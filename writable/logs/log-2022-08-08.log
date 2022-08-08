@@ -1,0 +1,12 @@
+CRITICAL - 2022-08-08 04:53:51 --> Cannot declare class App\Controllers\Home because the name is already in use
+in APPPATH\Controllers\Home.php on line 7.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2022-08-08 06:00:59 --> Invalid file: mission.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('mission.php')
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('mission', [], true)
+ 3 APPPATH\Controllers\Home.php(15): view('mission')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->mission()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
