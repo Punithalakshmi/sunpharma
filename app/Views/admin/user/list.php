@@ -6,12 +6,16 @@
                 <h3>Users <small></small></h3>
               </div>
             </div>
-
+           
             <div>
                 <a href="<?php echo base_url();?>/admin/user/add">Add User</a>
-        </div>
+           </div>
             <div class="clearfix"></div>
-
+            <?php if(session()->getFlashdata('msg')):?>
+              <div class="alert alert-warning">
+                  <?= session()->getFlashdata('msg') ?>
+              </div>
+            <?php endif;?>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -28,6 +32,7 @@
                           <th>Phone</th>
                           <th>Address</th>
                           <th>Created Date</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
 
@@ -43,6 +48,10 @@
                           <td><?=$user['phone'];?></td>
                           <td><?=$user['address'];?></td>
                           <td><?=$user['created_date'];?></td>
+                          <td>
+                          <a href="<?=base_url().'/admin/user/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="<?=base_url().'/admin/user/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                          </td>
                         </tr>
                         <?php endforeach;
                                 endif;

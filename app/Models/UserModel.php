@@ -10,7 +10,16 @@ class UserModel extends Model{
         'firstname',
         'password',
         'lastname',
-        'created_date'
+        'created_date',
+        'email',
+        'phone',
+        'role',
+        'created_id',
+        'updated_id',
+        'updated_date',
+        'dob',
+        'address',
+        'middlename'
     ];
 
     public function Login($username, $password) {
@@ -33,8 +42,11 @@ class UserModel extends Model{
         
     }
 
-    public function getListsOfUsers()
+    public function getListsOfUsers($id='')
     {
-        return $this->findAll();
+        if(empty($id))
+         return $this->findAll();
+        else 
+          return $this->getWhere(array('id' => $id)); 
     }
 }

@@ -89,3 +89,90 @@ in APPPATH\Controllers\Admin\User.php on line 47.
  6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
  7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 09:29:51 --> Argument 1 passed to CodeIgniter\Database\BaseBuilder::get() must be of the type int or null, array given, called in C:\xampp\htdocs\sunpharma\system\Model.php on line 771
+in SYSTEMPATH\Database\BaseBuilder.php on line 1577.
+ 1 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get([...])
+ 2 APPPATH\Controllers\Admin\User.php(48): CodeIgniter\Model->__call('get', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add('1')
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 09:31:38 --> Call to undefined method App\Models\UserModel::getResult
+in SYSTEMPATH\Model.php on line 773.
+ 1 APPPATH\Controllers\Admin\User.php(48): CodeIgniter\Model->__call('getResult', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add('1')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 14:45:25 --> Too few arguments to function App\Models\UserModel::getListsOfUsers(), 0 passed in C:\xampp\htdocs\sunpharma\app\Controllers\Admin\User.php on line 22 and exactly 1 expected
+in APPPATH\Models\UserModel.php on line 45.
+ 1 APPPATH\Controllers\Admin\User.php(22): App\Models\UserModel->getListsOfUsers()
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 14:46:07 --> Undefined variable: editdata
+in APPPATH\Views\admin\user\add.php on line 21.
+ 1 APPPATH\Views\admin\user\add.php(21): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: editdata', 'APPPATH\\Views\\admin\\user\\add.php', 21, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\user\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/user/add', [], true)
+ 5 APPPATH\Controllers\Admin\User.php(119): view('admin/user/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add('1')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 15:04:00 --> Argument 3 passed to CodeIgniter\Router\RouteCollection::post() must be of the type array or null, string given, called in C:\xampp\htdocs\sunpharma\app\Config\Routes.php on line 64
+in SYSTEMPATH\Router\RouteCollection.php on line 888.
+ 1 APPPATH\Config\Routes.php(64): CodeIgniter\Router\RouteCollection->post('post', 'user/add', 'User::add')
+ 2 SYSTEMPATH\Router\RouteCollection.php(637): CodeIgniter\CodeIgniter->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 3 APPPATH\Config\Routes.php(68): CodeIgniter\Router\RouteCollection->group('admin', [...], Object(Closure))
+ 4 SYSTEMPATH\CodeIgniter.php(758): require('APPPATH\\Config\\Routes.php')
+ 5 SYSTEMPATH\CodeIgniter.php(415): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 15:06:00 --> Cannot unpack array with string keys
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 53.
+ 1 APPPATH\Controllers\Admin\User.php(94): CodeIgniter\HTTP\RedirectResponse->route('admin/user', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 15:18:10 --> Cannot unpack array with string keys
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 53.
+ 1 APPPATH\Controllers\Admin\User.php(94): CodeIgniter\HTTP\RedirectResponse->route('admin/user', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 15:21:36 --> Undefined index: id
+in APPPATH\Views\admin\user\add.php on line 16.
+ 1 APPPATH\Views\admin\user\add.php(16): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: id', 'APPPATH\\Views\\admin\\user\\add.php', 16, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\user\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/user/add', [], true)
+ 5 APPPATH\Controllers\Admin\User.php(123): view('admin/user/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add('1')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 15:22:31 --> Undefined index: id
+in APPPATH\Views\admin\user\add.php on line 16.
+ 1 APPPATH\Views\admin\user\add.php(16): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: id', 'APPPATH\\Views\\admin\\user\\add.php', 16, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\user\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/user/add', [], true)
+ 5 APPPATH\Controllers\Admin\User.php(124): view('admin/user/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add('1')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-11 15:24:48 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 846.
+ 1 SYSTEMPATH\BaseModel.php(846): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(692): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\Admin\User.php(85): CodeIgniter\Model->update([...], [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

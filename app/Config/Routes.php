@@ -59,8 +59,16 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get("logout", "Login::logout");
     $routes->get("user", "User::index");
     //$routes->get("user/add", "User::add");
-    $routes->match(["get", "post"], "user/add", "User::add");
+    ///$routes->match(["get", "post"], "user/add/(:any)", "User::add/$1");
 
+    $routes->get('user/add','User::add');
+    $routes->post('user/add',"User::add");
+    
+    $routes->get('user/add/(:any)','User::add/$1');
+
+    
+
+    $routes->get("user/delete/(:any)", "User::delete/$1");
     $routes->get("profile", "User::profile");
 });
 
