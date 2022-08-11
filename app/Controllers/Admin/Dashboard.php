@@ -11,11 +11,17 @@ class Dashboard extends BaseController
         $session = \Config\Services::session();
 
         $userdata = $session->get('userdata');
-
+        
         $data['userdata'] = $userdata;
-
-        return view('_partials/header',$data)
-               .view('admin/login')
-               .view('_partials/footer');
+       
+        if((is_array($userdata) && count($userdata)) || !is_array($userdata)):
+            if(isset($userdata['isLoggedIn']) && $userdata['isLoggedIn']):
+                return view('_partials/header',$data)
+                    .view('admin/home')
+                    .view('_partials/footer');
+            else:
+                return redirect()->route('admin/login');
+            endif;
+        endif;
     }
 }

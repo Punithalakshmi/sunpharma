@@ -1,7 +1,12 @@
+<?php if(session()->getFlashdata('msg')):?>
+    <div class="alert alert-warning">
+        <?= session()->getFlashdata('msg') ?>
+    </div>
+<?php endif;?>
 <div class="login_wrapper">
 <div class="animate form login_form">
     <section class="login_content">
-    <form name="adminLogin" action="" method="post">
+    <form name="adminLogin" action="<?php echo base_url(); ?>/admin/login/loginAuth" method="post">
         <h1>Admin Login</h1>
         <div>
         <input type="text" class="form-control" name="username" placeholder="Username" required="" />

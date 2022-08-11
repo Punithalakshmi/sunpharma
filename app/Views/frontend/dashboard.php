@@ -155,7 +155,7 @@
 	    </tr>
 	    <tr>
 		    <td align="left">
-                <a href="SpecialAwardmain.asp" target="_top">
+                <a href="/special_awards" target="_top">
 		            <font face="Tahoma" size="4">
                         <span><b>Special&nbsp;Award&nbsp;in&nbsp;Public&nbsp;Health</b></span>
                     </font>
@@ -164,7 +164,7 @@
 	    </tr>
 	    <tr>	
 		    <td align="left">
-		        <a href="LatestWinnersResearchAwardmain.asp" target="_top">
+		        <a href="/research_awards" target="_top">
 		            <font face="Tahoma" size="4">
                         <span><b>Latest&nbsp;Winners&nbsp;of&nbsp;Research&nbsp;Awards</b></span>
                     </font>
@@ -173,7 +173,7 @@
         </tr>
 	    <tr>
 		    <td align="left">
-                <a href="DirectoryResearchAwardeesmain.asp" target="_top">
+                <a href="/directory_research_awardees" target="_top">
 		            <font face="Tahoma" size="4">
                         <span><b>Directory&nbsp;of&nbsp;Research&nbsp;Awardees</b></span>
                     </font>
@@ -182,7 +182,7 @@
 	    </tr>
 	    <tr>
 		    <td align="left">
-                <a href="LatestWinnersScienceScholarAwardmain.asp" target="_top">
+                <a href="/latest_winners_of_science_scholars_awards" target="_top">
 		            <font face="Tahoma" size="4">
                         <span><b>Latest&nbsp;Winners&nbsp;of&nbsp;Science&nbsp;Scholars&nbsp;Awards</b></span>
                     </font>
@@ -191,7 +191,7 @@
 	    </tr>
 	    <tr>		
 		    <td align="left">
-                <a href="DirectoryScienceScholarsmain.asp" target="_top">
+                <a href="/directory_of_science_scholars" target="_top">
 		            <font face="Tahoma" size="4">
                         <span><b>Directory&nbsp;of&nbsp;Science&nbsp;Scholars</b></span>
                     </font>

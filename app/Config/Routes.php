@@ -40,6 +40,11 @@ $routes->get('/', 'Home::index');
 $routes->get('mission', 'Home::mission');
 $routes->get('annual_activities', 'Home::annualActivities');
 $routes->get('contact', 'Home::contact');
+$routes->get('research_awards','ResearchAwards::index');
+$routes->get('directory_research_awardees','DirectoryResearchAwardees::index');
+$routes->get('special_awards','SpecialAwards::index');
+$routes->get('latest_winners_of_science_scholars_awards','LatestWinnersOfScienceScholarsAwards::index');
+$routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
@@ -48,7 +53,15 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     // URL - /admin/about
     $routes->get("dashboard", "Dashboard::index");
     // URL - /admin/product
-    $routes->get("product", "AdminController::product");
+    $routes->post("login/loginAuth", "Login::loginAuth");
+
+    $routes->get("login", "Login::index");
+    $routes->get("logout", "Login::logout");
+    $routes->get("user", "User::index");
+    //$routes->get("user/add", "User::add");
+    $routes->match(["get", "post"], "user/add", "User::add");
+
+    $routes->get("profile", "User::profile");
 });
 
 /*

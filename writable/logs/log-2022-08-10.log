@@ -1,0 +1,62 @@
+CRITICAL - 2022-08-10 03:22:03 --> syntax error, unexpected 'return' (T_RETURN), expecting ':'
+in APPPATH\Controllers\Admin\Dashboard.php on line 23.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Dashboard.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Dashboard')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Dashboard')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Dashboard')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Dashboard', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-10 03:24:15 --> count(): Parameter must be an array or an object that implements Countable
+in APPPATH\Controllers\Admin\Login.php on line 16.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parameter must be an array or an object that implements Countable', 'APPPATH\\Controllers\\Admin\\Login.php', 16, [...])
+ 2 APPPATH\Controllers\Admin\Login.php(16): count(null)
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Login->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-10 09:41:35 --> Undefined variable: userdata
+in APPPATH\Views\_partials\header.php on line 33.
+ 1 APPPATH\Views\_partials\header.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: userdata', 'APPPATH\\Views\\_partials\\header.php', 33, [])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\User.php(41): view('_partials/header', [])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-10 21:26:38 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Dashboard.php on line 18.
+ 1 APPPATH\Controllers\Admin\Dashboard.php(18): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Dashboard.php', 18, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Dashboard->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Dashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-10 21:34:03 --> Invalid file: admin/user/profile.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/user/profile.php')
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/user/profile', [], true)
+ 3 APPPATH\Controllers\Admin\User.php(61): view('admin/user/profile', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->profile()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-10 22:06:12 --> Class 'App\Models\RoleModel' not found
+in APPPATH\Controllers\Admin\User.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-10 22:11:52 --> Array to string conversion
+in APPPATH\Views\admin\user\add.php on line 81.
+ 1 APPPATH\Views\admin\user\add.php(81): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string conversion', 'APPPATH\\Views\\admin\\user\\add.php', 81, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\user\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/user/add', [], true)
+ 5 APPPATH\Controllers\Admin\User.php(44): view('admin/user/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
