@@ -23,7 +23,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if($validation->getError('firstname')) {?>
+                      <?php if(isset($validation) && $validation->getError('firstname')) {?>
                           <div class='alert alert-danger mt-2'>
                             <?= $error = $validation->getError('firstname'); ?>
                           </div>
@@ -39,7 +39,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if($validation->getError('lastname')) {?>
+                      <?php if(isset($validation) && $validation->getError('lastname')) {?>
                         <div class='alert alert-danger mt-2'>
                           <?= $error = $validation->getError('lastname'); ?>
                             </div>
@@ -61,7 +61,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if($validation->getError('email')) {?>
+                      <?php if(isset($validation) && $validation->getError('email')) {?>
                         <div class='alert alert-danger mt-2'>
                           <?= $error = $validation->getError('email'); ?>
                             </div>
@@ -77,7 +77,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if($validation->getError('phonenumber')) {?>
+                      <?php if(isset($validation) && $validation->getError('phonenumber')) {?>
                         <div class='alert alert-danger mt-2'>
                           <?= $error = $validation->getError('phonenumber'); ?>
                             </div>

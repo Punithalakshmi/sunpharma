@@ -27,6 +27,9 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url();?>/build/css/custom.min.css" rel="stylesheet">
+    <script>
+      var base_url = '<?=base_url();?>';
+      </script>
   </head>
 
   <body class="nav-md">
@@ -44,7 +47,7 @@
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+            <!-- <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
@@ -52,7 +55,7 @@
                 <span>Welcome,</span>
                 <h2></h2>
               </div>
-            </div>
+            </div> -->
             <!-- /menu profile quick info -->
 
             <br />
@@ -88,7 +91,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <!-- <img src="images/img.jpg" alt=""> --><?=ucfirst($userdata['login_name']);?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
