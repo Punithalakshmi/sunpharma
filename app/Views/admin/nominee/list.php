@@ -34,7 +34,7 @@
                           <th>Lastname</th>
                           <th>Email</th>
                           <th>Phone</th>
-                          <th>Address</th>
+                          <th>Assign to Jury</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
