@@ -1,0 +1,12 @@
+body{background: #0547ab;}
+.site_title{height: auto;}
+
+.nav_title {
+    background: #fff;
+    height: auto;
+    padding: 10px 10px 10px 0;
+}
+.left_col {
+    background: #0547ab;
+}
+#toolbarContainer{display: none!important;;}
