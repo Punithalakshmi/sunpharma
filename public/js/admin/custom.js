@@ -1,6 +1,6 @@
 function nominee_approve(type = '',id='')
 {
-    var msg = (type && type == 'approve')?'approve':'disapprove';
+    var msg = (type && type == 'approve')?'approve':'reject';
     if(confirm("Are you sure you want to "+msg+" this Nominee?")){
         $.ajax({
             url : base_url+'/admin/nominee/approve',
