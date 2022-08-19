@@ -58,7 +58,8 @@ $(function(){
             if(data.status && data.status == 'success')
               alert(data.message);
 
-            $("#juryListsModal").hide();   
+            $("#juryListsModal").hide(); 
+            location.reload();  
         },
         error: function (jqXHR, textStatus, errorThrown)
         {

@@ -34,7 +34,7 @@
                           <th>Lastname</th>
                           <th>Email</th>
                           <th>Phone</th>
-                          <th>Assign to Jury</th>
+                          <th>Assigned Jury</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -51,7 +51,8 @@
                           <td><?=$user['lastname'];?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
-                          <td><?=$user['address'];?></td>
+                          <td><?=(isset($user['assigned_jury']) && !empty($user['assigned_jury']))?$user['assigned_jury']:'-';?></td>
+                  
                           <td><?=$user['created_date'];?></td>
                           <td>
                             <button type="button" class="btn btn-info btn-xs" onclick="nominee_approve('approve','<?=$user['id'];?>');"><i class="fa fa-pencil"></i> Approve </button>

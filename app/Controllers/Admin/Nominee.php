@@ -23,8 +23,19 @@ class Nominee extends BaseController
         if(is_array($userdata) && count($userdata)):
 
             $userLists = $nomineeModel->getListsOfNominees();
-            $data['lists'] = $userLists->getResultArray();
+            $lists     = $userLists->getResultArray();
 
+            foreach($lists as $k => $user){
+               $userLists  = $nomineeModel->getJuryName($user['jury_id']);
+               $juryName   =  $userLists->getRowArray();
+             //  print_r($juryName); die;
+                if(isset($juryName['firstname']) && isset($juryName['lastname']))
+                    $lists[$k]['assigned_jury'] = $juryName['firstname'].' '.$juryName['lastname'];
+                else
+                    $lists[$k]['assigned_jury']  = ' - ';  
+            }
+
+            $data['lists'] = $lists;
             $juryLists = array();
             $juryLists  = $nomineeModel->getJuryLists()->getResultArray();
 
@@ -84,12 +95,14 @@ class Nominee extends BaseController
             $email->setSubject('Your Application Approval Status');
             $message = '';
             if($type == 'approve') {
+                $msg = 'Approved Successfully';
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
                 $message .= 'Username: '.$getUserData['email'].'<br /><br />';
                 $message .= 'Password: '.md5(uniqid(rand(), true)).'<br /><br /><br /><br />'; 
             }
             else
             {
+                $msg = 'Rejected Successfully';
                 $message .= 'Your Application has been rejected';
             }
             $message .= 'Thanks,<br/>';
@@ -99,7 +112,7 @@ class Nominee extends BaseController
             $status = '';
             if($email->send()){
                 $status = 'success';
-                $message = 'Mail sent Successfully!';
+                $message = $msg;
             }
             else
             {

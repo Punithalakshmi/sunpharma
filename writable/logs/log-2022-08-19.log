@@ -1,0 +1,54 @@
+ERROR - 2022-08-19 03:18:52 --> Not unique table/alias: 'users'
+CRITICAL - 2022-08-19 03:18:52 --> Not unique table/alias: 'users'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `users`.`firstname`, `users`.`lastname`
+FROM `users`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id` AND `users`.`role`="2"
+WHERE `jury_nominee`.`nominee_id` = \'4\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`firstname`, `users`.`lastname`
+FROM `users`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id` AND `users`.`role`="2"
+WHERE `jury_nominee`.`nominee_id` = \'4\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`firstname`, `users`.`lastname`
+FROM `users`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id` AND `users`.`role`="2"
+WHERE `jury_nominee`.`nominee_id` = \'4\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`firstname`, `users`.`lastname`
+FROM `users`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id` AND `users`.`role`="2"
+WHERE `jury_nominee`.`nominee_id` = :jury_nominee.nominee_id:', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\NomineeModel.php(39): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Nominee.php(29): App\Models\NomineeModel->getJuryName('4')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-19 03:19:40 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 31.
+ 1 APPPATH\Controllers\Admin\Nominee.php(31): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 31, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-19 03:20:43 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 31.
+ 1 APPPATH\Controllers\Admin\Nominee.php(31): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 31, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-19 03:24:06 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 32.
+ 1 APPPATH\Controllers\Admin\Nominee.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 32, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-19 03:26:10 --> Undefined offset: 0
+in APPPATH\Controllers\Admin\Nominee.php on line 32.
+ 1 APPPATH\Controllers\Admin\Nominee.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offset: 0', 'APPPATH\\Controllers\\Admin\\Nominee.php', 32, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
