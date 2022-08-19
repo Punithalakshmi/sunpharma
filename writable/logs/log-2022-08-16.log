@@ -1,0 +1,266 @@
+CRITICAL - 2022-08-16 02:57:42 --> syntax error, unexpected 'nominee_lists_of_jury' (T_STRING), expecting variable (T_VARIABLE)
+in APPPATH\Controllers\Admin\Nominee.php on line 61.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nominee.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nominee')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nominee')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nominee')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nominee', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:09:58 --> syntax error, unexpected 'nominee_lists_of_jury' (T_STRING), expecting variable (T_VARIABLE)
+in APPPATH\Controllers\Admin\Nominee.php on line 61.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nominee.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nominee')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nominee')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nominee')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nominee', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:11:28 --> syntax error, unexpected 'nominee_lists_of_jury' (T_STRING), expecting variable (T_VARIABLE)
+in APPPATH\Controllers\Admin\Nominee.php on line 61.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nominee.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nominee')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nominee')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nominee')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nominee', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:13:25 --> syntax error, unexpected 'nominee_lists_of_jury' (T_STRING), expecting variable (T_VARIABLE)
+in APPPATH\Controllers\Admin\Nominee.php on line 61.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nominee.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nominee')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nominee')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nominee')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nominee', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:17:39 --> syntax error, unexpected 'nominee_lists_of_jury' (T_STRING), expecting variable (T_VARIABLE)
+in APPPATH\Controllers\Admin\Nominee.php on line 61.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nominee.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nominee')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nominee')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nominee')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nominee', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:18:29 --> syntax error, unexpected 'jury_nominees_lists' (T_STRING), expecting variable (T_VARIABLE)
+in APPPATH\Controllers\Admin\Nominee.php on line 61.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nominee.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nominee')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nominee')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nominee')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nominee', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:19:06 --> Undefined index: role
+in APPPATH\Views\_partials\header.php on line 71.
+ 1 APPPATH\Views\_partials\header.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: role', 'APPPATH\\Views\\_partials\\header.php', 71, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(27): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:19:20 --> Undefined index: role
+in APPPATH\Views\_partials\header.php on line 71.
+ 1 APPPATH\Views\_partials\header.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: role', 'APPPATH\\Views\\_partials\\header.php', 71, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Dashboard.php(19): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:19:28 --> Undefined index: role
+in APPPATH\Views\_partials\header.php on line 71.
+ 1 APPPATH\Views\_partials\header.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: role', 'APPPATH\\Views\\_partials\\header.php', 71, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Dashboard.php(19): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:19:57 --> Undefined index: role
+in APPPATH\Views\_partials\header.php on line 71.
+ 1 APPPATH\Views\_partials\header.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: role', 'APPPATH\\Views\\_partials\\header.php', 71, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Dashboard.php(19): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 03:20:02 --> Undefined index: role
+in APPPATH\Views\_partials\header.php on line 71.
+ 1 APPPATH\Views\_partials\header.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: role', 'APPPATH\\Views\\_partials\\header.php', 71, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Dashboard.php(19): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 04:38:03 --> Undefined index: role
+in APPPATH\Views\_partials\header.php on line 71.
+ 1 APPPATH\Views\_partials\header.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: role', 'APPPATH\\Views\\_partials\\header.php', 71, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Dashboard.php(19): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 04:38:23 --> Undefined index: role
+in APPPATH\Views\_partials\header.php on line 71.
+ 1 APPPATH\Views\_partials\header.php(71): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: role', 'APPPATH\\Views\\_partials\\header.php', 71, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Dashboard.php(19): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 04:43:04 --> Undefined variable: db
+in APPPATH\Models\JuryModel.php on line 19.
+ 1 APPPATH\Models\JuryModel.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: db', 'APPPATH\\Models\\JuryModel.php', 19, [...])
+ 2 APPPATH\Controllers\Admin\Nominee.php(74): App\Models\JuryModel->getListsOfNominees('2')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->nominee_lists_of_jury()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-08-16 04:43:32 --> Unknown column 'users.phonenumber' in 'field list'
+CRITICAL - 2022-08-16 04:43:32 --> Unknown column 'users.phonenumber' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `jury_nominee`.`created_date`, `users`.`firstname`, `users`.`lastname`, `users`.`phonenumber`, `users`.`email`
+FROM `jury_nominee`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id`
+WHERE `jury_nominee`.`jury_id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `jury_nominee`.`created_date`, `users`.`firstname`, `users`.`lastname`, `users`.`phonenumber`, `users`.`email`
+FROM `jury_nominee`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id`
+WHERE `jury_nominee`.`jury_id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `jury_nominee`.`created_date`, `users`.`firstname`, `users`.`lastname`, `users`.`phonenumber`, `users`.`email`
+FROM `jury_nominee`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id`
+WHERE `jury_nominee`.`jury_id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `jury_nominee`.`created_date`, `users`.`firstname`, `users`.`lastname`, `users`.`phonenumber`, `users`.`email`
+FROM `jury_nominee`
+JOIN `users` ON `users`.`id` = `jury_nominee`.`nominee_id`
+WHERE `jury_nominee`.`jury_id` = :jury_nominee.jury_id:', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\JuryModel.php(23): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Nominee.php(74): App\Models\JuryModel->getListsOfNominees('2')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->nominee_lists_of_jury()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 04:47:40 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::result_array()
+in APPPATH\Models\JuryModel.php on line 23.
+ 1 APPPATH\Controllers\Admin\Nominee.php(74): App\Models\JuryModel->getListsOfNominees('2')
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->nominee_lists_of_jury()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 04:54:24 --> Undefined index: address
+in APPPATH\Views\admin\nominee\nominee_lists_of_jury.php on line 48.
+ 1 APPPATH\Views\admin\nominee\nominee_lists_of_jury.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: address', 'APPPATH\\Views\\admin\\nominee\\nominee_lists_of_jury.php', 48, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nominee\\nominee_lists_of_jury.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nominee/nominee_lists_of_jury', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(79): view('admin/nominee/nominee_lists_of_jury', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->nominee_lists_of_jury()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 04:54:47 --> Undefined index: id
+in APPPATH\Views\admin\nominee\nominee_lists_of_jury.php on line 52.
+ 1 APPPATH\Views\admin\nominee\nominee_lists_of_jury.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: id', 'APPPATH\\Views\\admin\\nominee\\nominee_lists_of_jury.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nominee\\nominee_lists_of_jury.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nominee/nominee_lists_of_jury', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(79): view('admin/nominee/nominee_lists_of_jury', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->nominee_lists_of_jury()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 05:15:16 --> Class 'App\Controllers\Admin\UserModel' not found
+in APPPATH\Controllers\Admin\Nominee.php on line 98.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('4')
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 10:14:03 --> syntax error, unexpected ':'
+in APPPATH\Controllers\Admin\Nominee.php on line 103.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nominee.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nominee')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nominee')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nominee')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nominee', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 10:29:44 --> Call to undefined method App\Models\NomineeModel::getJuryLists
+in SYSTEMPATH\Model.php on line 773.
+ 1 APPPATH\Controllers\Admin\Nominee.php(29): CodeIgniter\Model->__call('getJuryLists', [])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 11:07:59 --> Undefined variable: request
+in APPPATH\Controllers\Admin\Nominee.php on line 183.
+ 1 APPPATH\Controllers\Admin\Nominee.php(183): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: request', 'APPPATH\\Controllers\\Admin\\Nominee.php', 183, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->assignJury()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 12:06:54 --> Undefined index: jury_id
+in APPPATH\Controllers\Admin\Nominee.php on line 195.
+ 1 APPPATH\Controllers\Admin\Nominee.php(195): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: jury_id', 'APPPATH\\Controllers\\Admin\\Nominee.php', 195, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->assignJury()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 12:07:11 --> Undefined index: jury_id
+in APPPATH\Controllers\Admin\Nominee.php on line 195.
+ 1 APPPATH\Controllers\Admin\Nominee.php(195): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: jury_id', 'APPPATH\\Controllers\\Admin\\Nominee.php', 195, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->assignJury()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 12:08:43 --> Undefined index: jury_id
+in APPPATH\Controllers\Admin\Nominee.php on line 195.
+ 1 APPPATH\Controllers\Admin\Nominee.php(195): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: jury_id', 'APPPATH\\Controllers\\Admin\\Nominee.php', 195, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->assignJury()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 12:12:24 --> Undefined index: jury_id
+in APPPATH\Controllers\Admin\Nominee.php on line 195.
+ 1 APPPATH\Controllers\Admin\Nominee.php(195): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: jury_id', 'APPPATH\\Controllers\\Admin\\Nominee.php', 195, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->assignJury()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-16 12:18:20 --> count(): Parameter must be an array or an object that implements Countable
+in APPPATH\Controllers\Admin\Nominee.php on line 195.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parameter must be an array or an object that implements Countable', 'APPPATH\\Controllers\\Admin\\Nominee.php', 195, [...])
+ 2 APPPATH\Controllers\Admin\Nominee.php(195): count(null)
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->assignJury()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

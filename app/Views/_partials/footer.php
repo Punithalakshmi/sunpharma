@@ -31,6 +31,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url();?>/build/js/custom.min.js"></script>
-	
+	  <script src="<?php echo base_url();?>/js/admin/custom.js"></script>
   </body>
 </html>

@@ -34,6 +34,7 @@ class UserModel extends Model{
                 'login_name'        => $result->username,
                 'login_email'       => $result->firstname,
                 'isLoggedIn'      => TRUE,
+                'role'           => $result->role
             ];
             return $data;
         } else {

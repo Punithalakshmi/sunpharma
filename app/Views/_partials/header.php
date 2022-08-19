@@ -46,18 +46,6 @@
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <!-- <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2></h2>
-              </div>
-            </div> -->
-            <!-- /menu profile quick info -->
-
             <br />
 
             <!-- sidebar menu -->
@@ -65,10 +53,19 @@
               <div class="menu_section">
                
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo base_url();?>/admin/user"><i class="fa fa-user"></i> Users </a>
-                    
-                  </li>
                   
+                  <?php if($userdata['role'] == 3){ ?>
+                    <li><a href="<?php echo base_url();?>/admin/user">
+                    <i class="fa fa-user"></i> Users </a>
+                  </li>
+                  <li><a href="<?php echo base_url();?>/admin/nominee">
+                    <i class="fa fa-user"></i> Nominees </a>
+                  </li>
+                  <?php } else if($userdata['role'] == 1){ ?>
+                    <li><a href="<?php echo base_url();?>/admin/nominee/lists">
+                    <i class="fa fa-user"></i> Nominees </a>
+                  </li>
+                  <?php }else{}?>
                 </ul>
               </div>
               

@@ -50,7 +50,9 @@ class User extends BaseController
                 $edit_data   = $getUserData->getRowArray();
             }
             
-
+            if($request->getPost())
+               $id  = $request->getPost('id');
+               
             $validation = $this->validate($this->validation_rules('user',$id));
             
             $roleModel = new RoleModel();
@@ -70,7 +72,7 @@ class User extends BaseController
                     $gender        = $request->getPost('gender');
                     $date_of_birth = $request->getPost('date_of_birth');
                     $user_role     = $request->getPost('user_role');
-                    $id            = $request->getPost('id');
+                    
 
                     $ins_data = array();
                     $ins_data['firstname']  = $firstname;
@@ -243,7 +245,7 @@ class User extends BaseController
         $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');  
 
       return $validation_rules;
-
+      
     }
 
     public function delete($id='')
