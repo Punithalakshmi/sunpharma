@@ -1,3 +1,5 @@
+
+
 <!--Main Slider Start-->
 <section class="main-slider-two clearfix">
             <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
@@ -155,7 +157,7 @@
         <section class="about-two">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-5">
+                    <div class="col-xl-6">
                         <div class="about-two__left">
                             <div class="section-title text-left">
                                 <div class="section-sub-title-box">
@@ -207,7 +209,7 @@
                             <a href="#" class="thm-btn about-two__btn">Discover More</a>
                         </div>
                     </div>
-                    <div class="col-xl-5">
+                    <div class="col-xl-6">
                         <div class="about-two__middle">
                             <div class="about-two__img-box">
                                 <div class="about-two__img">
@@ -228,43 +230,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2">
-                        <div class="about-two__counter">
-                            <ul class="list-unstyled about-two__counter-list">
-                                <li>
-                                    <div class="about-two__counter-single">
-                                        <div class="about-two__counter-count count-box">
-                                            <h3 class="count-text" data-speed="4000" data-stop="1234">00</h3>
-                                        </div>
-                                        <p class="about-two__counter-text-1">Projects completed</p>
-                                        <p class="about-two__counter-text-2">Nulla viverra tortor eu nulla pulvinar
-                                            dignissim.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="about-two__counter-single">
-                                        <div class="about-two__counter-count count-box">
-                                            <h3 class="count-text" data-speed="4000" data-stop="955">00</h3>
-                                        </div>
-                                        <p class="about-two__counter-text-1">Satisfied customers</p>
-                                        <p class="about-two__counter-text-2">Nulla viverra tortor eu nulla pulvinar
-                                            dignissim.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="about-two__counter-single">
-                                        <div class="about-two__counter-count count-box">
-                                            <h3 class="count-text" data-speed="4000" data-stop="100">00</h3>
-                                            <span class="about-two__counter-percent">%</span>
-                                        </div>
-                                        <p class="about-two__counter-text-1">Success rates</p>
-                                        <p class="about-two__counter-text-2">Nulla viverra tortor eu nulla pulvinar
-                                            dignissim.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </section>
@@ -362,9 +328,3 @@
             </div>
         </section>
         <!--Process End-->
-
-    
-		
-        
-	
-	
