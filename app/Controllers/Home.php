@@ -7,7 +7,9 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('frontend/dashboard');
+        return   view('frontend/header')
+                 .view('frontend/dashboard')
+                 .view('frontend/footer');
     }
 
     public function mission()

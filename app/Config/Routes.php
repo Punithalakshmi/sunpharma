@@ -45,6 +45,8 @@ $routes->get('directory_research_awardees','DirectoryResearchAwardees::index');
 $routes->get('special_awards','SpecialAwards::index');
 $routes->get('latest_winners_of_science_scholars_awards','LatestWinnersOfScienceScholarsAwards::index');
 $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
+$routes->get('ssan','Nomination::index');
+$routes->get('spsfn','Nomination::spsfn');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
