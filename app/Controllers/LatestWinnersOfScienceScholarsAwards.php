@@ -7,8 +7,10 @@ class LatestWinnersOfScienceScholarsAwards extends BaseController
 {
     public function index()
     {
-        return view('frontend/latest_winners_of_science_scholars');
-    }
+        return   view('frontend/header')
+                .view('frontend/latest_winners_of_science_scholars')
+                 .view('frontend/footer');
+    }   
 
    
 

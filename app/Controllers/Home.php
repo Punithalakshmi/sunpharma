@@ -14,17 +14,23 @@ class Home extends BaseController
 
     public function mission()
     {
-        return view('frontend/mission');
+        return  view('frontend/header')
+                .view('frontend/mission')
+                 .view('frontend/footer');
     }
 
     public function annualActivities()
     {
-        return view('frontend/annual_activities');
+        return  view('frontend/header')
+               .view('frontend/annual_activities')
+                .view('frontend/footer');
     }
 
     public function contact()
     {
-        return view('frontend/contact');
+        return view('frontend/header')
+                .view('frontend/contact')
+                .view('frontend/footer');
     }
 
 }
