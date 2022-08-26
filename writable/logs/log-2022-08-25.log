@@ -4,3 +4,33 @@ in APPPATH\Controllers\Nomination.php on line 27.
  2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
  3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-25 15:03:02 --> Class 'App\Controllers\UserModel' not found
+in APPPATH\Controllers\Nomination.php on line 27.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-25 16:12:01 --> syntax error, unexpected 'public' (T_PUBLIC)
+in APPPATH\Controllers\Nomination.php on line 121.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Nomination.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Nomination')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Nomination')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Nomination')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Nomination', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-25 16:14:17 --> Undefined variable: id
+in APPPATH\Controllers\Nomination.php on line 37.
+ 1 APPPATH\Controllers\Nomination.php(37): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: id', 'APPPATH\\Controllers\\Nomination.php', 37, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-25 22:59:07 --> Undefined variable: date_of_birth
+in APPPATH\Controllers\Nomination.php on line 65.
+ 1 APPPATH\Controllers\Nomination.php(65): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: date_of_birth', 'APPPATH\\Controllers\\Nomination.php', 65, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

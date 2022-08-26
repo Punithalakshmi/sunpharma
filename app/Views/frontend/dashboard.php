@@ -1,5 +1,3 @@
-
-
 <!--Main Slider Start-->
 <section class="main-slider-two clearfix">
             <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
@@ -235,8 +233,6 @@
             </div>
         </section>
         <!--About Two End-->
-
-        
 
         <!--Process Start-->
         <section class="process">

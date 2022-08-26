@@ -47,6 +47,7 @@ $routes->get('latest_winners_of_science_scholars_awards','LatestWinnersOfScience
 $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
 $routes->get('ssan','Nomination::index');
 $routes->get('spsfn','Nomination::spsfn');
+$routes->post('spsfn','Nomination::spsfn');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
