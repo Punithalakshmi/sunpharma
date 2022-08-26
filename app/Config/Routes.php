@@ -57,6 +57,8 @@ $routes->get('forget_password','User::forget_password');
 $routes->post('reset_password','User::reset_password');
 $routes->get('reset_password','User::reset_password');
 
+$routes->get('logout','User::logout');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index");

@@ -9,6 +9,7 @@ class Home extends BaseController
     {
         $session   = \Config\Services::session();
         $userdata = $session->get('fuserdata');
+        
         $data['userdata'] = $userdata;
      
         

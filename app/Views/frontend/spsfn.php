@@ -27,11 +27,7 @@
                     </div>
                 </div>
                 <div class="row">
-                <?php if(session()->getFlashdata('msg')):?>
-                <div class="col-xl-3 col-lg-4">
-                    <?= session()->getFlashdata('msg') ?>
-                </div>
-               <?php endif;?>
+                
                 </div>   
                 <form name="research_awards" id="research_awards" method="POST" action="<?=base_url();?>/spsfn" enctype="multipart/form-data">
                 <div class="row">
@@ -61,6 +57,11 @@
                             <div class="contact-page__form">
                                 <!-- <form action="<?=base_url();?>/frontend/assets/inc/sendemail.php" class="comment-one__form contact-form-validated" novalidate="novalidate"> -->
                                     <div class="row">
+                                    <?php if(session()->getFlashdata('msg')):?>
+                                        <div class="col-xl-3 col-lg-4">
+                                            <?= session()->getFlashdata('msg') ?>
+                                        </div>
+                                    <?php endif;?>
                                         <div class="col-xl-6">                                           
                                             <label for="" class="fw-bold">Category of the Award</label>
                                             <div class="get-sunpharma__input-box mt-2">

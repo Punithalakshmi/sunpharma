@@ -51,9 +51,9 @@ class UserModel extends Model{
                         ->getRow();
         if($result) {
             $data = [
-                'login_id'          => $result->id,
-                'login_name'        => $result->firstname,
-                'login_email'       => $result->email,
+                'id'          => $result->id,
+                'name'        => $result->firstname,
+                'email'       => $result->email,
                 'isLoggedIn'      => TRUE,
                 'role'           => $result->role
             ];
@@ -70,5 +70,15 @@ class UserModel extends Model{
          return $this->findAll();
         else 
           return $this->getWhere(array('id' => $id)); 
+    }
+
+    public function getUserData($id='')
+    {
+            $builder = $this->table('users');
+            $builder->select('users.*,nominee_details.*');
+            $builder->join('nominee_details','nominee_details.nominee_id = users.id');
+            $builder->where("users.role",'2');
+            $builder->where("users.id",$id);
+            return $query = $builder->get();
     }
 }

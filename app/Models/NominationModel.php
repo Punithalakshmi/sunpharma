@@ -28,4 +28,10 @@ class NominationModel extends Model{
         'updated_date'
     ];
 
+
+    public function getNominationData($id='')
+    {
+        return $this->getWhere(array('nominee_id' => $id)); 
+    }
+
 }

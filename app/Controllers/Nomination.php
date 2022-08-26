@@ -26,7 +26,7 @@ class Nomination extends BaseController
         helper(array('form', 'url'));
 
         $session   = \Config\Services::session();
-        $userdata  = $session->get('userdata');
+        $userdata  = $session->get('fuserdata');
     
         $request    = \Config\Services::request();
         $validation = \Config\Services::validation();
@@ -34,8 +34,9 @@ class Nomination extends BaseController
         $userModel = new UserModel();
        
             if(!empty($id)){
-                $getUserData = $userModel->getListsOfUsers($id);
+                $getUserData = $userModel->getUserData($id);
                 $edit_data   = $getUserData->getRowArray();
+              //  print_r($edit_data);
             }
             
             if($request->getPost())
@@ -167,6 +168,7 @@ class Nomination extends BaseController
                     $data['validation'] = $this->validator;
 
                     $data['editdata'] = $editdata;
+                    $data['userdata'] = $userdata;
                     return   view('frontend/header',$data)
                             .view('frontend/spsfn',$data)
                             .view('frontend/footer');

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\NominationModel;
 
 class User extends BaseController
 {
@@ -12,6 +13,7 @@ class User extends BaseController
 
         $session   = session();
         $userModel = new UserModel();
+        $nominationModel = new NominationModel();
         $request   = \Config\Services::request();
 
         if($request->getPost()){
@@ -19,17 +21,26 @@ class User extends BaseController
               $password  = $request->getPost('password');
        
               $result   = $userModel->fLogin($username, md5($password));
-           
+              
+              $getNominationData = $nominationModel->getNominationData($result['id']);
+              $getNominationData   = $getNominationData->getRowArray();
+            
+
+              $result['nomination_type'] = $getNominationData['nomination_type'];
+
               $session->set('fuserdata',$result);
-              return redirect()->route('/');
+
+              $redirect_route = '/'.$result['nomination_type'].'/'.$result['id'];
+
+              return redirect()->route($redirect_route);
         }
         else
         {
             $session->setFlashdata('msg', 'Invalid Credentials');
             $data['userdata'] = array(
-                                    'login_id'          => '',
-                                    'login_name'        => '',
-                                    'login_email'       => '',
+                                    'id'          => '',
+                                    'name'        => '',
+                                    'email'       => '',
                                     'isLoggedIn'      => false,
                                     'role'           => ''
                                 );
@@ -53,6 +64,15 @@ class User extends BaseController
         return  view('frontend/header')
                .view('frontend/reset_password')
                .view('frontend/footer');
+    }
+
+
+    public function logout()
+    {
+
+        $session = session();
+        $session->remove('fuserdata');
+        return redirect()->route('/');
     }
 
 }    

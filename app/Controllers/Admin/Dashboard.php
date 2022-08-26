@@ -15,7 +15,7 @@ class Dashboard extends BaseController
         $data['userdata'] = $userdata;
        
         if((is_array($userdata) && count($userdata)) || !is_array($userdata)):
-            if(isset($userdata['isLoggedIn']) && $userdata['isLoggedIn'] && $userdata['role'] == 3):
+            if(isset($userdata['isLoggedIn']) && $userdata['isLoggedIn']):
                 return view('_partials/header',$data)
                     .view('admin/home')
                     .view('_partials/footer');
