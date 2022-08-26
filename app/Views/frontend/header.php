@@ -63,7 +63,7 @@
                             <p class="main-header-two__top-social-text"> <i class="fa fa-pin"></i> <span>Address:</span> 8C, 8th Floor, Hansalaya Building, 15-Barakhamba Road, Connaught Place, New Delhi -110001, INDIA</p>
                             <div class="main-header-two__top-menu-box">
                                     <ul class="list-unstyled main-header-two__top-menu">
-                                        <li><a href="login.html"><u>Login</u></a></li>
+                                        <li><a href="<?=base_url();?>/login"><u>Login</u></a></li>
                                     </ul>
                                 </div>
                         </div>

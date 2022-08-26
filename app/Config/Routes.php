@@ -48,6 +48,14 @@ $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
 $routes->get('ssan','Nomination::index');
 $routes->get('spsfn','Nomination::spsfn');
 $routes->post('spsfn','Nomination::spsfn');
+$routes->post('login','User::login');
+$routes->get('login','User::login');
+
+$routes->post('forget_password','User::forget_password');
+$routes->get('forget_password','User::forget_password');
+
+$routes->post('reset_password','User::reset_password');
+$routes->get('reset_password','User::reset_password');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 

@@ -14,6 +14,8 @@ class Nomination extends BaseController
                .view('frontend/footer');
     }
 
+   
+    
     public function spsfn($id = '')
     {
 

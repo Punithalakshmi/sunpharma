@@ -26,6 +26,7 @@ class UserModel extends Model{
         $result = $this->db
                         ->table($this->table)
                         ->where(array("username" => $username, "password" => $password))
+                        ->orWhere(array("email" => $username, "password" => $password))
                         ->get()
                         ->getRow();
         if($result) {

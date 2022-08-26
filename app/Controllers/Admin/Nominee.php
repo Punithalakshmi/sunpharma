@@ -96,9 +96,16 @@ class Nominee extends BaseController
             $message = '';
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
+
+                $pass = uniqid(rand(), true);
+
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
                 $message .= 'Username: '.$getUserData['email'].'<br /><br />';
-                $message .= 'Password: '.md5(uniqid(rand(), true)).'<br /><br /><br /><br />'; 
+                $message .= 'Password: '.$pass.'<br /><br /><br /><br />'; 
+
+                $up_data = array();
+                $up_data['password'] = md5($pass);
+                $userModel->update(array("id" => $getUserData['id']),$up_data);
             }
             else
             {
