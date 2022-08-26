@@ -14,22 +14,27 @@ class User extends BaseController
         $userModel = new UserModel();
         $request   = \Config\Services::request();
 
-       echo $username  = $request->getVar('email');
-       echo $password  = $request->getVar('password');
-        
-        $result   = $userModel->Login($username, md5($password));
-        //print_r($result); die;
-
-        if($result){
-            print_r($result); die;
-            $session->set('userdata',$result);
-            return redirect()->route('/');
+        if($request->getPost()){
+              $username   = $request->getPost('email');
+              $password  = $request->getPost('password');
+       
+              $result   = $userModel->fLogin($username, md5($password));
+           
+              $session->set('fuserdata',$result);
+              return redirect()->route('/');
         }
         else
         {
             $session->setFlashdata('msg', 'Invalid Credentials');
-            return  view('frontend/header')
-            .view('frontend/login')
+            $data['userdata'] = array(
+                                    'login_id'          => '',
+                                    'login_name'        => '',
+                                    'login_email'       => '',
+                                    'isLoggedIn'      => false,
+                                    'role'           => ''
+                                );
+            return  view('frontend/header',$data)
+            .view('frontend/login',$data)
             .view('frontend/footer');
         }
 

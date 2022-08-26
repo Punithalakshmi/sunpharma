@@ -9,8 +9,12 @@ class Nomination extends BaseController
 {
     public function index()
     {
-        return  view('frontend/header')
-               .view('frontend/ssan')
+        $session   = \Config\Services::session();
+        $userdata = $session->get('fuserdata');
+        $data['userdata'] = $userdata;
+
+        return  view('frontend/header',$data)
+               .view('frontend/ssan',$data)
                .view('frontend/footer');
     }
 

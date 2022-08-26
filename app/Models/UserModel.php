@@ -26,14 +26,34 @@ class UserModel extends Model{
         $result = $this->db
                         ->table($this->table)
                         ->where(array("username" => $username, "password" => $password))
-                        ->orWhere(array("email" => $username, "password" => $password))
                         ->get()
                         ->getRow();
         if($result) {
             $data = [
                 'login_id'          => $result->id,
-                'login_name'        => $result->username,
-                'login_email'       => $result->firstname,
+                'login_name'        => $result->firstname,
+                'login_email'       => $result->email,
+                'isLoggedIn'      => TRUE,
+                'role'           => $result->role
+            ];
+            return $data;
+        } else {
+            return 0;
+        }
+        
+    }
+
+    public function fLogin($username, $password) {
+        $result = $this->db
+                        ->table($this->table)
+                        ->where(array("email" => $username, "password" => $password))
+                        ->get()
+                        ->getRow();
+        if($result) {
+            $data = [
+                'login_id'          => $result->id,
+                'login_name'        => $result->firstname,
+                'login_email'       => $result->email,
                 'isLoggedIn'      => TRUE,
                 'role'           => $result->role
             ];

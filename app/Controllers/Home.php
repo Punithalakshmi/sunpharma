@@ -7,29 +7,45 @@ class Home extends BaseController
 {
     public function index()
     {
-        return   view('frontend/header')
-                 .view('frontend/dashboard')
+        $session   = \Config\Services::session();
+        $userdata = $session->get('fuserdata');
+        $data['userdata'] = $userdata;
+     
+        
+        return   view('frontend/header',$data)
+                 .view('frontend/dashboard',$data)
                  .view('frontend/footer');
     }
 
     public function mission()
     {
-        return  view('frontend/header')
-                .view('frontend/mission')
+        $session   = \Config\Services::session();
+        $userdata = $session->get('fuserdata');
+        $data['userdata'] = $userdata;
+
+        return  view('frontend/header',$data)
+                .view('frontend/mission',$data)
                  .view('frontend/footer');
     }
 
     public function annualActivities()
     {
-        return  view('frontend/header')
-               .view('frontend/annual_activities')
+        $session   = \Config\Services::session();
+        $userdata = $session->get('fuserdata');
+        $data['userdata'] = $userdata;
+
+        return  view('frontend/header',$data)
+               .view('frontend/annual_activities',$data)
                 .view('frontend/footer');
     }
 
     public function contact()
     {
-        return view('frontend/header')
-                .view('frontend/contact')
+        $session   = \Config\Services::session();
+        $userdata = $session->get('fuserdata');
+        $data['userdata'] = $userdata;
+        return view('frontend/header',$data)
+                .view('frontend/contact',$data)
                 .view('frontend/footer');
     }
 

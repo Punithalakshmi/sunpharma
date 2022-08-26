@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="message-one__form loginsec">
-                            <form name="login" action="<?=base_url();?>/login" method="POST" class="comment-one__form contact-form-validated" novalidate="novalidate">
+                            <form name="login" action="<?=base_url();?>/login" method="POST" class="comment-one__form" >
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="get-insuracne-two__input-box">
