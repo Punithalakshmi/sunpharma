@@ -68,3 +68,13 @@ $(function(){
     });
 
  }
+
+
+ function categoryRestrictionByRole(ele)
+ {
+     //alert(ele.value);
+     if(ele.value == 1)
+       $("#categorySelection").css("display",'block');
+     else
+       $("#categorySelection").css("display",'none');  
+ }

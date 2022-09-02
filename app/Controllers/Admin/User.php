@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\RoleModel;
+use App\Models\CategoryModel;
 
 class User extends BaseController
 {
@@ -15,12 +16,26 @@ class User extends BaseController
 
         $userdata  = $session->get('userdata');
         $userModel = new UserModel();
+        $categoryModel = new CategoryModel();
         
         $data['userdata'] = $userdata;
        
         if(is_array($userdata) && count($userdata)):
 
             $userLists = $userModel->getListsOfUsers();
+            
+            foreach($userLists as $ukey => $uvalue){
+               if(!empty($uvalue['category'])){ 
+                $category = $categoryModel->getListsOfCategories($uvalue['category']);
+
+                $category = $category->getRowArray();
+                $userLists[$ukey]['category'] = $category['name'];
+               }
+               else
+               {
+                $userLists[$ukey]['category'] = '-';
+               }
+            }
            
             $data['lists'] = $userLists;
             return view('_partials/header',$data)
@@ -42,6 +57,10 @@ class User extends BaseController
         $validation = \Config\Services::validation();
 
         $userModel = new UserModel();
+        $categoryModel = new CategoryModel();
+
+        $getCategoryLists = $categoryModel->getListsOfCategories();
+        $data['categories'] = $getCategoryLists;
 
         if(is_array($userdata) && count($userdata)):
            
@@ -63,7 +82,9 @@ class User extends BaseController
             if($validation) {
 
                 if($request->getPost()){
-                
+                     
+                    $category = '';
+
                     $firstname     = $request->getPost('firstname');
                     $lastname      = $request->getPost('lastname');
                     $middlename    = $request->getPost('middlename');
@@ -72,7 +93,9 @@ class User extends BaseController
                     $gender        = $request->getPost('gender');
                     $date_of_birth = $request->getPost('date_of_birth');
                     $user_role     = $request->getPost('user_role');
-                    
+
+                    if($request->getPost('category'))
+                       $category      = $request->getPost('category');
 
                     $ins_data = array();
                     $ins_data['firstname']  = $firstname;
@@ -83,6 +106,10 @@ class User extends BaseController
                     $ins_data['role']       = $user_role;
                     $ins_data['address']    = '';
                     $ins_data['dob']        =  $date_of_birth;
+
+                    if($user_role == 1)
+                      $ins_data['category'] =  $category;
+
                     
                     if(!empty($id)){
                         $session->setFlashdata('msg', 'User Updated Successfully!');
@@ -114,6 +141,12 @@ class User extends BaseController
                     $editdata['address']    = '';
                     $editdata['dob']        =  $edit_data['dob'];
                     $editdata['gender']     =  $edit_data['gender'];
+
+                    if($edit_data['role'] == 1)
+                      $editdata['category']  =  $edit_data['category'];
+                    else
+                      $editdata['category']  = '';
+
                     $editdata['id']         =  $edit_data['id'];
                 }
                 else
@@ -127,6 +160,7 @@ class User extends BaseController
                     $editdata['address']    = ($request->getPost('address'))?$request->getPost('address'):'';
                     $editdata['dob']        = ($request->getPost('date_of_birth'))?$request->getPost('date_of_birth'):'';
                     $editdata['gender']     = ($request->getPost('gender'))?$request->getPost('gender'):'';
+                    $editdata['category']   = ($request->getPost('category'))?$request->getPost('category'):'';
                     $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
                 }
 

@@ -1,0 +1,31 @@
+CRITICAL - 2022-09-01 23:17:33 --> Invalid file: admin/category/list.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/category/list.php')
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/category/list', [], true)
+ 3 APPPATH\Controllers\Admin\Category.php(27): view('admin/category/list', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Category->index()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Category))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-01 23:37:19 --> Undefined variable: userdata
+in APPPATH\Views\_partials\header.php on line 37.
+ 1 APPPATH\Views\_partials\header.php(37): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: userdata', 'APPPATH\\Views\\_partials\\header.php', 37, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('_partials/header', [], true)
+ 5 APPPATH\Controllers\Admin\Category.php(109): view('_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Category->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-01 23:43:12 --> Undefined index: id
+in APPPATH\Views\admin\category\add.php on line 16.
+ 1 APPPATH\Views\admin\category\add.php(16): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: id', 'APPPATH\\Views\\admin\\category\\add.php', 16, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\category\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/category/add', [], true)
+ 5 APPPATH\Controllers\Admin\Category.php(111): view('admin/category/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Category->add('1')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

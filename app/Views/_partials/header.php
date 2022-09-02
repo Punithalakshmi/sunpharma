@@ -62,6 +62,9 @@
                   <li><a href="<?php echo base_url();?>/admin/nominee">
                     <i class="fa fa-user"></i> Nominees </a>
                   </li>
+                  <li><a href="<?php echo base_url();?>/admin/category">
+                    <i class="fa fa-user"></i> Categories </a>
+                  </li>
                   <?php } else if($userdata['role'] == 1){ ?>
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">
                     <i class="fa fa-user"></i> Nominees </a>

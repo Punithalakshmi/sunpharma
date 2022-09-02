@@ -30,7 +30,7 @@
                           <th>Lastname</th>
                           <th>Email</th>
                           <th>Phone</th>
-                    
+                          <th>Category</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -46,7 +46,7 @@
                           <td><?=$user['lastname'];?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
-                          
+                          <td><?=$user['category'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
                           <a href="<?=base_url().'/admin/user/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>

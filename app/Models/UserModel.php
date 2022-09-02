@@ -19,7 +19,8 @@ class UserModel extends Model{
         'updated_date',
         'dob',
         'address',
-        'middlename'
+        'middlename',
+        'category'
     ];
 
     public function Login($username, $password) {
@@ -80,5 +81,10 @@ class UserModel extends Model{
             $builder->where("users.role",'2');
             $builder->where("users.id",$id);
             return $query = $builder->get();
+    }
+
+    public function getListsOfNominees()
+    { 
+          return $this->getWhere(array('role' => 2)); 
     }
 }

@@ -3,10 +3,13 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Nominees <small></small></h3>
+                <h3>Categories <small></small></h3>
               </div>
             </div>
            
+            <div>
+                <a href="<?php echo base_url();?>/admin/category/add" class="btn btn-primary btn-xs">Add Category</a>
+           </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
               <div class="alert alert-warning">
@@ -23,11 +26,9 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                         
-                          <th>Firstname</th>
-                          <th>Lastname</th>
-                          <th>Email</th>
-                          <th>Phone</th>
+                          <th>Name</th>
+                          <th>Type</th>
+                          <th>Status</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -39,15 +40,13 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                  
-                          <td><?=$user['firstname'];?></td>
-                          <td><?=$user['lastname'];?></td>
-                          <td><?=$user['email'];?></td>
-                          <td><?=$user['phone'];?></td>
+                          <td><?=$user['name'];?></td>
+                          <td><?=$user['type'];?></td>
+                          <td><?=$user['status'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
-                           
-                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i> View </a>
+                          <a href="<?=base_url().'/admin/category/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="<?=base_url().'/admin/category/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                         <?php endforeach;

@@ -152,8 +152,8 @@ class Nominee extends BaseController
        
         if(is_array($userdata) && count($userdata)):
 
-            $juryModel     = new JuryModel();
-            $nomineeLists  = $juryModel->getListsOfNominees($userdata['login_id']);
+            $userModel     = new UserModel();
+            $nomineeLists  = $userModel->getListsOfNominees();
             $data['lists'] = $nomineeLists->getResultArray();
            
             return view('_partials/header',$data)
@@ -170,6 +170,9 @@ class Nominee extends BaseController
     {
         $session   = \Config\Services::session();
         $userdata  = $session->get('userdata');
+        
+        $request    = \Config\Services::request();
+        $validation = \Config\Services::validation();
         
         $data['userdata'] = $userdata;
        

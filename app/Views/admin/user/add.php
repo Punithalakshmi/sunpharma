@@ -106,7 +106,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Role</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select2_single form-control" name="user_role" tabindex="-1">
+                          <select class="select2_single form-control" name="user_role" tabindex="-1" onchange="categoryRestrictionByRole(this);">
                             <option value=""></option>
                             <?php if(is_array($roles)):
                                     foreach($roles as $rvalue): ?>
@@ -117,15 +117,28 @@
                           </select>
                         </div>
                       </div>
+                        <div id="categorySelection" class="form-group" style="display:<?=(isset($editdata['role']) && ($editdata['role'] == 1))?'block':'none';?>">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="select2_single form-control" name="category" tabindex="-1">
+                              <option value=""></option>
+                              <?php if(is_array($categories)):
+                                      foreach($categories as $rvalue): ?>
+                              <option value="<?=$rvalue['id'];?>" <?=set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
+                              <?php endforeach;
+                                    endif;
+                                    ?>
+                            </select>
+                          </div>
+                      </div>
 
                       <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <input type="reset" class="btn btn-primary" name="reset" value="RESET">
-						              
-                          <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+                        <div class="form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <input type="reset" class="btn btn-primary" name="reset" value="RESET">
+                            <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+                          </div>
                         </div>
-                      </div>
 
                     </form>
                   </div>

@@ -76,23 +76,22 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
 
     $routes->get('user/add','User::add');
     $routes->post('user/add',"User::add");
-    
     $routes->get('user/add/(:any)','User::add/$1');
-
     $routes->get("user/delete/(:any)", "User::delete/$1");
-    $routes->get("profile", "User::profile");
 
+    $routes->get("profile", "User::profile");
     $routes->post("profile", "User::profile");
 
     $routes->get("nominee", "Nominee::index");
-
     $routes->get('nominee/view/(:any)','Nominee::view/$1');
-
     $routes->get('nominee/lists','Nominee::nominee_lists_of_jury');
-    
     $routes->post('nominee/assignJury','Nominee::assignJury');
 
-    $routes->post('nominee/approve','Nominee::approve');
+    $routes->get('category','Category::index');
+    $routes->post('category/add','Category::add');
+    $routes->get('category/add','Category::add');
+    $routes->get('category/add/(:any)','Category::add/$1');
+    $routes->get('category/delete/(:any)','Category::delete/$1');
 
 });
 
