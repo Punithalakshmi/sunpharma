@@ -86,6 +86,10 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nominee/view/(:any)','Nominee::view/$1');
     $routes->get('nominee/lists','Nominee::nominee_lists_of_jury');
     $routes->post('nominee/assignJury','Nominee::assignJury');
+   // $routes->post('nominee/rating/(:any)','Nominee::rating/$1');
+    $routes->post('nominee/view','Nominee::view');
+    $routes->get('nominee/ratings','Nominee::ratings');
+
 
     $routes->get('category','Category::index');
     $routes->post('category/add','Category::add');
@@ -93,6 +97,12 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('category/add/(:any)','Category::add/$1');
     $routes->get('category/delete/(:any)','Category::delete/$1');
 
+    $routes->get('nomination','Nomination::index');
+    $routes->post('nomination/add','Nomination::add');
+    $routes->get('nomination/add','Nomination::add');
+    $routes->get('nomination/add/(:any)','Nomination::add/$1');
+    $routes->get('nomination/delete/(:any)','Nomination::delete/$1');
+    
 });
 
 /*

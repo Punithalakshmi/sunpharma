@@ -1,3 +1,21 @@
+$(document).ready(function(){
+
+    $('#single_cal3').daterangepicker({
+        singleDatePicker: true,
+        singleClasses: "picker_3"
+      }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+      });
+
+    $('#single_cal2').daterangepicker({
+        singleDatePicker: true,
+        singleClasses: "picker_2"
+      }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+      
+});
+
 function nominee_approve(type = '',id='')
 {
     var msg = (type && type == 'approve')?'approve':'reject';

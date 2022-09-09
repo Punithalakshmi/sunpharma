@@ -6,6 +6,12 @@
               </div>
             </div>
             <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <?php if(session()->getFlashdata('msg')):?>
+              <div class="alert alert-warning">
+                  <?= session()->getFlashdata('msg') ?>
+              </div>
+            <?php endif;?>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -93,8 +99,11 @@
                 
                   <div class="x_content">
                     <br />
-                    <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/rating" method="POST" data-parsley-validate class="form-horizontal form-label-left">
-                      <input type="hidden" name="id" value="<?=(isset($user['id']))?$user['id']:"";?>"  >
+                    <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                      <input type="hidden" name="nominee_id" value="<?=(isset($user['id']))?$user['id']:"";?>"  >
+
+                      <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>"  >
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rating <span class="required">*</span>
                         </label>
@@ -118,12 +127,19 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
-                              <textarea></textarea>
+                              <textarea name="comment"><?=$editdata['comment'];?></textarea>
                            </p>
                           </div>
                         </div>
                       </div>
-
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('comment')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('comment'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
                      
                       <div class="ln_solid"></div>
                         <div class="form-group">

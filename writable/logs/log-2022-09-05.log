@@ -1,0 +1,30 @@
+CRITICAL - 2022-09-05 02:24:16 --> Undefined variable: userdata
+in APPPATH\Views\frontend\header.php on line 64.
+ 1 APPPATH\Views\frontend\header.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: userdata', 'APPPATH\\Views\\frontend\\header.php', 64, [])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/header', [], true)
+ 5 APPPATH\Controllers\SpecialAwards.php(15): view('frontend/header')
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\SpecialAwards->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SpecialAwards))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-05 02:29:55 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 APPPATH\Controllers\Admin\Nominee.php(226): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-05 03:16:10 --> Undefined variable: userdata
+in APPPATH\Views\frontend\header.php on line 64.
+ 1 APPPATH\Views\frontend\header.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: userdata', 'APPPATH\\Views\\frontend\\header.php', 64, [])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/header', [], true)
+ 5 APPPATH\Controllers\SpecialAwards.php(15): view('frontend/header')
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\SpecialAwards->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SpecialAwards))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

@@ -25,6 +25,12 @@
     <link href="<?php echo base_url();?>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+    <!-- bootstrap-daterangepicker -->
+    <link href="<?php echo base_url();?>/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker -->
+    <link href="<?php echo base_url();?>/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    
+
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url();?>/build/css/custom.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>/css/admin/custom-admin-iz.css" rel="stylesheet">
@@ -65,9 +71,15 @@
                   <li><a href="<?php echo base_url();?>/admin/category">
                     <i class="fa fa-user"></i> Categories </a>
                   </li>
+                  <li><a href="<?php echo base_url();?>/admin/nomination">
+                    <i class="fa fa-user"></i> Nominations </a>
+                  </li>
                   <?php } else if($userdata['role'] == 1){ ?>
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">
-                    <i class="fa fa-user"></i> Nominees </a>
+                      <i class="fa fa-user"></i> Nominees </a>
+                    </li>
+                    <li><a href="<?php echo base_url();?>/admin/nominee/ratings">
+                      <i class="fa fa-user"></i> Rated Nominees </a>
                   </li>
                   <?php }else{}?>
                 </ul>

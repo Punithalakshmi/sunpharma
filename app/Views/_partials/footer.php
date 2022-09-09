@@ -29,6 +29,12 @@
     <script src="<?php echo base_url();?>/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?php echo base_url();?>/vendors/pdfmake/build/vfs_fonts.js"></script>
 
+    <!-- bootstrap-daterangepicker -->
+    <script src="<?php echo base_url();?>/vendors/moment/min/moment.min.js"></script>
+    <script src="<?php echo base_url();?>/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->    
+    <script src="<?php echo base_url();?>/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url();?>/build/js/custom.min.js"></script>
 	  <script src="<?php echo base_url();?>/js/admin/custom.js"></script>

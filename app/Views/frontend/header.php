@@ -81,7 +81,7 @@
                     <div class="container">
                         <div class="main-header-two__top-details-inner">
                             <div class="main-header-two__logo">
-                                <a href="index.html"><img src="<?=base_url();?>/frontend/assets/images/logo-2-alt.png" alt="Sun Pharma Science Foundation"></a>
+                                <a href="<?=base_url();?>"><img src="<?=base_url();?>/frontend/assets/images/logo-2-alt.png" alt="Sun Pharma Science Foundation"></a>
                             </div>
                             <ul class="list-unstyled main-header-two__top-details-list">
                                 <li>

@@ -7,6 +7,7 @@ use App\Models\NomineeModel;
 use App\Models\UserModel;
 use App\Models\RoleModel;
 use App\Models\JuryModel;
+use App\Models\RatingModel;
 
 class Nominee extends BaseController
 {
@@ -166,21 +167,90 @@ class Nominee extends BaseController
     }
     
     
-    public function view($id = '')
+    public function view($nominee_id = '')
     {
+        helper(array('form', 'url'));
+
         $session   = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-        
         $request    = \Config\Services::request();
         $validation = \Config\Services::validation();
+
+        $userdata  = $session->get('userdata');
+
+        $nominee_id = ($request->getPost('nominee_id'))?$request->getPost('nominee_id'):$nominee_id;
+
+        $id = ($request->getPost('id'))?$request->getPost('id'):'';
         
+        $userModel    = new UserModel();
+        $getUserData  = $userModel->getListsOfUsers($nominee_id);
+        $data['user'] = $getUserData->getRowArray();
+
+        $ratingModel    = new RatingModel();
+        
+        $edit_data  = $ratingModel->getRatingData($userdata['login_id'],$nominee_id)->getRowArray();
+       
+        $validation = $this->validate($this->validation_rules());
+
         $data['userdata'] = $userdata;
+
        
         if(is_array($userdata) && count($userdata)):
 
-            $userModel    = new UserModel();
-            $getUserData  = $userModel->getListsOfUsers($id);
-            $data['user'] = $getUserData->getRowArray();
+
+            if($validation) {
+
+                if($request->getPost()){
+                  
+                    $category = '';
+
+                    $rating     = $request->getPost('rating');
+                    $comment    = $request->getPost('comment');
+                 
+                    $ins_data = array();
+                    $ins_data['rating']       = $rating;
+                    $ins_data['comments']     = $comment;
+                    $ins_data['jury_id']      = $userdata['login_id'];
+                    $ins_data['nominee_id']   = $nominee_id;
+                    
+                    if(!empty($id)){
+                        $session->setFlashdata('msg', 'Rating Updated Successfully!');
+                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $ratingModel->update(array("id" => $id),$ins_data);
+                    }
+                    else
+                    {
+                        $session->setFlashdata('msg', 'Rated Successfully!');
+                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
+                        $ins_data['created_id']    =  $userdata['login_id'];
+                        $ratingModel->save($ins_data);
+                    } 
+
+                    return redirect()->to('admin/nominee/view/'.$nominee_id)->withInput();
+                }
+            }
+            else
+            {  
+            
+                if(!empty($edit_data) && count($edit_data)){
+                    $editdata['rating']    = $edit_data['rating'];
+                    $editdata['comment']   = $edit_data['comments'];
+                    $editdata['id']         =  $edit_data['id'];
+                }
+                else
+                {
+                    $editdata['rating']  = ($request->getPost('rating'))?$request->getPost('rating'):'';
+                    $editdata['comment']   = ($request->getPost('comment'))?$request->getPost('comment'):'';
+                    $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
+                }
+
+            } 
+            
+            if($request->getPost())
+               $data['validation'] = $this->validator;
+
+
+            $data['editdata'] = $editdata;
             return view('_partials/header',$data)
                 .view('admin/nominee/view',$data)
                 .view('_partials/footer');
@@ -228,5 +298,27 @@ class Nominee extends BaseController
             return redirect()->route('admin/login');
         endif;
     }
+
+
+    public function ratings()
+    {
+        
+    }
+
+    public function validation_rules()
+    {
+
+      $validation_rules = array();
+
+      $validation_rules = array(
+                                    "rating" => array("label" => "Rating",'rules' => 'required'),
+                                    "comment" => array("label" => "Comment",'rules' => 'required')
+      );
+ 
+      
+      return $validation_rules;
+      
+    }
+
 
 }

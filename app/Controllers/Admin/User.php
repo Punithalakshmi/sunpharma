@@ -29,7 +29,7 @@ class User extends BaseController
                 $category = $categoryModel->getListsOfCategories($uvalue['category']);
 
                 $category = $category->getRowArray();
-                $userLists[$ukey]['category'] = $category['name'];
+                $userLists[$ukey]['category'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
                }
                else
                {

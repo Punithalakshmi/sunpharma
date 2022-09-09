@@ -111,3 +111,54 @@ in APPPATH\Views\admin\nominee\view.php on line 102.
  6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
  7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 03:39:01 --> Call to undefined method App\Controllers\Admin\Nominee::validation_rules()
+in APPPATH\Controllers\Admin\Nominee.php on line 186.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('2')
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 03:43:11 --> Call to a member function getRowArray() on array
+in APPPATH\Controllers\Admin\Nominee.php on line 179.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 03:45:04 --> Call to a member function getRowArray() on array
+in APPPATH\Controllers\Admin\Nominee.php on line 179.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 03:46:13 --> Call to a member function getRowArray() on array
+in APPPATH\Controllers\Admin\Nominee.php on line 179.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 03:46:20 --> Call to a member function getRowArray() on array
+in APPPATH\Controllers\Admin\Nominee.php on line 179.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 03:47:15 --> Undefined variable: request
+in APPPATH\Controllers\Admin\Nominee.php on line 177.
+ 1 APPPATH\Controllers\Admin\Nominee.php(177): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: request', 'APPPATH\\Controllers\\Admin\\Nominee.php', 177, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('2')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 04:09:09 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\User.php on line 32.
+ 1 APPPATH\Controllers\Admin\User.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\User.php', 32, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-02 04:09:21 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\User.php on line 32.
+ 1 APPPATH\Controllers\Admin\User.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\User.php', 32, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\User->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
