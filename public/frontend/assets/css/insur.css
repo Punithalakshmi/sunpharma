@@ -5257,7 +5257,7 @@ ul {
 .feature-two {
   position: relative;
   display: block;
-  padding: 120px 0 90px;
+  padding: 50px 0 90px;
 }
 
 .feature-two__single {
@@ -10177,7 +10177,7 @@ ul {
 .google-map-two {
   position: relative;
   display: block;
-  background-color:#ffeddb;
+  background-color: var(--insur-extra);
   margin-top: -60px;
 }
 
@@ -12227,6 +12227,29 @@ body.boxed-wrapper {
   box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.08);
 }
 
+div#newslider {
+  margin-top: 20px;
+  font-family: lato;
+}
+
+div#newslider .alert {
+  background: #fcc89b2e;
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffc578+0,ffdfb4+62,ffffff+100 */
+  background: #ffc578; /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  #ffc578 0%, #ffdfb4 62%, #ffffff 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(85deg,  #ffffff 0%,#fff2e0 62%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(85deg,  #ffffff 0%,#fff2e0 62%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc578', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  border: 1px solid #F7941E;
+}
+
+div#newslider * {
+  font-family: lato;
+}
+div#newslider a:hover{color:#F7941E}
+div#newslider img {
+  filter: invert(1);
+}
 @media (min-width: 1531px) {
   body.boxed-wrapper .get-sunpharma__left {
     left: 120px;
@@ -12392,9 +12415,3 @@ ul.main-menu__list.mobilebtn>li:hover>ul {
 .mobile-nav__content {
   max-width: 100%;
 }
-
-section.google-map-two {
-  border-top: 2px solid #fff;
-  box-shadow: 1px 4px 11px #000000;
-}
-#toolbarContainer{display:none!important;}

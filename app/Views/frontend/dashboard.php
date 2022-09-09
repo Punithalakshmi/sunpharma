@@ -2,21 +2,7 @@
 
 <!--Main Slider Start-->
 <section class="main-slider-two clearfix">
-<div id="newslider" class="container">
-            <div class="row">
-                <div class="alert alert-danger" role="alert">
-                        <strong><i class="fa fa-warning"></i> Invitation for Nominations - <?=date("Y");?>:</strong> 
-                        <marquee>
-                            <p style="font-size: 18pt">
-                                <h3>Sun Pharma Science Foundation Research Awards</h3>
-                                   <a href="/spsfn/<?=$currentNominations['research_awards'];?>">Submit Nomination</a>  
-                                 <h3>Sun Pharma Science Foundation Science Scholar Awards</h3>
-                                   <a href="/ssan/<?=$currentNominations['science_scholars_awards'];?>">Submit Nomination</a>
-                            </p>
-                        </marquee>
-                </div>
-            </div>
-        </div>
+
 
             <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
                 "effect": "fade",
@@ -101,6 +87,22 @@
             </div>
         </section>
         <!--Main Slider End-->
+
+        <div id="newslider" class="container">
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                        <strong><i class="fa fa-warning"></i> Invitation for Nominations - <?=date("Y");?>:</strong> 
+                        <marquee>
+                            <p style="font-size: 18pt">
+                                <b>Sun Pharma Science Foundation Research Awards</b>
+                                   <small><a href="/spsfn/<?=$currentNominations['research_awards'];?>">Submit Nomination</a></small> | 
+                                 <b>Sun Pharma Science Foundation Science Scholar Awards</b>
+                                   <small><a href="/ssan/<?=$currentNominations['science_scholars_awards'];?>">Submit Nomination</a></small>
+                            </p>
+                        </marquee>
+                </div>
+            </div>
+        </div>
 
         <!--Feature Two Start-->
         <section class="feature-two">
@@ -343,3 +345,5 @@
         </section>
         <!--Process End-->
         
+
+      
