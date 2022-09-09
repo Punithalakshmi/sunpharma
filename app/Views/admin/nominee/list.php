@@ -39,8 +39,6 @@
                           <th>Action</th>
                         </tr>
                       </thead>
-
-
                       <tbody>
                         <?php if(is_array($lists)):
                                 foreach($lists as $user):

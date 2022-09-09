@@ -18,73 +18,31 @@
                 
                   <div class="x_content">
                     <br />
-                
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name 
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?=$user['firstname'];?>
-                        </div>
-                      </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h4>First Name <small> <?=$user['firstname'];?></small></h4>
+                   </div>  
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h4>Last Name <small> <?=$user['lastname'];?></small></h4>
+                   </div>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h4>Email <small> <?=$user['email'];?></small></h4>
+                   </div>
                       
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?=$user['lastname'];?>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h4>Phone <small> <?=$user['phone'];?></small></h4>
+                   </div>
                      
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?=$user['middlename'];?>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?=$user['email'];?>
-                        </div>
-                       
-                      </div>
-                      <div class="clearfix"></div>
                      
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phonenumber</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?=$user['phone'];?>
-                        </div>
-                       
-                      </div>
-                      <div class="clearfix"></div>
                      
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <?=(isset($user['gender']) && ($user['gender'] == 'M'))?'Male':'Female';?>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?=$user['dob'];?>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                      
+                     
+                     
 
                   </div>
                 </div>
               </div>
             </div>
+
+            <?php if($userdata['role'] == 1): ?>
           <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -154,3 +112,49 @@
                 </div>
               </div>
             </div>
+            <?php else: ?>
+              <div class="page-title">
+              <div class="title_left">
+                <h3>Ratings</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_content">
+                  <table id="datatable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                         
+                          <th>Juryname</th>
+                          <th>Ratings</th>
+                          <th>Comments</th>
+                          <th>Rated Date</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php if(is_array($ratings)):
+                                foreach($ratings as $rating):
+                            ?>
+                        <tr>
+                          <td><?=$rating['firstname'];?></td>
+                          <td><?=$rating['rating'];?></td>
+                          <td><?=$rating['comments'];?></td>
+                          <td><?=$rating['created_date'];?></td>
+                          <td>
+                          <a href="<?=base_url().'/admin/rating/add/'.$rating['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                          <a href="<?=base_url().'/admin/rating/delete/'.$rating['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                           
+                          </td>
+                        </tr>
+                        <?php endforeach;
+                                endif;
+                                ?>            
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+<?php endif;?>

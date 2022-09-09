@@ -78,9 +78,9 @@
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">
                       <i class="fa fa-user"></i> Nominees </a>
                     </li>
-                    <li><a href="<?php echo base_url();?>/admin/nominee/ratings">
+                    <!-- <li><a href="<?php //echo base_url();?>/admin/nominee/ratings">
                       <i class="fa fa-user"></i> Rated Nominees </a>
-                  </li>
+                  </li> -->
                   <?php }else{}?>
                 </ul>
               </div>
