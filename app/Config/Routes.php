@@ -48,6 +48,10 @@ $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
 $routes->get('ssan','Nomination::index');
 $routes->get('spsfn','Nomination::spsfn');
 $routes->post('spsfn','Nomination::spsfn');
+
+$routes->get('ssan/(:any)','Nomination::index/$1');
+$routes->get('spsfn/(:any)','Nomination::spsfn/$1');
+
 $routes->post('login','User::login');
 $routes->get('login','User::login');
 

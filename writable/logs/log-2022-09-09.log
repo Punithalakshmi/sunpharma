@@ -32,3 +32,161 @@ in APPPATH\Views\admin\nomination\list.php on line 42.
  7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
  8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:49:53 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(29): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:51:14 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(42): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:52:10 --> Undefined variable: categoryModel
+in APPPATH\Controllers\Admin\Nomination.php on line 29.
+ 1 APPPATH\Controllers\Admin\Nomination.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: categoryModel', 'APPPATH\\Controllers\\Admin\\Nomination.php', 29, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:52:32 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(43): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:52:47 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(43): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:53:15 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(44): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:55:55 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(45): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:56:09 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(45): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 00:56:12 --> Undefined index: name
+in APPPATH\Views\admin\nomination\list.php on line 42.
+ 1 APPPATH\Views\admin\nomination\list.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\nomination\\list.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/list', [], true)
+ 5 APPPATH\Controllers\Admin\Nomination.php(45): view('admin/nomination/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 01:15:27 --> syntax error, unexpected 'use' (T_USE)
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Home.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Home')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Home')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Home')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Home', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 01:15:50 --> Class 'NominationTypesModel' not found
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 01:16:28 --> Class 'NominationTypesModel' not found
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 01:18:06 --> Class 'NominationTypesModel' not found
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 01:49:08 --> array_push() expects parameter 1 to be array, null given
+in APPPATH\Controllers\Home.php on line 23.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'array_push() expects parameter 1 to be array, null given', 'APPPATH\\Controllers\\Home.php', 23, [...])
+ 2 APPPATH\Controllers\Home.php(23): array_push(null, [...])
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 01:51:34 --> array_push() expects parameter 1 to be array, null given
+in APPPATH\Controllers\Home.php on line 23.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'array_push() expects parameter 1 to be array, null given', 'APPPATH\\Controllers\\Home.php', 23, [...])
+ 2 APPPATH\Controllers\Home.php(23): array_push(null, [...])
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 01:52:23 --> array_push() expects parameter 1 to be array, null given
+in APPPATH\Controllers\Home.php on line 24.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'array_push() expects parameter 1 to be array, null given', 'APPPATH\\Controllers\\Home.php', 24, [...])
+ 2 APPPATH\Controllers\Home.php(24): array_push(null, [...])
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-09 02:40:26 --> Array to string conversion
+in APPPATH\Views\frontend\dashboard.php on line 12.
+ 1 APPPATH\Views\frontend\dashboard.php(12): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string conversion', 'APPPATH\\Views\\frontend\\dashboard.php', 12, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/dashboard', [], true)
+ 5 APPPATH\Controllers\Home.php(38): view('frontend/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

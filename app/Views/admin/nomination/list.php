@@ -26,7 +26,8 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Name</th>
+                          <th>Category Name</th>
+                          <th>Nomination Year</th>
                           <th>Start Date</th>
                           <th>End Date</th>
                           <th>Action</th>
@@ -39,7 +40,8 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                          <td><?=$user['name'];?></td>
+                          <td><?=$user['category_id'];?></td>
+                          <td><?=$user['year'];?></td>
                           <td><?=$user['start_date'];?></td>
                           <td><?=$user['end_date'];?></td>
                           <td>

@@ -1,12 +1,14 @@
 <?php 
 namespace App\Models;  
 use CodeIgniter\Model;
-  
+
+
 class NominationTypesModel extends Model{
     protected $table = 'nominations';
     
     protected $allowedFields = [
-        'name',
+        'category_id',
+        'year',
         'start_date',
         'end_date',
         'created_date',
@@ -24,4 +26,11 @@ class NominationTypesModel extends Model{
           return $this->getWhere(array('id' => $id)); 
     }
 
+    public function getCategoryWiseNominations()
+    {
+            $builder = $this->table('nominations');
+            $builder->select('nominations.*,category.type');
+            $builder->join('category','category.id = nominations.category_id');
+            return $query = $builder->get();
+    }
 }

@@ -44,6 +44,15 @@
     <!-- template styles -->
     <link rel="stylesheet" href="<?=base_url();?>/frontend/assets/css/insur.css" />
     <link rel="stylesheet" href="<?=base_url();?>/frontend/assets/css/insur-responsive.css" />
+    <style type="text/css">
+        div#newslider {
+            margin-top: 20px;
+        }
+
+        div#newslider .alert {
+            background: #fcc89b2e;
+        }
+    </style>
 </head>
 <body>
 
@@ -167,7 +176,7 @@
                             <div class="main-menu-two__right">
                                 <div class="main-menu-two__search-box-get-quote">
                                   
-                                    <div class="main-menu-two__get-quote">
+                                    <!-- <div class="main-menu-two__get-quote">
                                         
                                      <ul class="main-menu__list">   
                                         <li class="dropdown megamenu">
@@ -176,7 +185,7 @@
                                                 <li><a class="researchaward" href="/spsfn">Sun Pharma Science Foundation Research Awards 2022</a></li>
                                                 <li><a class="schaward" href="/ssan">Sun Pharma Science Foundation Science Scholar Awards 2022</a></li>
                                             </ul>
-                                        </li></ul></div>
+                                        </li></ul></div> -->
                                 </div>
                             </div>
                         </div>

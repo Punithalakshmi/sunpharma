@@ -17,12 +17,28 @@ class Nomination extends BaseController
 
         $userdata      = $session->get('userdata');
         $nominationTypesModel = new NominationTypesModel();
+        $categoryModel        = new CategoryModel();
         
         $data['userdata'] = $userdata;
        
         if(is_array($userdata) && count($userdata)):
 
             $nominationTypeLists = $nominationTypesModel->getListsOfNominations();
+
+            foreach($nominationTypeLists as $ukey => $uvalue){
+                
+                if(!empty($uvalue['category_id'])){ 
+                 $category = $categoryModel->getListsOfCategories($uvalue['category_id']);
+                    
+                 $category = $category->getRowArray();
+                 //($category); die;
+                 $nominationTypeLists[$ukey]['category_id'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
+                }
+                else
+                {
+                 $nominationTypeLists[$ukey]['category_id'] = '-';
+                }
+             }
            
             $data['lists'] = $nominationTypeLists;
             return view('_partials/header',$data)

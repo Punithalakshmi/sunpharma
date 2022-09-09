@@ -7,11 +7,13 @@ use App\Models\NominationModel;
 
 class Nomination extends BaseController
 {
-    public function index()
+    public function index($nomination='')
     {
         $session   = \Config\Services::session();
         $userdata = $session->get('fuserdata');
         $data['userdata'] = $userdata;
+
+        $data['nomination'] = $nomination;
 
         return  view('frontend/header',$data)
                .view('frontend/ssan',$data)
@@ -169,6 +171,7 @@ class Nomination extends BaseController
 
                     $data['editdata'] = $editdata;
                     $data['userdata'] = $userdata;
+                    $data['nomination'] = $id;
                     return   view('frontend/header',$data)
                             .view('frontend/spsfn',$data)
                             .view('frontend/footer');

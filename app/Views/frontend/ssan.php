@@ -17,6 +17,14 @@
         <!--Page Header End-->
 
         <!--Form Page Start-->
+        <?php if($nomination == 'no'){ ?>
+            <div class="row">
+                    <div class="col-12">
+                        <h4 class="section-title__title mb-5">Nomination Registration - Closed
+                        </h4>
+                    </div>
+                </div>
+            <?php } else {?>
         <section class="contact-page">
             <div class="container">
                 <div class="row">
@@ -242,3 +250,4 @@
             </div>
         </section>
         <!--Form Page End-->     
+        <?php } ?>
