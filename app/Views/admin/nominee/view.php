@@ -18,18 +18,18 @@
                 
                   <div class="x_content">
                     <br />
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <h4>First Name <small> <?=$user['firstname'];?></small></h4>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <h4>First Name: <small> <?=$user['firstname'];?></small></h4>
                    </div>  
-                   <div class="col-md-6 col-sm-6 col-xs-12">
-                      <h4>Last Name <small> <?=$user['lastname'];?></small></h4>
+                   <div class="col-md-3 col-sm-6 col-xs-12">
+                      <h4>Last Name: <small> <?=$user['lastname'];?></small></h4>
                    </div>
-                   <div class="col-md-6 col-sm-6 col-xs-12">
-                      <h4>Email <small> <?=$user['email'];?></small></h4>
+                   <div class="col-md-3 col-sm-6 col-xs-12">
+                      <h4>Email: <small> <?=$user['email'];?></small></h4>
                    </div>
                       
-                   <div class="col-md-6 col-sm-6 col-xs-12">
-                      <h4>Phone <small> <?=$user['phone'];?></small></h4>
+                   <div class="col-md-3 col-sm-6 col-xs-12">
+                      <h4>Phone: <small> <?=$user['phone'];?></small></h4>
                    </div>
                      
                      
