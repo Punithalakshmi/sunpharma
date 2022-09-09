@@ -194,7 +194,7 @@ class Nominee extends BaseController
         $data['userdata'] = $userdata;
 
         if($userdata['role'] == 3)
-          $data['ratings'] = $ratingModel->getRatingByJury()->getResultArray();
+          $data['ratings'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
 
         if(is_array($userdata) && count($userdata)):
 
