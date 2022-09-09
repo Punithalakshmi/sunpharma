@@ -37,6 +37,7 @@
     <script>
       var base_url = '<?=base_url();?>';
       </script>
+      
   </head>
 
   <body class="nav-md">

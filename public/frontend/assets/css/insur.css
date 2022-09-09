@@ -19,7 +19,8 @@
 :root {
   --insur-font: 'DM Sans', sans-serif;
   --insur-reey-font: "reeyregular";
-  --insur-gray: #696e77;
+  /* --insur-gray: #696e77; */
+  --insur-gray: #080a0e;
   --insur-gray-rgb: 105, 110, 119;
   --insur-white: #ffffff;
   --insur-white-rgb: 255, 255, 255;
@@ -10176,7 +10177,7 @@ ul {
 .google-map-two {
   position: relative;
   display: block;
-  background-color: var(--insur-extra);
+  background-color:#ffeddb;
   margin-top: -60px;
 }
 
@@ -12391,3 +12392,9 @@ ul.main-menu__list.mobilebtn>li:hover>ul {
 .mobile-nav__content {
   max-width: 100%;
 }
+
+section.google-map-two {
+  border-top: 2px solid #fff;
+  box-shadow: 1px 4px 11px #000000;
+}
+#toolbarContainer{display:none!important;}

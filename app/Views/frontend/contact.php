@@ -1,8 +1,8 @@
 <!--Page Header Start-->
 <section class="page-header">
-            <div class="page-header-bg" style="background-image: url(<?=base_url();?>/frontend/<?=base_url();?>/frontend/assets/images/backgrounds/page-header-bg.jpg)">
+<div class="page-header-bg" style="background-image: url(<?=base_url();?>/frontend/assets/images/backgrounds/page-header-bg-contact.jpg)">
             </div>
-            <div class="page-header-shape-1"><img src="<?=base_url();?>/frontend/<?=base_url();?>/frontend/assets/images/shapes/page-header-shape-1.png" alt=""></div>
+            <div class="page-header-shape-1"><img src="<?=base_url();?>/frontend/assets/images/shapes/page-header-shape-1.png" alt=""></div>
             <div class="container">
                 <div class="page-header__inner">
                     <ul class="thm-breadcrumb list-unstyled">
@@ -10,213 +10,86 @@
                         <li><span>/</span></li>
                         <li>Contact</li>
                     </ul>
-                    <h2>Contact</h2>
+                    <h2>Need Instant Support?</h2>
                 </div>
             </div>
         </section>
         <!--Page Header End-->
 
-        <!--Form Page Start-->
-        <section class="contact-page">
+        <section id="contactpage" class="feature-four pt-5">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h3 class="section-title__title mb-5">Nomination - Sun Pharma Science Foundation Research Awards 2022
-                        </h3>
-                    </div>
-                </div>
+             
+                <div class="feature-four__bottom">
+                    <div class="row">
 
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="contact-page__left">
-                            <div class="m-card">
-                                <div class="m-card-body text-center">
-                                    <img src="images/user--default-Image.png" class="img-fluid" alt="">
+
+                    <div class="col-xl-4 col-lg-4">
+                            <div class="feature-four__single h-100 shadow-sm">
+                                <div class="feature-four__single-top">
+                                    <div class="feature-four__icon">
+                                        <span class="icon-pin"></span>
+                                    </div>
+                                    <h4 class="feature-four__title">Address</h4>
                                 </div>
-                                <div class="m-card-footer">
-                                    <!-- <label for="formFile3" class="form-label">Attach </label> -->
-                                    <input class="form-control my-3" name="nominator_photo" type="file" id="formFile3">
+                               
+                                <ul class="list-unstyled feature-four__points mt-5">
+                                    <li>
+                                    <div class="text">
+                                            <p>SUN PHARMA SCIENCE FOUNDATION,<br>
+                      8C, 8th Floor, Hansalaya Building, 15-Barakhamba Road,<br>
+                      Connaught Place, New Delhi -110001, INDIA</p>
+                                        </div>
+                                    </li>
                                     
-                                    <small class="text-danger">
-                                        
-                                    </small>
-                                </div>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-8">
-                        <div class="contact-page__right">
-                            <div class="contact-page__form">
-                                <!-- <form action="<?=base_url();?>/frontend/<?=base_url();?>/frontend/assets/inc/sendemail.php" class="comment-one__form contact-form-validated" novalidate="novalidate"> -->
-                                    <div class="row">
-                                        <div class="col-xl-6">                                           
-                                            <label for="" class="fw-bold">Category of the Award</label>
-                                            <div class="get-sunpharma__input-box mt-2">
-                                                
-                                                <select class="selectpicker mt-2"
-                                                    aria-label="Default select example" name="category">
-                                                    <option selected>-- Select --</option>
-                                                    <option value="Medical Sciences-Basic Research">Medical Sciences-Basic Research</option>
-                                                    <option value="Medical Sciences-Clinical Research">Medical Sciences-Clinical Research</option>
-                                                    <option value="Pharmaceutical Sciences">Pharmaceutical Sciences</option>
-                                                </select>
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                            
-                                        </div>
-
-                                        <div class="col-xl-6">
-                                            <div class="get-sunpharma__input-box">
-                                                <label for="" class="fw-bold">Name of the Applicant</label>
-                                                <input type="text" class="" placeholder="" name="nominee_name">
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6">                                           
-                                            <label for="" class="fw-bold">Date of Birth</label>
-                                            <div class="get-sunpharma__input-box mt-2">
-                                                <input type="date" placeholder="" name="date_of_birth" >
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6">
-                                            <div class="get-sunpharma__input-box">
-                                                <label for="" class="fw-bold">Citizenship</label>
-                                                <select class="selectpicker mt-2"
-                                                    aria-label="Default select example" name="citizenship">
-                                                    <option selected>-- Select --</option>
-                                                    <option value="1">Indian</option>
-                                                    <option value="2">Other</option>
-                                                </select>
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
 
 
-                                        <div class="col-xl-6">
-                                            <label for="" class="fw-bold">Designation & Office Address</label>
-                                            <div class="get-sunpharma__comment-box comment-form__input-box text-message-box mt-2">
-                                                <textarea name="designation_and_office_address" placeholder="Write a message"></textarea>
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6">                                           
-                                            <label for="" class="fw-bold">Residence Address</label>
-                                            <div class="get-sunpharma__comment-box comment-form__input-box text-message-box mt-2">
-                                                <textarea name="residence_address" placeholder="Write a message"></textarea>
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6">                                           
-                                            <label for="" class="fw-bold">Mobile No</label>
-                                            <div class="get-sunpharma__input-box mt-2">
-                                                <input type="number" placeholder="" name="mobile_no">
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6">                                           
-                                            <label for="" class="fw-bold">Email ID</label>
-                                            <div class="get-sunpharma__input-box mt-2">
-                                                <input type="email" placeholder="" name="email">
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-4">                                           
-                                            <label for="" class="fw-bold">Name of the Nominator</label>
-                                            <div class="get-sunpharma__input-box mt-2">
-                                                <input type="text" placeholder="" name="nominator_name">
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-4">                                           
-                                            <label for="" class="fw-bold">Mobile No (Nominator)</label>
-                                            <div class="get-sunpharma__input-box mt-2">
-                                                <input type="number" placeholder="" name="nominator_mobile">
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-4">                                           
-                                            <label for="" class="fw-bold">Email ID (Nominator)</label>
-                                            <div class="get-sunpharma__input-box mt-2">
-                                                <input type="email" placeholder="" name="nominator_email">
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-12">                                           
-                                            <label for="" class="fw-bold">Office Address (Nominator)</label>
-                                            <div class="get-sunpharma__comment-box comment-form__input-box mt-2">
-                                                <textarea name="nominator_office_address" placeholder="Write a message" style="height:auto;"></textarea>
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-12">
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)	</label>
-                                                <input class="form-control" name="justification_letter" type="file" id="formFile">
-                                                <small class="text-danger">
-                                                    
-                                                </small>                                            
-                                            </div>                                           
-                                            
-                                        </div>
-
-                                        <div class="col-xl-12">    
-                                            <div class="mb-3">
-                                                <label for="formFile2" class="form-label">Attach Indian Passport Copy in pdf format  (<i class="fas fa-file-pdf text-danger">if citizenship is NRI</i>)</label>
-                                                <input class="form-control mb-3" name="passport" type="file" id="formFile2">                                            
-                                                <small class="text-danger">
-                                                    
-                                                </small>
-                                            </div>                                       
-                                        </div>
-  
+<div class="col-xl-4 col-lg-4">
+                            <div class="feature-four__single h-100 shadow-sm">
+                                <div class="feature-four__single-top">
+                                    <div class="feature-four__icon">
+                                        <span class="icon-email"></span>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <div class="comment-form__btn-box">
-                                                <button type="submit" class="thm-btn comment-form__btn">Next</button>
-                                            </div>
-                                        </div>
+                                    <h4 class="feature-four__title">Email</h4>
+                                </div>
+                               
+                                <ul class="list-unstyled feature-four__points-two pt-5">
+                                    <li><a  style="line-height: normal;  display: block;" href="mailto:sunpharma.sciencefoundation@sunpharma.com">sunpharma.sciencefoundation@ sunpharma.com</a></li>
+                                </ul>
+               
+                            </div>
+                        </div>
+
+
+                       
+                        <div class="col-xl-4 col-lg-4">
+                            <div class="feature-four__single h-100 shadow-sm">
+                                <div class="feature-four__single-top">
+                                    <div class="feature-four__icon">
+                                        <span class="icon-telephone-call"></span>
                                     </div>
-                                <!-- </form> -->
+                                    <h4 class="feature-four__title">Call</h4>
+                                </div>
+                                
+                                <ul class="list-unstyled feature-four__points-two pt-5">
+                                    <li><a href="tel:+91 - (11) - 23721414">+91 - (11) - 23721414</a></li>
+                                    <li><a href="tel:+91 - (11) - 23721415">+91 - (11) - 23721415</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!--Form Page End-->
+
+
+         <!--Google Map Start-->
+         <section class="google-map-two">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d218.87743831058245!2d77.22556982936122!3d28.628592823269944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd33c9f50295%3A0xc654840defbc891f!2sHansalaya%20Building!5e0!3m2!1sen!2sin!4v1661501919317!5m2!1sen!2sin"
+                class="google-map__two" allowfullscreen></iframe>
+
+        </section>
+        <!--Google Map End-->

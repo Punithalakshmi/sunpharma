@@ -1,8 +1,8 @@
 <!--Page Header Start-->
         <section class="page-header">
-            <div class="page-header-bg" style="background-image: url(<?=base_url();?>/frontend/assets/<?=base_url();?>/frontend/assets/images/backgrounds/page-header-bg.jpg)">
+            <div class="page-header-bg" style="background-image: url(<?=base_url();?>/frontend/assets/images/backgrounds/page-header-bg.jpg)">
             </div>
-            <div class="page-header-shape-1"><img src="<?=base_url();?>/frontend/assets/<?=base_url();?>/frontend/assets/images/shapes/page-header-shape-1.png" alt=""></div>
+            <div class="page-header-shape-1"><img src="<?=base_url();?>/frontend/assets/images/shapes/page-header-shape-1.png" alt=""></div>
             <div class="container">
                 <div class="page-header__inner">
                     <ul class="thm-breadcrumb list-unstyled">

@@ -7,7 +7,7 @@
               </div>
             </div>
            
-            <div>
+            <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/nominee/assign" class="btn btn-primary btn-xs">Assign Jury</a>
            </div>
             <div class="clearfix"></div>

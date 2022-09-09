@@ -7,7 +7,7 @@
               </div>
             </div>
            
-            <div>
+            <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/user/add" class="btn btn-primary btn-xs">Add User</a>
            </div>
             <div class="clearfix"></div>

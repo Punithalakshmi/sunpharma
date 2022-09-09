@@ -10,3 +10,8 @@ body{background: #0547ab;}
     background: #0547ab;
 }
 #toolbarContainer{display: none!important;;}
+
+.actionbtns {
+    display: flex;
+    justify-content: right;
+}
