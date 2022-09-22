@@ -262,25 +262,6 @@ class User extends BaseController
 
     }
 
-    public function validation_rules($type = 'profile',$id='')
-    {
-
-      $validation_rules = array();
-
-      $validation_rules = array(
-                                    "firstname" => array("label" => "Firstname",'rules' => 'required'),
-                                    "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                    "email" => array("label" => "email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
-                                    "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
-                                    "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
-      );
- 
-      if($type == 'user')
-        $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');  
-
-      return $validation_rules;
-      
-    }
 
     public function delete($id='')
     {
@@ -290,7 +271,6 @@ class User extends BaseController
         $userdata  = $session->get('userdata'); 
         $data['userdata'] = $userdata;
 
-       
         if(is_array($userdata) && count($userdata)):
           $userModel->delete(array("id" => $id));
           return redirect()->route('admin/user');
@@ -298,4 +278,95 @@ class User extends BaseController
             return redirect()->route('admin/login');
         endif;
     }
+
+    public function changepassword($id='')
+    {
+        helper(array('form', 'url'));
+        $userModel = new UserModel();
+        $session   = \Config\Services::session();
+
+        $request   = \Config\Services::request();
+        $validation = \Config\Services::validation();
+
+        $userdata  = $session->get('userdata'); 
+        $data['userdata'] = $userdata;
+
+        if(is_array($userdata) && count($userdata)):
+
+            $userModel = new UserModel();
+
+            $data['userdata'] = $userdata;
+
+            $validation = $this->validate($this->validation_rules('change_password',$id));
+            
+            if($validation) {
+
+                if($request->getPost()){
+                
+                    $newPassword     = $request->getPost('new_password');
+                    $id              = $request->getPost('id');
+
+                    $ins_data = array();
+                    $ins_data['password']  = md5($newPassword);
+                    
+                    if(!empty($id)){
+                        $session->setFlashdata('msg', 'Password Updated Successfully!');
+                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $userModel->update(array("id" => $id),$ins_data);
+                    }
+                    
+                    return redirect()->route('admin/user');
+                }
+            }
+            else
+            {  
+            
+                $editdata['new_password']       = ($request->getPost('new_password'))?$request->getPost('new_password'):'';
+                $editdata['confirm_password']   = ($request->getPost('confirm_password'))?$request->getPost('confirm_password'):'';
+                $editdata['id']                 = ($request->getPost('id'))?$request->getPost('id'):$id;   
+            } 
+
+            if($request->getPost())
+              $data['validation'] = $this->validator;
+
+            $data['editdata'] = $editdata;
+
+            return  view('_partials/header',$data)
+            .view('admin/user/changepassword',$data)
+            .view('_partials/footer');
+        else:
+            return redirect()->route('admin/login');
+        endif;
+    }
+
+    public function validation_rules($type = 'profile',$id='')
+    {
+
+        $validation_rules = array();
+
+        if($type =='profile' || $type == 'user'){
+            $validation_rules = array(
+                                            "firstname" => array("label" => "Firstname",'rules' => 'required'),
+                                            "lastname" => array("label" => "Lastname",'rules' => 'required'),
+                                            "email" => array("label" => "email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
+                                            "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
+                                            "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
+            );
+        
+            if($type == 'user')
+                $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');  
+        }
+        else
+        {
+            $validation_rules = array(
+                "new_password" => array("label" => "Password",'rules' => 'required'),
+                "confirm_password" => array("label" => "Confirm Passwod",'rules' => 'required|matches[new_password]')
+            );
+        }  
+
+        return $validation_rules;
+      
+    }
+
 }

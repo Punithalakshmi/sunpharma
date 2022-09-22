@@ -10,8 +10,12 @@ class Login extends BaseController
     public function index()
     {
         $session  = \Config\Services::session();
-        $userdata = $session->get('userdata');
-        $data['userdata'] = $userdata;
+
+        $session = session();
+        $session->remove('userdata');
+
+        
+        $data['userdata'] = '';
      
         if(empty($userdata)):
             return view('_partials/header',$data)

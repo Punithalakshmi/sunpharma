@@ -13,7 +13,7 @@ class Dashboard extends BaseController
         $userdata = $session->get('userdata');
         
         $data['userdata'] = $userdata;
-       //print_r($userdata); die;
+       
         if((is_array($userdata) && count($userdata)) || !is_array($userdata)):
             if(isset($userdata['isLoggedIn']) && $userdata['isLoggedIn']):
                 return view('_partials/header',$data)
@@ -24,4 +24,5 @@ class Dashboard extends BaseController
             endif;
         endif;
     }
+
 }

@@ -66,8 +66,6 @@ class Nomination extends BaseController
          
         $data['categories']  = $categoryModel->getListsOfCategories();
         
-         
-
         if(is_array($userdata) && count($userdata)):
            
             if(!empty($id)){
@@ -94,9 +92,8 @@ class Nomination extends BaseController
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
                     $ins_data['year']         = $year;
-                    
+                   // print_r($ins_data); die;
                     if(!empty($id)){
-                       // print_r($ins_data); die;
                         $session->setFlashdata('msg', 'Nomination Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['login_id'];
@@ -154,7 +151,7 @@ class Nomination extends BaseController
 
         $validation_rules = array();
         $validation_rules = array(
-                                        "name" => array("label" => "Nomination Name",'rules' => 'required')
+                                        "start_date" => array("label" => "Start Date",'rules' => 'required')
         );
     
         return $validation_rules;

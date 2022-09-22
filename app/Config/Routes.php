@@ -82,6 +82,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('user/add',"User::add");
     $routes->get('user/add/(:any)','User::add/$1');
     $routes->get("user/delete/(:any)", "User::delete/$1");
+    $routes->get("user/changepassword/(:any)", "User::changepassword/$1");
+    $routes->post("user/changepassword", "User::changepassword");
 
     $routes->get("profile", "User::profile");
     $routes->post("profile", "User::profile");

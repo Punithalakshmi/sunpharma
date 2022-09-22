@@ -12,8 +12,8 @@ class SpecialAwards extends BaseController
         $userdata = $session->get('fuserdata');
         $data['userdata'] = $userdata;
         
-        return  view('frontend/header')
-                .view('frontend/special_award')
+        return  view('frontend/header',$data)
+                .view('frontend/special_award',$data)
                 .view('frontend/footer');
     }
 

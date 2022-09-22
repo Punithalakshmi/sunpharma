@@ -137,17 +137,17 @@
                                             <a href="/mission">Mission</a>
                                         </li>
                                         <li class="dropdown">
-                                            <a href="/research_awards">Research Awards</a>
+                                            <a href="https://sunpharmasciencefoundation.net/LatestWinnersResearchAwardmain.asp" target="_blank">Research Awards</a>
                                             <ul>
-                                                <li><a href="/research_awards">Latest Winners of Research Awards</a></li>
+                                                <li><a href="https://sunpharmasciencefoundation.net/LatestWinnersResearchAwardmain.asp" target="_blank">Latest Winners of Research Awards</a></li>
                                                 <li><a href="/directory_research_awardees">Directory of Research Awardees</a></li>
                                             </ul>
                                         </li>
 
                                         <li class="dropdown">
-                                            <a href="/latest_winners_of_science_scholars_awards">Scholars Awards</a>
+                                            <a href="https://sunpharmasciencefoundation.net/LatestWinnersScienceScholarAwardmain.asp" target="_blank">Scholars Awards</a>
                                             <ul>
-                                                <li><a href="/latest_winners_of_science_scholars_awards">Latest Winners of Science Scholars Awards</a></li>
+                                                <li><a href="https://sunpharmasciencefoundation.net/LatestWinnersScienceScholarAwardmain.asp" target="_blank">Latest Winners of Science Scholars Awards</a></li>
                                                 <li><a href="/directory_of_science_scholars">Directory of Science Scholars</a></li>
                                                 <!-- <li><a href="#">Science Scholars Awards for Young Scientists</a></li> -->
                                             </ul>
