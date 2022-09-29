@@ -3,9 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\NominationTypesModel;
-use App\Models\CategoryModel;
-use App\Models\RoleModel;
+use App\Models\WorkshopModel;
 
 
 class Workshops extends BaseController
@@ -16,33 +14,17 @@ class Workshops extends BaseController
         $session = \Config\Services::session();
 
         $userdata      = $session->get('userdata');
-        $nominationTypesModel = new NominationTypesModel();
-        $categoryModel        = new CategoryModel();
-        
+        $workshopModel = new WorkshopModel();
+       
         $data['userdata'] = $userdata;
        
         if(is_array($userdata) && count($userdata)):
 
-            $nominationTypeLists = $nominationTypesModel->getListsOfNominations();
+            $workshopLists = $workshopModel->getLists();
 
-            foreach($nominationTypeLists as $ukey => $uvalue){
-                
-                if(!empty($uvalue['category_id'])){ 
-                 $category = $categoryModel->getListsOfCategories($uvalue['category_id']);
-                    
-                 $category = $category->getRowArray();
-                 //($category); die;
-                 $nominationTypeLists[$ukey]['category_id'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
-                }
-                else
-                {
-                 $nominationTypeLists[$ukey]['category_id'] = '-';
-                }
-             }
-           
-            $data['lists'] = $nominationTypeLists;
+            $data['lists'] = $workshopLists;
             return view('_partials/header',$data)
-                .view('admin/nomination/list',$data)
+                .view('admin/workshop/list',$data)
                 .view('_partials/footer');
         else:
             return redirect()->route('admin/login');
@@ -60,17 +42,14 @@ class Workshops extends BaseController
         $validation = \Config\Services::validation();
         
         $data['userdata'] = $userdata;
-        $nominationTypesModel = new NominationTypesModel();
-        $categoryModel        = new CategoryModel();
+    
+        $workshopModel = new WorkshopModel();
 
-         
-        $data['categories']  = $categoryModel->getListsOfCategories();
-        
         if(is_array($userdata) && count($userdata)):
            
             if(!empty($id)){
-                $getUserData = $nominationTypesModel->getListsOfNominations($id);
-                $edit_data   = $getUserData->getRowArray();
+                $edit_data = $workshopModel->getLists($id);
+               // $edit_data   = $getUserData->getRowArray();
             }
             
             if($request->getPost())
@@ -81,48 +60,52 @@ class Workshops extends BaseController
 
                 if($request->getPost()){
                 
-                    $category      = $request->getPost('category');
+                    $event_name    = $request->getPost('event_name');
+                    $description   = $request->getPost('description');
                     $start_date    = $request->getPost('start_date');
                     $end_date      = $request->getPost('end_date');
                     $year          = $request->getPost('year');
 
                     
                     $ins_data = array();
-                    $ins_data['category_id']  = $category;
+                    $ins_data['event_name']   = $event_name;
+                    $ins_data['description']  = $description;
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
                     $ins_data['year']         = $year;
-                   // print_r($ins_data); die;
+                   
                     if(!empty($id)){
-                        $session->setFlashdata('msg', 'Nomination Updated Successfully!');
+                        $session->setFlashdata('msg', 'Workshop Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['login_id'];
-                        $nominationTypesModel->update(array("id" => $id),$ins_data);
+                        $workshopModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
-                        $session->setFlashdata('msg', 'Nomination Added Successfully!');
+                        $session->setFlashdata('msg', 'Workshop Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  $userdata['login_id'];
-                        $nominationTypesModel->save($ins_data);
+                        $workshopModel->save($ins_data);
                     } 
 
-                    return redirect()->route('admin/nomination');
+                    return redirect()->route('admin/workshop');
                 }
             }
             else
             {  
             
                 if(!empty($edit_data) && count($edit_data)){
-                    $editdata['category']   = $edit_data['category_id'];
-                    $editdata['year']       = $edit_data['year'];
-                    $editdata['start_date'] = date("m/d/Y",strtotime($edit_data['start_date']));
-                    $editdata['end_date']   = date("m/d/Y",strtotime($edit_data['end_date']));
-                    $editdata['id']         = $edit_data['id'];
+                    $editdata['event_name']   = $edit_data['event_name'];
+                    $editdata['description']  = $edit_data['description'];
+                    $editdata['year']         = $edit_data['year'];
+                    $editdata['start_date']   = date("m/d/Y",strtotime($edit_data['start_date']));
+                    $editdata['end_date']     = date("m/d/Y",strtotime($edit_data['end_date']));
+                    $editdata['id']           = $edit_data['id'];
                 }
                 else
                 {
-                    $editdata['category']       = ($request->getPost('category'))?$request->getPost('category'):'';
+                    $editdata['event_name']     = ($request->getPost('event_name'))?$request->getPost('event_name'):'';
+                    $editdata['description']    = ($request->getPost('description'))?$request->getPost('description'):'';
                     $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
                     $editdata['start_date']     = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
                     $editdata['end_date']       = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");
@@ -135,14 +118,12 @@ class Workshops extends BaseController
 
                     $data['editdata'] = $editdata;
                     return view('_partials/header',$data)
-                        .view('admin/nomination/add',$data)
+                        .view('admin/workshop/add',$data)
                         .view('_partials/footer');
             }       
         else:
             return redirect()->route('admin/login');
         endif; 
-
-
     }
 
 
@@ -150,9 +131,7 @@ class Workshops extends BaseController
     {
 
         $validation_rules = array();
-        $validation_rules = array(
-                                        "start_date" => array("label" => "Start Date",'rules' => 'required')
-        );
+        $validation_rules = array("start_date" => array("label" => "Start Date",'rules' => 'required'));
     
         return $validation_rules;
       
@@ -160,15 +139,15 @@ class Workshops extends BaseController
 
     public function delete($id='')
     {
-        $nominationTypesModel = new NominationTypesModel();
+        $workshopModel = new WorkshopModel();
         $session = \Config\Services::session();
 
         $userdata  = $session->get('userdata'); 
         $data['userdata'] = $userdata;
 
         if(is_array($userdata) && count($userdata)):
-          $nominationTypesModel->delete(array("id" => $id));
-          return redirect()->route('admin/nomination');
+          $workshopModel->delete(array("id" => $id));
+          return redirect()->route('admin/workshop');
         else:
             return redirect()->route('admin/login');
         endif;
