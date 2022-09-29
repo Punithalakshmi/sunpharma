@@ -16,9 +16,12 @@ class RatingModel extends Model{
         'updated_id'
     ];
 
-    public function getLists()
+    public function getLists($id='')
     {
+        if(empty($id))
         return $this->findAll();
+       else 
+         return $this->getWhere(array('id' => $id)); 
     }
 
     public function getRatingData($jury_id='',$nominee_id='')

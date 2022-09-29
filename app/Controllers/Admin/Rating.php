@@ -9,7 +9,7 @@ use App\Models\RatingModel;
 class Rating extends BaseController
 {
 
-    public function add($id='')
+    public function add($id='',$nominee_id='')
     {
         helper(array('form', 'url'));
 
@@ -20,66 +20,48 @@ class Rating extends BaseController
         $validation = \Config\Services::validation();
         
         $data['userdata'] = $userdata;
-        $categoryModel = new CategoryModel();
+        $ratingModel = new RatingModel();
 
         if(is_array($userdata) && count($userdata)):
            
-            if(!empty($id)){
-                $getUserData = $categoryModel->getListsOfCategories($id);
-                $edit_data   = $getUserData->getRowArray();
-            }
-            
             if($request->getPost())
                $id  = $request->getPost('id');
-               
-            $validation = $this->validate($this->validation_rules());
+
+               $edit_data = $ratingModel->getLists($id);   
+               $edit_data = $edit_data->getRowArray();
+             
+               $validation = $this->validate($this->validation_rules());
+
             if($validation) {
 
                 if($request->getPost()){
                 
-                    $category      = $request->getPost('name');
-                    $active        = $request->getPost('status');
-                    $type          = $request->getPost('type');
-
-                    
+                    $rating        = $request->getPost('rating');
+                    $comments      = $request->getPost('comments');
+                   
                     $ins_data = array();
-                    $ins_data['name']       = $category;
-                    $ins_data['type']       = $type;
-                    $ins_data['status']     = $active;
+                    $ins_data['rating']     = $rating;
+                    $ins_data['comments']   = $comments;
                     
                     if(!empty($id)){
-                       // print_r($ins_data); die;
-                        $session->setFlashdata('msg', 'Category Updated Successfully!');
+                        $session->setFlashdata('msg', 'Rating Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['login_id'];
-                        $categoryModel->update(array("id" => $id),$ins_data);
+                        $ratingModel->update(array("id" => $id),$ins_data);
                     }
-                    else
-                    {
-                        $session->setFlashdata('msg', 'Category Added Successfully!');
-                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
-                        $categoryModel->save($ins_data);
-                    } 
-
-                    return redirect()->route('admin/category');
+                   
+                    $nominee_id = $request->getPost('nominee_id');
+                    return redirect()->to('admin/nominee/view/'.$nominee_id);
                 }
             }
             else
             {  
             
                 if(!empty($edit_data) && count($edit_data)){
-                    $editdata['name']       = $edit_data['name'];
-                    $editdata['status']     = $edit_data['status'];
-                    $editdata['type']       = $edit_data['type'];
-                    $editdata['id']       = $edit_data['id'];
-                }
-                else
-                {
-                    $editdata['name']       = ($request->getPost('name'))?$request->getPost('name'):'';
-                    $editdata['status']     = ($request->getPost('status'))?$request->getPost('status'):'Active';
-                    $editdata['type']       = ($request->getPost('type'))?$request->getPost('type'):'Research Awards';
-                    $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['rating']     = $edit_data['rating'];
+                    $editdata['comments']   = $edit_data['comments'];
+                    $editdata['id']         = $edit_data['id'];
+                    $editdata['nominee_id'] = $edit_data['nominee_id'];
                 }
 
                   if($request->getPost())
@@ -88,7 +70,7 @@ class Rating extends BaseController
 
                     $data['editdata'] = $editdata;
                     return view('_partials/header',$data)
-                        .view('admin/category/add',$data)
+                        .view('admin/rating/add',$data)
                         .view('_partials/footer');
             }       
         else:
@@ -104,24 +86,25 @@ class Rating extends BaseController
 
         $validation_rules = array();
         $validation_rules = array(
-                                        "name" => array("label" => "Category Name",'rules' => 'required')
+                                        "rating" => array("label" => "Rating",'rules' => 'required')
         );
     
         return $validation_rules;
       
     }
 
-    public function delete($id='')
+    public function delete($id='',$nominee_id='')
     {
-        $categoryModel = new CategoryModel();
+        $ratingModel = new ratingModel();
         $session = \Config\Services::session();
 
         $userdata  = $session->get('userdata'); 
         $data['userdata'] = $userdata;
 
         if(is_array($userdata) && count($userdata)):
-          $categoryModel->delete(array("id" => $id));
-          return redirect()->route('admin/category');
+
+          $ratingModel->delete(array("id" => $id));
+          return redirect()->to('admin/nominee/view/'.$nominee_id);
         else:
             return redirect()->route('admin/login');
         endif;

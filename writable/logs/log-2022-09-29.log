@@ -1,0 +1,15 @@
+CRITICAL - 2022-09-29 08:02:56 --> Undefined variable: editdata
+in APPPATH\Controllers\Admin\Rating.php on line 66.
+ 1 APPPATH\Controllers\Admin\Rating.php(66): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: editdata', 'APPPATH\\Controllers\\Admin\\Rating.php', 66, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Rating->add('2')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Rating))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 08:13:22 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 APPPATH\Controllers\Admin\Rating.php(54): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Rating->add()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Rating))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

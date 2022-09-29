@@ -92,7 +92,6 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nominee/view/(:any)','Nominee::view/$1');
     $routes->get('nominee/lists','Nominee::nominee_lists_of_jury');
     $routes->post('nominee/assignJury','Nominee::assignJury');
-   // $routes->post('nominee/rating/(:any)','Nominee::rating/$1');
     $routes->post('nominee/view','Nominee::view');
     $routes->get('nominee/ratings','Nominee::ratings');
     $routes->get('nominee/getApproval/(:any)','Nominee::getApproval/$1');
@@ -110,7 +109,16 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nomination/add','Nomination::add');
     $routes->get('nomination/add/(:any)','Nomination::add/$1');
     $routes->get('nomination/delete/(:any)','Nomination::delete/$1');
-    
+
+    $routes->get('rating/add/(:any)','Rating::add/$1');
+    $routes->post('rating/add','Rating::add');
+    $routes->get('rating/delete/(:any)/(:any)','Rating::delete/$1/$1');
+
+    $routes->get('workshops/add/(:any)','Workshops::add/$1');
+    $routes->post('workshops/add','Workshops::add');
+    $routes->get('workshops/delete/(:any)','Workshops::delete/$1');
+
+
 });
 
 /*
