@@ -49,7 +49,7 @@ class Workshops extends BaseController
            
             if(!empty($id)){
                 $edit_data = $workshopModel->getLists($id);
-               // $edit_data   = $getUserData->getRowArray();
+                $edit_data   = $edit_data->getRowArray();
             }
             
             if($request->getPost())
@@ -68,7 +68,7 @@ class Workshops extends BaseController
 
                     
                     $ins_data = array();
-                    $ins_data['event_name']   = $event_name;
+                    $ins_data['name']   = $event_name;
                     $ins_data['description']  = $description;
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
@@ -88,14 +88,14 @@ class Workshops extends BaseController
                         $workshopModel->save($ins_data);
                     } 
 
-                    return redirect()->route('admin/workshop');
+                    return redirect()->route('admin/workshops');
                 }
             }
             else
             {  
             
                 if(!empty($edit_data) && count($edit_data)){
-                    $editdata['event_name']   = $edit_data['event_name'];
+                    $editdata['event_name']   = $edit_data['name'];
                     $editdata['description']  = $edit_data['description'];
                     $editdata['year']         = $edit_data['year'];
                     $editdata['start_date']   = date("m/d/Y",strtotime($edit_data['start_date']));
@@ -131,7 +131,8 @@ class Workshops extends BaseController
     {
 
         $validation_rules = array();
-        $validation_rules = array("start_date" => array("label" => "Start Date",'rules' => 'required'));
+        $validation_rules = array(   "event_name" => array("label" => "Event",'rules' => 'required'),
+                                    "start_date" => array("label" => "Start Date",'rules' => 'required'));
     
         return $validation_rules;
       

@@ -2,7 +2,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add Nomination</h3>
+                <h3>Add Event</h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -15,6 +15,32 @@
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/workshops/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Event Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="event_name" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('event_name',$editdata['event_name']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('event_name')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('event_name'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      
+                      <div class="clearfix"></div>
+                     
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea name="description"><?=$editdata['description'];?></textarea>
+                        </div>
+                      </div>
+
                       <div class="clearfix"></div>
                       
                       <div class="form-group">
