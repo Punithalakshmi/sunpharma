@@ -33,4 +33,12 @@ class CategoryModel extends Model{
             $builder->where("users.id",$id);
             return $query = $builder->get();
     }
+
+    public function getCategoriesByType($type){
+            $builder = $this->table('category');
+            $builder->select('category.*');
+            $builder->join('nominations','nominations.category_id = category.id');
+            $builder->where("category.type",$type);
+            return $query = $builder->get();
+    }
 }

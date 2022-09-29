@@ -87,7 +87,6 @@
             </div>
         </section>
         <!--Main Slider End-->
-
         <div id="newslider" class="container">
             <div class="row">
                 <div class="alert alert-danger" role="alert">

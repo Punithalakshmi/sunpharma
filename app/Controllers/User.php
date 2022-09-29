@@ -32,7 +32,7 @@ class User extends BaseController
 
               $redirect_route = '/'.$result['nomination_type'].'/'.$result['id'];
 
-              return redirect()->route($redirect_route);
+              return redirect()->to($redirect_route);
         }
         else
         {

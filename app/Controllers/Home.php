@@ -72,4 +72,6 @@ class Home extends BaseController
                 .view('frontend/footer');
     }
 
+ 
+
 }

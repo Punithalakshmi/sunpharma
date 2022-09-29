@@ -52,6 +52,34 @@ class Nominee extends BaseController
         endif;        
     }
 
+    public function getApproval($id = '')
+    {
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+
+        $userdata  = $session->get('userdata');
+        $nomineeModel = new NomineeModel();
+        
+        $data['userdata'] = $userdata;
+       
+        if(is_array($userdata) && count($userdata)):
+
+            $id = ($request->getPost('id'))?$request->getPost('id'):$id;
+            
+            $getUserData  = $nomineeModel->getNomineeInfo($id);
+            
+            $data['user'] = $getUserData->getRowArray();
+           // print_r($getUserData); die;
+            $data['editdata'] = $data;
+            return view('_partials/header',$data)
+                .view('admin/nominee/nominee_view',$data)
+                .view('_partials/footer');
+
+        else:
+            return redirect()->route('admin/login');
+        endif;   
+    }
+
     public function approve()
     {
 
@@ -88,7 +116,7 @@ class Nominee extends BaseController
 
             $email = \Config\Services::email();
 
-            $email->setFrom('your@example.com', 'Your Name');
+            $email->setFrom('punitha@izaaptech.in', 'Punithalakshmi');
             $email->setTo($getUserData['email']);
            // $email->setCC('another@another-example.com');
             //$email->setBCC('them@their-example.com');
@@ -98,7 +126,7 @@ class Nominee extends BaseController
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
 
-                $pass = uniqid(rand(), true);
+                $pass = $this->generatePassword(6);
 
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
                 $message .= 'Username: '.$getUserData['email'].'<br /><br />';
@@ -106,6 +134,7 @@ class Nominee extends BaseController
 
                 $up_data = array();
                 $up_data['password'] = md5($pass);
+                $up_data['original_password'] = $pass;
                 $userModel->update(array("id" => $getUserData['id']),$up_data);
             }
             else
@@ -130,8 +159,8 @@ class Nominee extends BaseController
             }
         
             if($this->request->isAJAX()){
-                    echo json_encode(array('status' => $status,'message' => $message));
-                    exit;
+                echo json_encode(array('status' => $status,'message' => $message));
+                exit;
             }
 
         else
@@ -321,6 +350,18 @@ class Nominee extends BaseController
       return $validation_rules;
       
     }
+ 
+    public function generatePassword($n) {
+        $characters = 'abcdefghijklmnopqrstuvwxyz';
+        $randomString = '';
 
+        for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
+ 
 
 }

@@ -49,7 +49,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-              <a href="/admin" class="site_title"><img class="logo img-responsive" src="<?php echo base_url();?>/images/logo.jpg" alt="Sun Pharma Science Foundation" /></a>
+              <a href="<?=base_url();?>/admin" class="site_title"><img class="logo img-responsive" src="<?php echo base_url();?>/images/logo.jpg" alt="Sun Pharma Science Foundation" /></a>
             </div>
 
             <div class="clearfix"></div>
@@ -74,6 +74,11 @@
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/nomination">
                     <i class="fa fa-user"></i> Nominations </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url();?>/admin/workshops">
+                      <i class="fa fa-user"></i> Workshops 
+                    </a>
                   </li>
                   <?php } else if($userdata['role'] == 1){ ?>
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">

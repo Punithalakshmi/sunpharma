@@ -20,7 +20,8 @@ class UserModel extends Model{
         'dob',
         'address',
         'middlename',
-        'category'
+        'category',
+        'original_password'
     ];
 
     public function Login($username, $password) {
@@ -55,8 +56,9 @@ class UserModel extends Model{
                 'id'          => $result->id,
                 'name'        => $result->firstname,
                 'email'       => $result->email,
-                'isLoggedIn'      => TRUE,
-                'role'           => $result->role
+                'isLoggedIn'  => TRUE,
+                'role'        => $result->role,
+                'isNominee'   => 'yes'
             ];
             return $data;
         } else {

@@ -70,7 +70,7 @@
                     <div class="container">
                         <div class="main-header-two__top-social-box-inner">
                             <p class="main-header-two__top-social-text"> <i class="fa fa-pin"></i> <span>Address:</span> 8C, 8th Floor, Hansalaya Building, 15-Barakhamba Road, Connaught Place, New Delhi -110001, INDIA</p>
-                            <?php if(!is_array($userdata)):?>
+                            <?php if(!isset($userdata['isLoggedIn'])):?>
                               <div class="main-header-two__top-menu-box">
                                     <ul class="list-unstyled main-header-two__top-menu">
                                         <li><a href="<?=base_url();?>/login"><u>Login</u></a></li>

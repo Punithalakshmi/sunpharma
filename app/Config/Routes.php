@@ -95,6 +95,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
    // $routes->post('nominee/rating/(:any)','Nominee::rating/$1');
     $routes->post('nominee/view','Nominee::view');
     $routes->get('nominee/ratings','Nominee::ratings');
+    $routes->get('nominee/getApproval/(:any)','Nominee::getApproval/$1');
+    $routes->post('nominee/approve','Nominee::approve');
 
 
     $routes->get('category','Category::index');
