@@ -42,6 +42,24 @@
                       </div>
 
                       <div class="clearfix"></div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Registration Link <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="registration_link" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('registration_link',$editdata['registration_link']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('registration_link')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('registration_link'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      
+                      <div class="clearfix"></div>
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Year</label>

@@ -65,6 +65,7 @@ class Workshops extends BaseController
                     $start_date    = $request->getPost('start_date');
                     $end_date      = $request->getPost('end_date');
                     $year          = $request->getPost('year');
+                    $link          = $request->getPost('registration_link');
 
                     
                     $ins_data = array();
@@ -73,6 +74,7 @@ class Workshops extends BaseController
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
                     $ins_data['year']         = $year;
+                    $ins_data['registration_link']         = $link;
                    
                     if(!empty($id)){
                         $session->setFlashdata('msg', 'Workshop Updated Successfully!');
@@ -100,6 +102,7 @@ class Workshops extends BaseController
                     $editdata['year']         = $edit_data['year'];
                     $editdata['start_date']   = date("m/d/Y",strtotime($edit_data['start_date']));
                     $editdata['end_date']     = date("m/d/Y",strtotime($edit_data['end_date']));
+                    $editdata['registration_link']     = $edit_data['registration_link'];
                     $editdata['id']           = $edit_data['id'];
                 }
                 else
@@ -109,6 +112,7 @@ class Workshops extends BaseController
                     $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
                     $editdata['start_date']     = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
                     $editdata['end_date']       = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");
+                    $editdata['registration_link']    = ($request->getPost('registration_link'))?$request->getPost('registration_link'):'';
                     $editdata['id']             = ($request->getPost('id'))?$request->getPost('id'):'';
                 }
 

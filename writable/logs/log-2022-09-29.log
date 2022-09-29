@@ -84,3 +84,14 @@ in APPPATH\Controllers\Admin\Workshops.php on line 52.
  3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
  4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 11:45:44 --> Undefined index: registration_link
+in APPPATH\Views\admin\workshop\add.php on line 50.
+ 1 APPPATH\Views\admin\workshop\add.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: registration_link', 'APPPATH\\Views\\admin\\workshop\\add.php', 50, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/add', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(123): view('admin/workshop/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

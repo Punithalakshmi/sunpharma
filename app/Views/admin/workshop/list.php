@@ -31,6 +31,7 @@
                           
                           <th>Event Name</th>
                           <th>Description</th>
+                          <th>Registration Link</th>
                           <th>Start Date</th>
                           <th>End Date</th>
                           <th>Created Date</th>
@@ -45,6 +46,7 @@
                           
                           <td><?=$user['name'];?></td>
                           <td><?=$user['description'];?></td>
+                          <td><?=$user['registration_link'];?></td>
                           <td><?=$user['start_date'];?></td>
                           <td><?=$user['end_date'];?></td>
                           <td><?=$user['created_date'];?></td>
