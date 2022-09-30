@@ -2,10 +2,11 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Personal Info</h3>
+                <h3>Nominee Details</h3>
               </div>
             </div>
             <div class="clearfix"></div>
+            
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
               <div class="alert alert-warning">
@@ -36,22 +37,100 @@
               </div>
             </div>
 
-            <?php if($userdata['role'] == 1): ?>
-          <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Rating</h3>
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Personal Info</h2>
+          
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+          <div class="col-md-3 col-xs-12 mt-30">
+            <div class="product-image border">
+                              <img class="border" src="http://local.sunpharma.md/uploads/7/robots.jpg" alt="" style="
+    border: 1px solid #959595;
+    padding: 5px;
+">
+                
+            </div>
+            <div class="product_gallery">
+             
+            </div>
+          </div>
+
+          <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
+
+            <h3 class="prod_title">Harthik </h3>
+
+            <p>Test</p>
+           
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Email</label>
+  <div class="col-sm-9">
+      punithalakshmi1587@gmail.com  </div>
+</div>
+
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Phonenumber</label>
+  <div class="col-sm-9">
+  7708837773  </div>
+</div>
+       
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Name</label>
+  <div class="col-sm-9">
+  Test  </div>
+</div>
+
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Phone</label>
+  <div class="col-sm-9">
+  8148715336  </div>
+</div>
+
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Email</label>
+  <div class="col-sm-9">
+  punitha.izaap@gmail.com  </div>
+</div>
+           
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Address</label>
+  <div class="col-sm-9">
+  Test  </div>
+</div>
+
+          
+            <div class="">
+              <div class="product_price">
+                <h2>Medical Sciences-Basic Research</h2>
+                <span>Award Category</span>
+                <br>
               </div>
             </div>
-            <div class="clearfix"></div>
+
+            <div class="">
+              <button type="button" onclick="nominee_approve('approve','3');" class="btn btn-primary btn-lg">Approve</button>
+            </div>
+
+          </div>
+
+          </div>
+        </div>
+      </div>
+            </div>
+
+            <?php if($userdata['role'] == 1): ?>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                
-                  <div class="x_content">
-                    <br />
-                    <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Rating</h2>
+          
+          <div class="clearfix"></div>
+          <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="nominee_id" value="<?=(isset($user['id']))?$user['id']:"";?>"  >
 
                       <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>"  >
@@ -77,10 +156,10 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Comments</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <p>
-                              <textarea name="comment"><?=$editdata['comment'];?></textarea>
-                           </p>
+                          <div id="gender" class="btn-group ratingcommentcont" data-toggle="buttons">
+                            
+                              <textarea class="ratingcomment col-xs-12" name="comment"><?=$editdata['comment'];?></textarea>
+                           
                           </div>
                         </div>
                       </div>
@@ -102,11 +181,12 @@
                         </div>
 
                     </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <?php else: ?>
+      </div>
+    </div>
+
+</div></div>
+
+<?php else: ?>
               <div class="page-title">
               <div class="title_left">
                 <h3>Ratings</h3>
@@ -152,3 +232,6 @@
               </div>
             </div>
 <?php endif;?>
+
+
+        
