@@ -263,6 +263,7 @@ class Nomination extends BaseController
                     $ins_data['dob']        = date("Y/m/d",strtotime($dob));
                     $ins_data['status']     = 'Disapproved';
                     $ins_data['role']       = 2;
+                    $ins_data['category']       = $category;
 
                     $nominee_details_data = array();
                     $nominee_details_data['category_id']        = $category;

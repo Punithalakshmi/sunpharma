@@ -152,7 +152,7 @@ class Workshops extends BaseController
 
         if(is_array($userdata) && count($userdata)):
           $workshopModel->delete(array("id" => $id));
-          return redirect()->route('admin/workshop');
+          return redirect()->route('admin/workshops');
         else:
             return redirect()->route('admin/login');
         endif;

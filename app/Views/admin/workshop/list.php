@@ -46,13 +46,13 @@
                           
                           <td><?=$user['name'];?></td>
                           <td><?=$user['description'];?></td>
-                          <td><?=$user['registration_link'];?></td>
+                          <td><a href="<?=$user['registration_link'];?>" target="_blank"><?=$user['registration_link'];?></a></td>
                           <td><?=$user['start_date'];?></td>
                           <td><?=$user['end_date'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
-                          <a href="<?=base_url().'/admin/workshops/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="<?=base_url().'/admin/workshops/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                          <a href="<?=base_url().'/admin/workshops/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                            <a href="<?=base_url().'/admin/workshops/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                           </td>
                         </tr>
                         <?php endforeach;

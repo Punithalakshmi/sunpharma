@@ -13,7 +13,8 @@ class WorkshopModel extends Model{
         'created_date',
         'updated_date',
         'created_id',
-        'updated_id'
+        'updated_id',
+        'registration_link'
     ];
 
     public function getLists($id='')
