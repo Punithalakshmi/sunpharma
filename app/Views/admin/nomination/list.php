@@ -7,9 +7,10 @@
               </div>
             </div>
            
-            <div>
-                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs">Add Nomination</a>
+            <div class="actionbtns">
+                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add Nomination</a>
            </div>
+          
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
               <div class="alert alert-warning">

@@ -8,7 +8,7 @@
             </div>
            
             <div class="actionbtns">
-                <a href="<?php echo base_url();?>/admin/nominee/assign" class="btn btn-primary btn-xs">Assign Jury</a>
+                <a href="<?php echo base_url();?>/admin/nominee/assign" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Assign Jury</a>
            </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
@@ -51,9 +51,9 @@
                           <td><?=$user['address'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
-                            <button type="button" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Approve </button>
-                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Disapprove </buttonh fdd>
-                            <a href="<?=base_url().'/admin/nominee/view'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i> View </a>
+                            <button type="button" class="btn btn-info btn-xs"><i class="fa fa-check"></i> Approve </button>
+                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-ban"></i> Disapprove </buttonh fdd>
+                            <a href="<?=base_url().'/admin/nominee/view'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View </a>
                           </td>
                         </tr>
                         <?php endforeach;

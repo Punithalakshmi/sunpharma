@@ -15,3 +15,26 @@ body{background: #0547ab;}
     display: flex;
     justify-content: right;
 }
+
+.mt-0{margin-top: 0!important;}
+.mt-10{margin-top: 10px!important;}
+.mt-15{margin-top: 15px!important;}
+.mt-20{margin-top: 20px!important;}
+.mt-25{margin-top: 25px!important;}
+.mt-30{margin-top: 30px!important;}
+
+.userimgbrder{border: 1px solid #959595;
+    padding: 5px;}
+
+
+    .nav-md .container.body .right_col{padding-bottom: 25px;}
+
+    .ratingcommentcont{display: flex;}
+
+    body.nav-md  .mobilelogo {
+        display: none;
+    }
+    body.nav-sm .desklogo{
+        display: none;}
+
+        .btn{letter-spacing: -.05px;}

@@ -48,6 +48,7 @@ $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
 $routes->get('ssan','Nomination::index');
 $routes->get('spsfn','Nomination::spsfn');
 $routes->post('spsfn','Nomination::spsfn');
+$routes->get('nomination_preview', 'Home::nominationPreview');
 
 $routes->get('ssan/(:any)','Nomination::index/$1');
 $routes->get('spsfn/(:any)','Nomination::spsfn/$1');

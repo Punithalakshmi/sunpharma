@@ -34,11 +34,11 @@
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
+                        <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
+                          <div id="gender" class="btn-group mt-10" data-toggle="buttons">
                             <p>
-                            <input type="radio" class="flat" name="status" id="statusActive" value="Active" <?php echo set_radio('status','Active',(isset($editdata['status']) && ($editdata['status']=='Active'))?'checked':'');?> /> Active
-                            <input type="radio" class="flat" name="status" id="statusInActive" value="InActive" <?php echo set_radio('status','InActive',(isset($editdata['status']) && ($editdata['status']=='InActive'))?'checked':'');?> />InActive
+                            <input type="radio" class="flat" name="status" id="statusActive" value="Active" <?php echo set_radio('status','Active',(isset($editdata['status']) && ($editdata['status']=='Active'))?'checked':'');?> /> Active &nbsp;&nbsp;
+                            <input type="radio" class="flat" name="status" id="statusInActive" value="InActive" <?php echo set_radio('status','InActive',(isset($editdata['status']) && ($editdata['status']=='InActive'))?'checked':'');?> /> InActive
                            </p>
                           </div>
                         </div>
@@ -48,11 +48,11 @@
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Type</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
-                            <input type="radio" class="flat" name="type" id="typeResearchAwards" value="Research Awards" <?php echo set_radio('type','Research Awards',(isset($editdata['type']) && ($editdata['type']=='Research Awards'))?'checked':'');?> /> Research Awards
-                            <input type="radio" class="flat" name="type" id="typeScienceScholarAwards" value="Science Scholar Awards" <?php echo set_radio('type','Science Scholar Awards',(isset($editdata['type']) && ($editdata['type']=='Science Scholar Awards'))?'checked':'');?> />Science Scholar Awards
+                            <input type="radio" class="flat" name="type" id="typeResearchAwards" value="Research Awards" <?php echo set_radio('type','Research Awards',(isset($editdata['type']) && ($editdata['type']=='Research Awards'))?'checked':'');?> /> Research Awards &nbsp;&nbsp;
+                            <input type="radio" class="flat" name="type" id="typeScienceScholarAwards" value="Science Scholar Awards" <?php echo set_radio('type','Science Scholar Awards',(isset($editdata['type']) && ($editdata['type']=='Science Scholar Awards'))?'checked':'');?> /> Science Scholar Awards
                            </p>
                           </div>
                         </div>

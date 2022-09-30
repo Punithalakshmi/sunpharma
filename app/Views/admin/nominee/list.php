@@ -55,8 +55,8 @@
                             <!-- <button type="button" class="btn btn-info btn-xs" onclick="nominee_approve('approve','<?//$user['id'];?>');">
                                 <i class="fa fa-pencil"></i> Approve 
                             </button> -->
-                            <button type="button" class="btn btn-danger btn-xs" onclick="nominee_approve('disapprove','<?=$user['id'];?>');"><i class="fa fa-trash-o"></i> Reject </button>
-                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i> View </a>
+                            <button type="button" class="btn btn-danger btn-xs" onclick="nominee_approve('disapprove','<?=$user['id'];?>');"><i class="fa fa-ban"></i> Reject </button>
+                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View </a>
                           </td>
                         </tr>
                         <?php endforeach;
