@@ -26,7 +26,7 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th><input type="checkbox" name="selectall" class="selectAll"></th>
+                          
                           <th>Firstname</th>
                           <th>Lastname</th>
                           <th>Email</th>
@@ -41,7 +41,7 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                          <td><input type="checkbox" name="assign_jury" class="assign_jury_to_nominee" value="<?=$user['id'];?>" /></td>
+                         
                           <td><?=$user['firstname'];?></td>
                           <td><?=$user['lastname'];?></td>
                           <td><?=$user['email'];?></td>

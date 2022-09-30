@@ -13,3 +13,93 @@ in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
  4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Rating))
  5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 09:01:28 --> Undefined variable: nominationTypesModel
+in APPPATH\Controllers\Admin\Workshops.php on line 24.
+ 1 APPPATH\Controllers\Admin\Workshops.php(24): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: nominationTypesModel', 'APPPATH\\Controllers\\Admin\\Workshops.php', 24, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 10:34:56 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 APPPATH\Controllers\Admin\Workshops.php(91): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 10:36:35 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 APPPATH\Controllers\Admin\Workshops.php(91): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 10:36:58 --> Undefined index: start_name
+in APPPATH\Views\admin\workshop\list.php on line 48.
+ 1 APPPATH\Views\admin\workshop\list.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: start_name', 'APPPATH\\Views\\admin\\workshop\\list.php', 48, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/list', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(27): view('admin/workshop/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 10:44:26 --> Undefined index: event_name
+in APPPATH\Views\admin\workshop\list.php on line 46.
+ 1 APPPATH\Views\admin\workshop\list.php(46): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: event_name', 'APPPATH\\Views\\admin\\workshop\\list.php', 46, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/list', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(27): view('admin/workshop/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 10:44:52 --> Undefined index: event_name
+in APPPATH\Views\admin\workshop\list.php on line 46.
+ 1 APPPATH\Views\admin\workshop\list.php(46): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: event_name', 'APPPATH\\Views\\admin\\workshop\\list.php', 46, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/list', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(27): view('admin/workshop/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 10:45:38 --> count(): Parameter must be an array or an object that implements Countable
+in APPPATH\Controllers\Admin\Workshops.php on line 97.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parameter must be an array or an object that implements Countable', 'APPPATH\\Controllers\\Admin\\Workshops.php', 97, [...])
+ 2 APPPATH\Controllers\Admin\Workshops.php(97): count(Object(CodeIgniter\Database\MySQLi\Result))
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add('1')
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 10:46:09 --> Undefined variable: getUserData
+in APPPATH\Controllers\Admin\Workshops.php on line 52.
+ 1 APPPATH\Controllers\Admin\Workshops.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: getUserData', 'APPPATH\\Controllers\\Admin\\Workshops.php', 52, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add('1')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 11:45:44 --> Undefined index: registration_link
+in APPPATH\Views\admin\workshop\add.php on line 50.
+ 1 APPPATH\Views\admin\workshop\add.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: registration_link', 'APPPATH\\Views\\admin\\workshop\\add.php', 50, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/add', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(123): view('admin/workshop/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-29 12:32:15 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 APPPATH\Controllers\Admin\Workshops.php(155): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->delete('1')
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

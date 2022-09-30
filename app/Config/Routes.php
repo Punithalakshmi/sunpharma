@@ -115,6 +115,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('rating/add','Rating::add');
     $routes->get('rating/delete/(:any)/(:any)','Rating::delete/$1/$1');
 
+    $routes->get('workshops','Workshops::index');
+    $routes->get('workshops/add','Workshops::add');
     $routes->get('workshops/add/(:any)','Workshops::add/$1');
     $routes->post('workshops/add','Workshops::add');
     $routes->get('workshops/delete/(:any)','Workshops::delete/$1');
