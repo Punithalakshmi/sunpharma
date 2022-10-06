@@ -4,6 +4,9 @@
               <div class="title_left">
                 <h3>Personal Info</h3>
               </div>
+              <div class="title_right">
+                <h3>Average Rating: <?=round($average_rating);?></h3>
+              </div>
             </div>
             <div class="clearfix"></div>
             <div class="clearfix"></div>
@@ -119,7 +122,6 @@
                   <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                         
                           <th>Juryname</th>
                           <th>Ratings</th>
                           <th>Comments</th>

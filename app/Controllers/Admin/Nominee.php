@@ -118,9 +118,7 @@ class Nominee extends BaseController
 
             $email->setFrom('punitha@izaaptech.in', 'Punithalakshmi');
             $email->setTo($getUserData['email']);
-           // $email->setCC('another@another-example.com');
-            //$email->setBCC('them@their-example.com');
-
+          
             $email->setSubject('Your Application Approval Status');
             $message = '';
             if($type == 'approve') {
@@ -200,7 +198,7 @@ class Nominee extends BaseController
     {
         helper(array('form', 'url'));
 
-        $session   = \Config\Services::session();
+        $session    = \Config\Services::session();
         $request    = \Config\Services::request();
         $validation = \Config\Services::validation();
 
@@ -215,12 +213,16 @@ class Nominee extends BaseController
         $data['user'] = $getUserData->getRowArray();
 
         $ratingModel    = new RatingModel();
-        
+        $nomineeModel   = new NomineeModel();
+
         $edit_data  = $ratingModel->getRatingData($userdata['login_id'],$nominee_id)->getRowArray();
        
         $validation = $this->validate($this->validation_rules());
 
         $data['userdata'] = $userdata;
+        $average_rating   = $ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
+
+        $data['average_rating'] = $average_rating['avg_rating'];
 
         if($userdata['role'] == 3)
           $data['ratings'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();

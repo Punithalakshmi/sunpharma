@@ -14,7 +14,13 @@ $(document).ready(function(){
         console.log(start.toISOString(), end.toISOString(), label);
     });
       
+
+   
+
+
 });
+
+
 
 function nominee_approve(type = '',id='')
 {
@@ -90,9 +96,39 @@ $(function(){
 
  function categoryRestrictionByRole(ele)
  {
-     //alert(ele.value);
      if(ele.value == 1)
        $("#categorySelection").css("display",'block');
      else
        $("#categorySelection").css("display",'none');  
  }
+
+ function getAwardLists()
+ {
+   
+    var category = $("#category").val();
+    var year     = $("#year").val();
+
+    console.log('category',category);
+    console.log('year',year);
+
+    $.ajax({
+      url : base_url+'/admin/awards/index',
+      type: "POST",
+      data : {category:category,year:year},
+      dataType:'json',
+      success: function(data, textStatus, jqXHR)
+      {
+          console.log('data',data);
+          if(data.data)
+            $("#getLists").html(data.data);
+      },
+      error: function (jqXHR, textStatus, errorThrown)
+      {
+        
+      }
+
+    });
+
+
+ }
+

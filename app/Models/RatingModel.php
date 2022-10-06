@@ -38,4 +38,11 @@ class RatingModel extends Model{
         return $query = $builder->get();
     }
 
+    public function getNomineeAverageRating($nominee_id = '')
+    {
+        $builder = $this->table('ratings');
+        $builder->select('AVG(rating) as avg_rating');
+        $builder->where("ratings.nominee_id",$nominee_id);
+        return $query = $builder->get();
+    }
 }

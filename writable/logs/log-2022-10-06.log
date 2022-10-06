@@ -1,0 +1,393 @@
+ERROR - 2022-10-06 04:36:40 --> Unknown column 'ratings' in 'field list'
+CRITICAL - 2022-10-06 04:36:40 --> Unknown column 'ratings' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, `ratings`
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, `ratings`
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, `ratings`
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, `ratings`
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(33): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-06 04:48:31 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+CRITICAL - 2022-10-06 04:48:31 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, "-", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, "-", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, "-", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, "-", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(33): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-06 04:49:37 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+CRITICAL - 2022-10-06 04:49:37 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(33): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-06 04:50:26 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+CRITICAL - 2022-10-06 04:50:26 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-06 04:50:39 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+CRITICAL - 2022-10-06 04:50:39 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " - ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-06 04:51:48 --> A non-numeric value encountered
+in APPPATH\Models\AwardsModel.php on line 22.
+ 1 APPPATH\Models\AwardsModel.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'A non-numeric value encountered', 'APPPATH\\Models\\AwardsModel.php', 22, [...])
+ 2 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-06 04:51:49 --> A non-numeric value encountered
+in APPPATH\Models\AwardsModel.php on line 22.
+ 1 APPPATH\Models\AwardsModel.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'A non-numeric value encountered', 'APPPATH\\Models\\AwardsModel.php', 22, [...])
+ 2 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-06 04:52:30 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+CRITICAL - 2022-10-06 04:52:30 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`ca...' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id, " ", `ratings`.`rating SEPARATOR` ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(38): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-06 05:31:25 --> Unknown table 'sunpharma.users'
+CRITICAL - 2022-10-06 05:31:25 --> Unknown table 'sunpharma.users'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = :users.role:
+AND `users`.`id` = :users.id:', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(43): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(46): App\Models\AwardsModel->getJuryRateData('2')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-06 05:32:57 --> Unknown table 'sunpharma.users'
+CRITICAL - 2022-10-06 05:32:57 --> Unknown table 'sunpharma.users'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `users`.*, `ratings`.`rating`
+FROM `category`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id`
+WHERE `users`.`role` = :users.role:
+AND `users`.`id` = :users.id:', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(43): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(46): App\Models\AwardsModel->getJuryRateData('2')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-06 05:34:50 --> Undefined variable: builder
+in APPPATH\Models\AwardsModel.php on line 39.
+ 1 APPPATH\Models\AwardsModel.php(39): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: builder', 'APPPATH\\Models\\AwardsModel.php', 39, [...])
+ 2 APPPATH\Controllers\Admin\Awards.php(46): App\Models\AwardsModel->getJuryRateData('2')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-06 05:36:12 --> Class 'App\Controllers\Admin\UserModel' not found
+in APPPATH\Controllers\Admin\Awards.php on line 26.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-06 05:39:33 --> Array to string conversion
+in APPPATH\Controllers\Admin\Awards.php on line 48.
+ 1 APPPATH\Controllers\Admin\Awards.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string conversion', 'APPPATH\\Controllers\\Admin\\Awards.php', 48, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

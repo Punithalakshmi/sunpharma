@@ -80,6 +80,11 @@
                       <i class="fa fa-user"></i> Workshops 
                     </a>
                   </li>
+                  <li>
+                    <a href="<?php echo base_url();?>/admin/awards">
+                      <i class="fa fa-user"></i> Awards Process 
+                    </a>
+                  </li>
                   <?php } else if($userdata['role'] == 1){ ?>
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">
                       <i class="fa fa-user"></i> Nominees </a>

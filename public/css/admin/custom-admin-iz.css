@@ -15,3 +15,18 @@ body{background: #0547ab;}
     display: flex;
     justify-content: right;
 }
+
+.expandChildTable:before {
+    content: "+";
+    display: block;
+    cursor: pointer;
+}
+.expandChildTable.selected:before {
+    content: "-";
+}
+.childTableRow {
+    display: none;
+}
+.childTableRow table {
+    border: 2px solid #555;
+}

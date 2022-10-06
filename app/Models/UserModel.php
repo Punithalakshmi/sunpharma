@@ -77,16 +77,26 @@ class UserModel extends Model{
 
     public function getUserData($id='')
     {
-            $builder = $this->table('users');
-            $builder->select('users.*,nominee_details.*');
-            $builder->join('nominee_details','nominee_details.nominee_id = users.id');
-            $builder->where("users.role",'2');
-            $builder->where("users.id",$id);
-            return $query = $builder->get();
+        $builder = $this->table('users');
+        $builder->select('users.*,nominee_details.*');
+        $builder->join('nominee_details','nominee_details.nominee_id = users.id');
+        $builder->where("users.role",'2');
+        $builder->where("users.id",$id);
+        return $query = $builder->get();
     }
 
     public function getListsOfNominees()
     { 
           return $this->getWhere(array('role' => 2)); 
+    }
+
+    public function getJuryRateData($jury_id = '')
+    {
+        $builder = $this->table('users');
+        $builder->select('users.*,ratings.rating');
+        $builder->join('ratings','ratings.jury_id = users.id');
+        $builder->where("users.role",'1');
+        $builder->where("users.id",$jury_id);
+        return $query = $builder->get();
     }
 }

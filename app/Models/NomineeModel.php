@@ -61,4 +61,7 @@ class NomineeModel extends Model{
         $builder->where("nominee_details.nominee_id",$id);
         return $query = $builder->get();
     }
+
+
+    
 }

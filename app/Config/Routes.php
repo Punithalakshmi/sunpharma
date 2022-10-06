@@ -119,7 +119,9 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('workshops/add/(:any)','Workshops::add/$1');
     $routes->post('workshops/add','Workshops::add');
     $routes->get('workshops/delete/(:any)','Workshops::delete/$1');
-
+    
+    $routes->get('awards','Awards::index');
+    $routes->post('awards/index','Awards::index');
 
 });
 
