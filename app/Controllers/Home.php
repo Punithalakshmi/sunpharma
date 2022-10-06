@@ -62,6 +62,17 @@ class Home extends BaseController
                 .view('frontend/footer');
     }
 
+    public function nominationPreview()
+    {
+        $session   = \Config\Services::session();
+        $userdata = $session->get('fuserdata');
+        $data['userdata'] = $userdata;
+
+        return  view('frontend/header',$data)
+               .view('frontend/nomination_preview',$data)
+                .view('frontend/footer');
+    }
+
     public function contact()
     {
         $session   = \Config\Services::session();

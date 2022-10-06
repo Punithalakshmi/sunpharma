@@ -47,7 +47,7 @@
                           <td><?=$user['created_date'];?></td>
                           <td>
                            
-                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i> View </a>
+                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View </a>
                           </td>
                         </tr>
                         <?php endforeach;

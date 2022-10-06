@@ -12,8 +12,8 @@
         </div>
         <div class="x_content">
 
-          <div class="col-md-7 col-sm-7 col-xs-12">
-            <div class="product-image">
+          <div class="col-md-3 col-xs-12 mt-30">
+            <div class="product-image userimgbrder">
               <?php if(isset($user['nominee_id']) && isset($user['nominator_photo'])): ?>
                 <img src="<?=base_url()."/uploads/".$user['nominee_id']."/".$user['nominator_photo'];?>" alt="" />
               <?php endif;?>  
@@ -23,60 +23,55 @@
             </div>
           </div>
 
-          <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
+          <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
             <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?></h3>
 
             <p><?=$user['address'];?></p>
            
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Email</label>
+  <div class="col-sm-9">
+      <?=$user['email'];?>
+  </div>
+</div>
+
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Phonenumber</label>
+  <div class="col-sm-9">
+  <?=$user['phone'];?>
+  </div>
+</div>
        
-            <div class="">
-              <h5>Email</h5>
-              <ul class="list-inline prod_color">
-                <li>
-                  <p><?=$user['email'];?></p>
-                </li>
-              </ul>
-            </div>
-        
-            <div class="">
-              <h5>Phonenumber</h5>
-              <ul class="list-inline prod_color">
-                <li><?=$user['phone'];?></li>
-              </ul>
-            </div>
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Name</label>
+  <div class="col-sm-9">
+  <?=$user['nominator_name'];?>
+  </div>
+</div>
+
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Phone</label>
+  <div class="col-sm-9">
+  <?=$user['nominator_phone'];?>
+  </div>
+</div>
+
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Email</label>
+  <div class="col-sm-9">
+  <?=$user['nominator_email'];?>
+  </div>
+</div>
            
-            <div class="">
-              <h5>Nominator Name</h5>
-              <ul class="list-inline prod_color">
-                <li><?=$user['nominator_name'];?></li>
-              </ul>
-            </div>
-            
+<div class="form-group row formitem">
+  <label class="col-sm-3 col-form-label">Nominator Address</label>
+  <div class="col-sm-9">
+  <?=$user['nominator_address'];?>
+  </div>
+</div>
 
-            <div class="">
-              <h5>Nominator Phone</h5>
-              <ul class="list-inline prod_color">
-                <li><?=$user['nominator_phone'];?></li>
-              </ul>
-            </div>
             
-
-            <div class="">
-              <h5>Nominator Email</h5>
-              <ul class="list-inline prod_color">
-                <li><?=$user['nominator_email'];?></li>
-              </ul>
-            </div>
-            
-
-            <div class="">
-              <h5>Nominator Address</h5>
-              <ul class="list-inline prod_color">
-                <li><?=$user['nominator_address'];?></li>
-              </ul>
-            </div>
-            <br />
 
             <div class="">
               <div class="product_price">

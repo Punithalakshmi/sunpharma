@@ -8,7 +8,7 @@
             </div>
            
             <div class="actionbtns">
-                <a href="<?php echo base_url();?>/admin/user/add" class="btn btn-primary btn-xs">Add User</a>
+                <a href="<?php echo base_url();?>/admin/user/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add User</a>
            </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
@@ -49,9 +49,7 @@
                           <td><?=$user['category'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
-                          <a href="<?=base_url().'/admin/user/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                          <a href="<?=base_url().'/admin/user/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          <a href="<?=base_url().'/admin/user/changepassword/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Change Password </a>
+                          <a href="<?=base_url().'/admin/user/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a><a href="<?=base_url().'/admin/user/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a><a href="<?=base_url().'/admin/user/changepassword/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-key"></i> Change Password </a>
                           </td>
                         </tr>
                         <?php endforeach;
