@@ -74,3 +74,136 @@ in APPPATH\Controllers\Admin\Nominee.php on line 215.
  3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
  4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 02:40:49 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 215.
+ 1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('5')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 02:40:56 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 215.
+ 1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('4')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-07 02:41:33 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
+CRITICAL - 2022-10-07 02:41:33 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND `ratings`.`is_rate_submitted` = \'1\'
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND `ratings`.`is_rate_submitted` = \'1\'
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND `ratings`.`is_rate_submitted` = \'1\'
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND `ratings`.`is_rate_submitted` = :ratings.is_rate_submitted:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(39): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-07 02:41:36 --> Table 'sunpharma.events' doesn't exist
+CRITICAL - 2022-10-07 02:41:36 --> Table 'sunpharma.events' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
+FROM `events`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `events`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `events`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 5 SYSTEMPATH\Model.php(222): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\WorkshopModel.php(23): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Admin\Workshops.php(23): App\Models\WorkshopModel->getLists()
+ 9 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+10 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+11 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-07 02:41:44 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
+CRITICAL - 2022-10-07 02:41:44 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND `ratings`.`is_rate_submitted` = \'1\'
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND `ratings`.`is_rate_submitted` = \'1\'
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = 2
+AND `ratings`.`is_rate_submitted` = \'1\'
+AND YEAR(nominee_details.created_date) = \'2022\'
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
+FROM `category`
+JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
+JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
+JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
+WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
+AND `ratings`.`is_rate_submitted` = :ratings.is_rate_submitted:
+AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
+GROUP BY `ratings`.`nominee_id`
+ORDER BY `average_rating` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AwardsModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(39): App\Models\AwardsModel->getLists(2, '2022')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

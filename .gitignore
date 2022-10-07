@@ -127,3 +127,5 @@ writable/debugbar/debugbar_1665125411.372007.json
 writable/debugbar/debugbar_1665125409.878422.json
 writable/debugbar/debugbar_1665125409.750112.json
 writable/debugbar/debugbar_1665125406.740467.json
+*.log
+*.json
