@@ -17,7 +17,7 @@
         <!--Page Header End-->
 
         <!--Form Page Start-->
-        <?php if($nomination == 'no'){ ?>
+        <?php  if($nomination == 'no'){ ?>
             <div class="row">
                     <div class="col-12">
                         <h4 class="section-title__title mb-5">Nomination Registration - Closed

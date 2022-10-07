@@ -74,3 +74,86 @@ in APPPATH\Controllers\Admin\Nominee.php on line 215.
  3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
  4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-07 03:00:37 --> Column 'year' cannot be null
+CRITICAL - 2022-10-07 03:00:37 --> Column 'year' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:00:37\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:00:37\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:00:37\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1904): CodeIgniter\Database\BaseConnection->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (:category_id:, :start_date:, :end_date:, :year:, :created_date:, :created_id:)', [...], false)
+ 5 SYSTEMPATH\Model.php(278): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(738): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(666): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(658): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Admin\Nomination.php(107): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
+11 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+12 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-07 03:01:09 --> Column 'year' cannot be null
+CRITICAL - 2022-10-07 03:01:09 --> Column 'year' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:01:09\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:01:09\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:01:09\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1904): CodeIgniter\Database\BaseConnection->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (:category_id:, :start_date:, :end_date:, :year:, :created_date:, :created_id:)', [...], false)
+ 5 SYSTEMPATH\Model.php(278): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(738): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(666): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(658): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Admin\Nomination.php(107): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
+11 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+12 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:09:21 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 309.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:11:13 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 215.
+ 1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('6')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:15:51 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 314.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:19:05 --> Undefined variable: complete_bio_data
+in APPPATH\Controllers\Nomination.php on line 340.
+ 1 APPPATH\Controllers\Nomination.php(340): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: complete_bio_data', 'APPPATH\\Controllers\\Nomination.php', 340, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:29:16 --> Trying to access array offset on value of type int
+in APPPATH\Controllers\User.php on line 25.
+ 1 APPPATH\Controllers\User.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type int', 'APPPATH\\Controllers\\User.php', 25, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:37:36 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 215.
+ 1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:38:25 --> Trying to access array offset on value of type null
+in APPPATH\Views\admin\nominee\view.php on line 42.
+ 1 APPPATH\Views\admin\nominee\view.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Views\\admin\\nominee\\view.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nominee\\view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nominee/view', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(292): view('admin/nominee/view', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('1')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

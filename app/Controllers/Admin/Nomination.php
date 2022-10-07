@@ -84,7 +84,7 @@ class Nomination extends BaseController
                     $category      = $request->getPost('category');
                     $start_date    = $request->getPost('start_date');
                     $end_date      = $request->getPost('end_date');
-                    $year          = $request->getPost('year');
+                    $year          = $request->getPost('nomination_year');
 
                     
                     $ins_data = array();

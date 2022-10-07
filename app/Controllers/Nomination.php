@@ -27,7 +27,7 @@ class Nomination extends BaseController
             }
 
             //get categories lists
-            $getCategoryLists   = $categoryModel->getCategoriesByType('Research Awards');
+            $getCategoryLists   = $categoryModel->getCategoriesByType('Science Scholar Awards');
             $data['categories'] = $getCategoryLists->getResultArray();
             
             if($request->getPost())
@@ -100,9 +100,11 @@ class Nomination extends BaseController
                             $nominator_photo = $this->request->getFile('nominator_photo');
                             $nominator_photo->move($fileUploadDir);
 
+                            if($this->request->getFile('complete_bio_data')) {
+
                             $complete_bio_data = $this->request->getFile('complete_bio_data');
                             $complete_bio_data->move($fileUploadDir);
-
+                  
                             $best_papers = $this->request->getFile('best_papers');
                             $best_papers->move($fileUploadDir);
 
@@ -120,23 +122,26 @@ class Nomination extends BaseController
 
                             $citation = $this->request->getFile('citation');
                             $citation->move($fileUploadDir);
- 
+
+                            }
                             $nominationModel = new NominationModel();
                             $nominee_details_data['nominee_id']                         = $lastInsertID;
                             $nominee_details_data['passport_filename']                  = $passport->getClientName();
                             $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
                             $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
-                            $nominee_details_data['complete_bio_data']                  = $complete_bio_data->getClientName();
-                            $nominee_details_data['statement_of_research_achievements'] = $statement_of_research_achievements->getClientName();
-                            $nominee_details_data['signed_details']                     = $signed_details->getClientName();
-                            $nominee_details_data['best_papers']                        = $best_papers->getClientName();
-                            $nominee_details_data['specific_publications']              = $specific_publications->getClientName();
-                            $nominee_details_data['signed_statement']                   = $signed_statement->getClientName();
-                            $nominee_details_data['citation']                           = $citation->getClientName();
+                            if($complete_bio_data->getClientName()) {
+                                $nominee_details_data['complete_bio_data']                  = $complete_bio_data->getClientName();
+                                $nominee_details_data['statement_of_research_achievements'] = $statement_of_research_achievements->getClientName();
+                                $nominee_details_data['signed_details']                     = $signed_details->getClientName();
+                                $nominee_details_data['best_papers']                        = $best_papers->getClientName();
+                                $nominee_details_data['specific_publications']              = $specific_publications->getClientName();
+                                $nominee_details_data['signed_statement']                   = $signed_statement->getClientName();
+                                $nominee_details_data['citation']                           = $citation->getClientName();
+                            }
                             $nominationModel->save($nominee_details_data);
                     } 
 
-                    return redirect()->route('spsfn');
+                    return redirect()->route('ssan');
                 }
             }
             else
@@ -197,9 +202,9 @@ class Nomination extends BaseController
                   if($request->getPost())
                     $data['validation'] = $this->validator;
 
-                    $data['editdata'] = $editdata;
-                    $data['userdata'] = $userdata;
-                    $data['nomination'] = $id;
+                    $data['editdata']   = $editdata;
+                    $data['userdata']   = $userdata;
+                    $data['nomination'] = $nomination;
 
                     return  view('frontend/header',$data)
                            .view('frontend/ssan',$data)
@@ -305,39 +310,44 @@ class Nomination extends BaseController
                             $nominator_photo = $this->request->getFile('nominator_photo');
                             $nominator_photo->move($fileUploadDir);
 
-                            $complete_bio_data = $this->request->getFile('complete_bio_data');
-                            $complete_bio_data->move($fileUploadDir);
-
-                            $best_papers = $this->request->getFile('best_papers');
-                            $best_papers->move($fileUploadDir);
-
-                            $statement_of_research_achievements = $this->request->getFile('statement_of_research_achievements');
-                            $statement_of_research_achievements->move($fileUploadDir);
-
-                            $signed_details = $this->request->getFile('signed_details');
-                            $signed_details->move($fileUploadDir);
-
-                            $specific_publications = $this->request->getFile('specific_publications');
-                            $specific_publications->move($fileUploadDir);
-
-                            $signed_statement = $this->request->getFile('signed_statement');
-                            $signed_statement->move($fileUploadDir);
-
-                            $citation = $this->request->getFile('citation');
-                            $citation->move($fileUploadDir);
- 
                             $nominationModel = new NominationModel();
                             $nominee_details_data['nominee_id']                         = $lastInsertID;
                             $nominee_details_data['passport_filename']                  = $passport->getClientName();
                             $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
                             $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
-                            $nominee_details_data['complete_bio_data']                  = $complete_bio_data->getClientName();
-                            $nominee_details_data['statement_of_research_achievements'] = $statement_of_research_achievements->getClientName();
-                            $nominee_details_data['signed_details']                     = $signed_details->getClientName();
-                            $nominee_details_data['best_papers']                        = $best_papers->getClientName();
-                            $nominee_details_data['specific_publications']              = $specific_publications->getClientName();
-                            $nominee_details_data['signed_statement']                   = $signed_statement->getClientName();
-                            $nominee_details_data['citation']                           = $citation->getClientName();
+
+                            if($this->request->getFile('complete_bio_data')) {
+                                    $complete_bio_data = $this->request->getFile('complete_bio_data');
+                                    $complete_bio_data->move($fileUploadDir);
+
+                                    $best_papers = $this->request->getFile('best_papers');
+                                    $best_papers->move($fileUploadDir);
+
+                                    $statement_of_research_achievements = $this->request->getFile('statement_of_research_achievements');
+                                    $statement_of_research_achievements->move($fileUploadDir);
+
+                                    $signed_details = $this->request->getFile('signed_details');
+                                    $signed_details->move($fileUploadDir);
+
+                                    $specific_publications = $this->request->getFile('specific_publications');
+                                    $specific_publications->move($fileUploadDir);
+
+                                    $signed_statement = $this->request->getFile('signed_statement');
+                                    $signed_statement->move($fileUploadDir);
+
+                                    $citation = $this->request->getFile('citation');
+                                    $citation->move($fileUploadDir);
+
+                                    $nominee_details_data['complete_bio_data']                  = $complete_bio_data->getClientName();
+                                    $nominee_details_data['statement_of_research_achievements'] = $statement_of_research_achievements->getClientName();
+                                    $nominee_details_data['signed_details']                     = $signed_details->getClientName();
+                                    $nominee_details_data['best_papers']                        = $best_papers->getClientName();
+                                    $nominee_details_data['specific_publications']              = $specific_publications->getClientName();
+                                    $nominee_details_data['signed_statement']                   = $signed_statement->getClientName();
+                                    $nominee_details_data['citation']                           = $citation->getClientName();
+                            }
+                            
+                           
                             $nominationModel->save($nominee_details_data);
                     } 
 
