@@ -17,12 +17,16 @@ body{background: #0547ab;}
 }
 
 .expandChildTable:before {
-    content: "+";
+    content: "\f055";
     display: block;
     cursor: pointer;
 }
 .expandChildTable.selected:before {
-    content: "-";
+    content: "\f056";
+}
+.iconcal{width: 38px;}
+#getLists i.expandChildTable {
+    font-size: 22px;
 }
 .childTableRow {
     display: none;
@@ -42,3 +46,27 @@ body{background: #0547ab;}
 .formitem.documents {
     color:blue;
 }
+
+.graybg{background-color: rgb(247 247 247)!important;
+    border: 1px solid rgba(86, 61, 124, 0.2)!important;}
+
+    .iconcal{width: 18px;}
+    .topformsec{}
+    .topformsec .form-inline {
+        display: flex;
+        align-items: center;
+    }
+    
+    .topformsec .form-inline label {
+        margin-right: 10px;
+        display: inline-block;
+    }
+    .topformsec .form-inline .form-control{width:100%;}
+    .topformsec {
+        background: white;
+        padding: 15px 10px;
+        border: 1px solid #ddd;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
