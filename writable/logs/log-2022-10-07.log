@@ -1,0 +1,76 @@
+CRITICAL - 2022-10-07 00:39:45 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 221.
+ 1 APPPATH\Controllers\Admin\Nominee.php(221): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 221, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('4')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 00:45:35 --> Trying to access array offset on value of type null
+in APPPATH\Views\admin\nominee\nominee_view.php on line 28.
+ 1 APPPATH\Views\admin\nominee\nominee_view.php(28): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Views\\admin\\nominee\\nominee_view.php', 28, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nominee\\nominee_view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nominee/nominee_view', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(76): view('admin/nominee/nominee_view', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->getApproval('5')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 01:34:47 --> Undefined index: name
+in APPPATH\Views\admin\workshop\list.php on line 47.
+ 1 APPPATH\Views\admin\workshop\list.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: name', 'APPPATH\\Views\\admin\\workshop\\list.php', 47, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/list', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(27): view('admin/workshop/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 01:38:23 --> Undefined index: address
+in APPPATH\Views\admin\workshop\list.php on line 50.
+ 1 APPPATH\Views\admin\workshop\list.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: address', 'APPPATH\\Views\\admin\\workshop\\list.php', 50, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/list', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(27): view('admin/workshop/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 01:39:05 --> Undefined index: firstname
+in APPPATH\Views\admin\workshop\add.php on line 56.
+ 1 APPPATH\Views\admin\workshop\add.php(56): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: firstname', 'APPPATH\\Views\\admin\\workshop\\add.php', 56, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/add', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(128): view('admin/workshop/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 01:41:09 --> Undefined index: event_name
+in APPPATH\Views\admin\workshop\add.php on line 22.
+ 1 APPPATH\Views\admin\workshop\add.php(22): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: event_name', 'APPPATH\\Views\\admin\\workshop\\add.php', 22, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\add.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/add', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(134): view('admin/workshop/add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 01:50:26 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 215.
+ 1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 01:50:49 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 215.
+ 1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

@@ -35,7 +35,7 @@ class Workshops extends BaseController
     {
         helper(array('form', 'url'));
 
-        $session = \Config\Services::session();
+        $session   = \Config\Services::session();
         $userdata  = $session->get('userdata');
     
         $request    = \Config\Services::request();
@@ -60,17 +60,19 @@ class Workshops extends BaseController
 
                 if($request->getPost()){
                 
-                    $event_name    = $request->getPost('event_name');
-                    $description   = $request->getPost('description');
-                    $start_date    = $request->getPost('start_date');
-                    $end_date      = $request->getPost('end_date');
-                    $year          = $request->getPost('year');
+                    $firstname     = $request->getPost('firstname');
+                    $lastname      = $request->getPost('lastname');
+                    $email         = $request->getPost('email');
+                    $phone         = $request->getPost('phone');
+                    $address       = $request->getPost('address');
                     $link          = $request->getPost('registration_link');
 
-                    
                     $ins_data = array();
-                    $ins_data['name']   = $event_name;
-                    $ins_data['description']  = $description;
+                    $ins_data['firstname']   = $firstname;
+                    $ins_data['lastname']  = $lastname; 
+                    $ins_data['email']  = $email;
+                    $ins_data['phone']  = $phone;
+                    $ins_data['address']  = $address;
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
                     $ins_data['year']         = $year;
@@ -97,8 +99,11 @@ class Workshops extends BaseController
             {  
             
                 if(!empty($edit_data) && count($edit_data)){
-                    $editdata['event_name']   = $edit_data['name'];
-                    $editdata['description']  = $edit_data['description'];
+                    $editdata['firstname']   = $edit_data['firstname'];
+                    $editdata['lastname']  = $edit_data['lastname'];
+                    $editdata['email']  = $edit_data['email'];
+                    $editdata['phone']  = $edit_data['phone'];
+                    $editdata['address']  = $edit_data['address'];
                     $editdata['year']         = $edit_data['year'];
                     $editdata['start_date']   = date("m/d/Y",strtotime($edit_data['start_date']));
                     $editdata['end_date']     = date("m/d/Y",strtotime($edit_data['end_date']));
@@ -107,8 +112,11 @@ class Workshops extends BaseController
                 }
                 else
                 {
-                    $editdata['event_name']     = ($request->getPost('event_name'))?$request->getPost('event_name'):'';
-                    $editdata['description']    = ($request->getPost('description'))?$request->getPost('description'):'';
+                    $editdata['firstname']     = ($request->getPost('firstname'))?$request->getPost('firstname'):'';
+                    $editdata['lastname']    = ($request->getPost('lastname'))?$request->getPost('lastname'):'';
+                    $editdata['email']    = ($request->getPost('email'))?$request->getPost('email'):'';
+                    $editdata['phone']    = ($request->getPost('phone'))?$request->getPost('phone'):'';
+                    $editdata['address']    = ($request->getPost('address'))?$request->getPost('address'):'';
                     $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
                     $editdata['start_date']     = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
                     $editdata['end_date']       = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");

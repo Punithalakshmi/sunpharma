@@ -21,7 +21,9 @@ class UserModel extends Model{
         'address',
         'middlename',
         'category',
-        'original_password'
+        'original_password',
+        'status',
+        'active'
     ];
 
     public function Login($username, $password) {
@@ -78,7 +80,7 @@ class UserModel extends Model{
     public function getUserData($id='')
     {
         $builder = $this->table('users');
-        $builder->select('users.*,nominee_details.*');
+        $builder->select('users.*,users.id as user_id,nominee_details.*');
         $builder->join('nominee_details','nominee_details.nominee_id = users.id');
         $builder->where("users.role",'2');
         $builder->where("users.id",$id);

@@ -8,6 +8,7 @@ use App\Models\UserModel;
 use App\Models\RoleModel;
 use App\Models\JuryModel;
 use App\Models\RatingModel;
+use App\Models\CategoryModel;
 
 class Nominee extends BaseController
 {
@@ -98,18 +99,8 @@ class Nominee extends BaseController
 
             $up_data = array();
 
-            if(!empty($type) && ($type == 'approve')){
-              $up_data['status']  = 'Approved';
-            }  
-            else
-            {  
-              $up_data['status']  = 'Disapproved';
-            } 
-
             $up_data['updated_date']  =  date("Y-m-d H:i:s");
             $up_data['updated_id']    =  $userdata['login_id'];
-
-            $userModel->update(array("id" => $id),$up_data);
 
             $getUserData  = $userModel->getListsOfUsers($id);
             $getUserData  = $getUserData->getRowArray();
@@ -124,22 +115,26 @@ class Nominee extends BaseController
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
 
-                $pass = $this->generatePassword(6);
+                $pass = $this->generatePassword(8);
 
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
                 $message .= 'Username: '.$getUserData['email'].'<br /><br />';
                 $message .= 'Password: '.$pass.'<br /><br /><br /><br />'; 
 
-                $up_data = array();
+                $up_data['status']  = 'Approved';
+                $up_data['active']  = 1;
                 $up_data['password'] = md5($pass);
                 $up_data['original_password'] = $pass;
                 $userModel->update(array("id" => $getUserData['id']),$up_data);
             }
             else
             {
+                $up_data['status']  = 'Disapproved';
+                $up_data['active']  = 0;
                 $msg = 'Rejected Successfully';
                 $message .= 'Your Application has been rejected';
             }
+            $userModel->update(array("id" => $id),$up_data);
             $message .= 'Thanks,<br/>';
             $message .= 'Sunpharma';
             $email->setMessage($message);
@@ -208,15 +203,19 @@ class Nominee extends BaseController
 
         $id = ($request->getPost('id'))?$request->getPost('id'):'';
         
-        $userModel    = new UserModel();
-        $getUserData  = $userModel->getListsOfUsers($nominee_id);
-        $data['user'] = $getUserData->getRowArray();
-
+        $userModel      = new UserModel();
         $ratingModel    = new RatingModel();
         $nomineeModel   = new NomineeModel();
+        $categoryModel  = new CategoryModel();
 
+        $getUserData  = $userModel->getUserData($nominee_id);
+        $data['user'] = $getUserData->getRowArray();
+
+        //get nominee category
+        $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
+        $data['user']['category_name'] = $getNomineeCategory['name'];
+    
         $edit_data  = $ratingModel->getRatingData($userdata['login_id'],$nominee_id)->getRowArray();
-       
         $validation = $this->validate($this->validation_rules());
 
         $data['userdata'] = $userdata;
@@ -244,6 +243,7 @@ class Nominee extends BaseController
                     $ins_data['comments']     = $comment;
                     $ins_data['jury_id']      = $userdata['login_id'];
                     $ins_data['nominee_id']   = $nominee_id;
+                    $ins_data['is_rate_submitted'] = ($request->getPost('submit') && ($request->getPost('submit') == 'Save Draft'))?0:1; 
                     
                     if(!empty($id)){
                         $session->setFlashdata('msg', 'Rating Updated Successfully!');
@@ -264,17 +264,19 @@ class Nominee extends BaseController
             }
             else
             {  
-            
+
                 if(!empty($edit_data) && count($edit_data)){
                     $editdata['rating']    = $edit_data['rating'];
                     $editdata['comment']   = $edit_data['comments'];
-                    $editdata['id']         =  $edit_data['id'];
+                    $editdata['id']        =  $edit_data['id'];
+                    $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
                 }
                 else
                 {
                     $editdata['rating']  = ($request->getPost('rating'))?$request->getPost('rating'):'';
                     $editdata['comment']   = ($request->getPost('comment'))?$request->getPost('comment'):'';
                     $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['is_rate_submitted'] = '0';
                 }
 
             } 

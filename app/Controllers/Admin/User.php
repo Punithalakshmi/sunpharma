@@ -106,6 +106,7 @@ class User extends BaseController
                     $ins_data['role']       = $user_role;
                     $ins_data['address']    = '';
                     $ins_data['dob']        =  $date_of_birth;
+                    $ins_data['active']     =  '1';
 
                     if($user_role == 1)
                       $ins_data['category'] =  $category;

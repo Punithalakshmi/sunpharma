@@ -13,7 +13,8 @@ class RatingModel extends Model{
         'created_date',
         'updated_date',
         'created_id',
-        'updated_id'
+        'updated_id',
+        'is_rate_submitted'
     ];
 
     public function getLists($id='')

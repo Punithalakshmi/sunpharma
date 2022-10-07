@@ -264,6 +264,7 @@ class Nomination extends BaseController
                     $ins_data['status']     = 'Disapproved';
                     $ins_data['role']       = 2;
                     $ins_data['category']       = $category;
+                    $ins_data['active']     =  '0';
 
                     $nominee_details_data = array();
                     $nominee_details_data['category_id']        = $category;

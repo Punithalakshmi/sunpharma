@@ -29,11 +29,11 @@
                       <thead>
                         <tr>
                           
-                          <th>Event Name</th>
-                          <th>Description</th>
-                          <th>Registration Link</th>
-                          <th>Start Date</th>
-                          <th>End Date</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>Address</th>
+                          <th>Registration No</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -44,11 +44,12 @@
                             ?>
                         <tr>
                           
-                          <td><?=$user['name'];?></td>
-                          <td><?=$user['description'];?></td>
-                          <td><a href="<?=$user['registration_link'];?>" target="_blank"><?=$user['registration_link'];?></a></td>
-                          <td><?=$user['start_date'];?></td>
-                          <td><?=$user['end_date'];?></td>
+                          <td><?=$user['firstname'].' '.$user['lastname'];?></td>
+                          <td><?=$user['email'];?></td>
+                          <td><?=$user['phone'];?></td>
+                          <td><?=$user['address'];?></td>
+                          <td><?=$user['registration_link'];?></td>
+                          
                           <td><?=$user['created_date'];?></td>
                           <td>
                           <a href="<?=base_url().'/admin/workshops/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>

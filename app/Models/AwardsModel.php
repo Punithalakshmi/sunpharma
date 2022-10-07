@@ -24,9 +24,9 @@ class AwardsModel extends Model{
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
         $builder->where("nominee_details.category_id",$category);
+        $builder->where("ratings.is_rate_submitted","1");
         if(!empty($year))
             $builder->where("YEAR(nominee_details.created_date)",$year);
-
         $builder->orderBy("average_rating","DESC");
         $builder->groupBy("ratings.nominee_id");
         return $query = $builder->get();

@@ -15,18 +15,73 @@
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/workshops/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       
+                      
+    
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Event Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Firstname <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="event_name" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('event_name',$editdata['event_name']);?>">
+                          <input type="text" id="first-name" name="firstname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('firstname',$editdata['firstname']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
+                      
                       <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('event_name')) {?>
+                      <?php if(isset($validation) && $validation->getError('firstname')) {?>
                           <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('event_name'); ?>
+                            <?= $error = $validation->getError('firstname'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lastname <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="lastname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('lastname',$editdata['lastname']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('lastname')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('lastname'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="email" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('email',$editdata['email']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('email')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('email'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Phone <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="phone" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('phone',$editdata['phone']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('phone')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('phone'); ?>
                           </div>
                       <?php }?>
                       </div>
@@ -34,30 +89,23 @@
                       <div class="clearfix"></div>
                      
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Address 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="description"><?=$editdata['description'];?></textarea>
+                          <textarea name="address"><?=$editdata['address'];?></textarea>
                         </div>
                       </div>
 
                       <div class="clearfix"></div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Registration Link <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Registration No: 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="registration_link" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('registration_link',$editdata['registration_link']);?>">
+                          <input type="text" id="first-name" name="registration_link" readonly class="form-control col-md-7 col-xs-12" value="<?php echo set_value('registration_link',$editdata['registration_link']);?>">
                         </div>
                       </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('registration_link')) {?>
-                          <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('registration_link'); ?>
-                          </div>
-                      <?php }?>
-                      </div>
+                      
                       
                       <div class="clearfix"></div>
                       
