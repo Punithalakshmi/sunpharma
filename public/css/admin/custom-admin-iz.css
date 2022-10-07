@@ -49,6 +49,9 @@ body{background: #0547ab;}
 
 .graybg{background-color: rgb(247 247 247)!important;
     border: 1px solid rgba(86, 61, 124, 0.2)!important;}
+    .orangebglight{ background:rgb(255 252 243)!important;
+        border: 1px solid rgba(86, 61, 124, 0.2)!important;}
+   
 
     .iconcal{width: 18px;}
     .topformsec{}

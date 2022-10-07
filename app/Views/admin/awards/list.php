@@ -86,7 +86,7 @@
                                   <tr class="childTableRow ">
                                       <td colspan="6">
                                           <h5>Jury Info</h5>
-                                          <table class="table graybg">
+                                          <table class="table orangebglight">
                                               <thead>
                                               <tr>
                                                   <th>Jury</th>
