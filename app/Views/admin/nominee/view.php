@@ -107,42 +107,42 @@
               </div>
 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">In Order of Importance list of 10 best papers of the applicant highlighting the important discoveries/contribution described in them briefly.(Max 1 MB)</label>
+                <label class="col col-form-label">In Order of Importance list of 10 best papers of the applicant highlighting the important discoveries/contribution described in them briefly.(Max 1 MB)</label>
                 <div class="col-sm-9">
                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['best_papers'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['best_papers'];?></a> 
                 </div>
               </div>
 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the awards</label>
+                <label class="col col-form-label">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the awards</label>
                 <div class="col-sm-9">
                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_research_achievements'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['statement_of_research_achievements'];?></a> 
                 </div>
               </div>
 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references and illustrations. The candidate should duly sign on the details.</label>
+                <label class="col col-form-label">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references and illustrations. The candidate should duly sign on the details.</label>
                 <div class="col-sm-9">
                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_details'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['signed_details'];?></a> 
                 </div>
               </div>
 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Two specific publications/research papers of the applicant relevent to the research work mentioned above.(Max: 2.5MB)</label>
+                <label class="col col-form-label">Two specific publications/research papers of the applicant relevent to the research work mentioned above.(Max: 2.5MB)</label>
                 <div class="col-sm-9">
                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['specific_publications'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['specific_publications'];?></a> 
                 </div>
               </div>
 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">A signed statement by the applicant that the research work under reference has not been given any award. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB)</label>
+                <label class="col col-form-label">A signed statement by the applicant that the research work under reference has not been given any award. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB)</label>
                 <div class="col-sm-9">
                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_statement'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['signed_statement'];?></a> 
                 </div>
               </div>
 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Citation on the Research Work of the Applicant duly signed by the Naminator(Max: 300 KB)</label>
+                <label class="col col-form-label">Citation on the Research Work of the Applicant duly signed by the Naminator(Max: 300 KB)</label>
                 <div class="col-sm-9">
                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['citation'];?></a> 
                 </div>

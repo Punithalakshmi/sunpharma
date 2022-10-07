@@ -7,11 +7,11 @@
               </div>
             </div>
             <div class="clearfix"></div>
-            <div class="row">
-            <div class="col-md-4">
-            <div class="get-sunpharma__input-box mt-2">
-                    <label for="" class="fw-bold">Category</label>
-                    <select class="selectpicker mt-2"
+            <div class="row topformsec">
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+            <label for="" class="fw-bold">Category</label>
+                    <select class="selectpicker mt-2 form-control"
                         aria-label="Default select example" name="category" id="category">
                         <option></option>
                         <?php if(is_array($categories)):
@@ -23,25 +23,24 @@
                     <?php if(isset($validation) && $validation->getError('category')) {?>
                         <?= $error = $validation->getError('category'); ?>
                     <?php }?>
-                    </small>
+                    </small>  
                 </div>
             </div>
           
-            <div class="col-md-4">
-                <div class="get-sunpharma__input-box mt-2">
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
                     <label for="" class="fw-bold">Year</label>
-                    <select class="selectpicker mt-2"
+                    <select class="selectpicker mt-2 form-control"
                         aria-label="Default select example" name="year" id="year">
                         <option></option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option> 
                     </select>
-                </div>
             </div>
-            <div class="col-md-4">
-                <div class="get-sunpharma__input-box mt-2">
-                    <button name="search" id="search" onclick="getAwardLists()">Search</button>
-                </div>
+            </div>
+            <div class="col-md-3">
+                    <button class="btn btn-primary mb-2" name="search" id="search" onclick="getAwardLists()">Search</button>
+                
             </div>
         </div>
             
@@ -76,7 +75,7 @@
                                     foreach($lists as $user):
                             ?>
                                 <tr>
-                                    <td><span class="expandChildTable"></span></td>
+                                    <td class="iconcal"><i class="expandChildTable fa fa-plus-circle"></i></td>
                                     <td><?=$user['category_name'];?></td>
                                     <td><?=$user['firstname'];?></td>
                                     <td><?=date("Y")."/".$user['id'];?></td>
@@ -84,10 +83,10 @@
                                     <td><?=round($user['average_rating']);?></td>
                                 </tr>
                                 <?php if(is_array($user['juries']) && count($user['juries']) > 0): ?>
-                                  <tr class="childTableRow">
+                                  <tr class="childTableRow ">
                                       <td colspan="6">
                                           <h5>Jury Info</h5>
-                                          <table class="table">
+                                          <table class="table graybg">
                                               <thead>
                                               <tr>
                                                   <th>Jury</th>
