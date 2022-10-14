@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-3 actionbtns">
                 <a href="#" onclick="exportResult();" class="btn btn-primary mb-2">
-                   <i class="fa fa-plus"></i> Download Result
+                   <i class="fa fa-download"></i> Download Result
                 </a>
            </div>
         </div>

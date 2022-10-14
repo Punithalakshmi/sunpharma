@@ -102,4 +102,17 @@ class UserModel extends Model{
         $builder->where("users.id",$jury_id);
         return $query = $builder->get();
     }
+
+    public function getListsNominations()
+    {
+        $builder = $this->table('users');
+        $builder->select('users.*,nominations.end_date,category.name as category_name');
+        $builder->join('nominee_details','nominee_details.nominee_id = users.id');
+        $builder->join('category','category.id = nominee_details.category_id');
+        $builder->join('nominations','nominations.category_id = category.id');
+        $builder->where("users.role",'2');
+        $builder->where("users.status",'Approved');
+        $builder->where("users.active",'1');
+        return $query = $builder->get();
+    }
 }

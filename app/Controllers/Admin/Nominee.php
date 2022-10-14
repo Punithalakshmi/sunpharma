@@ -178,7 +178,7 @@ class Nominee extends BaseController
         if(is_array($userdata) && count($userdata)):
 
             $userModel     = new UserModel();
-            $nomineeLists  = $userModel->getListsOfNominees();
+            $nomineeLists  = $userModel->getListsNominations();
             $data['lists'] = $nomineeLists->getResultArray();
            
             return view('_partials/header',$data)

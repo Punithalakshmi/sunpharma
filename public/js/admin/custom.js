@@ -24,8 +24,10 @@ $(document).ready(function(){
 
 function nominee_approve(type = '',id='')
 {
+  
     var msg = (type && type == 'approve')?'approve':'reject';
     if(confirm("Are you sure you want to "+msg+" this Nominee?")){
+      $('#loader').removeClass('hidden');
         $.ajax({
             url : base_url+'/admin/nominee/approve',
             type: "POST",
@@ -33,6 +35,7 @@ function nominee_approve(type = '',id='')
             dataType:'json',
             success: function(data, textStatus, jqXHR)
             {
+              $('#loader').addClass('hidden');
                 if(data.status && data.status == 'success')
                   alert(data.message);
 
@@ -73,7 +76,7 @@ $(function(){
     });
 
     var juryID = $("#juryLists").val();
-
+    $('#loader').removeClass('hidden');
     $.ajax({
         url : base_url+'/admin/nominee/assignJury',
         type: "POST",
@@ -81,6 +84,9 @@ $(function(){
         dataType:'json',
         success: function(data, textStatus, jqXHR)
         {
+
+          $('#loader').addClass('hidden');
+
             if(data.status && data.status == 'success')
               alert(data.message);
 
@@ -110,8 +116,7 @@ $(function(){
     var category = $("#category").val();
     var year     = $("#year").val();
 
-    console.log('category',category);
-    console.log('year',year);
+    $('#loader').removeClass('hidden');
 
     $.ajax({
       url : base_url+'/admin/awards/index',
@@ -120,7 +125,7 @@ $(function(){
       dataType:'json',
       success: function(data, textStatus, jqXHR)
       {
-          console.log('data',data);
+        $('#loader').addClass('hidden');
           if(data.data)
             $("#getLists").html(data.data);
       },
@@ -140,9 +145,8 @@ $(function(){
     var category = $("#category").val();
     var year     = $("#year").val();
 
-    console.log('category',category);
-    console.log('year',year);
-    $('#loader').removeClass('hidden')
+   
+    $('#loader').removeClass('hidden');
     $.ajax({
       url : base_url+'/admin/awards/export',
       type: "POST",
@@ -150,7 +154,7 @@ $(function(){
       dataType:'json',
       success: function(data, textStatus, jqXHR)
       {
-        $('#loader').addClass('hidden')
+        $('#loader').addClass('hidden');
           console.log('data',data.filename);
           window.location.href = data.filename;
       },

@@ -7,8 +7,8 @@
               </div>
             </div>
            
-            <div>
-                <a href="<?php echo base_url();?>/admin/workshops/add" class="btn btn-primary btn-xs">Add Event</a>
+            <div class="actionbtns">
+                <a href="<?php echo base_url();?>/admin/workshops/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>Add Event</a>
            </div>
                 
            </div>
