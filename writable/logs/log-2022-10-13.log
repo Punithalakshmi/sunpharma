@@ -1,0 +1,233 @@
+CRITICAL - 2022-10-13 02:16:28 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 02:19:16 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 02:21:48 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 02:23:19 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 02:30:32 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 02:39:00 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-13 03:56:21 --> Column 'year_of_passing' cannot be null
+CRITICAL - 2022-10-13 03:56:21 --> Column 'year_of_passing' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `nominee_details` (`category_id`, `citizenship`, `nomination_type`, `residence_address`, `nominator_name`, `nominator_email`, `nominator_phone`, `nominator_address`, `year_of_passing`, `number_of_attempts`, `nominee_id`, `supervisor_certifying`, `justification_letter_filename`, `nominator_photo`) VALUES (\'4\', \'1\', \'ssan\', \'Test\', \'Nominator1\', \'nominator@gmail.com\', \'8765432156\', \'Test\', NULL, NULL, 6, \'Invoice (2) (1).pdf\', \'PRICE LIST 2022.pdf\', \'robots.jpg\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `nominee_details` (`category_id`, `citizenship`, `nomination_type`, `residence_address`, `nominator_name`, `nominator_email`, `nominator_phone`, `nominator_address`, `year_of_passing`, `number_of_attempts`, `nominee_id`, `supervisor_certifying`, `justification_letter_filename`, `nominator_photo`) VALUES (\'4\', \'1\', \'ssan\', \'Test\', \'Nominator1\', \'nominator@gmail.com\', \'8765432156\', \'Test\', NULL, NULL, 6, \'Invoice (2) (1).pdf\', \'PRICE LIST 2022.pdf\', \'robots.jpg\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `nominee_details` (`category_id`, `citizenship`, `nomination_type`, `residence_address`, `nominator_name`, `nominator_email`, `nominator_phone`, `nominator_address`, `year_of_passing`, `number_of_attempts`, `nominee_id`, `supervisor_certifying`, `justification_letter_filename`, `nominator_photo`) VALUES (\'4\', \'1\', \'ssan\', \'Test\', \'Nominator1\', \'nominator@gmail.com\', \'8765432156\', \'Test\', NULL, NULL, 6, \'Invoice (2) (1).pdf\', \'PRICE LIST 2022.pdf\', \'robots.jpg\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1904): CodeIgniter\Database\BaseConnection->query('INSERT INTO `nominee_details` (`category_id`, `citizenship`, `nomination_type`, `residence_address`, `nominator_name`, `nominator_email`, `nominator_phone`, `nominator_address`, `year_of_passing`, `number_of_attempts`, `nominee_id`, `supervisor_certifying`, `justification_letter_filename`, `nominator_photo`) VALUES (:category_id:, :citizenship:, :nomination_type:, :residence_address:, :nominator_name:, :nominator_email:, :nominator_phone:, :nominator_address:, :year_of_passing:, :number_of_attempts:, :nominee_id:, :supervisor_certifying:, :justification_letter_filename:, :nominator_photo:)', [...], false)
+ 5 SYSTEMPATH\Model.php(278): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(738): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(666): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(658): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Nomination.php(171): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+11 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+12 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 04:47:06 --> Undefined index: year_of_passing
+in APPPATH\Views\frontend\ssan.php on line 378.
+ 1 APPPATH\Views\frontend\ssan.php(378): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: year_of_passing', 'APPPATH\\Views\\frontend\\ssan.php', 378, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\ssan.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/ssan', [], true)
+ 5 APPPATH\Controllers\Nomination.php(249): view('frontend/ssan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index('7')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-13 09:27:40 --> Error connecting to the database: No connection could be made because the target machine actively refused it.
+
+CRITICAL - 2022-10-13 09:27:40 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it.
+
+in SYSTEMPATH\Database\BaseConnection.php on line 416.
+ 1 SYSTEMPATH\Database\BaseConnection.php(586): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `users`.*, `users`.`id` as `user_id`, `nominee_details`.*
+FROM `users`
+JOIN `nominee_details` ON `nominee_details`.`nominee_id` = `users`.`id`
+WHERE `users`.`role` = :users.role:
+AND `users`.`id` = :users.id:', [...], false)
+ 3 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Models\UserModel.php(88): CodeIgniter\Model->__call('get', [])
+ 5 APPPATH\Controllers\Admin\Nominee.php(213): App\Models\UserModel->getUserData('7')
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('7')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 09:31:10 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Admin\Nominee.php on line 222.
+ 1 APPPATH\Controllers\Admin\Nominee.php(222): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 222, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('7')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 09:45:03 --> Trying to access array offset on value of type int
+in APPPATH\Controllers\User.php on line 25.
+ 1 APPPATH\Controllers\User.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type int', 'APPPATH\\Controllers\\User.php', 25, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 09:47:19 --> Undefined variable: detail_id
+in APPPATH\Controllers\Nomination.php on line 142.
+ 1 APPPATH\Controllers\Nomination.php(142): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: detail_id', 'APPPATH\\Controllers\\Nomination.php', 142, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 09:50:17 --> Undefined variable: detail_id
+in APPPATH\Controllers\Nomination.php on line 142.
+ 1 APPPATH\Controllers\Nomination.php(142): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: detail_id', 'APPPATH\\Controllers\\Nomination.php', 142, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 10:44:22 --> The original file is not a valid file.
+in SYSTEMPATH\HTTP\Files\UploadedFile.php on line 137.
+ 1 SYSTEMPATH\HTTP\Files\UploadedFile.php(137): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidFile()
+ 2 APPPATH\Controllers\Nomination.php(103): CodeIgniter\HTTP\Files\UploadedFile->move('FCPATH\\uploads\\7')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 11:55:00 --> Call to undefined method CodeIgniter\Database\MySQLi\Builder::query()
+in APPPATH\Controllers\Admin\Awards.php on line 83.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 11:58:01 --> Class 'PhpOffice\PhpSpreadsheet\Spreadsheet' not found
+in APPPATH\Controllers\Admin\Awards.php on line 87.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:41:53 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(110): redirect('http://local.sunpharma.md/uploads/users.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:41:55 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(110): redirect('http://local.sunpharma.md/uploads/users.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:42:00 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(110): redirect('http://local.sunpharma.md/uploads/users.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:42:31 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(110): redirect('http://local.sunpharma.md/uploads/users.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:42:34 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(110): redirect('http://local.sunpharma.md/uploads/users.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:42:35 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(110): redirect('http://local.sunpharma.md/uploads/users.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:42:40 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(110): redirect('http://local.sunpharma.md/uploads/users.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:56:20 --> fopen(uploads/AwardResult_13-10-2022 23:56:20.xlsx): failed to open stream: No such file or directory
+in VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php on line 125.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(uploads/AwardResult_13-10-2022 23:56:20.xlsx): failed to open stream: No such file or directory', 'VENDORPATH\\phpoffice\\phpspreadsheet\\src\\PhpSpreadsheet\\Writer\\BaseWriter.php', 125, [...])
+ 2 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php(125): fopen('uploads/AwardResult_13-10-2022 23:56:20.xlsx', 'wb')
+ 3 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php(542): PhpOffice\PhpSpreadsheet\Writer\BaseWriter->openFileHandle('uploads/AwardResult_13-10-2022 23:56:20.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(109): PhpOffice\PhpSpreadsheet\Writer\Xlsx->save('uploads/AwardResult_13-10-2022 23:56:20.xlsx')
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:57:21 --> fopen(http://local.sunpharma.md/uploads/AwardResult_13-10-2022 23:57:21.xlsx): failed to open stream: HTTP wrapper does not support writeable connections
+in VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php on line 125.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(http://local.sunpharma.md/uploads/AwardResult_13-10-2022 23:57:21.xlsx): failed to open stream: HTTP wrapper does not support writeable connections', 'VENDORPATH\\phpoffice\\phpspreadsheet\\src\\PhpSpreadsheet\\Writer\\BaseWriter.php', 125, [...])
+ 2 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php(125): fopen('http://local.sunpharma.md/uploads/AwardResult_13-10-2022 23:57:21.xlsx', 'wb')
+ 3 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php(542): PhpOffice\PhpSpreadsheet\Writer\BaseWriter->openFileHandle('http://local.sunpharma.md/uploads/AwardResult_13-10-2022 23:57:21.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(109): PhpOffice\PhpSpreadsheet\Writer\Xlsx->save('http://local.sunpharma.md/uploads/AwardResult_13-10-2022 23:57:21.xlsx')
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:57:41 --> File not found: http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx
+in SYSTEMPATH\Files\File.php on line 46.
+ 1 SYSTEMPATH\Files\File.php(46): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(97): CodeIgniter\Files\File->__construct('http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(779): CodeIgniter\HTTP\DownloadResponse->setFilePath('http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(112): CodeIgniter\HTTP\Response->download('AwardResult_13-10-2022.xlsx', null)
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-13 23:58:14 --> File not found: http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx
+in SYSTEMPATH\Files\File.php on line 46.
+ 1 SYSTEMPATH\Files\File.php(46): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(97): CodeIgniter\Files\File->__construct('http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(779): CodeIgniter\HTTP\DownloadResponse->setFilePath('http://local.sunpharma.md/uploads/AwardResult_13-10-2022.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(112): CodeIgniter\HTTP\Response->download('AwardResult_13-10-2022.xlsx', null)
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

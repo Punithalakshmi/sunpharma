@@ -41,6 +41,9 @@
   </head>
 
   <body class="nav-md">
+
+  <div id="loader" class="lds-dual-ring hidden overlay"></div>
+
   <?php if(is_array($userdata)): ?>
     <div class="container body">
 
@@ -87,7 +90,7 @@
                   </li>
                   <?php } else if($userdata['role'] == 1){ ?>
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">
-                      <i class="fa fa-user"></i> Nominees </a>
+                      <i class="fa fa-user"></i> Nominations </a>
                     </li>
                     <!-- <li><a href="<?php //echo base_url();?>/admin/nominee/ratings">
                       <i class="fa fa-user"></i> Rated Nominees </a>
@@ -132,3 +135,5 @@
         </div>
         <!-- /top navigation -->
         <?php endif; ?>
+
+        

@@ -6,7 +6,13 @@
               </div>
               <div class="title_right">
                 <h3>Average Rating: <?=round($average_rating);?></h3>
+                <?php if($user['status'] == 'Approved' && $user['active'] == 1): ?>
+                  <h4>Approved</h4>
+                <?php else: ?>
+                  <h4>Disapproved</h4>
+                  <?php endif; ?>
               </div>
+             
             </div>
             <div class="clearfix"></div>
             
@@ -20,29 +26,22 @@
 
             <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-       
-        <div class="x_content">
+            <div class="x_panel">
+              <div class="x_content">
 
-          <div class="col-md-3 col-xs-12 mt-30">
-            <div class="product-image border">
-                              <img class="border" src="http://local.sunpharma.md/uploads/7/robots.jpg" alt="" style="
-    border: 1px solid #959595;
-    padding: 5px;
-">
-                
-            </div>
-            <div class="product_gallery">
-             
-            </div>
-          </div>
+                <div class="col-md-3 col-xs-12 mt-30">
+                  <div class="product-image border">
+                    <img class="border" src="<?=base_url();?>/uploads/7/robots.jpg" alt="" style="border: 1px solid #959595;padding: 5px;"> 
+                  </div>
+                  <div class="product_gallery">
+                  
+                  </div>
+                </div>
 
           <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
             <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?> </h3>
 
-  
-           
               <div class="form-group row formitem">
                 <label class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
@@ -148,6 +147,89 @@
                 </div>
               </div>
               <?php else: ?>
+                <div class="form-group row formitem">
+                <label class="col col-form-label">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB)</label>
+                <div class="col-sm-9">
+                   <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['justification_letter_filename'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['justification_letter_filename'];?></a>
+               </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">Justification for Sponsoring the Nomination duly signed by the Nominator/Supervisor(500 KB)</label>
+                <div class="col-sm-9">
+                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['supervisor_certifying'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['supervisor_certifying'];?></a> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">Complete Bio-data of the applicant(Max: 1MB) pdf format</label>
+                <div class="col-sm-9">
+                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['complete_bio_data'];?></a>  
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['excellence_research_work'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['excellence_research_work'];?></a> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['lists_of_publications'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['lists_of_publications'];?></a> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_applicant'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['statement_of_applicant'];?></a> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['ethical_clearance'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['ethical_clearance'];?></a> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_duly_signed_by_nominee'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['statement_of_duly_signed_by_nominee'];?></a> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['citation'];?></a> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col col-form-label">Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['aggregate_marks'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['aggregate_marks'];?></a> 
+                </div>
+              </div>
+              <br />
+              <div class="form-group row formitem">
+                <label class="col col-form-label">Age proof (Max: 250KB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['age_proof'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['age_proof'];?></a> 
+                </div>
+              </div>
+              <br />
+              <div class="form-group row formitem">
+                <label class="col col-form-label">A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)</label>
+                <div class="col-sm-9">
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['declaration_candidate'];?>" target="_blank" class="documents" style="color:blue;"><?=$user['declaration_candidate'];?></a> 
+                </div>
+              </div>
 
              <?php endif; ?> 
               <div class="">
@@ -157,7 +239,8 @@
                   <br>
                 </div>
               </div>
-              <?php if(isset($userdata['role']) && ($userdata['role'] == '3')): ?>
+
+              <?php if(isset($userdata['role']) && ($userdata['role'] == '3') && (($user['status'] == 'Disapproved' && $user['is_rejected'] == '0') || ($user['status'] == 'Disapproved' && $user['active'] == '0'))): ?>
                 <div class="">
                   <button type="button" onclick="nominee_approve('approve','<?=$user['user_id'];?>');" class="btn btn-primary btn-lg">Approve</button>
                   <button type="button" class="btn btn-danger btn-lg" onclick="nominee_approve('disapprove','<?=$user['user_id'];?>');">
@@ -165,78 +248,79 @@
                 </button>
               </div>
                 <?php endif;?>
-          </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
             <?php if($userdata['role'] == 1): ?>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>Rating</h2>
-          
-          <div class="clearfix"></div>
-          <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left">
-                      <input type="hidden" name="nominee_id" value="<?=(isset($user['id']))?$user['id']:"";?>"  >
-
-                      <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>"  >
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rating <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="rating" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',((isset($editdata['rating']) && !empty($editdata['rating']))?$editdata['rating']:""));?>">
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('rating')) {?>
-                          <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('rating'); ?>
-                          </div>
-                      <?php }?>
-                      </div>
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>Rating</h2>
                       
                       <div class="clearfix"></div>
-                      
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Comments</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group ratingcommentcont" data-toggle="buttons">
-                            
-                              <textarea class="ratingcomment col-xs-12" name="comment"><?=$editdata['comment'];?></textarea>
-                           
-                          </div>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('comment')) {?>
-                          <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('comment'); ?>
-                          </div>
-                      <?php }?>
-                      </div>
-                     
-                      <div class="ln_solid"></div>
-                        <div class="form-group">
-                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <?php if(isset($editdata['is_rate_submitted']) && ($editdata['is_rate_submitted'] == 0)):?>
-                            <input type="submit" class="btn btn-primary" name="submit" value="Save Draft">
-                            <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
-                            <?php endif;?>
-                          </div>
-                        </div>
-                    </form>
-                  </div>
-                </div>
+                      <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                                  <input type="hidden" name="nominee_id" value="<?=(isset($user['user_id']))?$user['user_id']:"";?>"  >
 
-</div></div>
+                                  <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>"  >
 
-<?php else: ?>
+                                  <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rating <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <input type="text" id="first-name" name="rating" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',((isset($editdata['rating']) && !empty($editdata['rating']))?$editdata['rating']:""));?>">
+                                    </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <div class="form-group col-md-6">
+                                  <?php if(isset($validation) && $validation->getError('rating')) {?>
+                                      <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('rating'); ?>
+                                      </div>
+                                  <?php }?>
+                                  </div>
+                                  
+                                  <div class="clearfix"></div>
+                                  
+                                  <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Comments</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <div id="gender" class="btn-group ratingcommentcont" data-toggle="buttons">
+                                        
+                                          <textarea class="ratingcomment col-xs-12" name="comment"><?=$editdata['comment'];?></textarea>
+                                      
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <div class="form-group col-md-6">
+                                  <?php if(isset($validation) && $validation->getError('comment')) {?>
+                                      <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('comment'); ?>
+                                      </div>
+                                  <?php }?>
+                                  </div>
+                                
+                                  <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                        <?php if(isset($editdata['is_rate_submitted']) && ($editdata['is_rate_submitted'] == 0)):?>
+                                        <input type="submit" class="btn btn-primary" name="submit" value="Save Draft">
+                                        <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+                                        <?php endif;?>
+                                      </div>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+
+            </div></div>
+
+            <?php else: ?>
               <div class="page-title">
               <div class="title_left">
                 <h3>Ratings</h3>

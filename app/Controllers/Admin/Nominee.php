@@ -118,12 +118,13 @@ class Nominee extends BaseController
                 $pass = $this->generatePassword(8);
 
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
-                $message .= 'Username: '.$getUserData['email'].'<br /><br />';
+                $message .= 'Username: '.strtolower($getUserData['firstname']).'<br /><br />';
                 $message .= 'Password: '.$pass.'<br /><br /><br /><br />'; 
 
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
                 $up_data['password'] = md5($pass);
+                $up_data['username'] = strtolower($getUserData['firstname']);
                 $up_data['original_password'] = $pass;
                 $userModel->update(array("id" => $getUserData['id']),$up_data);
             }
@@ -131,6 +132,7 @@ class Nominee extends BaseController
             {
                 $up_data['status']  = 'Disapproved';
                 $up_data['active']  = 0;
+                $up_data['is_rejected'] = 1;
                 $msg = 'Rejected Successfully';
                 $message .= 'Your Application has been rejected';
             }
@@ -212,8 +214,10 @@ class Nominee extends BaseController
         $data['user'] = $getUserData->getRowArray();
 
         //get nominee category
+        if(isset($data['user']['category_id'])) {
         $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
         $data['user']['category_name'] = $getNomineeCategory['name'];
+        }
     
         $edit_data  = $ratingModel->getRatingData($userdata['login_id'],$nominee_id)->getRowArray();
         $validation = $this->validate($this->validation_rules());

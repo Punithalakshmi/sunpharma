@@ -94,9 +94,9 @@
                         <marquee>
                             <p style="font-size: 18pt">
                                 <b>Sun Pharma Science Foundation Research Awards</b>
-                                   <small><a href="/spsfn/<?=$currentNominations['research_awards'];?>">Submit Nomination</a></small> | 
+                                   <small><a href="<?=base_url();?>/spsfn/<?=$currentNominations['research_awards'];?>">Submit Nomination</a></small> | 
                                  <b>Sun Pharma Science Foundation Science Scholar Awards</b>
-                                   <small><a href="/ssan/<?=$currentNominations['science_scholars_awards'];?>">Submit Nomination</a></small>
+                                   <small><a href="<?=base_url();?>/ssan/<?=$currentNominations['science_scholars_awards'];?>">Submit Nomination</a></small>
                             </p>
                         </marquee>
                 </div>
