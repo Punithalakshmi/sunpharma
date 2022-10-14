@@ -134,13 +134,13 @@
                                     <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                                     <ul class="main-menu__list">
                                         <li>
-                                            <a href="/mission">Mission</a>
+                                            <a href="<?=base_url();?>/mission">Mission</a>
                                         </li>
                                         <li class="dropdown">
                                             <a href="https://sunpharmasciencefoundation.net/LatestWinnersResearchAwardmain.asp" target="_blank">Research Awards</a>
                                             <ul>
                                                 <li><a href="https://sunpharmasciencefoundation.net/LatestWinnersResearchAwardmain.asp" target="_blank">Latest Winners of Research Awards</a></li>
-                                                <li><a href="/directory_research_awardees">Directory of Research Awardees</a></li>
+                                                <li><a href="<?=base_url();?>/directory_research_awardees">Directory of Research Awardees</a></li>
                                             </ul>
                                         </li>
 
@@ -148,12 +148,12 @@
                                             <a href="https://sunpharmasciencefoundation.net/LatestWinnersScienceScholarAwardmain.asp" target="_blank">Scholars Awards</a>
                                             <ul>
                                                 <li><a href="https://sunpharmasciencefoundation.net/LatestWinnersScienceScholarAwardmain.asp" target="_blank">Latest Winners of Science Scholars Awards</a></li>
-                                                <li><a href="/directory_of_science_scholars">Directory of Science Scholars</a></li>
+                                                <li><a href="<?=base_url();?>/directory_of_science_scholars">Directory of Science Scholars</a></li>
                                                 <!-- <li><a href="#">Science Scholars Awards for Young Scientists</a></li> -->
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a href="/annual_activities">Annual Activities</a>
+                                            <a href="<?=base_url();?>/annual_activities">Annual Activities</a>
                                             <!-- <ul>    
                                                 <li><a href="#">Upcoming Events</a></li>                                           </li>
                                                 <li><a href="#">Research work by Indian scientists</a></li>
@@ -164,11 +164,11 @@
                                         </li>
                                        
                                         <li>
-                                            <a href="/special_awards">Special Award in Public Health</a>
+                                            <a href="<?=base_url();?>/special_awards">Special Award in Public Health</a>
                                         </li>
                                         
                                         <li>
-                                            <a href="/contact">Contact</a>
+                                            <a href="<?=base_url();?>/contact">Contact</a>
                                         </li>
                                     </ul>
                                 </div>

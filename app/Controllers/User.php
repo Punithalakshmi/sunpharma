@@ -22,7 +22,7 @@ class User extends BaseController
        
               $result   = $userModel->fLogin($username, md5($password));
               
-              $getNominationData = $nominationModel->getNominationData($result['id']);
+              $getNominationData   = $nominationModel->getNominationData($result['id']);
               $getNominationData   = $getNominationData->getRowArray();
             
 

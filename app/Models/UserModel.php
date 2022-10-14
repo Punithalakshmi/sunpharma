@@ -23,7 +23,8 @@ class UserModel extends Model{
         'category',
         'original_password',
         'status',
-        'active'
+        'active',
+        'is_rejected'
     ];
 
     public function Login($username, $password) {
@@ -89,14 +90,14 @@ class UserModel extends Model{
 
     public function getListsOfNominees()
     { 
-          return $this->getWhere(array('role' => 2)); 
+          return $this->getWhere(array('role' => 2,'status' => 'Approved','active' => 1)); 
     }
 
-    public function getJuryRateData($jury_id = '')
+    public function getJuryRateData($jury_id = '',$nominee_id = '')
     {
         $builder = $this->table('users');
         $builder->select('users.*,ratings.rating');
-        $builder->join('ratings','ratings.jury_id = users.id');
+        $builder->join('ratings','ratings.jury_id = users.id AND ratings.nominee_id='.$nominee_id);
         $builder->where("users.role",'1');
         $builder->where("users.id",$jury_id);
         return $query = $builder->get();

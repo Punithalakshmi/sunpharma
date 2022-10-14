@@ -35,6 +35,8 @@ function nominee_approve(type = '',id='')
             {
                 if(data.status && data.status == 'success')
                   alert(data.message);
+
+                  location.reload();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -130,5 +132,34 @@ $(function(){
     });
 
 
+ }
+
+ function exportResult()
+ {
+
+    var category = $("#category").val();
+    var year     = $("#year").val();
+
+    console.log('category',category);
+    console.log('year',year);
+    $('#loader').removeClass('hidden')
+    $.ajax({
+      url : base_url+'/admin/awards/export',
+      type: "POST",
+      data : {category:category,year:year},
+      dataType:'json',
+      success: function(data, textStatus, jqXHR)
+      {
+        $('#loader').addClass('hidden')
+          console.log('data',data.filename);
+          window.location.href = data.filename;
+      },
+      error: function (jqXHR, textStatus, errorThrown)
+      {
+        
+      }
+
+    });
+   
  }
 

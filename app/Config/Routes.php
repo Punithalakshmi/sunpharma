@@ -46,12 +46,14 @@ $routes->get('special_awards','SpecialAwards::index');
 $routes->get('latest_winners_of_science_scholars_awards','LatestWinnersOfScienceScholarsAwards::index');
 $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
 $routes->get('ssan','Nomination::index');
+$routes->post('ssan','Nomination::index');
 $routes->get('spsfn','Nomination::spsfn');
 $routes->post('spsfn','Nomination::spsfn');
 $routes->get('nomination_preview', 'Home::nominationPreview');
 
 $routes->get('ssan/(:any)','Nomination::index/$1');
 $routes->get('spsfn/(:any)','Nomination::spsfn/$1');
+$routes->get('preview/(:any)','Nomination::preview/$1');
 
 $routes->post('login','User::login');
 $routes->get('login','User::login');
@@ -123,6 +125,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     
     $routes->get('awards','Awards::index');
     $routes->post('awards/index','Awards::index');
+    $routes->get('awards/export','Awards::export');
+    $routes->post('awards/export','Awards::export');
 
 });
 

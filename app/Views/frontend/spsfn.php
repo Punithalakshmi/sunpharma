@@ -24,7 +24,7 @@
                         </h4>
                     </div>
                 </div>
-            <?php } else {?>
+            <?php } else { //print_r($userdata); ?>
         <section class="contact-page">
             <div class="container">
 
@@ -39,6 +39,8 @@
                 </div>   
               
                 <form name="research_awards" id="research_awards" method="POST" action="<?=base_url();?>/spsfn" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
+                <input type="hidden" name="detail_id" value="<?=(isset($editdata['detail_id']))?$editdata['detail_id']:"";?>" >
                 <?php if(session()->getFlashdata('msg')):?>
                     <div class="col-xl-3 col-lg-4" style="color:green;font-size:14px;">
                         <?= session()->getFlashdata('msg') ?>
@@ -109,8 +111,9 @@
 
                                         <div class="col-xl-6">                                           
                                             <label for="" class="fw-bold">Date of Birth</label>
+                                            <?php //echo $editdata['date_of_birth']; ?>
                                             <div class="get-sunpharma__input-box mt-2">
-                                                <input type="date" placeholder="" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>">
+                                                <input type="text" placeholder="" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>">
                                                 <small class="text-danger">
                                                 <?php if(isset($validation) && $validation->getError('date_of_birth')) {?>
                                       
@@ -246,110 +249,158 @@
                                         <div class="col-xl-12">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)	</label>
-                                                <input class="form-control" name="justification_letter" type="file" id="formFile">
+                                                
+                                                <input class="form-control" name="justification_letter" type="file" id="formFile" value="<?=$editdata['justification_letter'];?>">
+                                                <?php if(!empty($editdata['justification_letter'])): ?>
+                                                    <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['justification_letter'];?>" style="color:blue;"><?=$editdata['justification_letter'];?></a>
+                                                    <?php endif;?>
                                                 <small class="text-danger">
                                                 <?php if(isset($validation) && $validation->getError('justification_letter')) {?>
                                                     <?= $error = $validation->getError('justification_letter'); ?>
                                                 <?php }?>
-                                                </small>                                            
+                                                </small>   
+                                                
                                             </div>                                           
-                                            
                                         </div>
 
                                         
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">Attach Indian Passport Copy in pdf format  (<i class="fas fa-file-pdf text-danger">if citizenship is NRI</i>)</label>
-                                                <input class="form-control mb-3" name="passport" type="file" id="formFile2">                                            
+                                                
+                                                <input class="form-control mb-3" name="passport" type="file" id="formFile2" value="<?=$editdata['passport'];?>">                                            
+                                               
+                                                <?php if(!empty($editdata['passport'])): ?>
+                                                    <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['passport'];?>" style="color:blue;"><?=$editdata['passport'];?></a>
+                                                    <?php endif;?> 
                                                 <small class="text-danger">
                                                 <?php if(isset($validation) && $validation->getError('passport')) {?>
                                                     <?= $error = $validation->getError('passport'); ?>
                                                 <?php }?>
                                                 </small>
+                                                
                                             </div>                                       
                                         </div>
                              <?php if(isset($userdata['isNominee']) && ($userdata['isNominee'] == 'yes')): ?>
+                                        
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">Complete Bio-data of the applicant(Max: 1.5MB) pdf format</label>
-                                                <input class="form-control mb-3" name="complete_bio_data" type="file" id="formFile2">                                            
-                                                <!-- <small class="text-danger">
-                                                <?php //if(isset($validation) && $validation->getError('passport')) {?>
-                                                    <? //$error = $validation->getError('passport'); ?>
-                                                <?php // }?>
-                                                </small> -->
+                                                
+                                                    <input class="form-control mb-3" name="complete_bio_data" type="file" id="formFile2" value="<?=$editdata['complete_bio_data'];?>">   
+                                                    <?php if(!empty($editdata['complete_bio_data'])): ?> 
+                                                         <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['complete_bio_data'];?>" style="color:blue;"><?=$editdata['complete_bio_data'];?></a>                                        
+                                                    <?php endif;?> 
+                                                    <!-- <small class="text-danger">
+                                                            <?php //if(isset($validation) && $validation->getError('complete_bio_data')) {?>
+                                                                <? //$error = $validation->getError('complete_bio_data'); ?>
+                                                            <?php // }?>
+                                                        </small> -->
+                                                
                                             </div>                                       
                                         </div>
 
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">In Order of Importance list of 10 best papers of the applicant highlighting the important discoveries/contribution described in them briefly.(Max 1 MB)</label>
-                                                <input class="form-control mb-3" name="best_papers" type="file" id="formFile2">                                            
-                                                <!-- <small class="text-danger">
-                                                <?php //if(isset($validation) && $validation->getError('passport')) {?>
-                                                    <? //$error = $validation->getError('passport'); ?>
-                                                <?php //}?>
-                                                </small> -->
+                                                
+                                                 <input class="form-control mb-3" name="best_papers" type="file" id="formFile2" value="<?=$editdata['best_papers'];?>">  
+                                                 <?php if(!empty($editdata['best_papers'])): ?>
+                                                 <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['best_papers'];?>" style="color:blue;"><?=$editdata['best_papers'];?></a>    
+                                                 <?php endif;?>                                      
+                                                    <!-- <small class="text-danger">
+                                                        <?php //if(isset($validation) && $validation->getError('best_papers')) {?>
+                                                            <? //$error = $validation->getError('best_papers'); ?>
+                                                        <?php //}?>
+                                                    </small>  -->
+                                                
                                             </div>                                       
                                         </div>
 
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the awards (Max: 1 MB)</label>
-                                                <input class="form-control mb-3" name="statement_of_research_achievements" type="file" id="formFile2">                                            
-                                                <!-- <small class="text-danger">
-                                                <?php //if(isset($validation) && $validation->getError('passport')) {?>
-                                                    <? //$error = $validation->getError('passport'); ?>
+                                                
+                                                  <input class="form-control mb-3" name="statement_of_research_achievements" type="file" id="formFile2" value="<?=$editdata['statement_of_research_achievements'];?>"> 
+                                                  <?php if(!empty($editdata['statement_of_research_achievements'])): ?>
+                                                    <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['statement_of_research_achievements'];?>" style="color:blue;"><?=$editdata['statement_of_research_achievements'];?></a>                                           
+                                                  <?php endif;?>
+                                                  <!-- <small class="text-danger">
+                                                <?php //if(isset($validation) && $validation->getError('statement_of_research_achievements')) {?>
+                                                    <? //$error = $validation->getError('statement_of_research_achievements'); ?>
                                                 <?php //}?>
-                                                </small> -->
+                                                </small>  -->
+                                                 
                                             </div>                                       
                                         </div>
 
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references and illustrations. The candidate should duly sign on the details. (Max: 2.5 MB)</label>
-                                                <input class="form-control mb-3" name="signed_details" type="file" id="formFile2">                                            
+                                                
+                                                <input class="form-control mb-3" name="signed_details" type="file" id="formFile2" value="<?=$editdata['signed_details'];?>">    
+                                                <?php if(!empty($editdata['signed_details'])): ?>
+                                                   <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['signed_details'];?>" style="color:blue;"><?=$editdata['signed_details'];?></a>                                        
+                                                <?php endif;?>
                                                 <!-- <small class="text-danger">
                                                 <?php //if(isset($validation) && $validation->getError('passport')) {?>
                                                     <? //$error = $validation->getError('passport'); ?>
                                                 <?php //}?>
                                                 </small> -->
+                                                  
                                             </div>                                       
                                         </div>
 
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">Two specific publications/research papers of the applicant relevent to the research work mentioned above.(Max: 2.5MB)</label>
-                                                <input class="form-control mb-3" name="specific_publications" type="file" id="formFile2">                                            
-                                                <!-- <small class="text-danger">
+                                                
+                                                <input class="form-control mb-3" name="specific_publications" type="file" id="formFile2" value="<?=$editdata['specific_publications'];?>">  
+                                                <?php if(!empty($editdata['specific_publications'])): ?>
+                                                    <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['specific_publications'];?>" style="color:blue;"><?=$editdata['specific_publications'];?></a>                                          
+                                                    <?php endif;?>
+                                                    <!-- <small class="text-danger">
                                                 <?php //if(isset($validation) && $validation->getError('passport')) {?>
                                                     <? //$error = $validation->getError('passport'); ?>
                                                 <?php //}?>
                                                 </small> -->
+                                                  
                                             </div>                                       
                                         </div>
 
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">A signed statement by the applicant that the research work under reference has not been given any award. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB) </label>
-                                                <input class="form-control mb-3" name="signed_statement" type="file" id="formFile2">                                            
+                                                
+                                                <input class="form-control mb-3" name="signed_statement" type="file" id="formFile2" value="<?=$editdata['signed_statement'];?>">   
+                                                <br />
+                                                <?php if(!empty($editdata['signed_statement'])): ?>
+                                                <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['signed_statement'];?>" style="color:blue;"><?=$editdata['signed_statement'];?></a>                                         
+                                                <?php endif;?>
                                                 <!-- <small class="text-danger">
                                                 <?php //if(isset($validation) && $validation->getError('passport')) {?>
                                                     <? //$error = $validation->getError('passport'); ?>
                                                 <?php //}?>
                                                 </small> -->
+                                                 
                                             </div>                                       
                                         </div>
 
                                         <div class="col-xl-12">    
                                             <div class="mb-3">
                                                 <label for="formFile2" class="form-label">Citation on the Research Work of the Applicant duly signed by the Naminator(Max: 300 KB)</label>
-                                                <input class="form-control mb-3" name="citation" type="file" id="formFile2">                                            
+                                                
+                                                <input class="form-control mb-3" name="citation" type="file" id="formFile2" value="<?=$editdata['citation'];?>">   
+                                                <br>
+                                                <?php if(!empty($editdata['citation'])): ?>
+                                                  <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['citation'];?>" style="color:blue;"><?=$editdata['citation'];?></a>                                         
+                                                <?php endif;?>
                                                 <!-- <small class="text-danger">
                                                 <?php //if(isset($validation) && $validation->getError('passport')) {?>
                                                     <? //$error = $validation->getError('passport'); ?>
                                                 <?php //}?>
                                                 </small> -->
+                                                 
                                             </div>                                       
                                         </div>
                                     <?php endif; ?>

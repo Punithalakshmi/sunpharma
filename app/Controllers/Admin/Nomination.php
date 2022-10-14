@@ -173,4 +173,6 @@ class Nomination extends BaseController
             return redirect()->route('admin/login');
         endif;
     }
+
+    
 }

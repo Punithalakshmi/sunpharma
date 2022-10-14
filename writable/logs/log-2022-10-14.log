@@ -1,0 +1,158 @@
+CRITICAL - 2022-10-14 00:03:04 --> Call to a member function setFileName() on null
+in APPPATH\Controllers\Admin\Awards.php on line 112.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:09:00 --> File not found: http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx
+in SYSTEMPATH\Files\File.php on line 46.
+ 1 SYSTEMPATH\Files\File.php(46): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(97): CodeIgniter\Files\File->__construct('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(779): CodeIgniter\HTTP\DownloadResponse->setFilePath('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(112): CodeIgniter\HTTP\Response->download('AwardResult_14-10-2022.xlsx', null, true)
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:09:54 --> File not found: http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx
+in SYSTEMPATH\Files\File.php on line 46.
+ 1 SYSTEMPATH\Files\File.php(46): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(97): CodeIgniter\Files\File->__construct('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(779): CodeIgniter\HTTP\DownloadResponse->setFilePath('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(112): CodeIgniter\HTTP\Response->download('AwardResult_14-10-2022.xlsx', null, true)
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:14:25 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(113): redirect('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:14:26 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(113): redirect('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:14:32 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(113): redirect('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:14:44 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(113): redirect('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:14:52 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(113): redirect('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:15:22 -->  route cannot be found while reverse-routing.
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 56.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('ROOTPATH\\public')
+ 2 SYSTEMPATH\Common.php(863): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Admin\Awards.php(113): redirect('http://local.sunpharma.md/uploads/AwardResult_14-10-2022.xlsx')
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:34:43 --> Undefined variable: request
+in APPPATH\Controllers\Admin\Awards.php on line 83.
+ 1 APPPATH\Controllers\Admin\Awards.php(83): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: request', 'APPPATH\\Controllers\\Admin\\Awards.php', 83, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:35:15 --> Call to undefined method CodeIgniter\HTTP\Response::getPost()
+in APPPATH\Controllers\Admin\Awards.php on line 85.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 00:58:09 --> Undefined variable: i
+in APPPATH\Controllers\Admin\Awards.php on line 47.
+ 1 APPPATH\Controllers\Admin\Awards.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: i', 'APPPATH\\Controllers\\Admin\\Awards.php', 47, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-14 01:05:39 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE `users`.`role` = '1'
+AND `users`.`id` = '2'' at line 4
+CRITICAL - 2022-10-14 01:05:39 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE `users`.`role` = '1'
+AND `users`.`id` = '2'' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `users`.*, `ratings`.`rating`
+FROM `users`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id` AND `ratings`.`nominee_id`=
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.*, `ratings`.`rating`
+FROM `users`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id` AND `ratings`.`nominee_id`=
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.*, `ratings`.`rating`
+FROM `users`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id` AND `ratings`.`nominee_id`=
+WHERE `users`.`role` = \'1\'
+AND `users`.`id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `users`.*, `ratings`.`rating`
+FROM `users`
+JOIN `ratings` ON `ratings`.`jury_id` = `users`.`id` AND `ratings`.`nominee_id`=
+WHERE `users`.`role` = :users.role:
+AND `users`.`id` = :users.id:', [...], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\UserModel.php(103): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Awards.php(99): App\Models\UserModel->getJuryRateData('2')
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 01:06:30 --> fopen(uploads/AwardResult_14-10-2022.xlsx): failed to open stream: Resource temporarily unavailable
+in VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php on line 125.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(uploads/AwardResult_14-10-2022.xlsx): failed to open stream: Resource temporarily unavailable', 'VENDORPATH\\phpoffice\\phpspreadsheet\\src\\PhpSpreadsheet\\Writer\\BaseWriter.php', 125, [...])
+ 2 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php(125): fopen('FCPATH\\uploads\\AwardResult_14-10-2022.xlsx', 'wb')
+ 3 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php(542): PhpOffice\PhpSpreadsheet\Writer\BaseWriter->openFileHandle('FCPATH\\uploads\\AwardResult_14-10-2022.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(124): PhpOffice\PhpSpreadsheet\Writer\Xlsx->save('FCPATH\\uploads\\AwardResult_14-10-2022.xlsx')
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 01:55:50 --> fopen(uploads/AwardResult_14-10-2022.xlsx): failed to open stream: Resource temporarily unavailable
+in VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php on line 125.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(uploads/AwardResult_14-10-2022.xlsx): failed to open stream: Resource temporarily unavailable', 'VENDORPATH\\phpoffice\\phpspreadsheet\\src\\PhpSpreadsheet\\Writer\\BaseWriter.php', 125, [...])
+ 2 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\BaseWriter.php(125): fopen('FCPATH\\uploads\\AwardResult_14-10-2022.xlsx', 'wb')
+ 3 VENDORPATH\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx.php(542): PhpOffice\PhpSpreadsheet\Writer\BaseWriter->openFileHandle('FCPATH\\uploads\\AwardResult_14-10-2022.xlsx')
+ 4 APPPATH\Controllers\Admin\Awards.php(144): PhpOffice\PhpSpreadsheet\Writer\Xlsx->save('FCPATH\\uploads\\AwardResult_14-10-2022.xlsx')
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-14 02:01:35 --> Call to undefined method PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::getActiveSheet()
+in APPPATH\Controllers\Admin\Awards.php on line 113.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->export()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
