@@ -1,4 +1,4 @@
-<section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/directory-winner.jpg) top no-repeat, #fff;">
+ <section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/directory-winner.jpg&quot;) top no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Directory of previous Research Award winners<br></h1>
         </div>
@@ -17,7 +17,7 @@
             </div>
             <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Suvendra-Nath-Bhattacharyya-thumb.jpg"></a><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg"></a><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Dr Suvendra Nath Bhattacharyya<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Basic Research&nbsp;</p>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Bushra-Ateeq-thumb.jpg"></a><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg"></a><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Professor Bushra Ateeq<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Basic Research</p>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Giriraj-Ratan-Chandak-thumb.jpg"></a><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/GirirajRattanChandak-photo.jpg"></a><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Dr Giriraj Ratan Chandak<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Clinical Research<br></p>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Debabrata-Maiti-thumb.jpg"></a><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg"></a><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Prof. Debabrata Maiti<br></h5>
                         </a>
                         <p class="text-muted mb-2">Pharmaceutical Sciences<br></p>
@@ -246,9 +246,102 @@
                     </div>
                 </div>
             </div>
+            <div class="row d-lg-flex mx-auto justify-content-lg-center" style="max-width: 900px;">
+                <div class="col-auto mb-4"><a href="<?=base_url();?>/frontend/assets/pdf/Directory of Previous Research Award Winners.pdf" target="_blank"><button class="btn btn-primary btn-lg" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor" class="fs-2">
+                                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                                <path d="M88 304H80V256H88C101.3 256 112 266.7 112 280C112 293.3 101.3 304 88 304zM192 256H200C208.8 256 216 263.2 216 272V336C216 344.8 208.8 352 200 352H192V256zM224 0V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64C0 28.65 28.65 0 64 0H224zM64 224C55.16 224 48 231.2 48 240V368C48 376.8 55.16 384 64 384C72.84 384 80 376.8 80 368V336H88C118.9 336 144 310.9 144 280C144 249.1 118.9 224 88 224H64zM160 368C160 376.8 167.2 384 176 384H200C226.5 384 248 362.5 248 336V272C248 245.5 226.5 224 200 224H176C167.2 224 160 231.2 160 240V368zM288 224C279.2 224 272 231.2 272 240V368C272 376.8 279.2 384 288 384C296.8 384 304 376.8 304 368V320H336C344.8 320 352 312.8 352 304C352 295.2 344.8 288 336 288H304V256H336C344.8 256 352 248.8 352 240C352 231.2 344.8 224 336 224H288zM256 0L384 128H256V0z"></path>
+                            </svg>&nbsp;Download Research Awards Directory</button></a></div>
+            </div>
         </div>
     </section>
-
+    <div class="modal fade" role="dialog" tabindex="-1" id="SuvendraNathBhattacharyya">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dr Suvendra Nath Bhattacharyya<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-9">
+                                <p class="fw-bold">Dr Suvendra Nath Bhattacharyya<br></p><small>Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology,<br>Kolkata, India<br>Twitter: Suvendra Bhattacharyya(@Suvendra_B)<br><br></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start"></div>
+                    <p>Dr Suvendra Nath Bhattacharyya has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for his seminal contribution in establishing the role of a special class of small regulatory RNAs, the microRNAs, in varieties of cellular events and pathways in mammalian cells including the host-pathogen interaction and infection processes. Dr Bhattacharyya has investigated the mechanism of exchange of microRNAs between mammalian cells via the Extracellular Vesicles (EV) and has shown importance of EV-associated miRNA exchange in neurodegeneration, inflammation, and cancer. He has recently explored the EV-associated microRNAs as immunomodulators to regulate the infection process of the host cells by the invading pathogen Leishmania donovani, the causative agent of visceral leishmaniasis. His research also promises development of microRNA and EV-based therapeutics against other deadly diseases.<br></p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="BushraAteeq">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Professor Bushra Ateeq<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-9">
+                                <p class="fw-bold"><span style="font-weight: normal !important; color: rgb(0, 0, 0);">Professor Bushra Ateeq</span><br></p><small>Department of Biological Sciences and<br>Bioengineering,<br>Indian Institute of Technology Kanpur<br>Kanpur, 208016, U.P., India<br></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start"></div>
+                    <p>Professor Bushra Ateeq has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for molecular characterization of prostate cancer with application in diagnostics and precision medicine, discovery of new drug targets and development of alternative therapeutic strategies for the treatment of advanced-stage and drug-resistant cancer.<br></p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="GirirajRatanChandak">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dr Giriraj Ratan Chandak<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/GirirajRattanChandak-photo.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-9">
+                                <p class="fw-bold">Dr Giriraj Ratan Chandak<br></p><small>Chief Scientist &amp; Group Leader<br>CSIR-Centre for Cellular and Molecular Biology<br>Hyderabad - 500007<br>Twitter : 'chandakgrc'<br></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start"></div>
+                    <p>Dr Giriraj Ratan Chandak, a physician-scientist has made significant contributions in the field of genetic disorders. A former director of the Centre for DNA Fingerprinting and Diagnostics, he has led multiple cohort-based studies of non-communicable diseases. He has discovered novel genes for chronic pancreatitis demonstrating genetic heterogeneity with Europeans. He lead his team to identify a novel microRNA that regulates Type 2 diabetes risk genes through vitamin B12, proving that genetic susceptibility to Type 2 diabetes and associated intermediate traits like obesity and insulin resistance may be epigenetically regulated. In contrast to the global role of folate deficiency, he has established maternal B12 deficiency as a risk factor for neural tube defects in their children. These findings have immense translational value. As Director of CSIR-Sickle Cell Anaemia Mission, he is passionately involved in creating awareness and reducing the disease burden through population screening, prenatal diagnosis, and clinical, social and genetic counseling.<br></p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="DebabrataMaiti">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Prof. Debabrata Maiti<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-9">
+                                <p class="fw-bold">Prof. Debabrata Maiti<br></p><small>Department of Chemistry<br>Indian Institute of Technology Bombay<br>Powai, Mumbai 400076, India<br>Twitter : Debabrata Maiti (@maiti_iitb)<br></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start"></div>
+                    <p>Prof. Debabrata Maiti has been selected as the recipient of The Sun Pharma Science Foundation Research Award 2021 in Pharmaceutical Sciences. He has established himself as one of the world’s leading scientists in the field of C-H activation by designing innovative catalytic methods for transforming organic molecules into several bio-active natural products as well as drug molecules and materials in step and atom-economic fashion. These conceptual developments have witnessed significant impact on materials research, agrochemicals and pharmaceuticals industry. At the same time, he has successfully developed various bio-inspired approaches by employing “eco-friendly” metals. In recent times, his group is pursuing research in the field of artificial metalloenzymatic chemistry, which has seen tremendous growth with significant value in agrochemical and pharmaceutical industries.<br></p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" role="dialog" tabindex="-1" id="KarishmaKaushik">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -271,72 +364,6 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="SuvendraNathBhattacharyya">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Dr Suvendra Nath Bhattacharyya<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Suvendra-Nath-Bhattacharyya-thumb.jpg" style="width: 150px;height: 150px;"></div>
-                            <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Dr Suvendra Nath Bhattacharyya<br></p><small>Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology,<br>Kolkata, India<br>Twitter: Suvendra Bhattacharyya(@Suvendra_B)<br><br></small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-start"></div>
-                    <p>Dr Suvendra Nath Bhattacharyya has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for his seminal contribution in establishing the role of a special class of small regulatory RNAs, the microRNAs, in varieties of cellular events and pathways in mammalian cells including the host-pathogen interaction and infection processes. Dr Bhattacharyya has investigated the mechanism of exchange of microRNAs between mammalian cells via the Extracellular Vesicles (EV) and has shown importance of EV-associated miRNA exchange in neurodegeneration, inflammation, and cancer. He has recently explored the EV-associated microRNAs as immunomodulators to regulate the infection process of the host cells by the invading pathogen Leishmania donovani, the causative agent of visceral leishmaniasis. His research also promises development of microRNA and EV-based therapeutics against other deadly diseases.<br></p>
-                </div>
-                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="GirirajRatanChandak">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Dr Giriraj Ratan Chandak<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Giriraj-Ratan-Chandak-thumb.jpg" style="width: 150px;height: 150px;"></div>
-                            <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Dr Giriraj Ratan Chandak<br></p><small>Dr Giriraj Ratan Chandak<br>Chief Scientist &amp; Group Leader<br>CSIR-Centre for Cellular and Molecular Biology<br>Hyderabad - 500007<br>Twitter : 'chandakgrc'<br></small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-start"></div>
-                    <p>Dr Giriraj Ratan Chandak, a physician-scientist has made significant contributions in the field of genetic disorders. A former director of the Centre for DNA Fingerprinting and Diagnostics, he has led multiple cohort-based studies of non-communicable diseases. He has discovered novel genes for chronic pancreatitis demonstrating genetic heterogeneity with Europeans. He lead his team to identify a novel microRNA that regulates Type 2 diabetes risk genes through vitamin B12, proving that genetic susceptibility to Type 2 diabetes and associated intermediate traits like obesity and insulin resistance may be epigenetically regulated. In contrast to the global role of folate deficiency, he has established maternal B12 deficiency as a risk factor for neural tube defects in their children. These findings have immense translational value. As Director of CSIR-Sickle Cell Anaemia Mission, he is passionately involved in creating awareness and reducing the disease burden through population screening, prenatal diagnosis, and clinical, social and genetic counseling.<br></p>
-                </div>
-                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="BushraAteeq">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Professor Bushra Ateeq<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Bushra-Ateeq-thumb.jpg" style="width: 150px;height: 150px;"></div>
-                            <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold"><span style="font-weight: normal !important; color: rgb(0, 0, 0);">Professor Bushra Ateeq</span><br></p><small>Department of Biological Sciences and<br>Bioengineering,<br>Indian Institute of Technology Kanpur<br>Kanpur, 208016, U.P., India<br></small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-start"></div>
-                    <p>Professor Bushra Ateeq has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for molecular characterization of prostate cancer with application in diagnostics and precision medicine, discovery of new drug targets and development of alternative therapeutic strategies for the treatment of advanced-stage and drug-resistant cancer.<br></p>
-                </div>
-                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
-            </div>
-        </div>
-    </div>
     <div class="modal fade" role="dialog" tabindex="-1" id="Ravi-Salgia">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -354,28 +381,6 @@
                     </div>
                     <div class="text-start"></div>
                     <p><span style="color: rgb(0, 0, 0);">Dr. Ravi Salgia is a distinguished clinician-scientist who has dedicated his career to cancer care and research. As a scientist, his groundbreaking research into receptor tyrosine kinases and their role in thoracic cancers has paved the way for the development of innovative targeted therapies that have transformed treatment of the disease. As a clinician, he leads an active clinical practice and remains committed to ensuring the very best care for his patients. Dr. Salgia has been honored with numerous awards, including being named numerous times as one of the Top Doctors in America. He is a member of the editorial board for several top-tier journals, and has authored or coauthored &gt;300 peerreviewed publications and book chapters. He is also the sole editor of two recently published books on targeted therapies and personalized medicine. Prior to City of Hope, Dr. Salgia was tenured professor and vice chair at University of Chicago School of Medicine. Dr. Salgia began his academic career as a faculty member at the Dana-Farber Cancer Institute and Harvard Medical School following his postgraduate training in internal medicine at The Johns Hopkins University School of Medicine in Baltimore, MD.</span><br></p>
-                </div>
-                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="DebabrataMaiti">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Prof. Debabrata Maiti<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Debabrata-Maiti-thumb.jpg" style="width: 150px;height: 150px;"></div>
-                            <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Prof. Debabrata Maiti<br></p><small>Department of Chemistry<br>Indian Institute of Technology Bombay<br>Powai, Mumbai 400076, India<br>Twitter : Debabrata Maiti (@maiti_iitb)<br></small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-start"></div>
-                    <p>Prof. Debabrata Maiti has been selected as the recipient of The Sun Pharma Science Foundation Research Award 2021 in Pharmaceutical Sciences. He has established himself as one of the world’s leading scientists in the field of C-H activation by designing innovative catalytic methods for transforming organic molecules into several bio-active natural products as well as drug molecules and materials in step and atom-economic fashion. These conceptual developments have witnessed significant impact on materials research, agrochemicals and pharmaceuticals industry. At the same time, he has successfully developed various bio-inspired approaches by employing “eco-friendly” metals. In recent times, his group is pursuing research in the field of artificial metalloenzymatic chemistry, which has seen tremendous growth with significant value in agrochemical and pharmaceutical industries.<br></p>
                 </div>
                 <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
             </div>

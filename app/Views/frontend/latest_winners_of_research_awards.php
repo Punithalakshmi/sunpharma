@@ -1,4 +1,5 @@
-<section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/science-scholar-inner.jpg) center left no-repeat, #fff;">
+
+    <section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/research-awards.jpg&quot;) center left no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Research Award<br></h1>
         </div>
@@ -17,7 +18,7 @@
             </div>
             <div class="row row-cols-2 row-cols-md-2 mx-auto" style="max-width: 900px;">
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Suvendra-Nath-Bhattacharyya-thumb.jpg"></a><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg"></a><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Dr Suvendra Nath Bhattacharyya<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Basic Research&nbsp;</p>
@@ -25,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Bushra-Ateeq-thumb.jpg"></a><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg"></a><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Professor Bushra Ateeq<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Basic Research</p>
@@ -33,7 +34,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Giriraj-Ratan-Chandak-thumb.jpg"></a><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/GirirajRattanChandak-photo.jpg"></a><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Dr Giriraj Ratan Chandak<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Clinical Research<br></p>
@@ -41,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Debabrata-Maiti-thumb.jpg"></a><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg"></a><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Prof. Debabrata Maiti<br></h5>
                         </a>
                         <p class="text-muted mb-2">Pharmaceutical Sciences<br></p>
@@ -51,29 +52,7 @@
             </div>
         </div>
     </section>
-    
-    <div class="modal fade" role="dialog" tabindex="-1" id="BushraAteeq">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Professor Bushra Ateeq<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Bushra-Ateeq-thumb.jpg" style="width: 150px;height: 150px;"></div>
-                            <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Professor Bushra Ateeq<br></p><small>Department of Biological Sciences and<br>Bioengineering,<br>Indian Institute of Technology Kanpur<br>Kanpur, 208016, U.P., India<br>Twitter @bushraiitk<br></small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-start"></div>
-                    <p>Professor Bushra Ateeq has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for molecular characterization of prostate cancer with application in diagnostics and precision medicine, discovery of new drug targets and development of alternative therapeutic strategies for the treatment of advanced-stage and drug-resistant cancer.<br></p>
-                </div>
-                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
-            </div>
-        </div>
-    </div>
+
     <div class="modal fade" role="dialog" tabindex="-1" id="SuvendraNathBhattacharyya">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -83,7 +62,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Suvendra-Nath-Bhattacharyya-thumb.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
                                 <p class="fw-bold">Dr Suvendra Nath Bhattacharyya<br></p><small>Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology,<br>Kolkata, India<br>Twitter: Suvendra Bhattacharyya(@Suvendra_B)<br><br></small>
                             </div>
@@ -91,6 +70,28 @@
                     </div>
                     <div class="text-start"></div>
                     <p>Dr Suvendra Nath Bhattacharyya has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for his seminal contribution in establishing the role of a special class of small regulatory RNAs, the microRNAs, in varieties of cellular events and pathways in mammalian cells including the host-pathogen interaction and infection processes. Dr Bhattacharyya has investigated the mechanism of exchange of microRNAs between mammalian cells via the Extracellular Vesicles (EV) and has shown importance of EV-associated miRNA exchange in neurodegeneration, inflammation, and cancer. He has recently explored the EV-associated microRNAs as immunomodulators to regulate the infection process of the host cells by the invading pathogen Leishmania donovani, the causative agent of visceral leishmaniasis. His research also promises development of microRNA and EV-based therapeutics against other deadly diseases.<br></p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="BushraAteeq">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Professor Bushra Ateeq<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-9">
+                                <p class="fw-bold">Professor Bushra Ateeq<br></p><small>Department of Biological Sciences and<br>Bioengineering,<br>Indian Institute of Technology Kanpur<br>Kanpur, 208016, U.P., India<br>Twitter @bushraiitk<br></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start"></div>
+                    <p>Professor Bushra Ateeq has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for molecular characterization of prostate cancer with application in diagnostics and precision medicine, discovery of new drug targets and development of alternative therapeutic strategies for the treatment of advanced-stage and drug-resistant cancer.<br></p>
                 </div>
                 <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
             </div>
@@ -105,9 +106,9 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Giriraj-Ratan-Chandak-thumb.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/GirirajRattanChandak-photo.jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Dr Giriraj Ratan Chandak<br></p><small>Dr Giriraj Ratan Chandak<br>Chief Scientist &amp; Group Leader<br>CSIR-Centre for Cellular and Molecular Biology<br>Hyderabad - 500007<br>Twitter : 'chandakgrc'<br></small>
+                                <p class="fw-bold">Dr Giriraj Ratan Chandak<br></p><small>Chief Scientist &amp; Group Leader<br>CSIR-Centre for Cellular and Molecular Biology<br>Hyderabad - 500007<br>Twitter : 'chandakgrc'<br></small>
                             </div>
                         </div>
                     </div>
@@ -127,7 +128,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Debabrata-Maiti-thumb.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
                                 <p class="fw-bold">Prof. Debabrata Maiti<br></p><small>Department of Chemistry<br>Indian Institute of Technology Bombay<br>Powai, Mumbai 400076, India<br>Twitter : Debabrata Maiti (@maiti_iitb)<br></small>
                             </div>

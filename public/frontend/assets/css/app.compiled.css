@@ -69,3 +69,20 @@
 .swiper-container {
   padding-bottom: 30px !important;
 }
+
+.btnaction .list-group-item svg {
+  position: absolute;
+  left: 10px;
+}
+
+.btnaction li.list-group-item {
+  padding-left: 30px;
+}
+
+.btnaction li.list-group-item a {
+  display: block;
+}
+
+.btnaction li.list-group-item a:hover {
+  color: #f7941e !important;
+}

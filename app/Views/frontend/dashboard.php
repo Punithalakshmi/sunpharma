@@ -1,5 +1,4 @@
-
- <div class="container-fluid" style="padding: 0;">
+<div class="container-fluid" style="padding: 0;">
         <div class="row gx-0 gy-0">
             <div class="col">
                 <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
@@ -7,11 +6,10 @@
                         <div class="carousel-item active h-100"><img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/slide4.jpg" alt="Slide Image" style="z-index: -1;">
                             <div class="container text-start d-flex flex-column justify-content-center h-100">
                                 <div class="row">
-                                    <div class="col-md-8 col-xl-7 col-xxl-7 offset-md-0" style="background: rgba(245,246,248,0.75);padding: 20px;border-radius: 6px;">
-                                        <div>
+                                    <div class="col-md-8 col-xl-7 col-xxl-7 offset-md-0 banneroverlay" style="background: rgba(245,246,248,0.75);padding: 20px;border-radius: 6px;">
+                                        <div class="bannercaption">
                                             <h1 class="text-uppercase fw-bold" style="border-style: none;">Epidemiological and Genomic Methods for the Study of Human Diseases</h1>
-                                            <p class="my-3">Workshop on “Epidemiological and Genomic Methods for the Study of Human Diseases” For Young Clinical Researchers and Basic Scientists</p>
-                                            <a class="btn btn-primary btn-lg me-2" role="button" href="workshop-epidemiological-genomic-methods.html" style="background: #F7941E;border-color: #F7941E;">Read more</a><a class="btn btn-outline-primary btn-lg" role="button" href="https://sunpharmasciencefoundation.net/documents/Winter_School_Announcement_2022.pdf" target="blank">Poster Invitation</a>
+                                            <p class="my-3">Workshop on “Epidemiological and Genomic Methods for the Study of Human Diseases” For Young Clinical Researchers and Basic Scientists</p><a class="btn btn-primary btn-lg me-2" role="button" href="workshop-epidemiological-genomic-methods.html" style="background: #F7941E;border-color: #F7941E;">Read more</a><a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/frontend/assets/pdf/Winter_School_Announcement_2022.pdf" target="blank">Poster Invitation</a>
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +46,8 @@
                     <h3 class="fw-bold heading" style="color: #F7941E;">Find out more</h3>
                 </div>
             </div>
-        </div><div class="container">
+        </div>
+        <div class="container">
 	<div class="row">
 		<div class="MultiCarousel" data-items="1,2,3,4" data-slide="1" id="MultiCarousel"  data-interval="1000">
             <div class="MultiCarousel-inner">
@@ -67,7 +66,7 @@
                 <!-- slide 2 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/ScienceScholarAwards.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//ScienceScholarAwards.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Science Scholar Awards</h4>
                             <p class="card-text" style="font-size: 14px;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges of India to nominate Young Scientists for the “Sun Pharma Science Foundation...</p>
@@ -79,7 +78,7 @@
                 <!-- slide 3 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/RoundTableConference.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//RoundTableConference.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">National Seminars</h4>
                             <p class="card-text" style="font-size: 14px;">The Foundation organizes two Round Table Conferences in a year on topics of contemporary concern to human health which pose challenges.</p>
@@ -91,7 +90,7 @@
                 <!-- slide 4 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/ScientificSymposia.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//ScientificSymposia.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">International Symposia</h4>
                             <p class="card-text" style="font-size: 14px;">The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research...</p>
@@ -103,7 +102,7 @@
                 <!-- slide 5 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/workshop-for-the-young-researchers.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//workshop-for-the-young-researchers.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Workshop for the young researchers</h4>
                             <p class="card-text" style="font-size: 14px;">
@@ -157,48 +156,61 @@
                                 <div class="swiper-slide">
                                     <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                         <div class="row g-0">
-                                            <div class="col-md-6 col-lg-8">
-                                                <div class="text-white p-4 p-md-5">
+                                            <div class="col-md-6 col-lg-8 winnercolleft">
+                                                <div class="text-white winnerinfo">
                                                     <h2 class="fw-bold text-white mb-3">Dr Suvendra Nath Bhattacharyya</h2>
                                                     <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
                                                     <p class="mb-4" style="color: var(--bs-btn-border-color);">Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology, Kolkata, India<br></p>
-                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
-                                            <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/winner-SuvendraNathBhattacharyya.jpg"></div>
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                         <div class="row g-0">
-                                            <div class="col-md-6 col-lg-8">
-                                                <div class="text-white p-4 p-md-5">
-                                                    <h2 class="fw-bold text-white mb-3">Dr Suvendra Nath Bhattacharyya</h2>
+                                            <div class="col-md-6 col-lg-8 winnercolleft">
+                                                <div class="text-white winnerinfo">
+                                                    <h2 class="fw-bold text-white mb-3">Professor Bushra Ateeq<br></h2>
                                                     <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
-                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology, Kolkata, India<br></p>
-                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Biological Sciences and&nbsp;Bioengineering,<br>Indian Institute of Technology Kanpur<br>Kanpur, 208016, U.P., India<br></p>
+                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
-                                            <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/winner-SuvendraNathBhattacharyya.jpg"></div>
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright">
+                                                <img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                         <div class="row g-0">
-                                            <div class="col-md-6 col-lg-8">
-                                                <div class="text-white p-4 p-md-5">
-                                                    <h2 class="fw-bold text-white mb-3">Dr Suvendra Nath Bhattacharyya</h2>
-                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
-                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology, Kolkata, India<br></p>
-                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                            <div class="col-md-6 col-lg-8 winnercolleft">
+                                                <div class="text-white winnerinfo">
+                                                    <h2 class="fw-bold text-white mb-3">Dr Giriraj Ratan Chandak</h2>
+                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Clinical Research<br></p>
+                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Chief Scientist &amp; Group Leader<br>CSIR-Centre for Cellular and Molecular Biology<br>Hyderabad - 500007<br></p>
+                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
-                                            <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/winner-SuvendraNathBhattacharyya.jpg"></div>
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/GirirajRattanChandak-photo.jpg"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                        <div class="row g-0">
+                                            <div class="col-md-6 col-lg-8 winnercolleft">
+                                                <div class="text-white winnerinfo">
+                                                    <h2 class="fw-bold text-white mb-3">Prof. Debabrata Maiti</h2>
+                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Pharmaceutical Sciences<br></p>
+                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Chemistry<br>Indian Institute of Technology Bombay<br>Powai, Mumbai 400076, India<br></p>
+                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -228,48 +240,45 @@
                         <div class="swiper-slide">
                             <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                 <div class="row g-0">
-                                    <div class="col-md-6 col-lg-8">
-                                        <div class="text-white p-4 p-md-5">
+                                    <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
+                                        <div class="text-white winnerinfo">
                                             <h2 class="fw-bold text-white mb-3">Mr. Shubham Singh</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Ph.D. Student<br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Biology<br>IISER-Pune, MH<br>India - 411008<br></p>
-                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Biomedical Sciences<br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Student<br>Department of Biology,&nbsp;IISER-Pune, MH<br>India - 411008<br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="LatestWinnersScienceScholarAward.html">Know More</a></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
-                                    <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/shubham-singh.png"></div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/ShubhamSingh-photo.jpg"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                 <div class="row g-0">
-                                    <div class="col-md-6 col-lg-8">
-                                        <div class="text-white p-4 p-md-5">
-                                            <h2 class="fw-bold text-white mb-3">Mr. Shubham Singh</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Ph.D. Student<br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Biology<br>IISER-Pune, MH<br>India - 411008<br></p>
-                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                    <div class="col-md-6 col-lg-8 winnercolleft">
+                                        <div class="text-white winnerinfo">
+                                            <h2 class="fw-bold text-white mb-3">Mr. Sundaram Acharya</h2>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Biomedical Sciences<br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Student, Genomics and Molecular Medicine Unit<br>Council of Scientific and Industrial Research<br>Institute of Genomics &amp; Integrative Biology (CSIR-IGIB), New Delhi, India - 110025.<br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="LatestWinnersScienceScholarAward.html">Know More</a></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
-                                    <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/shubham-singh.png"></div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Sundaram-photo.jpg"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                 <div class="row g-0">
-                                    <div class="col-md-6 col-lg-8">
-                                        <div class="text-white p-4 p-md-5">
-                                            <h2 class="fw-bold text-white mb-3">Mr. Shubham Singh</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Ph.D. Student<br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Biology<br>IISER-Pune, MH<br>India - 411008<br></p>
-                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                    <div class="col-md-6 col-lg-8 winnercolleft">
+                                        <div class="text-white winnerinfo">
+                                            <h2 class="fw-bold text-white mb-3">Mr. Arihant Kumar Singh</h2>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Pharmaceutical Sciences<br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Nanomedicine &amp; Gene Delivery Lab, Department of Pharmacy,<br>Birla Institute of Technology &amp; Science Pilani, Pilani campus,<br>Pilani, Rajasthan- 333031<br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="LatestWinnersScienceScholarAward.html">Know More</a></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
-                                    <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/shubham-singh.png"></div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/ArihantKumarSingh-photo.jpg"></div>
                                 </div>
                             </div>
                         </div>
@@ -289,17 +298,15 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">We’re happy to invite entries for excellence in original research work in medical and pharmaceutical sciences from scientists and young researchers. Nominations for Sun Pharma Science Foundation Awards 2022 are open.<br><br>Visit : <a href="https://t.co/ZwJD0o1XPi">https://t.co/ZwJD0o1XPi</a><a href="https://twitter.com/hashtag/SPSF?src=hash&amp;ref_src=twsrc%5Etfw">#SPSF</a> <a href="https://twitter.com/hashtag/Awards?src=hash&amp;ref_src=twsrc%5Etfw">#Awards</a> <a href="https://twitter.com/hashtag/SunPharma?src=hash&amp;ref_src=twsrc%5Etfw">#SunPharma</a> <a href="https://t.co/1OK9VbhWCY">pic.twitter.com/1OK9VbhWCY</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1552551634525618176?ref_src=twsrc%5Etfw">July 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-                <div class="col-md-4"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Join us for the Sun Pharma Science Foundation’s Annual Conference on 25th April from 9 AM to 4 PM. <br><br>Watch : <a href="https://t.co/KGA9aimQkA">https://t.co/KGA9aimQkA</a> <br>Passcode: 12345 <br><br>Register : <a href="https://t.co/mm3CQNXvjw">https://t.co/mm3CQNXvjw</a><a href="https://twitter.com/hashtag/SunPharma?src=hash&amp;ref_src=twsrc%5Etfw">#SunPharma</a> <a href="https://twitter.com/hashtag/ScienceFoundationAnnualConference?src=hash&amp;ref_src=twsrc%5Etfw">#ScienceFoundationAnnualConference</a> <a href="https://t.co/Vy0ymSbozG">pic.twitter.com/Vy0ymSbozG</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1517813409425018882?ref_src=twsrc%5Etfw">April 23, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-                <div class="col-md-4"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Heartiest congratulations to the winners of the Sun Pharma Science Foundation Science Scholar Award - 2021 for outstanding research works. The award promotes scientific endeavours in India by encouraging young researchers who are contributing to the future advancement of science. <a href="https://t.co/zb3a3Wj3oW">pic.twitter.com/zb3a3Wj3oW</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1484718211140825095?ref_src=twsrc%5Etfw">January 22, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+                <div class="col-12 col-sm-12 col-md-4 feedcol"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">We’re happy to invite entries for excellence in original research work in medical and pharmaceutical sciences from scientists and young researchers. Nominations for Sun Pharma Science Foundation Awards 2022 are open.<br><br>Visit : <a href="https://t.co/ZwJD0o1XPi">https://t.co/ZwJD0o1XPi</a><a href="https://twitter.com/hashtag/SPSF?src=hash&amp;ref_src=twsrc%5Etfw">#SPSF</a> <a href="https://twitter.com/hashtag/Awards?src=hash&amp;ref_src=twsrc%5Etfw">#Awards</a> <a href="https://twitter.com/hashtag/SunPharma?src=hash&amp;ref_src=twsrc%5Etfw">#SunPharma</a> <a href="https://t.co/1OK9VbhWCY">pic.twitter.com/1OK9VbhWCY</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1552551634525618176?ref_src=twsrc%5Etfw">July 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+                <div class="col-12 col-sm-12 col-md-4 feedcol"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Join us for the Sun Pharma Science Foundation’s Annual Conference on 25th April from 9 AM to 4 PM. <br><br>Watch : <a href="https://t.co/KGA9aimQkA">https://t.co/KGA9aimQkA</a> <br>Passcode: 12345 <br><br>Register : <a href="https://t.co/mm3CQNXvjw">https://t.co/mm3CQNXvjw</a><a href="https://twitter.com/hashtag/SunPharma?src=hash&amp;ref_src=twsrc%5Etfw">#SunPharma</a> <a href="https://twitter.com/hashtag/ScienceFoundationAnnualConference?src=hash&amp;ref_src=twsrc%5Etfw">#ScienceFoundationAnnualConference</a> <a href="https://t.co/Vy0ymSbozG">pic.twitter.com/Vy0ymSbozG</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1517813409425018882?ref_src=twsrc%5Etfw">April 23, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+                <div class="col-12 col-sm-12 col-md-4 feedcol"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Heartiest congratulations to the winners of the Sun Pharma Science Foundation Science Scholar Award - 2021 for outstanding research works. The award promotes scientific endeavours in India by encouraging young researchers who are contributing to the future advancement of science. <a href="https://t.co/zb3a3Wj3oW">pic.twitter.com/zb3a3Wj3oW</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1484718211140825095?ref_src=twsrc%5Etfw">January 22, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
             </div>
         </div>
         <div class="container">
             <div></div>
         </div>
     </section>
-
-
         
 
       

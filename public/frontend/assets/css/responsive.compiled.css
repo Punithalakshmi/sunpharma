@@ -1,0 +1,123 @@
+@media (max-width: 991px) {
+  .modal-title span {
+    line-height: normal;
+    display: inline-flex;
+  }
+
+  div#navcol-1 {
+    padding: 10px 10px 20px 10px;
+  }
+}
+@media (max-width: 767px) {
+  .feedcol {
+    width: 100%;
+  }
+
+  .contactinfo * {
+    word-break: break-all;
+    font-size: small;
+  }
+
+  .wizard > .steps > ul > li {
+    font-size: 11px;
+  }
+
+  .contactinfo .bs-icon-md * {
+    font-size: 25px;
+  }
+
+  #mainNav .navbar-brand img {
+    height: 100px;
+  }
+
+  .bannercaption .btn {
+    font-size: 16px;
+    padding: 4px 16px;
+  }
+
+  .MultiCarousel .rightLst {
+    right: 5px;
+  }
+
+  .MultiCarousel .leftLst {
+    left: -5px;
+  }
+
+  .MultiCarousel {
+    padding: 15px 10px 15px 5px;
+  }
+
+  .simple-slider .swiper-slide {
+    height: auto !important;
+  }
+
+  footer h3 {
+    text-align: left;
+  }
+
+  ul.list-group.btnaction {
+    margin-bottom: 15px;
+  }
+
+  a.dropdown-item {
+    white-space: normal;
+    line-height: normal;
+    margin: 10px 0;
+  }
+
+  .winnerinfo {
+    padding: 1rem 1rem 1rem 1rem;
+  }
+  .winnerinfo h2 {
+    font-size: 19px;
+  }
+  .winnerinfo p {
+    font-size: 14px;
+  }
+
+  .winnerimg {
+    max-height: 100%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .feedcol {
+    width: 50%;
+  }
+
+  .navbar > .container {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  a.dropdown-item {
+    white-space: normal;
+    line-height: normal;
+    margin: 10px 0;
+  }
+
+  .winnerinfo {
+    padding: 1rem 1rem 1rem 1rem;
+  }
+  .winnerinfo h2 {
+    font-size: 19px;
+  }
+  .winnerinfo p {
+    font-size: 14px;
+  }
+
+  .swiper-button-next:after, .swiper-container-rtl .swiper-button-prev:after {
+    color: orange;
+  }
+
+  .swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after {
+    color: orange;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    top: 97%;
+  }
+
+  .swiper-wrapper {
+    padding-bottom: 20px;
+  }
+}

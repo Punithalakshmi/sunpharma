@@ -1,4 +1,5 @@
-<section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/Malaysia-1.jpg) center left no-repeat, #fff;">
+
+    <section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/Malaysia-1.jpg) center left no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Science Scholar Award<br></h1>
         </div>
@@ -17,7 +18,7 @@
             </div>
             <div class="row row-cols-1 row-cols-md-3 mx-auto" style="max-width: 900px;">
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Shubham-Singh-thumb.jpg"></a><a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/ShubhamSingh-photo.jpg"></a><a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Mr. Shubham Singh<br></h5>
                         </a>
                         <p class="text-muted mb-2">Biomedical Sciences</p>
@@ -25,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#SundaramAcharya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Sundaram-Acharya-thumb.jpg"></a><a href="#" data-bs-target="#SundaramAcharya" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#SundaramAcharya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Sundaram-photo.jpg"></a><a href="#" data-bs-target="#SundaramAcharya" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Mr. Sundaram Acharya<br></h5>
                         </a>
                         <p class="text-muted mb-2">Biomedical Sciences</p>
@@ -33,7 +34,7 @@
                     </div>
                 </div>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#Arihant-KumarSingh" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Arihant-Kumar-Singh-thumb.jpg"></a><a href="#" data-bs-target="#Arihant-KumarSingh" data-bs-toggle="modal">
+                    <div class="text-center"><a href="#" data-bs-target="#Arihant-KumarSingh" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/ArihantKumarSingh-photo.jpg"></a><a href="#" data-bs-target="#Arihant-KumarSingh" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Mr. Arihant Kumar Singh<br></h5>
                         </a>
                         <p class="text-muted mb-2">Pharmaceutical Sciences<br></p>
@@ -43,7 +44,6 @@
             </div>
         </div>
     </section>
-
     <div class="modal fade" role="dialog" tabindex="-1" id="ShubhamSingh">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -53,7 +53,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Shubham-Singh-thumb.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/ShubhamSingh-photo.jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
                                 <p class="fw-bold">Mr. Shubham Singh<br></p><small>Ph.D. Student<br>Department of Biology<br>IISER-Pune, MH<br>India - 411008<br></small>
                             </div>
@@ -75,7 +75,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Sundaram-Acharya-thumb.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Sundaram-photo.jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
                                 <p class="fw-bold">Mr. Sundaram Acharya<br></p><small>Ph.D. Student<br>Genomics and Molecular Medicine Unit<br>Council of Scientific and Industrial Research<br>Institute of Genomics &amp; Integrative Biology (CSIR-IGIB)<br>New Delhi, India - 110025.<br></small>
                             </div>
@@ -97,7 +97,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Arihant-Kumar-Singh-thumb.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/ArihantKumarSingh-photo.jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
                                 <p class="fw-bold">Mr. Arihant Kumar Singh<br></p><small>(Ph.D. Research Scholar)<br>Nanomedicine &amp; Gene Delivery Lab<br>Department of Pharmacy,<br>Birla Institute of Technology &amp; Science Pilani, Pilani campus,<br>Pilani, Rajasthan- 333031<br></small>
                             </div>
