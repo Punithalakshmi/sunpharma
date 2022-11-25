@@ -1,348 +1,305 @@
-     
 
-<!--Main Slider Start-->
-<section class="main-slider-two clearfix">
-
-
-            <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
-                "effect": "fade",
-                "pagination": {
-                "el": "#main-slider-pagination",
-                "type": "bullets",
-                "clickable": true
-                },
-                "navigation": {
-                "nextEl": "#main-slider__swiper-button-next",
-                "prevEl": "#main-slider__swiper-button-prev"
-                },
-                "autoplay": {
-                "delay": 5000
-                }}'>
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
-                        <div class="image-layer-two"
-                            style="background-image: url(<?=base_url();?>/frontend/assets/images/backgrounds/slider1.jpg);"></div>
-                        <!-- /.image-layer -->
-
-                        <div class="container">
-                            <div class="main-slider-two__inner">
+ <div class="container-fluid" style="padding: 0;">
+        <div class="row gx-0 gy-0">
+            <div class="col">
+                <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active h-100"><img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/slide4.jpg" alt="Slide Image" style="z-index: -1;">
+                            <div class="container text-start d-flex flex-column justify-content-center h-100">
                                 <div class="row">
-                                    <div class="col-xl-7 col-lg-7">
-                                        <div class="main-slider-two__content">
-                                            <h2 class="main-slider-two__title">Sun Pharma Science Foundation Research Awards</h2>
-                                            <p class="main-slider-two__text">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges, to
-                                                send in their nominations for the Sun Pharma Science Foundation Research Awards 2022.
-                                            </p>
-                                            <div class="main-slider-two__btn-box">
-                                                <a href="#" class="thm-btn main-slider-two__btn">Let’s Get
-                                                    Started</a>
-                                            </div>
+                                    <div class="col-md-8 col-xl-7 col-xxl-7 offset-md-0" style="background: rgba(245,246,248,0.75);padding: 20px;border-radius: 6px;">
+                                        <div>
+                                            <h1 class="text-uppercase fw-bold" style="border-style: none;">Epidemiological and Genomic Methods for the Study of Human Diseases</h1>
+                                            <p class="my-3">Workshop on “Epidemiological and Genomic Methods for the Study of Human Diseases” For Young Clinical Researchers and Basic Scientists</p>
+                                            <a class="btn btn-primary btn-lg me-2" role="button" href="workshop-epidemiological-genomic-methods.html" style="background: #F7941E;border-color: #F7941E;">Read more</a><a class="btn btn-outline-primary btn-lg" role="button" href="https://sunpharmasciencefoundation.net/documents/Winter_School_Announcement_2022.pdf" target="blank">Poster Invitation</a>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="image-layer-two"
-                            style="background-image: url(<?=base_url();?>/frontend/assets/images/backgrounds/slider2.jpg);"></div>
-                        <!-- /.image-layer -->
-
-                        <div class="container">
-                            <div class="main-slider-two__inner">
-                                <div class="row">
-                                    <div class="col-xl-7 col-lg-7">
-                                        <div class="main-slider-two__content">
-                                            <h2 class="main-slider-two__title">Sun Pharma Science Foundation Science Scholar Awards</h2>
-                                            <p class="main-slider-two__text">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges
-                                                of India to nominate Young Scientists for the “Sun Pharma Science Foundation
-                                                Science ScholarAwards 2022”.
-                                            </p>
-                                            <div class="main-slider-two__btn-box">
-                                                <a href="#" class="thm-btn main-slider-two__btn">Let’s Get
-                                                    Started</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <!-- If we need navigation buttons -->
-                <div class="main-slider__nav">
-                    <div class="swiper-button-prev" id="main-slider__swiper-button-next">
-                        <i class="icon-right-arrow"></i>
-                    </div>
-                    <div class="swiper-button-next" id="main-slider__swiper-button-prev">
-                        <i class="icon-right-arrow1"></i>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <!--Main Slider End-->
-        <div id="newslider" class="container">
-            <div class="row">
-                <div class="alert alert-danger" role="alert">
-                        <strong><i class="fa fa-warning"></i> Invitation for Nominations - <?=date("Y");?>:</strong> 
-                        <marquee>
-                            <p style="font-size: 18pt">
-                                <b>Sun Pharma Science Foundation Research Awards</b>
-                                   <small><a href="<?=base_url();?>/spsfn/<?=$currentNominations['research_awards'];?>">Submit Nomination</a></small> | 
-                                 <b>Sun Pharma Science Foundation Science Scholar Awards</b>
-                                   <small><a href="<?=base_url();?>/ssan/<?=$currentNominations['science_scholars_awards'];?>">Submit Nomination</a></small>
-                            </p>
-                        </marquee>
+                    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev" style="filter: grayscale(0%);"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></li>
+                    </ol>
                 </div>
             </div>
         </div>
-
-        <!--Feature Two Start-->
-        <section class="feature-two">
-            <div class="container">
-                <div class="row">
-                    <!--Feature Two Single Start-->
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
-                        <div class="feature-two__single">
-                            <div class="feature-two__img">
-                                <img src="<?=base_url();?>/frontend/assets/images/resources/feature-two-img-1.jpg" alt="">
-                            </div>
-                            <div class="feature-two__content">
-                                <div class="feature-two__content-inner">
-                                    <div class="feature-two__icon">
-                                        <span class="icon-group"></span>
-                                    </div>
-                                    <div class="feature-two__text-box">
-                                        <p class="feature-two__text"><a href="#">Annual Activities</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    </div>
+    <section style="padding: 35px 0px;background: #FBF9FE;">
+        <div class="container py-4 py-xl-5">
+            <div class="row gy-4 gy-md-0">
+                <div class="col-md-6">
+                    <div style="margin-right:15px;"><img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="<?=base_url();?>/frontend/assets/img/about.jpg"></div>
+                </div>
+                <div class="col-md-6 d-md-flex align-items-md-center">
+                    <div>
+                        <h2 class="text-capitalize fw-normal" style="color: #F7941E;"><strong>About Sun Pharma Science Foundation</strong></h2>
+                        <p class="my-3" style="margin-bottom: 15px;">Sun Pharma Science Foundation is an independent non-profit organization registered under the Societies Registration Act. The aim of the Foundation is to promote scientific endeavors in the country by encouraging and rewarding excellence in medical and pharmaceutical sciences and to give impetus to research activity in India.</p><a class="btn btn-primary" role="button" href="<?=base_url();?>/aboutus">Read More</a>
                     </div>
-                    <!--Feature Two Single End-->
-                    <!--Feature Two Single Start-->
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="200ms">
-                        <div class="feature-two__single">
-                            <div class="feature-two__img">
-                                <img src="<?=base_url();?>/frontend/assets/images/resources/feature-two-img-2.jpg" alt="">
-                            </div>
-                            <div class="feature-two__content">
-                                <div class="feature-two__content-inner">
-                                    <div class="feature-two__icon">
-                                        <span class="icon-mission"></span>
-                                    </div>
-                                    <div class="feature-two__text-box">
-                                        <p class="feature-two__text"><a href="#">Special Award in Public Health</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Feature Two Single End-->
-                    <!--Feature Two Single Start-->
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="300ms">
-                        <div class="feature-two__single">
-                            <div class="feature-two__img">
-                                <img src="<?=base_url();?>/frontend/assets/images/resources/feature-two-img-3.jpg" alt="">
-                            </div>
-                            <div class="feature-two__content">
-                                <div class="feature-two__content-inner">
-                                    <div class="feature-two__icon">
-                                        <span class="icon-shield"></span>
-                                    </div>
-                                    <div class="feature-two__text-box">
-                                        <p class="feature-two__text"><a href="#">Latest Winners of Research Awards</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Feature Two Single End-->
                 </div>
             </div>
-        </section>
-        <!--Feature Two End-->
-
-        <!--About Two Start-->
-        <section class="about-two">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="about-two__left">
-                            <div class="section-title text-left">
-                                <div class="section-sub-title-box">
-                                    <p class="section-sub-title">About company</p>
-                                    <div class="section-title-shape-1">
-                                        <img src="<?=base_url();?>/frontend/assets/images/shapes/section-title-shape-1.png" alt="">
-                                    </div>
-                                    <div class="section-title-shape-2">
-                                        <img src="<?=base_url();?>/frontend/assets/images/shapes/section-title-shape-2.png" alt="">
-                                    </div>
-                                </div>
-                                <h2 class="section-title__title">Sun Pharmaceutical Industries Ltd.</h2>
-                            </div>
-                            <p class="about-two__text">We’re happy to invite entries for excellence in original research work in medical and pharmaceutical sciences from scientists and young researchers. Nominations for Sun Pharma Science Foundation Awards 2022 are open.</p>
-                            <ul class="list-unstyled about-two__points">
-                                <li>
-                                    <div class="icon">
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                    <div class="text">
-                                        <p><a href="#">Research Awards</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                    <div class="text">
-                                        <p><a href="#">- Circular Invitation</a></p>
-                                    </div>
-                                </li><br>
-                                <li>
-                                    <div class="icon">
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                    <div class="text">
-                                        <p><a href="#">Science Scholars Awards</a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                    <div class="text">
-                                        <p><a href="#">- Circular Invitation</a></p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <a href="#" class="thm-btn about-two__btn">Discover More</a>
+        </div>
+    </section>
+    <section style="padding: 60px 0px 60px 0px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Find out more</h3>
+                </div>
+            </div>
+        </div><div class="container">
+	<div class="row">
+		<div class="MultiCarousel" data-items="1,2,3,4" data-slide="1" id="MultiCarousel"  data-interval="1000">
+            <div class="MultiCarousel-inner">
+                <!-- slide 1 -->
+                <div class="item">
+                    <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//ResearchAwards.jpg" style="height: 200px;" alt="">
+                        <div class="card-body p-4 pb-0">
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Research Awards</h4>
+                            <p class="card-text" style="font-size: 14px;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges, to send in their nominations for the Sun Pharma Science Foundation Research Awards 2022.</p>
+                            <a href="<?=base_url();?>/research_awards" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="about-two__middle">
-                            <div class="about-two__img-box">
-                                <div class="about-two__img">
-                                    <a href="#"><img src="<?=base_url();?>/frontend/assets/images/resources/about-two-img-1.jpg" alt=""></a>
-                                </div>
-                                <div class="about-two__awards-box">
-                                    <div class="about-two__awards-inner">
-                                        <h2 class="about-two__awards-year">No. 1</h2>
-                                        <p class="about-two__awards-content">Pharmaceutical Company</p>
-                                        <div class="about-two__awards-shape-2">
-                                            <img src="<?=base_url();?>/frontend/assets/images/shapes/about-two-awards-shape-2.png" alt="">
+                </div>
+
+                <!-- slide 2 -->
+                <div class="item">
+                    <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/ScienceScholarAwards.jpg" style="height: 200px;" alt="">
+                        <div class="card-body p-4 pb-0">
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Science Scholar Awards</h4>
+                            <p class="card-text" style="font-size: 14px;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges of India to nominate Young Scientists for the “Sun Pharma Science Foundation...</p>
+                            <a href="<?=base_url();?>/science_scholar_awards" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- slide 3 -->
+                <div class="item">
+                    <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/RoundTableConference.jpg" style="height: 200px;" alt="">
+                        <div class="card-body p-4 pb-0">
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">National Seminars</h4>
+                            <p class="card-text" style="font-size: 14px;">The Foundation organizes two Round Table Conferences in a year on topics of contemporary concern to human health which pose challenges.</p>
+                            <a href="<?=base_url();?>/roundtable" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- slide 4 -->
+                <div class="item">
+                    <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/ScientificSymposia.jpg" style="height: 200px;" alt="">
+                        <div class="card-body p-4 pb-0">
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">International Symposia</h4>
+                            <p class="card-text" style="font-size: 14px;">The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research...</p>
+                            <a href="<?=base_url();?>/symposium" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- slide 5 -->
+                <div class="item">
+                    <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/workshop-for-the-young-researchers.jpg" style="height: 200px;" alt="">
+                        <div class="card-body p-4 pb-0">
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Workshop for the young researchers</h4>
+                            <p class="card-text" style="font-size: 14px;">
+                                This Winter School is being organized for clinical researchers and basic scientists engaged in research on biomedical sciences involving humans. 
+                            </p>
+                            <a href="workshop-epidemiological-genomic-methods.html" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <button class="border-0 leftLst">
+<!--                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill fs-3" style="color:var(--bs-gray-500);">
+                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path></svg> -->
+                <svg xmlns='http://www.w3.org/2000/svg' width="2em" height="2em" viewBox='0 0 16 16' fill='#adb5bd'><path d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/></svg>
+            </button>
+            <button class="border-0 rightLst">
+                <svg xmlns='http://www.w3.org/2000/svg' width="2em" height="2em" viewBox='0 0 16 16' fill='#adb5bd'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill fs-3" style="color:var(--bs-gray-500);">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+                </svg> -->
+
+            </button>
+        </div>
+	</div>
+
+	<!-- <div class="row">
+	    <div class="col-md-12 text-center">
+	        <br/><br/><br/>
+	        <hr/>
+	        <p>Settings</p>
+	        <p>Change data items for xs,sm,md and lg display items respectively. Ex:data-items="1,3,5,6"</p>
+	        <p>Change data slide for slides per click Ex:data-slide="1"</p>
+	    </div>
+	</div> -->
+</div>
+    </section>
+    <section>
+        <div class="container-fluid bg-primary-gradient py-5" style="padding: 48px 12px 0;">
+            <div class="row">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest winners of Research awards</h3>
+                </div>
+            </div>
+            <section class="pt-4 pt-xl-4">
+                <div class="container">
+                    <div class="simple-slider">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                        <div class="row g-0">
+                                            <div class="col-md-6 col-lg-8">
+                                                <div class="text-white p-4 p-md-5">
+                                                    <h2 class="fw-bold text-white mb-3">Dr Suvendra Nath Bhattacharyya</h2>
+                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
+                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology, Kolkata, India<br></p>
+                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
+                                            <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/winner-SuvendraNathBhattacharyya.jpg"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="about-two__dots float-bob-y">
-                                    <img src="<?=base_url();?>/frontend/assets/images/shapes/about-two-dots.png" alt="">
+                                <div class="swiper-slide">
+                                    <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                        <div class="row g-0">
+                                            <div class="col-md-6 col-lg-8">
+                                                <div class="text-white p-4 p-md-5">
+                                                    <h2 class="fw-bold text-white mb-3">Dr Suvendra Nath Bhattacharyya</h2>
+                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
+                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology, Kolkata, India<br></p>
+                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
+                                            <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/winner-SuvendraNathBhattacharyya.jpg"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                        <div class="row g-0">
+                                            <div class="col-md-6 col-lg-8">
+                                                <div class="text-white p-4 p-md-5">
+                                                    <h2 class="fw-bold text-white mb-3">Dr Suvendra Nath Bhattacharyya</h2>
+                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
+                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology, Kolkata, India<br></p>
+                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
+                                            <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/winner-SuvendraNathBhattacharyya.jpg"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination bottom-0"></div>
+                            <div class="text-light swiper-button-prev" style="margin: -25px 0px 0px;"></div>
+                            <div class="text-light swiper-button-next" style="margin: -25px 0px 0px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    <section></section>
+    <section style="padding-top: 60px;">
+        <div class="container-fluid">
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Scholars Awards</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="simple-slider">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                <div class="row g-0">
+                                    <div class="col-md-6 col-lg-8">
+                                        <div class="text-white p-4 p-md-5">
+                                            <h2 class="fw-bold text-white mb-3">Mr. Shubham Singh</h2>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Ph.D. Student<br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Biology<br>IISER-Pune, MH<br>India - 411008<br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
+                                    <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/shubham-singh.png"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                <div class="row g-0">
+                                    <div class="col-md-6 col-lg-8">
+                                        <div class="text-white p-4 p-md-5">
+                                            <h2 class="fw-bold text-white mb-3">Mr. Shubham Singh</h2>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Ph.D. Student<br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Biology<br>IISER-Pune, MH<br>India - 411008<br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
+                                    <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/shubham-singh.png"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                <div class="row g-0">
+                                    <div class="col-md-6 col-lg-8">
+                                        <div class="text-white p-4 p-md-5">
+                                            <h2 class="fw-bold text-white mb-3">Mr. Shubham Singh</h2>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Ph.D. Student<br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Biology<br>IISER-Pune, MH<br>India - 411008<br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="#">Know More</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last" style="min-height: 250px;">
+                                    <img class="w-100 h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/shubham-singh.png"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                   
+                    <div class="swiper-pagination bottom-0"></div>
+                    <div class="text-light swiper-button-prev" style="margin: -24px 0px 0px;"></div>
+                    <div class="text-light swiper-button-next" style="margin: -24px 0px 0px;"></div>
                 </div>
             </div>
-        </section>
-        <!--About Two End-->
+        </div>
+    </section>
+    <section style="margin:60px 0;">
+        <div class="row mx-0">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h3 class="fw-bold heading" style="color: #F7941E;">Social Media</h3>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">We’re happy to invite entries for excellence in original research work in medical and pharmaceutical sciences from scientists and young researchers. Nominations for Sun Pharma Science Foundation Awards 2022 are open.<br><br>Visit : <a href="https://t.co/ZwJD0o1XPi">https://t.co/ZwJD0o1XPi</a><a href="https://twitter.com/hashtag/SPSF?src=hash&amp;ref_src=twsrc%5Etfw">#SPSF</a> <a href="https://twitter.com/hashtag/Awards?src=hash&amp;ref_src=twsrc%5Etfw">#Awards</a> <a href="https://twitter.com/hashtag/SunPharma?src=hash&amp;ref_src=twsrc%5Etfw">#SunPharma</a> <a href="https://t.co/1OK9VbhWCY">pic.twitter.com/1OK9VbhWCY</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1552551634525618176?ref_src=twsrc%5Etfw">July 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+                <div class="col-md-4"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Join us for the Sun Pharma Science Foundation’s Annual Conference on 25th April from 9 AM to 4 PM. <br><br>Watch : <a href="https://t.co/KGA9aimQkA">https://t.co/KGA9aimQkA</a> <br>Passcode: 12345 <br><br>Register : <a href="https://t.co/mm3CQNXvjw">https://t.co/mm3CQNXvjw</a><a href="https://twitter.com/hashtag/SunPharma?src=hash&amp;ref_src=twsrc%5Etfw">#SunPharma</a> <a href="https://twitter.com/hashtag/ScienceFoundationAnnualConference?src=hash&amp;ref_src=twsrc%5Etfw">#ScienceFoundationAnnualConference</a> <a href="https://t.co/Vy0ymSbozG">pic.twitter.com/Vy0ymSbozG</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1517813409425018882?ref_src=twsrc%5Etfw">April 23, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+                <div class="col-md-4"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Heartiest congratulations to the winners of the Sun Pharma Science Foundation Science Scholar Award - 2021 for outstanding research works. The award promotes scientific endeavours in India by encouraging young researchers who are contributing to the future advancement of science. <a href="https://t.co/zb3a3Wj3oW">pic.twitter.com/zb3a3Wj3oW</a></p>&mdash; Sun Pharma (@SunPharma_Live) <a href="https://twitter.com/SunPharma_Live/status/1484718211140825095?ref_src=twsrc%5Etfw">January 22, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+            </div>
+        </div>
+        <div class="container">
+            <div></div>
+        </div>
+    </section>
 
-        <!--Process Start-->
-        <section class="process">
-            <div class="container">
-                <div class="section-title text-center">
-                    <div class="section-sub-title-box">
-                        <p class="section-sub-title">Award process</p>
-                        <div class="section-title-shape-1">
-                            <img src="<?=base_url();?>/frontend/assets/images/shapes/section-title-shape-1.png" alt="">
-                        </div>
-                        <div class="section-title-shape-2">
-                            <img src="<?=base_url();?>/frontend/assets/images/shapes/section-title-shape-2.png" alt="">
-                        </div>
-                    </div>
-                    <h2 class="section-title__title">The road to the award</h2>
-                </div>
-                <div class="process__inner">
-                    <div class="process-shape-1">
-                        <img src="<?=base_url();?>/frontend/assets/images/shapes/process-shape-1.png" alt="">
-                    </div>
-                    <div class="row">
-                        <!--Process Single Start-->
-                        <div class="col-xl-3 col-lg-3 col-md-6">
-                            <div class="process__single">
-                                <div class="process__icon-box">
-                                    <div class="process__icon">
-                                        <span class="icon-file"></span>
-                                    </div>
-                                    <div class="process__count"></div>
-                                </div>
-                                <div class="process__content">
-                                    <h3 class="process__title">Nomination Submission</h3>
-                                    <p class="process__text">Applicants fill out the online form.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Process Single End-->
-                        <!--Process Single Start-->
-                        <div class="col-xl-3 col-lg-3 col-md-6">
-                            <div class="process__single process__single-2">
-                                <div class="process__icon-box">
-                                    <div class="process__icon">
-                                        <span class="icon-select"></span>
-                                    </div>
-                                    <div class="process__count"></div>
-                                </div>
-                                <div class="process__content">
-                                    <h3 class="process__title">Sponsor Justification</h3>
-                                    <p class="process__text">The applicant will be provided a login id and password to continue the nomination procedure.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Process Single End-->
-                        <!--Process Single Start-->
-                        <div class="col-xl-3 col-lg-3 col-md-6">
-                            <div class="process__single process__single-3">
-                                <div class="process__icon-box">
-                                    <div class="process__icon">
-                                        <span class="icon-meeting"></span>
-                                    </div>
-                                    <div class="process__count"></div>
-                                </div>
-                                <div class="process__content">
-                                    <h3 class="process__title">Judges Panel</h3>
-                                    <p class="process__text">The nominations will be reviewed by a Panel of Judges.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Process Single End-->
-                        <!--Process Single Start-->
-                        <div class="col-xl-3 col-lg-3 col-md-6">
-                            <div class="process__single process__single-4">
-                                <div class="process__icon-box">
-                                    <div class="process__icon">
-                                        <span class="icon-sunpharma-agent"></span>
-                                    </div>
-                                    <div class="process__count"></div>
-                                </div>
-                                <div class="process__content">
-                                    <h3 class="process__title">Award Presenting Ceremony</h3>
-                                    <p class="process__text">Jury announces the winners.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Process Single End-->
-                    </div>
-                </div>
-              
-            </div>
-        </section>
-        <!--Process End-->
+
         
 
       

@@ -2,18 +2,41 @@
 
 namespace App\Controllers;
 
+use App\Models\NominationTypesModel;
 
 class ResearchAwards extends BaseController
 {
     public function index()
     {
-
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
         $session   = \Config\Services::session();
-        $userdata = $session->get('fuserdata');
+        $userdata = $session->get('userdata');
         $data['userdata'] = $userdata;
-        return  view('frontend/header',$data)
-                .view('frontend/latest_winners_of_research_awards',$data)
-                .view('frontend/footer');
+
+        $nominationModel = new NominationTypesModel();
+        
+        $nominationLists = $nominationModel->getCategoryWiseNominations()->getResultArray();
+       
+        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+        $currentDate = strtotime(date('Y-m-d'));
+        foreach($nominationLists as $nkey => $nvalue){
+            $endDate = strtotime($nvalue['end_date']);
+          if($endDate >= $currentDate)  {
+            if($nvalue['type'] == 'Research Awards'){
+              $currentNominations['research_awards'] = 'yes';
+            }
+            else
+            {
+              $currentNominations['science_scholars_awards'] = 'yes';
+            }
+         }
+        }
+
+        $data['currentNominations'] = $currentNominations;
+        return  view('frontend/_partials/header',$data)
+                .view('frontend/research_awards',$data)
+                .view('frontend/_partials/footer');
     }
 
    

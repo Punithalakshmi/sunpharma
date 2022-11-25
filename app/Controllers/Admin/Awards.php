@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AwardsModel;
 use App\Models\CategoryModel;
 use App\Models\UserModel;
+use App\Models\RatingModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -39,13 +40,13 @@ class Awards extends BaseController
            //$data['categories'] = $getCategoryLists->getResultArray();
 
             $awardsLists = $awardsModel->getLists($category,$year)->getResultArray();
-            //print_r($awardsLists); die;
+           // echo "<pre>";
+           // print_r($awardsLists); die;
             foreach($awardsLists as $akey => $avalue) {
 
                 //get jury lists 
                 $splitJuryIds = explode(',',$avalue['jury']);
                
-                
                 for($i=0;$i<count($splitJuryIds);$i++) {
                     
                     $getJuryRateData = $userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
@@ -164,5 +165,21 @@ class Awards extends BaseController
     }
 
     
+    public function getJuryListsByNominee($nominee_id = '')
+    {
+        $request    = \Config\Services::request();
+        $ratingModel = new RatingModel();
+        $data['juries'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
+
+        if($request->isAJAX()) {
+            $html = view('admin/awards/juryLists',$data,array('debug' => false));
+             return $this->response->setJSON([
+                 'status'            => 'success',
+                 'html'              => $html
+             ]); 
+             exit;
+        }
+
+    }
 
 }

@@ -38,8 +38,9 @@ class UserModel extends Model{
                 'login_id'          => $result->id,
                 'login_name'        => $result->firstname,
                 'login_email'       => $result->email,
-                'isLoggedIn'      => TRUE,
-                'role'           => $result->role
+                'isLoggedIn'        => TRUE,
+                'role'              => $result->role,
+                'id'  => $result->id
             ];
             return $data;
         } else {
@@ -81,7 +82,7 @@ class UserModel extends Model{
     public function getUserData($id='')
     {
         $builder = $this->table('users');
-        $builder->select('users.*,users.id as user_id,nominee_details.*');
+        $builder->select('users.*,users.id as user_id,nominee_details.*,nominee_details.id as nominee_detail_id');
         $builder->join('nominee_details','nominee_details.nominee_id = users.id');
         $builder->where("users.role",'2');
         $builder->where("users.id",$id);
@@ -115,4 +116,6 @@ class UserModel extends Model{
         $builder->where("users.active",'1');
         return $query = $builder->get();
     }
+
+    
 }

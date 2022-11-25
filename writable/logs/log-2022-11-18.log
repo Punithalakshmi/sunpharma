@@ -1,0 +1,128 @@
+ERROR - 2022-11-18 00:11:12 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: NO)
+CRITICAL - 2022-11-18 00:11:12 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH\Database\BaseConnection.php on line 416.
+ 1 SYSTEMPATH\Database\BaseConnection.php(586): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `nominations`.*, `category`.`type`
+FROM `nominations`
+JOIN `category` ON `category`.`id` = `nominations`.`category_id`', [], false)
+ 3 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Models\NominationTypesModel.php(34): CodeIgniter\Model->__call('get', [])
+ 5 APPPATH\Controllers\Home.php(18): App\Models\NominationTypesModel->getCategoryWiseNominations()
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-18 00:11:21 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: NO)
+CRITICAL - 2022-11-18 00:11:21 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH\Database\BaseConnection.php on line 416.
+ 1 SYSTEMPATH\Database\BaseConnection.php(586): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `nominations`.*, `category`.`type`
+FROM `nominations`
+JOIN `category` ON `category`.`id` = `nominations`.`category_id`', [], false)
+ 3 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Models\NominationTypesModel.php(34): CodeIgniter\Model->__call('get', [])
+ 5 APPPATH\Controllers\Home.php(18): App\Models\NominationTypesModel->getCategoryWiseNominations()
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-18 00:11:29 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: NO)
+CRITICAL - 2022-11-18 00:11:29 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH\Database\BaseConnection.php on line 416.
+ 1 SYSTEMPATH\Database\BaseConnection.php(586): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `nominations`.*, `category`.`type`
+FROM `nominations`
+JOIN `category` ON `category`.`id` = `nominations`.`category_id`', [], false)
+ 3 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Models\NominationTypesModel.php(34): CodeIgniter\Model->__call('get', [])
+ 5 APPPATH\Controllers\Home.php(18): App\Models\NominationTypesModel->getCategoryWiseNominations()
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-18 04:02:11 --> Invalid file: frontend/header.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('frontend/header.php')
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/header', [], true)
+ 3 APPPATH\Controllers\Home.php(38): view('frontend/header', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-18 07:41:02 --> Invalid file: frontend/header.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('frontend/header.php')
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/header', [], true)
+ 3 APPPATH\Controllers\SpecialAwards.php(15): view('frontend/header', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\SpecialAwards->index()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SpecialAwards))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-18 17:46:50 --> Error connecting to the database: No connection could be made because the target machine actively refused it.
+
+CRITICAL - 2022-11-18 17:46:50 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it.
+
+in SYSTEMPATH\Database\BaseConnection.php on line 416.
+ 1 SYSTEMPATH\Database\BaseConnection.php(586): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `nominations`.*, `category`.`type`
+FROM `nominations`
+JOIN `category` ON `category`.`id` = `nominations`.`category_id`', [], false)
+ 3 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Models\NominationTypesModel.php(34): CodeIgniter\Model->__call('get', [])
+ 5 APPPATH\Controllers\Home.php(18): App\Models\NominationTypesModel->getCategoryWiseNominations()
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-18 18:14:44 --> Invalid file: frontend/_partials/spsfn.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('frontend/_partials/spsfn.php')
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/_partials/spsfn', [], true)
+ 3 APPPATH\Controllers\Nomination.php(476): view('frontend/_partials/spsfn', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-18 19:18:08 --> Call to undefined method CodeIgniter\HTTP\IncomingRequest::getSegment()
+in APPPATH\Controllers\Nomination.php on line 21.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-18 19:32:50 --> Undefined variable: uri
+in APPPATH\Views\frontend\_partials\footer.php on line 45.
+ 1 APPPATH\Views\frontend\_partials\footer.php(45): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: uri', 'APPPATH\\Views\\frontend\\_partials\\footer.php', 45, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\_partials\\footer.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/_partials/footer', [], true)
+ 5 APPPATH\Controllers\Home.php(106): view('frontend/_partials/footer')
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->science_scholar_awards()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-18 19:33:32 --> Undefined variable: uri
+in APPPATH\Views\frontend\_partials\footer.php on line 45.
+ 1 APPPATH\Views\frontend\_partials\footer.php(45): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: uri', 'APPPATH\\Views\\frontend\\_partials\\footer.php', 45, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\_partials\\footer.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/_partials/footer', [], true)
+ 5 APPPATH\Controllers\Home.php(106): view('frontend/_partials/footer')
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->science_scholar_awards()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-18 23:13:10 --> Undefined index: best_papers
+in APPPATH\Views\frontend\ssan.php on line 304.
+ 1 APPPATH\Views\frontend\ssan.php(304): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: best_papers', 'APPPATH\\Views\\frontend\\ssan.php', 304, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\ssan.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/ssan', [], true)
+ 5 APPPATH\Controllers\Nomination.php(265): view('frontend/ssan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

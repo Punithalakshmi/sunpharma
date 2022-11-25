@@ -33,4 +33,10 @@ class NominationTypesModel extends Model{
             $builder->join('category','category.id = nominations.category_id');
             return $query = $builder->get();
     }
+
+    public function getCategoryNomination($id='')
+    {
+          return $this->getWhere(array('category_id' => $id)); 
+    }
+
 }

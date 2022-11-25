@@ -1,0 +1,31 @@
+.MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
+.MultiCarousel .MultiCarousel-inner { display:flex;transition: 1s ease all; float: left; }
+.MultiCarousel .MultiCarousel-inner .item { float: left;}
+.MultiCarousel .MultiCarousel-inner .item > div { text-align: left; padding:10px; margin:15px; background:transparent; }
+.MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(50% - 20px); background-color:transparent; }
+.MultiCarousel .leftLst { left:-15px; }
+.MultiCarousel .rightLst { right:-15px; }
+    
+.MultiCarousel .leftLst.over, 
+.MultiCarousel .rightLst.over { pointer-events: none; background:transparent; }
+#MultiCarousel1 .pb-0{margin-bottom:0!important;}
+
+.MultiCarousel-inner .item:nth-child(5) h4 {
+    letter-spacing: -.2px;}
+.MultiCarousel .card-body {
+    position: relative;
+    padding-bottom: 45px!important;
+}
+
+.MultiCarousel .card-body .btn {
+    position: absolute;
+    bottom: 22px;
+}
+
+:root {
+    --swiper-navigation-size:32px !important;
+}
+
+.swiper-container {
+    padding-bottom:30px!important;
+}

@@ -7,13 +7,16 @@ class DirectoryResearchAwardees extends BaseController
 {
     public function index()
     {
+
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
         $session   = \Config\Services::session();
-        $userdata = $session->get('fuserdata');
+        $userdata = $session->get('userdata');
         $data['userdata'] = $userdata;
 
-        return view('frontend/header',$data)
+        return view('frontend/_partials/header',$data)
                .view('frontend/directory_research_awardees',$data)
-               .view('frontend/footer');
+               .view('frontend/_partials/footer');
     }
 
    

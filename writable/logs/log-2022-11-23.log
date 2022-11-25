@@ -1,0 +1,191 @@
+CRITICAL - 2022-11-23 02:38:51 --> Undefined variable: status
+in APPPATH\Controllers\Nomination.php on line 286.
+ 1 APPPATH\Controllers\Nomination.php(286): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: status', 'APPPATH\\Controllers\\Nomination.php', 286, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 02:46:05 --> Undefined variable: message
+in APPPATH\Controllers\Nomination.php on line 286.
+ 1 APPPATH\Controllers\Nomination.php(286): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: message', 'APPPATH\\Controllers\\Nomination.php', 286, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 03:54:45 --> Undefined variable: message
+in APPPATH\Controllers\Nomination.php on line 286.
+ 1 APPPATH\Controllers\Nomination.php(286): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: message', 'APPPATH\\Controllers\\Nomination.php', 286, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 04:35:23 --> Undefined variable: message
+in APPPATH\Controllers\Nomination.php on line 286.
+ 1 APPPATH\Controllers\Nomination.php(286): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: message', 'APPPATH\\Controllers\\Nomination.php', 286, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 06:54:21 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Nomination.php on line 481.
+ 1 APPPATH\Controllers\Nomination.php(481): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Nomination.php', 481, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 19:30:52 --> file_get_contents(C:\xampp\htdocs\sunpharma\writable\debugbar/debugbar_1669212482.914978.json): failed to open stream: No such file or directory
+in SYSTEMPATH\Debug\Toolbar\Collectors\History.php on line 82.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_contents(C:\\xampp\\htdocs\\sunpharma\\writable\\debugbar/debugbar_1669212482.914978.json): failed to open stream: No such file or directory', 'SYSTEMPATH\\Debug\\Toolbar\\Collectors\\History.php', 82, [...])
+ 2 SYSTEMPATH\Debug\Toolbar\Collectors\History.php(82): file_get_contents('ROOTPATH\\writable\\debugbar/debugbar_1669212482.914978.json')
+ 3 SYSTEMPATH\Debug\Toolbar.php(495): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles('1669253435.188581', 20)
+ 4 SYSTEMPATH\Debug\Toolbar.php(472): CodeIgniter\Debug\Toolbar->format([...], 'html')
+ 5 APPPATH\Config\Events.php(46): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH\Events\Events.php(149): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH\CodeIgniter.php(326): CodeIgniter\Events\Events::trigger('pre_system')
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 19:31:08 --> file_get_contents(): Filename cannot be empty
+in APPPATH\Controllers\Nomination.php on line 486.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_contents(): Filename cannot be empty', 'APPPATH\\Controllers\\Nomination.php', 486, [...])
+ 2 APPPATH\Controllers\Nomination.php(486): file_get_contents('ROOTPATH\\public')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 22:54:46 --> Invalid file: frontend/header.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('frontend/header.php')
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/header', [], true)
+ 3 APPPATH\Controllers\User.php(47): view('frontend/header', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:07:42 --> Trying to access array offset on value of type int
+in APPPATH\Controllers\User.php on line 25.
+ 1 APPPATH\Controllers\User.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type int', 'APPPATH\\Controllers\\User.php', 25, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:10:08 --> Undefined index: id
+in APPPATH\Controllers\User.php on line 25.
+ 1 APPPATH\Controllers\User.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: id', 'APPPATH\\Controllers\\User.php', 25, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:15:25 --> Undefined variable: getUserData
+in APPPATH\Controllers\Nomination.php on line 566.
+ 1 APPPATH\Controllers\Nomination.php(566): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: getUserData', 'APPPATH\\Controllers\\Nomination.php', 566, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:15:35 --> Undefined variable: getUserData
+in APPPATH\Controllers\Nomination.php on line 566.
+ 1 APPPATH\Controllers\Nomination.php(566): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: getUserData', 'APPPATH\\Controllers\\Nomination.php', 566, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:19:21 --> Undefined variable: user
+in APPPATH\Views\frontend\preview.php on line 17.
+ 1 APPPATH\Views\frontend\preview.php(17): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: user', 'APPPATH\\Views\\frontend\\preview.php', 17, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
+ 5 APPPATH\Controllers\Nomination.php(569): view('frontend/preview', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:19:42 --> Cannot use object of type CodeIgniter\Database\MySQLi\Result as array
+in APPPATH\Views\frontend\preview.php on line 17.
+ 1 SYSTEMPATH\View\View.php(213): include()
+ 2 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
+ 4 APPPATH\Controllers\Nomination.php(567): view('frontend/preview', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:20:27 --> Undefined index: category_name
+in APPPATH\Views\frontend\preview.php on line 128.
+ 1 APPPATH\Views\frontend\preview.php(128): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: category_name', 'APPPATH\\Views\\frontend\\preview.php', 128, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
+ 5 APPPATH\Controllers\Nomination.php(567): view('frontend/preview', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:33:43 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Nomination.php on line 565.
+ 1 APPPATH\Controllers\Nomination.php(565): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Nomination.php', 565, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('assets', 'img', 'user--default-Image.png')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:34:23 --> Undefined variable: uri
+in APPPATH\Views\frontend\_partials\header.php on line 26.
+ 1 APPPATH\Views\frontend\_partials\header.php(26): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: uri', 'APPPATH\\Views\\frontend\\_partials\\header.php', 26, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\_partials\\header.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/_partials/header', [], true)
+ 5 APPPATH\Controllers\Nomination.php(572): view('frontend/_partials/header', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:35:29 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\Nomination.php on line 568.
+ 1 APPPATH\Controllers\Nomination.php(568): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Nomination.php', 568, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('assets', 'img', 'user--default-Image.png')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:50:15 --> Undefined index: date_of_birth
+in APPPATH\Views\frontend\preview.php on line 220.
+ 1 APPPATH\Views\frontend\preview.php(220): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: date_of_birth', 'APPPATH\\Views\\frontend\\preview.php', 220, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
+ 5 APPPATH\Controllers\Nomination.php(576): view('frontend/preview', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:50:48 --> Undefined index: mobile_no
+in APPPATH\Views\frontend\preview.php on line 262.
+ 1 APPPATH\Views\frontend\preview.php(262): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: mobile_no', 'APPPATH\\Views\\frontend\\preview.php', 262, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
+ 5 APPPATH\Controllers\Nomination.php(576): view('frontend/preview', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:51:13 --> Undefined index: nominator_mobile
+in APPPATH\Views\frontend\preview.php on line 302.
+ 1 APPPATH\Views\frontend\preview.php(302): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: nominator_mobile', 'APPPATH\\Views\\frontend\\preview.php', 302, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
+ 5 APPPATH\Controllers\Nomination.php(576): view('frontend/preview', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-23 23:51:46 --> Undefined index: justification_letter
+in APPPATH\Views\frontend\preview.php on line 321.
+ 1 APPPATH\Views\frontend\preview.php(321): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: justification_letter', 'APPPATH\\Views\\frontend\\preview.php', 321, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
+ 5 APPPATH\Controllers\Nomination.php(576): view('frontend/preview', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('9')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

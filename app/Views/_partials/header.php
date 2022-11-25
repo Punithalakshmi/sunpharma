@@ -80,7 +80,12 @@
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/workshops">
-                      <i class="fa fa-user"></i> Workshops 
+                      <i class="fa fa-user"></i> Events 
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url();?>/admin/eventregisteration">
+                      <i class="fa fa-user"></i> Event Registeration
                     </a>
                   </li>
                   <li>

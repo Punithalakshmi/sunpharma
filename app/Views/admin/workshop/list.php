@@ -3,7 +3,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Workshops <small></small></h3>
+                <h3>Events <small></small></h3>
               </div>
             </div>
            
@@ -29,11 +29,11 @@
                       <thead>
                         <tr>
                           
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Phone</th>
-                          <th>Address</th>
-                          <th>Registration No</th>
+                          <th>Subject</th>
+                          <th>Description</th>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <!-- <th>Registration No</th> -->
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -44,11 +44,11 @@
                             ?>
                         <tr>
                           
-                          <td><?=$user['firstname'].' '.$user['lastname'];?></td>
-                          <td><?=$user['email'];?></td>
-                          <td><?=$user['phone'];?></td>
-                          <td><?=$user['address'];?></td>
-                          <td><?=$user['registration_link'];?></td>
+                          <td><?=$user['subject'];?></td>
+                          <td><?=$user['description'];?></td>
+                          <td><?=$user['start_date'];?></td>
+                          <td><?=$user['end_date'];?></td>
+                         
                           
                           <td><?=$user['created_date'];?></td>
                           <td>
