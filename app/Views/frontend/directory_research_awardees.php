@@ -12,7 +12,7 @@
         <div class="container olddirectory">
             <div class="row row-cols-1 row-cols-md-4">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Research Awardees - 2021<br></h3>
+                    <h3 class="heading" style="color: #F7941E;">2021<br></h3>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">
@@ -53,7 +53,7 @@
         <div class="container olddirectory" style="/*margin-bottom: 60px;*/">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Research Awardees - 2020<br></h3>
+                    <h3 class="heading" style="color: #F7941E;">2020<br></h3>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">
@@ -94,7 +94,7 @@
         <div class="container olddirectory" style="/*margin-bottom: 60px;*/">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Research Awardees - 2019<br></h3>
+                    <h3 class="heading" style="color: #F7941E;">2019<br></h3>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">
@@ -135,7 +135,7 @@
         <div class="container olddirectory" style="/*margin-bottom: 60px;*/">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Research Awardees - 2018<br></h3>
+                    <h3 class="heading" style="color: #F7941E;">2018<br></h3>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 d-lg-flex mx-auto justify-content-lg-center" style="max-width: 900px;">
@@ -168,7 +168,7 @@
         <div class="container olddirectory" style="/*margin-bottom: 60px;*/">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Research Awardees - 2016<br></h3>
+                    <h3 class="heading" style="color: #F7941E;">2016<br></h3>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">
@@ -209,7 +209,7 @@
         <div class="container olddirectory" style="/*margin-bottom: 60px;*/">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Research Awardees - 2015<br></h3>
+                    <h3 class="heading" style="color: #F7941E;">2015<br></h3>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">

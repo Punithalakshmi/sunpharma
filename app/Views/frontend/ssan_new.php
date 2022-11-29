@@ -1,4 +1,4 @@
-<div class="container py-5">
+<section class="bg-primary-gradient"><div class="container py-5">
     <div class="row mx-auto" style="padding-bottom: 15px">
         <div class="col-lg-12">
             <h2 class="text-capitalize fw-normal text-start text-center" style="color: #f7941e;
@@ -79,7 +79,63 @@
                             </div>
                         </div>
 
+                        
+
                         <div class="col-lg-6">
+                            <div class="mb-3 form-items">
+                                <label class="form-label " for="">Residence Address</label>
+                                <textarea name="residence_address" class="form-control required" id="residence_address" placeholder="Write a message"><?=$editdata['residence_address'];?></textarea>
+                                <small class="text-danger">
+                                    <?php if(isset($validation) && $validation->getError('residence_address')) {?>
+                                        <?= $error = $validation->getError('residence_address'); ?>
+                                    <?php }?>
+                                </small>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="mb-3 form-items">
+                            <label class="form-label " for="">Designation & Office Address</label>
+                                <textarea class="form-control required" name="designation_and_office_address" id="designation_and_office_address" placeholder="Write a message"><?=$editdata['designation_and_office_address'];?></textarea>
+                                <small class="text-danger">
+                                    <?php if(isset($validation) && $validation->getError('designation_and_office_address')) {?>
+                                        <?= $error = $validation->getError('designation_and_office_address'); ?>
+                                    <?php }?>
+                                </small>
+                            </div>
+                        </div>
+
+                        
+                        
+
+                        <div class="col-lg-6">
+                            <div class="mb-3 form-items">
+                                 <label class="form-label " for="">Mobile No.</label>
+                                        
+                                <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
+                                <small class="text-danger">
+                                <?php if(isset($validation) && $validation->getError('mobile_no')) {?>
+                                    <?= $error = $validation->getError('mobile_no'); ?>
+                                <?php }?>
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="mb-3 form-items">
+                                <label class="form-label " for="">Email ID</label>
+                                
+                                <input type="email" class="form-control required" placeholder="Please Enter Email" id="nominee_email" name="email" value="<?=set_value('email',$editdata['email']);?>">
+                                <small class="text-danger">
+                                <?php if(isset($validation) && $validation->getError('email')) {?>
+                                    <?= $error = $validation->getError('email'); ?>
+                                <?php }?>
+                                </small>
+                            </div>
+                       </div>
+
+                        <div class="col-lg-12">
                             <div class="mb-3 form-items">
                                 <label class="form-label " for="">Citizenship</label>
                                 <select class="form-control selectpicker mt-2 required"
@@ -98,53 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3 form-items">
-                            <label class="form-label " for="">Designation & Office Address</label>
-                                <textarea class="form-control required" name="designation_and_office_address" id="designation_and_office_address" placeholder="Write a message"><?=$editdata['designation_and_office_address'];?></textarea>
-                                <small class="text-danger">
-                                    <?php if(isset($validation) && $validation->getError('designation_and_office_address')) {?>
-                                        <?= $error = $validation->getError('designation_and_office_address'); ?>
-                                    <?php }?>
-                                </small>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3 form-items">
-                                <label class="form-label " for="">Residence Address</label>
-                                <textarea name="residence_address" class="form-control required" id="residence_address" placeholder="Write a message"><?=$editdata['residence_address'];?></textarea>
-                                <small class="text-danger">
-                                    <?php if(isset($validation) && $validation->getError('residence_address')) {?>
-                                        <?= $error = $validation->getError('residence_address'); ?>
-                                    <?php }?>
-                                </small>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3 form-items">
-                                 <label class="form-label " for="">Mobile No.</label>
-                                        
-                                <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
-                                <small class="text-danger">
-                                <?php if(isset($validation) && $validation->getError('mobile_no')) {?>
-                                    <?= $error = $validation->getError('mobile_no'); ?>
-                                <?php }?>
-                                </small>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3 form-items">
-                                <label class="form-label " for="">Email ID</label>
-                                
-                                <input type="email" class="form-control required" placeholder="Please Enter Email" id="nominee_email" name="email" value="<?=set_value('email',$editdata['email']);?>">
-                                <small class="text-danger">
-                                <?php if(isset($validation) && $validation->getError('email')) {?>
-                                    <?= $error = $validation->getError('email'); ?>
-                                <?php }?>
-                                </small>
-                            </div>
-                       </div>
+                        
                     
                     </div>
                 </div>
@@ -178,7 +188,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="mb-3 form-items">
                                 <label class="form-label " for="">Mobile No of the Nominator</label>
                                 
@@ -191,7 +201,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="mb-3 form-items">
                                 <label class="form-label " for="">Email ID of the Nominator</label>
                             

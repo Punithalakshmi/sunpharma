@@ -12,12 +12,15 @@
 }
 
 .heroInner {
-  padding-top: 180px;
-  padding-bottom: 180px;
+  /* padding-top: 180px;
+  padding-bottom: 180px; */
+  padding-top: 22em;
   background-size: cover !important;
 }
 .heroInner h1 {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px 52px 0 0;
+    box-shadow: 4px -1px 3px rgb(0 0 0 / 23%);
 }
 
 .backgroundCover {

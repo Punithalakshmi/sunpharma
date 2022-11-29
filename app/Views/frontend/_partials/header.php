@@ -29,9 +29,9 @@
                         <div class="nav-item dropdown nav-link">
                             <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="<?=base_url();?>/symposium">Key Activities</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=base_url();?>/symposium">Scientific symposium in frontline areas of research</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/roundtable">Round table conference on national health areas</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/annualforeign_scientist">Inviting foreign scientists as visiting professor</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/symposium">Scientific Symposium</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/roundtable">National Seminar</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/annualforeign_scientist">Inviting Foreign Scientists</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/special_awards">Special Award in Public Health</a>
                             </div>
                         </div>

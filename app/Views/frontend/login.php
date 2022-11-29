@@ -14,9 +14,9 @@
         <div class="form-group mb-3"></div>
         <div class="form-group mb-3"><button class="btn btn-primary btn-sm d-block create-account w-100" type="submit">Login</button></div>
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-md-12" style="text-align: center;"><a href="forgot.html">Forgot Password?</a></div>
-            </div> -->
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;"><a onclick="history.back()" href="#"><u>Back</u></a></div>
+            </div>
         </div>
     </form>
 </div>
