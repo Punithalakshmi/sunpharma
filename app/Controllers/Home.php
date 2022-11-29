@@ -1,26 +1,50 @@
 <?php
 
 namespace App\Controllers;
-
-use App\Models\NominationTypesModel;
-  
+ 
 class Home extends BaseController
 {
     public function index()
     {
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+        
+        $userdata = $this->session->get('userdata');
 
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
         
         $data['userdata'] = $userdata;
 
-        $nominationModel = new NominationTypesModel();
+        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
+
+        $categoryNominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
+     
+        $eventLists = $this->workshopModel->getActiveEvents()->getResultArray();
+
+        $nominationArr = array();
         
-        $nominationLists = $nominationModel->getCategoryWiseNominations()->getResultArray();
-       
+        $current_date = strtotime(date("Y-m-d"));
+        foreach($eventLists as $ekey => $evalue) {
+         
+          $end_date     = strtotime($evalue['end_date']);
+          if($end_date > $current_date): 
+            array_push($nominationArr,$eventLists[$ekey]);
+          endif;  
+        }
+
+        foreach($categoryNominationLists as $ekey => $evalue) {
+          //get category name
+          $categoryDt =  $this->categoryModel->getListsOfCategories($evalue['category_id'])->getRowArray();
+          $categoryNominationLists[$ekey]['category'] = $categoryDt['name'];
+          $categoryNominationLists[$ekey]['category_type'] =  $categoryDt['type'];
+          $end_date     = strtotime($evalue['end_date']);
+          if($end_date > $current_date): 
+            array_push($nominationArr,$categoryNominationLists[$ekey]);
+          endif;  
+        }
+    
+     
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+
         $currentDate = strtotime(date('Y-m-d'));
         foreach($nominationLists as $nkey => $nvalue){
             $endDate = strtotime($nvalue['end_date']);
@@ -36,10 +60,13 @@ class Home extends BaseController
         }
 
         $data['currentNominations'] = $currentNominations;
+
         
-        return   view('frontend/_partials/header',$data)
-                 .view('frontend/dashboard',$data)
-                 .view('frontend/_partials/footer');
+
+        $data['nominations'] = $nominationArr;
+
+          return  render('frontend/dashboard',$data);
+              
     }
 
     public function aboutus()
@@ -47,13 +74,12 @@ class Home extends BaseController
 
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+
+        $userdata = $this->session->get('userdata');
         $data['userdata'] = $userdata;
 
-        return  view('frontend/_partials/header',$data)
-                .view('frontend/mission',$data)
-                 .view('frontend/_partials/footer');
+        return  render('frontend/mission',$data);
+              
     }
 
     public function annualActivities()
@@ -61,51 +87,47 @@ class Home extends BaseController
 
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+       
+        $userdata = $this->session->get('userdata');
         $data['userdata'] = $userdata;
 
-        return  view('frontend/_partials/header',$data)
-               .view('frontend/annual_activities',$data)
-                .view('frontend/_partials/footer');
+        return render('frontend/annual_activities',$data);
+   
     }
 
     public function nominationPreview()
     {
       $uri = current_url(true);
       $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+       
+        $userdata = $this->session->get('userdata');
         $data['userdata'] = $userdata;
 
-        return  view('frontend/_partials/header',$data)
-               .view('frontend/nomination_preview',$data)
-                .view('frontend/_partials/footer');
+        return  render('frontend/nomination_preview',$data);
+
     }
 
     public function contact()
     {
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+        
+        $userdata =$this->session->get('userdata');
         $data['userdata'] = $userdata;
-        return view('frontend/_partials/header',$data)
-                .view('frontend/contact',$data)
-                .view('frontend/_partials/footer');
+
+        return render('frontend/contact',$data);
+        
     }
 
     public function research_awards()
     {
       $uri = current_url(true);
       $data['uri'] = $uri->getSegment(1); 
-      $session   = \Config\Services::session();
-      $userdata = $session->get('userdata');
+   
+      $userdata = $this->session->get('userdata');
       $data['userdata'] = $userdata;
 
-      $nominationModel = new NominationTypesModel();
-        
-        $nominationLists = $nominationModel->getCategoryWiseNominations()->getResultArray();
+        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
        
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
         $currentDate = strtotime(date('Y-m-d'));
@@ -124,10 +146,8 @@ class Home extends BaseController
 
         $data['currentNominations'] = $currentNominations;
 
-        return view('frontend/_partials/header',$data)
-                .view('frontend/research_awards',$data)
-                .view('frontend/_partials/footer');
-
+        return render('frontend/research_awards',$data);
+             
     }
 
     public function science_scholar_awards()
@@ -136,13 +156,10 @@ class Home extends BaseController
       $uri = current_url(true);
       $data['uri'] = $uri->getSegment(1); 
 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
-        $data['userdata'] = $userdata;
-
-        $nominationModel = new NominationTypesModel();
-        
-        $nominationLists = $nominationModel->getCategoryWiseNominations()->getResultArray();
+      
+      $data['userdata'] = $this->session->get('userdata');
+       
+        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
        
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
         $currentDate = strtotime(date('Y-m-d'));
@@ -161,10 +178,7 @@ class Home extends BaseController
 
         $data['currentNominations'] = $currentNominations;
         
-        return view('frontend/_partials/header',$data)
-                .view('frontend/science_scholar_awards',$data)
-                .view('frontend/_partials/footer');
-
+        return render('frontend/science_scholar_awards',$data);
     }
 
     public function symposium()
@@ -172,13 +186,12 @@ class Home extends BaseController
 
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+       
+        $userdata =$this->session->get('userdata');
         $data['userdata'] = $userdata;
 
-        return  view('frontend/_partials/header',$data)
-               .view('frontend/symposium',$data)
-                .view('frontend/_partials/footer');
+        return  render('frontend/symposium',$data);
+               
     }
 
     public function annualforeign_scientist()
@@ -186,26 +199,24 @@ class Home extends BaseController
 
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+       
+        $userdata = $this->session->get('userdata');
         $data['userdata'] = $userdata;
 
-        return  view('frontend/_partials/header',$data)
-               .view('frontend/annualforeignscientist',$data)
-                .view('frontend/_partials/footer');
+        return  render('frontend/annualforeignscientist',$data);
+               
     }
 
     public function roundtable()
     {
 
-      $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
+    
+        $userdata = $this->session->get('userdata');
         $data['userdata'] = $userdata;
 
-        return  view('frontend/_partials/header',$data)
-               .view('frontend/roundtable',$data)
-                .view('frontend/_partials/footer');
+        return  render('frontend/roundtable',$data);
+                
     }
 }

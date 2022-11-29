@@ -69,7 +69,7 @@ class Workshops extends BaseController
                     $start_date   = $request->getPost('start_date');
                     $end_date     = $request->getPost('end_date');
                     $year         = $request->getPost('year');
-                    $status         = $request->getPost('status');
+                    $status       = $request->getPost('status');
 
                     $ins_data = array();
                     $ins_data['category']          = $category;
@@ -153,7 +153,7 @@ class Workshops extends BaseController
                     $editdata['event_document']        = $edit_data['document'];
                     $editdata['banner_image']          = $edit_data['banner_image'];
                     $editdata['thumb_image']           = $edit_data['thumb_image'];
-                    $editdata['status']           = $edit_data['status'];
+                    $editdata['status']                = $edit_data['status'];
                     $editdata['id']                    = $edit_data['id'];
                 }
                 else
@@ -168,7 +168,7 @@ class Workshops extends BaseController
                     $editdata['event_document']       = ($this->request->getFile('event_document'))?$this->request->getFile('event_document'):'';
                     $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';
                     $editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
-                    $editdata['status']               = ($this->request->getFile('status'))?$this->request->getFile('status'):'';
+                    $editdata['status']               = ($request->getPost('status'))?$request->getPost('status'):'';
                     $editdata['id']                   = ($request->getPost('id'))?$request->getPost('id'):'';
                 }
 

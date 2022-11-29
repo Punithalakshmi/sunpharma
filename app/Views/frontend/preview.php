@@ -28,7 +28,9 @@
         </div>
     </div>
     <div class="row">
-       <?php if($userdata['nominationEndDays'] == 0): ?>
+       <?php //echo "<pre>";
+        // print_r($user);
+       if(isset($userdata['nominationEndDays']) && $userdata['nominationEndDays'] == 0): ?>
           <h4>Nomination was closed you just view your data. you can't able to update the data</h4>
         <?php endif;?>
         <!-- FORMS -->
@@ -272,7 +274,7 @@
 
                             <div class="row">
                             <?php
-                                  if(isset($user['complete_bio_data']) && !empty($user['complete_bio_data'])):
+                                  if(isset($user['complete_bio_data'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -301,9 +303,10 @@
                                             </div>
                                     </div>
                                 </div>
-                                <?php endif; endif;
+                                <?php endif; 
+                                endif;
                                    if(isset($user) && ($user['nomination_type'] == 'ssan')):
-                                  if(isset($user['best_papers']) && !empty($user['best_papers'])):
+                                  if(isset($user['best_papers'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -336,8 +339,9 @@
                                             </div>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['statement_of_research_achievements']) && !empty($user['statement_of_research_achievements'])):
+                                <?php endif; 
+                                     endif;
+                                  if(isset($user['statement_of_research_achievements'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -375,7 +379,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['signed_details']) && !empty($user['signed_details'])):
+                                  if(isset($user['signed_details'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -412,7 +416,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['specific_publications']) && !empty($user['specific_publications'])):
+                                  if(isset($user['specific_publications'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -445,7 +449,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['signed_statement']) && !empty($user['signed_statement'])):
+                                  if(isset($user['signed_statement'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -485,7 +489,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['citation']) && !empty($user['citation'])):
+                                  if(isset($user['citation'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -520,7 +524,7 @@
                                     <?php endif; endif;
                                        else: 
 
-                                      if(isset($user['excellence_research_work']) && !empty($user['excellence_research_work'])):
+                                      if(isset($user['excellence_research_work']) ):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -551,7 +555,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['lists_of_publications']) && !empty($user['lists_of_publications'])):
+                                  if(isset($user['lists_of_publications'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -583,7 +587,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['statement_of_applicant']) && !empty($user['statement_of_applicant'])):
+                                  if(isset($user['statement_of_applicant'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -613,7 +617,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['ethical_clearance']) && !empty($user['ethical_clearance'])):
+                                  if(isset($user['ethical_clearance'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -640,7 +644,7 @@
                                     </div>
                                 </div>
                                 <?php endif; endif;
-                                  if(isset($user['statement_of_duly_signed_by_nominee']) && !empty($user['statement_of_duly_signed_by_nominee'])):
+                                  if(isset($user['statement_of_duly_signed_by_nominee'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -669,8 +673,9 @@
                                             </div>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['citation']) && !empty($user['citation'])):
+                                <?php endif; 
+                                endif;
+                                  if(isset($user['citation'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -700,7 +705,7 @@
                                     </div>
                                     <?php endif; endif;
                                     
-                                  if(isset($user['aggregate_marks']) && !empty($user['aggregate_marks'])):
+                                  if(isset($user['aggregate_marks'])):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -728,7 +733,7 @@
                                         </div>
                                     </div>
                                     <?php endif; endif;
-                                    if(isset($user['year_of_passing']) && !empty($user['year_of_passing'])):
+                                    if(isset($user['year_of_passing'])):
                                    ?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -751,7 +756,7 @@
                                         </div>
                                     </div>
                                     <?php endif; endif;
-                                    if(isset($user['number_of_attempts']) && !empty($user['number_of_attempts'])):
+                                    if(isset($user['number_of_attempts']) ):
                                    ?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -774,7 +779,7 @@
                                         </div>
                                     </div>
                                     <?php endif; endif;
-                                    if(isset($user['age_proof']) && !empty($user['age_proof'])):
+                                    if(isset($user['age_proof'])):
                                    ?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -802,7 +807,7 @@
                                         </div>
                                     </div>
                                     <?php endif; endif;
-                                    if(isset($user['declaration_candidate']) && !empty($user['declaration_candidate'])):
+                                    if(isset($user['declaration_candidate'])):
                                    ?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">

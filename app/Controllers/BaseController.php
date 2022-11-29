@@ -35,8 +35,24 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['html','form','url'];
 
+    protected $session;
+    //protected $request;
+    protected $validation;
+
+    public $userModel;
+    public $nominationTypesModel;
+    public $nominationModel;
+    public $categoryModel;
+    public $awardsModel;
+    public $juryModel;
+    public $nomineeModel;
+    public $ratingModel;
+    public $registerationModel;
+    public $roleModel;
+    public $workshopModel;
+   
     /**
      * Constructor.
      */
@@ -47,6 +63,22 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
 
-        // E.g.: $this->session = \Config\Services::session();
+        
+        $this->userModel            = model('App\Models\UserModel');
+        $this->nominationTypesModel = model('App\Models\NominationTypesModel');
+        $this->nominationModel      = model('App\Models\NominationModel');
+        $this->categoryModel        = model('App\Models\CategoryModel');
+        $this->juryModel            = model('App\Models\JuryModel');
+        $this->awardsModel          = model('App\Models\AwardsModel');
+        $this->nomineeModel         = model('App\Models\NomineeModel');
+        $this->ratingModel          = model('App\Models\RatingModel');
+        $this->registerationModel   = model('App\Models\RegisterationModel');
+        $this->roleModel            = model('App\Models\RoleModel');
+        $this->workshopModel        = model('App\Models\WorkshopModel');
+
+        $this->session     = \Config\Services::session();
+      //  $this->request     = \Config\Services::request();
+        $this->validation  = \Config\Services::validation();
+
     }
 }

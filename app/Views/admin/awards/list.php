@@ -61,7 +61,7 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <!-- <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th></th>
@@ -72,52 +72,75 @@
                           <th>Rating</th>
                         </tr>
                       </thead>
-                      <tbody id="getLists">
+                      <tbody id="getLists"> -->
                            
                           <?php 
                             if(is_array($lists)):
                                     foreach($lists as $user):
                             ?>
-                                <tr>
-                                    <td class="iconcal"><i class="expandChildTable fa fa-plus-circle"></i></td>
-                                    <td><?=$user['category_name'];?></td>
-                                    <td><?=$user['firstname'];?></td>
-                                    <td><?=date("Y")."/".$user['id'];?></td>
-                                    <td><?=$user['dob'];?></td>
-                                    <td><?=round($user['average_rating']);?></td>
-                                </tr>
-                                <?php if(is_array($user['juries']) && count($user['juries']) > 0): ?>
-                                  <tr class="childTableRow ">
-                                      <td colspan="6">
-                                          <h5>Jury Info</h5>
-                                          <table class="table graybg jurysec">
-                                              <thead>
-                                              <tr>
-                                                  <th>Jury</th>
-                                                  <th>Rating</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody>
-                                                <?php foreach($user['juries'] as $ukey => $uvalue): ?>
-                                                  <tr>
-                                                      <td><?=$uvalue['firstname'].' '.$uvalue['lastname'];?></td>
-                                                      <td><?=$uvalue['rating'];?></td>
-                                                  </tr>
-                                                <?php endforeach;?>  
-                                              </tbody>
-                                          </table>
-                                      </td>            
-                                  </tr>
-                            <?php    endif;
-                                     endforeach;
-                                     endif;
-                            ?>
-                          
-                      </tbody>
-                    </table>
+
+                              <div data-toggle="modal" data-target="#juryListsModal" class="col-md-3 col-xs-12 mt-30" onclick="geJuryLists(<?=$user['id'];?>);">
+                                  <div class="product-image border avatarimg">
+                                    <img class="border" src="<?=base_url();?>/uploads/<?=$user['id'];?>/<?=$user['nominator_photo'];?>" alt="" style="border: 1px solid #959595;padding: 5px;"> 
+                                  </div>
+                                  <div class="product_gallery">
+                                    <br/>
+                                     <p align="center"><?=$user['firstname'];?></p>
+                                     <p align="center"><?=$user['category_name'];?></p>
+                                     <p align="center"><?=round($user['average_rating']);?></p>
+                                  </div>
+                                </div>
+                              <?php endforeach;
+                                     endif; ?>  
+                                <!-- <tr> <td class="iconcal"><i class="expandChildTable fa fa-plus-circle"></i></td>
+                                    <td><?//$user['category_name'];?></td>
+                                    <td><?//$user['firstname'];?></td>
+                                    <td><?//date("Y")."/".$user['id'];?></td>
+                                    <td><?//$user['dob'];?></td>
+                                    <td><?//round($user['average_rating']);?></td>
+                                </tr> -->
+                               
+                      <!-- </tbody>
+                    </table> -->
                   </div>
                 </div>
               </div>
         <!-- /page content -->
       </div>
     </div>
+
+    <div class="modal fade" id="juryListsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Jury Lists</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="juryListss">
+        <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody id="getLists">
+                <?php if(is_array($user['juries']) && count($user['juries']) > 0):  
+                  foreach($user['juries'] as $ukey => $uvalue): ?>
+                    <tr>
+                        <td><?=$uvalue['firstname'].' '.$uvalue['lastname'];?></td>
+                        <td><?=$uvalue['rating'];?></td>
+                    </tr>
+                  <?php endforeach;
+                  endif; ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+    </div>
+  </div>
+</div>

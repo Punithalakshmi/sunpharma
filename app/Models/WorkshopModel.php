@@ -20,7 +20,8 @@ class WorkshopModel extends Model{
         'document',
         'year',
         'banner_image',
-        'thumb_image'
+        'thumb_image',
+        'status'
     ];
 
     public function getLists($id='')
@@ -37,6 +38,11 @@ class WorkshopModel extends Model{
         $builder = $db->table('event_type');
         $builder->select('event_type.*');
         return $query = $builder->get();
+    }
+
+    public function getActiveEvents()
+    {
+         return $this->getWhere(array('status' => 1)); 
     }
 
 }

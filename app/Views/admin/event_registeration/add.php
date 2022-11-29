@@ -2,7 +2,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add Registeration</h3>
+                <h3>Add Registration</h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -100,7 +100,7 @@
 
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Registeration No:</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration No:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>

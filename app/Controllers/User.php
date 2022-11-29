@@ -2,94 +2,74 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
-use App\Models\NominationModel;
-use App\Models\NominationTypesModel;
-
-
 class User extends BaseController
 {
     
     public function login()
     {
 
-        $session   = session();
-        $userModel = new UserModel();
-        $nominationModel = new NominationModel();
-        $nominationModl  = new NominationTypesModel();
+        if($this->request->getPost()){
 
-        $request   = \Config\Services::request();
-
-        if($request->getPost()){
-              $username   = $request->getPost('username');
-              $password  = $request->getPost('password');
+              $username   = $this->request->getPost('username');
+              $password   = $this->request->getPost('password');
        
-              $result   = $userModel->Login($username, md5($password));
+              $result   = $this->userModel->Login($username, md5($password));
               
-              $getNominationData   = $nominationModel->getNominationData($result['id']);
-              $getNominationData   = $getNominationData->getRowArray();
-            
-              $getCategoryNominationData   = $nominationModl->getCategoryNomination($getNominationData['category_id']);
-              $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
+             if(!$result) {
+                 $this->session->setFlashdata('msg', 'Invalid Credentials');
+             }
+             else
+             {
+               // print_r($result); die;
+                $getNominationData   = $this->nominationModel->getNominationData($result['id']);
+                $getNominationData   = $getNominationData->getRowArray();
+                
+                $getCategoryNominationData   = $this->nominationTypesModel->getCategoryNomination($getNominationData['category_id']);
+                $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
 
-              $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
-             
-              $result['nominationEndDays'] =  $nominationEndDays;
+              
+               $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
+                
+                $result['nominationEndDays'] =  $nominationEndDays;
 
-              $result['nominationEndDate'] = $getNominationDaysCt['end_date'];
+                $result['nominationEndDate'] = $getNominationDaysCt['end_date'];
 
-              $result['nomination_type'] = $getNominationData['nomination_type'];
+                $result['nomination_type'] = $getNominationData['nomination_type'];
 
-             // print_r($result); die;
+                //print_r($result);
+                //die;
 
-              $session->set('userdata',$result);
+                $this->session->set('userdata',$result);
 
-              $redirect_route = 'view/'.$result['id'];
+                $redirect_route = 'view/'.$result['id'];
 
-              return redirect()->to($redirect_route);
+                return redirect()->to($redirect_route);
+            }    
         }
-        else
-        {
-            $session->setFlashdata('msg', 'Invalid Credentials');
-            $data['userdata'] = array(
-                                    'id'          => '',
-                                    'name'        => '',
-                                    'email'       => '',
-                                    'isLoggedIn'      => false,
-                                    'role'           => ''
-                                );
-
+       
             $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1);  
-
-            return  view('frontend/_partials/header',$data)
-            .view('frontend/login',$data)
-            .view('frontend/_partials/footer');
-        }
+           
+            return  render('frontend/login',$data);
 
        
     }
 
     public function forget_password()
     {
-        return  view('frontend/header')
-               .view('frontend/forget_password')
-               .view('frontend/footer');
+        return  render('frontend/forget_password');
     }
 
     public function reset_password()
     {
-        return  view('frontend/header')
-               .view('frontend/reset_password')
-               .view('frontend/footer');
+        return  render('frontend/reset_password');
+             
     }
 
 
     public function logout()
     {
-
-        $session = session();
-        $session->remove('userdata');
+        $this->session->remove('userdata');
         return redirect()->route('/');
     }
 
@@ -101,6 +81,13 @@ class User extends BaseController
         return round($diff / 86400);
     }
 
+
+    public function validForm()
+    {
+        $uri = current_url(true);
+            $data['uri'] = $uri->getSegment(1); 
+        return view('frontend/formvalid',$data);
+    }
 
 
 }    

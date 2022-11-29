@@ -3,13 +3,13 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Event Registeration <small></small></h3>
+                <h3>Event Registration <small></small></h3>
               </div>
             </div>
            
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/eventregisteration/add" class="btn btn-primary btn-xs">
-                   <i class="fa fa-plus"></i>Add Event Registeration
+                   <i class="fa fa-plus"></i>Add Event Registration
                 </a>
            </div>
                 
@@ -36,7 +36,7 @@
                           <th>Email</th>
                           <th>Phone</th>
                           <!-- <th>Registration No</th> -->
-                          <th>Registeration No</th>
+                          <th>Registration No</th>
                           <th>Action</th>
                         </tr>
                       </thead>

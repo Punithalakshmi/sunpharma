@@ -2,72 +2,61 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
-use App\Models\NominationModel;
-use App\Models\CategoryModel;
 
 class Nomination extends BaseController
 {
     public function index($id = '')
     {
-        helper(array('form', 'url'));
-        
-        $session   = \Config\Services::session();
-        $userdata  = $session->get('userdata');
+   
+        $userdata  = $this->session->get('userdata');
 
-        if(is_array($userdata) && $userdata['isLoggedIn'])
+       
+        if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == '2'))
             $this->view($userdata['id']);
 
-        $request     = \Config\Services::request();
-        $validation  = \Config\Services::validation();
         $uri         = current_url(true);
-
         $data['uri'] = $uri->getSegment(1);
 
-        $userModel       = new UserModel();
-        $categoryModel   = new CategoryModel();
-        $nominationModel = new NominationModel();
-       
             if(!empty($id)){
-                $getUserData = $userModel->getUserData($id);
+                $getUserData = $this->userModel->getUserData($id);
                 $edit_data   = $getUserData->getRowArray();
             }
 
             //get categories lists
-            $getCategoryLists   = $categoryModel->getCategoriesByType('Science Scholar Awards');
+            $getCategoryLists   = $this->categoryModel->getCategoriesByType('Science Scholar Awards');
             $data['categories'] = $getCategoryLists->getResultArray();
             
-            if($request->getPost()){
-               $id  = $request->getPost('id');
-               $detail_id = $request->getPost('detail_id');
+            if($this->request->getPost()){
+               $id  = $this->request->getPost('id');
+               $detail_id = $this->request->getPost('detail_id');
             }   
             else
             {
                $id  = $id;   
             }   
-            $validation = $this->validate($this->validation_rules($id));
+            $this->validation = $this->validate($this->validation_rules($id));
           
-            if($validation) {
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $category                    = $request->getPost('category');
-                    $firstname                   = $request->getPost('nominee_name');
-                    $dob                         = $request->getPost('date_of_birth');
-                    $citizenship                 = $request->getPost('citizenship');
-                    $email                       = $request->getPost('email');
-                    $phonenumber                 = $request->getPost('mobile_no');
-                    $address                     = $request->getPost('designation_and_office_address');
-                    $residence_address           = $request->getPost('residence_address');
-                    $nominator_name              = $request->getPost('nominator_name');
-                    $nominator_mobile            = $request->getPost('nominator_mobile');
-                    $nominator_email             = $request->getPost('nominator_email');
-                    $nominator_office_address    = $request->getPost('nominator_office_address');
-                    $ongoing_course              = $request->getPost('ongoing_course');
-                    $research_project            = $request->getPost('research_project');
-                    if($request->getPost('year_of_passing')) {
-                        $year_of_passing             = $request->getPost('year_of_passing');
-                        $number_of_attempts          = $request->getPost('number_of_attempts');
+                    $category                    = $this->request->getPost('category');
+                    $firstname                   = $this->request->getPost('nominee_name');
+                    $dob                         = $this->request->getPost('date_of_birth');
+                    $citizenship                 = $this->request->getPost('citizenship');
+                    $email                       = $this->request->getPost('email');
+                    $phonenumber                 = $this->request->getPost('mobile_no');
+                    $address                     = $this->request->getPost('designation_and_office_address');
+                    $residence_address           = $this->request->getPost('residence_address');
+                    $nominator_name              = $this->request->getPost('nominator_name');
+                    $nominator_mobile            = $this->request->getPost('nominator_mobile');
+                    $nominator_email             = $this->request->getPost('nominator_email');
+                    $nominator_office_address    = $this->request->getPost('nominator_office_address');
+                    $ongoing_course              = $this->request->getPost('ongoing_course');
+                    $research_project            = $this->request->getPost('research_project');
+                    if($this->request->getPost('year_of_passing')) {
+                        $year_of_passing             = $this->request->getPost('year_of_passing');
+                        $number_of_attempts          = $this->request->getPost('number_of_attempts');
                     }
                   
                     $ins_data = array();
@@ -92,17 +81,17 @@ class Nomination extends BaseController
                     $nominee_details_data['ongoing_course']    = $ongoing_course;
                     $nominee_details_data['is_completed_a_research_project']  = $research_project;
 
-                    if($request->getPost('year_of_passing')) 
+                    if($this->request->getPost('year_of_passing')) 
                         $nominee_details_data['year_of_passing']    = $year_of_passing;
 
-                    if($request->getPost('number_of_attempts'))     
+                    if($this->request->getPost('number_of_attempts'))     
                         $nominee_details_data['number_of_attempts'] = $number_of_attempts;
                     
                     if(!empty($id)){
                         $session->setFlashdata('msg', 'Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['id'];
-                        $userModel->update(array("id" => $id),$ins_data);
+                        $this->userModel->update(array("id" => $id),$ins_data);
 
                         $fileUploadDir = 'uploads/'.$id;
 
@@ -151,17 +140,17 @@ class Nomination extends BaseController
                                 $nominee_details_data['declaration_candidate']              = $declaration_candidate->getClientName();
                             }  
 
-                            $nominationModel->update(array("id" => $detail_id),$nominee_details_data);
+                            $this->nominationModel->update(array("id" => $detail_id),$nominee_details_data);
 
                         }
                     }
                     else
                     {
-                        $session->setFlashdata('msg', 'Submitted Successfully!');
+                        $this->session->setFlashdata('msg', 'Submitted Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  1;
-                        $userModel->save($ins_data);
-                        $lastInsertID = $userModel->insertID();
+                        $this->userModel->save($ins_data);
+                        $lastInsertID = $this->userModel->insertID();
 
                         $fileUploadDir = 'uploads/'.$lastInsertID;
                         
@@ -176,7 +165,6 @@ class Nomination extends BaseController
                             $supervisor_certifying->move($fileUploadDir);
 
                             $nominator_photo = $this->request->getFile('nominator_photo');
-                           // print_r($nominator_photo); die;
                             $nominator_photo->move($fileUploadDir);
 
                             $nominee_details_data['nominee_id']                         = $lastInsertID;
@@ -184,7 +172,9 @@ class Nomination extends BaseController
                             $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
                             $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
                             
-                            $nominationModel->save($nominee_details_data);
+                            $this->nominationModel->save($nominee_details_data);
+
+                            $this->sendMail();
                     } 
 
                     return redirect()->to('spsfn');
@@ -221,25 +211,25 @@ class Nomination extends BaseController
                     $editdata['declaration_candidate']                = $edit_data['declaration_candidate'];
                     $editdata['year_of_passing']                      = $edit_data['year_of_passing'];
                     $editdata['number_of_attempts']                   = $edit_data['number_of_attempts'];
-                    $editdata['ongoing_course']                      = $edit_data['ongoing_course'];
-                    $editdata['research_project']                   = $edit_data['is_completed_a_research_project'];
+                    $editdata['ongoing_course']                       = $edit_data['ongoing_course'];
+                    $editdata['research_project']                     = $edit_data['is_completed_a_research_project'];
                     $editdata['id']                                   = $edit_data['user_id'];
                     $editdata['detail_id']                            = $edit_data['id'];
                 }
                 else
                 {
-                    $editdata['category']                             = ($request->getPost('category'))?$request->getPost('category'):'';
-                    $editdata['nominee_name']                         = ($request->getPost('nominee_name'))?$request->getPost('nominee_name'):'';
-                    $editdata['citizenship']                          = ($request->getPost('citizenship'))?$request->getPost('citizenship'):'';
-                    $editdata['designation_and_office_address']       = ($request->getPost('designation_and_office_address'))?$request->getPost('designation_and_office_address'):'';
-                    $editdata['residence_address']                    = ($request->getPost('residence_address'))?$request->getPost('residence_address'):'';
-                    $editdata['email']                                = ($request->getPost('email'))?$request->getPost('email'):'';
-                    $editdata['mobile_no']                            = ($request->getPost('mobile_no'))?$request->getPost('mobile_no'):'';
-                    $editdata['date_of_birth']                        = ($request->getPost('date_of_birth'))?$request->getPost('date_of_birth'):'';
-                    $editdata['nominator_name']                       = ($request->getPost('nominator_name'))?$request->getPost('nominator_name'):'';
-                    $editdata['nominator_mobile']                     = ($request->getPost('nominator_mobile'))?$request->getPost('nominator_mobile'):'';
-                    $editdata['nominator_email']                      = ($request->getPost('nominator_email'))?$request->getPost('nominator_email'):'';
-                    $editdata['nominator_office_address']             = ($request->getPost('nominator_office_address'))?$request->getPost('nominator_office_address'):'';
+                    $editdata['category']                             = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                    $editdata['nominee_name']                         = ($this->request->getPost('nominee_name'))?$this->request->getPost('nominee_name'):'';
+                    $editdata['citizenship']                          = ($this->request->getPost('citizenship'))?$this->request->getPost('citizenship'):'';
+                    $editdata['designation_and_office_address']       = ($this->request->getPost('designation_and_office_address'))?$this->request->getPost('designation_and_office_address'):'';
+                    $editdata['residence_address']                    = ($this->request->getPost('residence_address'))?$this->request->getPost('residence_address'):'';
+                    $editdata['email']                                = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+                    $editdata['mobile_no']                            = ($this->request->getPost('mobile_no'))?$this->request->getPost('mobile_no'):'';
+                    $editdata['date_of_birth']                        = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
+                    $editdata['nominator_name']                       = ($this->request->getPost('nominator_name'))?$this->request->getPost('nominator_name'):'';
+                    $editdata['nominator_mobile']                     = ($this->request->getPost('nominator_mobile'))?$this->request->getPost('nominator_mobile'):'';
+                    $editdata['nominator_email']                      = ($this->request->getPost('nominator_email'))?$this->request->getPost('nominator_email'):'';
+                    $editdata['nominator_office_address']             = ($this->request->getPost('nominator_office_address'))?$this->request->getPost('nominator_office_address'):'';
                     $editdata['justification_letter']                 = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
                     $editdata['supervisor_certifying']                = ($this->request->getFile('supervisor_certifying'))?$this->request->getFile('supervisor_certifying'):'';
                     $editdata['nominator_photo']                      = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
@@ -253,14 +243,14 @@ class Nomination extends BaseController
                     $editdata['aggregate_marks']                      = ($this->request->getFile('aggregate_marks'))?$this->request->getFile('aggregate_marks'):'';
                     $editdata['age_proof']                            = ($this->request->getFile('age_proof'))?$this->request->getFile('age_proof'):'';
                     $editdata['declaration_candidate']                = ($this->request->getFile('declaration_candidate'))?$this->request->getFile('declaration_candidate'):'';
-                    $editdata['year_of_passing']                      = ($request->getPost('year_of_passing'))?$request->getPost('year_of_passing'):'';
-                    $editdata['number_of_attempts']                   = ($request->getPost('number_of_attempts'))?$request->getPost('number_of_attempts'):'';
-                    $editdata['ongoing_course']                       = ($request->getPost('ongoing_course'))?$request->getPost('ongoing_course'):'';
-                    $editdata['research_project']                     = ($request->getPost('research_project'))?$request->getPost('research_project'):'';
-                    $editdata['id']                                   = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['year_of_passing']                      = ($this->request->getPost('year_of_passing'))?$this->request->getPost('year_of_passing'):'';
+                    $editdata['number_of_attempts']                   = ($this->request->getPost('number_of_attempts'))?$this->request->getPost('number_of_attempts'):'';
+                    $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
+                    $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
+                    $editdata['id']                                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
 
                     if(!empty($editdata['category'])) {
-                        $getCategoryLists   = $categoryModel->getCategoriesById($editdata['category']);
+                        $getCategoryLists   = $this->categoryModel->getCategoriesById($editdata['category']);
                         $categoryRw         = $getCategoryLists->getRowArray();
                         $editdata['category'] =    $categoryRw['name'];
                     }
@@ -284,7 +274,7 @@ class Nomination extends BaseController
                     }
                 }
 
-                  if($request->getPost())
+                  if($this->request->getPost())
                     $data['validation'] = $this->validator;
 
 
@@ -302,9 +292,8 @@ class Nomination extends BaseController
                     }
                     else
                     {
-                        return  view('frontend/_partials/header',$data)
-                            .view('frontend/spsfn_new',$data)
-                            .view('frontend/_partials/footer');
+                        return render('frontend/spsfn_new',$data);
+                            
                     }        
           }
 
@@ -316,58 +305,50 @@ class Nomination extends BaseController
     {
 
             helper(array('form', 'url'));
-            $session   = \Config\Services::session();
-            $userdata  = $session->get('userdata');
+            
+            $userdata  = $this->session->get('userdata');
 
-         //   print_r($userdata);
-            if(is_array($userdata) && $userdata['isLoggedIn'])
+            if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == 2))
                 $this->view($userdata['id']);
 
-            $request   = \Config\Services::request();
-            
-            $validation = \Config\Services::validation();
             $uri = current_url(true);
 
             $data['uri'] = $uri->getSegment(1);
-
-            $userModel       = new UserModel();
-            $categoryModel   = new CategoryModel();
-            $nominationModel = new NominationModel();
        
             if(!empty($id)){
-                $getUserData = $userModel->getUserData($id);
+                $getUserData = $this->userModel->getUserData($id);
                 $edit_data   = $getUserData->getRowArray();
             }
 
             //get categories lists
-            $getCategoryLists   = $categoryModel->getCategoriesByType('Research Awards');
+            $getCategoryLists   = $this->categoryModel->getCategoriesByType('Research Awards');
             $categories         = $getCategoryLists->getResultArray();
             
             $data['categories'] = $categories;
 
-            if($request->getPost()){
-               $id  = $request->getPost('id');
-               $detail_id = $request->getPost('detail_id');
+            if($this->request->getPost()){
+               $id  = $this->request->getPost('id');
+               $detail_id = $this->request->getPost('detail_id');
             }   
                
-            $validation = $this->validate($this->validation_rules($id,'ssan'));
+            $this->validation = $this->validate($this->validation_rules($id,'ssan'));
           
-            if($validation) {
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                  
-                    $category                    = $request->getPost('category');
-                    $firstname                   = $request->getPost('nominee_name');
-                    $dob                         = $request->getPost('date_of_birth');
-                    $citizenship                 = $request->getPost('citizenship');
-                    $email                       = $request->getPost('email');
-                    $phonenumber                 = $request->getPost('mobile_no');
-                    $address                     = $request->getPost('designation_and_office_address');
-                    $residence_address           = $request->getPost('residence_address');
-                    $nominator_name              = $request->getPost('nominator_name');
-                    $nominator_mobile            = $request->getPost('nominator_mobile');
-                    $nominator_email             = $request->getPost('nominator_email');
-                    $nominator_office_address    = $request->getPost('nominator_office_address');
+                    $category                    = $this->request->getPost('category');
+                    $firstname                   = $this->request->getPost('nominee_name');
+                    $dob                         = $this->request->getPost('date_of_birth');
+                    $citizenship                 = $this->request->getPost('citizenship');
+                    $email                       = $this->request->getPost('email');
+                    $phonenumber                 = $this->request->getPost('mobile_no');
+                    $address                     = $this->request->getPost('designation_and_office_address');
+                    $residence_address           = $this->request->getPost('residence_address');
+                    $nominator_name              = $this->request->getPost('nominator_name');
+                    $nominator_mobile            = $this->request->getPost('nominator_mobile');
+                    $nominator_email             = $this->request->getPost('nominator_email');
+                    $nominator_office_address    = $this->request->getPost('nominator_office_address');
 
                     $ins_data = array();
                     $ins_data['firstname']  = $firstname;
@@ -394,7 +375,7 @@ class Nomination extends BaseController
                         $session->setFlashdata('msg', 'Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['id'];
-                        $userModel->update(array("id" => $id),$ins_data);
+                        $this->userModel->update(array("id" => $id),$ins_data);
 
                         $fileUploadDir = 'uploads/'.$id;
 
@@ -427,16 +408,16 @@ class Nomination extends BaseController
                                     $nominee_details_data['specific_publications']              = $specific_publications->getClientName();
                                     $nominee_details_data['signed_statement']                   = $signed_statement->getClientName();
                                     $nominee_details_data['citation']                           = $citation->getClientName();
-                                    $nominationModel->update(array("id" => $detail_id),$nominee_details_data);
+                                    $this->nominationModel->update(array("id" => $detail_id),$nominee_details_data);
                             }
                     }
                     else
                     {
-                        $session->setFlashdata('msg', 'Submitted Successfully!');
+                        $this->session->setFlashdata('msg', 'Submitted Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  1;
-                        $userModel->save($ins_data);
-                        $lastInsertID = $userModel->insertID();
+                        $this->userModel->save($ins_data);
+                        $lastInsertID = $this->userModel->insertID();
 
                          $fileUploadDir = 'uploads/'.$lastInsertID;
                         
@@ -457,7 +438,9 @@ class Nomination extends BaseController
                             $nominee_details_data['passport_filename']                  = $passport->getClientName();
                             $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
                             $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
-                            $nominationModel->save($nominee_details_data);
+                            $this->nominationModel->save($nominee_details_data);
+
+                            $this->sendMail();
                     } 
 
                     return redirect()->to('ssan');
@@ -494,18 +477,18 @@ class Nomination extends BaseController
                 }
                 else
                 {
-                    $editdata['category']                      = ($request->getPost('category'))?$request->getPost('category'):'';
-                    $editdata['nominee_name']                  = ($request->getPost('nominee_name'))?$request->getPost('nominee_name'):'';
-                    $editdata['citizenship']                   = ($request->getPost('citizenship'))?$request->getPost('citizenship'):'';
-                    $editdata['designation_and_office_address']= ($request->getPost('designation_and_office_address'))?$request->getPost('designation_and_office_address'):'';
-                    $editdata['residence_address']             = ($request->getPost('residence_address'))?$request->getPost('residence_address'):'';
-                    $editdata['email']                         = ($request->getPost('email'))?$request->getPost('email'):'';
-                    $editdata['mobile_no']                     = ($request->getPost('mobile_no'))?$request->getPost('mobile_no'):'';
-                    $editdata['date_of_birth']                 = ($request->getPost('date_of_birth'))?$request->getPost('date_of_birth'):'';
-                    $editdata['nominator_name']                = ($request->getPost('nominator_name'))?$request->getPost('nominator_name'):'';
-                    $editdata['nominator_mobile']              = ($request->getPost('nominator_mobile'))?$request->getPost('nominator_mobile'):'';
-                    $editdata['nominator_email']               = ($request->getPost('nominator_email'))?$request->getPost('nominator_email'):'';
-                    $editdata['nominator_office_address']      = ($request->getPost('nominator_office_address'))?$request->getPost('nominator_office_address'):'';
+                    $editdata['category']                      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                    $editdata['nominee_name']                  = ($this->request->getPost('nominee_name'))?$this->request->getPost('nominee_name'):'';
+                    $editdata['citizenship']                   = ($this->request->getPost('citizenship'))?$this->request->getPost('citizenship'):'';
+                    $editdata['designation_and_office_address']= ($this->request->getPost('designation_and_office_address'))?$this->request->getPost('designation_and_office_address'):'';
+                    $editdata['residence_address']             = ($this->request->getPost('residence_address'))?$this->request->getPost('residence_address'):'';
+                    $editdata['email']                         = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+                    $editdata['mobile_no']                     = ($this->request->getPost('mobile_no'))?$this->request->getPost('mobile_no'):'';
+                    $editdata['date_of_birth']                 = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
+                    $editdata['nominator_name']                = ($this->request->getPost('nominator_name'))?$this->request->getPost('nominator_name'):'';
+                    $editdata['nominator_mobile']              = ($this->request->getPost('nominator_mobile'))?$this->request->getPost('nominator_mobile'):'';
+                    $editdata['nominator_email']               = ($this->request->getPost('nominator_email'))?$this->request->getPost('nominator_email'):'';
+                    $editdata['nominator_office_address']      = ($this->request->getPost('nominator_office_address'))?$this->request->getPost('nominator_office_address'):'';
                     $editdata['justification_letter']          = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
                     $editdata['passport']                      = ($this->request->getFile('passport'))?$this->request->getFile('passport'):'';
                     $editdata['nominator_photo']               = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
@@ -516,10 +499,10 @@ class Nomination extends BaseController
                     $editdata['specific_publications']               = ($this->request->getFile('specific_publications'))?$this->request->getFile('specific_publications'):'';
                     $editdata['signed_statement']                    = ($this->request->getFile('signed_statement'))?$this->request->getFile('signed_statement'):'';
                     $editdata['citation']                            = ($this->request->getFile('citation'))?$this->request->getFile('citation'):'';
-                    $editdata['id']                                  = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['id']                                  = ($this->request->getPost('id'))?$request->getPost('id'):'';
 
                     if(!empty($editdata['category'])) {
-                        $getCategoryLists   = $categoryModel->getCategoriesById($editdata['category']);
+                        $getCategoryLists   = $this->categoryModel->getCategoriesById($editdata['category']);
                         $categoryRw         = $getCategoryLists->getRowArray();
                         $editdata['category'] =    $categoryRw['name'];
                     }
@@ -544,7 +527,7 @@ class Nomination extends BaseController
 
                 }
 
-                  if($request->getPost())
+                  if($this->request->getPost())
                     $data['validation'] = $this->validator;
 
 
@@ -561,9 +544,8 @@ class Nomination extends BaseController
                     }
                     else
                     {
-                        return   view('frontend/_partials/header',$data)
-                                .view('frontend/ssan_new',$data)
-                                .view('frontend/_partials/footer');
+                        return  render('frontend/ssan_new',$data);
+                               
                     }            
           }
 
@@ -602,29 +584,28 @@ class Nomination extends BaseController
     public function view($id = '')
     {
 
-        $userModel     = new UserModel();
-        $categoryModel = new CategoryModel();
+        $userdata = $this->session->get('userdata');
 
-        $request   = \Config\Services::request();
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
-        $nominationModel = new NominationModel();
-
+        //print_r($userdata); die;
+        
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1);  
        
-        $id = (!empty($id))?$id:$request->getPost('id');
+        $id = (!empty($id))?$id:$this->request->getPost('id');
 
         if(!empty($id)){
-            $getUserData = $userModel->getUserData($id);
+            $getUserData = $this->userModel->getUserData($id);
             $edit_data   = $getUserData->getRowArray();
 
-            $category   = $categoryModel->getCategoriesById($edit_data['category_id']);
-            $categoryDt = $category->getRowArray();
-            $edit_data['category_name'] = $categoryDt['name'];
+            $edit_data['category_name'] = '';
+            if(isset($edit_data['category_id'])) {
+                $category   = $this->categoryModel->getCategoriesById($edit_data['category_id']);
+                $categoryDt = $category->getRowArray();
+                $edit_data['category_name'] = $categoryDt['name'];
+            }
         }
         
-        if($request->getPost()){
+        if($this->request->getPost()){
             $nominee_details_data = array();
             $fileUploadDir = 'uploads/'.$edit_data['user_id'];
 
@@ -677,11 +658,11 @@ class Nomination extends BaseController
             else
             {
 
-                if($request->getPost('year_of_passing'))
-                  $nominee_details_data['year_of_passing'] = $request->getPost('year_of_passing');
+                if($this->request->getPost('year_of_passing'))
+                  $nominee_details_data['year_of_passing'] = $this->request->getPost('year_of_passing');
                 
-                if($request->getPost('number_of_attempts'))  
-                  $nominee_details_data['number_of_attempts'] = $request->getPost('number_of_attempts');
+                if($this->request->getPost('number_of_attempts'))  
+                  $nominee_details_data['number_of_attempts'] = $this->request->getPost('number_of_attempts');
                
                 if($this->request->getFile('complete_bio_data')) {
                     $complete_bio_data = $this->request->getFile('complete_bio_data');
@@ -745,7 +726,7 @@ class Nomination extends BaseController
 
             }
 
-            $nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data);  
+            $this->nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data);  
 
             return redirect()->to('view/'.$edit_data['user_id'])->withInput();
 
@@ -774,13 +755,13 @@ class Nomination extends BaseController
                 $editdata['aggregate_marks']                      = ($this->request->getFile('aggregate_marks'))?$this->request->getFile('aggregate_marks'):'';
                 $editdata['age_proof']                            = ($this->request->getFile('age_proof'))?$this->request->getFile('age_proof'):'';
                 $editdata['declaration_candidate']                = ($this->request->getFile('declaration_candidate'))?$this->request->getFile('declaration_candidate'):'';
-                $editdata['year_of_passing']                      = ($request->getPost('year_of_passing'))?$request->getPost('year_of_passing'):'';
-                $editdata['number_of_attempts']                   = ($request->getPost('number_of_attempts'))?$request->getPost('number_of_attempts'):'';
-                $editdata['ongoing_course']                       = ($request->getPost('ongoing_course'))?$request->getPost('ongoing_course'):'';
-                $editdata['research_project']                     = ($request->getPost('research_project'))?$request->getPost('research_project'):'';
+                $editdata['year_of_passing']                      = ($this->request->getPost('year_of_passing'))?$this->request->getPost('year_of_passing'):'';
+                $editdata['number_of_attempts']                   = ($this->request->getPost('number_of_attempts'))?$this->request->getPost('number_of_attempts'):'';
+                $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
+                $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
 
             }    
-                $editdata['id']                                  = ($request->getPost('id'))?$request->getPost('id'):$id;
+                $editdata['id']                                  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
 
               
         }
@@ -789,9 +770,8 @@ class Nomination extends BaseController
         $data['userdata'] = $userdata;
         $data['editdata'] = $editdata;
 
-        return   view('frontend/_partials/header',$data)
-                .view('frontend/preview',$data)
-                .view('frontend/_partials/footer');
+        return  render('frontend/preview',$data);
+                
                        
     }
 
@@ -801,4 +781,25 @@ class Nomination extends BaseController
         return redirect()->to('view/'.$id); 
     }
 
+    public function sendMail()
+    {
+
+       //  $header = "From:abc@somedomain.com \r\n";
+       //  $header .= "Cc:afgh@somedomain.com \r\n";
+         $header  = '';
+         $header .= "MIME-Version: 1.0\r\n";
+         $header .= "Content-type: text/html\r\n";
+
+        $subject = " New Nomination ";
+        $message  = "Hi, ";
+        $message .= '<br/><br/>';
+        $message .= "New candidate was submitted application, Please login and check the nomination data in admin panel";
+        $message .= "<br/>";
+        $message .= "<br/>";
+        $message .= "<br/>";
+        $message .= "Thanks & Regards,";
+        $message .= "Sunpharma Team";
+        mail("punitha@izaaptech.in",$subject,$message,$header);
+
+    }
 }

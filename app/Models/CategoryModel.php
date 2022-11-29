@@ -47,5 +47,12 @@ class CategoryModel extends Model{
         $builder->select('category.*');
         $builder->where("category.id",$id);
         return $query = $builder->get();
-}
+    }
+
+    public function getCategoriesWithoutNomination(){
+        $builder = $this->table('category');
+        $builder->select('category.*');
+        $builder->join('nominations','nominations.category_id != category.id');
+        return $query = $builder->get();
+    }
 }

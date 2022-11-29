@@ -1,26 +1,60 @@
 <div class="container-fluid" style="padding: 0;">
         <div class="row gx-0 gy-0">
             <div class="col">
+
+           
                 <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
                     <div class="carousel-inner h-100">
-                        <div class="carousel-item active h-100"><img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/slide4.jpg" alt="Slide Image" style="z-index: -1;">
+                    <?php if(is_array($nominations) && count($nominations) > 0): 
+                        foreach($nominations as $nkey => $nvalue): 
+                        ?>
+                        <div class="carousel-item <?php if($nkey == 0):?>active<?php endif;?> h-100">
+                            <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/uploads/events/<?=$nvalue['banner_image'];?>" alt="Slide Image" style="z-index: -1;">
                             <div class="container text-start d-flex flex-column justify-content-center h-100">
                                 <div class="row">
                                     <div class="col-md-8 col-xl-7 col-xxl-7 offset-md-0 banneroverlay" style="background: rgba(245,246,248,0.75);padding: 20px;border-radius: 6px;">
                                         <div class="bannercaption">
-                                            <h1 class="text-uppercase fw-bold" style="border-style: none;">Epidemiological and Genomic Methods for the Study of Human Diseases</h1>
-                                            <p class="my-3">Workshop on “Epidemiological and Genomic Methods for the Study of Human Diseases” For Young Clinical Researchers and Basic Scientists</p><a class="btn btn-primary btn-lg me-2" role="button" href="workshop-epidemiological-genomic-methods.html" style="background: #F7941E;border-color: #F7941E;">Read more</a><a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/frontend/assets/pdf/Winter_School_Announcement_2022.pdf" target="blank">Poster Invitation</a>
+                                            <h1 class="text-uppercase fw-bold" style="border-style: none;"><?=(isset($nvalue['title']))?$nvalue['title']:"";?></h1>
+                                            <p class="my-3"><?=(isset($nvalue['subject']))?$nvalue['subject']:"";?></p>
+                                            <?php if(isset($nvalue['category_type']) && ($nvalue['category_type'] == 'Research Awards' || $nvalue['category_type'] == 'Science Scholar Awards') ):
+                                                   $ntype = ($nvalue['category_type'] == 'Science Scholar Awards')?'spsfn':'ssan';
+                                                ?>
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>
+                                            <?php endif;?>  
+                                            <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    <?php  
+                            endforeach;
+                        else: ?>
+                            <div class="carousel-item active h-100">
+                            <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/frontend/assets/img/slide4.jpg" alt="Slide Image" style="z-index: -1;">
+                            <div class="container text-start d-flex flex-column justify-content-center h-100">
+                               <!-- <div class="row">
+                                    <div class="col-md-8 col-xl-7 col-xxl-7 offset-md-0 banneroverlay" style="background: rgba(245,246,248,0.75);padding: 20px;border-radius: 6px;">
+                                        <div class="bannercaption">
+                                            <h1 class="text-uppercase fw-bold" style="border-style: none;"><?//(isset($nvalue['title']))?$nvalue['title']:"";?></h1>
+                                            <p class="my-3"></p>
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="workshop-epidemiological-genomic-methods.html" style="background: #F7941E;border-color: #F7941E;">Read more</a> 
+                                             <a class="btn btn-outline-primary btn-lg" role="button" href="<?//base_url();?>/uploads/events/<?//$nvalue['document'];?>" target="blank">Poster Invitation</a> 
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                        <?php
+                            endif; ?>     
                     </div>
                     <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev" style="filter: grayscale(0%);"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
                     <ol class="carousel-indicators">
                         <li data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></li>
                     </ol>
                 </div>
+           
+
             </div>
         </div>
     </div>

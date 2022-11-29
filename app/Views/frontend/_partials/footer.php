@@ -42,22 +42,4 @@
     </footer>
     <?php endif;?>
    
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script> -->
-    <script src="<?=base_url();?>/frontend/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?=base_url();?>/frontend/assets/js/custom-app.js"></script>
-    <?php
-          if(isset($uri) && $uri == 'ssan'): ?>
-        <script src="<?=base_url();?>/frontend/assets/js/ssan.js"></script> 
-    <?php endif; ?>
-    <?php if(isset($uri) && $uri == 'spsfn'): ?>
-        <script src="<?=base_url();?>/frontend/assets/js/spsfn.js"></script>
-    <?php endif; ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
-    <script src="<?=base_url();?>/frontend/assets/js/multi-item-carousel.js"></script>
-    <script src="<?=base_url();?>/frontend/assets/js/Simple-Slider.js"></script>
-    <script src="<?=base_url();?>/frontend/assets/js/sortTable.js"></script>
-    <script src="<?=base_url();?>/frontend/assets/js/static-forms.js"></script>
-    
-</body>
-
-</html>
+   

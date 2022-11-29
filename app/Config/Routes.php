@@ -74,6 +74,7 @@ $routes->get('view/(:any)','Nomination::view/$1');
 $routes->post('view','Nomination::view');
 
 $routes->get('logout','User::logout');
+$routes->get('form','User::validForm');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
@@ -137,6 +138,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('awards/export','Awards::export');
 
     $routes->get('awards/getJuryListsByNominee/(:any)','Awards::getJuryListsByNominee/$1');
+    $routes->post('awards/getJuryListsByNominee/(:any)','Awards::getJuryListsByNominee/$1');
     $routes->post('awards/getJuryListsByNominee','Awards::getJuryListsByNominee');
 
     $routes->get('eventregisteration','EventRegisteration::index');

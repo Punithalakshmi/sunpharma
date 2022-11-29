@@ -70,7 +70,7 @@
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth</label>
-                                    <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" min="1992-01-01" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
+                                    <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
                                         placeholder="Date of Birth">
 
                                     <div class="hintcont">

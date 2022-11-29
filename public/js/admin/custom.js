@@ -169,7 +169,7 @@ $(function(){
 
  function geJuryLists(nominee_id = '')
  {
-    
+ 
     $('#loader').removeClass('hidden');
     $.ajax({
         url : base_url+'/admin/awards/getJuryListsByNominee/'+nominee_id,
@@ -178,13 +178,10 @@ $(function(){
         dataType:'json',
         success: function(data, textStatus, jqXHR)
         {
-
-          $('#loader').addClass('hidden');
-
-            if(data.status && data.status == 'success')
-              
-            $("#juryListss").html(data.html);
-          //  $("#juryListsModal").hide(); 
+            $('#loader').addClass('hidden');
+            if(data.status && data.status == 'success'){
+              $("#juryListsModal #juryListss").html(data.html);
+            }
             
         },
         error: function (jqXHR, textStatus, errorThrown)

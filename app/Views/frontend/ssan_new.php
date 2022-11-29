@@ -69,7 +69,7 @@
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth</label>
-                                    <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" min="1992-01-01" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
+                                    <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
                                         placeholder="Date of Birth">
 
                                     <div class="hintcont">
@@ -209,7 +209,7 @@
                                 <label class="form-label " for=""> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB) </label>
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
-                                        <input class="form-control required" name="justification_letter" type="file" id="justification_letter" value="<?=$editdata['justification_letter'];?>">
+                                        <input class="form-control required" name="justification_letter" type="file" id="justification_letter" value="<?=$editdata['justification_letter'];?>" accept="application/pdf">
                                         <?php if(!empty($editdata['justification_letter'])): ?>
                                             <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['justification_letter'];?>" style="color:blue;"><?=$editdata['justification_letter'];?></a>
                                             <?php endif;?>
@@ -233,7 +233,7 @@
                             </label>
                             <div class="form-check ps-0 q-box">
                                 <div class="q-box__question col me-2">
-                                    <input class="form-control mb-3" name="passport" type="file" id="passport" value="<?=$editdata['passport'];?>">                                            
+                                    <input class="form-control mb-3" name="passport" type="file" id="passport" value="<?=$editdata['passport'];?>" accept=".pdf">                                            
                                                 
                                     <?php if(!empty($editdata['passport'])): ?>
                                         <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['passport'];?>" style="color:blue;"><?=$editdata['passport'];?></a>

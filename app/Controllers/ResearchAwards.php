@@ -2,21 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\NominationTypesModel;
-
 class ResearchAwards extends BaseController
 {
     public function index()
     {
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
-        $session   = \Config\Services::session();
-        $userdata = $session->get('userdata');
-        $data['userdata'] = $userdata;
-
-        $nominationModel = new NominationTypesModel();
+       
+        $data['userdata'] = $this->session->get('userdata');
         
-        $nominationLists = $nominationModel->getCategoryWiseNominations()->getResultArray();
+        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
        
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
         $currentDate = strtotime(date('Y-m-d'));
@@ -34,9 +29,8 @@ class ResearchAwards extends BaseController
         }
 
         $data['currentNominations'] = $currentNominations;
-        return  view('frontend/_partials/header',$data)
-                .view('frontend/research_awards',$data)
-                .view('frontend/_partials/footer');
+        return render('frontend/research_awards',$data);
+            
     }
 
    
