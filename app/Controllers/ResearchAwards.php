@@ -9,7 +9,7 @@ class ResearchAwards extends BaseController
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
        
-        $data['userdata'] = $this->session->get('userdata');
+        $data['userdata'] = $this->session->get('fuserdata');
         
         $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
        

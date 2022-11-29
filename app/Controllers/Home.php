@@ -7,7 +7,7 @@ class Home extends BaseController
     public function index()
     {
         
-        $userdata = $this->session->get('userdata');
+        $userdata = $this->session->get('fuserdata');
 
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
@@ -64,10 +64,8 @@ class Home extends BaseController
         //get latest winners of research awards
         $researchAwards = $this->awardsModel->getLatestWinnersofResearchAwards()->getResultArray();
 
-
         //get latest winners of science scholars awards
         $scienceScholarAwards = $this->awardsModel->getLatestWinnersofScienceScholarAwards()->getResultArray();
-
 
         $data['nominations'] = $nominationArr;
         $data['latestWinnersOfResearchAwards'] = $researchAwards;
@@ -82,7 +80,7 @@ class Home extends BaseController
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
 
-        $userdata = $this->session->get('userdata');
+        $userdata = $this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 
         return  render('frontend/mission',$data);
@@ -95,7 +93,7 @@ class Home extends BaseController
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
        
-        $userdata = $this->session->get('userdata');
+        $userdata = $this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 
         return render('frontend/annual_activities',$data);
@@ -107,7 +105,7 @@ class Home extends BaseController
       $uri = current_url(true);
       $data['uri'] = $uri->getSegment(1); 
        
-        $userdata = $this->session->get('userdata');
+        $userdata = $this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 
         return  render('frontend/nomination_preview',$data);
@@ -119,7 +117,7 @@ class Home extends BaseController
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
         
-        $userdata =$this->session->get('userdata');
+        $userdata =$this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 
         return render('frontend/contact',$data);
@@ -131,7 +129,7 @@ class Home extends BaseController
       $uri = current_url(true);
       $data['uri'] = $uri->getSegment(1); 
    
-      $userdata = $this->session->get('userdata');
+      $userdata = $this->session->get('fuserdata');
       $data['userdata'] = $userdata;
 
         $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
@@ -164,7 +162,7 @@ class Home extends BaseController
       $data['uri'] = $uri->getSegment(1); 
 
       
-      $data['userdata'] = $this->session->get('userdata');
+      $data['userdata'] = $this->session->get('fuserdata');
        
         $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
        
@@ -194,7 +192,7 @@ class Home extends BaseController
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
        
-        $userdata =$this->session->get('userdata');
+        $userdata =$this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 
         return  render('frontend/symposium',$data);
@@ -207,7 +205,7 @@ class Home extends BaseController
       $uri = current_url(true);
             $data['uri'] = $uri->getSegment(1); 
        
-        $userdata = $this->session->get('userdata');
+        $userdata = $this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 
         return  render('frontend/annualforeignscientist',$data);
@@ -220,7 +218,7 @@ class Home extends BaseController
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
     
-        $userdata = $this->session->get('userdata');
+        $userdata = $this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 
         return  render('frontend/roundtable',$data);

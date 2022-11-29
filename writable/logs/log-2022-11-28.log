@@ -298,3 +298,56 @@ in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 106.
  6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
  7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 20:32:11 --> Undefined variable: session
+in APPPATH\Controllers\Admin\Nominee.php on line 387.
+ 1 APPPATH\Controllers\Admin\Nominee.php(387): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: session', 'APPPATH\\Controllers\\Admin\\Nominee.php', 387, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->extend('7')
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 20:32:32 --> Undefined index: extend_date
+in APPPATH\Views\admin\nomination\extend.php on line 25.
+ 1 APPPATH\Views\admin\nomination\extend.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: extend_date', 'APPPATH\\Views\\admin\\nomination\\extend.php', 25, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\extend.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/extend', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(459): view('admin/nomination/extend', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->extend('7')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 20:35:33 --> count(): Parameter must be an array or an object that implements Countable
+in APPPATH\Controllers\Admin\Nominee.php on line 422.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parameter must be an array or an object that implements Countable', 'APPPATH\\Controllers\\Admin\\Nominee.php', 422, [...])
+ 2 APPPATH\Controllers\Admin\Nominee.php(422): count(Object(CodeIgniter\Database\MySQLi\Result))
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->extend()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 21:08:25 --> Undefined index: end_date
+in APPPATH\Controllers\Admin\Nominee.php on line 41.
+ 1 APPPATH\Controllers\Admin\Nominee.php(41): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: end_date', 'APPPATH\\Controllers\\Admin\\Nominee.php', 41, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 21:58:22 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\User.php on line 32.
+ 1 APPPATH\Controllers\User.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\User.php', 32, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 22:02:53 --> Call to a member function getRowArray() on null
+in APPPATH\Controllers\User.php on line 33.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 22:04:44 --> Undefined variable: getExtendNominationEndDays
+in APPPATH\Controllers\User.php on line 40.
+ 1 APPPATH\Controllers\User.php(40): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: getExtendNominationEndDays', 'APPPATH\\Controllers\\User.php', 40, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

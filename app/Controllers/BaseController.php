@@ -52,6 +52,7 @@ abstract class BaseController extends Controller
     public $registerationModel;
     public $roleModel;
     public $workshopModel;
+    public $extendModel;
    
     /**
      * Constructor.
@@ -75,6 +76,7 @@ abstract class BaseController extends Controller
         $this->registerationModel   = model('App\Models\RegisterationModel');
         $this->roleModel            = model('App\Models\RoleModel');
         $this->workshopModel        = model('App\Models\WorkshopModel');
+        $this->extendModel          = model('App\Models\ExtendModel');
 
         $this->session     = \Config\Services::session();
       //  $this->request     = \Config\Services::request();

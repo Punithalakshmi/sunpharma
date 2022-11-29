@@ -20,27 +20,33 @@ class User extends BaseController
              }
              else
              {
-               // print_r($result); die;
+               
                 $getNominationData   = $this->nominationModel->getNominationData($result['id']);
                 $getNominationData   = $getNominationData->getRowArray();
                 
                 $getCategoryNominationData   = $this->nominationTypesModel->getCategoryNomination($getNominationData['category_id']);
                 $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
 
-              
-               $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
-                
-                $result['nominationEndDays'] =  $nominationEndDays;
+                //get extend nomination date
+                $getExtendNominationDate   = $this->extendModel->getListsOfExtends($result['id']);
+
+                $getExtendNominationEndDays = 0;
+               if($getExtendNominationDate->getRowArray() > 0) {
+                $getExtendNominationDate = $getExtendNominationDate->getRowArray();
+                 $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
+               }  
+
+                $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
+
+                if($nominationEndDays <= 0 && $getExtendNominationEndDays > 0)
+                  $result['nominationEndDays'] =  $getExtendNominationEndDays;
+                else
+                  $result['nominationEndDays'] =  $nominationEndDays;  
 
                 $result['nominationEndDate'] = $getNominationDaysCt['end_date'];
+                $result['nomination_type']   = $getNominationData['nomination_type'];
 
-                $result['nomination_type'] = $getNominationData['nomination_type'];
-
-                //print_r($result);
-                //die;
-
-                $this->session->set('userdata',$result);
-
+                $this->session->set('fuserdata',$result);
                 $redirect_route = 'view/'.$result['id'];
 
                 return redirect()->to($redirect_route);
@@ -69,7 +75,7 @@ class User extends BaseController
 
     public function logout()
     {
-        $this->session->remove('userdata');
+        $this->session->remove('fuserdata');
         return redirect()->route('/');
     }
 
@@ -89,5 +95,28 @@ class User extends BaseController
         return view('frontend/formvalid',$data);
     }
 
+     
+    public function sendMail()
+    {
+
+   
+        $header  = '';
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+
+        $subject = " New Nomination ";
+        $message  = "Hi, ";
+        $message .= '<br/><br/>';
+        $message .= "New candidate was submitted application, Please login and check the nomination data in admin panel";
+        $message .= "<br/>";
+        $message .= "<br/>";
+        $message .= "<br/>";
+        $message .= "Thanks & Regards,";
+        $message .= "Sunpharma Team";
+        $html = view('email/mail',array(),array('debug' => false));
+
+        mail("punitha@izaaptech.in",$subject,$html,$header);
+
+    }
 
 }    

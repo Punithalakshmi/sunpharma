@@ -10,7 +10,7 @@ class DirectoryScienceScholars extends BaseController
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1); 
     
-        $data['userdata'] = $this->session->get('userdata');
+        $data['userdata'] = $this->session->get('fuserdata');
     
         return  render('frontend/directory_of_science_scholars',$data);
               

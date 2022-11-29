@@ -8,7 +8,7 @@ class Nomination extends BaseController
     public function index($id = '')
     {
    
-        $userdata  = $this->session->get('userdata');
+        $userdata  = $this->session->get('fuserdata');
 
        
         if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == '2'))
@@ -306,7 +306,7 @@ class Nomination extends BaseController
 
             helper(array('form', 'url'));
             
-            $userdata  = $this->session->get('userdata');
+            $userdata  = $this->session->get('fuserdata');
 
             if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == 2))
                 $this->view($userdata['id']);
@@ -584,10 +584,8 @@ class Nomination extends BaseController
     public function view($id = '')
     {
 
-        $userdata = $this->session->get('userdata');
-
-        //print_r($userdata); die;
-        
+        $userdata = $this->session->get('fuserdata');
+ 
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1);  
        
@@ -784,22 +782,25 @@ class Nomination extends BaseController
     public function sendMail()
     {
 
-       //  $header = "From:abc@somedomain.com \r\n";
-       //  $header .= "Cc:afgh@somedomain.com \r\n";
-         $header  = '';
-         $header .= "MIME-Version: 1.0\r\n";
-         $header .= "Content-type: text/html\r\n";
+        $header  = '';
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
 
         $subject = " New Nomination ";
         $message  = "Hi, ";
         $message .= '<br/><br/>';
         $message .= "New candidate was submitted application, Please login and check the nomination data in admin panel";
         $message .= "<br/>";
-        $message .= "<br/>";
-        $message .= "<br/>";
-        $message .= "Thanks & Regards,";
-        $message .= "Sunpharma Team";
-        mail("punitha@izaaptech.in",$subject,$message,$header);
+       
+        $data['content'] = $message;
+
+        $html = view('email/mail',$data,array('debug' => false));
+
+
+        mail("punitha@izaaptech.in",$subject,$html,$header);
+        
 
     }
+
+    
 }

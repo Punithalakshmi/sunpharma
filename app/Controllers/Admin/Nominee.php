@@ -9,6 +9,8 @@ use App\Models\RoleModel;
 use App\Models\JuryModel;
 use App\Models\RatingModel;
 use App\Models\CategoryModel;
+use App\Models\ExtendModel;
+use App\Models\NominationTypesModel;
 
 class Nominee extends BaseController
 {
@@ -19,6 +21,7 @@ class Nominee extends BaseController
 
         $userdata  = $session->get('userdata');
         $nomineeModel = new NomineeModel();
+        $nomineeTypesModel = new NominationTypesModel();
         
         $data['userdata'] = $userdata;
        
@@ -27,10 +30,27 @@ class Nominee extends BaseController
             $userLists = $nomineeModel->getListsOfNominees();
             $lists     = $userLists->getResultArray();
 
+            $current_date = date("Y-m-d");
+
             foreach($lists as $k => $user){
                $userLists  = $nomineeModel->getJuryName($user['jury_id']);
                $juryName   =  $userLists->getRowArray();
-             //  print_r($juryName); die;
+            
+                $getNominationEndDate = $nomineeTypesModel->getCategoryNomination($user['category']);
+               
+                $lists[$k]['nomination_end_date'] = '';
+                
+                if($getNominationEndDate->getRowArray() > 0) {  
+                    $getNominationEndDate = $getNominationEndDate->getRowArray();
+                    $nominationEndDate = $getNominationEndDate['end_date'];
+                    $lists[$k]['nomination_end_date']  = $nominationEndDate;
+                }     
+
+                $lists[$k]['is_expired_nomination'] = 'no';
+                if(strtotime($current_date) > strtotime($nominationEndDate))
+                   $lists[$k]['is_expired_nomination']  = 'yes';  
+                
+
                 if(isset($juryName['firstname']) && isset($juryName['lastname']))
                     $lists[$k]['assigned_jury'] = $juryName['firstname'].' '.$juryName['lastname'];
                 else
@@ -105,12 +125,13 @@ class Nominee extends BaseController
             $getUserData  = $userModel->getListsOfUsers($id);
             $getUserData  = $getUserData->getRowArray();
 
-            $email = \Config\Services::email();
+           // $email = \Config\Services::email();
 
-            $email->setFrom('punitha@izaaptech.in', 'Punithalakshmi');
-            $email->setTo($getUserData['email']);
+          //  $email->setFrom('punitha@izaaptech.in', 'Punithalakshmi');
+          //  $email->setTo($getUserData['email']);
           
-            $email->setSubject('Your Application Approval Status');
+         //   $email->setSubject('Your Application Approval Status');
+            $subject = 'Sunpharma Science Foundation Nomination Application Status';
             $message = '';
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
@@ -137,12 +158,20 @@ class Nominee extends BaseController
                 $message .= 'Your Application has been rejected';
             }
             $userModel->update(array("id" => $id),$up_data);
-            $message .= 'Thanks,<br/>';
-            $message .= 'Sunpharma';
-            $email->setMessage($message);
+          //  $message .= 'Thanks,<br/>';
+           // $message .= 'Sunpharma';
+           // $email->setMessage($message);
+
+            $header  = '';
+            $header .= "MIME-Version: 1.0\r\n";
+            $header .= "Content-type: text/html\r\n";
+
+            $data['content'] = $message;
+            $html = view('email/mail',$data,array('debug' => false));
+           // mail($getUserData['email'],$subject,$html,$header);
             
             $status = '';
-            if($email->send()){
+            if(mail($getUserData['email'],$subject,$html,$header)){
                 $status = 'success';
                 $message = $msg;
             }
@@ -347,15 +376,14 @@ class Nominee extends BaseController
     public function validation_rules()
     {
 
-      $validation_rules = array();
+        $validation_rules = array();
 
-      $validation_rules = array(
-                                    "rating" => array("label" => "Rating",'rules' => 'required'),
-                                    "comment" => array("label" => "Comment",'rules' => 'required')
-      );
- 
-      
-      return $validation_rules;
+        $validation_rules = array(
+                                        "rating" => array("label" => "Rating",'rules' => 'required'),
+                                        "comment" => array("label" => "Comment",'rules' => 'required')
+        );
+    
+        return $validation_rules;
       
     }
  
@@ -371,5 +399,129 @@ class Nominee extends BaseController
         return $randomString;
     }
  
+
+    public function extend($id = '')
+    {
+
+        $userdata  = $this->session->get('userdata');
+        $extendModel = new ExtendModel();
+        $userModel = new userModel();
+
+        helper(array('form', 'url'));
+
+        $session = \Config\Services::session();
+        $userdata  = $session->get('userdata');
+    
+        $request    = \Config\Services::request();
+        $validation = \Config\Services::validation();
+        
+        $data['userdata'] = $userdata;
+        
+        if(is_array($userdata) && count($userdata)):
+           
+            if($request->getPost())
+               $id  = $request->getPost('id');
+               
+            $validation = $this->validate($this->extend_validation_rules());
+
+            $getExtend  = $extendModel->getListsOfExtends($id);
+
+            if($getExtend->getRowArray() > 0)
+             $edit_data = $getExtend->getRowArray();
+
+            if($validation) {
+
+                if($request->getPost()){
+                
+                    $extend_date    = $request->getPost('extend_date');
+                    
+                    $ins_data = array();
+                    $ins_data['extend_date']   = date("Y-m-d",strtotime($extend_date));
+                    $ins_data['user_id']      = $id;
+
+                    //get user data
+                    $getExtendUserData  = $userModel->getListsOfUsers($id)->getRowArray();
+                   
+                    if(!empty($id) && $getExtend->getRowArray() > 0){
+                        $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
+                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $extendModel->update(array("id" => $id),$ins_data);
+                    }
+                    else
+                    {
+                        $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
+                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
+                        $ins_data['created_id']    =  $userdata['login_id'];
+                        $extendModel->save($ins_data);
+                    } 
+
+                    $this->extendMailNotification($getExtendUserData['email'],$extend_date);
+
+                    return redirect()->route('admin/nominee');
+                }
+            }
+            else
+            {  
+
+                if(!empty($edit_data) && count($edit_data)){
+                    $editdata['extend_date'] = date("m/d/Y",strtotime($edit_data['extend_date']));
+                    $editdata['id']         = $edit_data['id'];
+                }
+                else
+                {
+                   
+                    $editdata['extend_date']     = ($request->getPost('extend_date'))?$request->getPost('extend_date'):date("m/d/Y");
+                    $editdata['id']              = ($request->getPost('id'))?$request->getPost('id'):$id;
+                }
+
+                  if($request->getPost())
+                    $data['validation'] = $this->validator;
+
+
+                    $data['editdata'] = $editdata;
+                    return view('_partials/header',$data)
+                        .view('admin/nomination/extend',$data)
+                        .view('_partials/footer');
+            }       
+        else:
+            return redirect()->route('admin/login');
+        endif; 
+
+    }
+
+
+    public function extend_validation_rules()
+    {
+
+        $validation_rules = array();
+
+        $validation_rules = array(
+                                        "extend_date" => array("label" => "Extend",'rules' => 'required')                           
+        );
+    
+        return $validation_rules;
+      
+    }
+
+    public function extendMailNotification($mail,$extend_date)
+    {
+        $header  = '';
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+
+        $subject = " SPSFN - Extend Nomination Date ";
+        $message  = "Hi, ";
+        $message .= '<br/><br/>';
+        $message .= "Nomination date has been changed up to ".$extend_date." Please login and upload your documents.";
+        $message .= "<br/>";
+    
+        $message .= "<br/>";
+     
+        $data['content'] = $message;
+        $html = view('email/mail',$data,array('debug' => false));
+
+        mail($mail,$subject,$html,$header);
+    }
 
 }

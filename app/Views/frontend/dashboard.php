@@ -21,7 +21,9 @@
                                                 ?>
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>
                                             <?php endif;?>  
+                                            <?php if(!empty($nvalue['document'])):?>
                                             <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
+                                            <?php endif;?>
                                         </div>
                                     </div>
                                 </div>

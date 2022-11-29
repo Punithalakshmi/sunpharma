@@ -28,10 +28,10 @@
                         <tr>
                           
                           <th>Firstname</th>
-                          <th>Lastname</th>
+                         
                           <th>Email</th>
                           <th>Phone</th>
-                       
+                      
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -43,7 +43,7 @@
                         <tr>
                          
                           <td><?=$user['firstname'];?></td>
-                          <td><?=$user['lastname'];?></td>
+                          
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
                          
@@ -52,6 +52,11 @@
                             <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">
                                <i class="fa fa-eye"></i> View 
                             </a>
+                            <?php if($user['is_expired_nomination'] == 'yes'): ?>
+                            <a href="<?=base_url().'/admin/nominee/extend/'.$user['id'];?>" class="btn btn-primary btn-xs">
+                               <i class="fa fa-edit"></i> Extend Nomination 
+                            </a> 
+                            <?php endif; ?>     
                           </td>
                         </tr>
                         <?php endforeach;

@@ -75,6 +75,7 @@ $routes->post('view','Nomination::view');
 
 $routes->get('logout','User::logout');
 $routes->get('form','User::validForm');
+$routes->get('sendMail','User::sendMail');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
@@ -146,6 +147,9 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('eventregisteration/add','EventRegisteration::add');
     $routes->get('eventregisteration/add/(:any)','EventRegisteration::add/$1');
     $routes->get('eventregisteration/delete/(:any)','EventRegisteration::delete/$1');
+
+    $routes->get('nominee/extend/(:any)','Nominee::extend/$1');
+    $routes->post('nominee/extend','Nominee::extend');
 
 });
 

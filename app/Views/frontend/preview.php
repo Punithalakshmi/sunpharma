@@ -22,15 +22,16 @@
                   }
                   
                  ?>
+               <?php if(isset($userdata['nominationEndDays']) && $userdata['nominationEndDays'] > 0): ?>
                  Sun Pharma Science Foundation <?=$type;?> Awards <?=date('Y');?>
                 <br>Online Submission Of Nominations
+                <?php endif;?>
             </h2>
         </div>
     </div>
     <div class="row">
-       <?php //echo "<pre>";
-        // print_r($user);
-       if(isset($userdata['nominationEndDays']) && $userdata['nominationEndDays'] == 0): ?>
+       <?php 
+       if(isset($userdata['nominationEndDays']) && $userdata['nominationEndDays'] <= 0): ?>
           <h4>Nomination was closed you just view your data. you can't able to update the data</h4>
         <?php endif;?>
         <!-- FORMS -->
@@ -198,6 +199,7 @@
                                 </div>
                               <?php endif;?>
                                 <?php 
+                                
                                 if(isset($user) && ($user['nomination_type'] == 'ssan')):
                                   if(isset($user['justification_letter_filename']) && !empty($user['justification_letter_filename'])): ?>
                                 <div class="col-lg-12">
@@ -270,6 +272,7 @@
                             </div>
                         </div>
                   
+                        
                         <div class="step">
 
                             <div class="row">
@@ -280,6 +283,7 @@
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Complete Bio-data of the Applicant
                                             (Max 1.5 MB) </label>
+                                            <?php if(!empty($user['complete_bio_data'])): ?>
                                             <div>
                                               <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -288,6 +292,7 @@
                                             </button>
                                             </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -296,7 +301,7 @@
                                         <!-- <label class="form-label " for=""> Complete Bio-data of the Applicant
                                             (Max 1.5 MB) </label> -->
                                             <div>
-                                                <input class="form-control mb-3 required" name="complete_bio_data" type="file" id="complete_bio_data" value="<?=$editdata['complete_bio_data'];?>">   
+                                                <input class="form-control mb-3 required" accept=".pdf" name="complete_bio_data" type="file" id="complete_bio_data" value="<?=$editdata['complete_bio_data'];?>">   
                                                     <div class="">
                                                         <small>Upload the Bio-data (Not more than 1.5 MB)</small>
                                                     </div>
@@ -313,6 +318,7 @@
                                         <label class="form-label " for=""> In order of Importance, list of 10
                                             best papers of the applicant highlighting the important
                                             discoveries/contributions described in them briefly (Max. 1 MB) </label>
+                                            <?php if(!empty($user['best_papers'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['best_papers'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -320,6 +326,7 @@
                                             </svg> View</button>
                                               </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -330,7 +337,7 @@
                                             discoveries/contributions described in them briefly (Max. 1 MB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="best_papers" type="file" id="best_papers" value="<?=$editdata['best_papers'];?>">  
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="best_papers" type="file" id="best_papers" value="<?=$editdata['best_papers'];?>">  
                                                     
                                                 </label>
                                                 <div class="">
@@ -349,6 +356,7 @@
                                             any, on which any Award has already been Received by the Applicant. Please
                                             also upload brief citations on the research works for which the applicant
                                             has already received the awards (Max. 1 MB) </label>
+                                            <?php if(!empty($user['statement_of_research_achievements'])): ?>
                                             <div >
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_research_achievements'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -356,6 +364,7 @@
                                             </svg> View</button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -367,7 +376,7 @@
                                             has already received the awards (Max. 1 MB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                  <input class="form-control mb-3 required" name="statement_of_research_achievements" type="file" id="statement_of_research_achievements" value="<?=$editdata['statement_of_research_achievements'];?>"> 
+                                                  <input class="form-control mb-3 required" accept=".pdf" name="statement_of_research_achievements" type="file" id="statement_of_research_achievements" value="<?=$editdata['statement_of_research_achievements'];?>"> 
                                                  
                                                 </label>
                                                 <div class="">
@@ -387,6 +396,7 @@
                                             research work for which the Sun Pharma Research Award is claimed, including
                                             references & illustra- tions (Max. 2.5 MB). The candidate should duly sign
                                             on the details </label>
+                                            <?php if(!empty($user['signed_details'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_details'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -394,6 +404,7 @@
                                             </svg> View</button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -405,7 +416,7 @@
                                             on the details </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="signed_details" type="file" id="signed_details" value="<?=$editdata['signed_details'];?>">    
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="signed_details" type="file" id="signed_details" value="<?=$editdata['signed_details'];?>">    
                                                     
                                                 </label>
                                                 <div class="">
@@ -423,6 +434,7 @@
                                         <label class="form-label " for=""> Two specific publications/research
                                             papers of the applicant relevant to the research work mentioned above (Max.
                                             2.5 MB) </label>
+                                            <?php if(!empty($user['specific_publications'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['specific_publications'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -430,6 +442,7 @@
                                             </svg> View</button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -440,7 +453,7 @@
                                             2.5 MB) </label> -->
                                             <div>
                                                 <label class="form-check-label question__label noLabel">
-                                                  <input class="form-control mb-3 required" name="specific_publications" type="file" id="specific_publications" value="<?=$editdata['specific_publications'];?>">  
+                                                  <input class="form-control mb-3 required" accept=".pdf" name="specific_publications" type="file" id="specific_publications" value="<?=$editdata['specific_publications'];?>">  
                                                 </label>
                                                 <div class="">
                                                     <small>Upload the publication/Research paper (Not more than 2.5 MB)</small>
@@ -458,6 +471,7 @@
                                             applicant should also indicate the extent of the contribution of others
                                             associated with the research and he/she should clearly acknowledge his/her
                                             achievements. (Max. 500 KB) </label>
+                                            <?php if(!empty($user['signed_statement'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_statement'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -466,6 +480,7 @@
                                              </button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -478,7 +493,7 @@
                                             achievements. (Max. 500 KB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="signed_statement" type="file" id="signed_statement" value="<?=$editdata['signed_statement'];?>">   
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="signed_statement" type="file" id="signed_statement" value="<?=$editdata['signed_statement'];?>">   
                                                     <br />
                                                    
                                                 </label>
@@ -493,8 +508,9 @@
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> Citation on the Research Work of the
-                                            Applicant duly signed by the Nominator (Max. 300 KB) </label> -->
+                                         <label class="form-label " for=""> Citation on the Research Work of the
+                                            Applicant duly signed by the Nominator (Max. 300 KB) </label> 
+                                            <?php if(!empty($user['citation'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -503,6 +519,7 @@
                                           </button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                     <?php if($userdata['nominationEndDays'] > 0):  ?>
                                   <div class="col-lg-12">
@@ -511,7 +528,7 @@
                                             Applicant duly signed by the Nominator (Max. 300 KB) </label> -->
                                             <div>
                                                   <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="citation" type="file" id="citation" value="<?=$editdata['citation'];?>">   
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="citation" type="file" id="citation" value="<?=$editdata['citation'];?>">   
                                                     <br>
                                                     
                                                 </label>
@@ -528,7 +545,8 @@
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> -->
+                                        <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> 
+                                        <?php if(!empty($user['excellence_research_work'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['excellence_research_work'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button">
@@ -537,6 +555,7 @@
                                             </svg>View</button>
                                               </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -545,7 +564,7 @@
                                         <!-- <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="excellence_research_work" type="file" id="excellence_research_work" value="<?=$editdata['excellence_research_work'];?>">  
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="excellence_research_work" type="file" id="excellence_research_work" value="<?=$editdata['excellence_research_work'];?>">  
                                                     
                                                 </label>
                                                 <div class="">
@@ -560,6 +579,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB) </label>
+                                        <?php if(!empty($user['lists_of_publications'])): ?>
                                             <div >
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['lists_of_publications'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -567,6 +587,7 @@
                                             </svg> View</button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -575,7 +596,7 @@
                                         <!-- <label class="form-label " for=""> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                  <input class="form-control mb-3 required" name="lists_of_publications" type="file" id="lists_of_publications" value="<?=$editdata['lists_of_publications'];?>"> 
+                                                  <input class="form-control mb-3 required" accept=".pdf" name="lists_of_publications" type="file" id="lists_of_publications" value="<?=$editdata['lists_of_publications'];?>"> 
                                                  
                                                 </label>
                                                 <div class="">
@@ -592,6 +613,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB) </label>
+                                        <?php if(!empty($user['statement_of_applicant'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_applicant'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -599,6 +621,7 @@
                                             </svg> View</button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -607,7 +630,7 @@
                                         <!-- <label class="form-label " for=""> Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="statement_of_applicant" type="file" id="statement_of_applicant" value="<?=$editdata['statement_of_applicant'];?>">    
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="statement_of_applicant" type="file" id="statement_of_applicant" value="<?=$editdata['statement_of_applicant'];?>">    
                                                     
                                                 </label>
                                                 <div class="">
@@ -622,6 +645,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB) </label>
+                                        <?php if(!empty($user['ethical_clearance'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['ethical_clearance'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -629,6 +653,7 @@
                                             </svg> View</button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -637,7 +662,7 @@
                                         <!-- <label class="form-label " for=""> A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB) </label> -->
                                             <div>
                                                 <label class="form-check-label question__label noLabel">
-                                                  <input class="form-control mb-3 required" name="ethical_clearance" type="file" id="ethical_clearance" value="<?=$editdata['ethical_clearance'];?>">  
+                                                  <input class="form-control mb-3 required" accept=".pdf" name="ethical_clearance" type="file" id="ethical_clearance" value="<?=$editdata['ethical_clearance'];?>">  
                                                 </label>
                                                 
                                             </div>
@@ -649,6 +674,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </label>
+                                        <?php if(!empty($user['statement_of_duly_signed_by_nominee'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_duly_signed_by_nominee'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -657,6 +683,7 @@
                                              </button>
 </a>
                                             </div>
+                                            <?php endif; ?>
                                     </div>
                                 </div>
                                 <?php if($userdata['nominationEndDays'] > 0):  ?>
@@ -665,7 +692,7 @@
                                         <!-- <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="statement_of_duly_signed_by_nominee" type="file" id="statement_of_duly_signed_by_nominee" value="<?=$editdata['statement_of_duly_signed_by_nominee'];?>">   
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="statement_of_duly_signed_by_nominee" type="file" id="statement_of_duly_signed_by_nominee" value="<?=$editdata['statement_of_duly_signed_by_nominee'];?>">   
                                                     <br />
                                                    
                                                 </label>
@@ -680,6 +707,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB) </label>
+                                        <?php if(!empty($user['citation'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -688,6 +716,7 @@
                                           </button>
 </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                     <?php if($userdata['nominationEndDays'] > 0):  ?>
                                   <div class="col-lg-12">
@@ -695,7 +724,7 @@
                                         <!-- <label class="form-label " for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB) </label> -->
                                             <div>
                                                   <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="citation" type="file" id="citation" value="<?=$editdata['citation'];?>">   
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="citation" type="file" id="citation" value="<?=$editdata['citation'];?>">   
                                                     <br>
                                                     
                                                 </label>
@@ -710,6 +739,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB) </label>
+                                        <?php if(!empty($user['aggregate_marks'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['aggregate_marks'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -718,6 +748,7 @@
                                           </button>
                                           </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                     <?php if($userdata['nominationEndDays'] > 0):  ?>
                                   <div class="col-lg-12">
@@ -725,7 +756,7 @@
                                         <!-- <label class="form-label " for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB) </label> -->
                                             <div>
                                                   <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="aggregate_marks" type="file" id="aggregate_marks" value="<?=$editdata['aggregate_marks'];?>">   
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="aggregate_marks" type="file" id="aggregate_marks" value="<?=$editdata['aggregate_marks'];?>">   
                                                     <br>
                                                 </label>
                                                 
@@ -784,6 +815,7 @@
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Age proof (Max: 250KB) </label>
+                                        <?php if(!empty($user['age_proof'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['age_proof'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -792,6 +824,7 @@
                                           </button>
                                           </a>
                                             </div>
+                                            <?php endif;?>
                                     </div>
                                     <?php if($userdata['nominationEndDays'] > 0):  ?>
                                   <div class="col-lg-12">
@@ -799,7 +832,7 @@
                                         <!-- <label class="form-label " for=""> Age proof (Max: 250KB)</label> -->
                                             <div>
                                                   <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="age_proof" type="file" id="age_proof" value="<?=$editdata['age_proof'];?>">   
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="age_proof" type="file" id="age_proof" value="<?=$editdata['age_proof'];?>">   
                                                     <br>
                                                 </label>
                                                 
@@ -812,6 +845,7 @@
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB) </label>
+                                        <?php if(!empty($user['declaration_candidate'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['declaration_candidate'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -819,7 +853,8 @@
                                             </svg> View Declaration
                                           </button>
                                           </a>
-                                            </div>
+                                        </div>
+                                    <?php endif;?>
                                     </div>
                                     <?php if($userdata['nominationEndDays'] > 0): ?>
                                   <div class="col-lg-12">
@@ -827,7 +862,7 @@
                                         <!-- <label class="form-label " for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB) </label> -->
                                             <div>
                                                   <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="declaration_candidate" type="file" id="declaration_candidate" value="<?=$editdata['declaration_candidate'];?>">   
+                                                    <input class="form-control mb-3 required" accept=".pdf" name="declaration_candidate" type="file" id="declaration_candidate" value="<?=$editdata['declaration_candidate'];?>">   
                                                     <br>
                                                 </label>
                                                 
