@@ -13,19 +13,24 @@
         <div class="container" style="margin-bottom: 60px;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Science Foundation Research Awardees - 2021</h3>
+                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Science Foundation Research Awardees - <?=date("Y");?></h3>
                 </div>
             </div>
             <div class="row row-cols-2 row-cols-md-2 mx-auto" style="max-width: 900px;">
+            <?php if(is_array($latestWinnersOfResearchAwards) && count($latestWinnersOfResearchAwards) > 0):
+                   foreach($latestWinnersOfResearchAwards as $rkey => $rvalue): ?>
                 <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg"></a><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0">Dr Suvendra Nath Bhattacharyya<br></h5>
+                    <div class="text-center"><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/uploads/<?=$rvalue['id'];?>/<?=$rvalue['nominator_photo'];?>"></a>
+                       <a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal">
+                            <h5 class="fw-bold mb-0"><?=$rvalue['firstname'];?><br></h5>
                         </a>
-                        <p class="text-muted mb-2">Medical Sciences- Basic Research&nbsp;</p>
+                        <p class="text-muted mb-2"><?=$rvalue['category_name'];?></p>
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
-                <div class="col mb-4">
+            <?php endforeach;
+                  endif; ?>    
+                <!-- <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg"></a><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Professor Bushra Ateeq<br></h5>
                         </a>
@@ -48,7 +53,7 @@
                         <p class="text-muted mb-2">Pharmaceutical Sciences<br></p>
                         <p class="text-muted mb-2"></p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -75,6 +80,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="modal fade" role="dialog" tabindex="-1" id="BushraAteeq">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">

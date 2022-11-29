@@ -61,11 +61,18 @@ class Home extends BaseController
 
         $data['currentNominations'] = $currentNominations;
 
-        
+        //get latest winners of research awards
+        $researchAwards = $this->awardsModel->getLatestWinnersofResearchAwards()->getResultArray();
+
+
+        //get latest winners of science scholars awards
+        $scienceScholarAwards = $this->awardsModel->getLatestWinnersofScienceScholarAwards()->getResultArray();
+
 
         $data['nominations'] = $nominationArr;
-
-          return  render('frontend/dashboard',$data);
+        $data['latestWinnersOfResearchAwards'] = $researchAwards;
+        $data['latestWinnersOfScholarAwards'] = $scienceScholarAwards;
+        return  render('frontend/dashboard',$data);
               
     }
 

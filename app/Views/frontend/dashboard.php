@@ -175,6 +175,7 @@
 	</div> -->
 </div>
     </section>
+    <?php if(is_array($latestWinnersOfResearchAwards) && count($latestWinnersOfResearchAwards) > 0): ?>
     <section>
         <div class="container-fluid bg-primary-gradient py-5" style="padding: 48px 12px 0;">
             <div class="row">
@@ -182,27 +183,32 @@
                     <h3 class="fw-bold heading" style="color: #F7941E;">Latest winners of Research awards</h3>
                 </div>
             </div>
+
             <section class="pt-4 pt-xl-4">
                 <div class="container">
                     <div class="simple-slider">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
-                                        <div class="row g-0">
-                                            <div class="col-md-6 col-lg-8 winnercolleft">
-                                                <div class="text-white winnerinfo">
-                                                    <h2 class="fw-bold text-white mb-3">Dr Suvendra Nath Bhattacharyya</h2>
-                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
-                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology, Kolkata, India<br></p>
-                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
+                                <?php if(is_array($latestWinnersOfResearchAwards)):
+                                        foreach($latestWinnersOfResearchAwards as $rkey => $rvalue): ?>
+                                        <div class="swiper-slide">
+                                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                                <div class="row g-0">
+                                                    <div class="col-md-6 col-lg-8 winnercolleft">
+                                                        <div class="text-white winnerinfo">
+                                                            <h2 class="fw-bold text-white mb-3"><?=$rvalue['firstname'];?></h2>
+                                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;"><?=$rvalue['category_name'];?><br></p>
+                                                            <p class="mb-4" style="color: var(--bs-btn-border-color);"><?=$rvalue['address'];?><br></p>
+                                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/uploads/<?=$rvalue['id'];?>/<?=$rvalue['nominator_photo'];?>"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg"></div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
+                                <?php endforeach;
+                                         endif; ?>                
+                                <!-- <div class="swiper-slide">
                                     <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                         <div class="row g-0">
                                             <div class="col-md-6 col-lg-8 winnercolleft">
@@ -247,7 +253,7 @@
                                             <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="swiper-pagination bottom-0"></div>
                             <div class="text-light swiper-button-prev" style="margin: -25px 0px 0px;"></div>
@@ -258,7 +264,9 @@
             </section>
         </div>
     </section>
+   <?php endif; ?>   
     <section></section>
+    <?php if(is_array($latestWinnersOfScholarAwards) && count($latestWinnersOfScholarAwards) > 0): ?>
     <section style="padding-top: 60px;">
         <div class="container-fluid">
             <div class="row" style="padding-bottom: 20px;">
@@ -271,22 +279,26 @@
             <div class="simple-slider">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
+                    <?php if(is_array($latestWinnersOfScholarAwards)):
+                            foreach($latestWinnersOfScholarAwards as $rkey => $rvalue): ?>
                         <div class="swiper-slide">
                             <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                 <div class="row g-0">
                                     <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
                                         <div class="text-white winnerinfo">
-                                            <h2 class="fw-bold text-white mb-3">Mr. Shubham Singh</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Biomedical Sciences<br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Student<br>Department of Biology,&nbsp;IISER-Pune, MH<br>India - 411008<br></p>
-                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="LatestWinnersScienceScholarAward.html">Know More</a></div>
+                                            <h2 class="fw-bold text-white mb-3"><?=$rvalue['firstname'];?></h2>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;"><?=$rvalue['category_name'];?><br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);"><?=$rvalue['address'];?><br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_science_scholars_awards">Know More</a></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/ShubhamSingh-photo.jpg"></div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/uploads/<?=$rvalue['id'];?>/<?=$rvalue['nominator_photo'];?>"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <?php endforeach;
+                            endif; ?>
+                        <!-- <div class="swiper-slide">
                             <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                 <div class="row g-0">
                                     <div class="col-md-6 col-lg-8 winnercolleft">
@@ -315,7 +327,7 @@
                                     <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/ArihantKumarSingh-photo.jpg"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="swiper-pagination bottom-0"></div>
                     <div class="text-light swiper-button-prev" style="margin: -24px 0px 0px;"></div>
@@ -324,6 +336,7 @@
             </div>
         </div>
     </section>
+    <?php endif;?>
     <section style="margin:60px 0;">
         <div class="row mx-0">
             <div class="col-md-8 col-xl-6 text-center mx-auto">

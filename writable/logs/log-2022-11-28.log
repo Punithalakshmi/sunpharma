@@ -246,3 +246,55 @@ in APPPATH\Views\admin\awards\list.php on line 84.
  7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
  8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 18:22:57 --> Undefined index: address
+in APPPATH\Views\frontend\dashboard.php on line 199.
+ 1 APPPATH\Views\frontend\dashboard.php(199): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: address', 'APPPATH\\Views\\frontend\\dashboard.php', 199, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/dashboard', [], true)
+ 5 APPPATH\Helpers\render_helper.php(10): view('frontend/dashboard', [...], [])
+ 6 APPPATH\Controllers\Home.php(75): render('frontend/dashboard', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 18:51:09 --> syntax error, unexpected end of file
+in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 135.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
+ 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
+ 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 18:51:43 --> syntax error, unexpected end of file
+in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 134.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
+ 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
+ 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 18:53:54 --> syntax error, unexpected end of file
+in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 119.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
+ 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
+ 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 18:55:16 --> syntax error, unexpected end of file
+in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 106.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
+ 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
+ 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
+ 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

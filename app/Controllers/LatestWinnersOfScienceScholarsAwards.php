@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-
 class LatestWinnersOfScienceScholarsAwards extends BaseController
 {
     public function index()
@@ -11,6 +10,10 @@ class LatestWinnersOfScienceScholarsAwards extends BaseController
         $data['uri'] = $uri->getSegment(1); 
         
         $data['userdata']  = $this->session->get('userdata');
+
+        //get latest winners of science scholars awards
+        $scienceScholarAwards = $this->awardsModel->getLatestWinnersofScienceScholarAwards()->getResultArray();
+        $data['latestWinnersOfScholarAwards'] = $scienceScholarAwards;
         
         return  render('frontend/latest_winners_of_science_scholars', $data);
    

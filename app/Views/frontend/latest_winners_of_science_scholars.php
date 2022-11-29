@@ -5,6 +5,7 @@
         </div>
     </section>
     <section class="py-5">
+    <?php if(is_array($latestWinnersOfScholarAwards) && count($latestWinnersOfScholarAwards) > 0): ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-12"></div>
@@ -13,36 +14,42 @@
         <div class="container" style="margin-bottom: 60px;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Science Foundation Science Scholar Awardees - 2021</h3>
+                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Science Foundation Science Scholar Awardees - <?=date("Y");?></h3>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-3 mx-auto" style="max-width: 900px;">
-                <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/ShubhamSingh-photo.jpg"></a><a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0">Mr. Shubham Singh<br></h5>
-                        </a>
-                        <p class="text-muted mb-2">Biomedical Sciences</p>
-                        <p class="text-muted mb-2"></p>
+            <?php  
+                   foreach($latestWinnersOfScholarAwards as $rkey => $rvalue): ?>
+                    <div class="col mb-4">
+                        <div class="text-center"><a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal">
+                            <img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/uploads/<?=$rvalue['id'];?>/<?=$rvalue['nominator_photo'];?>"></a>
+                        <a href="#" data-bs-target="#ShubhamSingh" data-bs-toggle="modal">
+                                <h5 class="fw-bold mb-0"><?=$rvalue['firstname'];?><br></h5>
+                            </a>
+                            <p class="text-muted mb-2"><?=$rvalue['category_name'];?></p>
+                            <p class="text-muted mb-2"></p>
+                        </div>
                     </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#SundaramAcharya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Sundaram-photo.jpg"></a><a href="#" data-bs-target="#SundaramAcharya" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0">Mr. Sundaram Acharya<br></h5>
-                        </a>
-                        <p class="text-muted mb-2">Biomedical Sciences</p>
-                        <p class="text-muted mb-2"></p>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#Arihant-KumarSingh" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/ArihantKumarSingh-photo.jpg"></a><a href="#" data-bs-target="#Arihant-KumarSingh" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0">Mr. Arihant Kumar Singh<br></h5>
-                        </a>
-                        <p class="text-muted mb-2">Pharmaceutical Sciences<br></p>
-                        <p class="text-muted mb-2"></p>
-                    </div>
-                </div>
+                <?php endforeach;?>   
+                
             </div>
         </div>
+        <?php else: ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"></div>
+            </div>
+        </div>
+        <div class="container" style="margin-bottom: 60px;">
+            <div class="row">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="heading" style="color: #F7941E;">No Winners of Science Scholar Awards</h3>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 mx-auto" style="max-width: 900px;">
+            </div>
+        </div>
+        <?php endif; ?>
     </section>
     <div class="modal fade" role="dialog" tabindex="-1" id="ShubhamSingh">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
