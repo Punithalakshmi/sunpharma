@@ -306,6 +306,11 @@
                                                         <small>Upload the Bio-data (Not more than 1.5 MB)</small>
                                                     </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('complete_bio_data')) {?>
+                                                <?= $error = $validation->getError('complete_bio_data'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; 
@@ -344,6 +349,11 @@
                                                     <small>Upload the List of Publication (Not more than 1 MB) </small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('best_papers')) {?>
+                                                <?= $error = $validation->getError('best_papers'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; 
@@ -385,6 +395,11 @@
                                                     </small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('statement_of_research_achievements')) {?>
+                                                <?= $error = $validation->getError('statement_of_research_achievements'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -424,6 +439,11 @@
                                                         is being sent(Not more than 2.5 MB)</small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('signed_details')) {?>
+                                                <?= $error = $validation->getError('signed_details'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -459,6 +479,11 @@
                                                     <small>Upload the publication/Research paper (Not more than 2.5 MB)</small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('specific_publications')) {?>
+                                                <?= $error = $validation->getError('specific_publications'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -501,6 +526,11 @@
                                                     <small>Upload the signed statement (Not more than 500 KB) </small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('signed_statement')) {?>
+                                                <?= $error = $validation->getError('signed_statement'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -536,6 +566,11 @@
                                                     <small>Upload the Citation (Not more than 300KB) </small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('citation')) {?>
+                                                <?= $error = $validation->getError('citation'); ?>
+                                            <?php }?>
+                                            </small>
                                         </div>
                                     </div>
                                     <?php endif; endif;
@@ -571,6 +606,11 @@
                                                     <small> </small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('excellence_research_work')) {?>
+                                                <?= $error = $validation->getError('excellence_research_work'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -605,6 +645,11 @@
                                                     </small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('lists_of_publications')) {?>
+                                                <?= $error = $validation->getError('lists_of_publications'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -637,6 +682,11 @@
                                                     <small>Upload (Not more than 1 MB)</small>
                                                 </div>
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('statement_of_applicant')) {?>
+                                                <?= $error = $validation->getError('statement_of_applicant'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -666,6 +716,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('ethical_clearance')) {?>
+                                                <?= $error = $validation->getError('ethical_clearance'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; endif;
@@ -698,6 +753,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('statement_of_duly_signed_by_nominee')) {?>
+                                                <?= $error = $validation->getError('statement_of_duly_signed_by_nominee'); ?>
+                                            <?php }?>
+                                            </small>
                                     </div>
                                 </div>
                                 <?php endif; 
@@ -730,6 +790,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('citation')) {?>
+                                                <?= $error = $validation->getError('citation'); ?>
+                                            <?php }?>
+                                            </small>
                                         </div>
                                     </div>
                                     <?php endif; endif;
@@ -761,6 +826,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('aggregate_marks')) {?>
+                                                <?= $error = $validation->getError('aggregate_marks'); ?>
+                                            <?php }?>
+                                            </small>
                                         </div>
                                     </div>
                                     <?php endif; endif;
@@ -784,6 +854,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('year_of_passing')) {?>
+                                                <?= $error = $validation->getError('year_of_passing'); ?>
+                                            <?php }?>
+                                            </small>
                                         </div>
                                     </div>
                                     <?php endif; endif;
@@ -807,6 +882,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('number_of_attempts')) {?>
+                                                <?= $error = $validation->getError('number_of_attempts'); ?>
+                                            <?php }?>
+                                            </small>
                                         </div>
                                     </div>
                                     <?php endif; endif;
@@ -837,6 +917,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('age_proof')) {?>
+                                                <?= $error = $validation->getError('age_proof'); ?>
+                                            <?php }?>
+                                            </small>
                                         </div>
                                     </div>
                                     <?php endif; endif;
@@ -867,6 +952,11 @@
                                                 </label>
                                                 
                                             </div>
+                                            <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('declaration_candidate')) {?>
+                                                <?= $error = $validation->getError('declaration_candidate'); ?>
+                                            <?php }?>
+                                            </small>
                                         </div>
                                     </div>
                                     <?php endif; endif;
