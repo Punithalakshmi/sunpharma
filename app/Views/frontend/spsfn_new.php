@@ -236,7 +236,7 @@
                                 <label class="form-label " for=""> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB) </label>
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
-                                        <input class="form-control required" name="supervisor_certifying" type="file" id="supervisor_certifying" value="<?=$editdata['supervisor_certifying'];?>">
+                                        <input class="form-control required" name="supervisor_certifying" accept=".pdf" type="file" id="supervisor_certifying" value="<?=$editdata['supervisor_certifying'];?>">
                                         <?php if(!empty($editdata['supervisor_certifying'])): ?>
                                             <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['supervisor_certifying'];?>" style="color:blue;"><?=$editdata['supervisor_certifying'];?></a>
                                             <?php endif;?>
@@ -258,7 +258,7 @@
                                 <label class="form-label " for=""> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB) </label>
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
-                                        <input class="form-control required" name="justification_letter" type="file" id="justification_letter" value="<?=$editdata['justification_letter'];?>">
+                                        <input class="form-control required" name="justification_letter" accept=".pdf" type="file" id="justification_letter" value="<?=$editdata['justification_letter'];?>">
                                         <?php if(!empty($editdata['justification_letter'])): ?>
                                             <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['justification_letter'];?>" style="color:blue;"><?=$editdata['justification_letter'];?></a>
                                             <?php endif;?>

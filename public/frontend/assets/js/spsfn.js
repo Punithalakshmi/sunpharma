@@ -51,7 +51,7 @@ const progress = (value) => {
     );
 
 
-  var form = $("#science_scholar_awards");
+var form = $("#science_scholar_awards");
 form.validate({
     errorPlacement: function errorPlacement(error, element) { element.before(error); },
     rules: {
@@ -138,9 +138,10 @@ form.children("div").steps({
         fd.append('nominator_email',nominator_email);
         fd.append('ongoing_course',ongoing_course);
         fd.append('research_project',research_project);
+        fd.append('formType','spsfn');
        
         $.ajax({
-                url: base_url+'/spsfn',
+                url: base_url+'/getPostedData',
                 type: 'post',
                 data: fd,
                 contentType: false,
