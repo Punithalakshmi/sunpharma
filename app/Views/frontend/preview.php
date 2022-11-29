@@ -41,6 +41,7 @@
                     class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                     style="width: 0%; background-color:#f6911f; opacity: .5"></div>
             </div>
+            
             <div id="qbox-container">
             <form method="post" name="nomination_data" action="<?=base_url();?>/view" enctype="multipart/form-data">
               <input type="hidden" name="id" value="<?=(isset($editdata['id']) && !empty($editdata['id']))?$editdata['id']:"";?>" />
@@ -50,18 +51,13 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-
-
-                                        <div class="form-check ps-0 q-box">
-                                            <div class="q-box__question col me-2 d-flex">
-                                              
-                                <label class="form-check-label question__label noLabel">
-                                    <div class="form-label mb-2"> Photograph of the Applicant </div>
-                                        <img class="uploadPreview" src="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['nominator_photo'];?>" width="200"
+                                    <div class="form-check ps-0 q-box">
+                                      <div class="q-box__question col me-2 d-flex">     
+                                        <label class="form-check-label question__label noLabel">
+                                            <div class="form-label mb-2"> Photograph of the Applicant </div>
+                                                <img class="uploadPreview" src="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['nominator_photo'];?>" width="200"
                                                             height="200" />
                                                     </label>
-                                                    
-                                               
                                             </div>
                                         </div>
                                     </div>

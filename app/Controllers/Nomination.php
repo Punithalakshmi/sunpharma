@@ -110,7 +110,7 @@ class Nomination extends BaseController
                     
                     $this->nominationModel->save($nominee_details_data);
 
-                    $this->sendMail();
+                    $this->sendMail($firstname,$lastInsertID);
                      
                     return redirect()->to('spsfn');
                 }
@@ -167,11 +167,10 @@ class Nomination extends BaseController
                     }
                     else
                     {
-                        return render('frontend/spsfn_new',$data);
-                            
-                    }        
-          }
-
+                        return render('frontend/spsfn_new',$data); 
+                    }  
+                          
+                  }
        
     }
 
@@ -274,7 +273,7 @@ class Nomination extends BaseController
                 $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
                 $this->nominationModel->save($nominee_details_data);
 
-                $this->sendMail();
+                $this->sendMail($firstname,$lastInsertID);
 
                 return redirect()->to('ssan');
             }
@@ -375,11 +374,14 @@ class Nomination extends BaseController
                 $edit_data['category_name'] = $categoryDt['name'];
             }
         }
-        $this->validation = $this->validate($this->awards_validation_rules($id));
 
+        $this->validation = $this->validate($this->awards_validation_rules($edit_data['nomination_type']));
+
+      
         if($this->validation) {
 
         if($this->request->getPost()){
+
             $nominee_details_data = array();
             $fileUploadDir = 'uploads/'.$edit_data['user_id'];
 
@@ -501,8 +503,8 @@ class Nomination extends BaseController
             }
 
             $this->nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data);  
-
             return redirect()->to('view/'.$edit_data['user_id'])->withInput();
+
           }
         }
         else
@@ -538,6 +540,9 @@ class Nomination extends BaseController
                 $editdata['id']                                  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
   
         }
+
+        if($this->request->getPost())
+            $data['validation'] = $this->validator;
 
         $data['user']     = $edit_data;
         $data['userdata'] = $userdata;
@@ -630,7 +635,7 @@ class Nomination extends BaseController
     public function awards_validation_rules($type = '')
     {
         $validation_rules = array();
-
+        //echo $type; die;
         if($type == 'ssan') {
                 $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,500]|ext_in[complete_bio_data,pdf]');
                 $validation_rules['best_papers']                        = array("label" => "Best Papers",'rules' => 'uploaded[best_papers]|max_size[best_papers,500]|ext_in[best_papers,pdf]');
@@ -658,26 +663,27 @@ class Nomination extends BaseController
         return $validation_rules;
     }
 
-    public function sendMail()
+    public function sendMail($nominee_name,$nomination_no)
     {
 
         $header  = '';
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
 
-        $subject = " New Nomination ";
-        $message  = "Hi, ";
+        $subject = " Approve Nomination - Sun Pharma Science Foundation Science Scholar Awards ";
+        $message  = "Dear Admin,";
         $message .= '<br/><br/>';
-        $message .= "New candidate was submitted application, Please login and check the nomination data in admin panel";
+        $message .= ucfirst($nominee_name)."with Nomination No: ".date("Y")."/".$nomination_no." has submitted his/her nomination and is waiting for your approval";
+        $message .= "<br/><br/>";
+        $message .=  "Please <a href='".base_url()."/admin'>click here</a> to approve his/her nomination.";
+        $message .= "<br/><br/><br/>";
+        $message .= "Thanks & Regards,";
         $message .= "<br/>";
+        $message .= "Sunpharma Science Foundation Team";
        
         $data['content'] = $message;
-
         $html = view('email/mail',$data,array('debug' => false));
-
-
         mail("sathish@izaaptech.in",$subject,$html,$header);
-
 
     }
 
