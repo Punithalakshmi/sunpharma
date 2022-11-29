@@ -13,7 +13,7 @@
         <div class="container" style="margin-bottom: 60px;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Science Foundation Research Awardees - <?=date("Y");?></h3>
+                    <h3 class="heading" style="color: #F7941E;"><?=date("Y");?></h3>
                 </div>
             </div>
             <div class="row row-cols-2 row-cols-md-2 mx-auto" style="max-width: 900px;">

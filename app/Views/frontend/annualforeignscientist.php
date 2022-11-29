@@ -15,7 +15,7 @@
     </section>
     <section>
         <div class="container" style="margin-bottom: 60px;">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <h3 class="heading" style="color: #F7941E;">All Foreign Scientists</h3>
                 </div>
@@ -24,7 +24,7 @@
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="text-muted w-lg-50">as Visiting Professors</p>
                 </div>
-            </div>
+            </div> -->
             <div class="row row-cols-1 row-cols-md-4 mx-auto olddirectory" style="max-width: 900px;">
                 <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#ChristopherMathew" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png"></a><a href="#" data-bs-target="#ChristopherMathew" data-bs-toggle="modal">

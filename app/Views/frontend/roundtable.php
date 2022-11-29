@@ -1,4 +1,4 @@
-<section class="heroInner" style="background: url(<?=base_url();?>assets/img/round-table.jpg) center left no-repeat, #fff;">
+<section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/round-table.jpg) center left no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Round Table Conferences on Topics of National Public health Concern<br></h1>
         </div>
