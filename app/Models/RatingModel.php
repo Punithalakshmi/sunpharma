@@ -30,10 +30,10 @@ class RatingModel extends Model{
         return $this->getWhere(array('jury_id' => $jury_id,'nominee_id' =>$nominee_id)); 
     }
 
-    public function getRatingByJury($nominee_id)
+    public function getRatingByJury($nominee_id = '')
     {
         $builder = $this->table('ratings');
-        $builder->select('ratings.*,users.firstname');
+        $builder->select('ratings.*,users.firstname,users.lastname');
         $builder->join('users','users.id = ratings.jury_id AND users.role=1');
         $builder->where("ratings.nominee_id",$nominee_id);
         return $query = $builder->get();

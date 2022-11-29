@@ -2,7 +2,7 @@
         foreach($lists as $user):
 ?>
     <tr>
-    <td><span class="expandChildTable"></span></td>
+    <td><span class="expandChildTable fa fa-plus-circle"></span></td>
         <td><?=$user['category_name'];?></td>
         <td><?=$user['firstname'];?></td>
         <td><?=date("Y")."/".$user['id'];?></td>
@@ -12,7 +12,7 @@
         <tr class="childTableRow">
             <td colspan="6">
                 <h5>Jury Info</h5>
-                <table class="table">
+                <table class="table jurysec">
                     <thead>
                     <tr>
                         <th>Jury</th>

@@ -2,17 +2,21 @@
 
 namespace App\Controllers;
 
-
 class LatestWinnersOfScienceScholarsAwards extends BaseController
 {
     public function index()
     {
-        $session   = \Config\Services::session();
-        $userdata = $session->get('fuserdata');
-        $data['userdata'] = $userdata;
-        return   view('frontend/header',$data)
-                .view('frontend/latest_winners_of_science_scholars', $data)
-                 .view('frontend/footer');
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
+        
+        $data['userdata']  = $this->session->get('fuserdata');
+
+        //get latest winners of science scholars awards
+        $scienceScholarAwards = $this->awardsModel->getLatestWinnersofScienceScholarAwards()->getResultArray();
+        $data['latestWinnersOfScholarAwards'] = $scienceScholarAwards;
+        
+        return  render('frontend/latest_winners_of_science_scholars', $data);
+   
     }   
 
    

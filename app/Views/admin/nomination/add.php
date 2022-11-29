@@ -12,7 +12,7 @@
                 
                   <div class="x_content">
                     <br />
-                    <form id="categoryForm" action="<?php echo base_url();?>/admin/nomination/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="categoryForm" action="<?php echo base_url();?>/admin/nomination/add" method="POST" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       
                       <div class="clearfix"></div>
@@ -30,7 +30,63 @@
                           </select>
                         </div>
                       </div>
+                      <div class="clearfix"></div>          
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('category')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?= $error = $validation->getError('category'); ?>
+                            </div>
+                        <?php }?>
+                      </div>
+                     
+                      <div class="clearfix"></div>
 
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                          Title
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('title',$editdata['title']);?>">
+                      </div>
+                      <small class="text-danger">
+                      <?php if(isset($validation) && $validation->getError('title')) {?>
+                          <?= $error = $validation->getError('title'); ?>
+                      <?php }?>
+                      </small>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                          Subject
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="subject" name="subject" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('subject',$editdata['subject']);?>">
+                      </div>
+                      <small class="text-danger">
+                      <?php if(isset($validation) && $validation->getError('subject')) {?>
+                          <?= $error = $validation->getError('subject'); ?>
+                      <?php }?>
+                      </small>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <textarea name="description"><?=$editdata['description'];?></textarea>
+                        
+                      </div>
+                      <small class="text-danger">
+                      <?php if(isset($validation) && $validation->getError('description')) {?>
+                          <?= $error = $validation->getError('description'); ?>
+                      <?php }?>
+                      </small>
+                    </div>
                       <div class="clearfix"></div>
                       
                       <div class="form-group">
@@ -70,8 +126,73 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Invitation Document</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="btn-group">
+                            <p>
+                                <input class="form-control" name="event_document" type="file" >
+                           </p>
+                           <?php if(isset($editdata['event_document']) && !empty($editdata['event_document'])): ?>
+                              <a target="_blank" href="<?=base_url();?>/uploads/events/<?=$editdata['event_document'];?>"><?=$editdata['event_document'];?></a>
+                           <?php endif; ?>
+                          </div>
+                        </div>
+                      </div>
                      
-                     
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Banner Image</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="btn-group">
+                            <p>
+                                <input class="form-control" name="banner_image" type="file" >
+                           </p>
+                           <?php if(isset($editdata['banner_image']) && !empty($editdata['banner_image'])): ?>
+                              <a target="_blank" href="<?=base_url();?>/uploads/events/<?=$editdata['banner_image'];?>"><?=$editdata['banner_image'];?></a>
+                           <?php endif; ?>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Thumb Image</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="btn-group">
+                            <p>
+                                <input class="form-control" name="thumb_image" type="file" >
+                           </p>
+                           <?php if(isset($editdata['thumb_image']) && !empty($editdata['thumb_image'])): ?>
+                              <a target="_blank" href="<?=base_url();?>/uploads/events/<?=$editdata['thumb_image'];?>"><?=$editdata['thumb_image'];?></a>
+                           <?php endif; ?>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="clearfix"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
+                          <div id="gender" class="btn-group mt-10" data-toggle="buttons">
+                            <p>
+                            <input type="radio" class="flat" name="status" id="statusActive" value="1" <?php echo set_radio('status','1',(isset($editdata['status']) && ($editdata['status']=='1'))?'checked':'');?> /> Active &nbsp;&nbsp;
+                            <input type="radio" class="flat" name="status" id="statusInActive" value="0" <?php echo set_radio('status','0',(isset($editdata['status']) && ($editdata['status']=='0'))?'checked':'');?> /> InActive
+                           </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>          
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('status')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?= $error = $validation->getError('status'); ?>
+                            </div>
+                        <?php }?>
+                      </div>
                       <div class="ln_solid"></div>
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

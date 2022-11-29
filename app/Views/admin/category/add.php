@@ -10,7 +10,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                 
-                  <div class="x_content">
+                  <div class="x_content formareaptag">
                     <br />
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/category/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >

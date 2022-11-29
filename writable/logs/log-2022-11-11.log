@@ -1,0 +1,199 @@
+CRITICAL - 2022-11-11 00:56:03 --> Undefined index: subject
+in APPPATH\Views\admin\workshop\event.php on line 37.
+ 1 APPPATH\Views\admin\workshop\event.php(37): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: subject', 'APPPATH\\Views\\admin\\workshop\\event.php', 37, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\event.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/event', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(129): view('admin/workshop/event', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-11 01:19:55 --> Unknown table 'sunpharma.event_type'
+CRITICAL - 2022-11-11 01:19:55 --> Unknown table 'sunpharma.event_type'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `event_type`.*
+FROM `events`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `event_type`.*
+FROM `events`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `event_type`.*
+FROM `events`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `event_type`.*
+FROM `events`', [], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\WorkshopModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Workshops.php(47): App\Models\WorkshopModel->getEventTypes()
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-11 01:20:20 --> Unknown table 'sunpharma.event_type'
+CRITICAL - 2022-11-11 01:20:20 --> Unknown table 'sunpharma.event_type'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `event_type`.*
+FROM `events`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `event_type`.*
+FROM `events`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `event_type`.*
+FROM `events`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `event_type`.*
+FROM `events`', [], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\WorkshopModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Workshops.php(47): App\Models\WorkshopModel->getEventTypes()
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-11 01:24:37 --> Unknown table 'sunpharma.event_type'
+CRITICAL - 2022-11-11 01:24:37 --> Unknown table 'sunpharma.event_type'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `event_type`.*
+FROM `events`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `event_type`.*
+FROM `events`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `event_type`.*
+FROM `events`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `event_type`.*
+FROM `events`', [], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\WorkshopModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Workshops.php(47): App\Models\WorkshopModel->getEventTypes()
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-11 01:24:38 --> Unknown table 'sunpharma.event_type'
+CRITICAL - 2022-11-11 01:24:38 --> Unknown table 'sunpharma.event_type'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `event_type`.*
+FROM `events`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `event_type`.*
+FROM `events`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `event_type`.*
+FROM `events`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `event_type`.*
+FROM `events`', [], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\WorkshopModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Workshops.php(47): App\Models\WorkshopModel->getEventTypes()
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-11-11 01:24:40 --> Unknown table 'sunpharma.event_type'
+CRITICAL - 2022-11-11 01:24:40 --> Unknown table 'sunpharma.event_type'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `event_type`.*
+FROM `events`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `event_type`.*
+FROM `events`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `event_type`.*
+FROM `events`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `event_type`.*
+FROM `events`', [], false)
+ 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\WorkshopModel.php(32): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\Admin\Workshops.php(47): App\Models\WorkshopModel->getEventTypes()
+ 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 01:55:43 --> Call to a member function move() on null
+in APPPATH\Controllers\Admin\Workshops.php on line 89.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 01:56:36 --> Undefined index: firstname
+in APPPATH\Views\admin\workshop\list.php on line 47.
+ 1 APPPATH\Views\admin\workshop\list.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: firstname', 'APPPATH\\Views\\admin\\workshop\\list.php', 47, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\workshop\\list.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/workshop/list', [], true)
+ 5 APPPATH\Controllers\Admin\Workshops.php(27): view('admin/workshop/list', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 02:00:47 --> The original file is not a valid file.
+in SYSTEMPATH\HTTP\Files\UploadedFile.php on line 137.
+ 1 SYSTEMPATH\HTTP\Files\UploadedFile.php(137): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidFile()
+ 2 APPPATH\Controllers\Admin\Workshops.php(90): CodeIgniter\HTTP\Files\UploadedFile->move('FCPATH\\uploads\\events')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 20:09:15 --> syntax error, unexpected '$editdata' (T_VARIABLE)
+in APPPATH\Controllers\Nomination.php on line 443.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Nomination.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Nomination')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Nomination')
+ 4 [internal function]: spl_autoload_call('App\\Controllers\\Nomination')
+ 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Nomination', true)
+ 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 20:14:22 --> The original file is not a valid file.
+in SYSTEMPATH\HTTP\Files\UploadedFile.php on line 137.
+ 1 SYSTEMPATH\HTTP\Files\UploadedFile.php(137): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidFile()
+ 2 APPPATH\Controllers\Nomination.php(394): CodeIgniter\HTTP\Files\UploadedFile->move('FCPATH\\uploads\\7')
+ 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 20:23:14 --> Undefined variable: validation
+in APPPATH\Views\frontend\spsfn.php on line 258.
+ 1 APPPATH\Views\frontend\spsfn.php(258): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: validation', 'APPPATH\\Views\\frontend\\spsfn.php', 258, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\spsfn.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/spsfn', [], true)
+ 5 APPPATH\Controllers\Nomination.php(476): view('frontend/spsfn', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 20:25:47 --> Undefined variable: validation
+in APPPATH\Views\frontend\spsfn.php on line 258.
+ 1 APPPATH\Views\frontend\spsfn.php(258): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: validation', 'APPPATH\\Views\\frontend\\spsfn.php', 258, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\spsfn.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/spsfn', [], true)
+ 5 APPPATH\Controllers\Nomination.php(476): view('frontend/spsfn', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 20:25:52 --> Undefined variable: validation
+in APPPATH\Views\frontend\spsfn.php on line 258.
+ 1 APPPATH\Views\frontend\spsfn.php(258): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: validation', 'APPPATH\\Views\\frontend\\spsfn.php', 258, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\spsfn.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/spsfn', [], true)
+ 5 APPPATH\Controllers\Nomination.php(476): view('frontend/spsfn', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 20:25:55 --> Undefined variable: validation
+in APPPATH\Views\frontend\spsfn.php on line 258.
+ 1 APPPATH\Views\frontend\spsfn.php(258): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: validation', 'APPPATH\\Views\\frontend\\spsfn.php', 258, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\spsfn.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/spsfn', [], true)
+ 5 APPPATH\Controllers\Nomination.php(476): view('frontend/spsfn', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-11 20:39:03 --> Undefined variable: validation
+in APPPATH\Views\frontend\spsfn.php on line 18.
+ 1 APPPATH\Views\frontend\spsfn.php(18): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: validation', 'APPPATH\\Views\\frontend\\spsfn.php', 18, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\spsfn.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/spsfn', [], true)
+ 5 APPPATH\Controllers\Nomination.php(476): view('frontend/spsfn', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

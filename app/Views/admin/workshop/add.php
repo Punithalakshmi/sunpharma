@@ -99,10 +99,10 @@
                       <div class="clearfix"></div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Registration No: 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Invitation File Upload 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="registration_link" readonly class="form-control col-md-7 col-xs-12" value="<?php echo set_value('registration_link',$editdata['registration_link']);?>">
+                          <input type="text" id="first-name" name="event_document" readonly class="form-control col-md-7 col-xs-12" value="<?php echo set_value('registration_link',$editdata['registration_link']);?>">
                         </div>
                       </div>
                       

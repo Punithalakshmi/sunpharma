@@ -19,13 +19,13 @@ class NomineeModel extends Model{
         'updated_date',
         'dob',
         'address',
-        'middlename'
+        'middlename',
+        'category'
     ];
 
     public function getListsOfNominees($id='')
     {
         if(empty($id)){
-        // return $this->getWhere(array("role" => '2'));
             $builder = $this->table('users');
             $builder->select('users.*,jury_nominee.jury_id');
             $builder->join('jury_nominee', 'jury_nominee.nominee_id = users.id','left');

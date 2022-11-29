@@ -46,3 +46,8 @@ Events::on('pre_system', static function () {
         Services::toolbar()->respond();
     }
 });
+
+
+Events::on('post_controller_constructor', function() {
+    helper('render');
+});

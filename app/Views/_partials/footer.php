@@ -6,13 +6,7 @@
     <script src="<?php echo base_url();?>/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="<?php echo base_url();?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script>
-      $(function() {
-      $('.expandChildTable').on('click', function() {
-          $(this).toggleClass('selected').closest('tr').next().toggle();
-      })
-    });
-    </script>
+    
     <!-- FastClick -->
     <script src="<?php echo base_url();?>/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->

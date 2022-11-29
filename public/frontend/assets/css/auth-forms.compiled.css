@@ -1,0 +1,59 @@
+.authBg {
+  background-color: #b5b5b5;
+  background-blend-mode: overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../assets/img/contact-banner.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.registration-form {
+  padding: 50px 0;
+}
+
+.registration-form form {
+  max-width: 800px;
+  padding: 50px 70px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+.registration-form form h3 {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.registration-form .item {
+  border-radius: 10px;
+  margin-bottom: 25px;
+  padding: 10px 20px;
+}
+
+.registration-form .create-account {
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  color: white;
+  margin-top: 20px;
+}
+
+@media (max-width: 576px) {
+  .registration-form form {
+    padding: 50px 20px;
+  }
+}
+html {
+  height: 100%;
+}
+
+disabled,
+[disabled=disabled],
+.form-control:disabled {
+  cursor: no-drop;
+}

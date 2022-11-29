@@ -1,0 +1,65 @@
+:root {
+  --theme-orange:#F7941E;
+  --theme-blue:#6398d1;
+}
+
+.bg-orange {
+  background-color: var(--theme-orange);
+}
+
+.text-orange {
+  color: var(--theme-orange);
+}
+
+.heroInner {
+  padding-top: 180px;
+  padding-bottom: 180px;
+  background-size: cover !important;
+}
+.heroInner h1 {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.backgroundCover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bg-white-transparent {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.py-120 {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.tabWrapper .nav-tabs {
+  --bs-nav-tabs-border-radius:0;
+}
+.tabWrapper .nav-link {
+  --bs-nav-link-color:#fff;
+  font-weight: 600;
+}
+.tabWrapper .nav-link:hover, .tabWrapper .nav-link:focus {
+  color: #fbe4c8;
+}
+.tabWrapper .tab-content {
+  padding: 1rem;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.tabFilter .text-orange[aria-expanded=true] {
+  font-weight: 600;
+}
+.tabFilter .text-orange[aria-expanded=true]:hover, .tabFilter .text-orange[aria-expanded=true]:focus {
+  color: var(--theme-orange);
+}
+
+.noheader .sticky-top {
+  position: relative !important;
+}

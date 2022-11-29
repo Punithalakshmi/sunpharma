@@ -309,6 +309,8 @@ class User extends BaseController
 
                     $ins_data = array();
                     $ins_data['password']  = md5($newPassword);
+
+                    $userData = $userModel->getListsOfUsers($id);
                     
                     if(!empty($id)){
                         $session->setFlashdata('msg', 'Password Updated Successfully!');
@@ -317,6 +319,8 @@ class User extends BaseController
                         $userModel->update(array("id" => $id),$ins_data);
                     }
                     
+                    $this->sendMail($userData['email'],$newPassword);
+
                     return redirect()->route('admin/user');
                 }
             }
@@ -368,6 +372,26 @@ class User extends BaseController
 
         return $validation_rules;
       
+    }
+
+    public function sendMail($mail,$password)
+    {
+        $header  = '';
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+
+        $subject = " SPSFN - Change Password ";
+        $message  = "Hi, ";
+        $message .= '<br/><br/>';
+        $message .= "Your Account Password has been changed successfully.";
+        $message .= "<br/>";
+        $message .= "Please use this Password:".$password;
+        $message .= "<br/>";
+     
+        $data['content'] = $message;
+        $html = view('email/mail',$data,array('debug' => false));
+
+        mail($mail,$subject,$html,$header);
     }
 
 }

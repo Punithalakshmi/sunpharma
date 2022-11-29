@@ -24,10 +24,12 @@
                       <thead>
                         <tr>
                          
-                          <th>Firstname</th>
-                          <th>Lastname</th>
+                          <th>Nominee Name</th>
+                          <th>Category</th>
                           <th>Email</th>
+                          
                           <th>Phone</th>
+                          <th>Complete By</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -40,10 +42,11 @@
                             ?>
                         <tr>
                   
-                          <td><?=$user['firstname'];?></td>
-                          <td><?=$user['lastname'];?></td>
+                          <td><?=$user['firstname'].' '.$user['lastname'];?></td>
+                          <td><?=$user['category_name'];?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
+                          <td><?=$user['end_date'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
                            

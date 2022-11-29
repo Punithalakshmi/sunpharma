@@ -31,7 +31,7 @@ class Nomination extends BaseController
                  $category = $categoryModel->getListsOfCategories($uvalue['category_id']);
                     
                  $category = $category->getRowArray();
-                 //($category); die;
+                 
                  $nominationTypeLists[$ukey]['category_id'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
                 }
                 else
@@ -63,7 +63,6 @@ class Nomination extends BaseController
         $nominationTypesModel = new NominationTypesModel();
         $categoryModel        = new CategoryModel();
 
-         
         $data['categories']  = $categoryModel->getListsOfCategories();
         
         if(is_array($userdata) && count($userdata)):
@@ -85,6 +84,10 @@ class Nomination extends BaseController
                     $start_date    = $request->getPost('start_date');
                     $end_date      = $request->getPost('end_date');
                     $year          = $request->getPost('nomination_year');
+                    $status        = $request->getPost('status');
+                    $subject      = $request->getPost('subject');
+                    $title        = $request->getPost('title');
+                    $description  = $request->getPost('description');
 
                     
                     $ins_data = array();
@@ -92,7 +95,50 @@ class Nomination extends BaseController
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
                     $ins_data['year']         = $year;
-                   // print_r($ins_data); die;
+                    $ins_data['status']       = $status;
+                    $ins_data['subject']           = $subject; 
+                    $ins_data['description']       = $description;
+                    $ins_data['title']             = $title;
+
+                    if($this->request->getFile('banner_image') != ''){
+                        $fileUploadDir = 'uploads/events/';
+                            
+                        if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
+                        mkdir($fileUploadDir, 0777, true);
+                        
+                        //upload documents to respestive nominee folder
+                        $banner_image = $this->request->getFile('banner_image');
+                        $banner_image->move($fileUploadDir);
+
+                        $ins_data['banner_image']  = $banner_image->getClientName();
+                    }
+
+                    if($this->request->getFile('thumb_image') != ''){
+                        $fileUploadDir = 'uploads/events/';
+                            
+                        if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
+                        mkdir($fileUploadDir, 0777, true);
+                        
+                        //upload documents to respestive nominee folder
+                        $thumb_image = $this->request->getFile('thumb_image');
+                        $thumb_image->move($fileUploadDir);
+
+                        $ins_data['thumb_image']  = $thumb_image->getClientName();
+                    }
+
+                    if($this->request->getFile('event_document') != ''){
+                        $fileUploadDir = 'uploads/events/';
+                            
+                        if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
+                        mkdir($fileUploadDir, 0777, true);
+                        
+                        //upload documents to respestive nominee folder
+                        $event_document = $this->request->getFile('event_document');
+                        $event_document->move($fileUploadDir);
+
+                        $ins_data['document']  = $event_document->getClientName();
+                    }
+               
                     if(!empty($id)){
                         $session->setFlashdata('msg', 'Nomination Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
@@ -118,14 +164,26 @@ class Nomination extends BaseController
                     $editdata['year']       = $edit_data['year'];
                     $editdata['start_date'] = date("m/d/Y",strtotime($edit_data['start_date']));
                     $editdata['end_date']   = date("m/d/Y",strtotime($edit_data['end_date']));
+                    $editdata['banner_image']          = $edit_data['banner_image'];
+                    $editdata['thumb_image']           = $edit_data['thumb_image'];
+                    $editdata['status']                = $edit_data['status'];
+                    $editdata['title']                 = $edit_data['title'];
+                    $editdata['subject']               = $edit_data['subject'];
+                    $editdata['description']           = $edit_data['description'];
                     $editdata['id']         = $edit_data['id'];
                 }
                 else
                 {
+                    $editdata['title']                = ($request->getPost('title'))?$request->getPost('title'):'';
+                    $editdata['subject']              = ($request->getPost('subject'))?$request->getPost('subject'):'';
+                    $editdata['description']          = ($request->getPost('description'))?$request->getPost('description'):'';
                     $editdata['category']       = ($request->getPost('category'))?$request->getPost('category'):'';
                     $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
                     $editdata['start_date']     = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
                     $editdata['end_date']       = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");
+                    $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';
+                    $editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
+                    $editdata['status']               = ($request->getPost('status'))?$request->getPost('status'):'0';
                     $editdata['id']             = ($request->getPost('id'))?$request->getPost('id'):'';
                 }
 
@@ -151,7 +209,11 @@ class Nomination extends BaseController
 
         $validation_rules = array();
         $validation_rules = array(
-                                        "start_date" => array("label" => "Start Date",'rules' => 'required')
+            "category" => array("label" => "Category",'rules' => 'required'),
+            "subject" => array("label" => "Subject",'rules' => 'required'),
+            "description" => array("label" => "Description",'rules' => 'required'),
+                                        "start_date" => array("label" => "Start Date",'rules' => 'required'),
+                                        "status" => array("label" => "Status",'rules' => 'required')
         );
     
         return $validation_rules;

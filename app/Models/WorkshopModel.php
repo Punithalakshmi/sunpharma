@@ -6,7 +6,9 @@ class WorkshopModel extends Model{
     protected $table = 'events';
     
     protected $allowedFields = [
-        'name',
+        'title',
+        'subject',
+        'category',
         'description',
         'start_date',
         'end_date',
@@ -14,7 +16,12 @@ class WorkshopModel extends Model{
         'updated_date',
         'created_id',
         'updated_id',
-        'registration_link'
+        'registration_link',
+        'document',
+        'year',
+        'banner_image',
+        'thumb_image',
+        'status'
     ];
 
     public function getLists($id='')
@@ -25,6 +32,17 @@ class WorkshopModel extends Model{
          return $this->getWhere(array('id' => $id)); 
     }
 
-    
+    public function getEventTypes()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('event_type');
+        $builder->select('event_type.*');
+        return $query = $builder->get();
+    }
+
+    public function getActiveEvents()
+    {
+         return $this->getWhere(array('status' => 1)); 
+    }
 
 }

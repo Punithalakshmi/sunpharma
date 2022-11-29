@@ -37,22 +37,29 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('mission', 'Home::mission');
+$routes->get('aboutus', 'Home::aboutus');
 $routes->get('annual_activities', 'Home::annualActivities');
+$routes->get('roundtable', 'Home::roundtable');
+$routes->get('annualforeign_scientist', 'Home::annualforeign_scientist');
+$routes->get('symposium', 'Home::symposium');
 $routes->get('contact', 'Home::contact');
 $routes->get('research_awards','ResearchAwards::index');
 $routes->get('directory_research_awardees','DirectoryResearchAwardees::index');
 $routes->get('special_awards','SpecialAwards::index');
 $routes->get('latest_winners_of_science_scholars_awards','LatestWinnersOfScienceScholarsAwards::index');
 $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
-$routes->get('ssan','Nomination::index');
-$routes->post('ssan','Nomination::index');
-$routes->get('spsfn','Nomination::spsfn');
-$routes->post('spsfn','Nomination::spsfn');
+$routes->get('spsfn','Nomination::index');
+$routes->post('spsfn','Nomination::index');
+$routes->get('ssan','Nomination::ssan');
+$routes->post('ssan','Nomination::ssan');
 $routes->get('nomination_preview', 'Home::nominationPreview');
+$routes->get('latest_winners_of_research_awards','LatestWinnersOfResearchAwards::index');
+$routes->get('latest_winners_of_science_scholar_awards','LatestWinnersOfScienceScholarsAwards::index');
+//$routes->get('research_awards','Home::research_awards');
+$routes->get('science_scholar_awards','Home::science_scholar_awards');
 
-$routes->get('ssan/(:any)','Nomination::index/$1');
-$routes->get('spsfn/(:any)','Nomination::spsfn/$1');
+$routes->get('ssan/(:any)','Nomination::ssan/$1');
+$routes->get('spsfn/(:any)','Nomination::index/$1');
 $routes->get('preview/(:any)','Nomination::preview/$1');
 
 $routes->post('login','User::login');
@@ -63,8 +70,12 @@ $routes->get('forget_password','User::forget_password');
 
 $routes->post('reset_password','User::reset_password');
 $routes->get('reset_password','User::reset_password');
+$routes->get('view/(:any)','Nomination::view/$1');
+$routes->post('view','Nomination::view');
 
 $routes->get('logout','User::logout');
+$routes->get('form','User::validForm');
+$routes->get('sendMail','User::sendMail');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
@@ -100,7 +111,6 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nominee/getApproval/(:any)','Nominee::getApproval/$1');
     $routes->post('nominee/approve','Nominee::approve');
 
-
     $routes->get('category','Category::index');
     $routes->post('category/add','Category::add');
     $routes->get('category/add','Category::add');
@@ -127,6 +137,19 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('awards/index','Awards::index');
     $routes->get('awards/export','Awards::export');
     $routes->post('awards/export','Awards::export');
+
+    $routes->get('awards/getJuryListsByNominee/(:any)','Awards::getJuryListsByNominee/$1');
+    $routes->post('awards/getJuryListsByNominee/(:any)','Awards::getJuryListsByNominee/$1');
+    $routes->post('awards/getJuryListsByNominee','Awards::getJuryListsByNominee');
+
+    $routes->get('eventregisteration','EventRegisteration::index');
+    $routes->post('eventregisteration/add','EventRegisteration::add');
+    $routes->get('eventregisteration/add','EventRegisteration::add');
+    $routes->get('eventregisteration/add/(:any)','EventRegisteration::add/$1');
+    $routes->get('eventregisteration/delete/(:any)','EventRegisteration::delete/$1');
+
+    $routes->get('nominee/extend/(:any)','Nominee::extend/$1');
+    $routes->post('nominee/extend','Nominee::extend');
 
 });
 

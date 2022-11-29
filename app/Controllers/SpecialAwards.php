@@ -7,14 +7,13 @@ class SpecialAwards extends BaseController
 {
     public function index()
     {
-
-        $session   = \Config\Services::session();
-        $userdata = $session->get('fuserdata');
-        $data['userdata'] = $userdata;
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
+     
+        $data['userdata'] = $this->session->get('fuserdata');
         
-        return  view('frontend/header',$data)
-                .view('frontend/special_award',$data)
-                .view('frontend/footer');
+        return render('frontend/special_award',$data);
+               
     }
 
    

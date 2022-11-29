@@ -1,0 +1,26 @@
+CRITICAL - 2022-11-22 04:47:27 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 406.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-22 23:41:39 --> syntax error, unexpected 'endif' (T_ENDIF), expecting end of file
+in APPPATH\Views\frontend\ssan_new.php on line 415.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/ssan_new', [], true)
+ 3 APPPATH\Controllers\Nomination.php(485): view('frontend/ssan_new', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 6 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-22 23:44:03 --> Undefined index: nominator_photo
+in APPPATH\Views\frontend\ssan_new.php on line 446.
+ 1 APPPATH\Views\frontend\ssan_new.php(446): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: nominator_photo', 'APPPATH\\Views\\frontend\\ssan_new.php', 446, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\ssan_new.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/ssan_new', [], true)
+ 5 APPPATH\Controllers\Nomination.php(485): view('frontend/ssan_new', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
