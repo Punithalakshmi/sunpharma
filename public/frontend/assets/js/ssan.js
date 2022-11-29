@@ -87,15 +87,14 @@ form.children("div").steps({
     transitionEffect: "slideLeft",
     onStepChanging: function (event, currentIndex, newIndex)
     {
-       // console.log('index',currentIndex);
+       
         event.preventDefault();
         form.validate().settings.ignore = ":disabled,:hidden";
        
         // Get the selected file
-       
         if(currentIndex && currentIndex == 1){
 
-            $("#overlay").fadeIn(3000);
+            $("#overlay").fadeIn(300);
         
         var files                   = $('#nominator_photo')[0].files;
         var justification_letter    = $('#justification_letter')[0].files;
@@ -132,9 +131,10 @@ form.children("div").steps({
         fd.append('nominator_office_address',nominator_office_address);
         fd.append('nominator_mobile',nominator_mobile);
         fd.append('nominator_email',nominator_email);
-       
+        fd.append('formType','ssan');
+
         $.ajax({
-                url: base_url+'/ssan',
+                url: base_url+'/getPostedData',
                 type: 'POST',
                 data: fd,
                 contentType: false,
@@ -145,7 +145,7 @@ form.children("div").steps({
                 {
                     jQuery('#formPreview').html(form_res.html);
                     setTimeout(function(){
-                        $("#overlay").fadeOut(3000);
+                        $("#overlay").fadeOut(300);
                       },500);
                 }
             });
@@ -162,7 +162,6 @@ form.children("div").steps({
     {
         form.submit();
         alert('Your Application Submitted Successfully.');
-
     }
 
   })

@@ -61,6 +61,7 @@ $routes->get('science_scholar_awards','Home::science_scholar_awards');
 $routes->get('ssan/(:any)','Nomination::ssan/$1');
 $routes->get('spsfn/(:any)','Nomination::index/$1');
 $routes->get('preview/(:any)','Nomination::preview/$1');
+$routes->post('getPostedData','Nomination::getPostedData');
 
 $routes->post('login','User::login');
 $routes->get('login','User::login');
