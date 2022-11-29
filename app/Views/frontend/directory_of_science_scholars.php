@@ -1,7 +1,7 @@
 
     <section class="heroInner" style="background: #fff url(<?=base_url();?>/frontend/assets/img/directory-Scholars.jpg) center left no-repeat;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Directory Of Previous Ranbaxy Science Scholars Award Winners<br></h1>
+            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Science Scholar Award Winners<br></h1>
         </div>
     </section>
     <section class="py-5">

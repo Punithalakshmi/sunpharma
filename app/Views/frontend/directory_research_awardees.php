@@ -1,6 +1,6 @@
  <section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/directory-winner.jpg&quot;) top no-repeat, #fff;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Directory of previous Research Award winners<br></h1>
+            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Research Award Winners<br></h1>
         </div>
     </section>
     <section class="py-5">

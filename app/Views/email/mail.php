@@ -274,7 +274,7 @@
 												<td class="h5-center" style="color:#a1a1a1; font-family:Arial, sans-serif;font-size:16px; line-height:22px; text-align:center; padding-bottom:5px;">Welcome to</td>
 											</tr>
 											<tr>
-												<td class="h2-center" style="color:#000000; font-family:Arial, sans-serif;font-size:32px; line-height:36px; text-align:center; padding-bottom:20px;"><?=$title;?></td>
+												<td class="h2-center" style="color:#000000; font-family:Arial, sans-serif;font-size:32px; line-height:36px; text-align:center; padding-bottom:20px;"><?=(isset($title) && !empty($title))?$title:'Sunpharma Science Foundation';?></td>
 											</tr>
 											<tr>
 												<td class="text-center" style="color:#5d5c5c; font-family:Arial, sans-serif;font-size:14px; line-height:22px; text-align:center; padding-bottom:22px;">

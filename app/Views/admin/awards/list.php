@@ -119,24 +119,7 @@
           </button>
         </div>
         <div class="modal-body" id="juryListss">
-        <table id="datatable" class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Rating</th>
-              </tr>
-            </thead>
-            <tbody id="getLists">
-                <?php if(is_array($user['juries']) && count($user['juries']) > 0):  
-                  foreach($user['juries'] as $ukey => $uvalue): ?>
-                    <tr>
-                        <td><?=$uvalue['firstname'].' '.$uvalue['lastname'];?></td>
-                        <td><?=$uvalue['rating'];?></td>
-                    </tr>
-                  <?php endforeach;
-                  endif; ?>
-            </tbody>
-          </table>
+        
         </div>
         <div class="modal-footer">
           
