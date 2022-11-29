@@ -7,14 +7,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-capitalize fw-normal" style="color: var(--theme-orange);">Inviting Foreign Scientists as Visiting Professors<br></h3>
+                    
                     <p>The Foundation invites one outstanding research scientist from abroad every year to work with Indian scientists in Indian Laboratories to elevate the capabilities of Indian Scientists and widen their knowledge base in the ongoing research on topics related to health development. The following foreign scientists were invited to India by the Foundation as Visiting Professors.<br></p>
                 </div>
             </div>
         </div>
     </section>
     <section>
-        <div class="container" style="margin-bottom: 60px;">
+        <div class="container userprofileloop" style="margin-bottom: 60px;">
             <!-- <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <h3 class="heading" style="color: #F7941E;">All Foreign Scientists</h3>

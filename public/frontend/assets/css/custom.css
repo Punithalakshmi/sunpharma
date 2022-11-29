@@ -251,7 +251,7 @@ nav#mainNav {
   border:solid #ccc 1px;
   cursor: pointer;
 }
-#overlay{	
+#overlay{	display:none!important;
   position: fixed;
   top: 0;
   z-index: 100;
@@ -294,7 +294,23 @@ label#acceptTerms-error {max-width:190px;
   display: flex!important;
 }
 
+.userprofileloop .text-center > a:first-child {
+  display: none;
+}
 
+.userprofileloop .text-center > a:last-child {
+  border: 1px solid #ddd;
+  display: flex;
+}
+
+.userprofileloop .col > .text-center {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 7px;
+  background: #f9f9f9;
+}
+
+.userprofileloop .col > .text-center a:hover {color: #f7941e;}
 
 /*disable form scroll*/
 body .wizard > .content {

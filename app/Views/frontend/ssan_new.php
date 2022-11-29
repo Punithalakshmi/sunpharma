@@ -36,7 +36,7 @@
                                             <img class="uploadPreview" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="200"
                                                 height="200" />
 
-                                               <input type="file" style="max-width:210px" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo" />
+                                               <input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo" />
                                         </label>
                                         <div class="hintcont">
                                             <small>Not more than 500 KB</small>

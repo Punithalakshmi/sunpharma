@@ -7,7 +7,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-capitalize fw-normal" style="color: var(--theme-orange);">National Seminars<br></h3>
                     <p>The Foundation organizes two Round Table Conferences in a year on topics of contemporary concern to human health which pose challenges. The aim of these multidisciplinary Round Table Conferences is to review the collective experiences of basic scientists, laboratory scientists, epidemiologists, clinicians and public health professionals. At the end of the conference, frontline messages indicating need of newer areas of disease related knowledge and research for control of the disease are brought out to give directions to the government, policy makers, professionals and the public at large. The Round Table Conferences held under the aegis of Foundation are listed below:<br></p>
                 </div>
             </div>
