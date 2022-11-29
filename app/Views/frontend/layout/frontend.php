@@ -17,6 +17,7 @@ Online Submission Of Nominations">
         <?=link_tag('frontend/assets/css/Hero-Carousel-images.css')?>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
         <?=link_tag('frontend/assets/css/innerPages.compiled.css')?>
+        <?=link_tag('frontend/assets/css/responsive.compiled.css')?>
         <?=link_tag('frontend/assets/css/Simple-Slider-Simple-Slider.css')?>
         <?=link_tag('frontend/assets/css/slidingform.css')?>
        

@@ -127,7 +127,7 @@
                         <div class="step">
 
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for="">Name of the Nominator</label>
                                         <div><?=$editdata['nominator_name'];?>
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for="">Designation & Office Address of the
                                             Nominator</label>

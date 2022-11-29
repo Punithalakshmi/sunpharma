@@ -144,7 +144,7 @@
                             <p class="card-text" style="font-size: 14px;">
                                 This Winter School is being organized for clinical researchers and basic scientists engaged in research on biomedical sciences involving humans. 
                             </p>
-                            <a href="workshop-epidemiological-genomic-methods.html" class="btn btn-primary">Read More</a>
+                            <a href="#" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>
