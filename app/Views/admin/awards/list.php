@@ -54,7 +54,7 @@
                   <?= session()->getFlashdata('msg') ?>
               </div>
             <?php endif;?>
-            <div class="row">
+            <div class="row awardrating">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   
@@ -84,10 +84,9 @@
                                     <img class="border" src="<?=base_url();?>/uploads/<?=$user['id'];?>/<?=$user['nominator_photo'];?>" alt="" style="border: 1px solid #959595;padding: 5px;"> 
                                   </div>
                                   <div class="product_gallery">
-                                    <br/>
-                                     <p align="center"><?=$user['firstname'];?></p>
-                                     <p align="center"><?=$user['category_name'];?></p>
-                                     <p align="center"><?=round($user['average_rating']);?></p>
+                                     <h2 class="fname" align="center"><?=$user['firstname'];?></h2>
+                                     <h3 class="catname" align="center"><?=$user['category_name'];?></h3>
+                                     <h4 class="averrating" align="center"><span class="badge badge-warning"><i class="fa fa-star"></i> <?=round($user['average_rating']);?></span></h4>
                                   </div>
                                 </div>
                               <?php endforeach;
