@@ -90,7 +90,7 @@
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/awards">
-                      <i class="fa fa-solid fa-trophy"></i> Reports 
+                      <i class="fa fa-solid fa-trophy"></i> Award Results 
                     </a>
                   </li>
                   <?php } else if($userdata['role'] == 1){ ?>

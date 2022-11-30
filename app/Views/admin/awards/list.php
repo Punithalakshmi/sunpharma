@@ -3,7 +3,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Award Lists <small></small></h3>
+                <h3>Award Results<small></small></h3>
               </div>
             </div>
             <div class="clearfix"></div>

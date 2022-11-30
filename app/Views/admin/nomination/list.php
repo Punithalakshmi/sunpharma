@@ -3,12 +3,12 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Nominations <small></small></h3>
+                <h3>Awards Creation <small></small></h3>
               </div>
             </div>
            
             <div class="actionbtns">
-                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add Nomination</a>
+                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add New Award</a>
            </div>
           
             <div class="clearfix"></div>
@@ -28,7 +28,7 @@
                       <thead>
                         <tr>
                           <th>Category Name</th>
-                          <th>Title</th>
+                          <th>Nomination Year</th>
                           <th>Start Date</th>
                           <th>End Date</th>
                           <th>Action</th>
@@ -42,7 +42,7 @@
                             ?>
                         <tr>
                           <td><?=$user['category_id'];?></td>
-                          <td><?=$user['title'];?></td>
+                          <td><?=$user['year'];?></td>
                           <td><?=$user['start_date'];?></td>
                           <td><?=$user['end_date'];?></td>
                           <td>
