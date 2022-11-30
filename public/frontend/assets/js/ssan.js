@@ -16,6 +16,8 @@ $(document).ready(function(){
           return this.optional(element) || size <=param;
         else if(size <= 500 && $("#justification_letter"))
           return this.optional(element) || size <=param;
+        else if(size <= 500 && $("#passport"))
+          return this.optional(element) || size <=param;
         else
            return false;  
 
@@ -55,7 +57,7 @@ form.validate({
     errorPlacement: function errorPlacement(error, element) { element.before(error); },
     rules: {
          nominator_photo: {
-             extension: "jpg",
+             extension: "jpg,png,jpeg",
              filesize: 500
          },
          date_of_birth:{
@@ -67,6 +69,14 @@ form.validate({
          },
          passport:{
             extension: "pdf"
+         },
+         mobile_no:{
+            minlength:10,
+            maxlength:10
+         },
+         nominator_mobile:{
+            minlength:10,
+            maxlength:10
          }
     },
     messages: {
@@ -78,6 +88,9 @@ form.validate({
         },
         justification_letter:{
             filesize:"Justification Letter file size should be 500KB"
+        },
+        passport: {
+            filesize: "Passport file size should be 500KB"
         }
       } 
     });

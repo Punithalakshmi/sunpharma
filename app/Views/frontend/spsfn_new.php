@@ -246,7 +246,7 @@
                                         <?php }?>
                                         </small>
                                         <div class="hintcont">
-                                            <small>Upload (not more than 500KB)</small>
+                                            <small>Upload (not more than 500KB),pdf format</small>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@
                                         <?php }?>
                                         </small>
                                         <div class="hintcont">
-                                            <small>Upload Justification letter (not more than 500KB)</small>
+                                            <small>Upload Justification letter (not more than 500KB),pdf format</small>
                                         </div>
                                     </div>
                                 </div>

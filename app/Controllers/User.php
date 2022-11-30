@@ -119,4 +119,17 @@ class User extends BaseController
 
     }
 
+    public function uniqueValidation()
+    {
+        if($this->request->getPost()){
+            
+            $email = $this->request->getPost('email');
+            $table = $this->request->getPost('chkTable');
+            $type  = $this->request->getPost('chkType');
+            
+            $existsOrNot = $this->userModel->uniqueValidation();
+          
+        }
+    }
+
 }    

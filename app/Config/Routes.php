@@ -78,6 +78,8 @@ $routes->get('logout','User::logout');
 $routes->get('form','User::validForm');
 $routes->get('sendMail','User::sendMail');
 
+$routes->post('uniqueValidation','User::uniqueValidation');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index");

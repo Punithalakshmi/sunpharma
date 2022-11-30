@@ -56,7 +56,7 @@ form.validate({
     errorPlacement: function errorPlacement(error, element) { element.before(error); },
     rules: {
         nominator_photo: {
-            extension: "jpg",
+            extension: "jpg,png,jpeg",
             filesize: 500
         },
         date_of_birth:{

@@ -123,8 +123,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                 <label class="form-label " for="">Mobile No.</label>
-                                        
+                                 <label class="form-label " for="">Mobile No.</label>   
                                 <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('mobile_no')) {?>
@@ -219,7 +218,7 @@
                                         <?php }?>
                                         </small>
                                         <div class="hintcont">
-                                            <small>Upload Justification letter (not more than 500KB)</small>
+                                            <small>Upload Justification letter (not more than 500KB), pdf format</small>
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +232,7 @@
                             </label>
                             <div class="form-check ps-0 q-box">
                                 <div class="q-box__question col me-2">
-                                    <input class="form-control mb-3" name="passport" type="file" id="passport" value="<?=$editdata['passport'];?>" accept=".pdf">                                            
+                                    <input class="form-control mb-3 required" name="passport" type="file" id="passport" value="<?=$editdata['passport'];?>" accept=".pdf">                                            
                                                 
                                     <?php if(!empty($editdata['passport'])): ?>
                                         <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['passport'];?>" style="color:blue;"><?=$editdata['passport'];?></a>
@@ -243,6 +242,9 @@
                                             <?= $error = $validation->getError('passport'); ?>
                                         <?php }?>
                                     </small>
+                                    <div class="hintcont">
+                                        <small>Upload Passport (not more than 500KB), pdf format</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
