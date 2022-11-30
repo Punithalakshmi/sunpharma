@@ -858,7 +858,7 @@
                                         </div>
                                     </div>
                                     <?php endif; endif;
-                                    if(isset($user['number_of_attempts']) ):
+                                    if(isset($user['number_of_attempts']) && ):
                                    ?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -871,7 +871,7 @@
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Number of Attempts </label> -->
-                                            <div>
+                                                <div>
                                                   <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" name="number_of_attempts" type="text" id="number_of_attempts" value="<?=$editdata['number_of_attempts'];?>">   
                                                     <br>
@@ -960,7 +960,7 @@
                                 </div>
                             </div>
                         </div>
-                     <?php if($userdata['nominationEndDays'] > 0):   ?>           
+                     <?php if($userdata['is_submitted'] == 0):   ?>           
                         <div id="q-box__buttons">
                             <button id="next-btn" class="btn btn-primary" type="reset">Reset</button>
                             <button id="submit-btn" class="btn btn-success ms-2" type="submit">Save</button>

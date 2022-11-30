@@ -79,22 +79,6 @@
                         </small>
                       </div>
                       
-                      
-                      <div class="clearfix"></div>
-                      
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Year</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <p>
-                            <input type="text" readonly id="year" name="year" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('year',$editdata['year']);?>">
-                           </p>
-                          </div>
-                        </div>
-                      </div>
-
-
-                      
                       <div class="clearfix"></div>
                       
                       <div class="form-group">

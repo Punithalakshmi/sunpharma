@@ -168,7 +168,7 @@ form.children("div").steps({
     onFinished: function (event, currentIndex)
     {
         form.submit();
-        alert('Your Application Submitted Successfully.');
+        alert('Thank you. Your application is under review , you should receive an email soon!');
 
     }
 

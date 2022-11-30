@@ -132,6 +132,7 @@ class Nominee extends BaseController
           
          //   $email->setSubject('Your Application Approval Status');
             $subject = 'Sunpharma Science Foundation Nomination Application Status';
+            $login_url = base_url().'/login';
             $message = '';
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
@@ -139,6 +140,7 @@ class Nominee extends BaseController
                 $pass = $this->generatePassword(8);
 
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
+                $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In';
                 $message .= 'Username: '.strtolower($getUserData['firstname']).'<br /><br />';
                 $message .= 'Password: '.$pass.'<br /><br /><br /><br />'; 
 
@@ -158,9 +160,9 @@ class Nominee extends BaseController
                 $message .= 'Your Application has been rejected';
             }
             $userModel->update(array("id" => $id),$up_data);
-          //  $message .= 'Thanks,<br/>';
-           // $message .= 'Sunpharma';
-           // $email->setMessage($message);
+            $message .= 'Thanks & Regards,<br/>';
+            $message .= 'Sunpharma Science Foundation Team';
+           //$email->setMessage($message);
 
             $header  = '';
             $header .= "MIME-Version: 1.0\r\n";

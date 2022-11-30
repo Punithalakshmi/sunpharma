@@ -83,7 +83,7 @@ class Nomination extends BaseController
                     $category      = $request->getPost('category');
                     $start_date    = $request->getPost('start_date');
                     $end_date      = $request->getPost('end_date');
-                    $year          = $request->getPost('nomination_year');
+                   // $year          = $request->getPost('nomination_year');
                     $status        = $request->getPost('status');
                     $subject      = $request->getPost('subject');
                     $title        = $request->getPost('title');
@@ -94,7 +94,7 @@ class Nomination extends BaseController
                     $ins_data['category_id']  = $category;
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
-                    $ins_data['year']         = $year;
+                  //  $ins_data['year']         = $year;
                     $ins_data['status']       = $status;
                     $ins_data['subject']           = $subject; 
                     $ins_data['description']       = $description;
@@ -161,7 +161,7 @@ class Nomination extends BaseController
             
                 if(!empty($edit_data) && count($edit_data)){
                     $editdata['category']   = $edit_data['category_id'];
-                    $editdata['year']       = $edit_data['year'];
+                   // $editdata['year']       = $edit_data['year'];
                     $editdata['start_date'] = date("m/d/Y",strtotime($edit_data['start_date']));
                     $editdata['end_date']   = date("m/d/Y",strtotime($edit_data['end_date']));
                     $editdata['banner_image']          = $edit_data['banner_image'];
@@ -178,7 +178,7 @@ class Nomination extends BaseController
                     $editdata['subject']              = ($request->getPost('subject'))?$request->getPost('subject'):'';
                     $editdata['description']          = ($request->getPost('description'))?$request->getPost('description'):'';
                     $editdata['category']       = ($request->getPost('category'))?$request->getPost('category'):'';
-                    $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
+                  //  $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
                     $editdata['start_date']     = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
                     $editdata['end_date']       = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");
                     $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';

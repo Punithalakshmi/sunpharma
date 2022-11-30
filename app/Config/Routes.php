@@ -80,6 +80,10 @@ $routes->get('sendMail','User::sendMail');
 
 $routes->post('uniqueValidation','User::uniqueValidation');
 
+$routes->get('success','Nomination::Success');
+
+$routes->get('eventregistration','EventRegistration::index');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index");

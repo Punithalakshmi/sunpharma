@@ -68,7 +68,7 @@ class Workshops extends BaseController
                     $description  = $request->getPost('description');
                     $start_date   = $request->getPost('start_date');
                     $end_date     = $request->getPost('end_date');
-                    $year         = $request->getPost('year');
+                //    $year         = $request->getPost('year');
                     $status       = $request->getPost('status');
 
                     $ins_data = array();
@@ -78,7 +78,7 @@ class Workshops extends BaseController
                     $ins_data['title']             = $title;
                     $ins_data['start_date']        = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']          = date("Y-m-d",strtotime($end_date));
-                    $ins_data['year']              = $year;
+                   // $ins_data['year']              = $year;
                     $ins_data['status']            = $status;
                     
 
@@ -147,7 +147,7 @@ class Workshops extends BaseController
                     $editdata['subject']               = $edit_data['subject'];
                     $editdata['description']           = $edit_data['description'];
                     $editdata['category']              = $edit_data['category'];
-                    $editdata['year']                  = $edit_data['year'];
+                  //  $editdata['year']                  = $edit_data['year'];
                     $editdata['start_date']            = date("m/d/Y",strtotime($edit_data['start_date']));
                     $editdata['end_date']              = date("m/d/Y",strtotime($edit_data['end_date']));
                     $editdata['event_document']        = $edit_data['document'];
@@ -162,7 +162,7 @@ class Workshops extends BaseController
                     $editdata['subject']              = ($request->getPost('subject'))?$request->getPost('subject'):'';
                     $editdata['description']          = ($request->getPost('description'))?$request->getPost('description'):'';
                     $editdata['category']             = ($request->getPost('category'))?$request->getPost('category'):'';
-                    $editdata['year']                 = ($request->getPost('year'))?$request->getPost('year'):date("Y");
+                  //  $editdata['year']                 = ($request->getPost('year'))?$request->getPost('year'):date("Y");
                     $editdata['start_date']           = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
                     $editdata['end_date']             = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");
                     $editdata['event_document']       = ($this->request->getFile('event_document'))?$this->request->getFile('event_document'):'';

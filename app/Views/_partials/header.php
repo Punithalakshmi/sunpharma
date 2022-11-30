@@ -76,7 +76,7 @@
                     <i class="fa fa-user"></i> Categories </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/nomination">
-                    <i class="fa fa-user"></i> Nominations </a>
+                    <i class="fa fa-user"></i> Awards Creation </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/workshops">
@@ -90,7 +90,7 @@
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/awards">
-                      <i class="fa fa-user"></i> Awards Process 
+                      <i class="fa fa-user"></i> Reports 
                     </a>
                   </li>
                   <?php } else if($userdata['role'] == 1){ ?>

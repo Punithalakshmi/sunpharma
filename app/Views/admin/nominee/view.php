@@ -8,9 +8,11 @@
                
                 <h3>Average Rating: <span class="badge badge-warning"><i class="fa fa-star"></i> <?=($average_rating>0)?round($average_rating):0;?></span></h3>
                 <?php if($user['status'] == 'Approved' && $user['active'] == 1): ?>
-                  <h3 class="approvedtxt"><span class="badge badge-success"><i class="fa fa-check-circle"></i> Approved</span></h3>
+                  <h3 class="approvedtxt"><span class="badge badge-success">
+                    <i class="fa fa-check-circle"></i> Approved</span>
+                </h3>
                 <?php else: ?>
-                  <h3 class="disapprovedtxt"><span class="badge badge-danger"><i class="fa fa-times-circle"></i> Disapproved</span></h3>
+                  <h3 class="disapprovedtxt"><span class="badge badge-danger"><i class="fa fa-times-circle"></i> Pending </span></h3>
                   <?php endif; ?>
               </div>
              
