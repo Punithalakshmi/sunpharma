@@ -1,4 +1,4 @@
-
+<section class="bg-primary-gradient">
 <div class="container py-5">
     <div class="row mx-auto" style="padding-bottom: 15px">
         <div class="col-lg-12">
@@ -102,7 +102,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                            <label for="" class="fw-bold">&nbsp;<br />Ongoing Course </label>
+                            <label for="" class="fw-bold">Ongoing Course </label>
                                 <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="ongoing_course" id="ongoing_course">
                                     <option value="">-- select --</option>
                                     <option value="MD" <?=set_select('ongoing_course', 1, ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='MD'))?TRUE:FALSE));?>>MD</option>
@@ -113,16 +113,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-lg-6">
-                            <div class="mb-3 form-items">
-                                <label for="" class="fw-bold">Whether the applicant has completed a Research Project</label>
-                                <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="research_project" id="research_project">
-                                    <option value="">-- select --</option>
-                                    <option value="Yes" <?=set_select('research_project', 1, ((isset($editdata['research_project']) && ($editdata['research_project']=='Yes'))?TRUE:FALSE));?>>Yes</option>
-                                    <option value="No" <?=set_select('research_project', 1, ((isset($editdata['research_project']) && ($editdata['research_project']=='No'))?TRUE:FALSE));?>>No</option>
-                                </select>
-                            </div>
-                        </div>
+                       
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
@@ -147,6 +138,18 @@
 
                             </div>
                         </div>
+
+                        <div class="col-lg-6">
+                            <div class="mb-3 form-items">
+                                <label for="" class="fw-bold">Whether the applicant has completed a Research Project</label>
+                                <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="research_project" id="research_project">
+                                    <option value="">-- select --</option>
+                                    <option value="Yes" <?=set_select('research_project', 1, ((isset($editdata['research_project']) && ($editdata['research_project']=='Yes'))?TRUE:FALSE));?>>Yes</option>
+                                    <option value="No" <?=set_select('research_project', 1, ((isset($editdata['research_project']) && ($editdata['research_project']=='No'))?TRUE:FALSE));?>>No</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
                                  <label class="form-label " for="">Mobile No.</label>
@@ -204,7 +207,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="mb-3 form-items">
                                 <label class="form-label " for="">Mobile No of the Nominator</label>
                                 
@@ -217,7 +220,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="mb-3 form-items">
                                 <label class="form-label " for="">Email ID of the Nominator</label>
                             

@@ -1,7 +1,7 @@
 
     <section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/research-awards.jpg&quot;) center left no-repeat, #fff;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Research Award<br></h1>
+            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Of Research Awards<br></h1>
         </div>
     </section>
     <section class="py-5">
@@ -13,7 +13,7 @@
         <div class="container" style="margin-bottom: 60px;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Sun Pharma Science Foundation Research Awardees - <?=date("Y");?></h3>
+                    <h3 class="heading" style="color: #F7941E;"><?=date("Y");?></h3>
                 </div>
             </div>
             <div class="row row-cols-2 row-cols-md-2 mx-auto" style="max-width: 900px;">

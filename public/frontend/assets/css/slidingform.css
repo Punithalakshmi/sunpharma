@@ -106,8 +106,8 @@
 }
 
 .wizard > .steps .current a, .wizard > .steps .current a:hover, .wizard > .steps .current a:active {
-  background: #ffecd5;
-  color: #111;
+  background: #f7941e;
+  color: #fff;
   cursor: default;
 }
 

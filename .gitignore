@@ -131,3 +131,6 @@ writable/debugbar/debugbar_1665125406.740467.json
 *.json
 *.log
 *.log
+app/Config/Database.php
+app/Config/Database.php
+app/Config/Database.php

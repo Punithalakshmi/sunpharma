@@ -1,13 +1,12 @@
     <section class="heroInner" style="background: #fff url(https://sunpharma.com/wp-content/uploads/2020/12/Innovation.jpg) center left no-repeat;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Research Awards for Outstanding Research Work by Indian Scientists in India and Abroad<br></h1>
+            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Research Awards</h1>
         </div>
     </section>
     <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-capitalize fw-normal" style="color: var(--theme-orange);">Research Awards</h3>
                     <p>&nbsp;Research Awards aim to recognize and reward excellence in Medical and Pharmaceutical Sciences by Indian scientists in India and abroad. Every year the Foundation invites nominations for 3 awards – 2 awards in Medical Sciences (one each in Basic and Clinical research) and 1 in Pharmaceutical Sciences. These nominations are evaluated by a panel of judges comprising of eminent scientists. Each award carries a trophy, citation and a cash award of Rupees two lac fifty thousand. The awards are presented by a distinguished scientist.<br></p>
                 </div>
             </div>
@@ -15,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <ul class="list-group" style="max-width: 400px;border-color: var(--bs-blue);">
+                    <ul class="list-group btnaction" style="max-width: 400px;border-color: var(--bs-blue);">
                         <li class="list-group-item" style="border-color: var(--bs-blue);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em" height="1em" fill="currentColor" style="font-size: 29px;color: var(--theme-orange);">
                                 <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->

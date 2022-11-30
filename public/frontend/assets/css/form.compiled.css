@@ -387,7 +387,7 @@ select:hover,
   margin-bottom: 5px;
 }
 
-#form-wrapper .form-label {
+#formsection .form-label,#science_scholar_awards .form-label{
   font-weight: 600;
   color: #f7941e;
   color: #000;
@@ -817,6 +817,9 @@ select:hover,
 }
 
 #mainform-container #mainform-items .form-items {
+  margin-bottom: 5px !important;
+}
+.mb-3.form-items {
   margin-bottom: 5px !important;
 }
 
