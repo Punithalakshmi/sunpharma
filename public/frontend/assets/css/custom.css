@@ -294,9 +294,9 @@ label#acceptTerms-error {max-width:190px;
   display: flex!important;
 }
 
-.userprofileloop .text-center > a:first-child {
+/* .userprofileloop .text-center > a:first-child {
   display: none;
-}
+} */
 
 .userprofileloop .text-center > a:last-child {
   border: 1px solid #ddd;
@@ -308,6 +308,11 @@ label#acceptTerms-error {max-width:190px;
   padding: 10px;
   border-radius: 7px;
   background: #f9f9f9;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .userprofileloop .col > .text-center a:hover {color: #f7941e;}
@@ -320,6 +325,10 @@ body .wizard > .content {
 
 body .wizard > .content > .body {
   position: static!important;
+}
+
+.userprofileloop .col > .text-center p {
+  margin: 0!important;
 }
 
 
