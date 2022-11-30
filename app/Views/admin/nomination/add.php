@@ -18,7 +18,7 @@
                       <div class="clearfix"></div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
-                        <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="col-md-6">
                           <select class="select2_single form-control col-md-7 col-xs-12" name="category" tabindex="-1" >
                             <option value=""></option>
                             <?php if(is_array($categories)):
@@ -78,7 +78,7 @@
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea name="description"><?=$editdata['description'];?></textarea>
+                        <textarea class="form-control" name="description"><?=$editdata['description'];?></textarea>
                         
                       </div>
                       <small class="text-danger">

@@ -14,25 +14,25 @@
                
                 <ul class="nav side-menu">
                 <?php if($userdata['role'] == 3){ ?>
-                  <li><a href="/sunpharma/public/admin/user">
+                  <li><a href="<?php echo base_url();?>/admin/user">
                     <i class="fa fa-user"></i> Users </a>
                   </li>
-                  <li><a href="/sunpharma/public/admin/nominee">
+                  <li><a href="<?php echo base_url();?>/admin/nominee">
                     <i class="fa fa-user"></i> Nominees </a>
                   </li>
-                  <li><a href="/sunpharma/public/admin/category">
+                  <li><a href="<?php echo base_url();?>/admin/category">
                     <i class="fa fa-user"></i> Categories </a>
                   </li>
-                  <li><a href="/sunpharma/public/admin/nomination">
+                  <li><a href="<?php echo base_url();?>/admin/nomination">
                     <i class="fa fa-user"></i> Awards Creation </a>
                   </li>
                   <li>
-                    <a href="/sunpharma/public/admin/workshops">
+                    <a href="<?php echo base_url();?>/admin/workshops">
                       <i class="fa fa-user"></i> Workshops 
                     </a>
                   </li>
                   <li>
-                    <a href="http://beta.izaap.in/sunpharma/public/admin/awards">
+                    <a href="<?php echo base_url();?>/admin/awards">
                       <i class="fa fa-user"></i> Reports 
                     </a>
                   </li>

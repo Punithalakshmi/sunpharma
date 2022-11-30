@@ -12,7 +12,7 @@
                     <i class="fa fa-check-circle"></i> Approved</span>
                 </h3>
                 <?php else: ?>
-                  <h3 class="disapprovedtxt"><span class="badge badge-danger"><i class="fa fa-times-circle"></i> Pending </span></h3>
+                  <h3 class="disapprovedtxt"><span class="badge badge-info"><i class="fa fa-times-circle"></i> Pending </span></h3>
                   <?php endif; ?>
               </div>
              
@@ -250,7 +250,7 @@
 
               <?php if(isset($userdata['role']) && ($userdata['role'] == '3') && (($user['status'] == 'Disapproved' && $user['is_rejected'] == '0') || ($user['status'] == 'Disapproved' && $user['active'] == '0'))): ?>
                 <div class="">
-                  <button type="button" onclick="nominee_approve('approve','<?=$user['user_id'];?>');" class="btn btn-primary btn-lg">Approve</button>
+                  <button type="button" onclick="nominee_approve('approve','<?=$user['user_id'];?>');" class="btn btn-success greenbg btn-lg">Approve</button>
                   <button type="button" class="btn btn-danger btn-lg" onclick="nominee_approve('disapprove','<?=$user['user_id'];?>');">
                     <i class="fa fa-ban"></i> Reject 
                 </button>
@@ -269,9 +269,13 @@
                   <div class="x_panel xpanelform">
                    
                       <div class="page-title"  style="height: auto; border:0;">
-              <div class="title_left" style="width: auto;">
-                <h3>Give Your Rating(100/100) and Review</h3><br><br>
-              </div>
+                      <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Give Your Rating(100/100) and Share your comments</h3>
+                </div>
+            </div>
+        </div>
                       
                       <div class="clearfix"></div>
                       <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
@@ -302,8 +306,12 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                       <div id="gender" class="btn-group ratingcommentcont" data-toggle="buttons">
                                         
-                                          <textarea class="ratingcomment col-xs-12" name="comment"><?=$editdata['comment'];?></textarea>
-                                      
+                                          <textarea oninput="auto_grow(this)" style="height: 100px;" class="ratingcomment col-xs-12" name="comment"><?=$editdata['comment'];?></textarea>
+                                          
+                                          <script>function auto_grow(element) {
+                                            element.style.height = "5px";
+                                            element.style.height = (element.scrollHeight)+"px";}
+                                          </script>
                                       </div>
                                     </div>
                                   </div>
