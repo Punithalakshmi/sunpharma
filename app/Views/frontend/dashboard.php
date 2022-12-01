@@ -7,6 +7,7 @@
                     <div class="carousel-inner h-100">
                     <?php if(is_array($nominations) && count($nominations) > 0): 
                         foreach($nominations as $nkey => $nvalue): 
+                           
                         ?>
                         <div class="carousel-item <?php if($nkey == 0):?>active<?php endif;?> h-100">
                             <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/uploads/events/<?=$nvalue['banner_image'];?>" alt="Slide Image" style="z-index: -1;">
@@ -20,6 +21,11 @@
                                                    $ntype = ($nvalue['category_type'] == 'Science Scholar Awards')?'spsfn':'ssan';
                                                 ?>
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>
+                                            <?php endif;?>  
+                                            <?php if(isset($nvalue['type']) && ($nvalue['type'] == 'event') ):
+                                                  
+                                                ?>
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Event Registraton</a>
                                             <?php endif;?>  
                                             <?php if(!empty($nvalue['document'])):?>
                                             <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
@@ -155,7 +161,7 @@
                             <p class="card-text" style="font-size: 14px;">
                                 This Winter School is being organized for clinical researchers and basic scientists engaged in research on biomedical sciences involving humans. 
                             </p>
-                            <a href="#" class="btn btn-primary">Read More</a>
+                            <a href="<?=base_url();?>/event" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>

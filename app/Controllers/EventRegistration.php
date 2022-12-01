@@ -15,7 +15,7 @@ class EventRegistration extends BaseController
         $data['userdata'] = $userdata;
 
          $data['editdata'] = array();
-        return  render('frontend/event_registeration',$data);
+        return  render('frontend/event',$data);
               
     }
 
@@ -28,75 +28,112 @@ class EventRegistration extends BaseController
     
         $data['uri'] = $uri->getSegment(1);
 
-        if(!empty($id)){
-            $getUserData = $this->userModel->getUserData($id);
-            $edit_data   = $getUserData->getRowArray();
-        }
-
-    
         $this->validation = $this->validate($this->validation_rules());
+
+        $count = $this->registerationModel->CountAll();
+            
+        $ct = $count + 1;
+            
+        $registerationNo = 'SPSFN-REG-'.$ct;
         
         if($this->validation) {
 
             if($this->request->getPost()){
                 
-                $category                    = $this->request->getPost('category');
-                $firstname                   = $this->request->getPost('nominee_name');
-                $dob                         = $this->request->getPost('date_of_birth');
-                $citizenship                 = $this->request->getPost('citizenship');
+                $firstname                   = $this->request->getPost('firstname');
+                $lastname                    = $this->request->getPost('lastname');
                 $email                       = $this->request->getPost('email');
-                $phonenumber                 = $this->request->getPost('mobile_no');
-                $address                     = $this->request->getPost('designation_and_office_address');
-                $residence_address           = $this->request->getPost('residence_address');
+                $phone                       = $this->request->getPost('phone');
+                $address                     = $this->request->getPost('address');
+                $registerationNo             = $this->request->getPost('registeration_no');
                
-
                 $ins_data = array();
-                $ins_data['firstname']  = $firstname;
-                $ins_data['email']      = $email;
-                $ins_data['phone']      = $phonenumber;
-                $ins_data['address']    = $address;
-                $ins_data['dob']        = date("Y/m/d",strtotime($dob));
+                $ins_data['firstname']     = $firstname;
+                $ins_data['lastname']      = $lastname;
+                $ins_data['email']         = $email;
+                $ins_data['address']       = $address;
+                $ins_data['phone']         = $phone;
+                $ins_data['registeration_no'] = $registerationNo;
                 
-
-                
-                $this->session->setFlashdata('msg', 'Submitted Successfully!');
+            
+                $this->session->setFlashdata('msg', 'Registeration Submitted Successfully!');
                 $ins_data['created_date']  =  date("Y-m-d H:i:s");
                 $ins_data['created_id']    =  1;
-                $this->userModel->save($ins_data);
-                $lastInsertID = $this->userModel->insertID();
+                $this->registerationModel->save($ins_data);
+                $lastInsertID = $this->registerationModel->insertID();
 
               
-                $this->sendMail($firstname,$lastInsertID);
+                $this->sendMail($email,$registerationNo,$firstname);
 
-                return redirect()->to('success');
+                return redirect()->to('/');
             }
         }
         else
         {  
         
-            $editdata['category']                      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-            $editdata['nominee_name']                  = ($this->request->getPost('nominee_name'))?$this->request->getPost('nominee_name'):'';
-            $editdata['citizenship']                   = ($this->request->getPost('citizenship'))?$this->request->getPost('citizenship'):'';
-            $editdata['designation_and_office_address']= ($this->request->getPost('designation_and_office_address'))?$this->request->getPost('designation_and_office_address'):'';
-            $editdata['residence_address']             = ($this->request->getPost('residence_address'))?$this->request->getPost('residence_address'):'';
-            $editdata['email']                         = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
-            $editdata['mobile_no']                     = ($this->request->getPost('mobile_no'))?$this->request->getPost('mobile_no'):'';
-            $editdata['date_of_birth']                 = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
-           
-        
+            $editdata['firstname']        = ($this->request->getPost('firstname'))?$this->request->getPost('firstname'):'';
+            $editdata['lastname']         = ($this->request->getPost('lastname'))?$this->request->getPost('lastname'):'';
+            $editdata['email']            = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+            $editdata['phone']            = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
+            $editdata['address']          = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
+            $editdata['registeration_no'] = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
+            
             if($this->request->getPost())
               $data['validation'] = $this->validator;
 
             $data['editdata'] = $editdata;
             $data['userdata'] = $userdata;
-            $data['nomination'] = $id;
-
             
-            return  render('frontend/ssan_new',$data);
-                        
-                        
+            return  render('frontend/event_registeration',$data);
+                                      
         }
 
+
+
+    }
+
+
+    public function validation_rules()
+    {
+
+        $validation_rules = array();
+        $validation_rules = array(
+                                        "firstname" => array("label" => "Firstname",'rules' => 'required'),
+                                        "lastname" => array("label" => "Lastname",'rules' => 'required'),
+                                        "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]'),
+                                        "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
+                                        "registeration_no" => array("label" => "Registration No",'rules' => 'required')
+        ); 
+
+        return $validation_rules;
+      
+    }
+
+
+    public function sendMail($email,$registerationNo,$name)
+    {
+
+        $header  = '';
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+
+        $login_url = base_url().'/admin';
+
+        $subject  = "Event Registration - Sun Pharma Science Foundation ";
+        $message  = "Hi ".ucfirst($name).",";
+        $message .= '<br/><br/>';
+        $message .= 'Event Registration successfully registered.';
+        $message .= "<br/><br/>";
+        $message .= 'Registration No: '.$registerationNo;
+        $message .= "<br/><br/>";
+        $message .= "Thanks & Regards,";
+        $message .= "<br/>";
+        $message .= "Sunpharma Science Foundation Team";
+       
+        $data['content'] = $message;
+        $html = view('email/mail',$data,array('debug' => false));
+
+        mail($email,$subject,$html,$header);
 
 
     }

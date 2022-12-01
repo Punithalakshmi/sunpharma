@@ -50,7 +50,7 @@
                        if($view)
                        {
                     ?>
-                    <a href="<?=$url?>">
+                    <a href="<?=$url;?>">
                     <button class="btn btn-primary btn-lg" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" class="fs-2">
                             <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->

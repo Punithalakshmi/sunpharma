@@ -117,5 +117,10 @@ class UserModel extends Model{
         return $query = $builder->get();
     }
 
+
+    public function getJuryListsByCategory($category_id = '')
+    {
+        return $this->getWhere(array('category' => $category_id,'role' => 1))->getResultArray(); 
+    }
     
 }

@@ -107,7 +107,7 @@ class Nomination extends BaseController
                     
                     $this->nominationModel->save($nominee_details_data);
 
-                    $this->sendMail($firstname,$lastInsertID);
+                    $this->sendMail($firstname,$lastInsertID,$email);
                      
                     return redirect()->to('success');
                 }
@@ -130,17 +130,6 @@ class Nomination extends BaseController
                 $editdata['justification_letter']                 = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
                 $editdata['supervisor_certifying']                = ($this->request->getFile('supervisor_certifying'))?$this->request->getFile('supervisor_certifying'):'';
                 $editdata['nominator_photo']                      = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
-                // $editdata['complete_bio_data']                    = ($this->request->getFile('complete_bio_data'))?$this->request->getFile('complete_bio_data'):'';
-                // $editdata['excellence_research_work']             = ($this->request->getFile('excellence_research_work'))?$this->request->getFile('excellence_research_work'):'';
-                // $editdata['lists_of_publications']                = ($this->request->getFile('lists_of_publications'))?$this->request->getFile('lists_of_publications'):'';
-                // $editdata['statement_of_applicant']               = ($this->request->getFile('statement_of_applicant'))?$this->request->getFile('statement_of_applicant'):'';
-                // $editdata['ethical_clearance']                    = ($this->request->getFile('ethical_clearance'))?$this->request->getFile('ethical_clearance'):'';
-                // $editdata['statement_of_duly_signed_by_nominee']  = ($this->request->getFile('statement_of_duly_signed_by_nominee'))?$this->request->getFile('statement_of_duly_signed_by_nominee'):'';
-                // $editdata['citation']                             = ($this->request->getFile('citation'))?$this->request->getFile('citation'):'';
-                // $editdata['aggregate_marks']                      = ($this->request->getFile('aggregate_marks'))?$this->request->getFile('aggregate_marks'):'';
-                // $editdata['age_proof']                            = ($this->request->getFile('age_proof'))?$this->request->getFile('age_proof'):'';
-                // $editdata['declaration_candidate']                = ($this->request->getFile('declaration_candidate'))?$this->request->getFile('declaration_candidate'):'';
-                
                 $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
                 $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
                 $editdata['id']                                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
@@ -270,7 +259,7 @@ class Nomination extends BaseController
                 $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
                 $this->nominationModel->save($nominee_details_data);
 
-                $this->sendMail($firstname,$lastInsertID);
+                $this->sendMail($firstname,$lastInsertID,$email);
 
                 return redirect()->to('success');
             }
@@ -425,9 +414,6 @@ class Nomination extends BaseController
                         $citation->move($fileUploadDir);
                         $nominee_details_data['citation']     = $citation->getClientName();
                     }
-
-
-                   
             }
             else
             {
@@ -502,7 +488,12 @@ class Nomination extends BaseController
 
             $nominee_details_data['is_submitted'] = 1;
 
-            $this->nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data);  
+            $this->nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data); 
+
+            //sendmail to jury
+            $this->sendMailToJury($edit_data['category_id']);
+
+
             return redirect()->to('view/'.$edit_data['user_id'])->withInput();
 
           }
@@ -663,7 +654,7 @@ class Nomination extends BaseController
         return $validation_rules;
     }
 
-    public function sendMail($nominee_name,$nomination_no)
+    public function sendMail($nominee_name,$nomination_no,$nominee_email)
     {
 
         $admin_url = base_url()."/admin";
@@ -671,7 +662,7 @@ class Nomination extends BaseController
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
 
-        $subject = " Approve Nomination - Sun Pharma Science Foundation Science Scholar Awards ";
+        $subject = " Approve Nomination - Sun Pharma Science Foundation ";
         $message  = "Dear Admin,";
         $message .= '<br/><br/>';
         $message .= ucfirst($nominee_name)." with <b>Nomination No: ".date("Y")."/".$nomination_no."</b> has submitted his/her nomination and is waiting for your approval";
@@ -686,6 +677,55 @@ class Nomination extends BaseController
         $html = view('email/mail',$data,array('debug' => false));
         mail("punitha@izaaptech.in",$subject,$html,$header);
 
+
+        $header  = '';
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+
+        $subject  = "Thank you - Sun Pharma Science Foundation ";
+        $message  = "Hi ".ucfirst($nominee_name).",";
+        $message .= '<br/><br/>';
+        $message .= 'Your application is under review , you should receive an email soon.';
+        $message .= "<br/><br/><br/>";
+        $message .= "Thanks & Regards,";
+        $message .= "<br/>";
+        $message .= "Sunpharma Science Foundation Team";
+       
+        $data['content'] = $message;
+        $html = view('email/mail',$data,array('debug' => false));
+        mail($nominee_email,$subject,$html,$header);
+
+    }
+
+    public function sendMailToJury($category_id = ''){
+
+        $header  = '';
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+
+        $login_url = base_url().'/admin';
+
+        $subject  = "New Nomination - Sun Pharma Science Foundation ";
+        $message  = "Hi ".ucfirst($jury_name).",";
+        $message .= '<br/><br/>';
+        $message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
+        $message .= "<br/><br/><br/>";
+        $message .= "Thanks & Regards,";
+        $message .= "<br/>";
+        $message .= "Sunpharma Science Foundation Team";
+       
+        $data['content'] = $message;
+        $html = view('email/mail',$data,array('debug' => false));
+
+        $juryLists = $this->userModel->getJuryListsByCategory($category_id);
+
+        if(is_array($juryLists) && count($juryLists) > 0){
+            foreach($juryLists as $jkey=>$jvalue){
+                if(isset($jvalue['email']) && !empty($jvalue['email'])){
+                     mail($jvalue['email'],$subject,$html,$header);
+                }
+            }
+        }
     }
 
     public function success()

@@ -82,7 +82,9 @@ $routes->post('uniqueValidation','User::uniqueValidation');
 
 $routes->get('success','Nomination::Success');
 
-$routes->get('eventregistration','EventRegistration::index');
+$routes->get('event','EventRegistration::index');
+$routes->get('event/registration','EventRegistration::event');
+$routes->post('event/registration','EventRegistration::event');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
