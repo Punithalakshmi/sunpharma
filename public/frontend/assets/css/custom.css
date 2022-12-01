@@ -284,7 +284,7 @@ nav#mainNav {
 }
 
 
-.wizard > .content > .body label.error{display: none!important;}
+.wizard > .content > .body label.error{/*display: none!important;*/}
 .wizard > .content > .body input.error[type="checkbox"] {
   border: 6px solid #ff0009!important;
   box-shadow: 0px 2px 6px red;
