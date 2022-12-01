@@ -54,7 +54,7 @@ class User extends BaseController
         }
        
             $uri = current_url(true);
-           $data['uri'] = $uri->getSegment(1);  
+            $data['uri'] = (base_url() == 'http://local.sunpharma.md/')?$uri->getSegment(1):$uri->getSegment(3);
            
             return  render('frontend/login',$data);
 
@@ -91,7 +91,7 @@ class User extends BaseController
     public function validForm()
     {
         $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
+        $data['uri'] = $uri->getSegment(1); 
         return view('frontend/formvalid',$data);
     }
 

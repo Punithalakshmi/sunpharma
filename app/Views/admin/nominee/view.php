@@ -263,19 +263,19 @@
         </div>
       </div>
 
-            <?php if($userdata['role'] == 1): ?>
+            <?php if($userdata['role'] == 1 && $editdata['is_rate_submitted'] == 0): ?>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="x_panel xpanelform">
                    
                       <div class="page-title"  style="height: auto; border:0;">
-                      <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Give Your Rating(100/100) and Share your comments</h3>
-                </div>
-            </div>
-        </div>
+                        <div class="container">
+                          <div class="row">
+                              <div class="col-md-8 col-xl-6 text-center mx-auto">
+                                  <h3 class="fw-bold heading" style="color: #F7941E;">Give Your Rating(100/100) and Share your comments</h3>
+                              </div>
+                          </div>
+                    </div>
                       
                       <div class="clearfix"></div>
                       <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
@@ -339,7 +339,7 @@
 
             </div></div>
 
-            <?php else: ?>
+            <?php endif; ?>
               <div class="page-title">
               <div class="title_left">
                 <h3>Ratings</h3>
@@ -355,8 +355,9 @@
                           <th>Juryname</th>
                           <th>Ratings</th>
                           <th>Comments</th>
+                          <th>Mode</th>
                           <th>Rated Date</th>
-                          <th>Action</th>
+                          <!-- <th>Action</th> -->
                         </tr>
                       </thead>
                       <tbody>
@@ -367,12 +368,13 @@
                           <td><?=$rating['firstname'];?></td>
                           <td><?=$rating['rating'];?></td>
                           <td><?=$rating['comments'];?></td>
+                          <td><?=(isset($rating['is_rate_submitted']) && ($rating['is_rate_submitted'] == 1))?'Submitted':'Save Draft';?></td>
                           <td><?=$rating['created_date'];?></td>
-                          <td>
-                          <a href="<?=base_url().'/admin/rating/add/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                          <a href="<?=base_url().'/admin/rating/delete/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                          <!-- <td>
+                          <a href="<?//base_url().'/admin/rating/add/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                          <a href="<?//base_url().'/admin/rating/delete/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                            
-                          </td>
+                          </td> -->
                         </tr>
                         <?php endforeach;
                                 endif;
@@ -383,7 +385,7 @@
                 </div>
               </div>
             </div>
-<?php endif;?>
+
 
 
         

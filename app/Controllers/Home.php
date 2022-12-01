@@ -114,9 +114,9 @@ class Home extends BaseController
 
     public function contact()
     {
-      $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
-        
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
+          
         $userdata =$this->session->get('fuserdata');
         $data['userdata'] = $userdata;
 

@@ -14,7 +14,7 @@ class Nomination extends BaseController
             $this->view($userdata['id']);
 
             $uri         = current_url(true);
-            $data['uri'] = $uri->getSegment(1);
+            $data['uri'] = (base_url() == 'http://local.sunpharma.md/')?$uri->getSegment(1):$uri->getSegment(3);
 
             if(!empty($id)){
                 $getUserData = $this->userModel->getUserData($id);
@@ -172,7 +172,7 @@ class Nomination extends BaseController
 
         $uri = current_url(true);
 
-        $data['uri'] = $uri->getSegment(1);
+        $data['uri'] = (base_url() == 'http://local.sunpharma.md/')?$uri->getSegment(1):$uri->getSegment(3);
 
         if(!empty($id)){
             $getUserData = $this->userModel->getUserData($id);
@@ -344,7 +344,7 @@ class Nomination extends BaseController
         $userdata = $this->session->get('fuserdata');
  
         $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1);  
+        $data['uri'] = (base_url() == 'http://local.sunpharma.md/')?$uri->getSegment(1):$uri->getSegment(3);
        
         $id = (!empty($id))?$id:$this->request->getPost('id');
 
