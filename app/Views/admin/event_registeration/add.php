@@ -2,7 +2,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add Registration</h3>
+                <h3>Add</h3>
               </div>
             </div>
             <div class="clearfix"></div>

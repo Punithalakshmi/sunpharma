@@ -9,7 +9,7 @@
            
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/eventregisteration/add" class="btn btn-primary btn-xs">
-                   <i class="fa fa-plus"></i>Add Event Registration
+                   <i class="fa fa-plus"></i>Add
                 </a>
            </div>
                 
@@ -23,10 +23,8 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                    </p>
+                    <p class="text-muted font-13 m-b-30"></p>
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>

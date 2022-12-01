@@ -99,6 +99,7 @@ class User extends BaseController
 
                     $ins_data = array();
                     $ins_data['firstname']  = $firstname;
+                    $ins_data['username']   = strtolower($firstname);
                     $ins_data['lastname']   = $lastname;
                     $ins_data['middlename'] = $middlename;
                     $ins_data['email']      = $email;

@@ -28,7 +28,7 @@
                         <tr>
                           
                           <th>Firstname</th>
-                         
+                          <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
                       
@@ -43,7 +43,7 @@
                         <tr>
                          
                           <td><?=$user['firstname'];?></td>
-                          
+                          <td><?=strtolower($user['firstname']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
                          
