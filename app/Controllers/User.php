@@ -54,7 +54,7 @@ class User extends BaseController
         }
        
             $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1);  
+           $data['uri'] = $uri->getSegment(1);  
            
             return  render('frontend/login',$data);
 

@@ -272,9 +272,7 @@
                         <div class="step">
 
                             <div class="row">
-                            <?php
-                                  if(isset($user['complete_bio_data'])):
-                                ?>
+                            <?php if($userdata['nominationEndDays'] > 0): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Complete Bio-data of the Applicant
@@ -291,7 +289,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Complete Bio-data of the Applicant
@@ -309,10 +307,10 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; 
-                                endif;
-                                   if(isset($user) && ($user['nomination_type'] == 'ssan')):
-                                  if(isset($user['best_papers'])):
+                                <?php  
+                                    endif;
+                                   if(isset($user) && ($user['nomination_type'] == 'ssan') ):
+                                    
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -330,7 +328,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> In order of Importance, list of 10
@@ -352,10 +350,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; 
-                                     endif;
-                                  if(isset($user['statement_of_research_achievements'])):
-                                ?>
+                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Statement of Research Achievements, if
@@ -373,7 +368,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Statement of Research Achievements, if
@@ -398,9 +393,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['signed_details'])):
-                                ?>
+                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Signed details of the excellence in
@@ -418,7 +411,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Signed details of the excellence in
@@ -442,9 +435,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['specific_publications'])):
-                                ?>
+                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Two specific publications/research
@@ -461,7 +452,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Two specific publications/research
@@ -482,9 +473,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['signed_statement'])):
-                                ?>
+                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A signed statement by the applicant
@@ -504,7 +493,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> A signed statement by the applicant
@@ -529,9 +518,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['citation'])):
-                                ?>
+                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                          <label class="form-label " for=""> Citation on the Research Work of the
@@ -547,7 +534,7 @@
                                             </div>
                                             <?php endif;?>
                                     </div>
-                                    <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                    <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Citation on the Research Work of the
@@ -569,10 +556,11 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <?php endif; endif;
+                                    <?php
+                                       endif;
                                        else: 
 
-                                      if(isset($user['excellence_research_work']) ):
+                                        ?>
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -589,7 +577,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> -->
@@ -609,9 +597,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['lists_of_publications'])):
-                                ?>
+                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB) </label>
@@ -626,7 +612,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB) </label> -->
@@ -648,9 +634,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['statement_of_applicant'])):
-                                ?>
+                              <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB) </label>
@@ -665,7 +649,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB) </label> -->
@@ -685,9 +669,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['ethical_clearance'])):
-                                ?>
+                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB) </label>
@@ -702,7 +684,7 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB) </label> -->
@@ -719,9 +701,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; endif;
-                                  if(isset($user['statement_of_duly_signed_by_nominee'])):
-                                ?>
+                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </label>
@@ -737,7 +717,7 @@
                                             <?php endif; ?>
                                     </div>
                                 </div>
-                                <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </label> -->
@@ -756,10 +736,7 @@
                                             </small>
                                     </div>
                                 </div>
-                                <?php endif; 
-                                endif;
-                                  if(isset($user['citation'])):
-                                ?>
+                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB) </label>
@@ -774,7 +751,7 @@
                                             </div>
                                             <?php endif;?>
                                     </div>
-                                    <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                    <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB) </label> -->
@@ -793,10 +770,7 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <?php endif; endif;
-                                    
-                                  if(isset($user['aggregate_marks'])):
-                                ?>
+                                  <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB) </label>
@@ -811,7 +785,7 @@
                                             </div>
                                             <?php endif;?>
                                     </div>
-                                    <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                    <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB) </label> -->
@@ -829,9 +803,7 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <?php endif; endif;
-                                    if(isset($user['year_of_passing'])):
-                                   ?>
+                                    <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Year of Passing </label>
@@ -839,7 +811,7 @@
                                               <?=$user['year_of_passing'];?>
                                             </div>
                                     </div>
-                                    <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                    <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Year of Passing </label> -->
@@ -857,9 +829,7 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <?php endif; endif;
-                                    if(isset($user['number_of_attempts']) && ):
-                                   ?>
+                                   <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Number of Attempts </label>
@@ -867,7 +837,7 @@
                                               <?=$user['number_of_attempts'];?>
                                             </div>
                                     </div>
-                                    <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                    <?php if($user['is_submitted'] == 0): ?>
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Number of Attempts </label> -->
@@ -885,9 +855,7 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <?php endif; endif;
-                                    if(isset($user['age_proof'])):
-                                   ?>
+                                   <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Age proof (Max: 250KB) </label>
@@ -902,7 +870,7 @@
                                             </div>
                                             <?php endif;?>
                                     </div>
-                                    <?php if($userdata['nominationEndDays'] > 0):  ?>
+                                    <?php if($user['is_submitted'] == 0): ?>
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Age proof (Max: 250KB)</label> -->
@@ -920,9 +888,7 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <?php endif; endif;
-                                    if(isset($user['declaration_candidate'])):
-                                   ?>
+                                   <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB) </label>
@@ -937,7 +903,7 @@
                                         </div>
                                     <?php endif;?>
                                     </div>
-                                    <?php if($userdata['nominationEndDays'] > 0): ?>
+                                   <?php if($user['is_submitted'] == 0): ?>
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB) </label> -->
@@ -955,12 +921,16 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <?php endif; endif;
-                                   endif;?>
+                                    <?php endif;
+                                    endif;
+                                         endif;
+                                         ?>
                                 </div>
                             </div>
                         </div>
-                     <?php if($userdata['is_submitted'] == 0):   ?>           
+                     <?php //echo $userdata['nominationEndDays'];  
+                   //  echo $user['is_submitted'];
+                          if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && ($userdata['nominationEndDays'] > 0)):   ?>           
                         <div id="q-box__buttons">
                             <button id="next-btn" class="btn btn-primary" type="reset">Reset</button>
                             <button id="submit-btn" class="btn btn-success ms-2" type="submit">Save</button>

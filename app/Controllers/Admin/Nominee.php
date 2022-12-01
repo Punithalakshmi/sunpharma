@@ -131,7 +131,7 @@ class Nominee extends BaseController
           //  $email->setTo($getUserData['email']);
           
          //   $email->setSubject('Your Application Approval Status');
-            $subject = 'Sunpharma Science Foundation Nomination Application Status';
+            $subject = 'Nomination Application Status - Sunpharma Science Foundation';
             $login_url = base_url().'/login';
             $message = '';
             if($type == 'approve') {
@@ -440,6 +440,7 @@ class Nominee extends BaseController
                     $ins_data = array();
                     $ins_data['extend_date']   = date("Y-m-d",strtotime($extend_date));
                     $ins_data['user_id']      = $id;
+                    
 
                     //get user data
                     $getExtendUserData  = $userModel->getListsOfUsers($id)->getRowArray();
@@ -512,7 +513,7 @@ class Nominee extends BaseController
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
 
-        $subject = " SPSFN - Extend Nomination Date ";
+        $subject = " Extend Nomination Date - Sunpharma Science Foundation ";
         $message  = "Hi, ";
         $message .= '<br/><br/>';
         $message .= "Nomination date has been changed up to ".$extend_date." Please login and upload your documents.";
