@@ -8,55 +8,85 @@ class User extends BaseController
     public function login()
     {
 
-        if($this->request->getPost()){
+        try
+        {
+            if ($this->request->getMethod() == "post") {
 
-              $username   = $this->request->getPost('username');
-              $password   = $this->request->getPost('password');
-       
-              $result   = $this->userModel->Login($username, md5($password));
-              
-             if(!$result) {
-                 $this->session->setFlashdata('msg', 'Invalid Credentials');
-             }
-             else
-             {
-               
-                $getNominationData   = $this->nominationModel->getNominationData($result['id']);
-                $getNominationData   = $getNominationData->getRowArray();
-                
-                $getCategoryNominationData   = $this->nominationTypesModel->getCategoryNomination($getNominationData['category_id']);
-                $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
+                    $username   = $this->request->getVar('username');
+                    $password   = $this->request->getVar('password');
+            
+                    $data       = $this->userModel->where('username', $username)->first();
 
-                //get extend nomination date
-                $getExtendNominationDate   = $this->extendModel->getListsOfExtends($result['id']);
+                    if($data){
 
-                $getExtendNominationEndDays = 0;
-               if($getExtendNominationDate->getRowArray() > 0) {
-                $getExtendNominationDate = $getExtendNominationDate->getRowArray();
-                 $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
-               }  
+                        $pass = $data['password'];
+                        $authenticatePassword = password_verify($password, $pass);
 
-                $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
+                        if($authenticatePassword){
+                            $ses_data = [
+                                'id' => $data['id'],
+                                'name' => $data['name'],
+                                'email' => $data['email'],
+                                'isLoggedIn' => TRUE,
+                                'role' => $data['role'],
+                                'isNominee' => 'yes'
+                            ];
 
-                if($nominationEndDays <= 0 && $getExtendNominationEndDays > 0)
-                  $result['nominationEndDays'] =  $getExtendNominationEndDays;
-                else
-                  $result['nominationEndDays'] =  $nominationEndDays;  
+                            $getNominationData   = $this->nominationModel->getNominationData($result['id']);
+                            $getNominationData   = $getNominationData->getRowArray();
+                            
+                            $getCategoryNominationData   = $this->nominationTypesModel->getCategoryNomination($getNominationData['category_id']);
+                            $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
+            
+                            //get extend nomination date
+                            $getExtendNominationDate   = $this->extendModel->getListsOfExtends($result['id']);
+            
+                            $getExtendNominationEndDays = 0;
+                            if($getExtendNominationDate->getRowArray() > 0) {
+                                $getExtendNominationDate = $getExtendNominationDate->getRowArray();
+                                $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
+                            }  
+        
+                            $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
+            
+                            if($nominationEndDays <= 0 && $getExtendNominationEndDays > 0)
+                                $ses_data['nominationEndDays'] =  $getExtendNominationEndDays;
+                            else
+                                $ses_data['nominationEndDays'] =  $nominationEndDays;  
+            
+                            $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
+                            $ses_data['nomination_type']   = $getNominationData['nomination_type'];
 
-                $result['nominationEndDate'] = $getNominationDaysCt['end_date'];
-                $result['nomination_type']   = $getNominationData['nomination_type'];
-
-                $this->session->set('fuserdata',$result);
-                $redirect_route = 'view/'.$result['id'];
-
-                return redirect()->to($redirect_route);
-            }    
+                            $this->session->set($ses_data);
+                            $redirect_route = 'view/'.$result['id'];
+        
+                           return redirect()->to($redirect_route);
+                        
+                        }
+                        else
+                        {
+                            throw new \Exception('Password is incorrect.');
+                            return redirect()->to('/login');
+                        }
+                    }
+                    else
+                    {
+                        
+                        throw new \Exception('Username does not match.');
+                        return redirect()->to('/login');
+                    }
+                      
+            }
+         
+              $uri = current_url(true);
+              $data['uri'] = (base_url() == 'http://local.sunpharma.md')?$uri->getSegment(1):$uri->getSegment(3);
+             
+              return  render('frontend/login',$data);
+        }
+        catch(Exception $e){
+            $this->session->setFlashdata($e->getMessage());
         }
        
-            $uri = current_url(true);
-            $data['uri'] = (base_url() == 'http://local.sunpharma.md/')?$uri->getSegment(1):$uri->getSegment(3);
-           
-            return  render('frontend/login',$data);
 
        
     }

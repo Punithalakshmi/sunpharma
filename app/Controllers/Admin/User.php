@@ -356,8 +356,10 @@ class User extends BaseController
                                             "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                             "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                             "email" => array("label" => "email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
-                                            "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
-                                            "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
+                                            "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|min_length[10]'),
+                                            "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required'),
+                                            "gender" => array("label" => "Gender",'rules' => 'required'),
+                                            "user_role" => array("label" => "Role",'rules' => 'required')
             );
         
             if($type == 'user')

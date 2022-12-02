@@ -31,7 +31,7 @@
                           <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
-                      
+                          <th>Approval Status</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -46,7 +46,7 @@
                           <td><?=strtolower($user['firstname']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
-                         
+                          <td><?=(((isset($user['active']) && isset($user['status'])) && ($user['active']==1 && $user['status']=='Approved')))?'Approved':'Pending';?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
                             <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">

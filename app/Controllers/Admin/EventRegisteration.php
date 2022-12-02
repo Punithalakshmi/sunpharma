@@ -145,8 +145,8 @@ class EventRegisteration extends BaseController
         $validation_rules = array();
         $validation_rules = array(   "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                     "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                    "phone" => array("label" => "Phone",'rules' => 'required'),
-                                     "email" => array("label" => "Email",'rules' => 'required')
+                                    "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
+                                     "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]')
                                 );
     
         return $validation_rules;

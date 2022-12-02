@@ -88,16 +88,16 @@ $routes->post('event/registration','EventRegistration::event');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
-    $routes->get("/", "Dashboard::index");
+    $routes->get("/", "Dashboard::index",['filter' =>'auth']);
 
     // URL - /admin/about
-    $routes->get("dashboard", "Dashboard::index");
+    $routes->get("dashboard", "Dashboard::index",['filter' =>'auth']);
     // URL - /admin/product
     $routes->post("login/loginAuth", "Login::loginAuth");
 
     $routes->get("login", "Login::index");
     $routes->get("logout", "Login::logout");
-    $routes->get("user", "User::index");
+    $routes->get("user", "User::index",['filter' =>'auth']);
     //$routes->get("user/add", "User::add");
     ///$routes->match(["get", "post"], "user/add/(:any)", "User::add/$1");
 

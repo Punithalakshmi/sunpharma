@@ -37,7 +37,7 @@ class Login extends BaseController
         $result   = $userModel->Login($username, md5($password));
         
         if($result){
-            $session->set('userdata',$result);
+            $session->set($result);
             return redirect()->route('admin/dashboard');
         }
         else

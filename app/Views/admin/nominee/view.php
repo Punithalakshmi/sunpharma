@@ -352,7 +352,7 @@
                   <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Juryname</th>
+                          <th>Jury Name</th>
                           <th>Ratings</th>
                           <th>Comments</th>
                           <th>Mode</th>

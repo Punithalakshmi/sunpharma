@@ -9,6 +9,7 @@
     <img class="loginlogo" width="260" src="<?=base_url();?>/images/logo.jpg" alt=""> 
                   
     <form name="adminLogin" action="<?php echo base_url(); ?>/admin/login/loginAuth" method="post">
+    <?= csrf_field(); ?>
         <h1>Login</h1>
         <div>
         <input type="text" class="form-control" name="username" placeholder="Username" required="" />
