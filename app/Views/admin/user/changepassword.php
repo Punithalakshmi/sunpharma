@@ -18,7 +18,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">New Password <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="new_password" name="new_password" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('new_password',$editdata['new_password']);?>">
+                          <input type="password" id="new_password" name="new_password" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('new_password',$editdata['new_password']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
@@ -34,7 +34,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Confirm Password <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('confirm_password',$editdata['confirm_password']);?>">
+                          <input type="password" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('confirm_password',$editdata['confirm_password']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>

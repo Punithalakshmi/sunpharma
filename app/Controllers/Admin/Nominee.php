@@ -258,8 +258,7 @@ class Nominee extends BaseController
 
         $data['average_rating'] = $average_rating['avg_rating'];
 
-        if($userdata['role'] == 3)
-          $data['ratings'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
+        $data['ratings'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
 
         if(is_array($userdata) && count($userdata)):
 

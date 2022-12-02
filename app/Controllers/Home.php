@@ -33,9 +33,9 @@ class Home extends BaseController
 
         foreach($categoryNominationLists as $ekey => $evalue) {
           //get category name
-          $categoryDt =  $this->categoryModel->getListsOfCategories($evalue['category_id'])->getRowArray();
+          $categoryDt =  $this->awardsCategoryModel->getListsOfCategories($evalue['main_category_id'])->getRowArray();
           $categoryNominationLists[$ekey]['category'] = $categoryDt['name'];
-          $categoryNominationLists[$ekey]['category_type'] =  $categoryDt['type'];
+          $categoryNominationLists[$ekey]['category_type'] =  'awards';
           $end_date     = strtotime($evalue['end_date']);
           if($end_date > $current_date): 
             array_push($nominationArr,$categoryNominationLists[$ekey]);
