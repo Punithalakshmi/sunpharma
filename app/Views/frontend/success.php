@@ -7,11 +7,11 @@
     <section class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 text-center successseccont">
                     
-                    <p>
+                   <div class="successsec badge badge-success"> <p>
                         Thank you. Your application is under review , you should receive an email soon! 
-                    </p>
+                    </p></div>
                     
                 </div>
             </div>

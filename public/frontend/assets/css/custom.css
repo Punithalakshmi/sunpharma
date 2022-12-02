@@ -332,6 +332,35 @@ body .wizard > .content > .body {
 }
 
 
+form#eventRegistration {
+  margin: auto;
+}
+#eventRegistration label {
+  min-width: 165px;
+}
+form#eventRegistration .form-group{display: flex  ;}
+form#eventRegistration .form-group .alert-danger {
+  padding: 5px 20px;
+  margin-top: 0px!important;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #28a745;
+}
+.successsec {
+  padding: 20px;
+  font-size: 17px;
+  text-align: center;
+  margin: auto;
+}
+.successseccont {
+  min-height: 200px;
+  display: flex;
+}
+.successseccont p{margin:0;white-space: normal;}
+
+
 @media(max-width:767px){
   #mainNav .navbar-brand img {
     height: 80px;
@@ -343,6 +372,7 @@ body .wizard > .content > .body {
 .step > .row > .col-lg-12, .step > .row > .col-lg-6 {
   padding: 10px 10px 10px 10px;
 }
+form#eventRegistration .form-group{display: block;}
 
 }
 
