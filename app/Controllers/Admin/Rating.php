@@ -3,54 +3,46 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\CategoryModel;
-use App\Models\RatingModel;
 
 class Rating extends BaseController
 {
 
     public function add($id='',$nominee_id='')
     {
-        helper(array('form', 'url'));
-
-        $session = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-    
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
         
+        $userdata  = $this->session->get('userdata');
+    
         $data['userdata'] = $userdata;
-        $ratingModel = new RatingModel();
-
+        
         if(is_array($userdata) && count($userdata)):
            
-            if($request->getPost())
-               $id  = $request->getPost('id');
+            if($this->request->getPost())
+               $id  = $this->request->getPost('id');
 
-               $edit_data = $ratingModel->getLists($id);   
+               $edit_data = $this->ratingModel->getLists($id);   
                $edit_data = $edit_data->getRowArray();
              
-               $validation = $this->validate($this->validation_rules());
+               $this->validation = $this->validate($this->validation_rules());
 
-            if($validation) {
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $rating        = $request->getPost('rating');
-                    $comments      = $request->getPost('comments');
+                    $rating        = $this->request->getPost('rating');
+                    $comments      = $this->request->getPost('comments');
                    
                     $ins_data = array();
                     $ins_data['rating']     = $rating;
                     $ins_data['comments']   = $comments;
                     
                     if(!empty($id)){
-                        $session->setFlashdata('msg', 'Rating Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Rating Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['login_id'];
-                        $ratingModel->update(array("id" => $id),$ins_data);
+                        $this->ratingModel->update(array("id" => $id),$ins_data);
                     }
                    
-                    $nominee_id = $request->getPost('nominee_id');
+                    $nominee_id = $this->request->getPost('nominee_id');
                     return redirect()->to('admin/nominee/view/'.$nominee_id);
                 }
             }
@@ -64,7 +56,7 @@ class Rating extends BaseController
                     $editdata['nominee_id'] = $edit_data['nominee_id'];
                 }
 
-                  if($request->getPost())
+                  if($this->request->getPost())
                     $data['validation'] = $this->validator;
 
 
@@ -95,15 +87,13 @@ class Rating extends BaseController
 
     public function delete($id='',$nominee_id='')
     {
-        $ratingModel = new ratingModel();
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata'); 
+        
+        $userdata  = $this->session->get('userdata'); 
         $data['userdata'] = $userdata;
 
         if(is_array($userdata) && count($userdata)):
 
-          $ratingModel->delete(array("id" => $id));
+          $this->ratingModel->delete(array("id" => $id));
           return redirect()->to('admin/nominee/view/'.$nominee_id);
         else:
             return redirect()->route('admin/login');

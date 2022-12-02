@@ -15,31 +15,23 @@ class Awards extends BaseController
 
     public function index()
     {
-        helper(array('form', 'url'));
-
+    
         $view = \Config\Services::renderer();
 
-        $session    = \Config\Services::session();
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
-
-        $userdata      = $session->get('userdata');
-        $awardsModel   = new AwardsModel();
-        $categoryModel = new CategoryModel();
-        $userModel     = new UserModel();
-       
+        $userdata      = $this->session->get('userdata');
+        
         $data['userdata'] = $userdata;
        
         if(is_array($userdata) && count($userdata)):
 
-            $category      = ($request->getPost('category'))?$request->getPost('category'):'';
-            $year          = ($request->getPost('year'))?$request->getPost('year'):date('Y');
+            $category      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+            $year          = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
 
             //get categories lists
-            $data['categories']   = $categoryModel->getListsOfCategories();
+            $data['categories']   = $this->categoryModel->getListsOfCategories();
            //$data['categories'] = $getCategoryLists->getResultArray();
 
-            $awardsLists = $awardsModel->getLists($category,$year)->getResultArray();
+            $awardsLists = $this->awardsModel->getLists($category,$year)->getResultArray();
            // echo "<pre>";
            // print_r($awardsLists); die;
             foreach($awardsLists as $akey => $avalue) {
@@ -49,7 +41,7 @@ class Awards extends BaseController
                
                 for($i=0;$i<count($splitJuryIds);$i++) {
                     
-                    $getJuryRateData = $userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
+                    $getJuryRateData = $this->userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
                     $awardsLists[$akey]['juries'][$i]=$getJuryRateData;
                 }
             }
@@ -79,25 +71,20 @@ class Awards extends BaseController
     public function export()
     {
 
-        $response    = \Config\Services::response();
-        $request     = \Config\Services::request();
-
-        $userModel   = new UserModel();
-        $awardsModel = new AwardsModel();
-         
-        $category    = ($request->getPost('category'))?$request->getPost('category'):'';
-        $year        = ($request->getPost('year'))?$request->getPost('year'):date('Y');
+   
+        $category    = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+        $year        = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
  
         
         $fileName = 'AwardResult_'.date('d-m-Y').'.xlsx';  
 
-        $awardsLists = $awardsModel->getLists($category,$year)->getResultArray();
+        $awardsLists = $this->awardsModel->getLists($category,$year)->getResultArray();
             
         foreach($awardsLists as $akey => $avalue) {
             //get jury lists 
             $splitJuryIds = explode(',',$avalue['jury']);
             for($i=0;$i<count($splitJuryIds);$i++) {
-                $getJuryRateData = $userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
+                $getJuryRateData = $this->userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
                 $awardsLists[$akey]['juries'][$i]=$getJuryRateData;
             }
         }
@@ -154,7 +141,7 @@ class Awards extends BaseController
         $writer->save("uploads/".$fileName);
         $fileDownload = base_url().'/uploads/'.$fileName;
         header("Content-Type: application/vnd.ms-excel");
-        if($request->isAJAX()) {
+        if($this->request->isAJAX()) {
              return $this->response->setJSON([
                  'status'            => 'success',
                  'filename'              => $fileDownload
@@ -167,11 +154,10 @@ class Awards extends BaseController
     
     public function getJuryListsByNominee($nominee_id = '')
     {
-        $request    = \Config\Services::request();
-        $ratingModel = new RatingModel();
-        $data['juries'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
+  
+        $data['juries'] = $this->ratingModel->getRatingByJury($nominee_id)->getResultArray();
 
-        if($request->isAJAX()) {
+        if($this->request->isAJAX()) {
             $html = view('admin/awards/juryLists',$data,array('debug' => false));
              return $this->response->setJSON([
                  'status'            => 'success',

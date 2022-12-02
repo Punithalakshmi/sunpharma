@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\WorkshopModel;
 
 
 class Workshops extends BaseController
@@ -11,16 +10,15 @@ class Workshops extends BaseController
 
     public function index()
     {
-        $session = \Config\Services::session();
-
-        $userdata      = $session->get('userdata');
-        $workshopModel = new WorkshopModel();
        
+
+        $userdata      = $this->session->get('userdata');
+      
         $data['userdata'] = $userdata;
        
         if(is_array($userdata) && count($userdata)):
 
-            $workshopLists = $workshopModel->getLists();
+            $workshopLists = $this->workshopModel->getLists();
 
             $data['lists'] = $workshopLists;
             return view('_partials/header',$data)
@@ -33,13 +31,9 @@ class Workshops extends BaseController
 
     public function add($id='')
     {
-        helper(array('form', 'url'));
+       
+        $userdata  = $this->session->get('userdata');
 
-        $session   = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-    
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
         
         $data['userdata'] = $userdata;
     
