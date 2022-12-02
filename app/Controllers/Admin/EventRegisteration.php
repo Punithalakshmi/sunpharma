@@ -64,7 +64,7 @@ class EventRegisteration extends BaseController
             if($request->getPost())
                $id  = $request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules());
+            $validation = $this->validate($this->validation_rules($id = ''));
 
             if($validation) {
 
@@ -139,14 +139,14 @@ class EventRegisteration extends BaseController
     }
 
 
-    public function validation_rules()
+    public function validation_rules($id = '')
     {
 
         $validation_rules = array();
         $validation_rules = array(   "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                     "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                     "phone" => array("label" => "Phone",'rules' => 'required'),
-                                     "email" => array("label" => "Email",'rules' => 'required')
+                                     "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email,id,'.$id.']')
                                 );
     
         return $validation_rules;

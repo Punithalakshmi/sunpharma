@@ -39,7 +39,9 @@ class Nominee extends BaseController
                 $getNominationEndDate = $nomineeTypesModel->getCategoryNomination($user['category']);
                
                 $lists[$k]['nomination_end_date'] = '';
+
                 
+                $nominationEndDate = '';
                 if($getNominationEndDate->getRowArray() > 0) {  
                     $getNominationEndDate = $getNominationEndDate->getRowArray();
                     $nominationEndDate = $getNominationEndDate['end_date'];
