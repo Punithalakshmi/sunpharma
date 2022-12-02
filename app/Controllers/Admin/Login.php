@@ -9,10 +9,8 @@ class Login extends BaseController
 {
     public function index()
     {
-        $session  = \Config\Services::session();
-
-        $session = session();
-        $session->remove('userdata');
+       
+        $this->session->remove('userdata');
 
         
         $data['userdata'] = '';
@@ -29,20 +27,18 @@ class Login extends BaseController
     public function loginAuth()
     {
 
-        $session   = session();
-        $userModel = new UserModel();
         $username  = $this->request->getVar('username');
         $password  = $this->request->getVar('password');
         
-        $result   = $userModel->Login($username, md5($password));
-        
+        $result   = $this->userModel->Login($username, md5($password));
+      //  print_r($result); die;
         if($result){
-            $session->set($result);
+            $this->session->set($result);
             return redirect()->route('admin/dashboard');
         }
         else
         {
-            $session->setFlashdata('msg', 'Invalid Credentials');
+            $this->session->setFlashdata('msg', 'Invalid Credentials');
             return redirect()->route('admin/login');
         }
 
@@ -71,8 +67,7 @@ class Login extends BaseController
     public function logout()
     {
 
-        $session = session();
-        $session->remove('userdata');
+        $this->session->remove('userdata');
         return redirect()->route('admin/login');
     }
 }

@@ -49,15 +49,15 @@ class Rating extends BaseController
             else
             {  
             
-                if(!empty($edit_data) && count($edit_data)){
-                    $editdata['rating']     = $edit_data['rating'];
-                    $editdata['comments']   = $edit_data['comments'];
-                    $editdata['id']         = $edit_data['id'];
-                    $editdata['nominee_id'] = $edit_data['nominee_id'];
-                }
+                    if(!empty($edit_data) && count($edit_data)){
+                        $editdata['rating']     = $edit_data['rating'];
+                        $editdata['comments']   = $edit_data['comments'];
+                        $editdata['id']         = $edit_data['id'];
+                        $editdata['nominee_id'] = $edit_data['nominee_id'];
+                    }
 
-                  if($this->request->getPost())
-                    $data['validation'] = $this->validator;
+                    if($this->request->getPost())
+                        $data['validation'] = $this->validator;
 
 
                     $data['editdata'] = $editdata;
@@ -75,14 +75,11 @@ class Rating extends BaseController
 
     public function validation_rules()
     {
-
         $validation_rules = array();
         $validation_rules = array(
                                         "rating" => array("label" => "Rating",'rules' => 'required')
-        );
-    
+                                );
         return $validation_rules;
-      
     }
 
     public function delete($id='',$nominee_id='')
