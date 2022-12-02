@@ -44,6 +44,9 @@ class EventRegisteration extends BaseController
         $data['userdata'] = $userdata;
     
         $registerationModel = new RegisterationModel();
+
+        
+        $data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
       
         if(is_array($userdata) && count($userdata)):
            

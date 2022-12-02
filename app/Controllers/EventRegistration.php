@@ -35,6 +35,8 @@ class EventRegistration extends BaseController
         $ct = $count + 1;
             
         $registerationNo = 'SPSFN-REG-'.$ct;
+
+        $data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
         
         if($this->validation) {
 
