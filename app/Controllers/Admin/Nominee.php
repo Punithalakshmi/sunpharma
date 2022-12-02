@@ -262,7 +262,6 @@ class Nominee extends BaseController
 
         if(is_array($userdata) && count($userdata)):
 
-
             if($validation) {
 
                 if($request->getPost()){
@@ -279,19 +278,12 @@ class Nominee extends BaseController
                     $ins_data['nominee_id']   = $nominee_id;
                     $ins_data['is_rate_submitted'] = ($request->getPost('submit') && ($request->getPost('submit') == 'Save Draft'))?0:1; 
                     
-                    if(!empty($id)){
-                        $session->setFlashdata('msg', 'Rating Updated Successfully!');
-                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $ratingModel->update(array("id" => $id),$ins_data);
-                    }
-                    else
-                    {
-                        $session->setFlashdata('msg', 'Rated Successfully!');
-                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
-                        $ratingModel->save($ins_data);
-                    } 
+                   
+                    $session->setFlashdata('msg', 'Rated Successfully!');
+                    $ins_data['created_date']  =  date("Y-m-d H:i:s");
+                    $ins_data['created_id']    =  $userdata['login_id'];
+                    $ratingModel->save($ins_data);
+                     
 
                     return redirect()->to('admin/nominee/view/'.$nominee_id)->withInput();
                 }
@@ -307,22 +299,20 @@ class Nominee extends BaseController
                 }
                 else
                 {
-                    $editdata['rating']  = ($request->getPost('rating'))?$request->getPost('rating'):'';
-                    $editdata['comment']   = ($request->getPost('comment'))?$request->getPost('comment'):'';
-                    $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['rating']      = ($request->getPost('rating'))?$request->getPost('rating'):'';
+                    $editdata['comment']     = ($request->getPost('comment'))?$request->getPost('comment'):'';
+                    $editdata['id']          = ($request->getPost('id'))?$request->getPost('id'):'';
                     $editdata['is_rate_submitted'] = '0';
                 }
-
             } 
             
             if($request->getPost())
                $data['validation'] = $this->validator;
 
-
             $data['editdata'] = $editdata;
-            return view('_partials/header',$data)
-                .view('admin/nominee/view',$data)
-                .view('_partials/footer');
+            return   view('_partials/header',$data)
+                    .view('admin/nominee/view',$data)
+                    .view('_partials/footer');
         else:
             return redirect()->route('admin/login');
         endif;
