@@ -13,7 +13,7 @@ class User extends BaseController
               $username   = $this->request->getPost('username');
               $password   = $this->request->getPost('password');
        
-              $result   = $this->userModel->Login($username, md5($password));
+              $result   = $this->userModel->fLogin($username, md5($password));
               
              if(!$result) {
                  $this->session->setFlashdata('msg', 'Invalid Credentials');
