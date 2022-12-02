@@ -66,6 +66,8 @@ class EventRegisteration extends BaseController
                
             $validation = $this->validate($this->validation_rules($id = ''));
 
+            $data['event_categories']  = $this->workshopModel->getEventTypes()->getResultArray();
+
             if($validation) {
 
                 if($request->getPost()){
@@ -105,25 +107,28 @@ class EventRegisteration extends BaseController
             else
             {  
             
-                if(!empty($edit_data) && count($edit_data)){
-                    $editdata['firstname']               = $edit_data['firstname'];
-                    $editdata['lastname']                = $edit_data['lastname'];
-                    $editdata['email']                   = $edit_data['email'];
-                    $editdata['phone']                   = $edit_data['phone'];
-                    $editdata['address']                 = $edit_data['address'];
-                    $editdata['registeration_no']        = (!empty($edit_data['registeration_no']))?$edit_data['registeration_no']:'SPSFN-REG-'.$id;
-                    $editdata['id']                      = $edit_data['id'];
-                }
-                else
-                {
-                    $editdata['firstname']                = ($request->getPost('firstname'))?$request->getPost('firstname'):'';
-                    $editdata['lastname']              = ($request->getPost('lastname'))?$request->getPost('lastname'):'';
-                    $editdata['email']          = ($request->getPost('email'))?$request->getPost('email'):'';
-                    $editdata['phone']             = ($request->getPost('phone'))?$request->getPost('phone'):'';
-                    $editdata['address']             = ($request->getPost('address'))?$request->getPost('address'):'';
-                    $editdata['registeration_no']             = ($request->getPost('registeration_no'))?$request->getPost('registeration_no'):$registerationNo;
-                    $editdata['id']                   = ($request->getPost('id'))?$request->getPost('id'):'';
-                }
+                    if(!empty($edit_data) && count($edit_data)){
+                        $editdata['firstname']               = $edit_data['firstname'];
+                        $editdata['lastname']                = $edit_data['lastname'];
+                        $editdata['email']                   = $edit_data['email'];
+                        $editdata['phone']                   = $edit_data['phone'];
+                        $editdata['address']                 = $edit_data['address'];
+                        $editdata['event_type']              = $edit_data['event_type'];
+                        $editdata['registeration_no']        = (!empty($edit_data['registeration_no']))?$edit_data['registeration_no']:'SPSFN-REG-'.$id;
+                        $editdata['id']                      = $edit_data['id'];
+                    }
+                    else
+                    {
+                        $editdata['firstname']                = ($request->getPost('firstname'))?$request->getPost('firstname'):'';
+                        $editdata['lastname']              = ($request->getPost('lastname'))?$request->getPost('lastname'):'';
+                        $editdata['email']          = ($request->getPost('email'))?$request->getPost('email'):'';
+                        $editdata['phone']             = ($request->getPost('phone'))?$request->getPost('phone'):'';
+                        $editdata['address']             = ($request->getPost('address'))?$request->getPost('address'):'';
+                        $editdata['registeration_no']             = ($request->getPost('registeration_no'))?$request->getPost('registeration_no'):$registerationNo;
+                        $editdata['id']                   = ($request->getPost('id'))?$request->getPost('id'):'';
+                        $editdata['event_type']                   = ($request->getPost('event_type'))?$request->getPost('event_type'):'';
+                    }
+                
 
                   if($request->getPost())
                      $data['validation'] = $this->validator;
@@ -132,7 +137,8 @@ class EventRegisteration extends BaseController
                     return view('_partials/header',$data)
                            .view('admin/event_registeration/add',$data)
                            .view('_partials/footer');
-            }       
+            }
+                   
         else:
             return redirect()->route('admin/login');
         endif; 
