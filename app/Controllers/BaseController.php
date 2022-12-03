@@ -54,6 +54,8 @@ abstract class BaseController extends Controller
     public $workshopModel;
     public $extendModel;
     public $awardsCategoryModel;
+    
+    public $userdata;
    
     /**
      * Constructor.
@@ -81,8 +83,10 @@ abstract class BaseController extends Controller
         $this->awardsCategoryModel  = model('App\Models\AwardsCategoryModel');
 
         $this->session     = \Config\Services::session();
-      //  $this->request     = \Config\Services::request();
+      
         $this->validation  = \Config\Services::validation();
+
+        $this->userdata = getSessionData();
 
     }
 }

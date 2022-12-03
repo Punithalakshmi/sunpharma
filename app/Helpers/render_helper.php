@@ -2,11 +2,11 @@
  
 if ( ! function_exists('render'))
 {
-    function render(string $name, array $data = [], array $options = [])
+    function render(string $name, array $data = [], array $options = [],$layout_path='')
     {
         
         return view(
-            'frontend/layout/frontend',
+            $layout_path,
             [
                 'content' => view($name, $data, $options),
             ],
