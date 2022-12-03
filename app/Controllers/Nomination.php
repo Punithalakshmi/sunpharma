@@ -708,22 +708,23 @@ class Nomination extends BaseController
         $login_url = base_url().'/admin';
 
         $subject  = "New Nomination - Sun Pharma Science Foundation ";
-        $message  = "Hi ".ucfirst($jury_name).",";
-        $message .= '<br/><br/>';
-        $message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
-        $message .= "<br/><br/><br/>";
-        $message .= "Thanks & Regards,";
-        $message .= "<br/>";
-        $message .= "Sunpharma Science Foundation Team";
        
-        $data['content'] = $message;
-        $html = view('email/mail',$data,array('debug' => false));
 
         $juryLists = $this->userModel->getJuryListsByCategory($category_id);
 
         if(is_array($juryLists) && count($juryLists) > 0){
             foreach($juryLists as $jkey=>$jvalue){
                 if(isset($jvalue['email']) && !empty($jvalue['email'])){
+                    $message  = "Hi ".ucfirst($jvalue['firstname']).",";
+                    $message .= '<br/><br/>';
+                    $message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
+                    $message .= "<br/><br/><br/>";
+                    $message .= "Thanks & Regards,";
+                    $message .= "<br/>";
+                    $message .= "Sunpharma Science Foundation Team";
+                   
+                    $data['content'] = $message;
+                    $html = view('email/mail',$data,array('debug' => false));
                      mail($jvalue['email'],$subject,$html,$header);
                 }
             }

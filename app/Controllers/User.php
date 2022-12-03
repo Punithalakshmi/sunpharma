@@ -143,9 +143,10 @@ class User extends BaseController
         $message .= "<br/>";
         $message .= "Thanks & Regards,";
         $message .= "Sunpharma Team";
-        $html = view('email/mail',array(),array('debug' => false));
 
-        mail("punitha@izaaptech.in",$subject,$html,$header);
+        //$html = view('email/mail',array(),array('debug' => false));
+         
+        mail("punitha@izaaptech.in",$subject,'Testing',$header);
 
     }
 

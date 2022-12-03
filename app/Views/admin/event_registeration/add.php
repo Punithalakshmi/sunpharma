@@ -15,7 +15,31 @@
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/eventregisteration/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       
-                      
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Event</label>
+                        <div class="col-md-6">
+                          <select class="select2_single form-control col-md-7 col-xs-12" name="event_type" tabindex="-1" >
+                            <option value=""></option>
+                            <?php if(is_array($event_categories)):
+                                    foreach($event_categories as $rvalue): ?>
+                            <option value="<?=$rvalue['id'];?>" <?=set_select('event_type',$rvalue['id'],(isset($editdata['event_type']) && ($editdata['event_type']==$rvalue['id']))?true:false);?>><?=$rvalue['event_type'];?></option>
+                            <?php endforeach;
+                                  endif;
+                                  ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>          
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('event_type')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?= $error = $validation->getError('event_type'); ?>
+                            </div>
+                        <?php }?>
+                      </div>
+                     
+                      <div class="clearfix"></div>   
     
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Firstname <span class="required">*</span>

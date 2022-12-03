@@ -48,6 +48,7 @@ class EventRegistration extends BaseController
                 $phone                       = $this->request->getPost('phone');
                 $address                     = $this->request->getPost('address');
                 $registerationNo             = $this->request->getPost('registeration_no');
+                $event_type                  = $this->request->getPost('event_type');
                
                 $ins_data = array();
                 $ins_data['firstname']     = $firstname;
@@ -56,6 +57,7 @@ class EventRegistration extends BaseController
                 $ins_data['address']       = $address;
                 $ins_data['phone']         = $phone;
                 $ins_data['registeration_no'] = $registerationNo;
+                $ins_data['event_type'] = $event_type;
                 
             
                 $this->session->setFlashdata('msg', 'Registeration Submitted Successfully!');
@@ -79,6 +81,7 @@ class EventRegistration extends BaseController
             $editdata['phone']            = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
             $editdata['address']          = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
             $editdata['registeration_no'] = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
+            $editdata['event_type']       = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
             
             if($this->request->getPost())
               $data['validation'] = $this->validator;
@@ -104,7 +107,8 @@ class EventRegistration extends BaseController
                                         "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                         "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]'),
                                         "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
-                                        "registeration_no" => array("label" => "Registration No",'rules' => 'required')
+                                        "registeration_no" => array("label" => "Registration No",'rules' => 'required'),
+                                        "event_type" => array("label" => "Event Type",'rules' => 'required')
         ); 
 
         return $validation_rules;

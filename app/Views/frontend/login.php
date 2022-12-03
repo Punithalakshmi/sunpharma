@@ -3,7 +3,7 @@
       <?= csrf_field(); ?>
         <h3 class="text-center">Login</h3>
         <div class="form-group mb-3">
-            <input class="form-control item" type="text" id="username" placeholder="Username" name="username" required="" minlength="4" maxlength="15" pattern="^[a-zA-Z0-9_.-]*$">
+            <input class="form-control item" type="text" id="username" placeholder="Username" name="username" required="" minlength="4"  pattern="^[a-zA-Z0-9_.-]*$">
         </div>
         <div class="form-group mb-3">
             <input class="form-control item" type="password" id="password" placeholder="Password" name="password" required="" minlength="6"></div>
