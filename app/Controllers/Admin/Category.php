@@ -3,65 +3,38 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\CategoryModel;
-use App\Models\RoleModel;
 
 class Category extends BaseController
 {
 
     public function index()
     {
-        $session = \Config\Services::session();
-
-        $userdata      = $session->get('userdata');
-        $categoryModel = new CategoryModel();
         
-        $data['userdata'] = $userdata;
+        $this->data['lists'] = $this->categoryModel->getListsOfCategories();
        
-        if(is_array($userdata) && count($userdata)):
-
-            $categoryLists = $categoryModel->getListsOfCategories();
-           
-            $data['lists'] = $categoryLists;
-            return view('_partials/header',$data)
-                .view('admin/category/list',$data)
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;        
+        return render('admin/category/list',$this->data);
+        
     }
 
     public function add($id='')
     {
-        helper(array('form', 'url'));
-
-        $session = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-    
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
         
-        $data['userdata'] = $userdata;
-        $categoryModel = new CategoryModel();
-
-        if(is_array($userdata) && count($userdata)):
-           
             if(!empty($id)){
-                $getUserData = $categoryModel->getListsOfCategories($id);
+                $getUserData = $this->categoryModel->getListsOfCategories($id);
                 $edit_data   = $getUserData->getRowArray();
             }
             
-            if($request->getPost())
-               $id  = $request->getPost('id');
+            if($this->request->getPost())
+               $id  = $this->request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules());
-            if($validation) {
+            $this->validation = $this->validate($this->validation_rules());
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $category      = $request->getPost('name');
-                    $active        = $request->getPost('status');
-                    $type          = $request->getPost('type');
+                    $category      = $this->request->getPost('name');
+                    $active        = $this->request->getPost('status');
+                    $type          = $this->request->getPost('type');
 
                     
                     $ins_data = array();
@@ -70,18 +43,17 @@ class Category extends BaseController
                     $ins_data['status']     = $active;
                     
                     if(!empty($id)){
-                       // print_r($ins_data); die;
-                        $session->setFlashdata('msg', 'Category Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Category Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['login_id'];
-                        $categoryModel->update(array("id" => $id),$ins_data);
+                        $this->categoryModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
-                        $session->setFlashdata('msg', 'Category Added Successfully!');
+                        $this->session->setFlashdata('msg', 'Category Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  $userdata['login_id'];
-                        $categoryModel->save($ins_data);
+                        $this->categoryModel->save($ins_data);
                     } 
 
                     return redirect()->route('admin/category');
@@ -98,54 +70,39 @@ class Category extends BaseController
                 }
                 else
                 {
-                    $editdata['name']       = ($request->getPost('name'))?$request->getPost('name'):'';
-                    $editdata['status']     = ($request->getPost('status'))?$request->getPost('status'):'Active';
-                    $editdata['type']       = ($request->getPost('type'))?$request->getPost('type'):'Research Awards';
-                    $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['name']       = ($this->request->getPost('name'))?$this->request->getPost('name'):'';
+                    $editdata['status']     = ($this->request->getPost('status'))?$this->request->getPost('status'):'Active';
+                    $editdata['type']       = ($this->request->getPost('type'))?$this->request->getPost('type'):'Research Awards';
+                    $editdata['id']         = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                 }
 
-                  if($request->getPost())
-                    $data['validation'] = $this->validator;
+                  if($this->request->getPost())
+                    $this->data['validation'] = $this->validator;
 
 
-                    $data['editdata'] = $editdata;
-                    return view('_partials/header',$data)
-                        .view('admin/category/add',$data)
-                        .view('_partials/footer');
+                    $this->data['editdata'] = $editdata;
+                    return render('admin/category/add',$this->data);
+                      
             }       
-        else:
-            return redirect()->route('admin/login');
-        endif; 
-
-
+       
     }
 
 
     public function validation_rules()
     {
 
-        $validation_rules = array();
-        $validation_rules = array(
+        $this->validation_rules = array();
+        $this->validation_rules = array(
                                         "name" => array("label" => "Category Name",'rules' => 'required')
         );
     
-        return $validation_rules;
+        return $this->validation_rules;
       
     }
 
     public function delete($id='')
     {
-        $categoryModel = new CategoryModel();
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata'); 
-        $data['userdata'] = $userdata;
-
-        if(is_array($userdata) && count($userdata)):
-          $categoryModel->delete(array("id" => $id));
+          $this->categoryModel->delete(array("id" => $id));
           return redirect()->route('admin/category');
-        else:
-            return redirect()->route('admin/login');
-        endif;
     }
 }

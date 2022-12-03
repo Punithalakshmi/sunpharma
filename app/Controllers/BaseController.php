@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['html','form','url','user','session'];
+    protected $helpers = ['html','form','url','user','session','render'];
 
     protected $session;
     //protected $request;
@@ -55,7 +55,9 @@ abstract class BaseController extends Controller
     public $extendModel;
     public $awardsCategoryModel;
     
-    public $userdata;
+    public $data;
+    public $uri;
+    public $role;
    
     /**
      * Constructor.
@@ -66,8 +68,6 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
-
-        
         $this->userModel            = model('App\Models\UserModel');
         $this->nominationTypesModel = model('App\Models\NominationTypesModel');
         $this->nominationModel      = model('App\Models\NominationModel');
@@ -83,10 +83,13 @@ abstract class BaseController extends Controller
         $this->awardsCategoryModel  = model('App\Models\AwardsCategoryModel');
 
         $this->session     = \Config\Services::session();
-      
         $this->validation  = \Config\Services::validation();
 
-        $this->userdata = getSessionData();
-
+        $this->uri  = current_url(true);
+        $this->data['uri'] = (base_url() == 'http://local.sunpharma.md')?$this->uri->getSegment(1):$this->uri->getSegment(3); 
+        $this->data['userdata'] = getSessionData();
+        $this->role     = getUserRole();
+       
+       
     }
 }

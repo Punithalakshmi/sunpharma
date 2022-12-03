@@ -12,58 +12,41 @@ class Workshops extends BaseController
     {
        
 
-        $userdata      = $this->session->get('userdata');
-      
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
-
             $workshopLists = $this->workshopModel->getLists();
 
-            $data['lists'] = $workshopLists;
-            return view('_partials/header',$data)
-                .view('admin/workshop/list',$data)
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;        
+            $this->data['lists'] = $workshopLists;
+            return render('admin/workshop/list',$this->data);
+               
     }
 
     public function add($id='')
     {
        
-        $userdata  = $this->session->get('userdata');
+        $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
 
-        
-        $data['userdata'] = $userdata;
-    
-        $workshopModel = new WorkshopModel();
-        $data['eventTypes']  = $workshopModel->getEventTypes()->getResultArray();
-
-        if(is_array($userdata) && count($userdata)):
-           
+         
             if(!empty($id)){
-                $edit_data   = $workshopModel->getLists($id);
+                $edit_data   = $this->workshopModel->getLists($id);
                 $edit_data   = $edit_data->getRowArray();
             }
             
-            if($request->getPost())
-               $id  = $request->getPost('id');
+            if($this->request->getPost())
+               $id  = $this->request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules());
+            $this->validation = $this->validate($this->validation_rules());
 
-            if($validation) {
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $category     = $request->getPost('category');
-                    $subject      = $request->getPost('subject');
-                    $title        = $request->getPost('title');
-                    $description  = $request->getPost('description');
-                    $start_date   = $request->getPost('start_date');
-                    $end_date     = $request->getPost('end_date');
-                //    $year         = $request->getPost('year');
-                    $status       = $request->getPost('status');
+                    $category     = $this->request->getPost('category');
+                    $subject      = $this->request->getPost('subject');
+                    $title        = $this->request->getPost('title');
+                    $description  = $this->request->getPost('description');
+                    $start_date   = $this->request->getPost('start_date');
+                    $end_date     = $this->request->getPost('end_date');
+                //    $year         = $this->request->getPost('year');
+                    $status       = $this->request->getPost('status');
 
                     $ins_data = array();
                     $ins_data['category']          = $category;
@@ -117,17 +100,17 @@ class Workshops extends BaseController
                    
                    
                     if(!empty($id)){
-                        $session->setFlashdata('msg', 'Event Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Event Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['login_id'];
-                        $workshopModel->update(array("id" => $id),$ins_data);
+                        $this->workshopModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
-                        $session->setFlashdata('msg', 'Event Added Successfully!');
+                        $this->session->setFlashdata('msg', 'Event Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  $userdata['login_id'];
-                        $workshopModel->save($ins_data);
+                        $this->workshopModel->save($ins_data);
                     } 
 
                     return redirect()->route('admin/workshops');
@@ -152,59 +135,48 @@ class Workshops extends BaseController
                 }
                 else
                 {
-                    $editdata['title']                = ($request->getPost('title'))?$request->getPost('title'):'';
-                    $editdata['subject']              = ($request->getPost('subject'))?$request->getPost('subject'):'';
-                    $editdata['description']          = ($request->getPost('description'))?$request->getPost('description'):'';
-                    $editdata['category']             = ($request->getPost('category'))?$request->getPost('category'):'';
-                  //  $editdata['year']                 = ($request->getPost('year'))?$request->getPost('year'):date("Y");
-                    $editdata['start_date']           = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
-                    $editdata['end_date']             = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");
+                    $editdata['title']                = ($this->request->getPost('title'))?$this->request->getPost('title'):'';
+                    $editdata['subject']              = ($this->request->getPost('subject'))?$this->request->getPost('subject'):'';
+                    $editdata['description']          = ($this->request->getPost('description'))?$this->request->getPost('description'):'';
+                    $editdata['category']             = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                  //  $editdata['year']                 = ($this->request->getPost('year'))?$this->request->getPost('year'):date("Y");
+                    $editdata['start_date']           = ($this->request->getPost('start_date'))?$this->request->getPost('start_date'):date("m/d/Y");
+                    $editdata['end_date']             = ($this->request->getPost('end_date'))?$this->request->getPost('end_date'):date("m/d/Y");
                     $editdata['event_document']       = ($this->request->getFile('event_document'))?$this->request->getFile('event_document'):'';
                     $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';
                     $editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
-                    $editdata['status']               = ($request->getPost('status'))?$request->getPost('status'):'';
-                    $editdata['id']                   = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['status']               = ($this->request->getPost('status'))?$this->request->getPost('status'):'';
+                    $editdata['id']                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                 }
 
-                  if($request->getPost())
-                     $data['validation'] = $this->validator;
+                  if($this->request->getPost())
+                     $this->data['validation'] = $this->validator;
 
-                    $data['editdata'] = $editdata;
-                    return view('_partials/header',$data)
-                        .view('admin/workshop/event',$data)
-                        .view('_partials/footer');
+                    $this->data['editdata'] = $editdata;
+                    return render('admin/workshop/event',$this->data);
+                        
             }       
-        else:
-            return redirect()->route('admin/login');
-        endif; 
+        
     }
 
 
     public function validation_rules()
     {
 
-        $validation_rules = array();
-        $validation_rules = array(   "subject" => array("label" => "Subject",'rules' => 'required'),
+        $this->validation_rules = array();
+        $this->validation_rules = array(   "subject" => array("label" => "Subject",'rules' => 'required'),
                                      "description" => array("label" => "Description",'rules' => 'required')
                                 );
     
-        return $validation_rules;
+        return $this->validation_rules;
       
     }
 
     public function delete($id='')
     {
-        $workshopModel = new WorkshopModel();
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata'); 
-        $data['userdata'] = $userdata;
-
-        if(is_array($userdata) && count($userdata)):
-          $workshopModel->delete(array("id" => $id));
+       
+        $this->workshopModel->delete(array("id" => $id));
           return redirect()->route('admin/workshops');
-        else:
-            return redirect()->route('admin/login');
-        endif;
+       
     }
 }

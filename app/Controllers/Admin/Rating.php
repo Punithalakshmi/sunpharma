@@ -10,11 +10,6 @@ class Rating extends BaseController
     public function add($id='',$nominee_id='')
     {
         
-        $userdata  = $this->session->get('userdata');
-    
-        $data['userdata'] = $userdata;
-        
-        if(is_array($userdata) && count($userdata)):
            
             if($this->request->getPost())
                $id  = $this->request->getPost('id');
@@ -57,17 +52,15 @@ class Rating extends BaseController
                     }
 
                     if($this->request->getPost())
-                        $data['validation'] = $this->validator;
+                        $this->data['validation'] = $this->validator;
 
 
-                    $data['editdata'] = $editdata;
-                    return view('_partials/header',$data)
-                        .view('admin/rating/add',$data)
-                        .view('_partials/footer');
+                    $this->data['editdata'] = $editdata;
+                    
+                    return render('admin/rating/add',$this->data);
+                        
             }       
-        else:
-            return redirect()->route('admin/login');
-        endif; 
+        
 
 
     }
@@ -85,15 +78,9 @@ class Rating extends BaseController
     public function delete($id='',$nominee_id='')
     {
         
-        $userdata  = $this->session->get('userdata'); 
-        $data['userdata'] = $userdata;
-
-        if(is_array($userdata) && count($userdata)):
-
+       
           $this->ratingModel->delete(array("id" => $id));
           return redirect()->to('admin/nominee/view/'.$nominee_id);
-        else:
-            return redirect()->route('admin/login');
-        endif;
+       
     }
 }

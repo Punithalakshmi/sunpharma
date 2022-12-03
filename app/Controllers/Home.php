@@ -7,12 +7,7 @@ class Home extends BaseController
     public function index()
     {
         
-        $userdata = $this->session->get('fuserdata');
-
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
         
-        $data['userdata'] = $userdata;
 
         $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
 
@@ -59,7 +54,7 @@ class Home extends BaseController
          }
         }
 
-        $data['currentNominations'] = $currentNominations;
+        $this->data['currentNominations'] = $currentNominations;
 
         //get latest winners of research awards
         $researchAwards = $this->awardsModel->getLatestWinnersofResearchAwards()->getResultArray();
@@ -67,71 +62,44 @@ class Home extends BaseController
         //get latest winners of science scholars awards
         $scienceScholarAwards = $this->awardsModel->getLatestWinnersofScienceScholarAwards()->getResultArray();
 
-        $data['nominations'] = $nominationArr;
-        $data['latestWinnersOfResearchAwards'] = $researchAwards;
-        $data['latestWinnersOfScholarAwards'] = $scienceScholarAwards;
-        return  render('frontend/dashboard',$data);
+        $this->data['nominations'] = $nominationArr;
+        $this->data['latestWinnersOfResearchAwards'] = $researchAwards;
+        $this->data['latestWinnersOfScholarAwards'] = $scienceScholarAwards;
+        return  render('frontend/dashboard',$this->data);
               
     }
 
     public function aboutus()
     {
 
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
-
-        $userdata = $this->session->get('fuserdata');
-        $data['userdata'] = $userdata;
-
-        return  render('frontend/mission',$data);
+        return  render('frontend/mission',$this->data);
               
     }
 
     public function annualActivities()
     {
 
-      $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
-       
-        $userdata = $this->session->get('fuserdata');
-        $data['userdata'] = $userdata;
-
-        return render('frontend/annual_activities',$data);
+        return render('frontend/annual_activities',$this->data);
    
     }
 
     public function nominationPreview()
     {
-      $uri = current_url(true);
-      $data['uri'] = $uri->getSegment(1); 
-       
-        $userdata = $this->session->get('fuserdata');
-        $data['userdata'] = $userdata;
-
-        return  render('frontend/nomination_preview',$data);
+      
+        return  render('frontend/nomination_preview',$this->data);
 
     }
 
     public function contact()
     {
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
-          
-        $userdata =$this->session->get('fuserdata');
-        $data['userdata'] = $userdata;
-
-        return render('frontend/contact',$data);
+       
+        return render('frontend/contact',$this->data);
         
     }
 
     public function research_awards()
     {
-      $uri = current_url(true);
-      $data['uri'] = $uri->getSegment(1); 
-   
-      $userdata = $this->session->get('fuserdata');
-      $data['userdata'] = $userdata;
-
+      
         $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
        
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
@@ -149,21 +117,15 @@ class Home extends BaseController
          }
         }
 
-        $data['currentNominations'] = $currentNominations;
+        $this->data['currentNominations'] = $currentNominations;
 
-        return render('frontend/research_awards',$data);
+        return render('frontend/research_awards',$this->data);
              
     }
 
     public function science_scholar_awards()
     {
 
-      $uri = current_url(true);
-      $data['uri'] = $uri->getSegment(1); 
-
-      
-      $data['userdata'] = $this->session->get('fuserdata');
-       
         $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
        
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
@@ -181,47 +143,28 @@ class Home extends BaseController
          }
         }
 
-        $data['currentNominations'] = $currentNominations;
+        $this->data['currentNominations'] = $currentNominations;
         
-        return render('frontend/science_scholar_awards',$data);
+        return render('frontend/science_scholar_awards',$this->data);
     }
 
     public function symposium()
     {
 
-      $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
-       
-        $userdata =$this->session->get('fuserdata');
-        $data['userdata'] = $userdata;
-
-        return  render('frontend/symposium',$data);
-               
+        return  render('frontend/symposium',$this->data);
     }
 
     public function annualforeign_scientist()
     {
 
-      $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
+        return  render('frontend/annualforeignscientist',$this->data);
        
-        $userdata = $this->session->get('fuserdata');
-        $data['userdata'] = $userdata;
-
-        return  render('frontend/annualforeignscientist',$data);
-               
     }
 
     public function roundtable()
     {
 
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
-    
-        $userdata = $this->session->get('fuserdata');
-        $data['userdata'] = $userdata;
-
-        return  render('frontend/roundtable',$data);
+        return  render('frontend/roundtable',$this->data);
                 
     }
 }

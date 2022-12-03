@@ -18,18 +18,13 @@ class Awards extends BaseController
     
         $view = \Config\Services::renderer();
 
-        $userdata      = $this->session->get('userdata');
-        
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
 
             $category      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
             $year          = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
 
             //get categories lists
-            $data['categories']   = $this->categoryModel->getListsOfCategories();
-           //$data['categories'] = $getCategoryLists->getResultArray();
+            $this->data['categories']   = $this->categoryModel->getListsOfCategories();
+           //$this->data['categories'] = $getCategoryLists->getResultArray();
 
             $awardsLists = $this->awardsModel->getLists($category,$year)->getResultArray();
            // echo "<pre>";
@@ -46,10 +41,10 @@ class Awards extends BaseController
                 }
             }
 
-            $data['lists'] = $awardsLists;
+            $this->data['lists'] = $awardsLists;
 
              if($request->isAJAX()) {
-                   $html = view('admin/awards/filter',$data,array('debug' => false));
+                   $html = view('admin/awards/filter',$this->data,array('debug' => false));
                     return $this->response->setJSON([
                         'status'            => 'success',
                         'data'              => $html
@@ -58,13 +53,10 @@ class Awards extends BaseController
              }
              else
              {
-                return view('_partials/header',$data)
-                    .view('admin/awards/list',$data)
-                    .view('_partials/footer');
+                return render('admin/awards/list',$this->data);
+                  ;
             }    
-        else:
-            return redirect()->route('admin/login');
-        endif;        
+           
     }
 
 
@@ -155,10 +147,10 @@ class Awards extends BaseController
     public function getJuryListsByNominee($nominee_id = '')
     {
   
-        $data['juries'] = $this->ratingModel->getRatingByJury($nominee_id)->getResultArray();
+        $this->data['juries'] = $this->ratingModel->getRatingByJury($nominee_id)->getResultArray();
 
         if($this->request->isAJAX()) {
-            $html = view('admin/awards/juryLists',$data,array('debug' => false));
+            $html = view('admin/awards/juryLists',$this->data,array('debug' => false));
              return $this->response->setJSON([
                  'status'            => 'success',
                  'html'              => $html

@@ -7,26 +7,14 @@ class EventRegistration extends BaseController
     public function index()
     {
         
-        $userdata = $this->session->get('fuserdata');
 
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
-        
-        $data['userdata'] = $userdata;
-
-         $data['editdata'] = array();
-        return  render('frontend/event',$data);
-              
+        return  render('frontend/event',$this->data);
+            
     }
 
     public function event()
     {
 
-        helper(array('form', 'url'));
-        $userdata  = $this->session->get('fuserdata');
-        $uri       = current_url(true);
-    
-        $data['uri'] = $uri->getSegment(1);
 
         $this->validation = $this->validate($this->validation_rules());
 
@@ -36,7 +24,7 @@ class EventRegistration extends BaseController
             
         $registerationNo = 'SPSFN-REG-'.$ct;
 
-        $data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
+        $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
         
         if($this->validation) {
 
@@ -84,16 +72,14 @@ class EventRegistration extends BaseController
             $editdata['event_type']       = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
             
             if($this->request->getPost())
-              $data['validation'] = $this->validator;
+              $this->data['validation'] = $this->validator;
 
-            $data['editdata'] = $editdata;
-            $data['userdata'] = $userdata;
+            $this->data['editdata'] = $editdata;
+            $this->data['userdata'] = $userdata;
             
-            return  render('frontend/event_registeration',$data);
+            return  render('frontend/event_registeration',$this->data);
                                       
         }
-
-
 
     }
 
@@ -136,8 +122,8 @@ class EventRegistration extends BaseController
         $message .= "<br/>";
         $message .= "Sunpharma Science Foundation Team";
        
-        $data['content'] = $message;
-        $html = view('email/mail',$data,array('debug' => false));
+        $this->data['content'] = $message;
+        $html = view('email/mail',$this->data,array('debug' => false));
 
         mail($email,$subject,$html,$header);
 

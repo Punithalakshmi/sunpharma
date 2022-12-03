@@ -8,10 +8,7 @@ class Dashboard extends BaseController
 {
     public function index()
     {
-       
-        $data=[];
-        return render('admin/home',$data);
-            
+        return render('admin/home',$this->data);  
     }
 
 }

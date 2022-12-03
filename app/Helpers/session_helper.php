@@ -14,14 +14,17 @@ if ( ! function_exists('getSessionData'))
 {
     function getSessionData(string $name = '')
     {
+       
         $session = session();
         if($name != ''){
           $session->get($name);
         }
         else
         {
-            return ($session->get('userdaa'))?$session->get('userdata'):$session->get('fuserdata');
+            return $sessData = ($session->get('userdata'))?$session->get('userdata'):$session->get('fuserdata');
         }  
+
+       // print_r($session->get('userdaa')); 
     }
 }
 
@@ -32,6 +35,7 @@ if ( ! function_exists('getUserRole'))
     {
         
        $sessionData =  $this->getSessionData();
+       
        return $sessionData['role'];
     }
 }

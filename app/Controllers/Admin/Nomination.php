@@ -3,27 +3,14 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\NominationTypesModel;
-use App\Models\CategoryModel;
-use App\Models\RoleModel;
-
 
 class Nomination extends BaseController
 {
 
     public function index()
     {
-        $session = \Config\Services::session();
-
-        $userdata      = $session->get('userdata');
-        $nominationTypesModel = new NominationTypesModel();
-        $categoryModel        = new CategoryModel();
         
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
-
-            $nominationTypeLists = $nominationTypesModel->getListsOfNominations();
+            $nominationTypeLists = $this->nominationTypesModel->getListsOfNominations();
 
             foreach($nominationTypeLists as $ukey => $uvalue){
                 
@@ -56,59 +43,43 @@ class Nomination extends BaseController
 
              }
            
-            $data['lists'] = $nominationTypeLists;
+            $this->data['lists'] = $nominationTypeLists;
 
         
-            return view('_partials/header',$data)
-                .view('admin/nomination/list',$data)
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;        
+            return render('admin/nomination/list',$this->data);
+                
+              
     }
 
     public function add($id='')
     {
-        helper(array('form', 'url'));
-
-        $session = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-    
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
         
-        $data['userdata'] = $userdata;
-        $nominationTypesModel = new NominationTypesModel();
-        $categoryModel        = new CategoryModel();
-
-        $data['categories']  = $categoryModel->getListsOfCategories();
-
-        $data['main_categories'] = $this->awardsCategoryModel->getListsOfCategories();
-        
-        if(is_array($userdata) && count($userdata)):
+        $this->data['categories']  = $this->categoryModel->getListsOfCategories();
+        $this->data['main_categories'] = $this->awardsCategoryModel->getListsOfCategories();
+   
            
             if(!empty($id)){
-                $getUserData = $nominationTypesModel->getListsOfNominations($id);
+                $getUserData =  $this->nominationTypesModel->getListsOfNominations($id);
                 $edit_data   = $getUserData->getRowArray();
             }
             
-            if($request->getPost())
-               $id  = $request->getPost('id');
+            if($this->request->getPost())
+               $id  = $this->request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules());
-            if($validation) {
+            $this->validator = $this->validate($this->validation_rules());
+            if($this->validator) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $category      = $request->getPost('category');
-                    $main_category_id = $request->getPost('main_category_id');
-                    $start_date    = $request->getPost('start_date');
-                    $end_date      = $request->getPost('end_date');
-                   // $year          = $request->getPost('nomination_year');
-                    $status        = $request->getPost('status');
-                    $subject      = $request->getPost('subject');
-                    $title        = $request->getPost('title');
-                    $description  = $request->getPost('description');
+                    $category      = $this->request->getPost('category');
+                    $main_category_id = $this->request->getPost('main_category_id');
+                    $start_date    = $this->request->getPost('start_date');
+                    $end_date      = $this->request->getPost('end_date');
+                   // $year          = $this->request->getPost('nomination_year');
+                    $status        = $this->request->getPost('status');
+                    $subject      = $this->request->getPost('subject');
+                    $title        = $this->request->getPost('title');
+                    $description  = $this->request->getPost('description');
 
                     
                     $ins_data = array();
@@ -162,17 +133,17 @@ class Nomination extends BaseController
                     }
                
                     if(!empty($id)){
-                        $session->setFlashdata('msg', 'Nomination Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Nomination Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $userdata['login_id'];
-                        $nominationTypesModel->update(array("id" => $id),$ins_data);
+                        $this->nominationTypesModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
-                        $session->setFlashdata('msg', 'Nomination Added Successfully!');
+                        $this->session->setFlashdata('msg', 'Nomination Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  $userdata['login_id'];
-                        $nominationTypesModel->save($ins_data);
+                        $this->nominationTypesModel->save($ins_data);
                     } 
 
                     return redirect()->route('admin/nomination');
@@ -197,33 +168,29 @@ class Nomination extends BaseController
                 }
                 else
                 {
-                    $editdata['title']                = ($request->getPost('title'))?$request->getPost('title'):'';
-                    $editdata['subject']              = ($request->getPost('subject'))?$request->getPost('subject'):'';
-                    $editdata['description']          = ($request->getPost('description'))?$request->getPost('description'):'';
-                    $editdata['category']            = ($request->getPost('category'))?$request->getPost('category'):'';
-                    $editdata['main_category_id']       = ($request->getPost('main_category_id'))?$request->getPost('main_category_id'):'';
-                  //  $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
-                    $editdata['start_date']     = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
-                    $editdata['end_date']       = ($request->getPost('end_date'))?$request->getPost('end_date'):date("m/d/Y");
+                    $editdata['title']                = ($this->request->getPost('title'))?$this->request->getPost('title'):'';
+                    $editdata['subject']              = ($this->request->getPost('subject'))?$this->request->getPost('subject'):'';
+                    $editdata['description']          = ($this->request->getPost('description'))?$this->request->getPost('description'):'';
+                    $editdata['category']            = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                    $editdata['main_category_id']       = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
+                  //  $editdata['year']           = ($this->request->getPost('year'))?$this->request->getPost('year'):date("Y");
+                    $editdata['start_date']     = ($this->request->getPost('start_date'))?$this->request->getPost('start_date'):date("m/d/Y");
+                    $editdata['end_date']       = ($this->request->getPost('end_date'))?$this->request->getPost('end_date'):date("m/d/Y");
                     $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';
                     $editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
-                    $editdata['status']               = ($request->getPost('status'))?$request->getPost('status'):'0';
-                    $editdata['id']             = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['status']               = ($this->request->getPost('status'))?$this->request->getPost('status'):'0';
+                    $editdata['id']             = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                 }
 
-                  if($request->getPost())
-                    $data['validation'] = $this->validator;
+                  if($this->request->getPost())
+                    $this->data['validation'] = $this->validator;
 
 
-                    $data['editdata'] = $editdata;
-                    return view('_partials/header',$data)
-                        .view('admin/nomination/add',$data)
-                        .view('_partials/footer');
+                    $this->data['editdata'] = $editdata;
+                    return render('admin/nomination/add',$this->data);
+                       
             }       
-        else:
-            return redirect()->route('admin/login');
-        endif; 
-
+       
 
     }
 
@@ -231,8 +198,8 @@ class Nomination extends BaseController
     public function validation_rules()
     {
 
-        $validation_rules = array();
-        $validation_rules = array(
+        $this->validator_rules = array();
+        $this->validator_rules = array(
                                         "main_category_id" => array("label" => "Main Category",'rules' => 'required'),
                                         "category" => array("label" => "Category",'rules' => 'required'),
                                         "subject" => array("label" => "Subject",'rules' => 'required'),
@@ -241,24 +208,15 @@ class Nomination extends BaseController
                                         "status" => array("label" => "Status",'rules' => 'required')
         );
     
-        return $validation_rules;
+        return $this->validator_rules;
       
     }
 
     public function delete($id='')
     {
-        $nominationTypesModel = new NominationTypesModel();
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata'); 
-        $data['userdata'] = $userdata;
-
-        if(is_array($userdata) && count($userdata)):
+       
           $nominationTypesModel->delete(array("id" => $id));
           return redirect()->route('admin/nomination');
-        else:
-            return redirect()->route('admin/login');
-        endif;
     }
 
     

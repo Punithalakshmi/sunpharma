@@ -3,24 +3,13 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
+
 
 class Login extends BaseController
 {
     public function index()
     {
-       
-        $this->session->remove('userdata');
-
-        $data['userdata'] = '';
-     
-        if(empty($userdata)):
-            return view('_partials/header',$data)
-                .view('admin/login')
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/dashboard');
-        endif;
+        return view('admin/login',$this->data);
     }
 
     public function loginAuth()
@@ -32,6 +21,7 @@ class Login extends BaseController
         $result   = $this->userModel->Login($username, md5($password));
    
         if($result){
+            
             setSessionData('userdata',$result);
             return redirect()->to('admin/dashboard');
         }
@@ -65,7 +55,6 @@ class Login extends BaseController
     
     public function logout()
     {
-
         $this->session->remove('userdata');
         return redirect()->to('admin/login');
     }

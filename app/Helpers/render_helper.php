@@ -4,10 +4,12 @@ if ( ! function_exists('render'))
 {
     function render(string $name, array $data = [], array $options = [])
     {
-       $getRole = getSessionData(); 
-       print_r($getRole);
+       $getRole = getUserRole(); 
+       
+       $layoutPath = (isset($data['userdata']['role']) && $data['userdata']['role'] == 3)?'admin/layout/layout':'frontend/layout/frontend';
+
         return view(
-            'admin/layout/layout',
+            $layoutPath,
             [
                 'content' => view($name, $data, $options),
             ],

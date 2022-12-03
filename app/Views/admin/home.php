@@ -6,7 +6,8 @@
     </div>
     <!-- /top tiles -->
     <div id="dashboardsec">
-    <?php if($userdata['role'] == 3){ ?>
+    <?php //print_r($userdata); 
+    if($userdata['role'] == 3){ ?>
     <h1>Welcome to Sun Pharma Science Foundation Admin Panel</h1>
     <?php } ?>
 
