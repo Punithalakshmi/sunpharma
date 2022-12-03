@@ -31,10 +31,10 @@ class Login extends BaseController
         $password  = $this->request->getVar('password');
         
         $result   = $this->userModel->Login($username, md5($password));
-      //  print_r($result); die;
+   
         if($result){
-            $this->session->set($result);
-            return redirect()->route('admin/dashboard');
+            setSessionData('userdata',$result);
+            return redirect()->to('admin/dashboard');
         }
         else
         {
@@ -68,6 +68,6 @@ class Login extends BaseController
     {
 
         $this->session->remove('userdata');
-        return redirect()->route('admin/login');
+        return redirect()->to('admin/login');
     }
 }

@@ -9,10 +9,14 @@ class Auth implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // if user not logged in
-       
-        if(! session()->get('isLoggedIn')){
+        $sessionData = array();
+
+         if($sessionData)
+            $sessionData = (is_array(session()->get('fuserdata')))?session()->get('fuserdata'):session()->get('userdata');
+        print_r($sessionData); die;
+        if(count($sessionData) == 0 && !isset($sessionData['isLoggedIn'])){
             // then redirct to login page
-            return redirect()->to('/login'); 
+            return redirect()->to('/admin/login'); 
         }
     }
  
@@ -20,6 +24,6 @@ class Auth implements FilterInterface
  
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
+        
     }
 }

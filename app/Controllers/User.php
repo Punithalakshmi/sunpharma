@@ -57,7 +57,7 @@ class User extends BaseController
                             $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
                             $ses_data['nomination_type']   = $getNominationData['nomination_type'];
 
-                            $this->session->set($ses_data);
+                            setSessionData('fuserdata',$ses_data);
                             $redirect_route = 'view/'.$result['id'];
         
                            return redirect()->to($redirect_route);
@@ -66,7 +66,7 @@ class User extends BaseController
                         else
                         {
                             throw new \Exception('Password is incorrect.');
-                            return redirect()->to('/login');
+                            return redirect()->to('/admin/login');
                         }
                     }
                     else
@@ -83,7 +83,7 @@ class User extends BaseController
              
               return  render('frontend/login',$data);
         }
-        catch(Exception $e){
+        catch(\Exception $e){
             $this->session->setFlashdata($e->getMessage());
         }
        

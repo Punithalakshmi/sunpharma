@@ -40,7 +40,7 @@ class UserModel extends Model{
                 'login_email'       => $result->email,
                 'isLoggedIn'        => TRUE,
                 'role'              => $result->role,
-                'id'  => $result->id
+                'id'                => $result->id
             ];
             return $data;
         } else {
