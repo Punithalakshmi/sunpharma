@@ -2,7 +2,7 @@
  
 if ( ! function_exists('setSessionData'))
 {
-    function setSessionData(string $name, array $data = [])
+    function setSessionData(string $name = '', array $data = [])
     {
         $session = session();
         $session->set($name,$data);
@@ -12,7 +12,7 @@ if ( ! function_exists('setSessionData'))
 
 if ( ! function_exists('getSessionData'))
 {
-    function getSessionData(string $name)
+    function getSessionData(string $name = '')
     {
         $session = session();
         if($name != ''){
@@ -40,8 +40,8 @@ if ( ! function_exists('getLoggedInUsername'))
 {
     function getLoggedInUsername()
     {
-        $session = session();
-        $session->get($name);
+        $sessionData =  $this->getSessionData();
+        return $sessionData['firstname'];
     }
 }
 

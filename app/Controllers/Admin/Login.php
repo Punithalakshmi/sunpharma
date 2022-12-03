@@ -12,7 +12,6 @@ class Login extends BaseController
        
         $this->session->remove('userdata');
 
-        
         $data['userdata'] = '';
      
         if(empty($userdata)):

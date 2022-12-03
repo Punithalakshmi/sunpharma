@@ -2,11 +2,12 @@
  
 if ( ! function_exists('render'))
 {
-    function render(string $name, array $data = [], array $options = [],$layout_path='')
+    function render(string $name, array $data = [], array $options = [])
     {
-        
+       $getRole = getSessionData(); 
+       print_r($getRole);
         return view(
-            $layout_path,
+            'admin/layout/layout',
             [
                 'content' => view($name, $data, $options),
             ],

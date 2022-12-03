@@ -9,8 +9,8 @@ class Dashboard extends BaseController
     public function index()
     {
        
-        
-        return render('admin/home',$data,'admin/layout/layout');
+        $data=[];
+        return render('admin/home',$data);
             
     }
 
