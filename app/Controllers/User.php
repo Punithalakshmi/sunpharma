@@ -32,7 +32,7 @@ class User extends BaseController
 
                 $getExtendNominationEndDays = 0;
                if($getExtendNominationDate->getRowArray() > 0) {
-                $getExtendNominationDate = $getExtendNominationDate->getRowArray();
+                 $getExtendNominationDate = $getExtendNominationDate->getRowArray();
                  $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
                }  
 
