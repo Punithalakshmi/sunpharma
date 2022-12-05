@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['html','form','url','user','session','render'];
+    protected $helpers = ['html','form','url','user','session','render','security'];
 
     protected $session;
     //protected $request;
@@ -84,8 +84,10 @@ abstract class BaseController extends Controller
 
         $this->session     = \Config\Services::session();
         $this->validation  = \Config\Services::validation();
+      //  $this->security    = \Config\Services::security();
 
         $this->uri  = current_url(true);
+        $this->data['current_url'] = $this->uri;
         $this->data['uri'] = (base_url() == 'http://local.sunpharma.md')?$this->uri->getSegment(1):$this->uri->getSegment(3); 
         $this->data['userdata'] = getSessionData();
         $this->role     = getUserRole();

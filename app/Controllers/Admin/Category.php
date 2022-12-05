@@ -28,6 +28,7 @@ class Category extends BaseController
                $id  = $this->request->getPost('id');
                
             $this->validation = $this->validate($this->validation_rules());
+            
             if($this->validation) {
 
                 if($this->request->getPost()){
@@ -45,14 +46,14 @@ class Category extends BaseController
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Category Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->categoryModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
                         $this->session->setFlashdata('msg', 'Category Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
+                        $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                         $this->categoryModel->save($ins_data);
                     } 
 

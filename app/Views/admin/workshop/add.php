@@ -14,7 +14,7 @@
                     <br />
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/workshops/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
-                      
+                      <?= csrf_field(); ?>
                       
     
                       <div class="form-group">

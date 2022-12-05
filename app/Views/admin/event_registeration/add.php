@@ -14,7 +14,7 @@
                     <br />
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/eventregisteration/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
-                      
+                      <?= csrf_field(); ?>
                       <div class="clearfix"></div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Event</label>

@@ -80,7 +80,7 @@ class Nominee extends BaseController
 
             $up_data = array();
             $up_data['updated_date']  =  date("Y-m-d H:i:s");
-            $up_data['updated_id']    =  $userdata['login_id'];
+            $up_data['updated_id']    =  $this->data['userdata']['login_id'];
 
             $getUserData  = $this->userModel->getListsOfUsers($id);
             $getUserData  = $getUserData->getRowArray();
@@ -179,10 +179,9 @@ class Nominee extends BaseController
         $this->data['user']['category_name'] = $getNomineeCategory['name'];
         }
     
-        $edit_data  = $this->ratingModel->getRatingData($userdata['login_id'],$nominee_id)->getRowArray();
+        $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['login_id'],$nominee_id)->getRowArray();
         $this->validation = $this->validate($this->validation_rules());
 
-        $this->data['userdata'] = $userdata;
         $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
 
         $this->data['average_rating'] = $average_rating['avg_rating'];
@@ -201,14 +200,14 @@ class Nominee extends BaseController
                     $ins_data = array();
                     $ins_data['rating']       = $rating;
                     $ins_data['comments']     = $comment;
-                    $ins_data['jury_id']      = $userdata['login_id'];
+                    $ins_data['jury_id']      = $this->data['userdata']['login_id'];
                     $ins_data['nominee_id']   = $nominee_id;
                     $ins_data['is_rate_submitted'] = ($this->request->getPost('submit') && ($this->request->getPost('submit') == 'Save Draft'))?0:1; 
                     
                    
                     $this->session->setFlashdata('msg', 'Rated Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                    $ins_data['created_id']    =  $userdata['login_id'];
+                    $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                     $ratingModel->save($ins_data);
                      
 
@@ -252,7 +251,7 @@ class Nominee extends BaseController
             $ins_data = array();
             $ins_data['jury_id'] = $juryID;
             $ins_data['created_date'] = date("Y-m-d H:i:s");
-            $ins_data['created_id']   = $userdata['login_id'];
+            $ins_data['created_id']   = $this->data['userdata']['login_id'];
            foreach($nomineeArr as $nominee){
 
               $getAssignedJuryLists = $this->juryModel->checkIfAlreadyNominee($juryID,$nominee);
@@ -326,14 +325,14 @@ class Nominee extends BaseController
                 if(!empty($id) && $getExtend->getRowArray() > 0){
                     $this->session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
                     $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                    $ins_data['updated_id']    =  $userdata['login_id'];
+                    $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                     $this->extendModel->update(array("id" => $id),$ins_data);
                 }
                 else
                 {
                     $this->session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                    $ins_data['created_id']    =  $userdata['login_id'];
+                    $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                     $this->extendModel->save($ins_data);
                 } 
 

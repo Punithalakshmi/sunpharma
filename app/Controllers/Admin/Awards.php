@@ -43,7 +43,7 @@ class Awards extends BaseController
 
             $this->data['lists'] = $awardsLists;
 
-             if($request->isAJAX()) {
+             if($this->request->isAJAX()) {
                    $html = view('admin/awards/filter',$this->data,array('debug' => false));
                     return $this->response->setJSON([
                         'status'            => 'success',
@@ -54,7 +54,7 @@ class Awards extends BaseController
              else
              {
                 return render('admin/awards/list',$this->data);
-                  ;
+                
             }    
            
     }

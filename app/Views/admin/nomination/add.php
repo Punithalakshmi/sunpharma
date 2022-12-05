@@ -14,7 +14,7 @@
                     <br />
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/nomination/add" method="POST" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
-
+                      <?= csrf_field(); ?>
                           
                       <div class="clearfix"></div>
                       <div class="form-group">

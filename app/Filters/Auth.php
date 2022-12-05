@@ -13,10 +13,12 @@ class Auth implements FilterInterface
 
         $session = session();
     
-       if(count($sessionData) == 0)
+       if(count($sessionData) == 0) {
             $sessionData = ($session->get('fuserdata'))?$session->get('fuserdata'):$session->get('userdata');
-     
-        if(is_array($sessionData) && count($sessionData) == 0 && !isset($sessionData['isLoggedIn'])){
+        }
+      
+          //  print_r($sessionData); die;
+        if((is_array($sessionData) && count($sessionData) == 0 && !isset($sessionData['isLoggedIn'])) || empty($sessionData)){
             // then redirct to login page
             return redirect()->to('/admin/login'); 
         }

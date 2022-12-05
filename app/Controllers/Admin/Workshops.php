@@ -102,14 +102,14 @@ class Workshops extends BaseController
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Event Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->workshopModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
                         $this->session->setFlashdata('msg', 'Event Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
+                        $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                         $this->workshopModel->save($ins_data);
                     } 
 

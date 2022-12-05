@@ -63,14 +63,14 @@ class EventRegisteration extends BaseController
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Registeration Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->registerationModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
                         $this->session->setFlashdata('msg', 'Registeration Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
+                        $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                         $this->registerationModel->save($ins_data);
                     } 
 

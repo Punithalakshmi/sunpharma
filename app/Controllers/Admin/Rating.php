@@ -33,7 +33,7 @@ class Rating extends BaseController
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Rating Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->ratingModel->update(array("id" => $id),$ins_data);
                     }
                    

@@ -10,13 +10,21 @@ class User extends BaseController
 
         try
         {
-            if ($this->request->getMethod() == "post") {
+            if (strtolower($this->request->getMethod()) == "post") {  
+                
+             $this->validation->setRules($this->validation_rules());
+            
+                if(!$this->validation->withRequest($this->request)->run()) {
+                    $this->data['validation'] = $this->validation;
+                }
+                else
+                {  
 
                     $username   = $this->request->getVar('username');
                     $password   = $this->request->getVar('password');
             
                     $data       = $this->userModel->where('username', $username)->first();
-
+                    
                     if($data){
 
                         $pass = $data['password'];
@@ -60,28 +68,30 @@ class User extends BaseController
                             setSessionData('fuserdata',$ses_data);
                             $redirect_route = 'view/'.$result['id'];
         
-                           return redirect()->to($redirect_route);
+                            return redirect()->to($redirect_route);
                         
                         }
                         else
                         {
                             throw new \Exception('Password is incorrect.');
-                            return redirect()->to('/admin/login');
+                            return render('frontend/login',$this->data);
                         }
                     }
                     else
                     {
-                        
                         throw new \Exception('Username does not match.');
-                        return redirect()->to('/login');
+                        return render('frontend/login',$this->data);
                     }
-                      
+                }     
             }
-         
-              $uri = current_url(true);
-              $data['uri'] = (base_url() == 'http://local.sunpharma.md')?$uri->getSegment(1):$uri->getSegment(3);
-             
-              return  render('frontend/login',$data);
+            else
+            {
+                $editdata['username'] = ($this->request->getVar('username'))?$this->request->getVar('username'):"";
+                $editdata['password'] = ($this->request->getVar('password'))?$this->request->getVar('password'):"";
+                $this->data['editdata'] = $editdata;
+            }
+
+            return  render('frontend/login',$this->data);
         }
         catch(\Exception $e){
             $this->session->setFlashdata($e->getMessage());

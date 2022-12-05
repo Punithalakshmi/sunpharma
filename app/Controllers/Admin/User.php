@@ -47,7 +47,6 @@ class User extends BaseController
             
         $this->validation = $this->validate($this->validation_rules('user',$id));
         
-        $this->data['userdata'] = $userdata;
         $this->data['roles']    = $this->roleModel->getListsOfRoles();
         
         
@@ -87,14 +86,14 @@ class User extends BaseController
                 if(!empty($id)){
                     $this->session->setFlashdata('msg', 'User Updated Successfully!');
                     $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                    $ins_data['updated_id']    =  $userdata['login_id'];
+                    $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                     $this->userModel->update(array("id" => $id),$ins_data);
                 }
                 else
                 {
                     $this->session->setFlashdata('msg', 'User Added Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                    $ins_data['created_id']    =  $userdata['login_id'];
+                    $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                     $this->userModel->save($ins_data);
                 } 
 
@@ -143,7 +142,7 @@ class User extends BaseController
 
                 $this->data['editdata'] = $editdata;
 
-                return render('admin/user/add',$this->data)l
+                return render('admin/user/add',$this->data);
          }       
        
     }
@@ -151,7 +150,7 @@ class User extends BaseController
     public function profile()
     {
 
-            $id = $userdata['login_id'];
+            $id = $$this->data['userdata']['login_id'];
             $getUserData = $this->userModel->getListsOfUsers($id);
             $edit_data   = $getUserData->getRowArray();
 
@@ -183,7 +182,7 @@ class User extends BaseController
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'User Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->userModel->update(array("id" => $id),$ins_data);
                     }
                     
@@ -224,6 +223,7 @@ class User extends BaseController
     public function changepassword($id='')
     {
       
+           
             $this->validation = $this->validate($this->validation_rules('change_password',$id));
             
             if($this->validation) {
@@ -241,7 +241,7 @@ class User extends BaseController
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Password Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
+                        $ins_data['updated_id']    = $this->data['userdata']['login_id'];
                         $this->userModel->update(array("id" => $id),$ins_data);
                     }
                     
