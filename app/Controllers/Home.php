@@ -114,12 +114,65 @@ class Home extends BaseController
 
     public function contact()
     {
-      $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
         
         $userdata =$this->session->get('fuserdata');
         $data['userdata'] = $userdata;
+        $editdata = array();
 
+        if(strtolower($this->request->getMethod()) == 'post'){
+          
+              $this->validation = $this->validate($this->validation_rules());
+
+              if(!$this->validation){
+                  $data['validation'] = $this->validation;
+              } 
+              else
+              {
+
+                  $name         = $this->request->getVar('contact_name');
+                  $email        = $this->request->getVar('email');
+                  $message      = $this->request->getVar('message');
+                  
+                  $ins_data = array();
+                  $ins_data['name'] = $name;
+                  $ins_data['email'] = $email;
+                  $ins_data['message'] = $message;
+                  $this->contactModel->save($ins_data);
+
+                  $admin_url = base_url()."/admin";
+                  $header  = '';
+                  $header .= "MIME-Version: 1.0\r\n";
+                  $header .= "Content-type: text/html\r\n";
+          
+                  $subject = " Contact - Sun Pharma Science Foundation ";
+                  $message  = "Dear ".$name.",";
+                  $message .= '<br/><br/>';
+                  $message .=  "Thank you for contacting us, we will get back to you!";
+                  $message .= "<br/><br/>";
+                
+                  $message .= "<br/><br/><br/>";
+                  $message .= "Thanks & Regards,";
+                  $message .= "<br/>";
+                  $message .= "Sunpharma Science Foundation Team";
+                
+                  $data['content'] = $message;
+                  $html = view('email/mail',$data,array('debug' => false));
+                  mail($email,$subject,$html,$header);
+              }
+              
+        }
+       
+        $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
+        $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
+        $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
+  
+
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1);  
+        $data['editdata'] = $editdata;
+      
         return render('frontend/contact',$data);
         
     }
@@ -223,5 +276,18 @@ class Home extends BaseController
 
         return  render('frontend/roundtable',$data);
                 
+    }
+
+    public function validation_rules()
+    {
+
+            $validation_rules = array();
+            $validation_rules = array(
+                                      "name" => array("label" => "Name",'rules' => 'required'),
+                                      "email" => array("label" => "Email",'rules' => 'required'),
+                                      "message" => array("label" => "Message",'rules' => 'required'),
+            ); 
+            return $validation_rules;
+      
     }
 }
