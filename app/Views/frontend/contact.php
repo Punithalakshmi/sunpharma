@@ -5,7 +5,15 @@
                     <h3 class="heading" style="color: #F7941E;">Contact Us</h3>
                 </div>
             </div>
+            <?php //if(isset($validation) && $validation->getErrors()) { print_r($validation->getErrors()); die; }?>
             <div class="row d-flex justify-content-center">
+                <div class="form-group md-3">
+                    <?php if(session()->getFlashdata('msg')):?>
+                    <div class="alert alert-success mt-2">
+                        <?= session()->getFlashdata('msg') ?>
+                    </div>
+                    <?php endif;?>
+                </div>
                 <div class="col-md-6 col-xl-4">
                     <div>
                         <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/contact">
@@ -45,6 +53,8 @@
                                     </div>
                                 <?php }?>
                             </div>
+                            <div class="clearfix"></div>
+                            <div class="g-recaptcha" data-sitekey="6Ldh61ojAAAAAAamaHiBZ5mAv702yCK9qbqUQQu3"></div>
                             <div class="clearfix"></div>
                             <div>
                                 <button class="btn btn-primary shadow d-block w-100" type="submit">Send</button>

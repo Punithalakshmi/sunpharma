@@ -123,43 +123,43 @@ class Home extends BaseController
 
         if(strtolower($this->request->getMethod()) == 'post'){
           
-              $this->validation = $this->validate($this->validation_rules());
-
-              if(!$this->validation){
+              $this->validation->setRules($this->validation_rules());
+                    
+              if(!$this->validation->withRequest($this->request)->run()) {
                   $data['validation'] = $this->validation;
-              } 
+              }
               else
               {
 
                   $name         = $this->request->getVar('contact_name');
                   $email        = $this->request->getVar('email');
                   $message      = $this->request->getVar('message');
-                  
-                  $ins_data = array();
-                  $ins_data['name'] = $name;
-                  $ins_data['email'] = $email;
-                  $ins_data['message'] = $message;
-                  $this->contactModel->save($ins_data);
 
-                  $admin_url = base_url()."/admin";
-                  $header  = '';
-                  $header .= "MIME-Version: 1.0\r\n";
-                  $header .= "Content-type: text/html\r\n";
-          
-                  $subject = " Contact - Sun Pharma Science Foundation ";
-                  $message  = "Dear ".$name.",";
-                  $message .= '<br/><br/>';
-                  $message .=  "Thank you for contacting us, we will get back to you!";
-                  $message .= "<br/><br/>";
+                  $recaptchaResponse = trim($this->request->getVar('g-recaptcha-response'));
+            
+                  $userIp=$this->request->getIPAddress();
                 
-                  $message .= "<br/><br/><br/>";
-                  $message .= "Thanks & Regards,";
-                  $message .= "<br/>";
-                  $message .= "Sunpharma Science Foundation Team";
-                
-                  $data['content'] = $message;
-                  $html = view('email/mail',$data,array('debug' => false));
-                  mail($email,$subject,$html,$header);
+                  //captcha verification
+                  $captchaVerify = captchaVerification($recaptchaResponse,$userIp='');
+             
+                  if(isset($captchaVerify['success']) && $captchaVerify['success']){ 
+                   
+                    $ins_data = array();
+                    $ins_data['name'] = $name;
+                    $ins_data['email'] = $email;
+                    $ins_data['message'] = $message;
+                    $this->contactModel->save($ins_data);
+                    //send mail to contact person
+                    $this->sendMailtoContactUser($email,$name);
+
+                    //send mail to admin
+                    $this->sendMailtoAdmin($email,$name,$message);
+                    $this->session->setFlashdata('msg', 'Your contact request has been submitted successfully');
+                   }
+                   else
+                   {
+                    $this->session->setFlashdata('msg', 'Please verify Captcha!');
+                   }
               }
               
         }
@@ -283,11 +283,59 @@ class Home extends BaseController
 
             $validation_rules = array();
             $validation_rules = array(
-                                      "name" => array("label" => "Name",'rules' => 'required'),
-                                      "email" => array("label" => "Email",'rules' => 'required'),
+                                      "contact_name" => array("label" => "Name",'rules' => 'required|max_length[15]'),
+                                      "email" => array("label" => "Email",'rules' => 'required|valid_email'),
                                       "message" => array("label" => "Message",'rules' => 'required'),
             ); 
             return $validation_rules;
       
+    }
+
+    public function sendMailtoContactUser($email='',$name="")
+    {
+
+      $subject = " Contact - Sun Pharma Science Foundation ";
+      $message  = "Dear ".$name.",";
+      $message .= '<br/><br/>';
+      $message .=  "Thank you for reaching out.";
+      $message .= "<br/><br/>";
+      $message .= "We will get back to you!";
+      $message .= "<br/><br/><br/>";
+      $message .= "Thanks & Regards,";
+      $message .= "<br/>";
+      $message .= "Sunpharma Science Foundation Team";
+    
+      $data['content'] = $message;
+      $html = view('email/mail',$data,array('debug' => false));
+
+      sendMail($email,$subject,$html);
+
+    }
+
+    public function sendMailtoAdmin($email='',$name="",$message = '')
+    {
+
+      $adminEmail = 'punitha@izaaptech.in';
+      $subject = " New Contact Request - Sun Pharma Science Foundation ";
+      $message  = "Dear Admin,";
+      $message .= '<br/><br/>';
+      $message .=  "New Contact Request Submitted by <b>".ucfirst($name)."</b>";
+      $message .=  "<h2>Contact Request Submitted</h2>";
+      $message .= "<br/><br/>";
+      $message .= "<b>Name: </b>". $name;
+      $message .= "<br/>";
+      $message .= "<b>Email:</b> ". $email;
+      $message .= "<br/>";
+      $message .= "<b>Message:</b> ". $message;
+      $message .= "<br/>";
+      $message .= "Thanks & Regards,";
+      $message .= "<br/>";
+      $message .= "Sunpharma Science Foundation Team";
+    
+      $data['content'] = $message;
+      $html = view('email/mail',$data,array('debug' => false));
+
+      sendMail($adminEmail,$subject,$html);
+
     }
 }

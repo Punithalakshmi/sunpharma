@@ -29,7 +29,7 @@ Online Submission Of Nominations">
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js" integrity="sha512-DlXWqMPKer3hZZMFub5hMTfj9aMQTNDrf0P21WESBefJSwvJguz97HB007VuOEecCApSMf5SY7A7LkQwfGyVfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/framework/bootstrap.min.js" integrity="sha512-CwWsnPwntKMVNsVVCKIxPd4Ievk/YyAxt/yFNOLbs4JH3W6djpxYf2G50DtxLxFGHIbZxXeVDyjmTT8RCNp8DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;padding-bottom: 0!important;" <?php if($uri && $uri == 'login'): ?> class="authBg" <?php endif;?> >
