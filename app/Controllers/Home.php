@@ -127,6 +127,12 @@ class Home extends BaseController
                     
               if(!$this->validation->withRequest($this->request)->run()) {
                   $data['validation'] = $this->validation;
+                  
+                  $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
+                  $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
+                  $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
+            
+
               }
               else
               {
@@ -148,6 +154,7 @@ class Home extends BaseController
                     $ins_data['name'] = $name;
                     $ins_data['email'] = $email;
                     $ins_data['message'] = $message;
+                    $ins_data['created_date'] = date("Y-m-d");
                     $this->contactModel->save($ins_data);
                     //send mail to contact person
                     $this->sendMailtoContactUser($email,$name);
@@ -163,12 +170,16 @@ class Home extends BaseController
               }
               
         }
-       
-        $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
-        $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
-        $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
-  
+        else
+        {
+          
+          $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
+          $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
+          $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
+    
 
+        }
+       
         $uri = current_url(true);
         $data['uri'] = $uri->getSegment(1);  
         $data['editdata'] = $editdata;
@@ -312,7 +323,7 @@ class Home extends BaseController
 
     }
 
-    public function sendMailtoAdmin($email='',$name="",$message = '')
+    public function sendMailtoAdmin($email='',$name="",$msg = '')
     {
 
       $adminEmail = 'punitha@izaaptech.in';
@@ -326,7 +337,7 @@ class Home extends BaseController
       $message .= "<br/>";
       $message .= "<b>Email:</b> ". $email;
       $message .= "<br/>";
-      $message .= "<b>Message:</b> ". $message;
+      $message .= "<b>Message:</b> ". $msg;
       $message .= "<br/>";
       $message .= "Thanks & Regards,";
       $message .= "<br/>";

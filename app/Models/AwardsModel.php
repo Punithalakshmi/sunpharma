@@ -13,13 +13,14 @@ class AwardsModel extends Model{
         'updated_id',
         'updated_date',
         'jury_id',
-        'comments'
+        'comments',
+        'name'
     ];
 
     public function getLists($category='',$year='')
     {
         $builder = $this->table('category');
-        $builder->select('category.name as category_name,SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,nominee_details.nominator_photo');
+        $builder->select('category.name as category_name,SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,nominee_details.nominator_photo,ratings.nominee_id');
         $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
@@ -39,7 +40,7 @@ class AwardsModel extends Model{
     {
 
         $builder = $this->table('category');
-        $builder->select('category.name as category_name,SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,nominee_details.nominator_photo,users.address');
+        $builder->select('category.name as category_name,SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,nominee_details.nominator_photo,users.address,ratings.nominee_id');
         $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
@@ -57,7 +58,7 @@ class AwardsModel extends Model{
     public function getLatestWinnersofResearchAwards()
     {
         $builder = $this->table('category');
-        $builder->select('category.name as category_name,SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,nominee_details.nominator_photo,users.address');
+        $builder->select('category.name as category_name,SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,nominee_details.nominator_photo,users.address,ratings.nominee_id');
         $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');

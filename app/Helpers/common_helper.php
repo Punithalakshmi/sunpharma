@@ -32,7 +32,7 @@ if ( ! function_exists('captchaVerification'))
         function sendMail($to='',$subject = '',$html = '')
         {
 
-            $header = $this->mailHeader(); 
+            $header = mailHeader(); 
  
             
             mail($to,$subject,$html,$header);
