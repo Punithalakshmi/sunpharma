@@ -103,7 +103,29 @@ class User extends BaseController
 
     public function forget_password()
     {
-        return  render('frontend/forget_password');
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
+
+        if(strtolower($this->request->getMethod()) == 'post'){
+          
+            $this->validation->setRules($this->validation_rules());
+                  
+            if(!$this->validation->withRequest($this->request)->run()) {
+                $data['validation'] = $this->validation;
+            }
+            else
+            {
+                $email  = $this->request->getVar('email');  
+                
+                $userData = $this->userModel->where("email",$email);
+            }
+            
+        }    
+
+        $editdata['email'] = ($this->request->getVar('email'))?$this->request->getVar('email'):"";
+
+        $data['editdata'] = $editdata;
+        return  render('frontend/forget_password',$data);
     }
 
     public function reset_password()
@@ -139,7 +161,6 @@ class User extends BaseController
     public function sendMail()
     {
 
-   
         $header  = '';
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
@@ -171,6 +192,17 @@ class User extends BaseController
             $existsOrNot = $this->userModel->uniqueValidation();
           
         }
+    }
+
+    public function validation_rules()
+    {
+
+            $validation_rules = array();
+            $validation_rules = array(
+                                      "email" => array("label" => "Email",'rules' => 'required|valid_email')
+            ); 
+            return $validation_rules;
+      
     }
 
 }    

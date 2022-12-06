@@ -373,7 +373,6 @@
                           <!-- <td>
                           <a href="<?//base_url().'/admin/rating/add/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                           <a href="<?//base_url().'/admin/rating/delete/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                           
                           </td> -->
                         </tr>
                         <?php endforeach;

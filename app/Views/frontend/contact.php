@@ -5,14 +5,60 @@
                     <h3 class="heading" style="color: #F7941E;">Contact Us</h3>
                 </div>
             </div>
+            <?php //if(isset($validation) && $validation->getErrors()) { print_r($validation->getErrors()); die; }?>
             <div class="row d-flex justify-content-center">
+                <div class="form-group md-3">
+                    <?php if(session()->getFlashdata('msg')):?>
+                    <div class="alert alert-success mt-2">
+                        <?= session()->getFlashdata('msg') ?>
+                    </div>
+                    <?php endif;?>
+                </div>
                 <div class="col-md-6 col-xl-4">
                     <div>
-                        <form class="p-3 p-xl-4" method="post">
-                            <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name" required=""></div>
-                            <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email" required=""></div>
-                            <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message"></textarea></div>
-                            <div><button class="btn btn-primary shadow d-block w-100" type="submit">Send </button></div>
+                        <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/contact">
+                            <div class="mb-3">
+                                <input class="form-control" type="text" id="name-1" name="contact_name" placeholder="Name" value="<?php echo set_value('contact_name',$editdata['contact_name']);?>">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group md-3">
+                            <?php if(isset($validation) && $validation->getError('contact_name')) {?>
+                                <div class='alert alert-danger mt-2'>
+                                <?= $error = $validation->getError('contact_name'); ?>
+                                    </div>
+                                <?php }?>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="mb-3">
+                                <input class="form-control" type="email" id="email-1" name="email" placeholder="Email" value="<?php echo set_value('email',$editdata['email']);?>"></div>
+                                <div class="clearfix"></div>
+                            <div class="form-group md-3">
+                            <?php if(isset($validation) && $validation->getError('email')) {?>
+                                <div class='alert alert-danger mt-2'>
+                                <?= $error = $validation->getError('email'); ?>
+                                    </div>
+                                <?php }?>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="message-1" name="message" rows="3"  oninput="auto_grow(this)" placeholder="Message">
+                                    <?=$editdata['message'];?>
+                                </textarea>
+                                </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group md-3">
+                            <?php if(isset($validation) && $validation->getError('message')) {?>
+                                <div class='alert alert-danger mt-2'>
+                                <?= $error = $validation->getError('message'); ?>
+                                    </div>
+                                <?php }?>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="g-recaptcha" data-sitekey="6Ldh61ojAAAAAAamaHiBZ5mAv702yCK9qbqUQQu3"></div>
+                            <div class="clearfix"></div>
+                            <div>
+                                <button class="btn btn-primary shadow d-block w-100" type="submit">Send</button>
+                              </div>
                         </form>
                     </div>
                 </div>

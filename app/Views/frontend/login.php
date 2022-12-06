@@ -18,8 +18,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                  <a onclick="history.back()" href="#"><u>Back</u></a>
-                </div>
+                          <a  href="<?=base_url();?>/forget_password"><u>Forget Password</u></a>
+                          <a onclick="history.back()" href="#"><u>Back</u></a>
+                 </div>
             </div>
         </div>
     </form>
