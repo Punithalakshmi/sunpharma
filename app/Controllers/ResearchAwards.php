@@ -11,18 +11,17 @@ class ResearchAwards extends BaseController
        
         $data['userdata'] = $this->session->get('fuserdata');
         
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-       
+        $nominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
+   
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
         $currentDate = strtotime(date('Y-m-d'));
         foreach($nominationLists as $nkey => $nvalue){
             $endDate = strtotime($nvalue['end_date']);
           if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
+            if($nvalue['main_category_id'] == 1){
               $currentNominations['research_awards'] = 'yes';
             }
-            else
-            {
+            if($nvalue['main_category_id'] == 2){
               $currentNominations['science_scholars_awards'] = 'yes';
             }
          }

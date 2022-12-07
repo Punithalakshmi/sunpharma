@@ -2,7 +2,10 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add Event</h3>
+                <h3>Add/Modify Event</h3>
+              </div>
+              <div class="title_right">
+                <a href="<?=base_url();?>/admin/workshops"><h3 class="btn btn-secondary">BACK</h3></a>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -15,8 +18,6 @@
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/workshops/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       
-                      
-    
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Firstname <span class="required">*</span>
                         </label>

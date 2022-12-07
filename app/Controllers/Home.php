@@ -14,14 +14,14 @@ class Home extends BaseController
         
         $data['userdata'] = $userdata;
 
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-
         $categoryNominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
      
         $eventLists = $this->workshopModel->getActiveEvents()->getResultArray();
 
         $nominationArr = array();
-        
+
+        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+   
         $current_date = strtotime(date("Y-m-d"));
         foreach($eventLists as $ekey => $evalue) {
          
@@ -36,28 +36,21 @@ class Home extends BaseController
           $categoryDt =  $this->awardsCategoryModel->getListsOfCategories($evalue['main_category_id'])->getRowArray();
           $categoryNominationLists[$ekey]['category'] = $categoryDt['name'];
           $categoryNominationLists[$ekey]['category_type'] =  'awards';
+
+          if($categoryDt['name'] == 'Research Awards'){
+            $currentNominations['research_awards'] = 'yes';
+          }
+
+          if($categoryDt['name'] == 'Science Scholars Awards'){
+            $currentNominations['science_scholars_awards'] = 'yes';
+          }
+
           $end_date     = strtotime($evalue['end_date']);
           if($end_date > $current_date): 
             array_push($nominationArr,$categoryNominationLists[$ekey]);
           endif;  
         }
     
-     
-        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
-
-        $currentDate = strtotime(date('Y-m-d'));
-        foreach($nominationLists as $nkey => $nvalue){
-            $endDate = strtotime($nvalue['end_date']);
-          if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
-              $currentNominations['research_awards'] = 'yes';
-            }
-            else
-            {
-              $currentNominations['science_scholars_awards'] = 'yes';
-            }
-         }
-        }
 
         $data['currentNominations'] = $currentNominations;
 
@@ -196,22 +189,21 @@ class Home extends BaseController
       $userdata = $this->session->get('fuserdata');
       $data['userdata'] = $userdata;
 
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-       
-        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
-        $currentDate = strtotime(date('Y-m-d'));
-        foreach($nominationLists as $nkey => $nvalue){
-            $endDate = strtotime($nvalue['end_date']);
-          if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
-              $currentNominations['research_awards'] = 'yes';
-            }
-            else
-            {
-              $currentNominations['science_scholars_awards'] = 'yes';
-            }
-         }
-        }
+      $nominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
+   
+      $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+      $currentDate = strtotime(date('Y-m-d'));
+      foreach($nominationLists as $nkey => $nvalue){
+          $endDate = strtotime($nvalue['end_date']);
+        if($endDate >= $currentDate)  {
+          if($nvalue['main_category_id'] == 1){
+            $currentNominations['research_awards'] = 'yes';
+          }
+          if($nvalue['main_category_id'] == 2){
+            $currentNominations['science_scholars_awards'] = 'yes';
+          }
+       }
+      }
 
         $data['currentNominations'] = $currentNominations;
 
@@ -228,23 +220,21 @@ class Home extends BaseController
       
       $data['userdata'] = $this->session->get('fuserdata');
        
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-       
-        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
-        $currentDate = strtotime(date('Y-m-d'));
-        foreach($nominationLists as $nkey => $nvalue){
-            $endDate = strtotime($nvalue['end_date']);
-          if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
-              $currentNominations['research_awards'] = 'yes';
-            }
-            else
-            {
-              $currentNominations['science_scholars_awards'] = 'yes';
-            }
-         }
-        }
-
+      $nominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
+   
+      $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+      $currentDate = strtotime(date('Y-m-d'));
+      foreach($nominationLists as $nkey => $nvalue){
+          $endDate = strtotime($nvalue['end_date']);
+        if($endDate >= $currentDate)  {
+          if($nvalue['main_category_id'] == 1){
+            $currentNominations['research_awards'] = 'yes';
+          }
+          if($nvalue['main_category_id'] == 2){
+            $currentNominations['science_scholars_awards'] = 'yes';
+          }
+       }
+      }
         $data['currentNominations'] = $currentNominations;
         
         return render('frontend/science_scholar_awards',$data);

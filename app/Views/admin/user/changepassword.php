@@ -4,6 +4,9 @@
               <div class="title_left">
                 <h3>Change Password</h3>
               </div>
+              <div class="title_right">
+                <a href="<?=base_url();?>/admin/user"><h3 class="btn btn-secondary">BACK</h3></a>
+              </div>
             </div>
             <div class="clearfix"></div>
             <div class="row">

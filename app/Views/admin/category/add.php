@@ -1,8 +1,12 @@
 <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3>Add Category</h3>
+              <div class="title_left">btn btn-secondary
+                <h3>Add/Modify Category</h3>
+              </div>
+              <div class="title_right">
+                <a href="<?=base_url();?>/admin/category">
+                <h3 class="btn btn-secondary">BACK</h3></a>
               </div>
             </div>
             <div class="clearfix"></div>
