@@ -4,6 +4,9 @@
               <div class="title_left">
                 <h3>Nomination Extend</h3>
               </div>
+              <div class="title_right">
+                <a href="<?=base_url();?>/admin/nominee"><h3 class="btn btn-secondary">BACK</h3></a>
+              </div>
             </div>
             <div class="clearfix"></div>
             <div class="row">
@@ -31,7 +34,6 @@
                       
                       <div class="clearfix"></div>
                       
-                
                       <div class="ln_solid"></div>
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

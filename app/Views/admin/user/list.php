@@ -8,7 +8,8 @@
             </div>
            
             <div class="actionbtns">
-                <a href="<?php echo base_url();?>/admin/user/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add User</a>
+                <a href="<?php echo base_url();?>/admin/user/add" class="btn btn-primary btn-xs">
+                <i class="fa fa-plus"></i> Add/Modify User</a>
            </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>

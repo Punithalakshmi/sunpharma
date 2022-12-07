@@ -8,6 +8,7 @@ class NominationModel extends Model{
     protected $allowedFields = [
         'nominee_id',
         'category_id',
+        'category',
         'citizenship',
         'nomination_type',
         'ongoing_course',

@@ -173,10 +173,11 @@ class Nominee extends BaseController
         $getUserData  = $this->userModel->getUserData($nominee_id);
         $this->data['user'] = $getUserData->getRowArray();
 
+     // print_r($data['user']); die;
         //get nominee category
-        if(isset($this->data['user']['category_id'])) {
-        $getNomineeCategory = $this->categoryModel->getListsOfCategories($this->data['user']['category_id'])->getRowArray();
-        $this->data['user']['category_name'] = $getNomineeCategory['name'];
+        if(isset($data['user']['category_id'])) {
+    //    $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
+        $data['user']['category_name'] =  $this->data['user']['category_name'];
         }
     
         $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['login_id'],$nominee_id)->getRowArray();

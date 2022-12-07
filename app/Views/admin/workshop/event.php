@@ -2,9 +2,13 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add Event</h3>
+                <h3>Add/Modify Event</h3>
+              </div>
+              <div class="title_right">
+                <a href="<?=base_url();?>/admin/workshops"><h3 class="btn btn-secondary">BACK</h3></a>
               </div>
             </div>
+          
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -17,7 +21,7 @@
                       <?= csrf_field(); ?>
                       <div class="clearfix"></div>
                       <div id="categorySelection" class="form-group" >
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Events</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Event</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <select class="select2_single form-control" name="category" tabindex="-1">
                               <option value=""></option>

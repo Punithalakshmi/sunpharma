@@ -32,7 +32,7 @@ if ( ! function_exists('captchaVerification'))
         function sendMail($to='',$subject = '',$html = '')
         {
 
-            $header = $this->mailHeader(); 
+            $header = mailHeader(); 
  
             
             mail($to,$subject,$html,$header);
@@ -51,4 +51,18 @@ if ( ! function_exists('captchaVerification'))
 
             return $header;
         }
-    }    
+    }
+    
+    
+    if ( ! function_exists('getNominationEndDate'))
+    {
+        function getNominationEndDate()
+        {
+            $header  = '';
+            $header .= "MIME-Version: 1.0\r\n";
+            $header .= "Content-type: text/html\r\n";
+
+            return $header;
+        }
+    }
+

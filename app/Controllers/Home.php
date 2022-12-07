@@ -9,14 +9,14 @@ class Home extends BaseController
         
         
 
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-
         $categoryNominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
      
         $eventLists = $this->workshopModel->getActiveEvents()->getResultArray();
 
         $nominationArr = array();
-        
+
+        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+   
         $current_date = strtotime(date("Y-m-d"));
         foreach($eventLists as $ekey => $evalue) {
          
@@ -31,28 +31,21 @@ class Home extends BaseController
           $categoryDt =  $this->awardsCategoryModel->getListsOfCategories($evalue['main_category_id'])->getRowArray();
           $categoryNominationLists[$ekey]['category'] = $categoryDt['name'];
           $categoryNominationLists[$ekey]['category_type'] =  'awards';
+
+          if($categoryDt['name'] == 'Research Awards'){
+            $currentNominations['research_awards'] = 'yes';
+          }
+
+          if($categoryDt['name'] == 'Science Scholars Awards'){
+            $currentNominations['science_scholars_awards'] = 'yes';
+          }
+
           $end_date     = strtotime($evalue['end_date']);
           if($end_date > $current_date): 
             array_push($nominationArr,$categoryNominationLists[$ekey]);
           endif;  
         }
     
-     
-        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
-
-        $currentDate = strtotime(date('Y-m-d'));
-        foreach($nominationLists as $nkey => $nvalue){
-            $endDate = strtotime($nvalue['end_date']);
-          if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
-              $currentNominations['research_awards'] = 'yes';
-            }
-            else
-            {
-              $currentNominations['science_scholars_awards'] = 'yes';
-            }
-         }
-        }
 
         $this->data['currentNominations'] = $currentNominations;
 
@@ -103,6 +96,12 @@ class Home extends BaseController
                     
               if(!$this->validation->withRequest($this->request)->run()) {
                   $data['validation'] = $this->validation;
+                  
+                  $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
+                  $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
+                  $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
+            
+
               }
               else
               {
@@ -124,6 +123,7 @@ class Home extends BaseController
                     $ins_data['name'] = $name;
                     $ins_data['email'] = $email;
                     $ins_data['message'] = $message;
+                    $ins_data['created_date'] = date("Y-m-d");
                     $this->contactModel->save($ins_data);
                     //send mail to contact person
                     $this->sendMailtoContactUser($email,$name);
@@ -139,14 +139,16 @@ class Home extends BaseController
               }
               
         }
-       
-        $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
-        $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
-        $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
-  
-
+        else
+        {
+          
+          $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
+          $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
+          $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
+    
+        }
    
-        $this->data['editdata'] = $editdata;
+          $this->data['editdata'] = $editdata;
       
         return render('frontend/contact',$this->data);
         
@@ -154,23 +156,23 @@ class Home extends BaseController
 
     public function research_awards()
     {
-      
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-       
-        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
-        $currentDate = strtotime(date('Y-m-d'));
-        foreach($nominationLists as $nkey => $nvalue){
-            $endDate = strtotime($nvalue['end_date']);
-          if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
-              $currentNominations['research_awards'] = 'yes';
-            }
-            else
-            {
-              $currentNominations['science_scholars_awards'] = 'yes';
-            }
-         }
-        }
+    
+     
+      $nominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
+   
+      $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+      $currentDate = strtotime(date('Y-m-d'));
+      foreach($nominationLists as $nkey => $nvalue){
+          $endDate = strtotime($nvalue['end_date']);
+        if($endDate >= $currentDate)  {
+          if($nvalue['main_category_id'] == 1){
+            $currentNominations['research_awards'] = 'yes';
+          }
+          if($nvalue['main_category_id'] == 2){
+            $currentNominations['science_scholars_awards'] = 'yes';
+          }
+       }
+      }
 
         $this->data['currentNominations'] = $currentNominations;
 
@@ -181,23 +183,23 @@ class Home extends BaseController
     public function science_scholar_awards()
     {
 
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
+    
        
-        $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
-        $currentDate = strtotime(date('Y-m-d'));
-        foreach($nominationLists as $nkey => $nvalue){
-            $endDate = strtotime($nvalue['end_date']);
-          if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
-              $currentNominations['research_awards'] = 'yes';
-            }
-            else
-            {
-              $currentNominations['science_scholars_awards'] = 'yes';
-            }
-         }
-        }
-
+      $nominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
+   
+      $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
+      $currentDate = strtotime(date('Y-m-d'));
+      foreach($nominationLists as $nkey => $nvalue){
+          $endDate = strtotime($nvalue['end_date']);
+        if($endDate >= $currentDate)  {
+          if($nvalue['main_category_id'] == 1){
+            $currentNominations['research_awards'] = 'yes';
+          }
+          if($nvalue['main_category_id'] == 2){
+            $currentNominations['science_scholars_awards'] = 'yes';
+          }
+       }
+      }
         $this->data['currentNominations'] = $currentNominations;
         
         return render('frontend/science_scholar_awards',$this->data);
@@ -257,7 +259,7 @@ class Home extends BaseController
 
     }
 
-    public function sendMailtoAdmin($email='',$name="",$message = '')
+    public function sendMailtoAdmin($email='',$name="",$msg = '')
     {
 
       $adminEmail = 'punitha@izaaptech.in';
@@ -271,7 +273,7 @@ class Home extends BaseController
       $message .= "<br/>";
       $message .= "<b>Email:</b> ". $email;
       $message .= "<br/>";
-      $message .= "<b>Message:</b> ". $message;
+      $message .= "<b>Message:</b> ". $msg;
       $message .= "<br/>";
       $message .= "Thanks & Regards,";
       $message .= "<br/>";
