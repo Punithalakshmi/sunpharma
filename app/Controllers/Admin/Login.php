@@ -33,15 +33,14 @@ class Login extends BaseController
                
                         $data      = $this->userModel->where('username', $username)->first();
 
-                        print_r($data); die;
-           // echo "<br/>";
+                       
                         if($data)
                         {
                             $pass = $data['password'];
                           
                             $authenticatePassword = password_verify(trim($password), $pass); 
 
-                            if($authenticatePassword){
+                            if($pass == md5($password)){
                              //   echo "ffdfffd";
                                 $ses_data = [
                                     'id' => $data['id'],
