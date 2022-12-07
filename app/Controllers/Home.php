@@ -146,7 +146,7 @@ class Home extends BaseController
   
 
    
-        $$this->data['editdata'] = $editdata;
+        $this->data['editdata'] = $editdata;
       
         return render('frontend/contact',$this->data);
         
