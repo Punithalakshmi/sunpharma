@@ -22,6 +22,7 @@ class Login extends BaseController
                 
                  $this->validation->setRules($this->validation_rules());
                  
+
                     if(!$this->validation->withRequest($this->request)->run()) {
                         $this->data['validation'] = $this->validation;
                     }
@@ -31,9 +32,12 @@ class Login extends BaseController
                         $password  = $this->request->getVar('password');
                
                         $data      = $this->userModel->where('username', $username)->first();
+
+                        print_r($data); die;
            // echo "<br/>";
-                        if($data){
-                           $pass = $data['password'];
+                        if($data)
+                        {
+                            $pass = $data['password'];
                           
                             $authenticatePassword = password_verify(trim($password), $pass); 
 

@@ -11,8 +11,10 @@ class User extends BaseController
         try
         {
             if (strtolower($this->request->getMethod()) == "post") {  
+
+              //  echo "dsdsdsds"; die;
                 
-             $this->validation->setRules($this->validation_rules());
+                $this->validation->setRules($this->validation_rules());
             
                 if(!$this->validation->withRequest($this->request)->run()) {
                     $this->data['validation'] = $this->validation;
@@ -24,13 +26,16 @@ class User extends BaseController
                     $password   = $this->request->getVar('password');
             
                     $data       = $this->userModel->where('username', $username)->first();
-                    
+                   // print_r($data); die;
                     if($data){
 
-                        $pass = $data['password'];
+                      echo  $pass = trim($data['password']);
+                      echo "<br />";
+                      echo md5($password);
                         $authenticatePassword = password_verify($password, $pass);
-
+                       //    echo $authenticatePassword; die;
                         if($authenticatePassword){
+                            echo "Dddd"; die;
                             $ses_data = [
                                 'id' => $data['id'],
                                 'name' => $data['name'],
@@ -73,13 +78,13 @@ class User extends BaseController
                         }
                         else
                         {
-                            throw new \Exception('Password is incorrect.');
+                           // throw new \Exception('Password is incorrect.');
                             return render('frontend/login',$this->data);
                         }
                     }
                     else
                     {
-                        throw new \Exception('Username does not match.');
+                        //throw new \Exception('Username does not match.');
                         return render('frontend/login',$this->data);
                     }
                 }     
@@ -194,12 +199,24 @@ class User extends BaseController
         }
     }
 
-    public function validation_rules()
+    public function forgot_password_validation_rules()
     {
 
             $validation_rules = array();
             $validation_rules = array(
                                       "email" => array("label" => "Email",'rules' => 'required|valid_email')
+            ); 
+            return $validation_rules;
+      
+    }
+
+    public function validation_rules()
+    {
+
+            $validation_rules = array();
+            $validation_rules = array(
+                                      "username" => array("label" => "Username",'rules' => 'required'),
+                                      "password" => array("label" => "Password",'rules' => 'trim|required')
             ); 
             return $validation_rules;
       
