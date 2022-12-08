@@ -7,6 +7,7 @@ class NominationTypesModel extends Model{
     protected $table = 'nominations';
     
     protected $allowedFields = [
+        'main_category_id',
         'category_id',
         'year',
         'start_date',

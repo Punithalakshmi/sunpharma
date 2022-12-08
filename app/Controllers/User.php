@@ -13,7 +13,7 @@ class User extends BaseController
               $username   = $this->request->getPost('username');
               $password   = $this->request->getPost('password');
        
-              $result   = $this->userModel->Login($username, md5($password));
+              $result   = $this->userModel->fLogin($username, md5($password));
               
              if(!$result) {
                  $this->session->setFlashdata('msg', 'Invalid Credentials');
@@ -32,7 +32,7 @@ class User extends BaseController
 
                 $getExtendNominationEndDays = 0;
                if($getExtendNominationDate->getRowArray() > 0) {
-                $getExtendNominationDate = $getExtendNominationDate->getRowArray();
+                 $getExtendNominationDate = $getExtendNominationDate->getRowArray();
                  $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
                }  
 
@@ -54,7 +54,7 @@ class User extends BaseController
         }
        
             $uri = current_url(true);
-           $data['uri'] = $uri->getSegment(1);  
+            $data['uri'] = $uri->getSegment(1);  
            
             return  render('frontend/login',$data);
 
@@ -63,7 +63,29 @@ class User extends BaseController
 
     public function forget_password()
     {
-        return  render('frontend/forget_password');
+        $uri = current_url(true);
+        $data['uri'] = $uri->getSegment(1); 
+
+        if(strtolower($this->request->getMethod()) == 'post'){
+          
+            $this->validation->setRules($this->validation_rules());
+                  
+            if(!$this->validation->withRequest($this->request)->run()) {
+                $data['validation'] = $this->validation;
+            }
+            else
+            {
+                $email  = $this->request->getVar('email');  
+                
+                $userData = $this->userModel->where("email",$email);
+            }
+            
+        }    
+
+        $editdata['email'] = ($this->request->getVar('email'))?$this->request->getVar('email'):"";
+
+        $data['editdata'] = $editdata;
+        return  render('frontend/forget_password',$data);
     }
 
     public function reset_password()
@@ -99,7 +121,6 @@ class User extends BaseController
     public function sendMail()
     {
 
-   
         $header  = '';
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
@@ -113,9 +134,10 @@ class User extends BaseController
         $message .= "<br/>";
         $message .= "Thanks & Regards,";
         $message .= "Sunpharma Team";
-        $html = view('email/mail',array(),array('debug' => false));
 
-        mail("punitha@izaaptech.in",$subject,$html,$header);
+        //$html = view('email/mail',array(),array('debug' => false));
+         
+        mail("punitha@izaaptech.in",$subject,'Testing',$header);
 
     }
 
@@ -130,6 +152,17 @@ class User extends BaseController
             $existsOrNot = $this->userModel->uniqueValidation();
           
         }
+    }
+
+    public function validation_rules()
+    {
+
+            $validation_rules = array();
+            $validation_rules = array(
+                                      "email" => array("label" => "Email",'rules' => 'required|valid_email')
+            ); 
+            return $validation_rules;
+      
     }
 
 }    

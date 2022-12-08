@@ -24,7 +24,8 @@ class UserModel extends Model{
         'original_password',
         'status',
         'active',
-        'is_rejected'
+        'is_rejected',
+        'nomination_end_date'
     ];
 
     public function Login($username, $password) {
@@ -52,7 +53,7 @@ class UserModel extends Model{
     public function fLogin($username, $password) {
         $result = $this->db
                         ->table($this->table)
-                        ->where(array("email" => $username, "password" => $password))
+                        ->where(array("username" => $username, "password" => $password))
                         ->get()
                         ->getRow();
         if($result) {
@@ -82,7 +83,7 @@ class UserModel extends Model{
     public function getUserData($id='')
     {
         $builder = $this->table('users');
-        $builder->select('users.*,users.id as user_id,nominee_details.*,nominee_details.id as nominee_detail_id');
+        $builder->select('users.*,users.id as user_id,nominee_details.*,nominee_details.id as nominee_detail_id,nominee_details.category as category_name');
         $builder->join('nominee_details','nominee_details.nominee_id = users.id');
         $builder->where("users.role",'2');
         $builder->where("users.id",$id);
@@ -107,9 +108,8 @@ class UserModel extends Model{
     public function getListsNominations()
     {
         $builder = $this->table('users');
-        $builder->select('users.*,nominations.end_date,category.name as category_name');
+        $builder->select('users.*,nominations.end_date,nominee_details.category as category_name');
         $builder->join('nominee_details','nominee_details.nominee_id = users.id');
-        $builder->join('category','category.id = nominee_details.category_id');
         $builder->join('nominations','nominations.category_id = category.id');
         $builder->where("users.role",'2');
         $builder->where("users.status",'Approved');

@@ -55,9 +55,8 @@ class NomineeModel extends Model{
     public function getNomineeInfo($id='')
     {
         $builder = $this->table('users');
-        $builder->select('users.*,nominee_details.*,users.id as user_id,category.name as category_name');
+        $builder->select('users.*,nominee_details.*,users.id as user_id');
         $builder->join('nominee_details', 'nominee_details.nominee_id = users.id AND users.role="2"');
-        $builder->join('category', 'nominee_details.category_id = category.id','right');
         $builder->where("nominee_details.nominee_id",$id);
         return $query = $builder->get();
     }

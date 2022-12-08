@@ -43,6 +43,7 @@ $routes->get('roundtable', 'Home::roundtable');
 $routes->get('annualforeign_scientist', 'Home::annualforeign_scientist');
 $routes->get('symposium', 'Home::symposium');
 $routes->get('contact', 'Home::contact');
+$routes->post('contact', 'Home::contact');
 $routes->get('research_awards','ResearchAwards::index');
 $routes->get('directory_research_awardees','DirectoryResearchAwardees::index');
 $routes->get('special_awards','SpecialAwards::index');

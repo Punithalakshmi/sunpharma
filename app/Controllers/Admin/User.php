@@ -310,7 +310,7 @@ class User extends BaseController
                     $ins_data = array();
                     $ins_data['password']  = md5($newPassword);
 
-                    $userData = $userModel->getListsOfUsers($id);
+                    $userData = $userModel->getListsOfUsers($id)->getRowArray();
                     
                     if(!empty($id)){
                         $session->setFlashdata('msg', 'Password Updated Successfully!');
@@ -319,7 +319,8 @@ class User extends BaseController
                         $userModel->update(array("id" => $id),$ins_data);
                     }
                     
-                    $this->sendMail($userData['email'],$newPassword);
+                   if(isset($userData['email']) && !empty($userData['email'])) 
+                      $this->sendMail($userData['email'],$newPassword);
 
                     return redirect()->route('admin/user');
                 }

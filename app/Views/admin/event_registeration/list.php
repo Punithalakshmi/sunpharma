@@ -9,7 +9,7 @@
            
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/eventregisteration/add" class="btn btn-primary btn-xs">
-                   <i class="fa fa-plus"></i>Add Event Registration
+                   <i class="fa fa-plus"></i>Add/Modify Registration
                 </a>
            </div>
                 
@@ -35,7 +35,6 @@
                           <th>Lastname</th>
                           <th>Email</th>
                           <th>Phone</th>
-                          <!-- <th>Registration No</th> -->
                           <th>Registration No</th>
                           <th>Action</th>
                         </tr>

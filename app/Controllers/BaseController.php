@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['html','form','url'];
+    protected $helpers = ['html','form','url','common'];
 
     protected $session;
     //protected $request;
@@ -53,6 +53,7 @@ abstract class BaseController extends Controller
     public $roleModel;
     public $workshopModel;
     public $extendModel;
+    public $awardsCategoryModel;
    
     /**
      * Constructor.
@@ -77,6 +78,8 @@ abstract class BaseController extends Controller
         $this->roleModel            = model('App\Models\RoleModel');
         $this->workshopModel        = model('App\Models\WorkshopModel');
         $this->extendModel          = model('App\Models\ExtendModel');
+        $this->awardsCategoryModel  = model('App\Models\AwardsCategoryModel');
+        $this->contactModel         = model('App\Models\ContactModel');
 
         $this->session     = \Config\Services::session();
       //  $this->request     = \Config\Services::request();

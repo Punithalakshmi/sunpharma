@@ -8,7 +8,8 @@
             </div>
            
             <div class="actionbtns">
-                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add New Award</a>
+                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs">
+                <i class="fa fa-plus"></i> Add/Modify Award</a>
            </div>
           
             <div class="clearfix"></div>
@@ -27,8 +28,9 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Category Name</th>
-                          <th>Nomination Year</th>
+                          <th>Category</th>
+                          <th>Title</th>
+                          <th>Subject</th>
                           <th>Start Date</th>
                           <th>End Date</th>
                           <th>Action</th>
@@ -41,8 +43,10 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                          <td><?=$user['category_id'];?></td>
-                          <td><?=$user['year'];?></td>
+                          <td><?=$user['main_category_id'];?></td>
+                        
+                          <td><?=$user['title'];?></td>
+                          <td><?=$user['subject'];?></td>
                           <td><?=$user['start_date'];?></td>
                           <td><?=$user['end_date'];?></td>
                           <td>

@@ -30,11 +30,10 @@ class EventRegistration extends BaseController
 
         $this->validation = $this->validate($this->validation_rules());
 
-        $count = $this->registerationModel->CountAll();
-            
-        $ct = $count + 1;
-            
-        $registerationNo = 'SPSFN-REG-'.$ct;
+      
+        $registerationNo = $this->getRegisterationNo();
+
+        $data['event_categories']  = $this->workshopModel->getEventTypes()->getResultArray();
         
         if($this->validation) {
 
@@ -46,14 +45,18 @@ class EventRegistration extends BaseController
                 $phone                       = $this->request->getPost('phone');
                 $address                     = $this->request->getPost('address');
                 $registerationNo             = $this->request->getPost('registeration_no');
+                $event_type                  = $this->request->getPost('event_type');
                
+                $registerationNo = $this->getRegisterationNo();
+
                 $ins_data = array();
                 $ins_data['firstname']     = $firstname;
                 $ins_data['lastname']      = $lastname;
                 $ins_data['email']         = $email;
                 $ins_data['address']       = $address;
                 $ins_data['phone']         = $phone;
-                $ins_data['registeration_no'] = $registerationNo;
+                $ins_data['registeration_no'] = $registerationNo; 
+                $ins_data['event_type'] = $event_type;
                 
             
                 $this->session->setFlashdata('msg', 'Registeration Submitted Successfully!');
@@ -77,6 +80,7 @@ class EventRegistration extends BaseController
             $editdata['phone']            = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
             $editdata['address']          = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
             $editdata['registeration_no'] = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
+            $editdata['event_type']       = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
             
             if($this->request->getPost())
               $data['validation'] = $this->validator;
@@ -88,8 +92,6 @@ class EventRegistration extends BaseController
                                       
         }
 
-
-
     }
 
 
@@ -98,11 +100,12 @@ class EventRegistration extends BaseController
 
         $validation_rules = array();
         $validation_rules = array(
-                                        "firstname" => array("label" => "Firstname",'rules' => 'required'),
-                                        "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                        "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]'),
-                                        "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
-                                        "registeration_no" => array("label" => "Registration No",'rules' => 'required')
+                                    "firstname" => array("label" => "Firstname",'rules' => 'required'),
+                                    "lastname" => array("label" => "Lastname",'rules' => 'required'),
+                                    "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]'),
+                                    "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
+                                    "registeration_no" => array("label" => "Registration No",'rules' => 'required'),
+                                    "event_type" => array("label" => "Event Type",'rules' => 'required')
         ); 
 
         return $validation_rules;
@@ -122,7 +125,7 @@ class EventRegistration extends BaseController
         $subject  = "Event Registration - Sun Pharma Science Foundation ";
         $message  = "Hi ".ucfirst($name).",";
         $message .= '<br/><br/>';
-        $message .= 'Event Registration successfully registered.';
+        $message .= 'Your registration to this event is confirmed. ';
         $message .= "<br/><br/>";
         $message .= 'Registration No: '.$registerationNo;
         $message .= "<br/><br/>";
@@ -136,6 +139,13 @@ class EventRegistration extends BaseController
         mail($email,$subject,$html,$header);
 
 
+    }
+
+    public function getRegisterationNo()
+    {
+        $count = $this->registerationModel->CountAll(); 
+        $ct = $count + 1;  
+        return 'SPSFN-REG-'.$ct;
     }
 
     

@@ -1,64 +1,41 @@
- <!--Page Header Start-->
- <section class="page-header">
-            <div class="page-header-bg" style="background-image: url(<?=base_url();?>/frontend/assets/images/backgrounds/page-header-bg-login.jpg)">
-            </div>
-            <div class="page-header-shape-1"><img src="<?=base_url();?>/frontend/assets/images/shapes/page-header-shape-1.png" alt=""></div>
-            <div class="container">
-                <div class="page-header__inner">
-                    <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="/">Home</a></li>
-                        <li><span>/</span></li>
-                        <li>Forget Password</li>
-                    </ul>
-                    <h2>Forget Password</h2>
+<section class="py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="heading" style="color: #F7941E;">Forget Password</h3>
                 </div>
             </div>
-        </section>
-        <!--Page Header End-->
-
-         <!--Message One Start-->
-         <section class="message-one">
-            <div class="message-one-shape-1" style="background-image: url(<?=base_url();?>/frontend/assets/images/shapes/message-one-shape-1.png);"></div>
-            <div class="message-one-shape-2" style="background-image: url(<?=base_url();?>/frontend/assets/images/shapes/message-one-shape-2.png);"></div>
-            <div class="container">
-                <div class="section-title text-center">
-                    <div class="section-sub-title-box">
-                        <p class="section-sub-title">Please give your registered email id below:</p>
-                        <div class="section-title-shape-1">
-                            <img src="<?=base_url();?>/frontend/assets/images/shapes/section-title-shape-1.png" alt="">
-                        </div>
-                        <div class="section-title-shape-2">
-                            <img src="<?=base_url();?>/frontend/assets/images/shapes/section-title-shape-2.png" alt="">
-                        </div>
+            <?php //if(isset($validation) && $validation->getErrors()) { print_r($validation->getErrors()); die; }?>
+            <div class="row d-flex justify-content-center">
+                <div class="form-group md-3">
+                    <?php if(session()->getFlashdata('msg')):?>
+                    <div class="alert alert-success mt-2">
+                        <?= session()->getFlashdata('msg') ?>
                     </div>
-                    <h2 class="section-title__title">Forget Password</h2>
+                    <?php endif;?>
                 </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="message-one__form loginsec">
-                            <form action="<?=base_url();?>/frontend/assets/inc/sendemail.php" class="comment-one__form contact-form-validated" novalidate="novalidate">
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="get-insuracne-two__input-box">
-                                            <label><strong>Email</strong></label>
-                                            <input type="text" placeholder="Registered Email" name="email">
-                                        </div>
+                <div class="col-md-6 col-xl-4">
+                    <div>
+                        <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/forget_password">
+                            
+                            <div class="clearfix"></div>
+                            <div class="mb-3">
+                                <input class="form-control" type="email" id="email-1" name="email" placeholder="Email" value="<?php echo set_value('email',$editdata['email']);?>"></div>
+                                <div class="clearfix"></div>
+                            <div class="form-group md-3">
+                            <?php if(isset($validation) && $validation->getError('email')) {?>
+                                <div class='alert alert-danger mt-2'>
+                                <?= $error = $validation->getError('email'); ?>
                                     </div>
-                                            
-                                  
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        
-                                        <div class="comment-form__btn-box">
-                                            <button type="submit" class="thm-btn comment-form__btn">SUBMIT</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                                <?php }?>
+                            </div>
+                          
+                            <div class="clearfix"></div>
+                          
+                            <div>
+                                <button class="btn btn-primary shadow d-block w-100" type="submit">Send</button>
+                              </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!--Message One End-->
+</section>

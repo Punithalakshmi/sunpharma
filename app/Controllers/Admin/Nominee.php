@@ -39,7 +39,9 @@ class Nominee extends BaseController
                 $getNominationEndDate = $nomineeTypesModel->getCategoryNomination($user['category']);
                
                 $lists[$k]['nomination_end_date'] = '';
+
                 
+                $nominationEndDate = '';
                 if($getNominationEndDate->getRowArray() > 0) {  
                     $getNominationEndDate = $getNominationEndDate->getRowArray();
                     $nominationEndDate = $getNominationEndDate['end_date'];
@@ -244,10 +246,11 @@ class Nominee extends BaseController
         $getUserData  = $userModel->getUserData($nominee_id);
         $data['user'] = $getUserData->getRowArray();
 
+     // print_r($data['user']); die;
         //get nominee category
         if(isset($data['user']['category_id'])) {
-        $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
-        $data['user']['category_name'] = $getNomineeCategory['name'];
+    //    $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
+        $data['user']['category_name'] =  $data['user']['category_name'];
         }
     
         $edit_data  = $ratingModel->getRatingData($userdata['login_id'],$nominee_id)->getRowArray();
@@ -258,11 +261,9 @@ class Nominee extends BaseController
 
         $data['average_rating'] = $average_rating['avg_rating'];
 
-        if($userdata['role'] == 3)
-          $data['ratings'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
+        $data['ratings'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
 
         if(is_array($userdata) && count($userdata)):
-
 
             if($validation) {
 
@@ -280,19 +281,12 @@ class Nominee extends BaseController
                     $ins_data['nominee_id']   = $nominee_id;
                     $ins_data['is_rate_submitted'] = ($request->getPost('submit') && ($request->getPost('submit') == 'Save Draft'))?0:1; 
                     
-                    if(!empty($id)){
-                        $session->setFlashdata('msg', 'Rating Updated Successfully!');
-                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $ratingModel->update(array("id" => $id),$ins_data);
-                    }
-                    else
-                    {
-                        $session->setFlashdata('msg', 'Rated Successfully!');
-                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
-                        $ratingModel->save($ins_data);
-                    } 
+                   
+                    $session->setFlashdata('msg', 'Rated Successfully!');
+                    $ins_data['created_date']  =  date("Y-m-d H:i:s");
+                    $ins_data['created_id']    =  $userdata['login_id'];
+                    $ratingModel->save($ins_data);
+                     
 
                     return redirect()->to('admin/nominee/view/'.$nominee_id)->withInput();
                 }
@@ -308,22 +302,20 @@ class Nominee extends BaseController
                 }
                 else
                 {
-                    $editdata['rating']  = ($request->getPost('rating'))?$request->getPost('rating'):'';
-                    $editdata['comment']   = ($request->getPost('comment'))?$request->getPost('comment'):'';
-                    $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['rating']      = ($request->getPost('rating'))?$request->getPost('rating'):'';
+                    $editdata['comment']     = ($request->getPost('comment'))?$request->getPost('comment'):'';
+                    $editdata['id']          = ($request->getPost('id'))?$request->getPost('id'):'';
                     $editdata['is_rate_submitted'] = '0';
                 }
-
             } 
             
             if($request->getPost())
                $data['validation'] = $this->validator;
 
-
             $data['editdata'] = $editdata;
-            return view('_partials/header',$data)
-                .view('admin/nominee/view',$data)
-                .view('_partials/footer');
+            return   view('_partials/header',$data)
+                    .view('admin/nominee/view',$data)
+                    .view('_partials/footer');
         else:
             return redirect()->route('admin/login');
         endif;

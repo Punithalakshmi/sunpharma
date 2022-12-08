@@ -2,7 +2,10 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add Nomination</h3>
+                <h3> Add/Modify Award</h3>
+              </div>
+              <div class="title_right">
+                <a href="<?=base_url();?>/admin/nomination"><h3 class="btn btn-secondary">BACK</h3></a>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -14,16 +17,17 @@
                     <br />
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/nomination/add" method="POST" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
-                      
+
+                          
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Type</label>
                         <div class="col-md-6">
-                          <select class="select2_single form-control col-md-7 col-xs-12" name="category" tabindex="-1" >
+                          <select class="select2_single form-control col-md-7 col-xs-12" name="main_category_id" tabindex="-1" >
                             <option value=""></option>
-                            <?php if(is_array($categories)):
-                                    foreach($categories as $rvalue): ?>
-                            <option value="<?=$rvalue['id'];?>" <?=set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
+                            <?php if(is_array($main_categories)):
+                                    foreach($main_categories as $rvalue): ?>
+                            <option value="<?=$rvalue['id'];?>" <?=set_select('main_category_id',$rvalue['id'],(isset($editdata['main_category_id']) && ($editdata['main_category_id']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
                             <?php endforeach;
                                   endif;
                                   ?>
@@ -32,13 +36,39 @@
                       </div>
                       <div class="clearfix"></div>          
                       <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('category')) {?>
+                      <?php if(isset($validation) && $validation->getError('main_category_id')) {?>
                         <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('category'); ?>
+                          <?= $error = $validation->getError('main_category_id'); ?>
                             </div>
                         <?php }?>
                       </div>
                      
+                      <div class="clearfix"></div>       
+
+                      <!-- <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
+                        <div class="col-md-6">
+                          <select class="select2_single form-control col-md-7 col-xs-12" name="category" tabindex="-1" >
+                            <option value=""></option>
+                            <?php //if(is_array($categories)):
+                                    //foreach($categories as $rvalue): ?>
+                            <option value="<?//$rvalue['id'];?>" <?//set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?//$rvalue['name'];?></option>
+                            <?php //endforeach;
+                                  //endif;
+                                  ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>          
+                      <div class="form-group col-md-6">
+                      <?php //if(isset($validation) && $validation->getError('category')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?// $error = $validation->getError('category'); ?>
+                            </div>
+                        <?php //}?>
+                      </div>
+                      -->
                       <div class="clearfix"></div>
 
                     <div class="form-group">
