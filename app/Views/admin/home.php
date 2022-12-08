@@ -21,10 +21,10 @@
                     <i class="fa fa-user"></i> Nominees </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/category">
-                    <i class="fa fa-user"></i> Categories </a>
+                    <i class="fa fa-user"></i> Award Types </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/nomination">
-                    <i class="fa fa-user"></i> Awards Creation </a>
+                    <i class="fa fa-user"></i> Manage Awards</a>
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/workshops">

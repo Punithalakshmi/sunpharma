@@ -36,7 +36,7 @@ class User extends BaseController
                  $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
                }  
 
-                $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
+                $nominationEndDays =  isNominationExpired($getNominationDaysCt['end_date']);
 
                 if($nominationEndDays <= 0 && $getExtendNominationEndDays > 0)
                   $result['nominationEndDays'] =  $getExtendNominationEndDays;
@@ -99,14 +99,6 @@ class User extends BaseController
     {
         $this->session->remove('fuserdata');
         return redirect()->route('/');
-    }
-
-    public function dateDiff($date1, $date2)
-    {
-        $date1_ts = strtotime($date1);
-        $date2_ts = strtotime($date2);
-        $diff = $date2_ts - $date1_ts;
-        return round($diff / 86400);
     }
 
 

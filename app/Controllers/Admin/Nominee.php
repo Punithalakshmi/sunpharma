@@ -33,24 +33,14 @@ class Nominee extends BaseController
             $current_date = date("Y-m-d");
 
             foreach($lists as $k => $user){
-             //  $userLists  = $nomineeModel->getJuryName($user['jury_id']);
-             //  $juryName   =  $userLists->getRowArray();
-            
+             
                 $getNominationEndDate = $nomineeTypesModel->getCategoryNomination($user['category']);
                
                 $lists[$k]['nomination_end_date'] = '';
 
-                
-                $nominationEndDate = '';
-                if($getNominationEndDate->getRowArray() > 0) {  
-                    $getNominationEndDate = $getNominationEndDate->getRowArray();
-                    $nominationEndDate = $getNominationEndDate['end_date'];
-                    $lists[$k]['nomination_end_date']  = $nominationEndDate;
-                }     
+                $isExpiredNomination =  isNominationExpired($user['extend_date']);
 
-                $lists[$k]['is_expired_nomination'] = 'no';
-                if(strtotime($current_date) > strtotime($nominationEndDate))
-                   $lists[$k]['is_expired_nomination']  = 'yes';  
+                $lists[$k]['is_expired_nomination'] = ($isExpiredNomination)?'yes':'no';
                 
  
             }
@@ -358,11 +348,6 @@ class Nominee extends BaseController
     }
 
 
-    public function ratings()
-    {
-        
-    }
-
     public function validation_rules()
     {
 
@@ -409,15 +394,19 @@ class Nominee extends BaseController
         
         if(is_array($userdata) && count($userdata)):
            
-            if($request->getPost())
-               $id  = $request->getPost('id');
+           
+            $id  = ($request->getPost('id'))?$request->getPost('id'):$id;
                
             $validation = $this->validate($this->extend_validation_rules());
 
-            $getExtend  = $extendModel->getListsOfExtends($id);
+            $getExtend  = $this->userModel->getUserData($id);
 
             if($getExtend->getRowArray() > 0)
-             $edit_data = $getExtend->getRowArray();
+              $edit_data = $getExtend->getRowArray(); 
+
+            $data['editdata'] = $edit_data; 
+            
+            //print_r($data['editdata']); die;
 
             if($validation) {
 
@@ -427,26 +416,17 @@ class Nominee extends BaseController
                     
                     $ins_data = array();
                     $ins_data['extend_date']   = date("Y-m-d",strtotime($extend_date));
-                    $ins_data['user_id']      = $id;
-                    
-
+                 
                     //get user data
                     $getExtendUserData  = $userModel->getListsOfUsers($id)->getRowArray();
                    
                     if(!empty($id) && $getExtend->getRowArray() > 0){
                         $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
-                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $extendModel->update(array("id" => $id),$ins_data);
+                        $ins_data['updated_date']   =  date("Y-m-d H:i:s");
+                        $ins_data['updated_id']     =  $userdata['login_id'];
+                        $userModel->update(array("id" => $id),$ins_data);
                     }
-                    else
-                    {
-                        $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
-                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
-                        $extendModel->save($ins_data);
-                    } 
-
+                
                     $this->extendMailNotification($getExtendUserData['email'],$extend_date);
 
                     return redirect()->route('admin/nominee');
@@ -456,21 +436,15 @@ class Nominee extends BaseController
             {  
 
                 if(!empty($edit_data) && count($edit_data)){
-                    $editdata['extend_date'] = date("m/d/Y",strtotime($edit_data['extend_date']));
-                    $editdata['id']         = $edit_data['id'];
+                    $editdata['extend_date'] = $edit_data['extend_date'];
+                    $editdata['id']          = $id;
                 }
-                else
-                {
-                   
-                    $editdata['extend_date']     = ($request->getPost('extend_date'))?$request->getPost('extend_date'):date("m/d/Y");
-                    $editdata['id']              = ($request->getPost('id'))?$request->getPost('id'):$id;
-                }
-
+                
+                echo $editdata['extend_date'];
                   if($request->getPost())
                     $data['validation'] = $this->validator;
 
-
-                    $data['editdata'] = $editdata;
+                    
                     return view('_partials/header',$data)
                         .view('admin/nomination/extend',$data)
                         .view('_partials/footer');

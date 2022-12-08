@@ -20,7 +20,7 @@ class Category extends BaseController
        
         if(is_array($userdata) && count($userdata)):
 
-            $categoryLists = $categoryModel->getListsOfCategories();
+            $categoryLists = $categoryModel->getListsOfCategories()->getResultArray();
            
             $data['lists'] = $categoryLists;
             return view('_partials/header',$data)
@@ -54,7 +54,7 @@ class Category extends BaseController
             if($request->getPost())
                $id  = $request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules());
+            $validation = $this->validate($this->validation_rules($id));
             if($validation) {
 
                 if($request->getPost()){
@@ -121,12 +121,12 @@ class Category extends BaseController
     }
 
 
-    public function validation_rules()
+    public function validation_rules($id = '')
     {
 
         $validation_rules = array();
         $validation_rules = array(
-                                        "name" => array("label" => "Category Name",'rules' => 'required')
+                                        "name" => array("label" => "Category Name",'rules' => 'required|is_unique[category.name,id,'.$id.']')
         );
     
         return $validation_rules;

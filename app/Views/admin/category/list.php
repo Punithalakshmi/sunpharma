@@ -3,13 +3,13 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Categories <small></small></h3>
+                <h3>Award Types <small></small></h3>
               </div>
             </div>
            
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/category/add" class="btn btn-primary btn-xs">
-                <i class="fa fa-plus"></i> Add/Modify Category</a>
+                <i class="fa fa-plus"></i> Add/Modify Award Type</a>
            </div>
          
             <div class="clearfix"></div>
@@ -28,8 +28,8 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Type</th>
+                          <th>Award Type</th>
+                          <th>Award</th>
                           <th>Status</th>
                           <th>Created Date</th>
                           <th>Action</th>

@@ -23,7 +23,7 @@ class Nomination extends BaseController
        
         if(is_array($userdata) && count($userdata)):
 
-            $nominationTypeLists = $nominationTypesModel->getListsOfNominations();
+            $nominationTypeLists = $nominationTypesModel->getListsOfNominations()->getResultArray();
 
             foreach($nominationTypeLists as $ukey => $uvalue){
                 
@@ -81,7 +81,7 @@ class Nomination extends BaseController
         $nominationTypesModel = new NominationTypesModel();
         $categoryModel        = new CategoryModel();
 
-        $data['categories']  = $categoryModel->getListsOfCategories();
+        $data['categories']  = $categoryModel->getListsOfCategories()->getResultArray();
 
         $data['main_categories'] = $this->awardsCategoryModel->getListsOfCategories();
         

@@ -18,8 +18,13 @@ class CategoryModel extends Model{
  
     public function getListsOfCategories($id='')
     {
-        if(empty($id))
-         return $this->findAll();
+        if(empty($id)){
+            $builder = $this->table('category');
+            $builder->select('category.*');
+            $builder->orderBy('id', 'DESC');
+            $builder->orderBy('name', 'ASC');  
+            return $query = $builder->get();
+       }
         else 
           return $this->getWhere(array('id' => $id)); 
     }
