@@ -1,4 +1,4 @@
-    <section class="heroInner" style="background: #fff url(https://sunpharma.com/wp-content/uploads/2020/12/Innovation.jpg) center left no-repeat;">
+    <section class="heroInner" style="background: #fff url(<?=base_url();?>/frontend/assets/img/ResearchAwards-tbanner.jpg) center left no-repeat;">
         <div class="container">
             <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Research Awards</h1>
         </div>

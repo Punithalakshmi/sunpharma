@@ -1,4 +1,4 @@
-<section class="heroInner" style="background: url('<?=base_url();?>/frontend/assets/img/science-scholar-inner.jpg') top no-repeat, #fff;">
+<section class="heroInner" style="background: url('<?=base_url();?>/frontend/assets/img/science-scholar-award-tbanner.jpg') top no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Science Scholar Awards</h1>
         </div>

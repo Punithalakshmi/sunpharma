@@ -1,5 +1,5 @@
 
-    <section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/Malaysia-1.jpg) center left no-repeat, #fff;">
+    <section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/latest_winners_of_science_scholar_awards-tbanner.jpg) center left no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Of Science Scholar Award<br></h1>
         </div>

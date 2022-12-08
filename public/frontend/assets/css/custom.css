@@ -360,6 +360,12 @@ form#eventRegistration .form-group .alert-danger {
 }
 .successseccont p{margin:0;white-space: normal;}
 
+.simple-slider .bg-dark {
+  min-height: 320px;
+}
+.winnerimg {
+  min-height: 320px;
+}
 
 @media(max-width:767px){
   #mainNav .navbar-brand img {

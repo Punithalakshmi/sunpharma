@@ -26,7 +26,7 @@
                                             <?php if(isset($nvalue['type']) && ($nvalue['type'] == 'event') ):
                                                   
                                                 ?>
-                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Event Registraton</a>
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Registraton</a>
                                             <?php endif;?>  
                                             <?php if(!empty($nvalue['document'])):?>
                                             <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
@@ -86,8 +86,8 @@
                 </div>
                 <div class="col-md-6 d-md-flex align-items-md-center">
                     <div>
-                        <h2 class="text-capitalize fw-normal" style="color: #F7941E;"><strong>About Sun Pharma Science Foundation</strong></h2>
-                        <p class="my-3" style="margin-bottom: 15px;">Sun Pharma Science Foundation is an independent non-profit organization registered under the Societies Registration Act. The aim of the Foundation is to promote scientific endeavors in the country by encouraging and rewarding excellence in medical and pharmaceutical sciences and to give impetus to research activity in India.</p><a class="btn btn-primary" role="button" href="<?=base_url();?>/aboutus">Read More</a>
+                        <h2 class="text-capitalize fw-normal" style="color: #F7941E;"><strong>About Us</strong></h2>
+                        <p class="my-3" style="margin-bottom: 15px;">Sun Pharma Science Foundation is an independent non-profit organisation registered under the Societies Registration Act. The aim of the Foundation is to promote scientific endeavours in India by encouraging and rewarding excellence in medical and pharmaceutical sciences and to give impetus to research activity in India.</p><a class="btn btn-primary" role="button" href="<?=base_url();?>/aboutus">Read More</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                 <!-- slide 1 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//ResearchAwards.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/ResearchAwards-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Research Awards</h4>
                             <p class="card-text" style="font-size: 14px;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges, to send in their nominations for the Sun Pharma Science Foundation Research Awards 2022.</p>
@@ -120,7 +120,7 @@
                 <!-- slide 2 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//ScienceScholarAwards.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/science-scholar-award-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Science Scholar Awards</h4>
                             <p class="card-text" style="font-size: 14px;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges of India to nominate Young Scientists for the “Sun Pharma Science Foundation...</p>
@@ -132,7 +132,7 @@
                 <!-- slide 3 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//RoundTableConference.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/round-table-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">National Seminars</h4>
                             <p class="card-text" style="font-size: 14px;">The Foundation organizes two Round Table Conferences in a year on topics of contemporary concern to human health which pose challenges.</p>
@@ -144,7 +144,7 @@
                 <!-- slide 4 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//ScientificSymposia.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/symposia-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">International Symposia</h4>
                             <p class="card-text" style="font-size: 14px;">The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research...</p>
@@ -156,7 +156,7 @@
                 <!-- slide 5 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img//workshop-for-the-young-researchers.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/event-scientist.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Workshop for the young researchers</h4>
                             <p class="card-text" style="font-size: 14px;">
@@ -200,7 +200,7 @@
         <div class="container-fluid bg-primary-gradient py-5" style="padding: 48px 12px 0;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest winners of Research awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Research awards</h3>
                 </div>
             </div>
 
@@ -291,7 +291,7 @@
         <div class="container-fluid">
             <div class="row" style="padding-bottom: 20px;">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Scholars Awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Scholar Awards</h3>
                 </div>
             </div>
         </div>
