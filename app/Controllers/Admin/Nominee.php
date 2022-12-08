@@ -33,8 +33,8 @@ class Nominee extends BaseController
             $current_date = date("Y-m-d");
 
             foreach($lists as $k => $user){
-               $userLists  = $nomineeModel->getJuryName($user['jury_id']);
-               $juryName   =  $userLists->getRowArray();
+             //  $userLists  = $nomineeModel->getJuryName($user['jury_id']);
+             //  $juryName   =  $userLists->getRowArray();
             
                 $getNominationEndDate = $nomineeTypesModel->getCategoryNomination($user['category']);
                
@@ -52,11 +52,7 @@ class Nominee extends BaseController
                 if(strtotime($current_date) > strtotime($nominationEndDate))
                    $lists[$k]['is_expired_nomination']  = 'yes';  
                 
-
-                if(isset($juryName['firstname']) && isset($juryName['lastname']))
-                    $lists[$k]['assigned_jury'] = $juryName['firstname'].' '.$juryName['lastname'];
-                else
-                    $lists[$k]['assigned_jury']  = ' - ';  
+ 
             }
 
             $data['lists'] = $lists;

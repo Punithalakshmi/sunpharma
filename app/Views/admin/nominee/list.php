@@ -31,6 +31,7 @@
                           <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
+                          <th>Award Category</th>
                           <th>Approval Status</th>
                           <th>Created Date</th>
                           <th>Action</th>
@@ -46,6 +47,7 @@
                           <td><?=strtolower($user['firstname']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
+                          <td><?=$user['category_name'];?></td>
                           <td><?=(((isset($user['active']) && isset($user['status'])) && ($user['active']==1 && $user['status']=='Approved')))?'Approved':'Pending';?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
