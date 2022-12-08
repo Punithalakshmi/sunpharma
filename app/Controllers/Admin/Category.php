@@ -143,8 +143,14 @@ class Category extends BaseController
 
         if(is_array($userdata) && count($userdata)):
           $categoryModel->delete(array("id" => $id));
-          return redirect()->route('admin/category');
-        else:
+          if($this->request->isAJAX()){
+                
+            return $this->response->setJSON([
+                'status'            => 'success',
+                'message'              => 'Category deleted Successfully'
+            ]); 
+          }
+        else
             return redirect()->route('admin/login');
         endif;
     }

@@ -7,8 +7,7 @@
                     <div class="carousel-inner h-100">
                     <?php if(is_array($nominations) && count($nominations) > 0): 
                         foreach($nominations as $nkey => $nvalue): 
-                           // echo "<pre>";
-                         //  print_r($nvalue);
+                           
                         ?>
                         <div class="carousel-item <?php if($nkey == 0):?>active<?php endif;?> h-100">
                             <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/uploads/events/<?=$nvalue['banner_image'];?>" alt="Slide Image" style="z-index: -1;">
@@ -26,7 +25,7 @@
                                             <?php if(isset($nvalue['type']) && ($nvalue['type'] == 'event') ):
                                                   
                                                 ?>
-                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Event Registraton</a>
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Registraton</a>
                                             <?php endif;?>  
                                             <?php if(!empty($nvalue['document'])):?>
                                             <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
@@ -86,7 +85,7 @@
                 </div>
                 <div class="col-md-6 d-md-flex align-items-md-center">
                     <div>
-                        <h2 class="text-capitalize fw-normal" style="color: #F7941E;"><strong>About Sun Pharma Science Foundation</strong></h2>
+                        <h2 class="text-capitalize fw-normal" style="color: #F7941E;"><strong>About us</strong></h2>
                         <p class="my-3" style="margin-bottom: 15px;">Sun Pharma Science Foundation is an independent non-profit organization registered under the Societies Registration Act. The aim of the Foundation is to promote scientific endeavors in the country by encouraging and rewarding excellence in medical and pharmaceutical sciences and to give impetus to research activity in India.</p><a class="btn btn-primary" role="button" href="<?=base_url();?>/aboutus">Read More</a>
                     </div>
                 </div>
@@ -200,7 +199,7 @@
         <div class="container-fluid bg-primary-gradient py-5" style="padding: 48px 12px 0;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest winners of Research awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Research awards</h3>
                 </div>
             </div>
 
@@ -291,7 +290,7 @@
         <div class="container-fluid">
             <div class="row" style="padding-bottom: 20px;">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Scholars Awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Scholar Awards</h3>
                 </div>
             </div>
         </div>

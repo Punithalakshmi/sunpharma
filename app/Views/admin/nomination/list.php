@@ -8,8 +8,7 @@
             </div>
            
             <div class="actionbtns">
-                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs">
-                <i class="fa fa-plus"></i> Add/Modify Award</a>
+                <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add New Award</a>
            </div>
           
             <div class="clearfix"></div>
@@ -29,6 +28,7 @@
                       <thead>
                         <tr>
                           <th>Category</th>
+                          <th>Sub Category</th>
                           <th>Title</th>
                           <th>Subject</th>
                           <th>Start Date</th>
@@ -44,14 +44,14 @@
                             ?>
                         <tr>
                           <td><?=$user['main_category_id'];?></td>
-                        
+                          <td><?=$user['category_id'];?></td>
                           <td><?=$user['title'];?></td>
                           <td><?=$user['subject'];?></td>
                           <td><?=$user['start_date'];?></td>
                           <td><?=$user['end_date'];?></td>
                           <td>
                           <a href="<?=base_url().'/admin/nomination/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="<?=base_url().'/admin/nomination/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a onclick="userDelete('award','<?=$user['id'];?>','/admin/nomination/delete')"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                         <?php endforeach;

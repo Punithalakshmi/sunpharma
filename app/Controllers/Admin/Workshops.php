@@ -207,9 +207,16 @@ class Workshops extends BaseController
         $data['userdata'] = $userdata;
 
         if(is_array($userdata) && count($userdata)):
-          $workshopModel->delete(array("id" => $id));
-          return redirect()->route('admin/workshops');
-        else:
+            $workshopModel->delete(array("id" => $id));
+            if($this->request->isAJAX()){
+                
+                return $this->response->setJSON([
+                    'status'            => 'success',
+                    'message'              => 'Event deleted Successfully'
+                ]); 
+            }
+        
+        else
             return redirect()->route('admin/login');
         endif;
     }

@@ -6,6 +6,8 @@
     <script src="<?php echo base_url();?>/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="<?php echo base_url();?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>/js/admin/bootstrap-msg.js"></script>
+    <script src="<?php echo base_url();?>/js/admin/jquery.confirmModal.min.js"></script>
     
     <!-- FastClick -->
     <script src="<?php echo base_url();?>/vendors/fastclick/lib/fastclick.js"></script>

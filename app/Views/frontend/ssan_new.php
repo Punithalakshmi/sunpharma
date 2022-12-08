@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <h2 class="text-capitalize fw-normal text-start text-center" style="color: #f7941e;
             font-size: 1.6rem;
-            font-weight: bold!important;">Sun Pharma Science Research Awards-<?=date('Y');?><br>Online Submission of Nominations
+            font-weight: bold!important;">Sun Pharma Science Foundation Research Awards -<?=date('Y');?><br>Online Submission of Nominations
             </h2>
         </div>
     </div>
@@ -52,20 +52,20 @@
                                     <label class="form-label " for="">Category of the Award</label>
                                     <select class="form-control required" name="category" id="category">
                                     <option value="">-- Select --</option>
-                                    <option value="Pharmaceutical Sciences" <?=set_select('category',"Pharmaceutical Sciences", ((isset($editdata['category']) && ($editdata['category']=='Pharmaceutical Sciences'))?TRUE:FALSE));?>>Pharmaceutical Sciences</option>
-                                    <option value="Medical Sciences-Basic Research" <?=set_select('category',"Medical Sciences-Basic Research", ((isset($editdata['category']) && ($editdata['category']=='Medical Sciences-Basic Research'))?TRUE:FALSE));?>>Medical Sciences-Basic Research</option>
-                                    <option value="Medical Sciences-Clinical Research" <?=set_select('category',"Medical Sciences-Clinical Research", ((isset($editdata['category']) && ($editdata['category']=='Medical Sciences-Clinical Research'))?TRUE:FALSE));?>>Medical Sciences-Clinical Research</option>
-                                        <?php //if(is_array($categories)):
-                                           // foreach($categories as $ckey=>$cvalue):?>
-                                        <!-- <option value="<?//$cvalue['id'];?>" <?//set_select('category',$cvalue['id'], ((isset($editdata['category']) && ($editdata['category']==$cvalue['id']))?TRUE:FALSE));?>><?//$cvalue['name'];?></option> -->
-                                        <?php  // endforeach; 
-                                               // endif; ?>     
+                                    <!-- <option value="Pharmaceutical Sciences" <?//set_select('category',"Pharmaceutical Sciences", ((isset($editdata['category']) && ($editdata['category']=='Pharmaceutical Sciences'))?TRUE:FALSE));?>>Pharmaceutical Sciences</option>
+                                    <option value="Medical Sciences-Basic Research" <?//set_select('category',"Medical Sciences-Basic Research", ((isset($editdata['category']) && ($editdata['category']=='Medical Sciences-Basic Research'))?TRUE:FALSE));?>>Medical Sciences-Basic Research</option>
+                                    <option value="Medical Sciences-Clinical Research" <?//set_select('category',"Medical Sciences-Clinical Research", ((isset($editdata['category']) && ($editdata['category']=='Medical Sciences-Clinical Research'))?TRUE:FALSE));?>>Medical Sciences-Clinical Research</option> -->
+                                        <?php if(is_array($categories)):
+                                                foreach($categories as $ckey=>$cvalue):?>
+                                         <option value="<?=$cvalue['id'];?>" <?=set_select('category',$cvalue['id'], ((isset($editdata['category']) && ($editdata['category']==$cvalue['id']))?TRUE:FALSE));?>><?=$cvalue['name'];?></option>
+                                        <?php   endforeach; 
+                                                endif; ?>     
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
-                                    <label class="form-label " for="">Name of the Applicant</label>
+                                    <label class="form-label" for="">Name of the Applicant</label>
                                     <input class="form-control required" id="nominee_name" name="nominee_name" type="text" placeholder="" value="<?=set_value('nominee_name',$editdata['nominee_name']);?>">
                                 </div>
                             </div>

@@ -49,7 +49,7 @@
                           <td><?=$user['created_date'];?></td>
                           <td>
                           <a href="<?=base_url().'/admin/workshops/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
-                            <a href="<?=base_url().'/admin/workshops/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
+                            <a onclick="userDelete('Event','<?=$user['id'];?>','/admin/workshops/delete/')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                           </td>
                         </tr>
                         <?php endforeach;

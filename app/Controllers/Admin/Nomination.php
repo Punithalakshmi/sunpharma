@@ -27,17 +27,17 @@ class Nomination extends BaseController
 
             foreach($nominationTypeLists as $ukey => $uvalue){
                 
-                // if(!empty($uvalue['category_id'])){ 
-                //  $category = $categoryModel->getListsOfCategories($uvalue['category_id']);
+                if(!empty($uvalue['category_id'])){ 
+                 $category = $categoryModel->getListsOfCategories($uvalue['category_id']);
                     
-                //  $category = $category->getRowArray();
+                 $category = $category->getRowArray();
                  
-                //  $nominationTypeLists[$ukey]['category_id'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
-                // }
-                // else
-                // {
-                //  $nominationTypeLists[$ukey]['category_id'] = '-';
-                // }
+                 $nominationTypeLists[$ukey]['category_id'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
+                }
+                else
+                {
+                 $nominationTypeLists[$ukey]['category_id'] = '-';
+                }
 
                 
 
@@ -95,14 +95,16 @@ class Nomination extends BaseController
             if($request->getPost())
                $id  = $request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules($id));
+            $validation = $this->validate($this->validation_rules());
             if($validation) {
 
                 if($request->getPost()){
-
+                
+                    $category      = $request->getPost('category');
                     $main_category_id = $request->getPost('main_category_id');
                     $start_date    = $request->getPost('start_date');
                     $end_date      = $request->getPost('end_date');
+                   // $year          = $request->getPost('nomination_year');
                     $status        = $request->getPost('status');
                     $subject      = $request->getPost('subject');
                     $title        = $request->getPost('title');
@@ -110,10 +112,11 @@ class Nomination extends BaseController
 
                     
                     $ins_data = array();
-                    $ins_data['category_id']  = 0;
+                    $ins_data['category_id']  = $category;
                     $ins_data['main_category_id']  = $main_category_id;
                     $ins_data['start_date']   = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']     = date("Y-m-d",strtotime($end_date));
+                  //  $ins_data['year']         = $year;
                     $ins_data['status']       = $status;
                     $ins_data['subject']           = $subject; 
                     $ins_data['description']       = $description;
@@ -179,7 +182,7 @@ class Nomination extends BaseController
             {  
             
                 if(!empty($edit_data) && count($edit_data)){
-
+                    $editdata['category']   = $edit_data['category_id'];
                     $editdata['main_category_id']   = $edit_data['main_category_id'];
                 
                     $editdata['start_date'] = date("m/d/Y",strtotime($edit_data['start_date']));
@@ -197,7 +200,7 @@ class Nomination extends BaseController
                     $editdata['title']                = ($request->getPost('title'))?$request->getPost('title'):'';
                     $editdata['subject']              = ($request->getPost('subject'))?$request->getPost('subject'):'';
                     $editdata['description']          = ($request->getPost('description'))?$request->getPost('description'):'';
-                  //  $editdata['category']            = ($request->getPost('category'))?$request->getPost('category'):'';
+                    $editdata['category']            = ($request->getPost('category'))?$request->getPost('category'):'';
                     $editdata['main_category_id']       = ($request->getPost('main_category_id'))?$request->getPost('main_category_id'):'';
                   //  $editdata['year']           = ($request->getPost('year'))?$request->getPost('year'):date("Y");
                     $editdata['start_date']     = ($request->getPost('start_date'))?$request->getPost('start_date'):date("m/d/Y");
@@ -225,13 +228,13 @@ class Nomination extends BaseController
     }
 
 
-    public function validation_rules($id='')
+    public function validation_rules()
     {
 
         $validation_rules = array();
         $validation_rules = array(
-                                        "main_category_id" => array("label" => "Main Category",'rules' => 'required|is_unique[nominations.main_category_id,id,'.$id.']'),
-                                   //     "category" => array("label" => "Category",'rules' => 'required'),
+                                        "main_category_id" => array("label" => "Main Category",'rules' => 'required'),
+                                        "category" => array("label" => "Category",'rules' => 'required'),
                                         "subject" => array("label" => "Subject",'rules' => 'required'),
                                         "description" => array("label" => "Description",'rules' => 'required'),
                                         "start_date" => array("label" => "Start Date",'rules' => 'required'),
@@ -252,8 +255,13 @@ class Nomination extends BaseController
 
         if(is_array($userdata) && count($userdata)):
           $nominationTypesModel->delete(array("id" => $id));
-          return redirect()->route('admin/nomination');
-        else:
+          if($this->request->isAJAX()){
+            return $this->response->setJSON([
+                'status'    => 'success',
+                'message'   => 'Award deleted Successfully'
+            ]); 
+        }
+        else
             return redirect()->route('admin/login');
         endif;
     }
