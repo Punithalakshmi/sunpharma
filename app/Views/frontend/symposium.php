@@ -18,28 +18,318 @@
                         <div class="tabFilter">
                             <ul class="nav nav-tabs bg-orange pt-3 px-3" role="tablist">
                                 <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">2022</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">2021</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">2020</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-15">2019</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-14">2018</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-13">2017</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-12">2016</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-11">2015</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-10">2014</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-9">2013</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-8">2012</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-7">2011</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">2010</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">2009</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">2008</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">2014</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">2013</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">2012</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">2011</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">All</a></li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" role="tabpanel" id="tab-1">
-                                    <div class="d-flex flex-wrap">
-                                        <div></div>
-                                    </div>
-<div class="table-responsive">
+ <div class="tab-pane active" role="tabpanel" id="tab-1">
+                                    <p class="text-center">Coming Soon.</p>
+                                </div>
+                                
+                                <div class="tab-pane" role="tabpanel" id="tab-2">
+                                <div class="table-responsive">
     <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+             
+            
+
+            
+
+             
+             
+
+             
+
+            
+
+             
+
+            
+
+
+             
+
+
+ 
+
+             <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c20" role="button" aria-expanded="false" aria-controls="c20">The 20th Annual Symposium of the Foundation on the topic “Regenerative Medicine – Current and Future Perspectives”</a>
+
+                    <div class="collapse" id="c20">
+                    <p><b>The 20th Annual Symposium of the Foundation on the topic “Regenerative Medicine – Current and Future Perspectives”</b> was held on March 22, 2014 at the National Institute of Immunology, New Delhi. The symposium was jointly organized with Institute of Liver and Biliary Sciences (ILBS), New Delhi. The Chief Guest, Dr. R. Chidambaram, Principal Scientific Adviser to the Government of India delivered the inaugural address followed by the key note address by Prof. Pierre Alain Clavien. Eminent scientists from India and abroad participated in the symposium and deliberated on the recent advances in regenerative medicine and stem cell therapy and its recent applications in various disease areas such as kidney disorders, type II diabetes mellitus, neuronal disorder, ocular disorders, liver injury, cardiac disorders etc.<br>
+
+ 
+
+The symposium was attended by over 230 delegates from all over India.</p>
+                    </div> 
+                </td>
+                <td>March 22, 2014</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-3">
+                                <div class="table-responsive">
+    <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+             
+            
+
+            
+
+             
+             
+
+             
+
+            
+
+             
+
+            
+
+
+             
+
+
+ <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c19" role="button" aria-expanded="false" aria-controls="c19">19th Annual Symposium on the topic “Gains of Genomic Research in Biology and Medicine” </a>
+
+                    <div class="collapse" id="c19">
+                    <p>The Foundation conducted <b>its 19th Annual Symposium</b> on the topic <b>“Gains of Genomic Research in Biology and Medicine”</b> on February 4, 2013 at the National Institute of Immunology, New Delhi under the convenership of Prof. N.K. Mehra, Head, Department of Transplant Immunology and Immunogenetics, All India Institute of Medical Sciences, New Delhi. The symposium was co-sponsored by Immunology Foundation.</p>
+
+<p>Prof. Dhavendra Kumar, Consultant in Clinical Genetics, Institute of Molecular and Experimental Medicine, University Hospital of Wales, Cardiff, UK was the Chief Guest and Key-note speaker at the symposium. A special lecture on “Generic Drugs to Genomic Medicines” was delivered by Prof. Samir K. Brahmachari, Director General, Council of Scientific and Industrial Research, Government of India. The other prominent speakers were Prof. I.C. Verma, Sir Ganga Ram Hospital, Dr. Bert de Vries from University of Nijmegan, Netherlands, Dr. GPS Raghava, IMTECH, Chandigarh, Dr. Rajiv Sarin, The Advanced Centre for Treatment, Research and Education in Cancer, Mumbai Dr. Seyed Hasnain, Indian Institute of Technology, New Delhi etc.  The symposium addressed various issues like Genome to Genetic medicine : Opportunities and Challenges, Genetic Council in the Genomic Era, Genetic and Genomic Tools in Clinical Diagnosis, Genomic Architecture of HIV Infection, in silico Design of Subunit Vaccines, Genetics of Breast Cancer in Indian Population, Genetic Variations and its Implications in Health and Diseases etc.</p>
+
+<p>This symposium received a good response from the scientific community including young researchers, students and it was attended by as many as 270 delegates all over India.</p>
+                    </div> 
+                </td>
+                <td>February 4, 2013</td>
+            </tr>
+
+             
+
+
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-4">
+                                <div class="table-responsive">
+    <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+             
+            
+
+            
+
+             
+             
+
+             
+
+            
+
+             
+
+            
+
+
+             <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c18" role="button" aria-expanded="false" aria-controls="c18">18th Annual Symposium on the topic “Ageing Gracefully”  </a>
+
+                    <div class="collapse" id="c18">
+                    <p>Ranbaxy Science Foundation conducted&nbsp;<strong>its 18<sup>th</sup>&nbsp;Annual Symposium</strong>&nbsp;on the<strong>&nbsp;</strong>topic&nbsp;<strong>“Ageing Gracefully”</strong>&nbsp;on February 27, 2012 at the Jawaharlal Nehru Auditorium, All India Institute of Medical Sciences, New Delhi in association with&nbsp;International Congress on Gerontology &amp; Geriatric Medicine. The&nbsp;Co-Organizers of the symposium were&nbsp;All India Institute of Medical Sciences and University College of Medical Sciences, New Delhi.</p>
+
+<p>Prof. Finbarr Martin, President, British Geriatrics Society, London was the Chief Guest and Key-note of the Symposium. The other three renowned international speakers in the symposium were Prof. Yasumichi Arai, Keio University School of Medicine, Japan, Prof. John Morley, Saint Louis University School of Medicine, USA and Prof. Peter Crome, Keele University, UK</p>
+
+<p>The program of the symposium was well designed and experts from major research institutions were invited to deliver the lectures. The symposium addressed various topics like Human Longevity Research, Alzheimer’s Disease, Frailty - Joining the Geriatric Giants, Demographics of Ageing, Functional disability and its gender dimensions, Health Issues in Old Age, Vitamin D: skeletal and extra skeletal implications, Challenges of vascular diseases in ageing population, Civil society and policy formulation, National Program for Health Care of the Elderly etc.&nbsp;&nbsp;This symposium was attended by as many as 300 delegates all over India.</p>
+                    </div> 
+                </td>
+                <td>February 27, 2012</td>
+            </tr>
+
+
+ 
+
+             
+
+
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-5">
+                                <div class="table-responsive">
+    <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+             
+            
+
+            
+
+             
+             
+
+             
+
+            
+
+             
+
+            <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c17" role="button" aria-expanded="false" aria-controls="c17">The XVII Annual Symposium on “New Frontiers in Drug Design, Discovery and Development” </a>
+
+                    <div class="collapse" id="c17">
+                     <p><strong>The XVII Annual Symposium on “New Frontiers in Drug Design, Discovery and Development”</strong>&nbsp;was conducted on February 11, 2011 at the National Institute of Immunology, New Delhi.</p>
+<p>Dr. Hiroyuki Koike, Corporate Fellow-R&amp;D Division, Daiichi Sankyo Co., Japan was the Chief Guest and Key-note Speaker of the symposium. The topic of Dr. Koike’s Key-note Address was “Innovations in Design and Discovery of New Drugs for Cardiovascular Disorders: Special Focus on the Drugs that Inhibit the Renin-Angiotensin System”.</p>
+<p>The symposium focused on various topics in Drug Design, Discovery and Developemnt such as New approaches to Molecular modeling, Novel Peptido-mimetics, Approaches towards the development of chimeric DPPA/ACE inhibitor for treating metabolic syndrome, importance of chemical and biological space complementarity in drug discovery, improving R&amp;D productivity through external innovation, new approaches to the development of antibacterial agents with special reference to quinolone, discovery of new anti-TB agents, discovery of novel anti-malarial drugs, integration between drug discovery and development, meeting the challenges of microbial resistances in infectious diseases, interface between traditional systems drugs and modern drug discovery and re-positioning of discovered drugs.</p>
+<p>The symposium was attended by over 230 scientists and medical students across India.</p>
+                    </div> 
+                </td>
+                <td>February 11, 2011</td>
+            </tr>
+
+
+             
+
+
+ 
+
+             
+
+
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-6">
+                                <div class="table-responsive"><table class="table table-bordered table-striped" id="sortTable">
         <thead>
             <tr>
                 <th onclick="sortTable(0)" class="pointer">
@@ -379,51 +669,9 @@ The symposium was attended by over 230 delegates from all over India.</p>
 
 
         </tbody>
-    </table>
-</div>
+    </table></div>
                                 </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-2">
-                                    <p>Content for tab 2.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-3">
-                                    <p>Content for tab 3.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-15">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-14">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-13">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-12">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-11">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-10">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-9">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-8">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-7">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-6">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-5">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-4">
-                                    <p>Tab content.</p>
-                                </div>
+                                
                             </div>
                         </div>
                     </section>

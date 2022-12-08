@@ -18,26 +18,350 @@
                         <div class="tabFilter">
                             <ul class="nav nav-tabs bg-orange pt-3 px-3" role="tablist">
                                 <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">2022</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">2021</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">2020</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-15">2019</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-14">2018</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-13">2017</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-12">2016</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-11">2015</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-10">2014</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-9">2013</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-8">2012</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-7">2011</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">2010</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">2009</a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">2008</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">2013</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">2012</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">2011</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">2010</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">All</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" role="tabpanel" id="tab-1">
-                                    <div class="d-flex flex-wrap">
-                                        <div></div>
-                                    </div><div class="table-responsive">
+                                   <p class="text-center">Coming Soon.</p>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-2">
+                                <div class="table-responsive">
+    <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+              
+             
+           
+          
+           
+
+             
+            
+             
+            
+               
+
+             
+
+                 
+             
+
+             
+            
+
+              
+              
+             
+             
+             
+             
+             
+            <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c29" role="button" aria-expanded="false" aria-controls="c29">The 29th Round Table Conference on Preventive and Promotive Health</a>
+
+                    <div class="collapse" id="c29">
+                   <p>The&nbsp;<strong>29<sup>th</sup>&nbsp;Round Table Conference</strong>&nbsp;on&nbsp;<strong>“Preventive and Promotive Health”</strong>&nbsp;was conducted on January 22, 2013 at the Gulmohar Hall, India Habitat Centre, New Delhi. The conference was conducted under the convenership of&nbsp;Dr. Anoop Misra from Fortis CDOC Centre of Excellence for Diabetes, Metabolic Diseases and Endocrinology, New Delhi and Dr. Nikhil Tandon, Department of Endocrinology and Metabolism, All India Institute of Medical Sciences, New Delhi.&nbsp;</p>
+<p>&nbsp;</p>
+<p>The Program of the Conference was divided into several sessions covering issues related to NCD prevention and Health promotion in multiple settings: community, schools and work places,&nbsp;as&nbsp;it is important&nbsp;to re-assess the measures taken so far at multiple settings for preventing and controlling NCDs, and to map out the way forward so as to manage the situation more effectively and efficiently.&nbsp;</p>
+<p>&nbsp;</p>
+<p>Dr. Jagdish Prasad, Director General Health Services, Government of India inaugurated the Conference. Key speakers for this conference were: Dr. K. Srinath Reddy, President, Public Health Foundation of India, New Delhi, Mr. Amarjit Singh, Additional Secretary, Ministry of Human Resource Development, New Delhi, Dr. Sudhir Gupta, Additional Director General, Health Services, Dr. Prashant Joshi, Professor and Head, Department of Medicine, Indira Gandhi Government Medical College, Nagpur, and Prof. J.S. Thakur, Professor of Community Medicine, PGI Chandigarh, Dr. Pratima Murthy, NIMHANS, Bangalore.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>The Conference received a good response from the scientific/medical community as well as from public. More than one hundred and fifty people participated in the conference.</p>
+                    </div>
+                </td>
+                <td>January 22, 2013</td>
+            </tr>
+              <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c30" role="button" aria-expanded="false" aria-controls="c30">The 30th Round Table Conference of the Foundation on the topic Lifestyle and Cancer with focus on Cancer Prevention</a>
+
+                    <div class="collapse" id="c30">
+                        <p>The 30<sup>th</sup>&nbsp;Round Table Conference of the Foundation on the topic&nbsp;<strong>“Lifestyle and Cancer with focus on Cancer Prevention”</strong>&nbsp;was held on November 30, 2013 at Dr. Ramalingaswami Board Room, All India Institute of Medical Sciences, New Delhi under the convenership of Dr. Lalit Kumar, Professor &amp; Head of Medical Oncology, Institute Rotary Cancer Hospital, All India Institute of Medical Sciences, New Delhi. The conference was well organized and experts from various hospitals and research institutes were invited to deliver lectures on their areas of expertise sucha as epidemiology of cancer in India: current status; The role of cancer registries in cancer control;&nbsp;&nbsp;Lifestyle, environment, genes and cancer; Genes, lifestyle and risk of overian cancer;&nbsp;&nbsp;Potential role of curcummin in cervical cancer;&nbsp;&nbsp;Curcumin for head and neck cancer; Preventing the rise of digestive cancers in India; Herbal medication for reduction of side effects of ehemotherapy; Natural dietary compounds for cancer chemo-prevention etc. A total of 225 delegates were attended this conference.</p>
+                   
+                    </div>
+                </td>
+                <td>November 30, 2013</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-3">
+                                <div class="table-responsive">
+    <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+              
+             
+           
+          
+           
+
+             
+            
+             
+            
+               
+
+             
+
+                 
+             
+
+             
+            
+
+              
+              
+             
+             
+             
+             
+             <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c28" role="button" aria-expanded="false" aria-controls="c28">The 28th Round Table Conference on Chronic Kidney Disease (CKD) : A Hidden Tsunami</a>
+
+                    <div class="collapse" id="c28">
+            <p>The&nbsp;<strong>28<sup>th</sup>&nbsp;Round Table Conference on “Chronic Kidney Disease (CKD) : A Hidden Tsunami”</strong>&nbsp;was conducted on March 30, 2012 at India Habitat Centre, New Delhi in association with Department of Nephrology, All India Institute of Medical Sciences, New Delhi under the convenership of Prof. Sanjay Kumar Agarwal, Professor &amp; Head of Nephrology, AIIMS. The conference addressed various topics on Kidney Disease such as Magnitude of CKD, CKD in Diabetes Mellitus, CKD in Renal Parenchymal Disease, CKD in Hypertension, CKD as Non-communicable Disease and its Prevention etc. Experts from renowned institutes were invited to deliberate on the topics.</p>
+<p>The conference received a positive response from the scientific community as well as from the general public. A total of 165 people attended the conference.</p>
+                    </div>
+                </td>
+                <td>March 30, 2012</td>
+            </tr>
+            
+              
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-4">
+                                <div class="table-responsive">
+    <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+              
+             
+           
+          
+           
+
+             
+            
+             
+            
+               
+
+             
+
+                 
+             
+
+             
+            
+
+              
+              
+             
+             
+             
+             <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c27" role="button" aria-expanded="false" aria-controls="c27">The X27th Round Table Conference on Targeted Therapy in Malignancy : Where the Future is !</a>
+
+                    <div class="collapse" id="c27">
+             <p><strong>27<sup>th</sup>&nbsp;Round Table Conference on</strong>&nbsp;<strong>“Targeted Therapy in Malignancy : Where the Future is !”</strong>&nbsp;was conducted on November 12, 2011 at Dr. Ramalingaswami Board Room, All India Institute of Medical Sciences (AIIMS), in association with Prof. Lalit Kumar, Professor of Medical Oncology, Institute Rotary Cancer Hospital, AIIMS.&nbsp;The conference was attended by leading experts in the area of cancer, who shared their experiences with the audience and discussed the way forward. The conference was deliberated on various topics like&nbsp;Targeting Angiogenesis,&nbsp;Potential Targets in Cancer Cervix,&nbsp;Targeting CD20 Molecule, Non Hodgkin’s Lymphoma : Management – Impact of Novel Molecules, Multiple Myeloma : Management – Impact of Novel Molecules, Targeting Tyrosine Kinase and Signal Transduction Inhibitor, Targeting Epidermal Growth Factor, Rationally Designed Nanomedicines Targeting Malignancies etc.</p>
+<p>&nbsp;</p>
+<p>The conference received a good response and was attended by around 200 participants from all over India. The abstracts of the conference were published and distributed during the conference.</p>
+                    </div>
+                </td>
+                <td>November 12, 2011</td>
+            </tr>
+             
+            
+              
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-5">
+                                <div class="table-responsive">
+    <table class="table table-bordered table-striped" id="sortTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)" class="pointer">
+                    Press Release <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+                <th onclick="sortTable(1)" class="pointer" width="20%">Date <span class="sortIcon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-96 0 512 512" width="1em" height="1em" fill="#ccc">
+                            <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z">
+                            </path>
+                        </svg></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+              
+             
+           
+          
+           
+
+             
+            
+             
+            
+               
+
+             
+
+                 
+             
+
+             
+            
+
+              
+              
+             <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c24" role="button" aria-expanded="false" aria-controls="c24">The XXIV Round Table Conference of the Foundation on the topic Polio Eradication : Challenges and Opportunities</a>
+
+                    <div class="collapse" id="c24">
+                 <p><strong>The</strong><strong>&nbsp;</strong><strong>XXIV</strong><strong>&nbsp;Round Table Conference of the Foundation on the topic “Polio Eradication : Challenges and Opportunities</strong><strong>”</strong>&nbsp;was held on March 19, 2010 at India Habitat Centre, New Delhi in collaboration with Indian Academy of Pediatrics. Prof. T. Jacob John and Dr. O.P. Sood were the conveners of the Conference. The Keynote address "Polio Eradication: An Update on Progress and Challenges for India"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;was delivered by&nbsp;Dr.&nbsp;Hamid Jafari, Project Manager, National Polio Surveillance Project, WHO, New Delhi.</p>
+<p>The aim of the conference was to review the core eradication strategies, evaluation of major barriers in the intensified polio eradication effort, assessment of new strategic approaches, development and evaluation of new tools like bivalent OPV and injectable polio vaccine (IPV) including environmental surveillance to limit the international spread of polio virus. Besides these concerns, the experts also deliberated on the issue of development of post eradication policy. A large number of eminent scientists, researchers, clinicians, epidemiologist and public health experts deliberated on various aspects of polio eradication to share the lessons learnt from past experiences in order to facilitate planning of future strategies to achieve and consolidate polio eradication in India. A panel discussion on the topic “Polio eradication in India : Existing Gaps and Emerging Opportunities” was held as the last session in which specific questions about various facets of polio eradication were raised and debated. In the end frontline messages were delivered to give future directions to the policy makers, health professionals and public at large to show a way forward for eradication of this dreaded disease from India. The conference was attended by about 130 delegates from all over India.</p>
+                    </div>
+                </td>
+                <td>March 19, 2010</td>
+            </tr>
+             <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c25" role="button" aria-expanded="false" aria-controls="c25">Its XXV Round Table Conference on “Population, Health and Development</a>
+
+                    <div class="collapse" id="c25">
+               <p>Ranbaxy Science Foundation organized&nbsp;<strong>its XXV Round Table Conference on “Population, Health and Development”</strong>&nbsp;on July 13, 2010 at India Habitat Centre, New Delhi in partnership with&nbsp;Jansankhya Sthirata Kosh&nbsp;(National&nbsp;Population Stabilization&nbsp;Fund), an&nbsp;autonomous body of the Ministry of Health and Family Welfare, Government of India. It promotes and supports innovative activities aimed at population stabilization by partnering with government and civil society.</p>
+<p>Ms K. Sujatha Rao, Secretary, Ministry of Health and Family Welfare, Government of India was the chief guest at this conference and she delivered the Key-note Address.</p>
+<p>The conference was attended by leading experts in the area of health and population who shared their experiences with the audience and discussed the way forward. The conference also has participation of health officials from all the major northern states.</p>
+<p>Population growth has long been a concern of the government of India has a lengthy history of explicit population policy. The Government began its efforts in as early as 1950 and India was one of the pioneer nations in the developing world to have government sponsored family planning efforts. As we can see from the literature, all governments in India irrespective of their political affiliation has addressed this problem aggressively and have devoted tremendous efforts and resources for the last 60 years in this area. The government has long back recognized that the stabilization of the population is not a stand alone issue but is an integral part of general human development strategy which takes into account social, health and educational conditions. Despite the numerous resources deployed for health and development, India continued to have one of the most rapidly growing population in the world. We were just 350 million at the time of independence and now increased to 1.15 billion. Our expected population in 2030 will be 1.53 billion, which will be the largest in the world of a single country.</p>
+<p>This forum was&nbsp;an excellent opportunity for various government officers and member corporates from the national level and the states of UP, MP, Bihar, Rajasthan, Jharkhand, Chhattisgarh, Assam and Orissa to join in the deliberations and to understand the issues related to Population Stabilisation in the country. They also have an opportunity to interact with health officers from the states to discuss the way forward in their states and areas of possible collaboration. The issue of Population, Health and Development, is not limited to the health sector alone. It impacts all aspects of development and the economic development of the country at large and therefore would be a cause of concern and interest for all members. The Conference was well attended by 140 delegates from all over India.</p>
+                    </div>
+                </td>
+                <td>July 13, 2010</td>
+            </tr>
+             <tr>
+                <td>
+                    <a class="text-orange text-break" data-bs-toggle="collapse" href="#c26" role="button" aria-expanded="false" aria-controls="c26">The XXVI Round Table Conference of the Foundation on the topic Sleep Disorders : A Wake-up Call for Physicians</a>
+
+                    <div class="collapse" id="c26">
+             <p><strong>The XXVI Round Table Conference of the Foundation on the topic “Sleep Disorders : A Wake-up Call for Physicians”</strong>&nbsp;was held&nbsp;on October 9, 2010 at All India Institute of Medical Sciences, New Delhi in partnership with Department of Medicine and Sleep Laboratory, All India Institute of Medical Sciences.&nbsp;Sleep disorders are common and may result in significant morbidity. Sleep deprivation when left untreated interfere with one’s work and social activities. It produces negative effects on individual’s physical and mental well being. It is estimated that over a hundred different types of sleep disorder exists. Diagnosis is based upon meticulous inventory of the clinical history, careful examination and the evaluation from sleep laboratory with polysomnography.</p>
+<p><strong>Dr. Atul Malhotra,</strong>&nbsp;Professor of Medicine, Sleep Disorders Research Program, Brigham and Women’s Hospital, Boston, USA was the Key-note Speaker of the Conference and delivered his key-note address on “Sleep and Human Health”. The Conference addressed the major issues&nbsp;related to sleep disorders like&nbsp;Physiology of Sleep Disorder,&nbsp;Obstructive Sleep Apnea, Insomnia,&nbsp;Circadian Rhythm Sleep Disorders,&nbsp;Parasomnias, and Narcolepsy<strong><em>.</em></strong></p>
+<p>This conference was attended by approximately 140 scientists, clinicians, public health workers and medical students from all over India.</p>
+                    </div>
+                </td>
+                <td>October 09, 2010</td>
+            </tr>
+             
+             
+            
+              
+        </tbody>
+    </table>
+</div>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-6">
+                                <div class="table-responsive">
     <table class="table table-bordered table-striped" id="sortTable">
         <thead>
             <tr>
@@ -534,48 +858,7 @@ A series of scientific sessions on the main topics of Polio Eradication, Vaccine
     </table>
 </div>
                                 </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-2">
-                                    <p>Content for tab 2.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-3">
-                                    <p>Content for tab 3.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-15">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-14">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-13">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-12">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-11">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-10">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-9">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-8">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-7">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-6">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-5">
-                                    <p>Tab content.</p>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="tab-4">
-                                    <p>Tab content.</p>
-                                </div>
+                               
                             </div>
                         </div>
                     </section>
