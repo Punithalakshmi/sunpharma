@@ -2,10 +2,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3> Add/Modify Award</h3>
-              </div>
-              <div class="title_right">
-                <a href="<?=base_url();?>/admin/nomination"><h3 class="btn btn-secondary">BACK</h3></a>
+                <h3>Add Award</h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -21,7 +18,7 @@
                           
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Type</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Main Category</label>
                         <div class="col-md-6">
                           <select class="select2_single form-control col-md-7 col-xs-12" name="main_category_id" tabindex="-1" >
                             <option value=""></option>
@@ -45,30 +42,30 @@
                      
                       <div class="clearfix"></div>       
 
-                      <!-- <div class="clearfix"></div>
+                      <div class="clearfix"></div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
                         <div class="col-md-6">
                           <select class="select2_single form-control col-md-7 col-xs-12" name="category" tabindex="-1" >
                             <option value=""></option>
-                            <?php //if(is_array($categories)):
-                                    //foreach($categories as $rvalue): ?>
-                            <option value="<?//$rvalue['id'];?>" <?//set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?//$rvalue['name'];?></option>
-                            <?php //endforeach;
-                                  //endif;
+                            <?php if(is_array($categories)):
+                                    foreach($categories as $rvalue): ?>
+                            <option value="<?=$rvalue['id'];?>" <?=set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
+                            <?php endforeach;
+                                  endif;
                                   ?>
                           </select>
                         </div>
                       </div>
                       <div class="clearfix"></div>          
                       <div class="form-group col-md-6">
-                      <?php //if(isset($validation) && $validation->getError('category')) {?>
+                      <?php if(isset($validation) && $validation->getError('category')) {?>
                         <div class='alert alert-danger mt-2'>
-                          <?// $error = $validation->getError('category'); ?>
+                          <?= $error = $validation->getError('category'); ?>
                             </div>
-                        <?php //}?>
+                        <?php }?>
                       </div>
-                      -->
+                     
                       <div class="clearfix"></div>
 
                     <div class="form-group">

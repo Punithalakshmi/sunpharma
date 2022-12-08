@@ -7,8 +7,7 @@
                     <div class="carousel-inner h-100">
                     <?php if(is_array($nominations) && count($nominations) > 0): 
                         foreach($nominations as $nkey => $nvalue): 
-                           // echo "<pre>";
-                         //  print_r($nvalue);
+                           
                         ?>
                         <div class="carousel-item <?php if($nkey == 0):?>active<?php endif;?> h-100">
                             <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/uploads/events/<?=$nvalue['banner_image'];?>" alt="Slide Image" style="z-index: -1;">

@@ -1,7 +1,7 @@
 <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">btn btn-secondary
+              <div class="title_left">
                 <h3>Add/Modify Category</h3>
               </div>
               <div class="title_right">

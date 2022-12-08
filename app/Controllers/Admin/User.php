@@ -22,7 +22,7 @@ class User extends BaseController
        
         if(is_array($userdata) && count($userdata)):
 
-            $userLists = $userModel->getListsOfUsers();
+            $userLists = $userModel->getUserLists()->getResultArray();
             
             foreach($userLists as $ukey => $uvalue){
                if(!empty($uvalue['category'])){ 
@@ -273,9 +273,18 @@ class User extends BaseController
         $data['userdata'] = $userdata;
 
         if(is_array($userdata) && count($userdata)):
-          $userModel->delete(array("id" => $id));
-          return redirect()->route('admin/user');
-        else:
+
+            if($this->request->isAJAX()){
+            
+                $userModel->delete(array("id" => $id));
+                
+                return $this->response->setJSON([
+                    'status'            => 'success',
+                    'message'              => 'User deleted Successfully'
+                ]); 
+            }
+           
+        else
             return redirect()->route('admin/login');
         endif;
     }

@@ -12,6 +12,7 @@
     
     <!-- Bootstrap -->
     <link href="<?php echo base_url();?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>/css/admin/bootstrap-msg.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="<?php echo base_url();?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->

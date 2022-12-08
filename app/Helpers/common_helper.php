@@ -29,17 +29,31 @@ if ( ! function_exists('captchaVerification'))
 
     if ( ! function_exists('sendMail'))
    {
-        function sendMail($to='',$subject = '',$html = '')
+        function sendMail($to='',$subject = '',$message = '')
         {
 
-            $header = mailHeader(); 
- 
+            $email  =  \Config\Services::email();
+
+            $data['content'] = $message;
+            $html = view('email/mail',$data,array('debug' => false));
             
-            mail($to,$subject,$html,$header);
-        }
+            $email->setTo($to);
+
+            $email->setSubject($subject);
+
+            $email->setMessage($html);
+            if ($email->send()){
+                return true;
+            }
+            else
+            {
+                return $email->printDebugger(['headers']);
+            }
 
        
-    }       
+    }     
+    
+}
 
     if ( ! function_exists('mailHeader'))
     {

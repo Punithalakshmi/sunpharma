@@ -32,6 +32,7 @@
                           <th>Email</th>
                           <th>Phone</th>
                           <th>Category</th>
+                          <th>Role</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -48,9 +49,11 @@
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
                           <td><?=$user['category'];?></td>
+                          <td><?=$user['role_name'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
-                          <a href="<?=base_url().'/admin/user/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a><a href="<?=base_url().'/admin/user/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a><a href="<?=base_url().'/admin/user/changepassword/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-key"></i> Change Password </a>
+                          <a href="<?=base_url().'/admin/user/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                          <a onclick="userDelete('user','<?=$user['id'];?>','/admin/user/delete')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a><a href="<?=base_url().'/admin/user/changepassword/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-key"></i> Change Password </a>
                           </td>
                         </tr>
                         <?php endforeach;

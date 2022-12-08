@@ -85,5 +85,7 @@ abstract class BaseController extends Controller
       //  $this->request     = \Config\Services::request();
         $this->validation  = \Config\Services::validation();
 
+        $this->email       = \Config\Services::email();
+
     }
 }

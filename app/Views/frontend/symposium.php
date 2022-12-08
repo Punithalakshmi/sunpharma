@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p>The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research in the selected area of specialty which holds promise of improved health care and its potential application to the benefit of mankind. Eminent scientists from India and Abroad are invited to deliberate. The Symposia held under the aegis of Foundation are listed below :<br></p>
+                    <p>The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research in the selected area of specialty which holds promise of improved health care and its potential application to the benefit of mankind. Eminent scientists from India and abroad are invited to deliberate. The Symposia held under the aegis of Foundation are listed below :<br></p>
                 </div>
             </div>
         </div>

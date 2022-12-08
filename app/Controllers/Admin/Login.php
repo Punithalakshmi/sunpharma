@@ -38,7 +38,10 @@ class Login extends BaseController
         
         if($result){
             $session->set('userdata',$result);
-            return redirect()->route('admin/dashboard');
+            if(isset($result['role']) && ($result['role'] == 1))
+               return redirect()->to('/admin/nominee/lists');
+            else
+               return redirect()->route('admin/dashboard');
         }
         else
         {

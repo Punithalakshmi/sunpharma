@@ -31,13 +31,14 @@
                           <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
+                          <th>Award Category</th>
                           <th>Approval Status</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <?php if(is_array($lists)):
+                        <?php if(count($lists) > 0 && is_array($lists)):
                                 foreach($lists as $user):
                             ?>
                         <tr>
@@ -46,6 +47,7 @@
                           <td><?=strtolower($user['firstname']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
+                          <td><?=$user['category_name'];?></td>
                           <td><?=(((isset($user['active']) && isset($user['status'])) && ($user['active']==1 && $user['status']=='Approved')))?'Approved':'Pending';?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
@@ -59,7 +61,11 @@
                             <?php endif; ?>     
                           </td>
                         </tr>
-                        <?php endforeach;
+                        <?php endforeach; ?>
+
+                        <?php else: ?>
+                          <tr colspan="7"> <td>No Nominees Found</td></tr>
+                             <?php
                                 endif;
                                 ?>            
                       </tbody>
@@ -83,12 +89,12 @@
           <form name="juryListsForm" id="juryListsForm" >
                  <option value=" "></option>
                 <select name="juryLists" id="juryLists" class="form-control">
-                  <?php if(is_array($juryLists)):
-                           foreach($juryLists as $jvalue):
+                  <?php //if($juryLists && count($juryLists) > 0 && is_array($juryLists)):
+                           //foreach($juryLists as $jvalue):
                         ?>
-                        <option value="<?=$jvalue['id'];?>"><?=$jvalue['firstname'].' '.$jvalue['lastname'];?></option>
-                        <?php endforeach;
-                               endif; ?>
+                        <option value="<?//$jvalue['id'];?>"><?//$jvalue['firstname'].' '.$jvalue['lastname'];?></option>
+                        <?php //endforeach;
+                              // endif; ?>
                 </select>                
           </form>
       </div>

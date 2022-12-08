@@ -169,8 +169,14 @@ class EventRegisteration extends BaseController
 
         if(is_array($userdata) && count($userdata)):
           $registerationModel->delete(array("id" => $id));
-          return redirect()->route('admin/eventregisteration');
-        else:
+          if($this->request->isAJAX()){
+                
+            return $this->response->setJSON([
+                'status'            => 'success',
+                'message'           => 'Registration deleted Successfully'
+            ]); 
+         }
+        else
             return redirect()->route('admin/login');
         endif;
     }
