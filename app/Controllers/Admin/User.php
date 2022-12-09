@@ -10,7 +10,7 @@ class User extends BaseController
     public function index()
     {
         
-            $userLists = $userModel->getUserLists()->getResultArray();
+            $userLists = $this->userModel->getUserLists()->getResultArray();
             
             foreach($userLists as $ukey => $uvalue){
                if(!empty($uvalue['category'])){ 

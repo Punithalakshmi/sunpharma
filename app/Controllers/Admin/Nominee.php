@@ -18,7 +18,7 @@ class Nominee extends BaseController
 
             foreach($lists as $k => $user){
              
-                $getNominationEndDate = $nomineeTypesModel->getCategoryNomination($user['category']);
+                $getNominationEndDate = $this->nominationTypesModel->getCategoryNomination($user['category']);
                
                 $lists[$k]['nomination_end_date'] = '';
 
@@ -309,13 +309,13 @@ class Nominee extends BaseController
                     $ins_data['extend_date']   = date("Y-m-d",strtotime($extend_date));
                  
                     //get user data
-                    $getExtendUserData  = $userModel->getListsOfUsers($id)->getRowArray();
+                    $getExtendUserData  = $this->userModel->getListsOfUsers($id)->getRowArray();
                    
                     if(!empty($id) && $getExtend->getRowArray() > 0){
                         $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
                         $ins_data['updated_date']   =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']     =  $userdata['login_id'];
-                        $userModel->update(array("id" => $id),$ins_data);
+                        $this->userModel->update(array("id" => $id),$ins_data);
                     }
                 
                     $this->extendMailNotification($getExtendUserData['email'],$extend_date);

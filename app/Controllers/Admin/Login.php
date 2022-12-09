@@ -7,10 +7,11 @@ use App\Controllers\BaseController;
 
 class Login extends BaseController
 {
-    //public $title = 'Login';
+    
     
     public function index()
     {
+        sessionDestroy();
         return render('admin/login',$this->data);
     }
 
@@ -44,7 +45,8 @@ class Login extends BaseController
                              //   echo "ffdfffd";
                                 $ses_data = [
                                     'id' => $data['id'],
-                                    'name' => $data['name'],
+                                    'name' => $data['firstname'],
+                                    'login_name' => $data['firstname'],
                                     'email' => $data['email'],
                                     'isLoggedIn' => TRUE,
                                     'role' => $data['role'],

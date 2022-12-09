@@ -49,4 +49,14 @@ if ( ! function_exists('getLoggedInUsername'))
     }
 }
 
+if ( ! function_exists('sessionDestroy'))
+{
+    function sessionDestroy()
+    {
+        $session = session();
+        $session->destroy();
+    }
+}
+
+
 ?>

@@ -10,12 +10,12 @@ class Nomination extends BaseController
     public function index()
     {
         
-            $nominationTypeLists = $this->nominationTypesModel->getListsOfNominations();
+            $nominationTypeLists = $this->nominationTypesModel->getListsOfNominations()->getResultArray();
 
             foreach($nominationTypeLists as $ukey => $uvalue){
                 
                 if(!empty($uvalue['category_id'])){ 
-                 $category = $categoryModel->getListsOfCategories($uvalue['category_id']);
+                 $category = $this->categoryModel->getListsOfCategories($uvalue['category_id']);
                     
                  $category = $category->getRowArray();
                  
