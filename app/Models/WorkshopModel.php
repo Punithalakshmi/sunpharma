@@ -21,7 +21,8 @@ class WorkshopModel extends Model{
         'year',
         'banner_image',
         'thumb_image',
-        'status'
+        'status',
+        'agenda'
     ];
 
     public function getLists($id='')

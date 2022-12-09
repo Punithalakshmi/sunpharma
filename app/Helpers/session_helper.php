@@ -21,6 +21,8 @@ if ( ! function_exists('getSessionData'))
         }
         else
         {
+            $uri  = current_url(true);
+             echo $uri->getSegment(1); die;
             return $sessData = ($session->get('userdata'))?$session->get('userdata'):$session->get('fuserdata');
         }  
 

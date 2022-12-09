@@ -14,6 +14,7 @@
                     </div>
                     <?php endif;?>
                 </div>
+                <?= csrf_field(); ?>
                 <div class="col-md-6 col-xl-4">
                     <div>
                         <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/contact">

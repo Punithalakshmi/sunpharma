@@ -74,7 +74,6 @@ class EventRegistration extends BaseController
               $this->data['validation'] = $this->validator;
 
             $this->data['editdata'] = $editdata;
-            $this->data['userdata'] = $userdata;
             
             return  render('frontend/event_registeration',$this->data);
                                       
@@ -127,6 +126,28 @@ class EventRegistration extends BaseController
         mail($email,$subject,$html,$header);
 
 
+    }
+
+    function read_more($id = '')
+    {
+
+        if($id){
+            $eventData = $this->workshopModel->getLists($id)->getRowArray();
+
+            
+        }
+        else
+        {
+            $eventData['banner_image'] = '';
+            $eventData['description'] = '';
+            $eventData['subject']     = '';
+            $eventData['title']      = '';
+            $eventData['document']      = '';
+            $eventData['agenda']      = '';
+         //   $eventData['title']      = '';
+        }
+        $this->data['eventData'] = $eventData;
+        return  render('frontend/read_more',$this->data);
     }
 
     public function getRegisterationNo()

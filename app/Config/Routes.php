@@ -87,6 +87,10 @@ $routes->get('event','EventRegistration::index');
 $routes->get('event/registration','EventRegistration::event');
 $routes->post('event/registration','EventRegistration::event');
 
+$routes->get('event/read_more','EventRegistration::read_more');
+
+$routes->get('event/read_more/(:any)','EventRegistration::read_more/$1');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index",['filter' =>'auth']);
