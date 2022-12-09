@@ -1,5 +1,4 @@
-
-    <section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/research-awards.jpg&quot;) center left no-repeat, #fff;">
+<section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/research-awards.jpg&quot;) center left no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Of Research Awards<br></h1>
         </div>
@@ -13,20 +12,20 @@
         <div class="container" style="margin-bottom: 60px;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">2023</h3>
+                    <h3 class="heading" style="color: #F7941E;">2022</h3>
                 </div>
             </div>
-            <div class="row row-cols-2 row-cols-md-2 mx-auto" style="max-width: 900px;">
+            <div class="row row-cols-1 row-cols-md-3 mx-auto" style="max-width: 900px;">
            
-                <div class="col-md-4 mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#KaustuvSanyal" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Prof.-Kaustuv-Sanyal_Hi-Res-Photo[15].jpg"></a><a href="#" data-bs-target="#KaustuvSanyal" data-bs-toggle="modal">
+                <div class="col mb-4">
+                    <div class="text-center"><a href="#" data-bs-target="#KaustuvSanyal" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Kaustuv.jpg"></a><a href="#" data-bs-target="#KaustuvSanyal" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Dr. Kaustuv Sanyal<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Basic Research</p>
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#SameerBakhshi " data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Prof.-Sameer-Bhakshi-Hi-Res-Photo[95].jpg"></a><a href="#" data-bs-target="#SameerBakhshi" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Prof Sameer Bakhshi<br></h5>
                         </a>
@@ -34,7 +33,7 @@
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#Govindaraju" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Prof.-T.-Govindaraju[79].JPG"></a><a href="#" data-bs-target="#Govindaraju" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Professor T. Govindaraju<br></h5>
                         </a>
@@ -56,7 +55,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Prof.-Kaustuv-Sanyal_Hi-Res-Photo[15].jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Kaustuv.jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9"><p class="fw-bold">Dr. Kaustuv Sanyal<br></p>
                                 <small>JC Bose National Fellow<br>
 Professor and Chair<br>

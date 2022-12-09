@@ -375,7 +375,7 @@ form#eventRegistration .form-group .alert-danger {
   color: #FF9800;
 }
 .col-md-6.winnercolright{text-align: right;}
-
+.carousel-control-prev, .carousel-control-next{width: 8%;}
 
 @media(min-width:992px){
   .dropdown-menu[data-bs-popper]{top:auto; left:auto;margin-top: 0;}
@@ -394,7 +394,7 @@ form#eventRegistration .form-group .alert-danger {
 }
 
 @media(max-width:767px){
- 
+  .bannercaption .btn{margin-bottom: 5px;}
   #mainNav .navbar-brand img {
     height: 80px;
 }
