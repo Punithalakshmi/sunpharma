@@ -174,15 +174,19 @@ class Workshops extends BaseController
 
     public function delete($id='')
     {
-       
-        $this->workshopModel->delete(array("id" => $id));
-        if($this->request->isAJAX()){
-            
-            return $this->response->setJSON([
-                'status'            => 'success',
-                'message'              => 'Event deleted Successfully'
-            ]); 
-        }
+        if (strtolower($this->request->getMethod()) == "post") {  
+
+            if($this->validation->withRequest($this->request)->run()) {
+                $this->workshopModel->delete(array("id" => $id));
+                if($this->request->isAJAX()){
+                    
+                    return $this->response->setJSON([
+                        'status'            => 'success',
+                        'message'              => 'Event deleted Successfully'
+                    ]); 
+                }
+         }
+       }
        
     }
 }

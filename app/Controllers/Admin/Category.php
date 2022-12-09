@@ -103,13 +103,19 @@ class Category extends BaseController
 
     public function delete($id='')
     {
-         $this->categoryModel->delete(array("id" => $id));
-          if($this->request->isAJAX()){
-                
-            return $this->response->setJSON([
-                'status'            => 'success',
-                'message'              => 'Category deleted Successfully'
-            ]); 
-          }
+        if (strtolower($this->request->getMethod()) == "post") {  
+
+            if($this->validation->withRequest($this->request)->run()) {
+
+                    $this->categoryModel->delete(array("id" => $id));
+                    if($this->request->isAJAX()){
+                            
+                        return $this->response->setJSON([
+                            'status'            => 'success',
+                            'message'              => 'Category deleted Successfully'
+                        ]); 
+                    }
+            }
+        }    
     }
 }

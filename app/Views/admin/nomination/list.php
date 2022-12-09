@@ -11,7 +11,7 @@
                 <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs">
                 <i class="fa fa-plus"></i> Add/Modify Award</a>
            </div>
-          
+           <?= csrf_field(); ?>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
               <div class="alert alert-warning">
