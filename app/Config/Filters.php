@@ -40,7 +40,7 @@ class Filters extends BaseConfig
            // 'auth' 
         ],
         'after' => [
-            'toolbar',
+            //'toolbar',
             // 'honeypot',
             // 'secureheaders',
         ],

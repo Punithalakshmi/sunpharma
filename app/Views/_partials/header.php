@@ -67,7 +67,7 @@
             </div>
             <!-- /sidebar menu -->
 
-           
+            <p class="copyrightadmin" style="color: var(--bs-gray-400);font-size: 13px;">Copyright © 2022 Sun Pharma Science Foundation.</p>
           </div>
         </div>
 

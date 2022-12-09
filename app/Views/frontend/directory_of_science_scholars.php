@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p>&nbsp;The Ranbaxy Science Scholarships-2007 were presented on January 14, 2008 by Prof. David Battimore (Nobel Laureate) President â€“ Emeritus, Robert Andrews Millikan Professor of Biology,California Institute of Technology, USA at a special function organized at National Institute of Immunology, New Delhi.<br></p>
+                    <p>&nbsp;The Ranbaxy Science Scholarships - 2007 were presented on January 14, 2008 by Prof. David Battimore (Nobel Laureate), President  Emeritus, Robert Andrews Millikan, Professor of Biology, California Institute of Technology, USA at a special function organised at National Institute of Immunology, New Delhi.<br></p>
                 </div>
             </div>
         </div>

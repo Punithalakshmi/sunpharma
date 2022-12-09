@@ -284,7 +284,7 @@ nav#mainNav {
 }
 
 
-.wizard > .content > .body label.error{display: none!important;}
+.wizard > .content > .body label.error{/*display: none!important;*/}
 .wizard > .content > .body input.error[type="checkbox"] {
   border: 6px solid #ff0009!important;
   box-shadow: 0px 2px 6px red;
@@ -332,6 +332,63 @@ body .wizard > .content > .body {
 }
 
 
+form#eventRegistration {
+  margin: auto;
+}
+#eventRegistration label {
+  min-width: 165px;
+}
+form#eventRegistration .form-group{display: flex  ;}
+form#eventRegistration .form-group .alert-danger {
+  padding: 5px 20px;
+  margin-top: 0px!important;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #28a745;
+}
+.successsec {
+  padding: 20px;
+  font-size: 17px;
+  text-align: center;
+  margin: auto;
+}
+.successseccont {
+  min-height: 200px;
+  display: flex;
+}
+.successseccont p{margin:0;white-space: normal;}
+
+.simple-slider .bg-dark {
+  min-height: 320px;
+}
+.winnerimg {
+  min-height: 320px;
+}
+
+.tabWrapper .nav-link:hover, .tabWrapper .nav-link:focus {
+  color: #ffefdb;
+}
+
+.tabWrapper .nav-link.active:hover, .tabWrapper .nav-link.active:focus {
+  color: #FF9800;
+}
+
+@media(min-width:992px){
+  .dropdown-menu[data-bs-popper]{top:auto; left:auto;margin-top: 0;}
+.dropdown:hover .dropdown-menu{
+  display: block!important;
+}
+.dropdown-menu.show{display: none;}
+}
+@media(max-width:992px){
+  li.nav-item {
+    width: 100%;
+    border: 1px solid #dddddd6e!important;
+}
+}
+
 @media(max-width:767px){
   #mainNav .navbar-brand img {
     height: 80px;
@@ -343,6 +400,7 @@ body .wizard > .content > .body {
 .step > .row > .col-lg-12, .step > .row > .col-lg-6 {
   padding: 10px 10px 10px 10px;
 }
+form#eventRegistration .form-group{display: block;}
 
 }
 

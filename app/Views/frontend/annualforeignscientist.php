@@ -1,6 +1,6 @@
 <section class="heroInner" style="background: #fff url(<?=base_url();?>/frontend/assets/img/investor-banner.jpg) center left no-repeat;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Inviting Foreign Scientists as Visiting Professors</h1>
+            <h1 class="fs-1 fw-bold fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Inviting Foreign Scientists as Visiting Professors</h1>
         </div>
     </section>
     <section class="py-5">
@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     
-                    <p>The Foundation invites one outstanding research scientist from abroad every year to work with Indian scientists in Indian Laboratories to elevate the capabilities of Indian Scientists and widen their knowledge base in the ongoing research on topics related to health development. The following foreign scientists were invited to India by the Foundation as Visiting Professors.<br></p>
+                    <p>The Foundation invites one outstanding research scientist from abroad every year to work with Indian scientists in Indian laboratories. This is aimed at exchange of knowledge and ideas and helps our scientists in ongoing research projects related to health. The following foreign scientists were invited to India by the Foundation as Visiting Professors.<br></p>
                 </div>
             </div>
         </div>
