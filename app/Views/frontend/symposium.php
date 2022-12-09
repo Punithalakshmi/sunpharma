@@ -1,13 +1,13 @@
 <section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/symposium-tbanner.jpg) top / auto no-repeat, #fff;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Scientific Symposia in Frontline Areas of Research<br></h1>
+            <h1 class="fs-1 fw-bold fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Scientific Symposia in Frontline Areas of Research<br></h1>
         </div>
     </section>
     <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p>The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research in the selected area of specialty which holds promise of improved health care and its potential application to the benefit of mankind. Eminent scientists from India and abroad are invited to deliberate. The Symposia held under the aegis of Foundation are listed below :<br></p>
+                    <p>The Foundation organises one Annual Symposium on any topic which is at the cutting edge of research in Medical Sciences. The aim of the symposium is to explore the latest research in the selected area of specialty which holds promise of improved health care and its potential application to the benefit of mankind. Eminent scientists from India and abroad are invited to deliberate. The symposia held under the aegis of Foundation are listed below :<br></p>
                 </div>
             </div>
         </div>

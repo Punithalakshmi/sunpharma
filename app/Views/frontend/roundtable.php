@@ -1,13 +1,13 @@
 <section class="heroInner" style="background: url(<?=base_url();?>/frontend/assets/img/round-table-tbanner.jpg) center left no-repeat, #fff;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Round Table Conferences on Topics of National Public health Concern<br></h1>
+            <h1 class="fs-1 fw-bold fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Round Table Conferences on Topics of national Public Health Concern<br></h1>
         </div>
     </section>
     <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p>The Foundation organizes two Round Table Conferences in a year on topics of contemporary concern to human health which pose challenges. The aim of these multidisciplinary Round Table Conferences is to review the collective experiences of basic scientists, laboratory scientists, epidemiologists, clinicians and public health professionals. At the end of the conference, frontline messages indicating need of newer areas of disease related knowledge and research for control of the disease are brought out to give directions to the government, policy makers, professionals and the public at large. The Round Table Conferences held under the aegis of Foundation are listed below:<br></p>
+                    <p>The Foundation organises two Round Table Conferences in a year on topics of contemporary concern to human health. The aim of these multidisciplinary Round Table Conferences is to review the collective experiences of basic scientists, laboratory scientists, epidemiologists, clinicians and public health professionals. At the end of the conference, frontline messages indicating the need of newer areas of disease related knowledge and research for control of the disease are brought out to give directions to the government, policy makers, professionals and the public at large. The Round Table Conferences held under the aegis of Foundation are listed below:<br></p>
                 </div>
             </div>
         </div>
