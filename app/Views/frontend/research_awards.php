@@ -62,7 +62,7 @@
             </div>
         </div>
 
-     <div class="container mt-5">
+     <div id="awardslist" class="container mt-5">
         <div class="row">
             <div class="col-md-12">
             <section class="border tabWrapper">
