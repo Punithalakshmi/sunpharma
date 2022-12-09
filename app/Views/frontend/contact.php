@@ -14,11 +14,12 @@
                     </div>
                     <?php endif;?>
                 </div>
-                <?= csrf_field(); ?>
+               
                 <div class="col-md-6 col-xl-4">
                     <div>
                         <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/contact">
-                            <div class="mb-3">
+                        <?= csrf_field(); ?>    
+                        <div class="mb-3">
                                 <input class="form-control" type="text" id="name-1" name="contact_name" placeholder="Name" value="<?php echo set_value('contact_name',$editdata['contact_name']);?>">
                             </div>
                             <div class="clearfix"></div>
@@ -58,7 +59,7 @@
                             <div class="g-recaptcha" data-sitekey="6Ldh61ojAAAAAAamaHiBZ5mAv702yCK9qbqUQQu3"></div>
                             <div class="clearfix"></div>
                             <div>
-                                <button class="btn btn-primary shadow d-block w-100" type="submit">Send</button>
+                                <button class="btn btn-primary shadow d-block w-100" name="submit" type="submit">Send</button>
                               </div>
                         </form>
                     </div>

@@ -8,6 +8,7 @@
             <div class="row">
 <div class="registration-form">
            <form id="eventRegistration" action="<?php echo base_url();?>/event/registration" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+           <?= csrf_field(); ?>
            <div class="clearfix"></div>
                       <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Event</label>
