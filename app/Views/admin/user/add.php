@@ -4,10 +4,15 @@
               <div class="title_left">
                 <h3>Add/Modify User</h3>
               </div>
-              <div class="title_right">
-                <a href="<?=base_url();?>/admin/user"><h3 class="btn btn-secondary">BACK</h3></a>
+
               </div>
-            </div>
+
+              <div class="actionbtns">
+  <a class="btn btn-primary" href="<?=base_url();?>/admin/user"><i class="fa fa-arrow-left"></i> BACK</a>
+                            
+           </div>
+
+
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
