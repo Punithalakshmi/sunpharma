@@ -8,6 +8,8 @@ class Dashboard extends BaseController
 {
     public function index()
     {
+
+       
         return render('admin/home',$this->data);  
     }
 

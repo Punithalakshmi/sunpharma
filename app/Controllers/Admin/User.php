@@ -52,7 +52,7 @@ class User extends BaseController
         
         if($this->validation) {
 
-            if($this->request->getPost()){
+            if (strtolower($this->request->getMethod()) == "post") {  
                     
                 $category = '';
 
@@ -158,7 +158,7 @@ class User extends BaseController
             
             if($this->validation) {
 
-                if($this->request->getPost()){
+                if (strtolower($this->request->getMethod()) == "post") {  
                 
                     $firstname     = $this->request->getPost('firstname');
                     $lastname      = $this->request->getPost('lastname');
@@ -244,7 +244,7 @@ class User extends BaseController
             
             if($this->validation) {
 
-                if($this->request->getPost()){
+                if (strtolower($this->request->getMethod()) == "post") {  
                 
                     $newPassword     = $this->request->getPost('new_password');
                     $id              = $this->request->getPost('id');

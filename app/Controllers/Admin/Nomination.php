@@ -66,7 +66,7 @@ class Nomination extends BaseController
             if($this->request->getPost())
                $id  = $this->request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules());
+            $validation = $this->validate($this->validation_rules($id));
             if($validation) {
 
                 if($this->request->getPost()){
@@ -195,13 +195,13 @@ class Nomination extends BaseController
     }
 
 
-    public function validation_rules()
+    public function validation_rules($id = '')
     {
 
         $validation_rules = array();
         $validation_rules = array(
                                         "main_category_id" => array("label" => "Award",'rules' => 'required'),
-                                        "category" => array("label" => "Award Type",'rules' => 'required'),
+                                        "category" => array("label" => "Award Type",'rules' => 'required|is_unique[nominations.category_id,id,'.$id.']'),
                                         "subject" => array("label" => "Subject",'rules' => 'required'),
                                         "description" => array("label" => "Description",'rules' => 'required'),
                                         "start_date" => array("label" => "Start Date",'rules' => 'required'),

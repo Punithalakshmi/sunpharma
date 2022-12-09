@@ -7,11 +7,9 @@ class Nomination extends BaseController
 {
     public function index($id = '')
     {
-   
-        $userdata  = $this->session->get('fuserdata');
 
-        if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == '2'))
-            $this->view($userdata['id']);
+        if(is_array($this->data['userdata']) && $this->data['userdata']['isLoggedIn'] && ($this->data['userdata']['role'] == '2'))
+            $this->view($this->data['userdata']['id']);
             
             if(!empty($id)){
                 $getUserData = $this->userModel->getUserData($id);
@@ -35,7 +33,7 @@ class Nomination extends BaseController
            
             if($this->validation) {
 
-                if($this->request->getPost()){
+                if (strtolower($this->request->getMethod()) == "post") { 
                 
                     $category                    = $this->request->getPost('category');
                     $firstname                   = $this->request->getPost('nominee_name');
@@ -51,6 +49,10 @@ class Nomination extends BaseController
                     $nominator_office_address    = $this->request->getPost('nominator_office_address');
                     $ongoing_course              = $this->request->getPost('ongoing_course');
                     $research_project            = $this->request->getPost('research_project');
+                    $surname                     = $this->request->getPost('nominee_surname');
+                    $bio_description             = $this->request->getPost('bio_description');
+
+                    $nominationEndDate = getNominationEndDate($category);
                     
                   
                     $ins_data = array();
@@ -62,6 +64,8 @@ class Nomination extends BaseController
                     $ins_data['status']     = 'Disapproved';
                     $ins_data['role']       = 2;
                     $ins_data['category']   = $category;
+                    $ins_data['surname']    = $surname;
+                    $ins_data['extend_date']    = $nominationEndDate;
 
                     $nominee_details_data = array();
                     $nominee_details_data['category_id']        = $category;
@@ -75,6 +79,7 @@ class Nomination extends BaseController
                     $nominee_details_data['ongoing_course']    = $ongoing_course;
                     $nominee_details_data['is_completed_a_research_project']  = $research_project;
                     $nominee_details_data['is_submitted'] = 0;
+                    $nominee_details_data['bio_description'] = $bio_description;
 
                     $this->session->setFlashdata('msg', 'Submitted Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
@@ -129,6 +134,8 @@ class Nomination extends BaseController
                 $editdata['nominator_photo']                      = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
                 $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
                 $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
+                $editdata['nominee_surname']                       = ($this->request->getPost('nominee_surname'))?$this->request->getPost('nominee_surname'):'';
+                $editdata['bio_description']                       = ($this->request->getPost('bio_description'))?$this->request->getPost('bio_description'):'';
                 $editdata['id']                                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
 
                 
@@ -137,7 +144,7 @@ class Nomination extends BaseController
                 $this->data['validation'] = $this->validator;
 
                 $this->data['editdata']   = $editdata;
-                $this->data['userdata']   = $userdata;
+              
                 $this->data['nomination'] = $id;
 
                 if($this->request->isAJAX()){
@@ -160,9 +167,8 @@ class Nomination extends BaseController
     public function ssan($id = '',$detail_id='')
     {
 
-       
-        if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == 2))
-            $this->view($userdata['id']);
+        if(is_array($this->data['userdata']) && $this->data['userdata']['isLoggedIn'] && ($this->data['userdata']['role'] == 2))
+            $this->view($this->data['userdata']['id']);
 
         
         if(!empty($id)){
@@ -185,7 +191,7 @@ class Nomination extends BaseController
         
         if($this->validation) {
 
-            if($this->request->getPost()){
+            if (strtolower($this->request->getMethod()) == "post") {  
                 
                 $category                    = $this->request->getPost('category');
                 $firstname                   = $this->request->getPost('nominee_name');
@@ -199,6 +205,10 @@ class Nomination extends BaseController
                 $nominator_mobile            = $this->request->getPost('nominator_mobile');
                 $nominator_email             = $this->request->getPost('nominator_email');
                 $nominator_office_address    = $this->request->getPost('nominator_office_address');
+                $surname                     = $this->request->getPost('nominee_surname');
+                $bio_description             = $this->request->getPost('bio_description');
+
+                $nominationEndDate = getNominationEndDate($category);
 
                 $ins_data = array();
                 $ins_data['firstname']  = $firstname;
@@ -210,6 +220,8 @@ class Nomination extends BaseController
                 $ins_data['role']       = 2;
                 $ins_data['category']   = $category;
                 $ins_data['active']     = '0';
+                $ins_data['surname']    = $surname;
+                $ins_data['extend_date']    = $nominationEndDate;
 
                 $nominee_details_data = array();
                 $nominee_details_data['category_id']        = $category;
@@ -221,6 +233,7 @@ class Nomination extends BaseController
                 $nominee_details_data['nominator_phone']    = $nominator_mobile;
                 $nominee_details_data['nominator_address']  = $nominator_office_address;
                 $nominee_details_data['is_submitted'] = 0;
+                $nominee_details_data['bio_description'] = $bio_description;
 
                 
                 $this->session->setFlashdata('msg', 'Submitted Successfully!');
@@ -273,6 +286,8 @@ class Nomination extends BaseController
             $editdata['justification_letter']          = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
             $editdata['passport']                      = ($this->request->getFile('passport'))?$this->request->getFile('passport'):'';
             $editdata['nominator_photo']               = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
+            $editdata['nominee_surname']                       = ($this->request->getPost('nominee_surname'))?$this->request->getPost('nominee_surname'):'';
+            $editdata['bio_description']               = ($this->request->getPost('bio_description'))?$this->request->getPost('bio_description'):'';
             $editdata['id']                            = ($this->request->getPost('id'))?$request->getPost('id'):'';
 
         
@@ -280,7 +295,7 @@ class Nomination extends BaseController
               $this->data['validation'] = $this->validator;
 
             $this->data['editdata'] = $editdata;
-            $this->data['userdata'] = $userdata;
+          
             $this->data['nomination'] = $id;
 
             if($this->request->isAJAX()){

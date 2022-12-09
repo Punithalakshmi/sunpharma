@@ -96,3 +96,21 @@ if ( ! function_exists('getAwardsArr'))
         return $awards;
     }
 }   
+
+
+if ( ! function_exists('getNominationEndDate'))
+{
+    function getNominationEndDate($category_id)
+    {
+       
+        $nominationTypesModel      = model('App\Models\NominationTypesModel');
+
+        $getnominationDate  = $nominationTypesModel->getCategoryNomination($category_id)->getRowArray();
+    
+        if(is_array($getnominationDate) && count($getnominationDate) > 0)
+          return $getNominationEndDate['end_date'];
+        else
+          return false; 
+        
+    }
+}
