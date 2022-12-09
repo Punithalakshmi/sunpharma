@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 class Nomination extends BaseController
 {
     public function index($id = '')
@@ -11,10 +12,7 @@ class Nomination extends BaseController
 
         if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == '2'))
             $this->view($userdata['id']);
-
-            $uri         = current_url(true);
-            $this->data['uri'] = (base_url() == 'http://local.sunpharma.md')?$uri->getSegment(1):$uri->getSegment(3);
-
+            
             if(!empty($id)){
                 $getUserData = $this->userModel->getUserData($id);
                 $edit_data   = $getUserData->getRowArray();
@@ -53,14 +51,7 @@ class Nomination extends BaseController
                     $nominator_office_address    = $this->request->getPost('nominator_office_address');
                     $ongoing_course              = $this->request->getPost('ongoing_course');
                     $research_project            = $this->request->getPost('research_project');
-
-                    //getNomination End date
-                    $getNominationEndDate = $this->nominationTypesModel->getWhere(array("main_category_id" => 2,"status" => '1'))->getRowArray();
                     
-                    $end_date = '';
-                    if(count($getNominationEndDate) > 0)
-                       $end_date = $getNominationEndDate['end_date'];
-
                   
                     $ins_data = array();
                     $ins_data['firstname']  = $firstname;
@@ -70,12 +61,10 @@ class Nomination extends BaseController
                     $ins_data['dob']        = date("Y/m/d",strtotime($dob));
                     $ins_data['status']     = 'Disapproved';
                     $ins_data['role']       = 2;
-                    $ins_data['category']   = 2;
-                    $ins_data['nomination_end_date'] = $end_date;
+                    $ins_data['category']   = $category;
 
                     $nominee_details_data = array();
-                    $nominee_details_data['category']           = $category;
-                    $nominee_details_data['category_id']        = 2;
+                    $nominee_details_data['category_id']        = $category;
                     $nominee_details_data['citizenship']        = $citizenship ;
                     $nominee_details_data['nomination_type']    = 'spsfn';
                     $nominee_details_data['residence_address']  = $residence_address;
@@ -141,6 +130,8 @@ class Nomination extends BaseController
                 $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
                 $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
                 $editdata['id']                                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
+
+                
 
                 if($this->request->getPost())
                 $this->data['validation'] = $this->validator;
@@ -209,13 +200,6 @@ class Nomination extends BaseController
                 $nominator_email             = $this->request->getPost('nominator_email');
                 $nominator_office_address    = $this->request->getPost('nominator_office_address');
 
-                //getNomination End date
-                $getNominationEndDate = $this->nominationTypesModel->getWhere(array("main_category_id" => 1,"status" => '1'))->getRowArray();
-                    
-                $end_date = '';
-                if(count($getNominationEndDate) > 0)
-                   $end_date = $getNominationEndDate['end_date'];
-
                 $ins_data = array();
                 $ins_data['firstname']  = $firstname;
                 $ins_data['email']      = $email;
@@ -226,11 +210,9 @@ class Nomination extends BaseController
                 $ins_data['role']       = 2;
                 $ins_data['category']   = $category;
                 $ins_data['active']     = '0';
-                $ins_data['nomination_end_date'] = $end_date;
 
                 $nominee_details_data = array();
-                $nominee_details_data['category_id']        = 1;
-                $nominee_details_data['category']           = $category;
+                $nominee_details_data['category_id']        = $category;
                 $nominee_details_data['citizenship']        = $citizenship ;
                 $nominee_details_data['nomination_type']    = 'ssan';
                 $nominee_details_data['residence_address']  = $residence_address;
@@ -580,9 +562,9 @@ class Nomination extends BaseController
             }
 
             if(!empty($editdata['category'])) {
-               // $getCategoryLists   = $this->categoryModel->getCategoriesById($editdata['category']);
-            //    $categoryRw         = $getCategoryLists->getRowArray();
-               // $editdata['category'] =    $categoryRw['name'];
+                $getCategoryLists   = $this->categoryModel->getCategoriesById($editdata['category']);
+                $categoryRw         = $getCategoryLists->getRowArray();
+                $editdata['category'] =    $categoryRw['name'];
             }
             if(!empty($editdata['citizenship'])) {
                 $editdata['citizenship'] = ($editdata['citizenship'] ==1)?'Indian':'Other';
@@ -620,7 +602,6 @@ class Nomination extends BaseController
                     'html'              => $html
                 ]); 
             }
-
             die;
         }
 

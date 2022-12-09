@@ -94,6 +94,6 @@ abstract class BaseController extends Controller
         $this->data['userdata'] = getSessionData();
         $this->role     = getUserRole();
        
-       
+
     }
 }

@@ -29,40 +29,44 @@ if ( ! function_exists('captchaVerification'))
 
     if ( ! function_exists('sendMail'))
    {
-        function sendMail($to='',$subject = '',$html = '')
+        function sendMail($to='',$subject = '',$message = '')
         {
 
-            $header = mailHeader(); 
- 
+            $email  =  \Config\Services::email();
+
+            $data['content'] = $message;
+            $html = view('email/mail',$data,array('debug' => false));
             
-            mail($to,$subject,$html,$header);
-        }
+            $email->setTo($to);
 
+            $email->setSubject($subject);
+
+            $email->setMessage($html);
+            if ($email->send()){
+                return true;
+            }
+            else
+            {
+                return $email->printDebugger(['headers']);
+            }
+       }     
+}
+
+    
+if ( ! function_exists('isNominationExpired'))
+{
+    function isNominationExpired($extendDate)
+    {
        
-    }       
-
-    if ( ! function_exists('mailHeader'))
-    {
-        function mailHeader()
-        {
-            $header  = '';
-            $header .= "MIME-Version: 1.0\r\n";
-            $header .= "Content-type: text/html\r\n";
-
-            return $header;
-        }
-    }
+        $date1_ts = strtotime(date("Y-m-d"));
+        $date2_ts = strtotime($extendDate);
+        $diff = $date2_ts - $date1_ts;
+        $nominationEndDays = round($diff / 86400);
     
-    
-    if ( ! function_exists('getNominationEndDate'))
-    {
-        function getNominationEndDate()
-        {
-            $header  = '';
-            $header .= "MIME-Version: 1.0\r\n";
-            $header .= "Content-type: text/html\r\n";
-
-            return $header;
-        }
+        if($nominationEndDays <= 0 )
+          return true;
+       else
+          return false ;
+        
     }
-
+}

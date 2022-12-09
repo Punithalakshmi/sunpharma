@@ -106,6 +106,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('user/add',"User::add");
     $routes->get('user/add/(:any)','User::add/$1');
     $routes->get("user/delete/(:any)", "User::delete/$1");
+    $routes->post("user/delete/(:any)", "User::delete/$1");
     $routes->get("user/changepassword/(:any)", "User::changepassword/$1");
     $routes->post("user/changepassword", "User::changepassword");
 
@@ -126,22 +127,26 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('category/add','Category::add');
     $routes->get('category/add/(:any)','Category::add/$1');
     $routes->get('category/delete/(:any)','Category::delete/$1');
+    $routes->post('category/delete/(:any)','Category::delete/$1');
 
     $routes->get('nomination','Nomination::index');
     $routes->post('nomination/add','Nomination::add');
     $routes->get('nomination/add','Nomination::add');
     $routes->get('nomination/add/(:any)','Nomination::add/$1');
     $routes->get('nomination/delete/(:any)','Nomination::delete/$1');
+    $routes->post('nomination/delete/(:any)','Nomination::delete/$1');
 
     $routes->get('rating/add/(:any)','Rating::add/$1');
     $routes->post('rating/add','Rating::add');
     $routes->get('rating/delete/(:any)/(:any)','Rating::delete/$1/$1');
+    $routes->post('rating/delete/(:any)/(:any)','Rating::delete/$1/$1');
 
     $routes->get('workshops','Workshops::index');
     $routes->get('workshops/add','Workshops::add');
     $routes->get('workshops/add/(:any)','Workshops::add/$1');
     $routes->post('workshops/add','Workshops::add');
     $routes->get('workshops/delete/(:any)','Workshops::delete/$1');
+    $routes->post('workshops/delete/(:any)','Workshops::delete/$1');
     
     $routes->get('awards','Awards::index');
     $routes->post('awards/index','Awards::index');
@@ -157,6 +162,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('eventregisteration/add','EventRegisteration::add');
     $routes->get('eventregisteration/add/(:any)','EventRegisteration::add/$1');
     $routes->get('eventregisteration/delete/(:any)','EventRegisteration::delete/$1');
+    $routes->post('eventregisteration/delete/(:any)','EventRegisteration::delete/$1');
 
     $routes->get('nominee/extend/(:any)','Nominee::extend/$1');
     $routes->post('nominee/extend','Nominee::extend');

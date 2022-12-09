@@ -15,6 +15,12 @@
                 <?php else: ?>
                   <h3 class="disapprovedtxt"><span class="badge badge-info"><i class="fa fa-times-circle"></i> Pending </span></h3>
                   <?php endif; ?>
+
+                 
+                <a href="<?=base_url();?>/admin/nominee">
+                <h3 class="btn btn-secondary">BACK</h3></a>
+              
+
               </div>
              
             </div>
@@ -273,13 +279,13 @@
                         <div class="container">
                           <div class="row">
                               <div class="col-md-8 col-xl-6 text-center mx-auto">
-                                  <h3 class="fw-bold heading" style="color: #F7941E;">Give Your Rating(100/100) and Share your comments</h3>
+                                  <h3 class="fw-bold heading" style="color: #F7941E;">Input your score out of 100 in the rating box !</h3>
                               </div>
                           </div>
                     </div>
                       
                       <div class="clearfix"></div>
-                      <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
+                      <form id="ratingForm" onSubmit="juryFinalSubmit();" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
                                   <input type="hidden" name="nominee_id" value="<?=(isset($user['user_id']))?$user['user_id']:"";?>"  >
 
                                   <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>"  >

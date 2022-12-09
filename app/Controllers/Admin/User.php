@@ -10,7 +10,7 @@ class User extends BaseController
     public function index()
     {
         
-            $userLists = $this->userModel->getListsOfUsers();
+            $userLists = $userModel->getUserLists()->getResultArray();
             
             foreach($userLists as $ukey => $uvalue){
                if(!empty($uvalue['category'])){ 
@@ -216,8 +216,17 @@ class User extends BaseController
 
     public function delete($id='')
     {
-          $this->userModel->delete(array("id" => $id));
-          return redirect()->route('admin/user');
+          
+        if($this->request->isAJAX()){
+        
+            $this->userModel->delete(array("id" => $id));
+        
+            return $this->response->setJSON([
+                'status'            => 'success',
+                'message'              => 'User deleted Successfully'
+            ]); 
+        }
+       
     }
 
     public function changepassword($id='')

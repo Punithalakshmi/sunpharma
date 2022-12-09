@@ -176,7 +176,13 @@ class Workshops extends BaseController
     {
        
         $this->workshopModel->delete(array("id" => $id));
-          return redirect()->route('admin/workshops');
+        if($this->request->isAJAX()){
+            
+            return $this->response->setJSON([
+                'status'            => 'success',
+                'message'              => 'Event deleted Successfully'
+            ]); 
+        }
        
     }
 }

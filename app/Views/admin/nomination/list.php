@@ -3,7 +3,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Awards Creation <small></small></h3>
+                <h3>Manage Awards <small></small></h3>
               </div>
             </div>
            
@@ -28,11 +28,13 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Category</th>
+                          <th>Award</th>
+                          <th>Award Type</th>
                           <th>Title</th>
                           <th>Subject</th>
                           <th>Start Date</th>
                           <th>End Date</th>
+                          <th>Award Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -44,14 +46,15 @@
                             ?>
                         <tr>
                           <td><?=$user['main_category_id'];?></td>
-                        
+                          <td><?=$user['category_id'];?></td>
                           <td><?=$user['title'];?></td>
                           <td><?=$user['subject'];?></td>
                           <td><?=$user['start_date'];?></td>
                           <td><?=$user['end_date'];?></td>
+                          <td><?=($user['status'] == 1)?'Active':'InActive';?></td>
                           <td>
                           <a href="<?=base_url().'/admin/nomination/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="<?=base_url().'/admin/nomination/delete/'.$user['id'];?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a onclick="userDelete('award','<?=$user['id'];?>','/admin/nomination/delete')"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                         <?php endforeach;

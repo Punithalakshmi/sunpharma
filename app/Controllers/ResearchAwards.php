@@ -14,10 +14,11 @@ class ResearchAwards extends BaseController
         foreach($nominationLists as $nkey => $nvalue){
             $endDate = strtotime($nvalue['end_date']);
           if($endDate >= $currentDate)  {
-            if($nvalue['main_category_id'] == 1){
+            if($nvalue['type'] == 'Research Awards'){
               $currentNominations['research_awards'] = 'yes';
             }
-            if($nvalue['main_category_id'] == 2){
+            else
+            {
               $currentNominations['science_scholars_awards'] = 'yes';
             }
          }

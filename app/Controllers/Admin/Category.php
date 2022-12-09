@@ -10,7 +10,7 @@ class Category extends BaseController
     public function index()
     {
         
-        $this->data['lists'] = $this->categoryModel->getListsOfCategories();
+        $this->data['lists'] = $this->categoryModel->getListsOfCategories()->getResultArray();
        
         return render('admin/category/list',$this->data);
         
@@ -89,12 +89,12 @@ class Category extends BaseController
     }
 
 
-    public function validation_rules()
+    public function validation_rules($id = '')
     {
 
-        $this->validation_rules = array();
-        $this->validation_rules = array(
-                                        "name" => array("label" => "Category Name",'rules' => 'required')
+        $validation_rules = array();
+        $validation_rules = array(
+                                        "name" => array("label" => "Category Name",'rules' => 'required|is_unique[category.name,id,'.$id.']')
         );
     
         return $this->validation_rules;
@@ -103,7 +103,13 @@ class Category extends BaseController
 
     public function delete($id='')
     {
-          $this->categoryModel->delete(array("id" => $id));
-          return redirect()->route('admin/category');
+         $this->categoryModel->delete(array("id" => $id));
+          if($this->request->isAJAX()){
+                
+            return $this->response->setJSON([
+                'status'            => 'success',
+                'message'              => 'Category deleted Successfully'
+            ]); 
+          }
     }
 }

@@ -31,14 +31,28 @@
                           <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
+                          <th>Award Category</th>
                           <th>Approval Status</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <?php if(is_array($lists)):
+                        <?php if(count($lists) > 0 && is_array($lists)):
                                 foreach($lists as $user):
+                                  $status = '';
+
+                                  if($user['active']==1 && $user['status']=='Approved'){
+                                    $status = "Approved";
+                                  }
+                                  else if($user['is_rejected'] == 1){
+                                    $status = "Rejected";
+                                  }
+                                  else
+                                  {
+                                    $status = "Pending";
+                                  }
+
                             ?>
                         <tr>
                          
@@ -46,7 +60,8 @@
                           <td><?=strtolower($user['firstname']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
-                          <td><?=(((isset($user['active']) && isset($user['status'])) && ($user['active']==1 && $user['status']=='Approved')))?'Approved':'Pending';?></td>
+                          <td><?=$user['category_name'];?></td>
+                          <td><?=$status;?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
                             <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">
@@ -56,10 +71,21 @@
                             <a href="<?=base_url().'/admin/nominee/extend/'.$user['id'];?>" class="btn btn-primary btn-xs">
                                <i class="fa fa-edit"></i> Extend Nomination 
                             </a> 
-                            <?php endif; ?>     
+                           
+                            <?php endif; ?>   
+                            <?php if( ($user['active']==0 && $user['status']=='Disapproved' && $user['is_rejected'] == 0)){ ?>
+                            <button type="button" onclick="nominee_approve('approve','<?=$user['id'];?>');" class="btn btn-success greenbg btn-sm">Approve</button>
+                              <button type="button" class="btn btn-danger btn-sm" onclick="nominee_approve('disapprove','<?=$user['id'];?>');">
+                                <i class="fa fa-ban"></i> Reject 
+                            </button>
+                            <?php } ?>  
                           </td>
                         </tr>
-                        <?php endforeach;
+                        <?php endforeach; ?>
+
+                        <?php else: ?>
+                          <tr colspan="7"> <td>No Nominees Found</td></tr>
+                             <?php
                                 endif;
                                 ?>            
                       </tbody>
@@ -83,12 +109,12 @@
           <form name="juryListsForm" id="juryListsForm" >
                  <option value=" "></option>
                 <select name="juryLists" id="juryLists" class="form-control">
-                  <?php if(is_array($juryLists)):
-                           foreach($juryLists as $jvalue):
+                  <?php //if($juryLists && count($juryLists) > 0 && is_array($juryLists)):
+                           //foreach($juryLists as $jvalue):
                         ?>
-                        <option value="<?=$jvalue['id'];?>"><?=$jvalue['firstname'].' '.$jvalue['lastname'];?></option>
-                        <?php endforeach;
-                               endif; ?>
+                        <option value="<?//$jvalue['id'];?>"><?//$jvalue['firstname'].' '.$jvalue['lastname'];?></option>
+                        <?php //endforeach;
+                              // endif; ?>
                 </select>                
           </form>
       </div>

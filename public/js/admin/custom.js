@@ -14,8 +14,9 @@ $(document).ready(function(){
         console.log(start.toISOString(), end.toISOString(), label);
     });
       
-
+    //successMessageAlert('');
    
+  
 
 
 });
@@ -29,36 +30,42 @@ function nominee_approve(type = '',id='')
 {
   
     var msg = (type && type == 'approve')?'approve':'reject';
-    if(confirm("Are you sure you want to "+msg+" this Nominee?")){
-      $('#loader').removeClass('hidden');
-        $.ajax({
-            url : base_url+'/admin/nominee/approve',
-            type: "POST",
-            data : {type:type,id:id},
-            dataType:'json',
-            success: function(data, textStatus, jqXHR)
-            {
-              $('#loader').addClass('hidden');
-                if(data.status && data.status == 'success')
-                  alert(data.message);
 
-                  location.reload();
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                alert(data.message);
-            }
-        });
+    msg = "Are you sure you want to "+msg+" this Nominee?";
+
+    $.confirmModal('<h2>'+msg+'</h2>', {
+      messageHeader: '',
+      backgroundBlur: ['.container'],
+      modalVerticalCenter: true
+    },function(el) {
+          if(el){
+
+            $('#loader').removeClass('hidden');
+            $.ajax({
+                url : base_url+'/admin/nominee/approve',
+                type: "POST",
+                data : {type:type,id:id},
+                dataType:'json',
+                success: function(data, textStatus, jqXHR)
+                {
+                  $('#loader').addClass('hidden');
+                    if(data.status && data.status == 'success')
+                      successMessageAlert(data.message)
     
-}
-else
-{
-    return false;
-}
+                      //location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert(data.message);
+                }
+            });
 
-   
-}
+          }
+          
+        }); 
 
+  
+}
 
 $(function(){
     $('.selectAll').click(function(){
@@ -194,3 +201,89 @@ $(function(){
     });
 
  }
+
+function userDelete(type = '',id='',url = '',e)
+{
+   
+  $('#loader').removeClass('block');
+    var msg = 'Are you sure you want to delete this '+type+'?';
+
+    
+  $.confirmModal('<h2>'+msg+'</h2>', {
+    messageHeader: '',
+    backgroundBlur: ['.container'],
+    modalVerticalCenter: true
+  },function(el) {
+        if(el){
+                $('#loader').removeClass('hidden');
+                  $.ajax({
+                      url : base_url+url+'/'+id,
+                      type: "POST",
+                      data : '',
+                      dataType:'json',
+                      success: function(data, textStatus, jqXHR)
+                      {
+                        $('#loader').addClass('hidden');
+                          if(data.status && data.status == 'success')
+                            {
+                              
+                              if(data.message)
+                                successMessageAlert(data.message);
+                            }
+
+                            
+                      },
+                      error: function (jqXHR, textStatus, errorThrown)
+                      {
+                          alert(data.message);
+                      }
+                  });
+                }  
+                else
+                {
+                  return false;
+                }
+             }
+          );    
+    
+}
+
+
+function successMessageAlert(msg)
+{
+
+    Msg.icon = Msg.ICONS.FONTAWESOME;
+    Msg['success'](msg);
+  
+   setTimeout(function(){
+    location.reload();
+    },2500);
+}
+
+function juryFinalSubmit()
+{
+   
+  $('#loader').removeClass('hidden');
+    var msg = 'This is final review submission as it is not editable after that';
+    
+  $.confirmModal('<h2>'+msg+'</h2>', {
+    messageHeader: '',
+    backgroundBlur: ['.container'],
+    modalVerticalCenter: true
+  },function(el) {
+        if(el){
+          alert(el.value);
+                $('#loader').addClass('hidden');
+                  //$("#ratingForm").submit();
+                    setTimeout(function(){
+                    return true
+                    },2500);
+                }  
+                else
+                {
+                  return false;
+                }
+             }
+          );    
+    
+}

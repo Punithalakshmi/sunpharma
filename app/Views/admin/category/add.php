@@ -1,7 +1,7 @@
 <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">btn btn-secondary
+              <div class="title_left">
                 <h3>Add/Modify Category</h3>
               </div>
               <div class="title_right">
@@ -20,7 +20,7 @@
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Award Type <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="name" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',$editdata['name']);?>">
