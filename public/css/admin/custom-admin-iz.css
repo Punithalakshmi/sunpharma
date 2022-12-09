@@ -519,7 +519,11 @@ h3.heading::after {
     padding: 10px;
     border-top: 1px solid #3c3c3c;
 }
-
+p.copyrightadmin {
+    padding: 5px;
+    color: #959593!important;
+    border-top: 1px solid #424242;
+}
 @media(max-width:767px){
     .login_content{padding: 30px;min-width: 100px;}
 }
