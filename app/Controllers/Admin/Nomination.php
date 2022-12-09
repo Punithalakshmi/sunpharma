@@ -217,8 +217,7 @@ class Nomination extends BaseController
        
         if (strtolower($this->request->getMethod()) == "post") {  
 
-        if($this->validation->withRequest($this->request)->run()) {
-
+       
           $this->nominationTypesModel->delete(array("id" => $id));
           
           if($this->request->isAJAX()){
@@ -227,7 +226,7 @@ class Nomination extends BaseController
                     'message'   => 'Award deleted Successfully'
                 ]); 
             }
-          }
+          
         }
         
     }

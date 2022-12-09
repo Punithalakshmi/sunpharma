@@ -8,7 +8,7 @@
             </div>
            
        
-                
+            <?= csrf_field(); ?>
            </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>

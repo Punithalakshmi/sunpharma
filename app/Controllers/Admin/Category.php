@@ -105,8 +105,7 @@ class Category extends BaseController
     {
         if (strtolower($this->request->getMethod()) == "post") {  
 
-            if($this->validation->withRequest($this->request)->run()) {
-
+          
                     $this->categoryModel->delete(array("id" => $id));
                     if($this->request->isAJAX()){
                             
@@ -115,7 +114,7 @@ class Category extends BaseController
                             'message'              => 'Category deleted Successfully'
                         ]); 
                     }
-            }
+            
         }    
     }
 }

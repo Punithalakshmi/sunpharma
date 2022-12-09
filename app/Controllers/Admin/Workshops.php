@@ -176,7 +176,7 @@ class Workshops extends BaseController
     {
         if (strtolower($this->request->getMethod()) == "post") {  
 
-            if($this->validation->withRequest($this->request)->run()) {
+           
                 $this->workshopModel->delete(array("id" => $id));
                 if($this->request->isAJAX()){
                     
@@ -185,7 +185,7 @@ class Workshops extends BaseController
                         'message'              => 'Event deleted Successfully'
                     ]); 
                 }
-         }
+         
        }
        
     }

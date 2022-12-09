@@ -66,7 +66,7 @@ class Nominee extends BaseController
 
             $up_data = array();
             $up_data['updated_date']  =  date("Y-m-d H:i:s");
-            $up_data['updated_id']    =  $this->data['userdata']['login_id'];
+            $up_data['updated_id']    =  $this->data['userdata']['id'];
 
             $getUserData  = $this->userModel->getListsOfUsers($id);
             $getUserData  = $getUserData->getRowArray();
@@ -187,14 +187,14 @@ class Nominee extends BaseController
                     $ins_data = array();
                     $ins_data['rating']       = $rating;
                     $ins_data['comments']     = $comment;
-                    $ins_data['jury_id']      = $this->data['userdata']['login_id'];
+                    $ins_data['jury_id']      = $this->data['userdata']['id'];
                     $ins_data['nominee_id']   = $nominee_id;
                     $ins_data['is_rate_submitted'] = ($this->request->getPost('submit') && ($this->request->getPost('submit') == 'Save Draft'))?0:1; 
                     
                    
                     $this->session->setFlashdata('msg', 'Rated Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                    $ins_data['created_id']    =  $this->data['userdata']['login_id'];
+                    $ins_data['created_id']    =  $this->data['userdata']['id'];
                     $ratingModel->save($ins_data);
                      
 
@@ -238,7 +238,7 @@ class Nominee extends BaseController
             $ins_data = array();
             $ins_data['jury_id'] = $juryID;
             $ins_data['created_date'] = date("Y-m-d H:i:s");
-            $ins_data['created_id']   = $this->data['userdata']['login_id'];
+            $ins_data['created_id']   = $this->data['userdata']['id'];
            foreach($nomineeArr as $nominee){
 
               $getAssignedJuryLists = $this->juryModel->checkIfAlreadyNominee($juryID,$nominee);
@@ -285,19 +285,18 @@ class Nominee extends BaseController
     public function extend($id = '')
     {
 
-        $id  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
+         $id  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id; 
                
         $validation = $this->validate($this->extend_validation_rules());
 
         $getExtend  = $this->userModel->getUserData($id);
 
+        $edit_data = array();
+
         if($getExtend->getRowArray() > 0)
           $edit_data = $getExtend->getRowArray(); 
 
         $this->data['editdata'] = $edit_data; 
-
-        if($getExtend->getRowArray() > 0)
-            $edit_data = $getExtend->getRowArray();
 
         if($this->validation) {
 
@@ -314,7 +313,7 @@ class Nominee extends BaseController
                     if(!empty($id) && $getExtend->getRowArray() > 0){
                         $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
                         $ins_data['updated_date']   =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']     =  $userdata['login_id'];
+                        $ins_data['updated_id']     =  $userdata['id'];
                         $this->userModel->update(array("id" => $id),$ins_data);
                     }
                 
