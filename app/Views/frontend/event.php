@@ -1,4 +1,4 @@
-<section class="heroInner" style="background: #fff url(<?=base_url();?>/frontend/assets/img/slide4.jpg) center left no-repeat;">
+<section class="heroInner" style="background: #fff url(<?=base_url();?>/frontend/assets/img/WorkshopYoungResearchers28Nov-Dec03-2022-tbanner.jpg) center left no-repeat;">
 <div class="container">
     <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">EPIDEMIOLOGICAL AND GENOMIC METHODS FOR THE STUDY OF HUMAN DISEASES<br></h1>
 </div>

@@ -155,7 +155,7 @@
                 <!-- slide 5 -->
                 <div class="item">
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
-                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/event-scientist.jpg" style="height: 200px;" alt="">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/WorkshopYoungResearchers28Nov-Dec03-2022-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Workshop for the young researchers</h4>
                             <p class="card-text" style="font-size: 14px;">
