@@ -367,6 +367,14 @@ form#eventRegistration .form-group .alert-danger {
   min-height: 320px;
 }
 
+.tabWrapper .nav-link:hover, .tabWrapper .nav-link:focus {
+  color: #ffefdb;
+}
+
+.tabWrapper .nav-link.active:hover, .tabWrapper .nav-link.active:focus {
+  color: #FF9800;
+}
+
 @media(min-width:992px){
   .dropdown-menu[data-bs-popper]{top:auto; left:auto;margin-top: 0;}
 .dropdown:hover .dropdown-menu{
@@ -374,7 +382,12 @@ form#eventRegistration .form-group .alert-danger {
 }
 .dropdown-menu.show{display: none;}
 }
-
+@media(max-width:992px){
+  li.nav-item {
+    width: 100%;
+    border: 1px solid #dddddd6e!important;
+}
+}
 
 @media(max-width:767px){
   #mainNav .navbar-brand img {
