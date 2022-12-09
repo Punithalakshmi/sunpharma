@@ -97,7 +97,7 @@ class Category extends BaseController
                                         "name" => array("label" => "Category Name",'rules' => 'required|is_unique[category.name,id,'.$id.']')
         );
     
-        return $this->validation_rules;
+        return $validation_rules;
       
     }
 

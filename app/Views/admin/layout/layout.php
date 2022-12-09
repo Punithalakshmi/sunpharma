@@ -17,6 +17,7 @@
     <?=link_tag('/vendors/iCheck/skins/flat/green.css');?>
     <!-- Datatables -->
     <?=link_tag('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css');?>
+    <?=link_tag('/css/admin/bootstrap-msg.css');?>
     <?=link_tag('/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css');?>
     <?=link_tag('/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css');?>
     <?=link_tag('/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css');?>
@@ -28,6 +29,8 @@
     <!-- Custom Theme Style -->
     <?=link_tag('/build/css/custom.min.css');?>
     <?=link_tag('/css/admin/custom-admin-iz.css');?>
+
+    
       <script>
       var base_url = '<?=base_url();?>';
       </script>
@@ -52,7 +55,8 @@
     <?= script_tag('/vendors/jquery/dist/jquery.min.js');?>
     <!-- Bootstrap -->
     <?= script_tag('/vendors/bootstrap/dist/js/bootstrap.min.js');?>
-    
+    <?= script_tag('/js/admin/bootstrap-msg.js');?>
+    <?= script_tag('/js/admin/jquery.confirmModal.min.js');?>
     <!-- FastClick -->
     <?= script_tag('/vendors/fastclick/lib/fastclick.js');?>
     <!-- NProgress -->
