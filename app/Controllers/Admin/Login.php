@@ -42,7 +42,7 @@ class Login extends BaseController
                             $authenticatePassword = password_verify(trim($password), $pass); 
 
                             if($pass == md5($password)){
-                             //   echo "ffdfffd";
+                             
                                 $ses_data = [
                                     'id' => $data['id'],
                                     'name' => $data['firstname'],
@@ -54,7 +54,11 @@ class Login extends BaseController
                                 ];
 
                                 setSessionData('userdata',$ses_data);
-                                return redirect()->to('admin/dashboard');
+
+                                if( $data['role'] == 1 )
+                                  return redirect()->to('admin/nominee');
+                                else
+                                  return redirect()->to('admin/dashboard');
                             }
                             else
                             {

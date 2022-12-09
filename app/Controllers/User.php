@@ -29,13 +29,12 @@ class User extends BaseController
                    // print_r($data); die;
                     if($data){
 
-                      echo  $pass = trim($data['password']);
-                      echo "<br />";
-                      echo md5($password);
+                        $pass = trim($data['password']);
+                     
                         $authenticatePassword = password_verify($password, $pass);
                        //    echo $authenticatePassword; die;
-                        if($authenticatePassword){
-                            echo "Dddd"; die;
+                       if($pass == md5($password)){
+                           
                             $ses_data = [
                                 'id' => $data['id'],
                                 'name' => $data['name'],
