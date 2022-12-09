@@ -63,8 +63,8 @@ class Home extends BaseController
         $scienceScholarAwards = $this->awardsModel->getLatestWinnersofScienceScholarAwards()->getResultArray();
 
         $this->data['nominations'] = $nominationArr;
-        $this->data['latestWinnersOfResearchAwards'] = $researchAwards;
-        $this->data['latestWinnersOfScholarAwards'] = $scienceScholarAwards;
+        $this->data['latestWinnersOfResearchAwards'] = getAwardsArr($researchAwards);
+        $this->data['latestWinnersOfScholarAwards'] = getAwardsArr($scienceScholarAwards);
         return  render('frontend/dashboard',$this->data);
               
     }
@@ -291,5 +291,24 @@ class Home extends BaseController
 
       sendMail($adminEmail,$subject,$html);
 
+    }
+
+    public function getAwardsArr($awards = array())
+    {
+
+        if(is_array($awards)) {
+
+          foreach($awards as $akey => $avalue){
+             $categoryArr = $this->categoryModel->getListsOfCategories($avalue['category'])->getRowArray();
+             $awards[$akey]['category_name'] = $categoryArr['type'];
+
+             $nomineePhoto = $this->nominationModel->getNominationData($avalue['id'])->getRowArray();
+             $awards[$akey]['nominator_photo'] = $nomineePhoto['nominator_photo'];
+
+          }
+  
+        }
+
+        return $awards;
     }
 }

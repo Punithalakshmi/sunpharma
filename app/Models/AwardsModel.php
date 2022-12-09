@@ -3,7 +3,7 @@ namespace App\Models;
 use CodeIgniter\Model;
   
 class AwardsModel extends Model{
-    protected $table = 'awards_creation_category';
+    protected $table = 'category';
     
     protected $allowedFields = [
         'rating',
@@ -19,9 +19,9 @@ class AwardsModel extends Model{
 
     public function getLists($category='',$year='')
     {
-        $builder = $this->table('awards_creation_category');
-        $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,ratings.nominee_id');
-        $builder->join('nominee_details', 'nominee_details.category_id = awards_creation_category.id');
+        $builder = $this->table('category');
+        $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,ratings.nominee_id,users.category');
+        $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
         if(!empty($category))
@@ -39,9 +39,9 @@ class AwardsModel extends Model{
     public function getLatestWinnersofScienceScholarAwards()
     {
 
-        $builder = $this->table('awards_creation_category');
-        $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,users.address,ratings.nominee_id');
-        $builder->join('nominee_details', 'nominee_details.category_id = awards_creation_category.id');
+        $builder = $this->table('category');
+        $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,users.address,ratings.nominee_id,users.category');
+        $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
        
@@ -57,9 +57,9 @@ class AwardsModel extends Model{
     
     public function getLatestWinnersofResearchAwards()
     {
-        $builder = $this->table('awards_creation_category');
-        $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,users.address,ratings.nominee_id');
-        $builder->join('nominee_details', 'nominee_details.category_id = awards_creation_category.id');
+        $builder = $this->table('category');
+        $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,users.address,ratings.nominee_id,users.category');
+        $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
         $builder->whereIn("nominee_details.category_id",array("1","2","3"));

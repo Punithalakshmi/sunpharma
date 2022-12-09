@@ -1,51 +1,25 @@
 <?php if(is_array($lists) && count($lists) > 0):
         foreach($lists as $user):
 ?>
-    <tr>
-    <td><span class="expandChildTable fa fa-plus-circle"></span></td>
-        <td><?=$user['category_name'];?></td>
-        <td><?=$user['firstname'];?></td>
-        <td><?=date("Y")."/".$user['id'];?></td>
-        <td><?=$user['dob'];?></td>
-        <td><?=round($user['average_rating']);?></td>
-        <?php if(is_array($user['juries']) && count($user['juries']) > 0): ?>
-        <tr class="childTableRow">
-            <td colspan="6">
-                <h5>Jury Info</h5>
-                <table class="table jurysec">
-                    <thead>
-                    <tr>
-                        <th>Jury</th>
-                        <th>Rating</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($user['juries'] as $ukey => $uvalue): ?>
-                        <tr>
-                            <td><?=$uvalue['firstname'].' '.$uvalue['lastname'];?></td>
-                            <td><?=$uvalue['rating'];?></td>
-                        </tr>
-                    <?php endforeach;?>  
-                    </tbody>
-                </table>
-            </td>            
-        </tr>
+    <div data-toggle="modal" data-target="#juryListsModal" class="col-md-3 col-xs-12 mt-30" onclick="geJuryLists(<?=$user['id'];?>);">
+        <div class="product-image border avatarimg">
+        <img class="border" src="<?=base_url();?>/uploads/<?=$user['id'];?>/<?=$user['nominator_photo'];?>" alt="" style="border: 1px solid #959595;padding: 5px;"> 
+        </div>
+        <div class="product_gallery">
+            <h2 class="fname" align="center"><?=$user['firstname'];?></h2>
+            <h3 class="catname" align="center"><?=$user['category'];?></h3>
+            <h4 class="averrating" align="center"><span class="badge badge-warning"><i class="fa fa-star"></i> <?=round($user['average_rating']);?></span></h4>
+        </div>
+    </div>
     <?php    
-        endif;
+        
         endforeach;      
         else: 
     ?>
-      <tr>
-          <td colspan="5">No Awards Found!</td> 
-       </tr>
+       <div data-toggle="modal">
+          <p>No Awards Found!</p> 
+        </div>
     <?php        
         endif;
 ?>
 
-<script>
-    
-    $('#getLists .expandChildTable').on('click', function() {
-        $(this).toggleClass('selected').closest('tr').next().toggle();
-    })
-
-</script>

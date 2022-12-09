@@ -215,13 +215,19 @@ class Nomination extends BaseController
     public function delete($id='')
     {
        
+        if (strtolower($this->request->getMethod()) == "post") {  
+
+        if($this->validation->withRequest($this->request)->run()) {
+
           $this->nominationTypesModel->delete(array("id" => $id));
           
           if($this->request->isAJAX()){
-            return $this->response->setJSON([
-                'status'    => 'success',
-                'message'   => 'Award deleted Successfully'
-            ]); 
+                return $this->response->setJSON([
+                    'status'    => 'success',
+                    'message'   => 'Award deleted Successfully'
+                ]); 
+            }
+          }
         }
         
     }

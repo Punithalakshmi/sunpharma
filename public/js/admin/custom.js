@@ -16,7 +16,7 @@ $(document).ready(function(){
       
     //successMessageAlert('');
    
-  
+    
 
 
 });
@@ -33,6 +33,8 @@ function nominee_approve(type = '',id='')
 
     msg = "Are you sure you want to "+msg+" this Nominee?";
 
+    var csrfHash = $("input[name='app_csrf']").val();
+
     $.confirmModal('<h2>'+msg+'</h2>', {
       messageHeader: '',
       backgroundBlur: ['.container'],
@@ -44,7 +46,7 @@ function nominee_approve(type = '',id='')
             $.ajax({
                 url : base_url+'/admin/nominee/approve',
                 type: "POST",
-                data : {type:type,id:id},
+                data : {type:type,id:id,'app_csrf':csrfHash},
                 dataType:'json',
                 success: function(data, textStatus, jqXHR)
                 {
@@ -56,7 +58,14 @@ function nominee_approve(type = '',id='')
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
-                    alert(data.message);
+                  $('#loader').addClass('hidden');
+                  if(textStatus && textStatus == 'error'){
+                   if(jqXHR.responseJSON.message){
+                     errorMessageAlert(jqXHR.responseJSON.message);
+                     
+                     
+                   }
+                 }
                 }
             });
 
@@ -126,12 +135,20 @@ $(function(){
     var category = $("#category").val();
     var year     = $("#year").val();
 
+    if(category == ''){
+      errorMessageAlert('Please select category');
+      return false;
+   }
+
+
+    var csrfHash = $("input[name='app_csrf']").val();
+
     $('#loader').removeClass('hidden');
 
     $.ajax({
       url : base_url+'/admin/awards/index',
       type: "POST",
-      data : {category:category,year:year},
+      data : {category:category,year:year,'app_csrf':csrfHash},
       dataType:'json',
       success: function(data, textStatus, jqXHR)
       {
@@ -141,7 +158,16 @@ $(function(){
       },
       error: function (jqXHR, textStatus, errorThrown)
       {
-        
+        console.log(jqXHR);
+         console.log(textStatus);
+         $('#loader').addClass('hidden');
+         if(textStatus && textStatus == 'error'){
+          if(jqXHR.responseJSON.message){
+            errorMessageAlert(jqXHR.responseJSON.message);
+           
+            
+          }
+        }
       }
 
     });
@@ -156,21 +182,33 @@ $(function(){
     var year     = $("#year").val();
 
    
+    var csrfHash = $("input[name='app_csrf']").val();
+   
     $('#loader').removeClass('hidden');
     $.ajax({
       url : base_url+'/admin/awards/export',
       type: "POST",
-      data : {category:category,year:year},
+      data : {category:category,year:year,'app_csrf':csrfHash},
       dataType:'json',
       success: function(data, textStatus, jqXHR)
       {
         $('#loader').addClass('hidden');
-          console.log('data',data.filename);
+         
           window.location.href = data.filename;
       },
       error: function (jqXHR, textStatus, errorThrown)
       {
-        
+         console.log(jqXHR);
+         console.log(textStatus);
+         $('#loader').addClass('hidden');
+         if(textStatus && textStatus == 'error'){
+           if(jqXHR.responseJSON.message){
+              errorMessageAlert(jqXHR.responseJSON.message);
+              
+             
+           }
+         }
+          
       }
 
     });
@@ -179,36 +217,52 @@ $(function(){
 
  function geJuryLists(nominee_id = '')
  {
- 
-    $('#loader').removeClass('hidden');
-    $.ajax({
-        url : base_url+'/admin/awards/getJuryListsByNominee/'+nominee_id,
-        type: "GET",
-        data : {},
-        dataType:'json',
-        success: function(data, textStatus, jqXHR)
-        {
-            $('#loader').addClass('hidden');
-            if(data.status && data.status == 'success'){
-              $("#juryListsModal #juryListss").html(data.html);
-            }
-            
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            $("#juryListsModal").hide(); 
-        }
-    });
+  
+    var csrfHash = $("input[name='app_csrf']").val();
+
+      $('#loader').removeClass('hidden');
+      $.ajax({
+          url : base_url+'/admin/awards/getJuryListsByNominee/'+nominee_id,
+          type: "GET",
+          data : {'app_csrf':csrfHash},
+          dataType:'json',
+          success: function(data, textStatus, jqXHR)
+          {
+              $('#loader').addClass('hidden');
+              if(data.status && data.status == 'success'){
+                $("#juryListsModal #juryListss").html(data.html);
+              }
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              $("#juryListsModal").hide(); 
+              $('#loader').addClass('hidden');
+              if(textStatus && textStatus == 'error'){
+                if(jqXHR.responseJSON.message){
+                  errorMessageAlert(jqXHR.responseJSON.message);
+                 
+                
+                }
+              }
+          }
+      });
 
  }
 
 function userDelete(type = '',id='',url = '',e)
 {
    
+
+
   $('#loader').removeClass('block');
     var msg = 'Are you sure you want to delete this '+type+'?';
 
-    
+   // CSRF Hash
+  
+   var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
+
+    console.log('csrfName',csrfHash);
   $.confirmModal('<h2>'+msg+'</h2>', {
     messageHeader: '',
     backgroundBlur: ['.container'],
@@ -219,7 +273,7 @@ function userDelete(type = '',id='',url = '',e)
                   $.ajax({
                       url : base_url+url+'/'+id,
                       type: "POST",
-                      data : '',
+                      data : {'app_csrf':csrfHash},
                       dataType:'json',
                       success: function(data, textStatus, jqXHR)
                       {
@@ -235,7 +289,14 @@ function userDelete(type = '',id='',url = '',e)
                       },
                       error: function (jqXHR, textStatus, errorThrown)
                       {
-                          alert(data.message);
+                        $('#loader').addClass('hidden');
+                        if(textStatus && textStatus == 'error'){
+                          if(jqXHR.responseJSON.message){
+                            errorMessageAlert(jqXHR.responseJSON.message);
+                            
+                           
+                          }
+                        }
                       }
                   });
                 }  
@@ -260,11 +321,24 @@ function successMessageAlert(msg)
     },2500);
 }
 
+function errorMessageAlert(msg)
+{
+
+    Msg.icon = Msg.ICONS.FONTAWESOME;
+    Msg['danger'](msg);
+
+    setTimeout(function(){
+      location.reload();
+      },2500);
+
+}
+
 function juryFinalSubmit()
 {
    
   $('#loader').removeClass('hidden');
     var msg = 'This is final review submission as it is not editable after that';
+    
     
   $.confirmModal('<h2>'+msg+'</h2>', {
     messageHeader: '',

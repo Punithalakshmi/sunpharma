@@ -6,7 +6,7 @@
                 <h3>Users <small></small></h3>
               </div>
             </div>
-           
+            <?= csrf_field(); ?>
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/user/add" class="btn btn-primary btn-xs">
                 <i class="fa fa-plus"></i> Add/Modify User</a>

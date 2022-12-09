@@ -216,17 +216,25 @@ class User extends BaseController
 
     public function delete($id='')
     {
+        
+        if (strtolower($this->request->getMethod()) == "post") {  
+
+            if($this->validation->withRequest($this->request)->run()) {
+        
+                if($this->request->isAJAX()){
+                
+                    $this->userModel->delete(array("id" => $id));
+                
+                    return $this->response->setJSON([
+                        'status'            => 'success',
+                        'message'              => 'User deleted Successfully'
+                    ]); 
+                }
+         
+          } 
           
-        if($this->request->isAJAX()){
-        
-            $this->userModel->delete(array("id" => $id));
-        
-            return $this->response->setJSON([
-                'status'            => 'success',
-                'message'              => 'User deleted Successfully'
-            ]); 
-        }
-       
+       }
+
     }
 
     public function changepassword($id='')

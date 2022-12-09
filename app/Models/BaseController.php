@@ -90,7 +90,7 @@ abstract class BaseController extends Controller
 
         $this->uri  = current_url(true);
         $this->data['current_url'] = $this->uri;
-        $this->data['uri'] = (base_url() == 'http://local.sunpharma.md')?$this->uri->getSegment(1):$this->uri->getSegment(4); 
+        $this->data['uri'] = (base_url() == 'http://local.sunpharma.md')?$this->uri->getSegment(1):$this->uri->getSegment(3); 
         $this->data['userdata'] = getSessionData();
         $this->role     = getUserRole();
        

@@ -166,7 +166,7 @@ class Nominee extends BaseController
         $data['user']['category_name'] =  $this->data['user']['category_name'];
         }
     
-        $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['login_id'],$nominee_id)->getRowArray();
+        $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['id'],$nominee_id)->getRowArray();
         $this->validation = $this->validate($this->validation_rules());
 
         $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
@@ -285,7 +285,7 @@ class Nominee extends BaseController
     public function extend($id = '')
     {
 
-        $id  = ($request->getPost('id'))?$request->getPost('id'):$id;
+        $id  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
                
         $validation = $this->validate($this->extend_validation_rules());
 
@@ -303,7 +303,7 @@ class Nominee extends BaseController
 
             if($this->request->getPost()){
             
-                    $extend_date    = $request->getPost('extend_date');
+                    $extend_date    = $this->request->getPost('extend_date');
                     
                     $ins_data = array();
                     $ins_data['extend_date']   = date("Y-m-d",strtotime($extend_date));
@@ -327,16 +327,18 @@ class Nominee extends BaseController
         {  
 
             if(!empty($edit_data) && count($edit_data)){
-                $editdata['extend_date'] = $edit_data['extend_date'];
+                $editdata['extend_date'] = date("Y-m-d",strtotime($edit_data['extend_date']));
                 $editdata['id']          = $id;
             }
             
-            if($this->request->getPost())
-            $this->data['validation'] = $this->validator;
-
-           return render('admin/nomination/extend',$this->data);  
+           
                      
         }       
+
+        if($this->request->getPost())
+        $this->data['validation'] = $this->validator;
+
+            return render('admin/nomination/extend',$this->data);  
     
     }
 

@@ -7,6 +7,7 @@
               </div>
             </div>
             <div class="clearfix"></div>
+            <?= csrf_field(); ?>
             <div class="row topformsec">
             <div class="col-md-3">
             <div class="get-sunpharma__input-box mt-2 form-inline">
@@ -73,7 +74,7 @@
                         </tr>
                       </thead>
                       <tbody id="getLists"> -->
-                           
+                      <div id="getLists">
                           <?php 
                             if(is_array($lists)):
                                     foreach($lists as $user):
@@ -85,12 +86,13 @@
                                   </div>
                                   <div class="product_gallery">
                                      <h2 class="fname" align="center"><?=$user['firstname'];?></h2>
-                                     <h3 class="catname" align="center"><?=$user['category_name'];?></h3>
+                                     <h3 class="catname" align="center"><?=$user['category'];?></h3>
                                      <h4 class="averrating" align="center"><span class="badge badge-warning"><i class="fa fa-star"></i> <?=round($user['average_rating']);?></span></h4>
                                   </div>
                                 </div>
                               <?php endforeach;
                                      endif; ?>  
+                              </div>       
                                 <!-- <tr> <td class="iconcal"><i class="expandChildTable fa fa-plus-circle"></i></td>
                                     <td><?//$user['category_name'];?></td>
                                     <td><?//$user['firstname'];?></td>

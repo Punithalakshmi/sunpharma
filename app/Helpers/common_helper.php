@@ -70,3 +70,29 @@ if ( ! function_exists('isNominationExpired'))
         
     }
 }
+
+if ( ! function_exists('getAwardsArr'))
+{
+ function getAwardsArr($awards = array())
+    {
+
+        $nominationModel      = model('App\Models\NominationModel');
+        $categoryModel        = model('App\Models\CategoryModel');
+
+        if(is_array($awards)) {
+
+          foreach($awards as $akey => $avalue){
+             $categoryArr = $categoryModel->getListsOfCategories($avalue['category'])->getRowArray();
+             $awards[$akey]['category_name'] = $categoryArr['type'];
+             $awards[$akey]['category']      = $categoryArr['name'];
+
+             $nomineePhoto = $nominationModel->getNominationData($avalue['id'])->getRowArray();
+             $awards[$akey]['nominator_photo'] = $nomineePhoto['nominator_photo'];
+
+          }
+  
+        }
+
+        return $awards;
+    }
+}   
