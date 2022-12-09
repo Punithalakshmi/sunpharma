@@ -1,7 +1,7 @@
 
     <section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/research-awards.jpg&quot;) center left no-repeat, #fff;">
         <div class="container">
-            <h1 class="fs-1 fw-bold text-capitalize fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Of Research Awards<br></h1>
+            <h1 class="fs-1 fw-bold fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Of Research Awards<br></h1>
         </div>
     </section>
     <section class="py-5">
@@ -13,68 +13,62 @@
         <div class="container" style="margin-bottom: 60px;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;"><?=date("Y");?></h3>
+                    <h3 class="heading" style="color: #F7941E;">2023</h3>
                 </div>
             </div>
             <div class="row row-cols-2 row-cols-md-2 mx-auto" style="max-width: 900px;">
-            <?php if(is_array($latestWinnersOfResearchAwards) && count($latestWinnersOfResearchAwards) > 0):
-                   foreach($latestWinnersOfResearchAwards as $rkey => $rvalue): ?>
-                <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/uploads/<?=$rvalue['id'];?>/<?=$rvalue['nominator_photo'];?>"></a>
-                       <a href="#" data-bs-target="#SuvendraNathBhattacharyya" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0"><?=$rvalue['firstname'];?><br></h5>
-                        </a>
-                        <p class="text-muted mb-2"><?=$rvalue['category_name'];?></p>
-                        <p class="text-muted mb-2"></p>
-                    </div>
-                </div>
-            <?php endforeach;
-                  endif; ?>    
-                <!-- <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg"></a><a href="#" data-bs-target="#BushraAteeq" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0">Professor Bushra Ateeq<br></h5>
+           
+                <div class="col-md-4 mb-4">
+                    <div class="text-center"><a href="#" data-bs-target="#KaustuvSanyal" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Prof.-Kaustuv-Sanyal_Hi-Res-Photo[15].jpg"></a><a href="#" data-bs-target="#KaustuvSanyal" data-bs-toggle="modal">
+                            <h5 class="fw-bold mb-0">Dr. Kaustuv Sanyal<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Basic Research</p>
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
-                <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/GirirajRattanChandak-photo.jpg"></a><a href="#" data-bs-target="#GirirajRatanChandak" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0">Dr Giriraj Ratan Chandak<br></h5>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center"><a href="#" data-bs-target="#SameerBakhshi " data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Prof.-Sameer-Bhakshi-Hi-Res-Photo[95].jpg"></a><a href="#" data-bs-target="#SameerBakhshi" data-bs-toggle="modal">
+                            <h5 class="fw-bold mb-0">Prof Sameer Bakhshi<br></h5>
                         </a>
                         <p class="text-muted mb-2">Medical Sciences- Clinical Research<br></p>
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
-                <div class="col mb-4">
-                    <div class="text-center"><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg"></a><a href="#" data-bs-target="#DebabrataMaiti" data-bs-toggle="modal">
-                            <h5 class="fw-bold mb-0">Prof. Debabrata Maiti<br></h5>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center"><a href="#" data-bs-target="#Govindaraju" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Prof.-T.-Govindaraju[79].JPG"></a><a href="#" data-bs-target="#Govindaraju" data-bs-toggle="modal">
+                            <h5 class="fw-bold mb-0">Professor T. Govindaraju<br></h5>
                         </a>
                         <p class="text-muted mb-2">Pharmaceutical Sciences<br></p>
                         <p class="text-muted mb-2"></p>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="modal fade" role="dialog" tabindex="-1" id="SuvendraNathBhattacharyya">
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="KaustuvSanyal">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Dr Suvendra Nath Bhattacharyya<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title">Dr. Kaustuv Sanyal<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/SuvendraNathBhattacharyya-photo.jpg" style="width: 150px;height: 150px;"></div>
-                            <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Dr Suvendra Nath Bhattacharyya<br></p><small>Senior Principal Scientist and Head,<br>Molecular Genetics Division,<br>CSIR-Indian Institute of Chemical biology,<br>Kolkata, India<br>Twitter: Suvendra Bhattacharyya(@Suvendra_B)<br><br></small>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Prof.-Kaustuv-Sanyal_Hi-Res-Photo[15].jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-9"><p class="fw-bold">Dr. Kaustuv Sanyal<br></p>
+                                <small>JC Bose National Fellow<br>
+Professor and Chair<br>
+Molecular Biology and Genetics Unit<br>
+Jawaharlal Nehru Centre for Advanced Scientific Research<br>
+Bangalore, India.<br>Twitter : Kaustuv Sanyal (@KaustuvSanyal)
+<br></small><br></small>
                             </div>
                         </div>
                     </div>
                     <div class="text-start"></div>
-                    <p>Dr Suvendra Nath Bhattacharyya has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for his seminal contribution in establishing the role of a special class of small regulatory RNAs, the microRNAs, in varieties of cellular events and pathways in mammalian cells including the host-pathogen interaction and infection processes. Dr Bhattacharyya has investigated the mechanism of exchange of microRNAs between mammalian cells via the Extracellular Vesicles (EV) and has shown importance of EV-associated miRNA exchange in neurodegeneration, inflammation, and cancer. He has recently explored the EV-associated microRNAs as immunomodulators to regulate the infection process of the host cells by the invading pathogen Leishmania donovani, the causative agent of visceral leishmaniasis. His research also promises development of microRNA and EV-based therapeutics against other deadly diseases.<br></p>
+                    <p>Professor Kaustuv Sanyal has been awarded the Sun Pharma Award for Medical Sciences (Basic Research) for his seminal contributions in fungal centromere biology. Using a combination of biochemical, genetic, and genomic approaches, Professor Sanyal and his colleagues opened up new frontiers in basic research by identifying facets, in addition to DNA sequence, that define centromere structure and function. His elegant research demonstrates that spatial proximity and high DNA sequence homology make centromeres a nexus of inter-chromosomal rearrangements. Professor Sanyal’s findings contribute a quantum leap in our understanding of genome stability, mis-regulation of which may have serious consequences ranging from diseases such as cancers in humans to drug resistance in fungal pathogens. His research also identified key molecular events leading to emergence of new pathogenic species. <br></p>
                 </div>
                 <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
             </div>
@@ -82,67 +76,63 @@
     </div>
 
 
-    <div class="modal fade" role="dialog" tabindex="-1" id="BushraAteeq">
+    <div class="modal fade" role="dialog" tabindex="-1" id="SameerBakhshi">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Professor Bushra Ateeq<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title">Prof Sameer Bakhshi <br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/BushraAteeq-photo.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Prof.-Sameer-Bhakshi-Hi-Res-Photo[95].jpg" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Professor Bushra Ateeq<br></p><small>Department of Biological Sciences and<br>Bioengineering,<br>Indian Institute of Technology Kanpur<br>Kanpur, 208016, U.P., India<br>Twitter @bushraiitk<br></small>
+                                <p class="fw-bold">Prof Sameer Bakhshi<br></p><small>Department of Medical Oncology<br>
+Dr B.R.A. Institute Rotary Cancer Hospital<br>
+All India Institute of Medical Sciences<br>
+Ansari Nagar<br>
+New Delhi 110029, India<br>
+Twitter: @drsameerbakhshi<br></small>
                             </div>
                         </div>
                     </div>
                     <div class="text-start"></div>
-                    <p>Professor Bushra Ateeq has been awarded The Sun Pharma Science Foundation Research Award in Medical Sciences (Basic Research) for molecular characterization of prostate cancer with application in diagnostics and precision medicine, discovery of new drug targets and development of alternative therapeutic strategies for the treatment of advanced-stage and drug-resistant cancer.<br></p>
+                    <p>Prof. Sameer Bakhshi has been awarded the Sun Pharma Science Foundation Research Award for Medical Sciences (Clinical Research) for his contribution in establishing affordable, cost-effective and practical models of Supportive Care in Cancer.</p>
+
+<p>His pioneering work on drug repurposing has shown the utility of relatively non-toxic oral metronomic chemotherapy in some solid malignancies, and is now being considered as a  therapeutic option in upfront palliative intent and end-stage cancer patients.</p>
+
+<p>In the field of antiemetics, he brought a practice change by  establishing the utility of the drug aprepitant and the antipsychotic drug olanzapine in children receiving highly emetogenic  chemotherapy. </p>
+
+<p>He has established outpatient clinical protocols for managing neutropenic fever, and also paradigms for early stoppage of antibiotics in patients with febrile neutropenia, so as to prevent the menace of development of multi-drug resistant organisms and at the same time save cost and toxicity for patients.<br></p>
                 </div>
                 <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="GirirajRatanChandak">
+
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="Govindaraju">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Dr Giriraj Ratan Chandak<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title">Professor T. Govindaraju<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/GirirajRattanChandak-photo.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Prof.-T.-Govindaraju[79].JPG" style="width: 150px;height: 150px;"></div>
                             <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Dr Giriraj Ratan Chandak<br></p><small>Chief Scientist &amp; Group Leader<br>CSIR-Centre for Cellular and Molecular Biology<br>Hyderabad - 500007<br>Twitter : 'chandakgrc'<br></small>
+                                <p class="fw-bold">Professor T. Govindaraju<br></p><small>
+                                Bioorganic Chemistry Laboratory     
+New Chesmitry Unit, <br>Jawaharlal Nehru Centre for Advanced Scientific Research (JNCASR)<br>
+Bengaluru 560064, India<br>Twitter: T. Govindaraju @govindaraju_tgr
+    
+                                <br></small>
                             </div>
                         </div>
                     </div>
                     <div class="text-start"></div>
-                    <p>Dr Giriraj Ratan Chandak, a physician-scientist has made significant contributions in the field of genetic disorders. A former director of the Centre for DNA Fingerprinting and Diagnostics, he has led multiple cohort-based studies of non-communicable diseases. He has discovered novel genes for chronic pancreatitis demonstrating genetic heterogeneity with Europeans. He lead his team to identify a novel microRNA that regulates Type 2 diabetes risk genes through vitamin B12, proving that genetic susceptibility to Type 2 diabetes and associated intermediate traits like obesity and insulin resistance may be epigenetically regulated. In contrast to the global role of folate deficiency, he has established maternal B12 deficiency as a risk factor for neural tube defects in their children. These findings have immense translational value. As Director of CSIR-Sickle Cell Anaemia Mission, he is passionately involved in creating awareness and reducing the disease burden through population screening, prenatal diagnosis, and clinical, social and genetic counseling.<br></p>
-                </div>
-                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="DebabrataMaiti">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Prof. Debabrata Maiti<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row" style="margin-bottom: 15px;">
-                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/DebabrataMaiti-photo.jpg" style="width: 150px;height: 150px;"></div>
-                            <div class="col-md-6 col-lg-9">
-                                <p class="fw-bold">Prof. Debabrata Maiti<br></p><small>Department of Chemistry<br>Indian Institute of Technology Bombay<br>Powai, Mumbai 400076, India<br>Twitter : Debabrata Maiti (@maiti_iitb)<br></small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-start"></div>
-                    <p>Prof. Debabrata Maiti has been selected as the recipient of The Sun Pharma Science Foundation Research Award 2021 in Pharmaceutical Sciences. He has established himself as one of the world’s leading scientists in the field of C-H activation by designing innovative catalytic methods for transforming organic molecules into several bio-active natural products as well as drug molecules and materials in step and atom-economic fashion. These conceptual developments have witnessed significant impact on materials research, agrochemicals and pharmaceuticals industry. At the same time, he has successfully developed various bio-inspired approaches by employing “eco-friendly” metals. In recent times, his group is pursuing research in the field of artificial metalloenzymatic chemistry, which has seen tremendous growth with significant value in agrochemical and pharmaceutical industries.<br></p>
+                    <p>Prof. T Govindaraju has been awarded the the Sun Pharma Science Foundation Research Award for his outstanding contributions towards the development of novel diagnostics, therapeutics, theranostics and drug delivery platforms by judiciously employing multironged concepts of chemical biology and pharmaceutical sciences. Over a decade of dedicated research efforts have resulted in the discovery of novel molecular tools and drug candidates with potential for differential detection and treatment of Alzheimer’s disease. The interest in the inverse relationship between Alzheimer’s disease and cancer resulted in the discovery of a first small molecule-based theranostic drug candidate for lung cancer. Small molecule-based theranostics has significant implications in the personalized medicine. Govindaraju has developed silk-derived formulations for sustained in vivo insulin delivery, diabetic wound healing, and stem cell-based neuronal tissue engineering, a complementary approach to tackle Alzheimer’s disease, which add value to sericulture industry and farmers. Many of his discoveries have been already considered for translation. <br></p>
                 </div>
                 <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
             </div>

@@ -374,6 +374,8 @@ form#eventRegistration .form-group .alert-danger {
 .tabWrapper .nav-link.active:hover, .tabWrapper .nav-link.active:focus {
   color: #FF9800;
 }
+.col-md-6.winnercolright{text-align: right;}
+
 
 @media(min-width:992px){
   .dropdown-menu[data-bs-popper]{top:auto; left:auto;margin-top: 0;}
@@ -382,6 +384,8 @@ form#eventRegistration .form-group .alert-danger {
 }
 .dropdown-menu.show{display: none;}
 }
+
+
 @media(max-width:992px){
   li.nav-item {
     width: 100%;
@@ -390,6 +394,7 @@ form#eventRegistration .form-group .alert-danger {
 }
 
 @media(max-width:767px){
+ 
   #mainNav .navbar-brand img {
     height: 80px;
 }
@@ -404,3 +409,6 @@ form#eventRegistration .form-group{display: block;}
 
 }
 
+@media(min-width:768px){
+  .winnerimg{width: auto!important;}
+}
