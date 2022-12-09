@@ -48,7 +48,7 @@
                           <td><?=$user['created_date'];?></td>
                           <td>
                           <a href="<?=base_url().'/admin/category/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a onclick="userDelete('category','<?=$user['id'];?>','/admin/category/delete')"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a onclick="userDelete('award type','<?=$user['id'];?>','/admin/category/delete')"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                         <?php endforeach;
