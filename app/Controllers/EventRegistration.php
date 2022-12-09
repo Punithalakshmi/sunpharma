@@ -91,8 +91,9 @@ class EventRegistration extends BaseController
                                     "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                     "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]'),
                                     "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
-                                    "registeration_no" => array("label" => "Registration No",'rules' => 'required'),
-                                    "event_type" => array("label" => "Event Type",'rules' => 'required')
+                                    "address" => array("label" => "Official Address",'rules' => 'required'),
+                                   // "registeration_no" => array("label" => "Registration No",'rules' => 'required'),
+                                 //   "event_type" => array("label" => "Event Type",'rules' => 'required')
         ); 
 
         return $validation_rules;
