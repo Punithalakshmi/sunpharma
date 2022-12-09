@@ -3,79 +3,97 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
+
 
 class Login extends BaseController
 {
+    
+    
     public function index()
     {
-        $session  = \Config\Services::session();
-
-        $session = session();
-        $session->remove('userdata');
-
-        
-        $data['userdata'] = '';
-     
-        if(empty($userdata)):
-            return view('_partials/header',$data)
-                .view('admin/login')
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/dashboard');
-        endif;
+        sessionDestroy();
+        return render('admin/login',$this->data);
     }
 
     public function loginAuth()
     {
 
-        $session   = session();
-        $userModel = new UserModel();
-        $username  = $this->request->getVar('username');
-        $password  = $this->request->getVar('password');
-        
-        $result   = $userModel->Login($username, md5($password));
-        
-        if($result){
-            $session->set('userdata',$result);
-            if(isset($result['role']) && ($result['role'] == 1))
-               return redirect()->to('/admin/nominee/lists');
-            else
-               return redirect()->route('admin/dashboard');
-        }
-        else
-        {
-            $session->setFlashdata('msg', 'Invalid Credentials');
-            return redirect()->route('admin/login');
-        }
+
+            if (strtolower($this->request->getMethod()) == "post") {  
+                
+                 $this->validation->setRules($this->validation_rules());
+                 
+
+                    if(!$this->validation->withRequest($this->request)->run()) {
+                        $this->data['validation'] = $this->validation;
+                    }
+                    else
+                    {   
+                        $username  = $this->request->getVar('username');
+                        $password  = $this->request->getVar('password');
+               
+                        $data      = $this->userModel->where('username', $username)->first();
+
+                       
+                        if($data)
+                        {
+                            $pass = $data['password'];
+                          
+                            $authenticatePassword = password_verify(trim($password), $pass); 
+
+                            if($pass == md5($password)){
+                             
+                                $ses_data = [
+                                    'id' => $data['id'],
+                                    'name' => $data['firstname'],
+                                    'login_name' => $data['firstname'],
+                                    'email' => $data['email'],
+                                    'isLoggedIn' => TRUE,
+                                    'role' => $data['role'],
+                                    'isNominee' => 'yes'
+                                ];
+
+                                setSessionData('userdata',$ses_data);
+
+                                if( $data['role'] == 1 )
+                                  return redirect()->to('admin/nominee');
+                                else
+                                  return redirect()->to('admin/dashboard');
+                            }
+                            else
+                            {
+                                $this->session->setFlashdata('msg', "Password is incorrect!");
+                                //$this->validation->setRule("password","Password", "required",array("errors" => "Incorrect Password"));
+                                return render('admin/login',$this->data);
+                            }
+                        }
+                        else
+                        {
+                            $this->session->setFlashdata('msg', "Username doesn't match!");
+                            return render('admin/login',$this->data);
+                        }
+                    }
+
+                }  
+                
+                return render('admin/login',$this->data);
 
     }
 
-    public function validation_rules($type = 'profile',$id='')
+    public function validation_rules()
     {
-
-      $validation_rules = array();
-
       $validation_rules = array(
-                                    "firstname" => array("label" => "Firstname",'rules' => 'required'),
-                                    "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                    "email" => array("label" => "email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
-                                    "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
-                                    "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
+                                    "username" => array("label" => "Username",'rules' => 'required'),
+                                    "password" => array("label" => "Password",'rules' => 'required')
       );
  
-      if($type == 'user')
-        $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');  
-
       return $validation_rules;
       
     }
     
     public function logout()
     {
-
-        $session = session();
-        $session->remove('userdata');
-        return redirect()->route('admin/login');
+        $this->session->remove('userdata');
+        return redirect()->to('admin/login');
     }
 }

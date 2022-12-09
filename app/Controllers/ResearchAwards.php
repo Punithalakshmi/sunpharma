@@ -6,13 +6,9 @@ class ResearchAwards extends BaseController
 {
     public function index()
     {
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
        
-        $data['userdata'] = $this->session->get('fuserdata');
-        
-        $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-       
+        $nominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
+   
         $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
         $currentDate = strtotime(date('Y-m-d'));
         foreach($nominationLists as $nkey => $nvalue){
@@ -28,8 +24,8 @@ class ResearchAwards extends BaseController
          }
         }
 
-        $data['currentNominations'] = $currentNominations;
-        return render('frontend/research_awards',$data);
+        $this->data['currentNominations'] = $currentNominations;
+        return render('frontend/research_awards',$this->data);
             
     }
 

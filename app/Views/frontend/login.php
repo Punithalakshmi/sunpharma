@@ -1,5 +1,6 @@
 <div class="registration-form">
     <form method="post" name="login" action="<?=base_url();?>/login">
+      <?=csrf_field(); ?>
         <h3 class="text-center">Login</h3>
         <div class="form-group mb-3">
             <input class="form-control item" type="text" id="username" placeholder="Username" name="username" required="" minlength="4"  pattern="^[a-zA-Z0-9_.-]*$">
@@ -13,11 +14,11 @@
                 </h6>  
         <?php endif;?>
         <div class="form-group mb-3"></div>
-        <div class="form-group mb-3"><button class="btn btn-primary btn-sm d-block create-account w-100" type="submit">Login</button></div>
+        <div class="form-group mb-3"><button class="btn btn-primary btn-sm d-block create-account w-100" name="submit" type="submit">Login</button></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                          <a  href="<?=base_url();?>/forget_password"><u>Forget Password</u></a>
+                          <!-- <a  href="<//=base_url();?>/forget_password"><u>Forget Password</u></a> -->
                           <a onclick="history.back()" href="#"><u>Back</u></a>
                  </div>
             </div>

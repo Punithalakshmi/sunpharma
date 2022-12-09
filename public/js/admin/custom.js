@@ -50,7 +50,7 @@ function nominee_approve(type = '',id='')
                 {
                   $('#loader').addClass('hidden');
                     if(data.status && data.status == 'success')
-                      successMessageAlert(msg)
+                      successMessageAlert(data.message)
     
                       //location.reload();
                 },
@@ -246,8 +246,6 @@ function userDelete(type = '',id='',url = '',e)
              }
           );    
     
-
-   
 }
 
 
@@ -262,4 +260,30 @@ function successMessageAlert(msg)
     },2500);
 }
 
-
+function juryFinalSubmit()
+{
+   
+  $('#loader').removeClass('hidden');
+    var msg = 'This is final review submission as it is not editable after that';
+    
+  $.confirmModal('<h2>'+msg+'</h2>', {
+    messageHeader: '',
+    backgroundBlur: ['.container'],
+    modalVerticalCenter: true
+  },function(el) {
+        if(el){
+          alert(el.value);
+                $('#loader').addClass('hidden');
+                  //$("#ratingForm").submit();
+                    setTimeout(function(){
+                    return true
+                    },2500);
+                }  
+                else
+                {
+                  return false;
+                }
+             }
+          );    
+    
+}

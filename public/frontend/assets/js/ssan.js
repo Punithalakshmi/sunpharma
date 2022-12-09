@@ -68,6 +68,13 @@ form.validate({
             filesize: 500
          },
          passport:{
+            required: {
+                
+                depends: function(elem) {
+                             if($("#citizenship").val() == 2)
+                                return true;
+                    }
+            },
             extension: "pdf"
          },
          mobile_no:{

@@ -561,7 +561,7 @@
                                        else: 
 
                                         ?>
-                                ?>
+                             
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> 
@@ -928,13 +928,18 @@
                                 </div>
                             </div>
                         </div>
-                     <?php //echo $userdata['nominationEndDays'];  
-                   //  echo $user['is_submitted'];
+                     <?php 
+                   
                           if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && ($userdata['nominationEndDays'] > 0)):   ?>           
                         <div id="q-box__buttons">
                             <button id="next-btn" class="btn btn-primary" type="reset">Reset</button>
                             <button id="submit-btn" class="btn btn-success ms-2" type="submit">Save</button>
                         </div>
+                        <?php else:?>
+                            <div id="q-box__buttons">
+                            
+                            <button id="submit-btn" class="btn btn-success ms-2" type="submit">Print</button>
+                        </div>  
                     <?php endif;?>
                 </form>
             </div>

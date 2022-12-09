@@ -3,30 +3,18 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
-use App\Models\RoleModel;
-use App\Models\CategoryModel;
 
 class User extends BaseController
 {
 
     public function index()
     {
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata');
-        $userModel = new UserModel();
-        $categoryModel = new CategoryModel();
         
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
-
-            $userLists = $userModel->getUserLists()->getResultArray();
+            $userLists = $this->userModel->getUserLists()->getResultArray();
             
             foreach($userLists as $ukey => $uvalue){
                if(!empty($uvalue['category'])){ 
-                $category = $categoryModel->getListsOfCategories($uvalue['category']);
+                $category = $this->categoryModel->getListsOfCategories($uvalue['category']);
 
                 $category = $category->getRowArray();
                 $userLists[$ukey]['category'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
@@ -37,183 +25,149 @@ class User extends BaseController
                }
             }
            
-            $data['lists'] = $userLists;
-            return view('_partials/header',$data)
-                .view('admin/user/list',$data)
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;        
+            $this->data['lists'] = $userLists;
+            return render('admin/user/list',$this->data);
+             
     }
 
     public function add($id='')
     {
-        helper(array('form', 'url'));
+      
+        $getCategoryLists   = $this->categoryModel->getListsOfCategories();
+        $this->data['categories'] = $getCategoryLists;
 
-        $session = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-    
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
-
-        $userModel = new UserModel();
-        $categoryModel = new CategoryModel();
-
-        $getCategoryLists = $categoryModel->getListsOfCategories();
-        $data['categories'] = $getCategoryLists;
-
-        if(is_array($userdata) && count($userdata)):
-           
-            if(!empty($id)){
-                $getUserData = $userModel->getListsOfUsers($id);
-                $edit_data   = $getUserData->getRowArray();
-            }
+     
+        if(!empty($id)){
+            $getUserData = $this->userModel->getListsOfUsers($id);
+            $edit_data   = $getUserData->getRowArray();
+        }
+        
+        if($this->request->getPost())
+            $id  = $this->request->getPost('id');
             
-            if($request->getPost())
-               $id  = $request->getPost('id');
-               
-            $validation = $this->validate($this->validation_rules('user',$id));
-            
-            $roleModel = new RoleModel();
-            $data['userdata'] = $userdata;
-            $data['roles']    = $roleModel->getListsOfRoles();
-            
-          
-            if($validation) {
+        $this->validation = $this->validate($this->validation_rules('user',$id));
+        
+        $this->data['roles']    = $this->roleModel->getListsOfRoles();
+        
+        
+        if($this->validation) {
 
-                if($request->getPost()){
-                     
-                    $category = '';
-
-                    $firstname     = $request->getPost('firstname');
-                    $lastname      = $request->getPost('lastname');
-                    $middlename    = $request->getPost('middlename');
-                    $email         = $request->getPost('email');
-                    $phonenumber   = $request->getPost('phonenumber');
-                    $gender        = $request->getPost('gender');
-                    $date_of_birth = $request->getPost('date_of_birth');
-                    $user_role     = $request->getPost('user_role');
-
-                    if($request->getPost('category'))
-                       $category      = $request->getPost('category');
-
-                    $ins_data = array();
-                    $ins_data['firstname']  = $firstname;
-                    $ins_data['lastname']   = $lastname;
-                    $ins_data['middlename'] = $middlename;
-                    $ins_data['email']      = $email;
-                    $ins_data['phone']      = $phonenumber;
-                    $ins_data['role']       = $user_role;
-                    $ins_data['address']    = '';
-                    $ins_data['dob']        =  $date_of_birth;
-                    $ins_data['active']     =  '1';
-
-                    if($user_role == 1)
-                      $ins_data['category'] =  $category;
-
+            if($this->request->getPost()){
                     
-                    if(!empty($id)){
-                        $session->setFlashdata('msg', 'User Updated Successfully!');
-                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $userModel->update(array("id" => $id),$ins_data);
-                    }
-                    else
-                    {
-                        $session->setFlashdata('msg', 'User Added Successfully!');
-                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
-                        $userModel->save($ins_data);
-                    } 
+                $category = '';
 
-                    return redirect()->route('admin/user');
-                }
-            }
-            else
-            {  
-            
-                if(!empty($edit_data) && count($edit_data)){
-                    $editdata['firstname']  = $edit_data['firstname'];
-                    $editdata['lastname']   = $edit_data['lastname'];
-                    $editdata['middlename'] = $edit_data['middlename'];
-                    $editdata['email']      = $edit_data['email'];
-                    $editdata['phone']      = $edit_data['phone'];
-                    $editdata['role']       = $edit_data['role'];
-                    $editdata['address']    = '';
-                    $editdata['dob']        =  $edit_data['dob'];
-                    $editdata['gender']     =  $edit_data['gender'];
+                $firstname     = $this->request->getPost('firstname');
+                $lastname      = $this->request->getPost('lastname');
+                $middlename    = $this->request->getPost('middlename');
+                $email         = $this->request->getPost('email');
+                $phonenumber   = $this->request->getPost('phonenumber');
+                $gender        = $this->request->getPost('gender');
+                $date_of_birth = $this->request->getPost('date_of_birth');
+                $user_role     = $this->request->getPost('user_role');
 
-                    if($edit_data['role'] == 1)
-                      $editdata['category']  =  $edit_data['category'];
-                    else
-                      $editdata['category']  = '';
+                if($this->request->getPost('category'))
+                    $category      = $this->request->getPost('category');
 
-                    $editdata['id']         =  $edit_data['id'];
+                $ins_data = array();
+                $ins_data['firstname']  = $firstname;
+                $ins_data['lastname']   = $lastname;
+                $ins_data['middlename'] = $middlename;
+                $ins_data['email']      = $email;
+                $ins_data['phone']      = $phonenumber;
+                $ins_data['role']       = $user_role;
+                $ins_data['address']    = '';
+                $ins_data['dob']        =  $date_of_birth;
+                $ins_data['active']     =  '1';
+
+                if($user_role == 1)
+                    $ins_data['category'] =  $category;
+
+                
+                if(!empty($id)){
+                    $this->session->setFlashdata('msg', 'User Updated Successfully!');
+                    $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                    $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
+                    $this->userModel->update(array("id" => $id),$ins_data);
                 }
                 else
                 {
-                    $editdata['firstname']  = ($request->getPost('firstname'))?$request->getPost('firstname'):'';
-                    $editdata['lastname']   = ($request->getPost('lastname'))?$request->getPost('lastname'):'';
-                    $editdata['middlename'] = ($request->getPost('middlename'))?$request->getPost('middlename'):'';
-                    $editdata['email']      = ($request->getPost('email'))?$request->getPost('email'):'';
-                    $editdata['phone']      = ($request->getPost('phonenumber'))?$request->getPost('phonenumber'):'';
-                    $editdata['role']       = ($request->getPost('user_role'))?$request->getPost('user_role'):'';
-                    $editdata['address']    = ($request->getPost('address'))?$request->getPost('address'):'';
-                    $editdata['dob']        = ($request->getPost('date_of_birth'))?$request->getPost('date_of_birth'):'';
-                    $editdata['gender']     = ($request->getPost('gender'))?$request->getPost('gender'):'';
-                    $editdata['category']   = ($request->getPost('category'))?$request->getPost('category'):'';
-                    $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):'';
-                }
+                    $this->session->setFlashdata('msg', 'User Added Successfully!');
+                    $ins_data['created_date']  =  date("Y-m-d H:i:s");
+                    $ins_data['created_id']    =  $this->data['userdata']['login_id'];
+                    $this->userModel->save($ins_data);
+                } 
 
-                  if($request->getPost())
-                    $data['validation'] = $this->validator;
+                return redirect()->route('admin/user');
+            }
+        }
+        else
+        {  
+        
+            if(!empty($edit_data) && count($edit_data)){
+                $editdata['firstname']  = $edit_data['firstname'];
+                $editdata['lastname']   = $edit_data['lastname'];
+                $editdata['middlename'] = $edit_data['middlename'];
+                $editdata['email']      = $edit_data['email'];
+                $editdata['phone']      = $edit_data['phone'];
+                $editdata['role']       = $edit_data['role'];
+                $editdata['address']    = '';
+                $editdata['dob']        =  $edit_data['dob'];
+                $editdata['gender']     =  $edit_data['gender'];
+
+                if($edit_data['role'] == 1)
+                    $editdata['category']  =  $edit_data['category'];
+                else
+                    $editdata['category']  = '';
+
+                $editdata['id']         =  $edit_data['id'];
+            }
+            else
+            {
+                $editdata['firstname']  = ($this->request->getPost('firstname'))?$this->request->getPost('firstname'):'';
+                $editdata['lastname']   = ($this->request->getPost('lastname'))?$this->request->getPost('lastname'):'';
+                $editdata['middlename'] = ($this->request->getPost('middlename'))?$this->request->getPost('middlename'):'';
+                $editdata['email']      = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+                $editdata['phone']      = ($this->request->getPost('phonenumber'))?$this->request->getPost('phonenumber'):'';
+                $editdata['role']       = ($this->request->getPost('user_role'))?$this->request->getPost('user_role'):'';
+                $editdata['address']    = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
+                $editdata['dob']        = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
+                $editdata['gender']     = ($this->request->getPost('gender'))?$this->request->getPost('gender'):'';
+                $editdata['category']   = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                $editdata['id']         = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
+            }
+
+                if($this->request->getPost())
+                $this->data['validation'] = $this->validator;
 
 
-                    $data['editdata'] = $editdata;
-                    return view('_partials/header',$data)
-                        .view('admin/user/add',$data)
-                        .view('_partials/footer');
-            }       
-        else:
-            return redirect()->route('admin/login');
-        endif; 
+                $this->data['editdata'] = $editdata;
 
-
+                return render('admin/user/add',$this->data);
+         }       
+       
     }
 
     public function profile()
     {
 
-        helper(array('form', 'url'));
-        $session   = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-
-        $request   = \Config\Services::request();
-
-        if(is_array($userdata) && count($userdata)):
-
-            $userModel = new UserModel();
-
-            $id = $userdata['login_id'];
-            $getUserData = $userModel->getListsOfUsers($id);
+            $id = $$this->data['userdata']['login_id'];
+            $getUserData = $this->userModel->getListsOfUsers($id);
             $edit_data   = $getUserData->getRowArray();
 
-            $data['userdata'] = $userdata;
-
-            $validation = $this->validate($this->validation_rules('profile',$id));
+            $this->validation = $this->validate($this->validation_rules('profile',$id));
             
-            if($validation) {
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $firstname     = $request->getPost('firstname');
-                    $lastname      = $request->getPost('lastname');
-                    $middlename    = $request->getPost('middlename');
-                    $email         = $request->getPost('email');
-                    $phonenumber   = $request->getPost('phonenumber');
-                    $gender        = $request->getPost('gender');
-                    $date_of_birth = $request->getPost('date_of_birth');
-                    $id            = $request->getPost('id');
+                    $firstname     = $this->request->getPost('firstname');
+                    $lastname      = $this->request->getPost('lastname');
+                    $middlename    = $this->request->getPost('middlename');
+                    $email         = $this->request->getPost('email');
+                    $phonenumber   = $this->request->getPost('phonenumber');
+                    $gender        = $this->request->getPost('gender');
+                    $date_of_birth = $this->request->getPost('date_of_birth');
+                    $id            = $this->request->getPost('id');
 
                     $ins_data = array();
                     $ins_data['firstname']  = $firstname;
@@ -226,10 +180,10 @@ class User extends BaseController
                     $ins_data['gender']     = $gender;
                     
                     if(!empty($id)){
-                        $session->setFlashdata('msg', 'User Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'User Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $userModel->update(array("id" => $id),$ins_data);
+                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
+                        $this->userModel->update(array("id" => $id),$ins_data);
                     }
                     
                     return redirect()->route('admin/profile');
@@ -238,94 +192,66 @@ class User extends BaseController
             else
             {  
             
-                $editdata['firstname']  = ($request->getPost('firstname'))?$request->getPost('firstname'):'';
-                $editdata['lastname']   = ($request->getPost('lastname'))?$request->getPost('lastname'):'';
-                $editdata['middlename'] = ($request->getPost('middlename'))?$request->getPost('middlename'):'';
-                $editdata['email']      = ($request->getPost('email'))?$request->getPost('email'):'';
-                $editdata['phone']      = ($request->getPost('phonenumber'))?$request->getPost('phonenumber'):'';
-                $editdata['address']    = ($request->getPost('address'))?$request->getPost('address'):'';
-                $editdata['dob']        = ($request->getPost('date_of_birth'))?$request->getPost('date_of_birth'):'';
-                $editdata['gender']     = ($request->getPost('gender'))?$request->getPost('gender'):'';
-                $editdata['id']         = ($request->getPost('id'))?$request->getPost('id'):$id;   
+                $editdata['firstname']  = ($this->request->getPost('firstname'))?$this->request->getPost('firstname'):'';
+                $editdata['lastname']   = ($this->request->getPost('lastname'))?$this->request->getPost('lastname'):'';
+                $editdata['middlename'] = ($this->request->getPost('middlename'))?$this->request->getPost('middlename'):'';
+                $editdata['email']      = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+                $editdata['phone']      = ($this->request->getPost('phonenumber'))?$this->request->getPost('phonenumber'):'';
+                $editdata['address']    = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
+                $editdata['dob']        = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
+                $editdata['gender']     = ($this->request->getPost('gender'))?$this->request->getPost('gender'):'';
+                $editdata['id']         = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;   
             } 
 
-            if($request->getPost())
-              $data['validation'] = $this->validator;
+            if($this->request->getPost())
+              $this->data['validation'] = $this->validator;
 
-            $data['editdata'] = $edit_data;
+            $this->data['editdata'] = $edit_data;
             
-            return  view('_partials/header',$data)
-                   .view('admin/user/profile',$data)
-                   .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;
-
+            return render('admin/user/profile',$this->data);
+         
+       
     }
 
 
     public function delete($id='')
     {
-        $userModel = new UserModel();
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata'); 
-        $data['userdata'] = $userdata;
-
-        if(is_array($userdata) && count($userdata)):
-
-            if($this->request->isAJAX()){
-            
-                $userModel->delete(array("id" => $id));
-                
-                return $this->response->setJSON([
-                    'status'            => 'success',
-                    'message'              => 'User deleted Successfully'
-                ]); 
-            }
-           
-        else
-            return redirect()->route('admin/login');
-        endif;
+          
+        if($this->request->isAJAX()){
+        
+            $this->userModel->delete(array("id" => $id));
+        
+            return $this->response->setJSON([
+                'status'            => 'success',
+                'message'              => 'User deleted Successfully'
+            ]); 
+        }
+       
     }
 
     public function changepassword($id='')
     {
-        helper(array('form', 'url'));
-        $userModel = new UserModel();
-        $session   = \Config\Services::session();
-
-        $request   = \Config\Services::request();
-        $validation = \Config\Services::validation();
-
-        $userdata  = $session->get('userdata'); 
-        $data['userdata'] = $userdata;
-
-        if(is_array($userdata) && count($userdata)):
-
-            $userModel = new UserModel();
-
-            $data['userdata'] = $userdata;
-
-            $validation = $this->validate($this->validation_rules('change_password',$id));
+      
+           
+            $this->validation = $this->validate($this->validation_rules('change_password',$id));
             
-            if($validation) {
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $newPassword     = $request->getPost('new_password');
-                    $id              = $request->getPost('id');
+                    $newPassword     = $this->request->getPost('new_password');
+                    $id              = $this->request->getPost('id');
 
                     $ins_data = array();
                     $ins_data['password']  = md5($newPassword);
 
-                    $userData = $userModel->getListsOfUsers($id)->getRowArray();
+                    $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
                     
                     if(!empty($id)){
-                        $session->setFlashdata('msg', 'Password Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Password Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $userModel->update(array("id" => $id),$ins_data);
+                        $ins_data['updated_id']    = $this->data['userdata']['login_id'];
+                        $this->userModel->update(array("id" => $id),$ins_data);
                     }
                     
                    if(isset($userData['email']) && !empty($userData['email'])) 
@@ -337,22 +263,18 @@ class User extends BaseController
             else
             {  
             
-                $editdata['new_password']       = ($request->getPost('new_password'))?$request->getPost('new_password'):'';
-                $editdata['confirm_password']   = ($request->getPost('confirm_password'))?$request->getPost('confirm_password'):'';
-                $editdata['id']                 = ($request->getPost('id'))?$request->getPost('id'):$id;   
+                $editdata['new_password']       = ($this->request->getPost('new_password'))?$this->request->getPost('new_password'):'';
+                $editdata['confirm_password']   = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):'';
+                $editdata['id']                 = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;   
             } 
 
-            if($request->getPost())
-              $data['validation'] = $this->validator;
+            if($this->request->getPost())
+              $this->data['validation'] = $this->validator;
 
-            $data['editdata'] = $editdata;
+            $this->data['editdata'] = $editdata;
 
-            return  view('_partials/header',$data)
-            .view('admin/user/changepassword',$data)
-            .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;
+            return  render('admin/user/changepassword',$this->data);
+            
     }
 
     public function validation_rules($type = 'profile',$id='')
@@ -398,8 +320,8 @@ class User extends BaseController
         $message .= "Please use this Password:".$password;
         $message .= "<br/>";
      
-        $data['content'] = $message;
-        $html = view('email/mail',$data,array('debug' => false));
+        $this->data['content'] = $message;
+        $html = view('email/mail',$this->data,array('debug' => false));
 
         mail($mail,$subject,$html,$header);
     }

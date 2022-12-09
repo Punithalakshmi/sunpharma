@@ -246,7 +246,7 @@
                             </label>
                             <div class="form-check ps-0 q-box">
                                 <div class="q-box__question col me-2">
-                                    <input class="form-control mb-3 required" name="passport" type="file" id="passport" value="<?=$editdata['passport'];?>" accept=".pdf">                                            
+                                    <input class="form-control mb-3" name="passport" type="file" id="passport" value="<?=$editdata['passport'];?>" accept=".pdf">                                            
                                                 
                                     <?php if(!empty($editdata['passport'])): ?>
                                         <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['passport'];?>" style="color:blue;"><?=$editdata['passport'];?></a>

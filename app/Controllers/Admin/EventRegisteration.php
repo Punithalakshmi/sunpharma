@@ -3,81 +3,54 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\RegisterationModel;
-
 
 class EventRegisteration extends BaseController
 {
 
     public function index()
     {
-        $session = \Config\Services::session();
-
-        $userdata      = $session->get('userdata');
-        $registerationModel = new RegisterationModel();
-       
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
-
-            $workshopLists = $registerationModel->getRegisteredUsers();
-
-            $data['lists'] = $workshopLists;
-            return view('_partials/header',$data)
-                .view('admin/event_registeration/list',$data)
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;        
+            $workshopLists = $this->registerationModel->getRegisteredUsers();
+            $this->data['lists'] = $workshopLists;
+            return render('admin/event_registeration/list',$this->data);   
+            
     }
 
     public function add($id='')
     {
-        helper(array('form', 'url'));
-
-        $session   = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-    
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
         
-        $data['userdata'] = $userdata;
-    
-        $registerationModel = new RegisterationModel();
-      
-        if(is_array($userdata) && count($userdata)):
+        $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
            
             if(!empty($id)){
-                $edit_data   = $registerationModel->getRegisteredUsers($id);
+                $edit_data   = $this->registerationModel->getRegisteredUsers($id);
                 $edit_data   = $edit_data->getRowArray();
             }
 
             //check registered users count
-            $countofRegisteredUsers = $registerationModel->getRegisteredUsers();
+            $countofRegisteredUsers = $this->registerationModel->getRegisteredUsers();
 
-            $count = $registerationModel->CountAll();
+            $count = $this->registerationModel->CountAll();
             
             $ct = $count + 1;
              
             $registerationNo = 'SPSFN-REG-'.$ct;
             
-            if($request->getPost())
-               $id  = $request->getPost('id');
+            if($this->request->getPost())
+               $id  = $this->request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules($id = ''));
+            $this->validation = $this->validate($this->validation_rules($id = ''));
 
-            $data['event_categories']  = $this->workshopModel->getEventTypes()->getResultArray();
+            $this->data['event_categories']  = $this->workshopModel->getEventTypes()->getResultArray();
 
-            if($validation) {
+            if($this->validation) {
 
-                if($request->getPost()){
+                if($this->request->getPost()){
                 
-                    $firstname     = $request->getPost('firstname');
-                    $lastname      = $request->getPost('lastname');
-                    $email        = $request->getPost('email');
-                    $phone        = $request->getPost('phone');
-                    $address      = $request->getPost('address');
-                    $registeration_no  = $request->getPost('registeration_no');
+                    $firstname     = $this->request->getPost('firstname');
+                    $lastname      = $this->request->getPost('lastname');
+                    $email        = $this->request->getPost('email');
+                    $phone        = $this->request->getPost('phone');
+                    $address      = $this->request->getPost('address');
+                    $registeration_no  = $this->request->getPost('registeration_no');
                   
                     $ins_data = array();
                     $ins_data['firstname']          = $firstname;
@@ -88,17 +61,17 @@ class EventRegisteration extends BaseController
                     $ins_data['registeration_no']   = $registeration_no;
                   
                     if(!empty($id)){
-                        $session->setFlashdata('msg', 'Registeration Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Registeration Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $registerationModel->update(array("id" => $id),$ins_data);
+                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
+                        $this->registerationModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
-                        $session->setFlashdata('msg', 'Registeration Added Successfully!');
+                        $this->session->setFlashdata('msg', 'Registeration Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
-                        $registerationModel->save($ins_data);
+                        $ins_data['created_id']    =  $this->data['userdata']['login_id'];
+                        $this->registerationModel->save($ins_data);
                     } 
 
                     return redirect()->route('admin/eventregisteration');
@@ -119,56 +92,48 @@ class EventRegisteration extends BaseController
                     }
                     else
                     {
-                        $editdata['firstname']                = ($request->getPost('firstname'))?$request->getPost('firstname'):'';
-                        $editdata['lastname']              = ($request->getPost('lastname'))?$request->getPost('lastname'):'';
-                        $editdata['email']          = ($request->getPost('email'))?$request->getPost('email'):'';
-                        $editdata['phone']             = ($request->getPost('phone'))?$request->getPost('phone'):'';
-                        $editdata['address']             = ($request->getPost('address'))?$request->getPost('address'):'';
-                        $editdata['registeration_no']             = ($request->getPost('registeration_no'))?$request->getPost('registeration_no'):$registerationNo;
-                        $editdata['id']                   = ($request->getPost('id'))?$request->getPost('id'):'';
-                        $editdata['event_type']                   = ($request->getPost('event_type'))?$request->getPost('event_type'):'';
+                        $editdata['firstname']                = ($this->request->getPost('firstname'))?$this->request->getPost('firstname'):'';
+                        $editdata['lastname']              = ($this->request->getPost('lastname'))?$this->request->getPost('lastname'):'';
+                        $editdata['email']          = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+                        $editdata['phone']             = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
+                        $editdata['address']             = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
+                        $editdata['registeration_no']             = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
+                        $editdata['id']                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
+                        $editdata['event_type']                   = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
                     }
                 
 
-                  if($request->getPost())
-                     $data['validation'] = $this->validator;
+                  if($this->request->getPost())
+                     $this->data['validation'] = $this->validator;
 
-                    $data['editdata'] = $editdata;
-                    return view('_partials/header',$data)
-                           .view('admin/event_registeration/add',$data)
-                           .view('_partials/footer');
+                    $this->data['editdata'] = $editdata;
+                    return render('admin/event_registeration/add',$this->data);
+                          
             }
                    
-        else:
-            return redirect()->route('admin/login');
-        endif; 
+        
     }
 
 
     public function validation_rules($id = '')
     {
 
-        $validation_rules = array();
-        $validation_rules = array(   "firstname" => array("label" => "Firstname",'rules' => 'required'),
+        $this->validation_rules = array();
+        $this->validation_rules = array(   "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                     "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                     "phone" => array("label" => "Phone",'rules' => 'required'),
                                      "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email,id,'.$id.']')
                                 );
     
-        return $validation_rules;
+        return $this->validation_rules;
       
     }
 
     public function delete($id='')
     {
-        $registerationModel = new RegisterationModel();
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata'); 
-        $data['userdata'] = $userdata;
-
-        if(is_array($userdata) && count($userdata)):
-          $registerationModel->delete(array("id" => $id));
+      
+          $this->registerationModel->delete(array("id" => $id));
+         
           if($this->request->isAJAX()){
                 
             return $this->response->setJSON([
@@ -176,8 +141,6 @@ class EventRegisteration extends BaseController
                 'message'           => 'Registration deleted Successfully'
             ]); 
          }
-        else
-            return redirect()->route('admin/login');
-        endif;
+       
     }
 }

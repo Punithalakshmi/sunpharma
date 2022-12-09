@@ -28,8 +28,13 @@ class NominationTypesModel extends Model{
 
     public function getListsOfNominations($id='')
     {
-        if(empty($id))
-         return $this->findAll();
+        if(empty($id)){
+            $builder = $this->table('nominations');
+            $builder->select('nominations.*');
+            $builder->orderBy('id', 'DESC');
+            $builder->orderBy('title', 'ASC');  
+            return $query = $builder->get();
+        }
         else 
           return $this->getWhere(array('id' => $id)); 
     }

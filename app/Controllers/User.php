@@ -8,55 +8,99 @@ class User extends BaseController
     public function login()
     {
 
-        if($this->request->getPost()){
+        try
+        {
+            if (strtolower($this->request->getMethod()) == "post") {  
 
-              $username   = $this->request->getPost('username');
-              $password   = $this->request->getPost('password');
-       
-              $result   = $this->userModel->fLogin($username, md5($password));
-              
-             if(!$result) {
-                 $this->session->setFlashdata('msg', 'Invalid Credentials');
-             }
-             else
-             {
-               
-                $getNominationData   = $this->nominationModel->getNominationData($result['id']);
-                $getNominationData   = $getNominationData->getRowArray();
+              //  echo "dsdsdsds"; die;
                 
-                $getCategoryNominationData   = $this->nominationTypesModel->getCategoryNomination($getNominationData['category_id']);
-                $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
-
-                //get extend nomination date
-                $getExtendNominationDate   = $this->extendModel->getListsOfExtends($result['id']);
-
-                $getExtendNominationEndDays = 0;
-               if($getExtendNominationDate->getRowArray() > 0) {
-                 $getExtendNominationDate = $getExtendNominationDate->getRowArray();
-                 $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
-               }  
-
-                $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
-
-                if($nominationEndDays <= 0 && $getExtendNominationEndDays > 0)
-                  $result['nominationEndDays'] =  $getExtendNominationEndDays;
+                $this->validation->setRules($this->validation_rules());
+            
+                if(!$this->validation->withRequest($this->request)->run()) {
+                    $this->data['validation'] = $this->validation;
+                }
                 else
-                  $result['nominationEndDays'] =  $nominationEndDays;  
+                {  
 
-                $result['nominationEndDate'] = $getNominationDaysCt['end_date'];
-                $result['nomination_type']   = $getNominationData['nomination_type'];
+                    $username   = $this->request->getVar('username');
+                    $password   = $this->request->getVar('password');
+            
+                    $data       = $this->userModel->where('username', $username)->first();
+                   // print_r($data); die;
+                    if($data){
 
-                $this->session->set('fuserdata',$result);
-                $redirect_route = 'view/'.$result['id'];
+                        $pass = trim($data['password']);
+                     
+                        $authenticatePassword = password_verify($password, $pass);
+                       //    echo $authenticatePassword; die;
+                       if($pass == md5($password)){
+                           
+                            $ses_data = [
+                                'id' => $data['id'],
+                                'name' => $data['name'],
+                                'email' => $data['email'],
+                                'isLoggedIn' => TRUE,
+                                'role' => $data['role'],
+                                'isNominee' => 'yes'
+                            ];
 
-                return redirect()->to($redirect_route);
-            }    
+                            $getNominationData   = $this->nominationModel->getNominationData($result['id']);
+                            $getNominationData   = $getNominationData->getRowArray();
+                            
+                            $getCategoryNominationData   = $this->nominationTypesModel->getCategoryNomination($getNominationData['category_id']);
+                            $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
+            
+                            //get extend nomination date
+                            $getExtendNominationDate   = $this->extendModel->getListsOfExtends($result['id']);
+            
+                            $getExtendNominationEndDays = 0;
+                            if($getExtendNominationDate->getRowArray() > 0) {
+                                $getExtendNominationDate = $getExtendNominationDate->getRowArray();
+                                $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
+                            }  
+        
+                            $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
+            
+                            if($nominationEndDays <= 0 && $getExtendNominationEndDays > 0)
+                                $ses_data['nominationEndDays'] =  $getExtendNominationEndDays;
+                            else
+                                $ses_data['nominationEndDays'] =  $nominationEndDays;  
+            
+                            $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
+                            $ses_data['nomination_type']   = $getNominationData['nomination_type'];
+
+                            setSessionData('fuserdata',$ses_data);
+                            $redirect_route = 'view/'.$result['id'];
+        
+                            return redirect()->to($redirect_route);
+                        
+                        }
+                        else
+                        {
+                           // throw new \Exception('Password is incorrect.');
+                            return render('frontend/login',$this->data);
+                        }
+                    }
+                    else
+                    {
+                        //throw new \Exception('Username does not match.');
+                        return render('frontend/login',$this->data);
+                    }
+                }     
+            }
+            else
+            {
+                $editdata['username'] = ($this->request->getVar('username'))?$this->request->getVar('username'):"";
+                $editdata['password'] = ($this->request->getVar('password'))?$this->request->getVar('password'):"";
+                $this->data['editdata'] = $editdata;
+            }
+
+            return  render('frontend/login',$this->data);
+        }
+        catch(\Exception $e){
+            $this->session->setFlashdata($e->getMessage());
         }
        
-            $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1);  
-           
-            return  render('frontend/login',$data);
 
        
     }
@@ -101,19 +145,11 @@ class User extends BaseController
         return redirect()->route('/');
     }
 
-    public function dateDiff($date1, $date2)
-    {
-        $date1_ts = strtotime($date1);
-        $date2_ts = strtotime($date2);
-        $diff = $date2_ts - $date1_ts;
-        return round($diff / 86400);
-    }
-
 
     public function validForm()
     {
         $uri = current_url(true);
-            $data['uri'] = $uri->getSegment(1); 
+        $data['uri'] = $uri->getSegment(1); 
         return view('frontend/formvalid',$data);
     }
 
@@ -154,12 +190,24 @@ class User extends BaseController
         }
     }
 
-    public function validation_rules()
+    public function forgot_password_validation_rules()
     {
 
             $validation_rules = array();
             $validation_rules = array(
                                       "email" => array("label" => "Email",'rules' => 'required|valid_email')
+            ); 
+            return $validation_rules;
+      
+    }
+
+    public function validation_rules()
+    {
+
+            $validation_rules = array();
+            $validation_rules = array(
+                                      "username" => array("label" => "Username",'rules' => 'required'),
+                                      "password" => array("label" => "Password",'rules' => 'trim|required')
             ); 
             return $validation_rules;
       

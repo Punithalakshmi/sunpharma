@@ -12,10 +12,7 @@ class Nomination extends BaseController
 
         if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == '2'))
             $this->view($userdata['id']);
-
-            $uri         = current_url(true);
-            $data['uri'] = (base_url() == 'http://local.sunpharma.md')?$uri->getSegment(1):$uri->getSegment(3);
-
+            
             if(!empty($id)){
                 $getUserData = $this->userModel->getUserData($id);
                 $edit_data   = $getUserData->getRowArray();
@@ -23,7 +20,7 @@ class Nomination extends BaseController
 
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Science Scholar Awards');
-            $data['categories'] = $getCategoryLists->getResultArray();
+            $this->data['categories'] = $getCategoryLists->getResultArray();
             
             if($this->request->getPost()){
                $id  = $this->request->getPost('id');
@@ -137,14 +134,14 @@ class Nomination extends BaseController
                 
 
                 if($this->request->getPost())
-                $data['validation'] = $this->validator;
+                $this->data['validation'] = $this->validator;
 
-                $data['editdata']   = $editdata;
-                $data['userdata']   = $userdata;
-                $data['nomination'] = $id;
+                $this->data['editdata']   = $editdata;
+                $this->data['userdata']   = $userdata;
+                $this->data['nomination'] = $id;
 
                 if($this->request->isAJAX()){
-                    $html = view('frontend/spsfn_preview',$data,array('debug' => false));
+                    $html = view('frontend/spsfn_preview',$this->data,array('debug' => false));
                     return $this->response->setJSON([
                         'status'            => 'success',
                         'html'              => $html
@@ -152,7 +149,7 @@ class Nomination extends BaseController
                 }
                 else
                 {
-                    return render('frontend/spsfn_new',$data); 
+                    return render('frontend/spsfn_new',$this->data); 
                 }  
                           
         }
@@ -163,18 +160,11 @@ class Nomination extends BaseController
     public function ssan($id = '',$detail_id='')
     {
 
-        helper(array('form', 'url'));
-        
-        $userdata  = $this->session->get('fuserdata');
-
+       
         if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == 2))
             $this->view($userdata['id']);
 
-        $uri = current_url(true);
-
-        $data['uri'] = (base_url() == 'http://local.sunpharma.md')?$uri->getSegment(1):$uri->getSegment(3);
-
-
+        
         if(!empty($id)){
             $getUserData = $this->userModel->getUserData($id);
             $edit_data   = $getUserData->getRowArray();
@@ -184,7 +174,7 @@ class Nomination extends BaseController
         $getCategoryLists   = $this->categoryModel->getCategoriesByType('Research Awards');
         $categories         = $getCategoryLists->getResultArray();
         
-        $data['categories'] = $categories;
+        $this->data['categories'] = $categories;
 
         if($this->request->getPost()){
             $id  = $this->request->getPost('id');
@@ -287,14 +277,14 @@ class Nomination extends BaseController
 
         
             if($this->request->getPost())
-              $data['validation'] = $this->validator;
+              $this->data['validation'] = $this->validator;
 
-            $data['editdata'] = $editdata;
-            $data['userdata'] = $userdata;
-            $data['nomination'] = $id;
+            $this->data['editdata'] = $editdata;
+            $this->data['userdata'] = $userdata;
+            $this->data['nomination'] = $id;
 
             if($this->request->isAJAX()){
-                $html = view('frontend/ssan_preview',$data,array('debug' => false));
+                $html = view('frontend/ssan_preview',$this->data,array('debug' => false));
                 return $this->response->setJSON([
                     'status'            => 'success',
                     'html'              => $html
@@ -302,7 +292,7 @@ class Nomination extends BaseController
             }
             else
             {
-                return  render('frontend/ssan_new',$data);
+                return  render('frontend/ssan_new',$this->data);
                         
             }            
         }
@@ -341,11 +331,6 @@ class Nomination extends BaseController
 
     public function view($id = '')
     {
-
-        $userdata = $this->session->get('fuserdata');
- 
-        $uri = current_url(true);
-        $data['uri'] = (base_url() == 'http://local.sunpharma.md')?$uri->getSegment(1):$uri->getSegment(3);
 
        
         $id = (!empty($id))?$id:$this->request->getPost('id');
@@ -535,13 +520,12 @@ class Nomination extends BaseController
         }
 
         if($this->request->getPost())
-            $data['validation'] = $this->validator;
+            $this->data['validation'] = $this->validator;
 
-        $data['user']     = $edit_data;
-        $data['userdata'] = $userdata;
-        $data['editdata'] = $editdata;
+        $this->data['user']     = $edit_data;
+        $this->data['editdata'] = $editdata;
 
-        return  render('frontend/preview',$data);
+        return  render('frontend/preview',$this->data);
                                  
     }
 
@@ -607,12 +591,12 @@ class Nomination extends BaseController
                 $editdata['supervisor_certifying'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($supervisor_certifying));
             }
         
-            $data['editdata']  = $editdata;
+            $this->data['editdata']  = $editdata;
 
             $filename          = ($formtype == 'ssan')?'frontend/ssan_preview':'frontend/spsfn_preview';
 
             if($this->request->isAJAX()){
-                $html = view($filename,$data,array('debug' => false));
+                $html = view($filename,$this->data,array('debug' => false));
                 return $this->response->setJSON([
                     'status'            => 'success',
                     'html'              => $html
@@ -674,8 +658,8 @@ class Nomination extends BaseController
         $message .= "<br/>";
         $message .= "Sunpharma Science Foundation Team";
        
-        $data['content'] = $message;
-        $html = view('email/mail',$data,array('debug' => false));
+        $this->data['content'] = $message;
+        $html = view('email/mail',$this->data,array('debug' => false));
         mail("punitha@izaaptech.in",$subject,$html,$header);
 
 
@@ -692,8 +676,8 @@ class Nomination extends BaseController
         $message .= "<br/>";
         $message .= "Sunpharma Science Foundation Team";
        
-        $data['content'] = $message;
-        $html = view('email/mail',$data,array('debug' => false));
+        $this->data['content'] = $message;
+        $html = view('email/mail',$this->data,array('debug' => false));
         mail($nominee_email,$subject,$html,$header);
 
     }
@@ -722,8 +706,8 @@ class Nomination extends BaseController
                     $message .= "<br/>";
                     $message .= "Sunpharma Science Foundation Team";
                    
-                    $data['content'] = $message;
-                    $html = view('email/mail',$data,array('debug' => false));
+                    $this->data['content'] = $message;
+                    $html = view('email/mail',$this->data,array('debug' => false));
                      mail($jvalue['email'],$subject,$html,$header);
                 }
             }
@@ -732,13 +716,8 @@ class Nomination extends BaseController
 
     public function success()
     {
-
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
-       
-        $data['userdata'] = $this->session->get('fuserdata');
         
-        return render('frontend/success', $data);
+        return render('frontend/success', $this->data);
 
     }
 

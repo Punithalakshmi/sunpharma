@@ -17,8 +17,9 @@
                     <br />
                     <form id="demo-form2" action="<?php echo base_url();?>/admin/user/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
+                      <?= csrf_field(); ?>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required" style="color:red;">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="firstname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('firstname',$editdata['firstname']);?>">
@@ -34,7 +35,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required" style="color:red;">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="last-name" name="lastname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('lastname',$editdata['lastname']);?>">
@@ -56,7 +57,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="email" class="form-control col-md-7 col-xs-12" type="text" name="email" value="<?php echo set_value('email',$editdata['email']);?>">
                         </div>
@@ -72,11 +73,10 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phone Number</label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phone Number <span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="phonenumber" class="form-control col-md-7 col-xs-12" type="number" name="phonenumber" value="<?php echo set_value('phonenumber',$editdata['phone']);?>">
+                         <input id="phonenumber" class="form-control col-md-7 col-xs-12" type="number" name="phonenumber" value="<?php echo set_value('phonenumber',$editdata['phone']);?>">
                         </div>
-                       
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
@@ -88,7 +88,7 @@
                       </div>
                         <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender <span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group mt-10" data-toggle="buttons">
                             <p>
@@ -98,15 +98,34 @@
                           </div>
                         </div>
                       </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('gender')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('gender'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required" style="color:red;">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="birthday" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
                         </div>
                       </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('date_of_birth')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('date_of_birth'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Role</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Role 
+                          <span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="select2_single form-control" name="user_role" tabindex="-1" onchange="categoryRestrictionByRole(this);">
                             <option value=""></option>
@@ -119,6 +138,15 @@
                           </select>
                         </div>
                       </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('user_role')) {?>
+                          <div class='alert alert-danger mt-2'>
+                            <?= $error = $validation->getError('user_role'); ?>
+                          </div>
+                      <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
                         <div id="categorySelection" class="form-group" style="display:<?=(isset($editdata['role']) && ($editdata['role'] == 1))?'block':'none';?>">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">

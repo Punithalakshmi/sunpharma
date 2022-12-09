@@ -3,124 +3,72 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\NomineeModel;
-use App\Models\UserModel;
-use App\Models\RoleModel;
-use App\Models\JuryModel;
-use App\Models\RatingModel;
-use App\Models\CategoryModel;
-use App\Models\ExtendModel;
-use App\Models\NominationTypesModel;
 
 class Nominee extends BaseController
 {
 
     public function index()
     {
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata');
-        $nomineeModel = new NomineeModel();
-        $nomineeTypesModel = new NominationTypesModel();
         
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
 
-            $userLists = $nomineeModel->getListsOfNominees();
+            $userLists = $this->nomineeModel->getListsOfNominees();
             $lists     = $userLists->getResultArray();
 
             $current_date = date("Y-m-d");
 
             foreach($lists as $k => $user){
-             //  $userLists  = $nomineeModel->getJuryName($user['jury_id']);
-             //  $juryName   =  $userLists->getRowArray();
-            
-                $getNominationEndDate = $nomineeTypesModel->getCategoryNomination($user['category']);
+             
+                $getNominationEndDate = $this->nominationTypesModel->getCategoryNomination($user['category']);
                
                 $lists[$k]['nomination_end_date'] = '';
 
-                
-                $nominationEndDate = '';
-                if($getNominationEndDate->getRowArray() > 0) {  
-                    $getNominationEndDate = $getNominationEndDate->getRowArray();
-                    $nominationEndDate = $getNominationEndDate['end_date'];
-                    $lists[$k]['nomination_end_date']  = $nominationEndDate;
-                }     
+                $isExpiredNomination =  isNominationExpired($user['extend_date']);
 
-                $lists[$k]['is_expired_nomination'] = 'no';
-                if(strtotime($current_date) > strtotime($nominationEndDate))
-                   $lists[$k]['is_expired_nomination']  = 'yes';  
+                $lists[$k]['is_expired_nomination'] = ($isExpiredNomination)?'yes':'no';
                 
  
             }
 
-            $data['lists'] = $lists;
+            $this->data['lists'] = $lists;
             $juryLists = array();
-            $juryLists  = $nomineeModel->getJuryLists()->getResultArray();
+            $juryLists  = $this->nomineeModel->getJuryLists()->getResultArray();
 
             if(count($juryLists) > 0)
-                 $data['juryLists'] = $juryLists;
+                 $this->data['juryLists'] = $juryLists;
                  
 
-            return view('_partials/header',$data)
-                .view('admin/nominee/list',$data)
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;        
+            return render('admin/nominee/list',$this->data);
+              
+       
     }
 
     public function getApproval($id = '')
     {
-        $session = \Config\Services::session();
-        $request = \Config\Services::request();
-
-        $userdata  = $session->get('userdata');
-        $nomineeModel = new NomineeModel();
-        
-        $data['userdata'] = $userdata;
        
-        if(is_array($userdata) && count($userdata)):
-
-            $id = ($request->getPost('id'))?$request->getPost('id'):$id;
+            $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
             
-            $getUserData  = $nomineeModel->getNomineeInfo($id);
+            $getUserData  = $this->nomineeModel->getNomineeInfo($id);
             
-            $data['user'] = $getUserData->getRowArray();
+            $this->data['user'] = $getUserData->getRowArray();
            // print_r($getUserData); die;
-            $data['editdata'] = $data;
-            return view('_partials/header',$data)
-                .view('admin/nominee/nominee_view',$data)
-                .view('_partials/footer');
+            $this->data['editdata'] = $this->data;
+            return render('admin/nominee/nominee_view',$this->data);
+               
 
-        else:
-            return redirect()->route('admin/login');
-        endif;   
+         
     }
 
     public function approve()
     {
 
-        $session = \Config\Services::session();
-        $request = \Config\Services::request();
-
-        $userdata  = $session->get('userdata');
-        $userModel = new userModel();
-        
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
-
-            $id     = $request->getPost('id');
-            $type   = $request->getPost('type');
+            $id     = $this->request->getPost('id');
+            $type   = $this->request->getPost('type');
 
             $up_data = array();
-
             $up_data['updated_date']  =  date("Y-m-d H:i:s");
-            $up_data['updated_id']    =  $userdata['login_id'];
+            $up_data['updated_id']    =  $this->data['userdata']['login_id'];
 
-            $getUserData  = $userModel->getListsOfUsers($id);
+            $getUserData  = $this->userModel->getListsOfUsers($id);
             $getUserData  = $getUserData->getRowArray();
 
            // $email = \Config\Services::email();
@@ -147,7 +95,7 @@ class Nominee extends BaseController
                 $up_data['password'] = md5($pass);
                 $up_data['username'] = strtolower($getUserData['firstname']);
                 $up_data['original_password'] = $pass;
-                $userModel->update(array("id" => $getUserData['id']),$up_data);
+                $this->userModel->update(array("id" => $getUserData['id']),$up_data);
             }
             else
             {
@@ -157,7 +105,7 @@ class Nominee extends BaseController
                 $msg = 'Rejected Successfully';
                 $message .= 'Your Application has been rejected';
             }
-            $userModel->update(array("id" => $id),$up_data);
+            $this->userModel->update(array("id" => $id),$up_data);
             $message .= 'Thanks & Regards,<br/>';
             $message .= 'Sunpharma Science Foundation Team';
            //$email->setMessage($message);
@@ -166,8 +114,8 @@ class Nominee extends BaseController
             $header .= "MIME-Version: 1.0\r\n";
             $header .= "Content-type: text/html\r\n";
 
-            $data['content'] = $message;
-            $html = view('email/mail',$data,array('debug' => false));
+            $this->data['content'] = $message;
+            $html = view('email/mail',$this->data,array('debug' => false));
            // mail($getUserData['email'],$subject,$html,$header);
             
             $status = '';
@@ -178,8 +126,8 @@ class Nominee extends BaseController
             else
             {
                 $status = 'error';
-                $data = $email->printDebugger(['headers']);
-                $message = $data;
+                $this->data = $email->printDebugger(['headers']);
+                $message = $this->data;
             }
         
             if($this->request->isAJAX()){
@@ -187,100 +135,66 @@ class Nominee extends BaseController
                 exit;
             }
 
-        else
-            return redirect()->route('admin/login');
-        endif;
-
-
+        
     }
 
 
     public function nominee_lists_of_jury()
     {
-        $session = \Config\Services::session();
-
-        $userdata  = $session->get('userdata');
-        $nomineeModel = new NomineeModel();
+        $nomineeLists  = $this->userModel->getListsNominations();
+        $this->data['lists'] = $nomineeLists->getResultArray();
         
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
-
-            $userModel     = new UserModel();
-            $nomineeLists  = $userModel->getListsNominations();
-            $data['lists'] = $nomineeLists->getResultArray();
-           
-            return view('_partials/header',$data)
-                .view('admin/nominee/nominee_lists_of_jury',$data)
-                .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;
-
+        return render('admin/nominee/nominee_lists_of_jury',$this->data);         
     }
     
     
     public function view($nominee_id = '')
     {
-        helper(array('form', 'url'));
+      
 
-        $session    = \Config\Services::session();
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
+        $nominee_id = ($this->request->getPost('nominee_id'))?$this->request->getPost('nominee_id'):$nominee_id;
 
-        $userdata  = $session->get('userdata');
-
-        $nominee_id = ($request->getPost('nominee_id'))?$request->getPost('nominee_id'):$nominee_id;
-
-        $id = ($request->getPost('id'))?$request->getPost('id'):'';
+        $id = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
         
-        $userModel      = new UserModel();
-        $ratingModel    = new RatingModel();
-        $nomineeModel   = new NomineeModel();
-        $categoryModel  = new CategoryModel();
-
-        $getUserData  = $userModel->getUserData($nominee_id);
-        $data['user'] = $getUserData->getRowArray();
+        $getUserData  = $this->userModel->getUserData($nominee_id);
+        $this->data['user'] = $getUserData->getRowArray();
 
    
         //get nominee category
         if(isset($data['user']['category_id'])) {
     //    $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
-        $data['user']['category_name'] =  $data['user']['category_name'];
+        $data['user']['category_name'] =  $this->data['user']['category_name'];
         }
     
-        $edit_data  = $ratingModel->getRatingData($userdata['login_id'],$nominee_id)->getRowArray();
-        $validation = $this->validate($this->validation_rules());
+        $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['login_id'],$nominee_id)->getRowArray();
+        $this->validation = $this->validate($this->validation_rules());
 
-        $data['userdata'] = $userdata;
-        $average_rating   = $ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
+        $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
 
-        $data['average_rating'] = $average_rating['avg_rating'];
+        $this->data['average_rating'] = $average_rating['avg_rating'];
 
-        $data['ratings'] = $ratingModel->getRatingByJury($nominee_id)->getResultArray();
+        $this->data['ratings'] = $this->ratingModel->getRatingByJury($nominee_id)->getResultArray();
 
-        if(is_array($userdata) && count($userdata)):
+            if($this->validation) {
 
-            if($validation) {
-
-                if($request->getPost()){
+                if($this->request->getPost()){
                   
                     $category = '';
 
-                    $rating     = $request->getPost('rating');
-                    $comment    = $request->getPost('comment');
+                    $rating     = $this->request->getPost('rating');
+                    $comment    = $this->request->getPost('comment');
                  
                     $ins_data = array();
                     $ins_data['rating']       = $rating;
                     $ins_data['comments']     = $comment;
-                    $ins_data['jury_id']      = $userdata['login_id'];
+                    $ins_data['jury_id']      = $this->data['userdata']['login_id'];
                     $ins_data['nominee_id']   = $nominee_id;
-                    $ins_data['is_rate_submitted'] = ($request->getPost('submit') && ($request->getPost('submit') == 'Save Draft'))?0:1; 
+                    $ins_data['is_rate_submitted'] = ($this->request->getPost('submit') && ($this->request->getPost('submit') == 'Save Draft'))?0:1; 
                     
                    
-                    $session->setFlashdata('msg', 'Rated Successfully!');
+                    $this->session->setFlashdata('msg', 'Rated Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                    $ins_data['created_id']    =  $userdata['login_id'];
+                    $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                     $ratingModel->save($ins_data);
                      
 
@@ -298,82 +212,60 @@ class Nominee extends BaseController
                 }
                 else
                 {
-                    $editdata['rating']      = ($request->getPost('rating'))?$request->getPost('rating'):'';
-                    $editdata['comment']     = ($request->getPost('comment'))?$request->getPost('comment'):'';
-                    $editdata['id']          = ($request->getPost('id'))?$request->getPost('id'):'';
+                    $editdata['rating']      = ($this->request->getPost('rating'))?$this->request->getPost('rating'):'';
+                    $editdata['comment']     = ($this->request->getPost('comment'))?$this->request->getPost('comment'):'';
+                    $editdata['id']          = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                     $editdata['is_rate_submitted'] = '0';
                 }
             } 
             
-            if($request->getPost())
-               $data['validation'] = $this->validator;
+            if($this->request->getPost())
+               $this->data['validation'] = $this->validator;
 
-            $data['editdata'] = $editdata;
-            return   view('_partials/header',$data)
-                    .view('admin/nominee/view',$data)
-                    .view('_partials/footer');
-        else:
-            return redirect()->route('admin/login');
-        endif;
-
+            $this->data['editdata'] = $editdata;
+            return  render('admin/nominee/view',$this->data);
+                    
     }
 
 
     public function assignJury()
     {
-        $session = \Config\Services::session();
-        $request = \Config\Services::request();
-
-        $userdata  = $session->get('userdata');
         
-        $data['userdata'] = $userdata;
-       
-        if(is_array($userdata) && count($userdata)):
 
-            $juryModel = new JuryModel();
-
-            $juryID       = $request->getPost('juryID');
-            $nomineeArr   = $request->getPost('nominee');
+            $juryID       = $this->request->getPost('juryID');
+            $nomineeArr   = $this->request->getPost('nominee');
      
             $ins_data = array();
             $ins_data['jury_id'] = $juryID;
             $ins_data['created_date'] = date("Y-m-d H:i:s");
-            $ins_data['created_id']   = $userdata['login_id'];
+            $ins_data['created_id']   = $this->data['userdata']['login_id'];
            foreach($nomineeArr as $nominee){
 
-              $getAssignedJuryLists = $juryModel->checkIfAlreadyNominee($juryID,$nominee);
+              $getAssignedJuryLists = $this->juryModel->checkIfAlreadyNominee($juryID,$nominee);
                
               if(!is_array($getAssignedJuryLists)){
                 $ins_data['nominee_id'] = $nominee;
-                $getUserData = $juryModel->insert($ins_data);
+                $getUserData = $this->juryModel->insert($ins_data);
               }
            }
 
            echo json_encode(array('status' => 'success','message' => 'Jury Assigned Successfully!'));
            exit;
            
-        else:
-            return redirect()->route('admin/login');
-        endif;
     }
 
-
-    public function ratings()
-    {
-        
-    }
 
     public function validation_rules()
     {
 
-        $validation_rules = array();
+        $this->validation_rules = array();
 
-        $validation_rules = array(
-                                        "rating" => array("label" => "Rating",'rules' => 'required'),
+        $this->validation_rules = array(
+                                        "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero'),
                                         "comment" => array("label" => "Comment",'rules' => 'required')
         );
     
-        return $validation_rules;
+        return $this->validation_rules;
       
     }
  
@@ -393,105 +285,72 @@ class Nominee extends BaseController
     public function extend($id = '')
     {
 
-        $userdata  = $this->session->get('userdata');
-        $extendModel = new ExtendModel();
-        $userModel = new userModel();
-
-        helper(array('form', 'url'));
-
-        $session = \Config\Services::session();
-        $userdata  = $session->get('userdata');
-    
-        $request    = \Config\Services::request();
-        $validation = \Config\Services::validation();
-        
-        $data['userdata'] = $userdata;
-        
-        if(is_array($userdata) && count($userdata)):
-           
-            if($request->getPost())
-               $id  = $request->getPost('id');
+        $id  = ($request->getPost('id'))?$request->getPost('id'):$id;
                
-            $validation = $this->validate($this->extend_validation_rules());
+        $validation = $this->validate($this->extend_validation_rules());
 
-            $getExtend  = $extendModel->getListsOfExtends($id);
+        $getExtend  = $this->userModel->getUserData($id);
 
-            if($getExtend->getRowArray() > 0)
-             $edit_data = $getExtend->getRowArray();
+        if($getExtend->getRowArray() > 0)
+          $edit_data = $getExtend->getRowArray(); 
 
-            if($validation) {
+        $this->data['editdata'] = $edit_data; 
 
-                if($request->getPost()){
-                
+        if($getExtend->getRowArray() > 0)
+            $edit_data = $getExtend->getRowArray();
+
+        if($this->validation) {
+
+            if($this->request->getPost()){
+            
                     $extend_date    = $request->getPost('extend_date');
                     
                     $ins_data = array();
                     $ins_data['extend_date']   = date("Y-m-d",strtotime($extend_date));
-                    $ins_data['user_id']      = $id;
-                    
-
+                 
                     //get user data
-                    $getExtendUserData  = $userModel->getListsOfUsers($id)->getRowArray();
+                    $getExtendUserData  = $this->userModel->getListsOfUsers($id)->getRowArray();
                    
                     if(!empty($id) && $getExtend->getRowArray() > 0){
                         $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
-                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $userdata['login_id'];
-                        $extendModel->update(array("id" => $id),$ins_data);
+                        $ins_data['updated_date']   =  date("Y-m-d H:i:s");
+                        $ins_data['updated_id']     =  $userdata['login_id'];
+                        $this->userModel->update(array("id" => $id),$ins_data);
                     }
-                    else
-                    {
-                        $session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
-                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $userdata['login_id'];
-                        $extendModel->save($ins_data);
-                    } 
-
+                
                     $this->extendMailNotification($getExtendUserData['email'],$extend_date);
 
                     return redirect()->route('admin/nominee');
-                }
             }
-            else
-            {  
+        }
+        else
+        {  
 
-                if(!empty($edit_data) && count($edit_data)){
-                    $editdata['extend_date'] = date("m/d/Y",strtotime($edit_data['extend_date']));
-                    $editdata['id']         = $edit_data['id'];
-                }
-                else
-                {
-                   
-                    $editdata['extend_date']     = ($request->getPost('extend_date'))?$request->getPost('extend_date'):date("m/d/Y");
-                    $editdata['id']              = ($request->getPost('id'))?$request->getPost('id'):$id;
-                }
+            if(!empty($edit_data) && count($edit_data)){
+                $editdata['extend_date'] = $edit_data['extend_date'];
+                $editdata['id']          = $id;
+            }
+            
+            if($this->request->getPost())
+            $this->data['validation'] = $this->validator;
 
-                  if($request->getPost())
-                    $data['validation'] = $this->validator;
-
-
-                    $data['editdata'] = $editdata;
-                    return view('_partials/header',$data)
-                        .view('admin/nomination/extend',$data)
-                        .view('_partials/footer');
-            }       
-        else:
-            return redirect()->route('admin/login');
-        endif; 
-
+           return render('admin/nomination/extend',$this->data);  
+                     
+        }       
+    
     }
 
 
     public function extend_validation_rules()
     {
 
-        $validation_rules = array();
+        $this->validation_rules = array();
 
-        $validation_rules = array(
+        $this->validation_rules = array(
                                         "extend_date" => array("label" => "Extend",'rules' => 'required')                           
         );
     
-        return $validation_rules;
+        return $this->validation_rules;
       
     }
 
@@ -509,8 +368,8 @@ class Nominee extends BaseController
     
         $message .= "<br/>";
      
-        $data['content'] = $message;
-        $html = view('email/mail',$data,array('debug' => false));
+        $this->data['content'] = $message;
+        $html = view('email/mail',$this->data,array('debug' => false));
 
         mail($mail,$subject,$html,$header);
     }

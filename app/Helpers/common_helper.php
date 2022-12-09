@@ -49,34 +49,24 @@ if ( ! function_exists('captchaVerification'))
             {
                 return $email->printDebugger(['headers']);
             }
-
-       
-    }     
-    
+       }     
 }
 
-    if ( ! function_exists('mailHeader'))
-    {
-        function mailHeader()
-        {
-            $header  = '';
-            $header .= "MIME-Version: 1.0\r\n";
-            $header .= "Content-type: text/html\r\n";
-
-            return $header;
-        }
-    }
     
-    
-    if ( ! function_exists('getNominationEndDate'))
+if ( ! function_exists('isNominationExpired'))
+{
+    function isNominationExpired($extendDate)
     {
-        function getNominationEndDate()
-        {
-            $header  = '';
-            $header .= "MIME-Version: 1.0\r\n";
-            $header .= "Content-type: text/html\r\n";
-
-            return $header;
-        }
+       
+        $date1_ts = strtotime(date("Y-m-d"));
+        $date2_ts = strtotime($extendDate);
+        $diff = $date2_ts - $date1_ts;
+        $nominationEndDays = round($diff / 86400);
+    
+        if($nominationEndDays <= 0 )
+          return true;
+       else
+          return false ;
+        
     }
-
+}
