@@ -16,7 +16,7 @@
                     <h3 class="heading" style="color: #F7941E;">2022</h3>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-3 mx-auto" style="max-width: 900px;">
+            <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">
                 <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#arjun" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Arjun-B-S.jpg"></a><a href="#" data-bs-target="#arjun" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Mr. Arjun B S<br></h5>
@@ -25,6 +25,16 @@
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
+
+                <div class="col mb-4">
+                    <div class="text-center"><a href="#" data-bs-target="#atishroy" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Atish-Roy-Chowdhury-SSA-2022.jpg"></a><a href="#" data-bs-target="#atishroy" data-bs-toggle="modal">
+                            <h5 class="fw-bold mb-0">Mr. Atish Roy Chowdhury<br></h5>
+                        </a>
+                        <p class="text-muted mb-2">Biomedical Sciences<br></p>
+                        <p class="text-muted mb-2"></p>
+                    </div>
+                </div>
+
                 <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#deepakkumar" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Deepak-Kumar-Sahel.jpg"></a><a href="#" data-bs-target="#deepakkumar" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Mr. Deepak Kumar Sahel<br></h5>
@@ -33,6 +43,8 @@
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
+               
+
                 <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#rachana" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/frontend/assets/img/Rachana-Rao-Battaje[26].jpg"></a><a href="#" data-bs-target="#rachana" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0">Ms. Rachana Rao Battaje<br></h5>
@@ -75,6 +87,38 @@ Website: www.arjunbs.com<br>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="atishroy">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Mr. Atish Roy Chowdhury<br></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-md-6 col-lg-3"><img class="img-fluid mb-3 fit-cover rounded-3" src="<?=base_url();?>/frontend/assets/img/Atish-Roy-Chowdhury-SSA-2022.jpg" style="width: 150px;height: 150px;"></div>
+                            <div class="col-md-6 col-lg-9">
+                                <p class="fw-bold">Mr. Atish Roy Chowdhury<br></p><small>Ph.D. Student<br>
+Department of Microbiology <br>
+and Cell Biology<br>
+Indian Institute of Science, Bengaluru<br>
+Karnataka- 560012, India.<br>
+<br>
+Twitter: @atishbrc_IISc
+<br>
+<br></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start"></div>
+                    <p>Mr. Atish Roy Chowdhury has been selected for the Sun Pharma Science Foundation Science Scholar Award - 2022 for Young Scientists in the domain of Biomedical Sciences. His award-winning work is in the field of host-pathogen interaction and infection biology. His research entitled “Deciphering the role of outer membrane porins in Salmonella pathogenesis” was focused on characterizing the role of outer membrane protein A (OmpA), one of the most abundant outer membrane-bound β-barrel proteins of bacteria in the pathogenesis of Salmonella Typhimurium, the causative agent of gastroenteritis in humans. His study showed that deleting OmpA compromised the stability of the outer membrane of Salmonella and reduced the ability of the pathogen to fight against the nitrosative stress of macrophages (one of the essential innate immune arsenals of the host). His work expanded our understanding of the role of outer membrane porins in bacterial pathogenesis and identified OmpA as one of the crucial virulence factors of Salmonella.<br></p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" role="dialog" tabindex="-1" id="deepakkumar">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
