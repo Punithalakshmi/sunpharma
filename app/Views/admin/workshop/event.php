@@ -125,6 +125,21 @@
                       </div>
 
                       <div class="clearfix"></div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Agenda</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="btn-group">
+                            <p><input class="form-control" name="agenda" type="file"></p>
+                           <?php if(isset($editdata['agenda']) && !empty($editdata['agenda'])): ?>
+                              <a target="_blank" href="<?=base_url();?>/uploads/events/<?=$editdata['agenda'];?>"><?=$editdata['agenda'];?></a>
+                           <?php endif; ?>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="clearfix"></div>
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Banner Image</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">

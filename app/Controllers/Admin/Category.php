@@ -46,14 +46,14 @@ class Category extends BaseController
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Category Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
+                        $ins_data['updated_id']    =  $this->data['userdata']['id'];
                         $this->categoryModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
                         $this->session->setFlashdata('msg', 'Category Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['created_id']    =  $this->data['userdata']['login_id'];
+                        $ins_data['created_id']    =  $this->data['userdata']['id'];
                         $this->categoryModel->save($ins_data);
                     } 
 
@@ -105,8 +105,7 @@ class Category extends BaseController
     {
         if (strtolower($this->request->getMethod()) == "post") {  
 
-            if($this->validation->withRequest($this->request)->run()) {
-
+          
                     $this->categoryModel->delete(array("id" => $id));
                     if($this->request->isAJAX()){
                             
@@ -115,7 +114,7 @@ class Category extends BaseController
                             'message'              => 'Category deleted Successfully'
                         ]); 
                     }
-            }
+            
         }    
     }
 }

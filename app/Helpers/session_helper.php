@@ -21,7 +21,10 @@ if ( ! function_exists('getSessionData'))
         }
         else
         {
-            return $sessData = ($session->get('userdata'))?$session->get('userdata'):$session->get('fuserdata');
+            $uri  = current_url(true);
+            $segment =  $uri->getSegment(1);
+
+              return $sessData = ($segment=='admin')?$session->get('userdata'):$session->get('fuserdata');
         }  
 
        // print_r($session->get('userdaa')); 

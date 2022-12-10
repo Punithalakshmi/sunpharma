@@ -93,22 +93,21 @@ class Home extends BaseController
     public function contact()
     {
 
-        
-   
+       
         $editdata = array();
 
+       
         if(strtolower($this->request->getMethod()) == 'post'){
-          
+        //  echo $this->request->getMethod(); die;
               $this->validation->setRules($this->validation_rules());
                     
               if(!$this->validation->withRequest($this->request)->run()) {
-                  $data['validation'] = $this->validation;
-                  
+                  $this->data['validation'] = $this->validation;
                   $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
-                  $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
-                  $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
-            
-
+          $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
+          $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
+    
+                  
               }
               else
               {

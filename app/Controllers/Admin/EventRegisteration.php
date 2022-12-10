@@ -134,8 +134,7 @@ class EventRegisteration extends BaseController
       
         if (strtolower($this->request->getMethod()) == "post") {  
 
-        if($this->validation->withRequest($this->request)->run()) {
-
+        
           $this->registerationModel->delete(array("id" => $id));
          
           if($this->request->isAJAX()){
@@ -146,7 +145,7 @@ class EventRegisteration extends BaseController
             ]); 
          }
 
-        }
+        
 
       }
        

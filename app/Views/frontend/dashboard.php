@@ -30,13 +30,14 @@
                                                 ?>
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Registraton</a>
 
-                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/read_more/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Read More</a>
-
+                                            
                                             <?php endif;?>  
                                             <?php if(!empty($nvalue['document'])):?>
                                             <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
                                             <?php endif;?>
-                                            <?php if(!empty($nvalue['agenda'])):?>
+                                            <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/read_more/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Read More</a>
+
+                                            <?php if(!empty($nvalue['agenda']) && ($nvalue['agenda']!='')):?>
                                             <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['agenda'];?>" target="blank">Agenda</a>
                                             <?php endif;?>
                                         </div>

@@ -72,6 +72,19 @@ class Workshops extends BaseController
                         $ins_data['document']  = $event_document->getClientName();
                     }
 
+                    if($this->request->getFile('agenda') != ''){
+                        $fileUploadDir = 'uploads/events/';
+                            
+                        if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
+                        mkdir($fileUploadDir, 0777, true);
+                        
+                        //upload documents to respestive nominee folder
+                        $agenda = $this->request->getFile('agenda');
+                        $agenda->move($fileUploadDir);
+
+                        $ins_data['agenda']  = $agenda->getClientName();
+                    }
+
                     if($this->request->getFile('banner_image') != ''){
                         $fileUploadDir = 'uploads/events/';
                             
@@ -130,6 +143,7 @@ class Workshops extends BaseController
                     $editdata['event_document']        = $edit_data['document'];
                     $editdata['banner_image']          = $edit_data['banner_image'];
                     $editdata['thumb_image']           = $edit_data['thumb_image'];
+                    $editdata['agenda']                = $edit_data['agenda'];
                     $editdata['status']                = $edit_data['status'];
                     $editdata['id']                    = $edit_data['id'];
                 }
@@ -145,6 +159,7 @@ class Workshops extends BaseController
                     $editdata['event_document']       = ($this->request->getFile('event_document'))?$this->request->getFile('event_document'):'';
                     $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';
                     $editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
+                    $editdata['agenda']               = ($this->request->getFile('agenda'))?$this->request->getFile('agenda'):'';
                     $editdata['status']               = ($this->request->getPost('status'))?$this->request->getPost('status'):'';
                     $editdata['id']                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                 }
@@ -176,7 +191,7 @@ class Workshops extends BaseController
     {
         if (strtolower($this->request->getMethod()) == "post") {  
 
-            if($this->validation->withRequest($this->request)->run()) {
+           
                 $this->workshopModel->delete(array("id" => $id));
                 if($this->request->isAJAX()){
                     
@@ -185,7 +200,7 @@ class Workshops extends BaseController
                         'message'              => 'Event deleted Successfully'
                     ]); 
                 }
-         }
+         
        }
        
     }

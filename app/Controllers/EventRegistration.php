@@ -74,7 +74,6 @@ class EventRegistration extends BaseController
               $this->data['validation'] = $this->validator;
 
             $this->data['editdata'] = $editdata;
-            $this->data['userdata'] = $userdata;
             
             return  render('frontend/event_registeration',$this->data);
                                       
@@ -92,8 +91,9 @@ class EventRegistration extends BaseController
                                     "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                     "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]'),
                                     "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
-                                    "registeration_no" => array("label" => "Registration No",'rules' => 'required'),
-                                    "event_type" => array("label" => "Event Type",'rules' => 'required')
+                                    "address" => array("label" => "Official Address",'rules' => 'required'),
+                                   // "registeration_no" => array("label" => "Registration No",'rules' => 'required'),
+                                 //   "event_type" => array("label" => "Event Type",'rules' => 'required')
         ); 
 
         return $validation_rules;
@@ -127,6 +127,28 @@ class EventRegistration extends BaseController
         mail($email,$subject,$html,$header);
 
 
+    }
+
+    function read_more($id = '')
+    {
+
+        if($id){
+            $eventData = $this->workshopModel->getLists($id)->getRowArray();
+
+            
+        }
+        else
+        {
+            $eventData['banner_image'] = '';
+            $eventData['description'] = '';
+            $eventData['subject']     = '';
+            $eventData['title']      = '';
+            $eventData['document']      = '';
+            $eventData['agenda']      = '';
+         //   $eventData['title']      = '';
+        }
+        $this->data['eventData'] = $eventData;
+        return  render('frontend/read_more',$this->data);
     }
 
     public function getRegisterationNo()

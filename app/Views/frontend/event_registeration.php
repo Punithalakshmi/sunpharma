@@ -8,21 +8,22 @@
             <div class="row">
 <div class="registration-form">
            <form id="eventRegistration" action="<?php echo base_url();?>/event/registration" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+           <?= csrf_field(); ?>
            <div class="clearfix"></div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Event</label>
                         <div class="col-md-6">
                           <select class="select2_single form-control col-md-7 col-xs-12" name="event_type" tabindex="-1" >
                             <option value=""></option>
-                            <?php if(is_array($event_categories)):
-                                    foreach($event_categories as $rvalue): ?>
-                            <option value="<?=$rvalue['id'];?>" <?=set_select('event_type',$rvalue['id'],(isset($editdata['event_type']) && ($editdata['event_type']==$rvalue['id']))?true:false);?>><?=$rvalue['event_type'];?></option>
-                            <?php endforeach;
-                                  endif;
+                            <?php //if(is_array($event_categories)):
+                                  //  foreach($event_categories as $rvalue): ?>
+                            <option value="<?//$rvalue['id'];?>" <?//set_select('event_type',$rvalue['id'],(isset($editdata['event_type']) && ($editdata['event_type']==$rvalue['id']))?true:false);?>><?//$rvalue['event_type'];?></option>
+                            <?php //endforeach;
+                                 // endif;
                                   ?>
                           </select>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="clearfix"></div>          
                       <div class="form-group col-md-6">
                       <?php if(isset($validation) && $validation->getError('event_type')) {?>
@@ -105,7 +106,7 @@
                       <div class="clearfix"></div>
                      
                       <div class="form-group mb-3">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Address 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Official Address <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <textarea name="address" oninput="auto_grow(this)" class="form-control"><?=$editdata['address'];?></textarea>
@@ -113,18 +114,18 @@
                       </div>
 
                      
-
+<!-- 
                       <div class="clearfix"></div>
                       <div class="form-group mb-3">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration No:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
-                            <input type="text" readonly name="registeration_no" class="form-control col-md-7 col-xs-12" readonly value="<?php echo set_value('registeration_no',$editdata['registeration_no']);?>">
+                            <input type="hidden" readonly name="registeration_no" class="form-control col-md-7 col-xs-12" readonly value="<?php echo set_value('registeration_no',$editdata['registeration_no']);?>">
                            </p>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                      
                      
                       <div class="ln_solid"></div>
