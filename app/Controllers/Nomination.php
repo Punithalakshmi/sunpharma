@@ -161,8 +161,8 @@ class Nomination extends BaseController
     {
 
        
-        if(is_array($userdata) && $userdata['isLoggedIn'] && ($userdata['role'] == 2))
-            $this->view($userdata['id']);
+        if(is_array($this->data['userdata']) && $this->data['userdata']['isLoggedIn'] && ($this->data['userdata']['role'] == 2))
+            $this->view($this->data['userdata']['id']);
 
         
         if(!empty($id)){
@@ -280,7 +280,7 @@ class Nomination extends BaseController
               $this->data['validation'] = $this->validator;
 
             $this->data['editdata'] = $editdata;
-            $this->data['userdata'] = $userdata;
+         
             $this->data['nomination'] = $id;
 
             if($this->request->isAJAX()){
