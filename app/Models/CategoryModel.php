@@ -44,7 +44,6 @@ class CategoryModel extends Model{
             $builder->select('category.*');
             $builder->join('nominations','nominations.category_id = category.id');
             $builder->where("category.type",$type);
-            $builder->where('category.status','Active');
             return $query = $builder->get();
     }
 

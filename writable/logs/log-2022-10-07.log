@@ -74,143 +74,108 @@ in APPPATH\Controllers\Admin\Nominee.php on line 215.
  3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
  4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-10-07 02:40:49 --> Trying to access array offset on value of type null
+ERROR - 2022-10-07 03:00:37 --> Column 'year' cannot be null
+CRITICAL - 2022-10-07 03:00:37 --> Column 'year' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:00:37\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:00:37\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:00:37\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1904): CodeIgniter\Database\BaseConnection->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (:category_id:, :start_date:, :end_date:, :year:, :created_date:, :created_id:)', [...], false)
+ 5 SYSTEMPATH\Model.php(278): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(738): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(666): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(658): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Admin\Nomination.php(107): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
+11 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+12 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+ERROR - 2022-10-07 03:01:09 --> Column 'year' cannot be null
+CRITICAL - 2022-10-07 03:01:09 --> Column 'year' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:01:09\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:01:09\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (\'2\', \'2022-10-07\', \'2022-10-31\', NULL, \'2022-10-07 03:01:09\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1904): CodeIgniter\Database\BaseConnection->query('INSERT INTO `nominations` (`category_id`, `start_date`, `end_date`, `year`, `created_date`, `created_id`) VALUES (:category_id:, :start_date:, :end_date:, :year:, :created_date:, :created_id:)', [...], false)
+ 5 SYSTEMPATH\Model.php(278): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(738): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(666): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(658): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Admin\Nomination.php(107): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
+11 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
+12 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:09:21 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 309.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:11:13 --> Trying to access array offset on value of type null
 in APPPATH\Controllers\Admin\Nominee.php on line 215.
  1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('5')
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('6')
  3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
  4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-10-07 02:40:56 --> Trying to access array offset on value of type null
+CRITICAL - 2022-10-07 03:15:51 --> Call to a member function move() on null
+in APPPATH\Controllers\Nomination.php on line 314.
+ 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:19:05 --> Undefined variable: complete_bio_data
+in APPPATH\Controllers\Nomination.php on line 340.
+ 1 APPPATH\Controllers\Nomination.php(340): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: complete_bio_data', 'APPPATH\\Controllers\\Nomination.php', 340, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->spsfn()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:29:16 --> Trying to access array offset on value of type int
+in APPPATH\Controllers\User.php on line 25.
+ 1 APPPATH\Controllers\User.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type int', 'APPPATH\\Controllers\\User.php', 25, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:37:36 --> Trying to access array offset on value of type null
 in APPPATH\Controllers\Admin\Nominee.php on line 215.
  1 APPPATH\Controllers\Admin\Nominee.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Admin\\Nominee.php', 215, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('4')
+ 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
  3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
  4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-ERROR - 2022-10-07 02:41:33 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
-CRITICAL - 2022-10-07 02:41:33 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
-in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
- 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = 2
-AND `ratings`.`is_rate_submitted` = \'1\'
-AND YEAR(nominee_details.created_date) = \'2022\'
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC', 0)
- 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = 2
-AND `ratings`.`is_rate_submitted` = \'1\'
-AND YEAR(nominee_details.created_date) = \'2022\'
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC')
- 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = 2
-AND `ratings`.`is_rate_submitted` = \'1\'
-AND YEAR(nominee_details.created_date) = \'2022\'
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC')
- 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
-AND `ratings`.`is_rate_submitted` = :ratings.is_rate_submitted:
-AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC', [...], false)
- 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
- 6 APPPATH\Models\AwardsModel.php(32): CodeIgniter\Model->__call('get', [])
- 7 APPPATH\Controllers\Admin\Awards.php(39): App\Models\AwardsModel->getLists(2, '2022')
- 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
- 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
-10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-ERROR - 2022-10-07 02:41:36 --> Table 'sunpharma.events' doesn't exist
-CRITICAL - 2022-10-07 02:41:36 --> Table 'sunpharma.events' doesn't exist
-in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
- 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *
-FROM `events`', 0)
- 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
-FROM `events`')
- 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
-FROM `events`')
- 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT *
-FROM `events`', [], false)
- 5 SYSTEMPATH\Model.php(222): CodeIgniter\Database\BaseBuilder->get()
- 6 SYSTEMPATH\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
- 7 APPPATH\Models\WorkshopModel.php(23): CodeIgniter\BaseModel->findAll()
- 8 APPPATH\Controllers\Admin\Workshops.php(23): App\Models\WorkshopModel->getLists()
- 9 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->index()
-10 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
-11 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-12 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-ERROR - 2022-10-07 02:41:44 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
-CRITICAL - 2022-10-07 02:41:44 --> Unknown column 'ratings.is_rate_submitted' in 'where clause'
-in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
- 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = 2
-AND `ratings`.`is_rate_submitted` = \'1\'
-AND YEAR(nominee_details.created_date) = \'2022\'
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC', 0)
- 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = 2
-AND `ratings`.`is_rate_submitted` = \'1\'
-AND YEAR(nominee_details.created_date) = \'2022\'
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC')
- 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = 2
-AND `ratings`.`is_rate_submitted` = \'1\'
-AND YEAR(nominee_details.created_date) = \'2022\'
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC')
- 4 SYSTEMPATH\Database\BaseBuilder.php(1585): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`name` as `category_name`, SUM(ratings.rating) as average_rating, `users`.`firstname`, `users`.`dob`, `users`.`id`, GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury
-FROM `category`
-JOIN `nominee_details` ON `nominee_details`.`category_id` = `category`.`id`
-JOIN `users` ON `users`.`id` = `nominee_details`.`nominee_id` AND `users`.`role`="2" AND `users`.`status`="Approved"
-JOIN `ratings` ON `ratings`.`nominee_id` = `users`.`id`
-WHERE `nominee_details`.`category_id` = :nominee_details.category_id:
-AND `ratings`.`is_rate_submitted` = :ratings.is_rate_submitted:
-AND YEAR(nominee_details.created_date) = :YEAR(nominee_details.created_date):
-GROUP BY `ratings`.`nominee_id`
-ORDER BY `average_rating` DESC', [...], false)
- 5 SYSTEMPATH\Model.php(771): CodeIgniter\Database\BaseBuilder->get()
- 6 APPPATH\Models\AwardsModel.php(32): CodeIgniter\Model->__call('get', [])
- 7 APPPATH\Controllers\Admin\Awards.php(39): App\Models\AwardsModel->getLists(2, '2022')
- 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
- 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
-10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-10-07 03:57:08 --> Undefined index: year
-in APPPATH\Controllers\Admin\Workshops.php on line 107.
- 1 APPPATH\Controllers\Admin\Workshops.php(107): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: year', 'APPPATH\\Controllers\\Admin\\Workshops.php', 107, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Workshops->add('2')
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Workshops))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:38:25 --> Trying to access array offset on value of type null
+in APPPATH\Views\admin\nominee\view.php on line 42.
+ 1 APPPATH\Views\admin\nominee\view.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Views\\admin\\nominee\\view.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nominee\\view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nominee/view', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(292): view('admin/nominee/view', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('1')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 03:42:36 --> Trying to access array offset on value of type null
+in APPPATH\Views\admin\nominee\view.php on line 42.
+ 1 APPPATH\Views\admin\nominee\view.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Views\\admin\\nominee\\view.php', 42, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nominee\\view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nominee/view', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(292): view('admin/nominee/view', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('1')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-10-07 13:04:27 --> Undefined index: status
+in APPPATH\Views\admin\nominee\view.php on line 160.
+ 1 APPPATH\Views\admin\nominee\view.php(160): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: status', 'APPPATH\\Views\\admin\\nominee\\view.php', 160, [...])
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nominee\\view.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nominee/view', [], true)
+ 5 APPPATH\Controllers\Admin\Nominee.php(292): view('admin/nominee/view', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->view('6')
+ 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
+ 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()

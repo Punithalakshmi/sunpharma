@@ -1,353 +1,207 @@
-CRITICAL - 2022-11-28 00:09:35 --> Undefined variable: uri
-in APPPATH\Views\frontend\layout\frontend.php on line 29.
- 1 APPPATH\Views\frontend\layout\frontend.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: uri', 'APPPATH\\Views\\frontend\\layout\\frontend.php', 29, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\layout\\frontend.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/layout/frontend', [], true)
- 5 APPPATH\Helpers\render_helper.php(12): view('frontend/layout/frontend', [...], [])
- 6 APPPATH\Controllers\User.php(82): render('frontend/formvalid')
- 7 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->validForm()
- 8 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
- 9 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-10 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 06:56:25 --> Too few arguments to function App\Models\CategoryModel::getCategoriesWithoutNomination(), 0 passed in C:\xampp\htdocs\sunpharma\app\Controllers\Admin\Nomination.php on line 66 and exactly 1 expected
-in APPPATH\Models\CategoryModel.php on line 52.
- 1 APPPATH\Controllers\Admin\Nomination.php(66): App\Models\CategoryModel->getCategoriesWithoutNomination()
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 07:52:58 --> Trying to access array offset on value of type null
-in APPPATH\Controllers\Nomination.php on line 597.
- 1 APPPATH\Controllers\Nomination.php(597): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Nomination.php', 597, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('1')
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 08:43:54 --> Call to undefined function App\Models\NOW()
-in APPPATH\Models\NominationTypesModel.php on line 48.
- 1 APPPATH\Controllers\Home.php(19): App\Models\NominationTypesModel->getActiveNomination()
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-ERROR - 2022-11-28 09:03:01 --> Unknown column 'document' in 'field list'
-CRITICAL - 2022-11-28 09:03:01 --> Unknown column 'document' in 'field list'
-in SYSTEMPATH\Database\MySQLi\Connection.php on line 292.
- 1 SYSTEMPATH\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `nominations` SET `category_id` = \'1\', `start_date` = \'2022-10-07\', `end_date` = \'2022-11-30\', `year` = \'2022\', `status` = \'1\', `banner_image` = \'iStock_63113235_LARGE.jpg\', `thumb_image` = \'slide4.jpg\', `document` = \'Winter_School_Announcement_2022.pdf\', `updated_date` = \'2022-11-28 09:03:01\', `updated_id` = \'1\'
-WHERE `nominations`.`id` IN (\'2\')', 0)
- 2 SYSTEMPATH\Database\BaseConnection.php(695): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `nominations` SET `category_id` = \'1\', `start_date` = \'2022-10-07\', `end_date` = \'2022-11-30\', `year` = \'2022\', `status` = \'1\', `banner_image` = \'iStock_63113235_LARGE.jpg\', `thumb_image` = \'slide4.jpg\', `document` = \'Winter_School_Announcement_2022.pdf\', `updated_date` = \'2022-11-28 09:03:01\', `updated_id` = \'1\'
-WHERE `nominations`.`id` IN (\'2\')')
- 3 SYSTEMPATH\Database\BaseConnection.php(609): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `nominations` SET `category_id` = \'1\', `start_date` = \'2022-10-07\', `end_date` = \'2022-11-30\', `year` = \'2022\', `status` = \'1\', `banner_image` = \'iStock_63113235_LARGE.jpg\', `thumb_image` = \'slide4.jpg\', `document` = \'Winter_School_Announcement_2022.pdf\', `updated_date` = \'2022-11-28 09:03:01\', `updated_id` = \'1\'
-WHERE `nominations`.`id` IN (\'2\')')
- 4 SYSTEMPATH\Database\BaseBuilder.php(2046): CodeIgniter\Database\BaseConnection->query('UPDATE `nominations` SET `category_id` = :category_id:, `start_date` = :start_date:, `end_date` = :end_date:, `year` = :year:, `status` = :status:, `banner_image` = :banner_image:, `thumb_image` = :thumb_image:, `document` = :document:, `updated_date` = :updated_date:, `updated_id` = :updated_id:
-WHERE `nominations`.`id` IN :nominations.id:', [...], false)
- 5 SYSTEMPATH\Model.php(337): CodeIgniter\Database\BaseBuilder->update()
- 6 SYSTEMPATH\BaseModel.php(865): CodeIgniter\Model->doUpdate([...], [...])
- 7 SYSTEMPATH\Model.php(692): CodeIgniter\BaseModel->update([...], [...])
- 8 APPPATH\Controllers\Admin\Nomination.php(140): CodeIgniter\Model->update([...], [...])
- 9 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
-10 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
-11 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-12 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 09:12:44 --> Undefined index: title
-in APPPATH\Views\frontend\dashboard.php on line 15.
- 1 APPPATH\Views\frontend\dashboard.php(15): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: title', 'APPPATH\\Views\\frontend\\dashboard.php', 15, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\dashboard.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/dashboard', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/dashboard', [...], [])
- 6 APPPATH\Controllers\Home.php(49): render('frontend/dashboard', [...])
- 7 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
- 8 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
- 9 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-10 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 09:29:05 --> syntax error, unexpected '"start_date"' (T_CONSTANT_ENCAPSED_STRING), expecting ')'
-in APPPATH\Controllers\Admin\Nomination.php on line 209.
- 1 SYSTEMPATH\Autoloader\Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Admin\\Nomination.php')
- 2 SYSTEMPATH\Autoloader\Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Admin\\Nomination')
- 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Admin\\Nomination')
- 4 [internal function]: spl_autoload_call('App\\Controllers\\Admin\\Nomination')
- 5 SYSTEMPATH\CodeIgniter.php(846): class_exists('\\App\\Controllers\\Admin\\Nomination', true)
- 6 SYSTEMPATH\CodeIgniter.php(453): CodeIgniter\CodeIgniter->startController()
- 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 09:29:26 --> Undefined index: title
-in APPPATH\Views\admin\nomination\add.php on line 49.
- 1 APPPATH\Views\admin\nomination\add.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: title', 'APPPATH\\Views\\admin\\nomination\\add.php', 49, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\add.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/add', [], true)
- 5 APPPATH\Controllers\Admin\Nomination.php(190): view('admin/nomination/add', [...])
- 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
- 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nomination))
- 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 10:53:28 --> Trying to access array offset on value of type null
-in APPPATH\Controllers\Nomination.php on line 597.
- 1 APPPATH\Controllers\Nomination.php(597): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\Nomination.php', 597, [...])
- 2 APPPATH\Controllers\Nomination.php(311): App\Controllers\Nomination->view('1')
- 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
- 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 10:57:30 --> Undefined index: nominationEndDays
-in APPPATH\Views\frontend\preview.php on line 31.
- 1 APPPATH\Views\frontend\preview.php(31): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: nominationEndDays', 'APPPATH\\Views\\frontend\\preview.php', 31, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(770): render('frontend/preview', [...])
- 7 APPPATH\Controllers\Nomination.php(311): App\Controllers\Nomination->view('1')
- 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
- 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
-10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 10:58:59 --> Undefined index: user_id
-in APPPATH\Views\frontend\preview.php on line 57.
- 1 APPPATH\Views\frontend\preview.php(57): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: user_id', 'APPPATH\\Views\\frontend\\preview.php', 57, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(770): render('frontend/preview', [...])
- 7 APPPATH\Controllers\Nomination.php(311): App\Controllers\Nomination->view('1')
- 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
- 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
-10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 10:59:24 --> Undefined index: user_id
-in APPPATH\Views\frontend\preview.php on line 57.
- 1 APPPATH\Views\frontend\preview.php(57): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: user_id', 'APPPATH\\Views\\frontend\\preview.php', 57, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(770): render('frontend/preview', [...])
- 7 APPPATH\Controllers\Nomination.php(311): App\Controllers\Nomination->view('1')
- 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
- 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
-10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 11:01:44 --> Undefined index: user_id
-in APPPATH\Views\frontend\preview.php on line 57.
- 1 APPPATH\Views\frontend\preview.php(57): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: user_id', 'APPPATH\\Views\\frontend\\preview.php', 57, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(770): render('frontend/preview', [...])
- 7 APPPATH\Controllers\Nomination.php(311): App\Controllers\Nomination->view('1')
- 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
- 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
-10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 11:02:04 --> Undefined index: user_id
-in APPPATH\Views\frontend\preview.php on line 57.
- 1 APPPATH\Views\frontend\preview.php(57): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: user_id', 'APPPATH\\Views\\frontend\\preview.php', 57, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(770): render('frontend/preview', [...])
- 7 APPPATH\Controllers\Nomination.php(311): App\Controllers\Nomination->view('1')
- 8 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
- 9 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
-10 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-11 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 11:05:27 --> Undefined variable: header
-in APPPATH\Controllers\Nomination.php on line 787.
- 1 APPPATH\Controllers\Nomination.php(787): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: header', 'APPPATH\\Controllers\\Nomination.php', 787, [...])
- 2 APPPATH\Controllers\Nomination.php(443): App\Controllers\Nomination->sendMail()
- 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->ssan()
- 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 11:19:48 --> Undefined variable: request
-in APPPATH\Controllers\Nomination.php on line 57.
- 1 APPPATH\Controllers\Nomination.php(57): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: request', 'APPPATH\\Controllers\\Nomination.php', 57, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 11:22:38 --> Undefined variable: session
-in APPPATH\Controllers\Nomination.php on line 149.
- 1 APPPATH\Controllers\Nomination.php(149): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: session', 'APPPATH\\Controllers\\Nomination.php', 149, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 11:25:20 --> Undefined variable: categoryModel
-in APPPATH\Controllers\Nomination.php on line 253.
- 1 APPPATH\Controllers\Nomination.php(253): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: categoryModel', 'APPPATH\\Controllers\\Nomination.php', 253, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->index()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 12:24:46 --> Call to undefined method App\Models\NominationModel::getCategoryNomination
-in SYSTEMPATH\Model.php on line 773.
- 1 APPPATH\Controllers\User.php(26): CodeIgniter\Model->__call('getCategoryNomination', [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 12:33:54 --> Call to undefined method App\Models\NominationModel::getCategoryNomination
-in SYSTEMPATH\Model.php on line 773.
- 1 APPPATH\Controllers\User.php(27): CodeIgniter\Model->__call('getCategoryNomination', [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 13:51:43 --> Undefined index: nominationEndDays
-in APPPATH\Views\frontend\preview.php on line 293.
- 1 APPPATH\Views\frontend\preview.php(293): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: nominationEndDays', 'APPPATH\\Views\\frontend\\preview.php', 293, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(773): render('frontend/preview', [...])
- 7 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('6')
- 8 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 9 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-10 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 13:51:48 --> Undefined index: nominationEndDays
-in APPPATH\Views\frontend\preview.php on line 293.
- 1 APPPATH\Views\frontend\preview.php(293): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: nominationEndDays', 'APPPATH\\Views\\frontend\\preview.php', 293, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(773): render('frontend/preview', [...])
- 7 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('6')
- 8 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 9 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-10 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 13:51:58 --> Undefined index: nominationEndDays
-in APPPATH\Views\frontend\preview.php on line 293.
- 1 APPPATH\Views\frontend\preview.php(293): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: nominationEndDays', 'APPPATH\\Views\\frontend\\preview.php', 293, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\preview.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/preview', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/preview', [...], [])
- 6 APPPATH\Controllers\Nomination.php(773): render('frontend/preview', [...])
- 7 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Nomination->view('6')
- 8 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nomination))
- 9 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-10 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 17:22:44 --> Undefined index: user_id
-in APPPATH\Views\admin\awards\list.php on line 84.
- 1 APPPATH\Views\admin\awards\list.php(84): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: user_id', 'APPPATH\\Views\\admin\\awards\\list.php', 84, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\awards\\list.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/awards/list', [], true)
- 5 APPPATH\Controllers\Admin\Awards.php(70): view('admin/awards/list', [...])
- 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
- 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Awards))
- 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 18:22:57 --> Undefined index: address
-in APPPATH\Views\frontend\dashboard.php on line 199.
- 1 APPPATH\Views\frontend\dashboard.php(199): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: address', 'APPPATH\\Views\\frontend\\dashboard.php', 199, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\frontend\\dashboard.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/dashboard', [], true)
- 5 APPPATH\Helpers\render_helper.php(10): view('frontend/dashboard', [...], [])
- 6 APPPATH\Controllers\Home.php(75): render('frontend/dashboard', [...])
- 7 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Home->index()
- 8 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
- 9 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-10 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 18:51:09 --> syntax error, unexpected end of file
-in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 135.
- 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
- 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
- 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
- 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
- 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
- 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 18:51:43 --> syntax error, unexpected end of file
-in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 134.
- 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
- 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
- 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
- 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
- 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
- 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 18:53:54 --> syntax error, unexpected end of file
-in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 119.
- 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
- 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
- 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
- 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
- 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
- 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 18:55:16 --> syntax error, unexpected end of file
-in APPPATH\Views\frontend\latest_winners_of_science_scholars.php on line 106.
- 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 2 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('frontend/latest_winners_of_science_scholars', [], true)
- 3 APPPATH\Helpers\render_helper.php(10): view('frontend/latest_winners_of_science_scholars', [...], [])
- 4 APPPATH\Controllers\LatestWinnersOfScienceScholarsAwards.php(18): render('frontend/latest_winners_of_science_scholars', [...])
- 5 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\LatestWinnersOfScienceScholarsAwards->index()
- 6 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LatestWinnersOfScienceScholarsAwards))
- 7 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 8 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 20:32:11 --> Undefined variable: session
-in APPPATH\Controllers\Admin\Nominee.php on line 387.
- 1 APPPATH\Controllers\Admin\Nominee.php(387): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: session', 'APPPATH\\Controllers\\Admin\\Nominee.php', 387, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->extend('7')
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 20:32:32 --> Undefined index: extend_date
-in APPPATH\Views\admin\nomination\extend.php on line 25.
- 1 APPPATH\Views\admin\nomination\extend.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: extend_date', 'APPPATH\\Views\\admin\\nomination\\extend.php', 25, [...])
- 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\admin\\nomination\\extend.php')
- 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
- 4 SYSTEMPATH\Common.php(1135): CodeIgniter\View\View->render('admin/nomination/extend', [], true)
- 5 APPPATH\Controllers\Admin\Nominee.php(459): view('admin/nomination/extend', [...])
- 6 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->extend('7')
- 7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
- 8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 20:35:33 --> count(): Parameter must be an array or an object that implements Countable
-in APPPATH\Controllers\Admin\Nominee.php on line 422.
- 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parameter must be an array or an object that implements Countable', 'APPPATH\\Controllers\\Admin\\Nominee.php', 422, [...])
- 2 APPPATH\Controllers\Admin\Nominee.php(422): count(Object(CodeIgniter\Database\MySQLi\Result))
- 3 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->extend()
- 4 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
- 5 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 6 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 21:08:25 --> Undefined index: end_date
-in APPPATH\Controllers\Admin\Nominee.php on line 41.
- 1 APPPATH\Controllers\Admin\Nominee.php(41): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: end_date', 'APPPATH\\Controllers\\Admin\\Nominee.php', 41, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Nominee))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 21:58:22 --> Trying to access array offset on value of type null
-in APPPATH\Controllers\User.php on line 32.
- 1 APPPATH\Controllers\User.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\User.php', 32, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 22:02:53 --> Call to a member function getRowArray() on null
-in APPPATH\Controllers\User.php on line 33.
- 1 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
- 2 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
- 3 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 4 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
-CRITICAL - 2022-11-28 22:04:44 --> Undefined variable: getExtendNominationEndDays
-in APPPATH\Controllers\User.php on line 40.
- 1 APPPATH\Controllers\User.php(40): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: getExtendNominationEndDays', 'APPPATH\\Controllers\\User.php', 40, [...])
- 2 SYSTEMPATH\CodeIgniter.php(896): App\Controllers\User->login()
- 3 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
- 4 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:08:54 --> round(): Passing null to parameter #1 ($num) of type int|float is deprecated
+in APPPATH/Views/admin/nominee/view.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/admin/nominee/view.php(8): round()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/admin/nominee/view.php')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Admin/Nominee.php(294): view()
+ 7 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Nominee->view()
+ 8 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:19:19 --> Call to undefined method App\Models\NominationTypesModel::getActiveNomination
+in SYSTEMPATH/Model.php on line 773.
+ 1 APPPATH/Controllers/Home.php(19): CodeIgniter\Model->__call()
+ 2 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->index()
+ 3 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:19:23 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/DirectoryScienceScholars.php on line 15.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\DirectoryScienceScholars->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:19:25 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 118.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->contact()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:19:26 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 81.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->aboutus()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:19:29 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 81.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->aboutus()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:19:35 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 68.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:19:40 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 68.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:20:13 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 68.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:20:19 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 68.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:20:27 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 68.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:20:42 --> Call to undefined function App\Controllers\render()
+in APPPATH/Controllers/Home.php on line 68.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 12:59:25 --> Undefined array key "user_id"
+in APPPATH/Views/frontend/preview.php on line 57.
+ 1 APPPATH/Views/frontend/preview.php(57): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/frontend/preview.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Helpers/render_helper.php(10): view()
+ 6 APPPATH/Controllers/Nomination.php(771): render()
+ 7 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Nomination->view()
+ 8 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 19:18:09 --> view(): Argument #2 ($data) must be of type array, string given, called in /var/www/html/sunpharma/app/Controllers/User.php on line 110
+in SYSTEMPATH/Common.php on line 1121.
+ 1 APPPATH/Controllers/User.php(110): view()
+ 2 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\User->sendMail()
+ 3 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 19:19:00 --> Invalid file: email/mail.php
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/User.php(110): view()
+ 4 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\User->sendMail()
+ 5 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 22:19:08 --> Trying to access array offset on value of type null
+in APPPATH/Controllers/Admin/Nominee.php on line 41.
+ 1 APPPATH/Controllers/Admin/Nominee.php(41): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 22:23:11 --> Trying to access array offset on value of type null
+in APPPATH/Controllers/Admin/Nominee.php on line 41.
+ 1 APPPATH/Controllers/Admin/Nominee.php(41): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 3 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 22:25:53 --> Cannot use object of type CodeIgniter\Database\MySQLi\Result as array
+in APPPATH/Controllers/Admin/Nominee.php on line 43.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 22:29:15 --> Cannot use object of type CodeIgniter\Database\MySQLi\Result as array
+in APPPATH/Controllers/Admin/Nominee.php on line 44.
+ 1 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Nominee->index()
+ 2 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 22:57:05 --> Trying to access array offset on value of type null
+in APPPATH/Controllers/User.php on line 27.
+ 1 APPPATH/Controllers/User.php(27): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\User->login()
+ 3 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 23:08:46 --> Could not move file phpjqbRcw to uploads/events/ ()
+in SYSTEMPATH/HTTP/Files/UploadedFile.php on line 149.
+ 1 SYSTEMPATH/HTTP/Files/UploadedFile.php(149): CodeIgniter\HTTP\Exceptions\HTTPException::forMoveFailed()
+ 2 APPPATH/Controllers/Admin/Nomination.php(124): CodeIgniter\HTTP\Files\UploadedFile->move()
+ 3 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
+ 4 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 23:13:24 --> Could not move file phpSFYW1Y to uploads/events/ ()
+in SYSTEMPATH/HTTP/Files/UploadedFile.php on line 149.
+ 1 SYSTEMPATH/HTTP/Files/UploadedFile.php(149): CodeIgniter\HTTP\Exceptions\HTTPException::forMoveFailed()
+ 2 APPPATH/Controllers/Admin/Nomination.php(124): CodeIgniter\HTTP\Files\UploadedFile->move()
+ 3 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Nomination->add()
+ 4 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 23:24:18 --> Undefined variable $title
+in APPPATH/Views/email/mail.php on line 277.
+ 1 APPPATH/Views/email/mail.php(277): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/email/mail.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Nomination.php(799): view()
+ 6 APPPATH/Controllers/Nomination.php(443): App\Controllers\Nomination->sendMail()
+ 7 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 8 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 23:28:35 --> unlink(/var/www/html/sunpharma/writable/debugbar/debugbar_1669699573.927271.json): No such file or directory
+in SYSTEMPATH/Debug/Toolbar/Collectors/History.php on line 76.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Debug/Toolbar/Collectors/History.php(76): unlink()
+ 3 SYSTEMPATH/Debug/Toolbar.php(495): CodeIgniter\Debug\Toolbar\Collectors\History->setFiles()
+ 4 SYSTEMPATH/Debug/Toolbar.php(472): CodeIgniter\Debug\Toolbar->format()
+ 5 APPPATH/Config/Events.php(46): CodeIgniter\Debug\Toolbar->respond()
+ 6 SYSTEMPATH/Events/Events.php(149): CodeIgniter\Events\Events::Config\{closure}()
+ 7 SYSTEMPATH/CodeIgniter.php(326): CodeIgniter\Events\Events::trigger()
+ 8 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 23:28:38 --> Undefined variable $user
+in APPPATH/Views/admin/awards/list.php on line 130.
+ 1 APPPATH/Views/admin/awards/list.php(130): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/admin/awards/list.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Admin/Awards.php(70): view()
+ 6 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 7 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 23:35:22 --> Path cannot be empty
+in APPPATH/Controllers/Nomination.php on line 524.
+ 1 APPPATH/Controllers/Nomination.php(524): file_get_contents()
+ 2 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Nomination->ssan()
+ 3 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-28 23:49:07 --> Undefined variable $user
+in APPPATH/Views/admin/awards/list.php on line 130.
+ 1 APPPATH/Views/admin/awards/list.php(130): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/admin/awards/list.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Admin/Awards.php(70): view()
+ 6 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Admin\Awards->index()
+ 7 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()

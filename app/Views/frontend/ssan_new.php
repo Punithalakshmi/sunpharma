@@ -66,22 +66,18 @@
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
                                     <label class="form-label" for="">Name of the Applicant</label>
-                                    <input class="form-control required" id="nominee_name" name="nominee_name" type="text" minlength="6" maxlength="8" placeholder="Please enter the firstname" value="<?=set_value('nominee_name',$editdata['nominee_name']);?>">
+                                    <input class="form-control required" id="nominee_name" name="nominee_name" type="text" placeholder="" value="<?=set_value('nominee_name',$editdata['nominee_name']);?>">
                                 </div>
                             </div>
-
-                            <div class="col-lg-12">
-                                <div class="mb-3 form-items">
-                                    <label class="form-label " for="">Surname</label>
-                                    <input class="form-control required" id="nominee_surname" name="nominee_surname" type="text" placeholder="Please enter fullname" value="<?=set_value('nominee_surname',$editdata['nominee_surname']);?>">
-                                </div>
-                            </div>
-
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth</label>
                                     <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
-                                        placeholder="Date of Birth">                      
+                                        placeholder="Date of Birth">
+
+                                    <div class="hintcont">
+                                        <small>(Age should be less than 30 years as on August 01, 2022)</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +116,7 @@
                             <div class="mb-3 form-items">
                                  <label class="form-label " for="">Mobile No.</label>
                                         
-                                <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" minlength="10" maxlength="10" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
+                                <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('mobile_no')) {?>
                                     <?= $error = $validation->getError('mobile_no'); ?>

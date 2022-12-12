@@ -591,3 +591,47 @@ in APPPATH\Views\frontend\research_awards.php on line 49.
  7 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ResearchAwards))
  8 SYSTEMPATH\CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-24 23:37:42 --> Trying to access array offset on value of type null
+in APPPATH/Views/frontend/research_awards.php on line 49.
+ 1 APPPATH/Views/frontend/research_awards.php(49): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/frontend/research_awards.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/ResearchAwards.php(38): view()
+ 6 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\ResearchAwards->index()
+ 7 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-24 23:44:42 --> Trying to access array offset on value of type null
+in APPPATH/Views/frontend/science_scholar_awards.php on line 39.
+ 1 APPPATH/Views/frontend/science_scholar_awards.php(39): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/frontend/science_scholar_awards.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(165): view()
+ 6 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->science_scholar_awards()
+ 7 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-24 23:46:44 --> Trying to access array offset on value of type null
+in APPPATH/Views/frontend/science_scholar_awards.php on line 39.
+ 1 APPPATH/Views/frontend/science_scholar_awards.php(39): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/frontend/science_scholar_awards.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(165): view()
+ 6 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->science_scholar_awards()
+ 7 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-11-24 23:47:35 --> Trying to access array offset on value of type null
+in APPPATH/Views/frontend/science_scholar_awards.php on line 39.
+ 1 APPPATH/Views/frontend/science_scholar_awards.php(39): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/frontend/science_scholar_awards.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(165): view()
+ 6 SYSTEMPATH/CodeIgniter.php(896): App\Controllers\Home->science_scholar_awards()
+ 7 SYSTEMPATH/CodeIgniter.php(466): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(349): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()

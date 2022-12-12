@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://local.sunpharma.md/';
+    public $baseURL = 'https://sunpharmasciencefoundation.net/';
 
     /**
      * --------------------------------------------------------------------------

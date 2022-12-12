@@ -23,7 +23,34 @@ $(document).ready(function(){
 
     });    
     
-   
+    $.validator.addMethod(
+        "validDOB",
+        function(value, element) {              
+          //  var from = value.split(" "); // DD MM YYYY
+          //   var value = '01/08/2022';
+             var from = value.split("-"); // DD/MM/YYYY
+            var day = from[2];
+            var month = from[1];
+            var year = from[0];
+            var age = 30;
+
+            var mydate = new Date();
+            mydate.setFullYear(year, month-1, day);
+
+            var currdate = new Date();
+            currdate.setFullYear('2022','08','01');
+            
+            var setDate = new Date();
+
+            setDate.setFullYear(mydate.getFullYear() + age, month-1, day);
+
+            if ((currdate - setDate) > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    );
 
 var form = $("#formsection");
 form.validate({
@@ -32,6 +59,9 @@ form.validate({
          nominator_photo: {
              extension: "jpg,png,jpeg",
              filesize: 500
+         },
+         date_of_birth:{
+            validDOB:30
          },
          justification_letter:{
             extension: "pdf",
@@ -59,6 +89,9 @@ form.validate({
     messages: {
         nominator_photo:{
             filesize:" Nominator Photo should be size 500KB."
+        },
+        date_of_birth:{
+            validDOB: 'Age should be less than 30 years.'
         },
         justification_letter:{
             filesize:"Justification Letter file size should be 500KB"

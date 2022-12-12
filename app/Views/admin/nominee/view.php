@@ -25,7 +25,7 @@
              
             </div>
             <div class="clearfix"></div>
-            <?= csrf_field(); ?>
+            
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
               <div class="alert alert-warning">

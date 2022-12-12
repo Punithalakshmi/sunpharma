@@ -65,14 +65,7 @@
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
                                     <label class="form-label " for="">Name of the Applicant</label>
-                                    <input class="form-control required" id="nominee_name" name="nominee_name" minlength="6" maxlength="8" type="text" placeholder="Please enter firstname" value="<?=set_value('nominee_name',$editdata['nominee_name']);?>">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="mb-3 form-items">
-                                    <label class="form-label " for="">Surname</label>
-                                    <input class="form-control required" id="nominee_surname" name="nominee_surname" type="text" placeholder="Please enter fullname" value="<?=set_value('nominee_surname',$editdata['nominee_surname']);?>">
+                                    <input class="form-control required" id="nominee_name" name="nominee_name" type="text" placeholder="" value="<?=set_value('nominee_name',$editdata['nominee_name']);?>">
                                 </div>
                             </div>
 
@@ -163,7 +156,7 @@
                             <div class="mb-3 form-items">
                                  <label class="form-label " for="">Mobile No.</label>
                                         
-                                <input type="number" class="form-control required" minlength="10" maxlength="10" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
+                                <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('mobile_no')) {?>
                                     <?= $error = $validation->getError('mobile_no'); ?>
@@ -220,7 +213,7 @@
                             <div class="mb-3 form-items">
                                 <label class="form-label " for="">Mobile No of the Nominator</label>
                                 
-                                <input  class="form-control required" type="number" minlength="10" maxlength="10" placeholder="" id="nominator_mobile" name="nominator_mobile" value="<?=set_value('nominator_mobile',$editdata['nominator_mobile']);?>">
+                                <input  class="form-control required" type="number" placeholder="" id="nominator_mobile" name="nominator_mobile" value="<?=set_value('nominator_mobile',$editdata['nominator_mobile']);?>">
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('nominator_mobile')) {?>
                                     <?= $error = $validation->getError('nominator_mobile'); ?>

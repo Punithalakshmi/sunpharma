@@ -12,15 +12,13 @@ class Login extends BaseController
     public function index()
     {
         sessionDestroy();
-      //  echo "<pre>";
-      //  print_r($this->session); 
         return render('admin/login',$this->data);
     }
 
     public function loginAuth()
     {
 
-       
+
             if (strtolower($this->request->getMethod()) == "post") {  
                 
                  $this->validation->setRules($this->validation_rules());

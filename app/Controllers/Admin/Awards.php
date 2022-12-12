@@ -68,15 +68,13 @@ class Awards extends BaseController
     public function export()
     {
 
+        if (strtolower($this->request->getMethod()) == "post") {  
 
-        $category = '';
-        $year  = '';
-
-            if (strtolower($this->request->getMethod()) == "post") {  
-
-                $category    = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-                $year        = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
-            }   
+          //  if($this->validation->withRequest($this->request)->run()) {
+   
+                    $category    = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                    $year        = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
+            
                     
                     $fileName = 'AwardResult_'.date('d-m-Y').'.xlsx';  
 
@@ -108,7 +106,7 @@ class Awards extends BaseController
                     $rows = 2;
             
                     foreach ($awardsLists as $val){
-                        $sheet->setCellValue('A' . $rows, $val['category']);
+                        $sheet->setCellValue('A' . $rows, $val['category_name']);
                         $sheet->setCellValue('B' . $rows, $val['firstname']);
                         $sheet->setCellValue('C' . $rows, date("Y")."/".$val['id']);
                         $sheet->setCellValue('D' . $rows, $val['dob']);
@@ -153,9 +151,9 @@ class Awards extends BaseController
                         ]); 
                         exit;
                     }
-      
+              //  }
                 
-            
+            }
         
     }
 

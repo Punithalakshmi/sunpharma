@@ -6,7 +6,7 @@ if ( ! function_exists('render'))
     {
        $getRole = getUserRole(); 
 
-     //  echo $data['current_url']->getSegment(1);die;
+     // echo $data['current_url']->getSegment(1);die;
        
        $layoutPath = ((isset($data['userdata']['role']) && $data['userdata']['role'] == 3 && $data['current_url']->getSegment(1) == 'admin') || ($data['current_url']->getSegment(1) == 'admin'))?'admin/layout/layout':'frontend/layout/frontend';
 

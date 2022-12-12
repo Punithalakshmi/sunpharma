@@ -121,10 +121,9 @@ class EventRegistration extends BaseController
         $message .= "<br/>";
         $message .= "Sunpharma Science Foundation Team";
        
-        $this->data['content'] = $message;
-        $html = view('email/mail',$this->data,array('debug' => false));
-
-        mail($email,$subject,$html,$header);
+        
+		
+		sendMail($email,$subject, $message);
 
 
     }

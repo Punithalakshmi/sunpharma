@@ -142,6 +142,8 @@ class Home extends BaseController
                    {
                     $this->session->setFlashdata('msg', 'Please verify Captcha!');
                    }
+				   
+				   redirect()->to('/contact');
               }
               
         }
@@ -261,7 +263,7 @@ class Home extends BaseController
       $data['content'] = $message;
       $html = view('email/mail',$data,array('debug' => false));
 
-      sendMail($email,$subject,$html);
+      sendMail($email,$subject,$message);
 
     }
 
@@ -288,7 +290,7 @@ class Home extends BaseController
       $data['content'] = $message;
       $html = view('email/mail',$data,array('debug' => false));
 
-      sendMail($adminEmail,$subject,$html);
+      sendMail($adminEmail,$subject,$message);
 
     }
 

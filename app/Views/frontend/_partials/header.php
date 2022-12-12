@@ -47,11 +47,11 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="<?=base_url();?>/contact">Contact Us</a></li>
                 </ul>
-                <?php if(!isset($userdata['isLoggedIn'])):?>
-                    <a class="btn btn-primary shadow" role="button" href="<?=base_url();?>/login">Login</a>
-                <?php else: ?>
-                    <a class="btn btn-primary shadow" role="button" href="<?=base_url();?>/logout">Logout</a>
-                <?php endif;?>
+                <?php //if(!isset($userdata['isLoggedIn'])):?>
+                    <!--<a class="btn btn-primary shadow" role="button" href="<?=base_url();?>/login">Login</a>-->
+                <?php //else: ?>
+                    <!--<a class="btn btn-primary shadow" role="button" href="<?=base_url();?>/logout">Logout</a>-->
+                <?php //endif;?>
             </div>
         </div>
     </nav>
