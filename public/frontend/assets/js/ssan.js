@@ -108,6 +108,7 @@ form.children("div").steps({
     onStepChanging: function (event, currentIndex, newIndex)
     {
        
+        console.log('currentIndex',currentIndex);
         event.preventDefault();
         form.validate().settings.ignore = ":disabled,:hidden";
        
@@ -166,7 +167,7 @@ form.children("div").steps({
                     jQuery('#formPreview').html(form_res.html);
                     setTimeout(function(){
                         $("#overlay").fadeOut(300);
-                      },500);
+                    },500);
                 }
             });
         }
