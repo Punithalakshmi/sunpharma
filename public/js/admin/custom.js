@@ -203,9 +203,7 @@ $(function(){
          $('#loader').addClass('hidden');
          if(textStatus && textStatus == 'error'){
            if(jqXHR.responseJSON.message){
-              errorMessageAlert(jqXHR.responseJSON.message);
-              
-             
+              errorMessageAlert(jqXHR.responseJSON.message); 
            }
          }
           

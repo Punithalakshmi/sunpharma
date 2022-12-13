@@ -31,7 +31,7 @@ class Category extends BaseController
             
             if($this->validation) {
 
-                if($this->request->getPost()){
+                if (strtolower($this->request->getMethod()) == "post") {
                 
                     $category      = $this->request->getPost('name');
                     $active        = $this->request->getPost('status');

@@ -130,7 +130,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
-                            <input type="hidden" readonly name="registeration_no" class="form-control col-md-7 col-xs-12" readonly value="<?php echo set_value('registeration_no',$editdata['registeration_no']);?>">
+                            <input type="hidden" readonly name="registeration_no" class="form-control col-md-7 col-xs-12" readonly value="<?php //echo set_value('registeration_no',$editdata['registeration_no']);?>">
                            </p>
                           </div>
                         </div>

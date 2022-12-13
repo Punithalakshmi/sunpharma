@@ -17,7 +17,8 @@
     <?php  endif;?>
     
     <form name="science_scholar_awards" id="science_scholar_awards" method="POST" action="<?=base_url();?>/spsfn" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
+    <?= csrf_field(); ?> 
+    <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
         <input type="hidden" name="detail_id" value="<?=(isset($editdata['detail_id']))?$editdata['detail_id']:"";?>" >
         <div>
             <h3>Personal Info</h3>

@@ -46,6 +46,9 @@ Online Submission Of Nominations">
     <?= view('frontend/_partials/footer'); ?>
 
     <?= script_tag('frontend/assets/bootstrap/js/bootstrap.min.js'); ?>
+    <?= script_tag('frontend/assets/js/bootstrap-msg.js');?>
+    <?= script_tag('frontend/assets/js/jquery.confirmModal.min.js');?>
+    <!-- FastClick -->
     <?= script_tag('frontend/assets/js/custom-app.js'); ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
 

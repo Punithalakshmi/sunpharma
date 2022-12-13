@@ -160,146 +160,140 @@ class Nomination extends BaseController
     public function ssan($id = '',$detail_id='')
     {
 
-       
-        if(is_array($this->data['userdata']) && $this->data['userdata']['isLoggedIn'] && ($this->data['userdata']['role'] == 2))
-            $this->view($this->data['userdata']['id']);
-
-        
-        if(!empty($id)){
-            $getUserData = $this->userModel->getUserData($id);
-            $edit_data   = $getUserData->getRowArray();
-        }
-
-        //get categories lists
-        $getCategoryLists   = $this->categoryModel->getCategoriesByType('Research Awards');
-        $categories         = $getCategoryLists->getResultArray();
-        
-        $this->data['categories'] = $categories;
-
-        if($this->request->getPost()){
-            $id  = $this->request->getPost('id');
-            $detail_id = $this->request->getPost('detail_id');
-        }   
+            // if(is_array($this->data['userdata']) && $this->data['userdata']['isLoggedIn'] && ($this->data['userdata']['role'] == 2))
+            //       $this->view($this->data['userdata']['id']);
             
-        $this->validation = $this->validate($this->validation_rules($id,'ssan'));
-        
-        if($this->validation) {
+            // if(!empty($id)){
+            //     $getUserData = $this->userModel->getUserData($id);
+            //     $edit_data   = $getUserData->getRowArray();
+            // }
 
-            if($this->request->getPost()){
-                
-                $category                    = $this->request->getPost('category');
-                $firstname                   = $this->request->getPost('nominee_name');
-                $dob                         = $this->request->getPost('date_of_birth');
-                $citizenship                 = $this->request->getPost('citizenship');
-                $email                       = $this->request->getPost('email');
-                $phonenumber                 = $this->request->getPost('mobile_no');
-                $address                     = $this->request->getPost('designation_and_office_address');
-                $residence_address           = $this->request->getPost('residence_address');
-                $nominator_name              = $this->request->getPost('nominator_name');
-                $nominator_mobile            = $this->request->getPost('nominator_mobile');
-                $nominator_email             = $this->request->getPost('nominator_email');
-                $nominator_office_address    = $this->request->getPost('nominator_office_address');
-
-                $ins_data = array();
-                $ins_data['firstname']  = $firstname;
-                $ins_data['email']      = $email;
-                $ins_data['phone']      = $phonenumber;
-                $ins_data['address']    = $address;
-                $ins_data['dob']        = date("Y/m/d",strtotime($dob));
-                $ins_data['status']     = 'Disapproved';
-                $ins_data['role']       = 2;
-                $ins_data['category']   = $category;
-                $ins_data['active']     = '0';
-
-                $nominee_details_data = array();
-                $nominee_details_data['category_id']        = $category;
-                $nominee_details_data['citizenship']        = $citizenship ;
-                $nominee_details_data['nomination_type']    = 'ssan';
-                $nominee_details_data['residence_address']  = $residence_address;
-                $nominee_details_data['nominator_name']     = $nominator_name;
-                $nominee_details_data['nominator_email']    = $nominator_email;
-                $nominee_details_data['nominator_phone']    = $nominator_mobile;
-                $nominee_details_data['nominator_address']  = $nominator_office_address;
-                $nominee_details_data['is_submitted'] = 0;
-
-                
-                $this->session->setFlashdata('msg', 'Submitted Successfully!');
-                $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                $ins_data['created_id']    =  1;
-                $this->userModel->save($ins_data);
-                $lastInsertID = $this->userModel->insertID();
-
-                $fileUploadDir = 'uploads/'.$lastInsertID;
+            //get categories lists
+            $getCategoryLists   = $this->categoryModel->getCategoriesByType('Research Awards');
+            $categories         = $getCategoryLists->getResultArray();
             
-                if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                  mkdir($fileUploadDir, 0777, true);
+            $this->data['categories'] = $categories;
+
+            // if($this->request->getPost()){
+            //     $id  = $this->request->getPost('id');
+            //     $detail_id = $this->request->getPost('detail_id');
+            // }   
+            
+            if (strtolower($this->request->getMethod()) == "post") {
+
+                $this->validation->setRules($this->validation_rules('ssan'));
+
+               // print_r($this->request); die;
+
+                if($this->validation->withRequest($this->request)->run()) {
                 
-                //upload documents to respestive nominee folder
-                $justification_letter = $this->request->getFile('justification_letter');
-                $justification_letter->move($fileUploadDir);
+                        $category                    = $this->request->getPost('category');
+                        $firstname                   = $this->request->getPost('nominee_name');
+                        $dob                         = $this->request->getPost('date_of_birth');
+                        $citizenship                 = $this->request->getPost('citizenship');
+                        $email                       = $this->request->getPost('email');
+                        $phonenumber                 = $this->request->getPost('mobile_no');
+                        $address                     = $this->request->getPost('designation_and_office_address');
+                        $residence_address           = $this->request->getPost('residence_address');
+                        $nominator_name              = $this->request->getPost('nominator_name');
+                        $nominator_mobile            = $this->request->getPost('nominator_mobile');
+                        $nominator_email             = $this->request->getPost('nominator_email');
+                        $nominator_office_address    = $this->request->getPost('nominator_office_address');
 
-                $passport = $this->request->getFile('passport');
-                $passport->move($fileUploadDir);
+                        $ins_data = array();
+                        $ins_data['firstname']  = $firstname;
+                        $ins_data['email']      = $email;
+                        $ins_data['phone']      = $phonenumber;
+                        $ins_data['address']    = $address;
+                        $ins_data['dob']        = date("Y/m/d",strtotime($dob));
+                        $ins_data['status']     = 'Disapproved';
+                        $ins_data['role']       = 2;
+                        $ins_data['category']   = $category;
+                        $ins_data['active']     = '0';
 
-                $nominator_photo = $this->request->getFile('nominator_photo');
-                $nominator_photo->move($fileUploadDir);
+                        $nominee_details_data = array();
+                        $nominee_details_data['category_id']        = $category;
+                        $nominee_details_data['citizenship']        = $citizenship ;
+                        $nominee_details_data['nomination_type']    = 'ssan';
+                        $nominee_details_data['residence_address']  = $residence_address;
+                        $nominee_details_data['nominator_name']     = $nominator_name;
+                        $nominee_details_data['nominator_email']    = $nominator_email;
+                        $nominee_details_data['nominator_phone']    = $nominator_mobile;
+                        $nominee_details_data['nominator_address']  = $nominator_office_address;
+                        $nominee_details_data['is_submitted'] = 0;
 
-                $nominee_details_data['nominee_id']                         = $lastInsertID;
-                $nominee_details_data['passport_filename']                  = $passport->getClientName();
-                $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
-                $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
-                $this->nominationModel->save($nominee_details_data);
+                        
+                        $this->session->setFlashdata('msg', 'Submitted Successfully!');
+                        $ins_data['created_date']  =  date("Y-m-d H:i:s");
+                        $ins_data['created_id']    =  1;
+                        $this->userModel->save($ins_data);
+                        $lastInsertID = $this->userModel->insertID();
 
-                $this->sendMail($firstname,$lastInsertID,$email);
+                        $fileUploadDir = 'uploads/'.$lastInsertID;
+                    
+                        if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
+                        mkdir($fileUploadDir, 0777, true);
+                        
+                        //upload documents to respestive nominee folder
+                        $justification_letter = $this->request->getFile('justification_letter');
+                        $justification_letter->move($fileUploadDir);
 
-                return redirect()->to('success');
-            }
-        }
-        else
-        {  
-        
-            $editdata['category']                      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-            $editdata['nominee_name']                  = ($this->request->getPost('nominee_name'))?$this->request->getPost('nominee_name'):'';
-            $editdata['citizenship']                   = ($this->request->getPost('citizenship'))?$this->request->getPost('citizenship'):'';
-            $editdata['designation_and_office_address']= ($this->request->getPost('designation_and_office_address'))?$this->request->getPost('designation_and_office_address'):'';
-            $editdata['residence_address']             = ($this->request->getPost('residence_address'))?$this->request->getPost('residence_address'):'';
-            $editdata['email']                         = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
-            $editdata['mobile_no']                     = ($this->request->getPost('mobile_no'))?$this->request->getPost('mobile_no'):'';
-            $editdata['date_of_birth']                 = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
-            $editdata['nominator_name']                = ($this->request->getPost('nominator_name'))?$this->request->getPost('nominator_name'):'';
-            $editdata['nominator_mobile']              = ($this->request->getPost('nominator_mobile'))?$this->request->getPost('nominator_mobile'):'';
-            $editdata['nominator_email']               = ($this->request->getPost('nominator_email'))?$this->request->getPost('nominator_email'):'';
-            $editdata['nominator_office_address']      = ($this->request->getPost('nominator_office_address'))?$this->request->getPost('nominator_office_address'):'';
-            $editdata['justification_letter']          = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
-            $editdata['passport']                      = ($this->request->getFile('passport'))?$this->request->getFile('passport'):'';
-            $editdata['nominator_photo']               = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
-            $editdata['id']                            = ($this->request->getPost('id'))?$request->getPost('id'):'';
+                        $passport = $this->request->getFile('passport');
+                        $passport->move($fileUploadDir);
 
-        
-            if($this->request->getPost())
-              $this->data['validation'] = $this->validator;
+                        $nominator_photo = $this->request->getFile('nominator_photo');
+                        $nominator_photo->move($fileUploadDir);
 
-            $this->data['editdata'] = $editdata;
-         
-            $this->data['nomination'] = $id;
+                        $nominee_details_data['nominee_id']                         = $lastInsertID;
+                        $nominee_details_data['passport_filename']                  = $passport->getClientName();
+                        $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
+                        $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
+                        $this->nominationModel->save($nominee_details_data);
 
-            if($this->request->isAJAX()){
-                $html = view('frontend/ssan_preview',$this->data,array('debug' => false));
-                return $this->response->setJSON([
-                    'status'            => 'success',
-                    'html'              => $html
-                ]); 
+                        $this->sendMail($firstname,$lastInsertID,$email);
+
+                       // return redirect()->to('success');
             }
             else
-            {
-                return  render('frontend/ssan_new',$this->data);
-                        
-            }            
+            {  
+
+                $this->data['editdata'] = $this->getRequestedData();
+                
+                if(is_array($this->validation->getErrors()) && count($this->validation->getErrors()) > 0){
+                  $this->data['validation'] = $this->validation;
+                  $status = 'error';
+                  $html = view('frontend/ssan_new',$this->data,array('debug' => false));
+                }
+                else
+                {
+                    $status = 'success';
+                    $this->getPostedData();
+                  //  $html = view('frontend/ssan_new',$this->data,array('debug' => false));
+                }  
+            }
+
         }
+
+       
+
+        if($this->request->isAJAX()){
+           echo "ddssd";
+            return $this->response->setJSON([
+                'status'            => $status,
+                'html'              => $html
+            ]); 
+            die;
+        }
+        else
+        {
+            return  render('frontend/ssan_new',$this->data);
+                    
+        }
+       
 
    }
 
-    public function validation_rules($id='',$type='')
+    public function validation_rules($type='')
     {
 
             $validation_rules = array();
@@ -595,14 +589,14 @@ class Nomination extends BaseController
 
             $filename          = ($formtype == 'ssan')?'frontend/ssan_preview':'frontend/spsfn_preview';
 
-            if($this->request->isAJAX()){
-                $html = view($filename,$this->data,array('debug' => false));
-                return $this->response->setJSON([
-                    'status'            => 'success',
-                    'html'              => $html
-                ]); 
-            }
-            die;
+           // if($this->request->isAJAX()){
+              return $html = view($filename,$this->data,array('debug' => false));
+                // return $this->response->setJSON([
+                //     'status'            => 'success',
+                //     'html'              => $html
+                // ]); 
+           // }
+           // die;
         }
 
     }
@@ -719,6 +713,29 @@ class Nomination extends BaseController
         
         return render('frontend/success', $this->data);
 
+    }
+
+
+    public function getRequestedData()
+    {
+        $editdata['category']                      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+        $editdata['nominee_name']                  = ($this->request->getPost('nominee_name'))?$this->request->getPost('nominee_name'):'';
+        $editdata['citizenship']                   = ($this->request->getPost('citizenship'))?$this->request->getPost('citizenship'):'';
+        $editdata['designation_and_office_address']= ($this->request->getPost('designation_and_office_address'))?$this->request->getPost('designation_and_office_address'):'';
+        $editdata['residence_address']             = ($this->request->getPost('residence_address'))?$this->request->getPost('residence_address'):'';
+        $editdata['email']                         = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+        $editdata['mobile_no']                     = ($this->request->getPost('mobile_no'))?$this->request->getPost('mobile_no'):'';
+        $editdata['date_of_birth']                 = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
+        $editdata['nominator_name']                = ($this->request->getPost('nominator_name'))?$this->request->getPost('nominator_name'):'';
+        $editdata['nominator_mobile']              = ($this->request->getPost('nominator_mobile'))?$this->request->getPost('nominator_mobile'):'';
+        $editdata['nominator_email']               = ($this->request->getPost('nominator_email'))?$this->request->getPost('nominator_email'):'';
+        $editdata['nominator_office_address']      = ($this->request->getPost('nominator_office_address'))?$this->request->getPost('nominator_office_address'):'';
+        $editdata['justification_letter']          = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
+        $editdata['passport']                      = ($this->request->getFile('passport'))?$this->request->getFile('passport'):'';
+        $editdata['nominator_photo']               = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
+        $editdata['id']                            = ($this->request->getPost('id'))?$request->getPost('id'):'';
+      
+        return $editdata;
     }
 
     

@@ -69,7 +69,6 @@ form.validate({
          },
          passport:{
             required: {
-                
                 depends: function(elem) {
                              if($("#citizenship").val() == 2)
                                 return true;
@@ -115,64 +114,103 @@ form.children("div").steps({
         // Get the selected file
         if(currentIndex && currentIndex == 1){
 
-            $("#overlay").fadeIn(300);
-        
-        var files                   = $('#nominator_photo')[0].files;
-        var justification_letter    = $('#justification_letter')[0].files;
-        var passport                = $('#passport')[0].files;
-        
-        var fd = new FormData();
-        // Append data 
-        fd.append('nominator_photo',files[0]);
-        fd.append('justification_letter',justification_letter[0]);
-        fd.append('passport',passport[0]);
-            
-        var category      = $("#category").val();
-        var nominee_name  = $("#nominee_name").val();
-        var date_of_birth = $("#date_of_birth").val();
-        var citizenship   = $("#citizenship").val();
-        var designation_and_office_address = $("#designation_and_office_address").val();
-        var residence_address = $("#residence_address").val();
-        var mobile_no = $("#mobile_no").val();
-        var nominee_email = $("#nominee_email").val();
-        var nominator_name = $("#nominator_name").val();
-        var nominator_office_address = $("#nominator_office_address").val();
-        var nominator_mobile = $("#nominator_mobile").val();
-        var nominator_email = $("#nominator_email").val();
-       
-        fd.append('category',category);
-        fd.append('nominee_name',nominee_name);
-        fd.append('date_of_birth',date_of_birth);
-        fd.append('citizenship',citizenship);
-        fd.append('designation_and_office_address',designation_and_office_address);
-        fd.append('residence_address',residence_address);
-        fd.append('mobile_no',mobile_no);
-        fd.append('email',nominee_email);
-        fd.append('nominator_name',nominator_name);
-        fd.append('nominator_office_address',nominator_office_address);
-        fd.append('nominator_mobile',nominator_mobile);
-        fd.append('nominator_email',nominator_email);
-        fd.append('formType','ssan');
+               $("#overlay").fadeIn(300);
 
-        $.ajax({
-                url: base_url+'/getPostedData',
-                type: 'POST',
-                data: fd,
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                cache:false,
-                success: function (form_res) 
-                {
-                    jQuery('#formPreview').html(form_res.html);
-                    setTimeout(function(){
-                        $("#overlay").fadeOut(300);
-                    },500);
-                }
-            });
+               var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
+
+                console.log('csrfName',csrfHash);
+        
+                var files                   = $('#nominator_photo')[0].files;
+                var justification_letter    = $('#justification_letter')[0].files;
+                var passport                = $('#passport')[0].files;
+                
+                var fd = new FormData();
+                // Append data 
+               if(files[0])  
+                 fd.append('nominator_photo',files[0]);
+               else 
+                 fd.append('nominator_photo',''); 
+
+                if(justification_letter[0]) 
+                    fd.append('justification_letter',justification_letter[0]);
+                else 
+                    fd.append('justification_letter','');
+
+                if(passport[0])  
+                    fd.append('passport',passport[0]);
+                else  
+                    fd.append('passport','');
+                    
+                var category      = $("#category").val();
+                var nominee_name  = $("#nominee_name").val();
+                var date_of_birth = $("#date_of_birth").val();
+                var citizenship   = $("#citizenship").val();
+                var designation_and_office_address = $("#designation_and_office_address").val();
+                var residence_address = $("#residence_address").val();
+                var mobile_no = $("#mobile_no").val();
+                var nominee_email = $("#nominee_email").val();
+                var nominator_name = $("#nominator_name").val();
+                var nominator_office_address = $("#nominator_office_address").val();
+                var nominator_mobile = $("#nominator_mobile").val();
+                var nominator_email = $("#nominator_email").val();
+            
+                fd.append('category',category);
+                fd.append('nominee_name',nominee_name);
+                fd.append('date_of_birth',date_of_birth);
+                fd.append('citizenship',citizenship);
+                fd.append('designation_and_office_address',designation_and_office_address);
+                fd.append('residence_address',residence_address);
+                fd.append('mobile_no',mobile_no);
+                fd.append('email',nominee_email);
+                fd.append('nominator_name',nominator_name);
+                fd.append('nominator_office_address',nominator_office_address);
+                fd.append('nominator_mobile',nominator_mobile);
+                fd.append('nominator_email',nominator_email);
+                fd.append('formType','ssan');
+                fd.append('app_csrf',csrfHash);
+
+                $.ajax({
+                        url: base_url+'/ssan',
+                        type: 'POST',
+                        data: fd,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json',
+                        cache:false,
+                        success: function (form_res) 
+                        {
+                            jQuery('#formPreview').html(form_res.html);
+                            if(form_res.status && form_res.status == 'success'){
+                             //   $("a[href$='next']").show();
+                            //    $("a[href$='previous']").show();
+                             //   return form.valid();
+                            }  
+                            else
+                            {
+                                $("a[href$='next']").hide();
+                                $("a[href$='previous']").show(); 
+                                return false;  
+                            }
+                            
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+                            if(textStatus && textStatus == 'error'){
+                                if(jqXHR.responseJSON.message){
+                                    errorMessageAlert(jqXHR.responseJSON.message); 
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+        }
+        else
+        {
+            return form.valid();
         }
     
-        return form.valid();
+        
     },
     onFinishing: function (event, currentIndex)
     {
@@ -188,3 +226,27 @@ form.children("div").steps({
   })
  
 });
+
+
+function successMessageAlert(msg)
+{
+
+    Msg.icon = Msg.ICONS.FONTAWESOME;
+    Msg['success'](msg);
+  
+   setTimeout(function(){
+    location.reload();
+    },2500);
+}
+
+function errorMessageAlert(msg)
+{
+
+    Msg.icon = Msg.ICONS.FONTAWESOME;
+    Msg['danger'](msg);
+
+    setTimeout(function(){
+      location.reload();
+      },2500);
+
+}
