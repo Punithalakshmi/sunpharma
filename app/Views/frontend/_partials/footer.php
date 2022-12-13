@@ -14,7 +14,7 @@
                     <h3 class="fs-6 fw-bold" style="color: #F7941E;font-size: 14px;">About Us</h3>
                     <ul style="color: var(--bs-white);font-size: 14px;padding: 0 0 0 15px;text-align: left;">
                         <li style="color: var(--bs-white);font-size: 14px;"><a href="<?=base_url();?>/aboutus" style="color: var(--bs-white);font-size: 14px;">About SPSF</a></li>
-                        <li style="color: var(--bs-white);font-size: 14px;"><a href="<?=base_url();?>/aboutus" style="color: var(--bs-white);font-size: 14px;">Mission statement</a></li>
+                        <li style="color: var(--bs-white);font-size: 14px;"><a href="<?=base_url();?>/aboutus" style="color: var(--bs-white);font-size: 14px;">Mission Statement</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-2 col-md-2 text-center text-lg-start d-flex flex-column item" style="font-size: 14px;">

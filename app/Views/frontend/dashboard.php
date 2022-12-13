@@ -1,7 +1,4 @@
-<style>.carousel-control-prev, .carousel-control-next{width: 8%;}
-@media(max-width:767px){
-  .bannercaption .btn{margin-bottom: 5px;}
-}</style><div class="container-fluid" style="padding: 0;">
+<div class="container-fluid" style="padding: 0;">
         <div class="row gx-0 gy-0">
             <div class="col">
 
@@ -309,6 +306,26 @@ Department of Electronic Systems Engineering
                                 </div>
                             </div>
                         </div>
+						
+						<div class="swiper-slide">
+                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                <div class="row g-0">
+                                    <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
+                                        <div class="text-white winnerinfo">
+                                            <h2 class="fw-bold text-white mb-3">Mr. Atish Roy Chowdhury</h2>
+                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Biomedical Sciences<br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Student<br>
+Department of Microbiology and Cell Biology<br>
+Indian Institute of Science
+<br></p>
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Know More</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Atish-Roy-Chowdhury-SSA-2022.jpg"></div>
+                                </div>
+                            </div>
+                        </div>
+						
                         <div class="swiper-slide">
                             <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                 <div class="row g-0">
