@@ -87,17 +87,17 @@ class EventRegisteration extends BaseController
                         $editdata['phone']                   = $edit_data['phone'];
                         $editdata['address']                 = $edit_data['address'];
                         $editdata['event_type']              = $edit_data['event_type'];
-                        $editdata['registeration_no']        = (!empty($edit_data['registeration_no']))?$edit_data['registeration_no']:'SPSFN-REG-'.$id;
+                      //  $editdata['registeration_no']      = (!empty($edit_data['registeration_no']))?$edit_data['registeration_no']:'SPSFN-REG-'.$id;
                         $editdata['id']                      = $edit_data['id'];
                     }
                     else
                     {
                         $editdata['firstname']                = ($this->request->getPost('firstname'))?$this->request->getPost('firstname'):'';
-                        $editdata['lastname']              = ($this->request->getPost('lastname'))?$this->request->getPost('lastname'):'';
-                        $editdata['email']          = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
+                        $editdata['lastname']                 = ($this->request->getPost('lastname'))?$this->request->getPost('lastname'):'';
+                        $editdata['email']                    = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
                         $editdata['phone']             = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
                         $editdata['address']             = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
-                        $editdata['registeration_no']             = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
+                      //  $editdata['registeration_no']             = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
                         $editdata['id']                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                         $editdata['event_type']                   = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
                     }
@@ -119,10 +119,10 @@ class EventRegisteration extends BaseController
     {
 
         $this->validation_rules = array();
-        $this->validation_rules = array(   "firstname" => array("label" => "Firstname",'rules' => 'required'),
-                                    "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                    "phone" => array("label" => "Phone",'rules' => 'required'),
-                                     "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email,id,'.$id.']')
+        $this->validation_rules = array(       "firstname" => array("label" => "Firstname",'rules' => 'required'),
+                                                "lastname" => array("label" => "Lastname",'rules' => 'required'),
+                                                "phone" => array("label" => "Phone",'rules' => 'required'),
+                                                "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email,id,'.$id.']')
                                 );
     
         return $this->validation_rules;

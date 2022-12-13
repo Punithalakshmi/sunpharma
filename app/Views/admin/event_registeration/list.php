@@ -29,7 +29,7 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          
+                          <th>Registration Date</th>
                           <th>Firstname</th>
                           <th>Lastname</th>
                           <th>Email</th>
@@ -43,11 +43,11 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                          
+                          <td><?=$user['created_date'];?></td>
                           <td><?=$user['firstname'];?></td>
                           <td><?=$user['lastname'];?></td>
                           <td><?=$user['email'];?></td>
-                          <td><?=$user['phone'];?></td>
+                          <td><?=(isset($user['phone']) && ($user['phone']!='2147483647'))?$user['phone']:"-";?></td>
                           <td><?=$user['registeration_no'];?></td>
                           <td>
                             <a href="<?=base_url().'/admin/eventregisteration/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>

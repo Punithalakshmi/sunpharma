@@ -257,12 +257,12 @@ class Nomination extends BaseController
             else
             {  
 
-                $this->data['editdata'] = $this->getRequestedData();
+               
                 
                 if(is_array($this->validation->getErrors()) && count($this->validation->getErrors()) > 0){
                   $this->data['validation'] = $this->validation;
                   $status = 'error';
-                  $html = view('frontend/ssan_new',$this->data,array('debug' => false));
+                  
                 }
                 else
                 {
@@ -274,10 +274,11 @@ class Nomination extends BaseController
 
         }
 
-       
+        $this->data['editdata'] = $this->getRequestedData();
+
 
         if($this->request->isAJAX()){
-           echo "ddssd";
+            $html = view('frontend/ssan_new',$this->data,array('debug' => false));
             return $this->response->setJSON([
                 'status'            => $status,
                 'html'              => $html

@@ -16,14 +16,14 @@ class EventRegistration extends BaseController
     {
 
 
-        $this->validation = $this->validate($this->validation_rules());
+        $this->validation = $this->validation->setRules($this->validation_rules(),$this->validationMessages());
 
       
         $registerationNo = $this->getRegisterationNo();
 
         $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
         
-        if($this->validation) {
+        if($this->validation->withRequest($this->request)->run()) {
 
             if($this->request->getPost()){
                 
@@ -71,7 +71,7 @@ class EventRegistration extends BaseController
             $editdata['event_type']       = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
             
             if($this->request->getPost())
-              $this->data['validation'] = $this->validator;
+              $this->data['validation'] = $this->validation;
 
             $this->data['editdata'] = $editdata;
             
@@ -98,6 +98,17 @@ class EventRegistration extends BaseController
 
         return $validation_rules;
       
+    }
+
+    public function validationMessages()
+    {
+
+        $validationMessages = array("firstname" => array("required" => "Please enter firstname"),
+                                    "lastname" => array("required" => "Please enter lastname"),
+                                    "email" => array("required" => "Please enter Email","is_unique"=>"A registration with this email already exists"),
+                              );
+
+         return $validationMessages;
     }
 
 
