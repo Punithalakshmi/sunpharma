@@ -35,14 +35,12 @@ const progress = (value) => {
 
     });    
     
-    $.validator.addMethod('filesize', function (value, element,param) {
+    $.validator.addMethod('eligibleType', function (value, element,param) {
       
-       
-        if(size <= 500 && $("#nominato_photo"))
-          return this.optional(element) || size <=param;
+        if(value == 'Yes')
+          return this.optional(element) || value == param;
         else
            return false;  
-
     }); 
 
     $.validator.addMethod(
@@ -104,7 +102,7 @@ form.validate({
             maxlength:10
          },
          research_project:{
-            eligibleType:'yes'
+            eligibleType:'Yes'
          }
     },
     messages: {
@@ -121,7 +119,7 @@ form.validate({
             filesize:"File size not more than 500KB"
         },
         research_project:{
-            eligibleType: "Your are not eligible to register"
+            eligibleType: "Your are not eligible to register, you should be completed project"
         }
       }
 });
