@@ -34,8 +34,8 @@ class User extends BaseController
                         $authenticatePassword = password_verify($password, $pass);
                        //    echo $authenticatePassword; die;
                        if($pass == md5($password)){
-                           
-                            $ses_data = [
+                          
+                            $ses_data = [ 
                                 'id' => $data['id'],
                                 'name' => $data['name'],
                                 'email' => $data['email'],
@@ -44,35 +44,17 @@ class User extends BaseController
                                 'isNominee' => 'yes'
                             ];
 
-                            $getNominationData   = $this->nominationModel->getNominationData($result['id']);
-                            $getNominationData   = $getNominationData->getRowArray();
-                            
-                            $getCategoryNominationData   = $this->nominationTypesModel->getCategoryNomination($getNominationData['category_id']);
-                            $getNominationDaysCt         = $getCategoryNominationData->getRowArray();
+                            $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$data['extend_date']);
             
-                            //get extend nomination date
-                            $getExtendNominationDate   = $this->extendModel->getListsOfExtends($result['id']);
-            
-                            $getExtendNominationEndDays = 0;
-                            if($getExtendNominationDate->getRowArray() > 0) {
-                                $getExtendNominationDate = $getExtendNominationDate->getRowArray();
-                                $getExtendNominationEndDays = $this->dateDiff(date("Y-m-d"),$getExtendNominationDate['extend_date']);
-                            }  
-        
-                            $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$getNominationDaysCt['end_date']);
-            
-                            if($nominationEndDays <= 0 && $getExtendNominationEndDays > 0)
-                                $ses_data['nominationEndDays'] =  $getExtendNominationEndDays;
-                            else
-                                $ses_data['nominationEndDays'] =  $nominationEndDays;  
+                            $ses_data['nominationEndDays'] =  $nominationEndDays;  
             
                             $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
-                            $ses_data['nomination_type']   = $getNominationData['nomination_type'];
-
+                          
                             setSessionData('fuserdata',$ses_data);
-                            $redirect_route = 'view/'.$result['id'];
+
+                           echo $redirect_route = 'view/'.$data['id']; die;
         
-                            return redirect()->to($redirect_route);
+                            return redirect()->to('/');
                         
                         }
                         else

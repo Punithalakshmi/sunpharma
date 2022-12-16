@@ -10,6 +10,7 @@ class Nomination extends BaseController
    
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Science Scholar Awards');
+            
             $this->data['categories'] = $getCategoryLists->getResultArray();
             
             if (strtolower($this->request->getMethod()) == "post") {

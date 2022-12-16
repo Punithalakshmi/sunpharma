@@ -44,7 +44,7 @@ class EventRegistration extends BaseController
                 $ins_data['address']       = $address;
                 $ins_data['phone']         = $phone;
                 $ins_data['registeration_no'] = $registerationNo; 
-                $ins_data['event_type'] = $event_type;
+                $ins_data['event_type']       = $event_type;
                 
             
                 $this->session->setFlashdata('msg', 'Registeration Submitted Successfully!');
@@ -68,7 +68,7 @@ class EventRegistration extends BaseController
             $editdata['phone']            = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
             $editdata['address']          = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
             $editdata['registeration_no'] = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
-            $editdata['event_type']       = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
+          //  $editdata['event_type']       = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
             
             if($this->request->getPost())
               $this->data['validation'] = $this->validation;

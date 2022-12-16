@@ -35,7 +35,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Confirm Password <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Confirm New Password <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="password" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('confirm_password',$editdata['confirm_password']);?>">

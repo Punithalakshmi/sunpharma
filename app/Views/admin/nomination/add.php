@@ -219,7 +219,7 @@
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <input type="reset" class="btn btn-primary" name="reset" value="RESET">
-                            <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+                            <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                           </div>
                         </div>
 

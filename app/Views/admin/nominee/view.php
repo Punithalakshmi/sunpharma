@@ -17,15 +17,15 @@
                   <?php endif; ?>
 
                  
-                <a href="<?=base_url();?>/admin/nominee">
-                <h3 class="btn btn-secondary">BACK</h3></a>
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee">
+                <i class="fa fa-arrow-left"></i>BACK</a>
               
 
               </div>
              
             </div>
             <div class="clearfix"></div>
-            
+            <?= csrf_field(); ?>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
               <div class="alert alert-warning">

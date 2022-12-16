@@ -31,7 +31,7 @@ class NominationTypesModel extends Model{
         if(empty($id)){
             $builder = $this->table('nominations');
             $builder->select('nominations.*');
-            $builder->orderBy('id', 'DESC');
+            $builder->orderBy('status', '1');
             $builder->orderBy('title', 'ASC');  
             return $query = $builder->get();
         }
