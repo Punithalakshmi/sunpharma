@@ -35,6 +35,16 @@ const progress = (value) => {
 
     });    
     
+    $.validator.addMethod('filesize', function (value, element,param) {
+      
+       
+        if(size <= 500 && $("#nominato_photo"))
+          return this.optional(element) || size <=param;
+        else
+           return false;  
+
+    }); 
+
     $.validator.addMethod(
         "validDOB",
         function(value, element) {              
@@ -92,6 +102,9 @@ form.validate({
          nominator_mobile:{
             minlength:10,
             maxlength:10
+         },
+         research_project:{
+            eligibleType:'yes'
          }
     },
     messages: {
@@ -106,6 +119,9 @@ form.validate({
         },
         justification_letter:{
             filesize:"File size not more than 500KB"
+        },
+        research_project:{
+            eligibleType: "Your are not eligible to register"
         }
       }
 });

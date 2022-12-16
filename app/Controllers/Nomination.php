@@ -8,12 +8,10 @@ class Nomination extends BaseController
     public function index()
     {
    
-        
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Science Scholar Awards');
             $this->data['categories'] = $getCategoryLists->getResultArray();
             
-           
             if (strtolower($this->request->getMethod()) == "post") {
 
                 $this->validation->setRules($this->validation_rules('spsfn'));
@@ -52,8 +50,8 @@ class Nomination extends BaseController
                             $nominator_office_address    = $this->request->getPost('nominator_office_address');
                             $ongoing_course              = $this->request->getPost('ongoing_course');
                             $research_project            = $this->request->getPost('research_project');
+
                             
-                        
                             $ins_data = array();
                             $ins_data['firstname']  = $firstname;
                             $ins_data['email']      = $email;
@@ -76,6 +74,11 @@ class Nomination extends BaseController
                             $nominee_details_data['ongoing_course']    = $ongoing_course;
                             $nominee_details_data['is_completed_a_research_project']  = $research_project;
                             $nominee_details_data['is_submitted'] = 0;
+
+                            if($this->request->getPost('course_name')) {
+                                $course_name  = $this->request->getPost('course_name');
+                                $nominee_details_data['course_name']   = $course_name;
+                            } 
 
                             $this->session->setFlashdata('msg', 'Submitted Successfully!');
                             $ins_data['created_date']  =  date("Y-m-d H:i:s");
@@ -307,6 +310,16 @@ class Nomination extends BaseController
             if($type == 'ssan' && $this->request->getPost('citizenship') == 2)
                 $validation_rules['passport'] =  array("label" => "Attached Passport",'rules' => 'uploaded[passport]|ext_in[passport,pdf]');
 
+            if($type == 'spsfn') {
+
+                if($this->request->getPost('ongoing_course') == 'other')
+                    $validation_rules['course_name'] = array("label" => "Course Name",'rules' => 'required');
+
+                if($this->request->getPost('research_project') == 'No')
+                    $validation_rules['research_project'] = array("label" => "Course Name",'rules' => 'required');  
+
+                
+            }    
             return $validation_rules;
       
     }

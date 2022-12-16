@@ -55,9 +55,7 @@
                                     <label class="form-label " for="">Category of the Award</label>
                                     <select class="form-control required" name="category" id="category">
                                     <option value="">-- Select --</option>
-                                    <!-- <option value="Bio-Medical Sciences" <?//set_select('category',"Bio-Medical Sciences", ((isset($editdata['category']) && ($editdata['category']=='Bio-Medical Sciences'))?TRUE:FALSE));?>>Bio-Medical Sciences</option>
-                                    <option value="Pharmaceutical Sciences" <?//set_select('category',"Pharmaceutical Sciences", ((isset($editdata['category']) && ($editdata['category']=='Pharmaceutical Sciences'))?TRUE:FALSE));?>>Pharmaceutical Sciences</option> -->
-                                        <?php if(is_array($categories)):
+                                       <?php if(is_array($categories)):
                                                foreach($categories as $ckey=>$cvalue):?>
                                          <option value="<?=$cvalue['id'];?>" <?=set_select('category',$cvalue['id'], ((isset($editdata['category']) && ($editdata['category']==$cvalue['id']))?TRUE:FALSE));?>><?=$cvalue['name'];?></option>
                                         <?php   endforeach; 
