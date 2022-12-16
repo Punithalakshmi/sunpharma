@@ -27,7 +27,7 @@ class Category extends BaseController
             if($this->request->getPost())
                $id  = $this->request->getPost('id');
                
-            $this->validation = $this->validate($this->validation_rules());
+            $this->validation = $this->validate($this->validation_rules($id));
             
             if($this->validation) {
 

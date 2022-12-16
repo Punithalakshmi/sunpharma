@@ -1,3 +1,4 @@
+<div id="formReplace">
 <section class="bg-primary-gradient"><div class="container py-5">
     <div class="row mx-auto" style="padding-bottom: 15px">
         <div class="col-lg-12">
@@ -18,6 +19,7 @@
   
     <form name="research_awards" id="formsection" method="POST" action="<?=base_url();?>/ssan" enctype="multipart/form-data">
         <?= csrf_field(); ?>
+        <input type="hidden" name="formTypeStatus" value="submit">
         <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
         <input type="hidden" name="detail_id" value="<?=(isset($editdata['detail_id']))?$editdata['detail_id']:"";?>" >
         <div>
@@ -282,3 +284,4 @@
 </form>
 </div>
 </section>
+</div>

@@ -10,6 +10,8 @@
 Online Submission Of Nominations">
 
         <?=link_tag('frontend/assets/bootstrap/css/bootstrap.min.css')?>
+        <?=link_tag('frontend/assets/css/bootstrap-msg.css')?>
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i&amp;display=swap">
         <?=link_tag('frontend/assets/css/app.compiled.css')?>

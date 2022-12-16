@@ -91,6 +91,8 @@ $routes->get('event/read_more','EventRegistration::read_more');
 
 $routes->get('event/read_more/(:any)','EventRegistration::read_more/$1');
 
+$routes->get('csrf_token','Nomination::get_new_csrf_token');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index",['filter' =>'auth']);

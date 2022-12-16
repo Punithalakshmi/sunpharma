@@ -1,3 +1,4 @@
+<div id="formReplace">
 <section class="bg-primary-gradient">
 <div class="container py-5">
     <div class="row mx-auto" style="padding-bottom: 15px">
@@ -8,7 +9,7 @@
             </h2>
         </div>
     </div>
-    <script src="<?=base_url();?>/frontend/assets/js/jquery.min.js"></script>
+  
     <?php if(isset($uri) && ($uri == 'ssan' || $uri == 'spsfn')): ?>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
@@ -20,6 +21,7 @@
     <?= csrf_field(); ?> 
     <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
         <input type="hidden" name="detail_id" value="<?=(isset($editdata['detail_id']))?$editdata['detail_id']:"";?>" >
+        <input type="hidden" name="formTypeStatus" value="submit">
         <div>
             <h3>Personal Info</h3>
             <section>
@@ -106,7 +108,7 @@
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
                             <label for="" class="fw-bold">Ongoing Course </label>
-                                <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="ongoing_course" id="ongoing_course">
+                                <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="ongoing_course" id="ongoing_course" onChange="ongoingCourse(this);">
                                     <option value="">-- select --</option>
                                     <option value="MD" <?=set_select('ongoing_course', 1, ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='MD'))?TRUE:FALSE));?>>MD</option>
                                     <option value="PhD" <?=set_select('ongoing_course', 1, ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='PhD'))?TRUE:FALSE));?>>PhD</option>
@@ -116,7 +118,12 @@
                             </div>
                         </div>
                         
-                       
+                        <div class="col-lg-6" id="courseName" style="display:none;">
+                                <div class="mb-3 form-items">
+                                    <label class="form-label " for="">Course Name</label>
+                                    <input class="form-control" id="course_name" name="course_name" type="text" placeholder="" value="">
+                                </div>
+                            </div>
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
@@ -299,3 +306,4 @@
 </form>
 </div>
 </section>
+</div>

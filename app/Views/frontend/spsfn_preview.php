@@ -199,7 +199,7 @@
         </div>
     </div>
 </div>
-<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> 
+<input id="acceptTerms" name="acceptTerms" type="checkbox"> 
 <label for="acceptTerms">I agree with the Terms and Conditions.</label>
 
 </section>
