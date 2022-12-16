@@ -19,9 +19,9 @@
                             <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="<?=base_url();?>/research_awards">Awards</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="<?=base_url();?>/research_awards">Research Awards</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_research_awards">Latest winners of Research awards<br></a>
+                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_research_awards">Latest Winners Of Research Awards<br></a>
                                 <a class="dropdown-item" href="<?=base_url();?>/science_scholar_awards">Scholar Awards</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Latest winners of Scholar awards</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Latest Winners Of Scholar Awards</a>
                             </div>
                         </div>
                     </li>
@@ -32,7 +32,7 @@
                                 <a class="dropdown-item" href="<?=base_url();?>/symposium">Scientific Symposium</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/roundtable">National Seminar</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/annualforeign_scientist">Inviting Foreign Scientists</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/special_awards">Special Award in Public Health</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/special_awards">Special Award In Public Health</a>
                             </div>
                         </div>
                     </li>
@@ -40,7 +40,7 @@
                         <div class="nav-item dropdown nav-link">
                             <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="<?=base_url();?>/directory_research_awardees">Directory</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=base_url();?>/directory_research_awardees">Directory - Research Award winners</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/directory_research_awardees">Directory - Research Award Winners</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/directory_of_science_scholars">Directory - Science Scholars</a>
                             </div>
                         </div>
