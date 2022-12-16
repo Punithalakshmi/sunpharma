@@ -387,6 +387,9 @@ form#eventRegistration .form-group .alert-danger {
 
 
 @media(max-width:992px){
+  footer h3 {
+  text-align: left;
+}
   li.nav-item {
     width: 100%;
     border: 1px solid #dddddd6e!important;
