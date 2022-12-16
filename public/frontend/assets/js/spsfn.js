@@ -238,7 +238,6 @@ form.children("div").steps({
 function triggerSteps()
 {
 
-
     $.validator.addMethod('filesize', function (value, element,param) {
       
         var size=element.files[0].size;
@@ -340,87 +339,100 @@ form.children("div").steps({
         if(currentIndex && currentIndex == 1){
 
             $("#overlay").fadeIn(300);
+    
+            token_res  = {};
 
-            
-            var csrfHash = $("input[name='app_csrf']").val(); 
-
-         // Get the selected file
-         var files                   = $('#nominator_photo')[0].files;
-         var justification_letter    = $('#justification_letter')[0].files;
-         var supervisor_certifying   = $('#supervisor_certifying')[0].files;
-         
-         var fd = new FormData();
-         // Append data 
-         fd.append('nominator_photo',files[0]);
-         fd.append('justification_letter',justification_letter[0]);
-         fd.append('supervisor_certifying',supervisor_certifying[0]);
-
-        var category = $("#category").val();
-        var nominee_name = $("#nominee_name").val();
-        var date_of_birth = $("#date_of_birth").val();
-        var citizenship = $("#citizenship").val();
-        var designation_and_office_address = $("#designation_and_office_address").val();
-        var residence_address = $("#residence_address").val();
-        var mobile_no = $("#mobile_no").val();
-        var nominee_email = $("#nominee_email").val();
-        var nominator_name = $("#nominator_name").val();
-        var nominator_office_address = $("#nominator_office_address").val();
-        var nominator_mobile = $("#nominator_mobile").val();
-        var nominator_email = $("#nominator_email").val();
-        var ongoing_course  = $("#ongoing_course").val();
-        var research_project  = $("#research_project").val();
-
-        fd.append('category',category);
-        fd.append('nominee_name',nominee_name);
-        fd.append('date_of_birth',date_of_birth);
-        fd.append('citizenship',citizenship);
-        fd.append('designation_and_office_address',designation_and_office_address);
-        fd.append('residence_address',residence_address);
-        fd.append('mobile_no',mobile_no);
-        fd.append('email',nominee_email);
-        fd.append('nominator_name',nominator_name);
-        fd.append('nominator_office_address',nominator_office_address);
-        fd.append('nominator_mobile',nominator_mobile);
-        fd.append('nominator_email',nominator_email);
-        fd.append('ongoing_course',ongoing_course);
-        fd.append('research_project',research_project);
-        fd.append('formType','spsfn');
-        fd.append('app_csrf',csrfHash);
-        fd.append('formTypeStatus','preview');
-       
             $.ajax({
-                        url: base_url+'/spsfn',
-                        type: 'post',
-                        data: fd,
-                        contentType: false,
-                        processData: false,
-                        dataType: 'json',
-                        cache:false,
-                        success: function (form_res) 
-                        {
-                            if(form_res.status && form_res.status == 'success'){
-                                if(form_res.message && form_res.message == 'preview')
-                                $('#formPreview').html(form_res.html);
-                            }  
-                            else
-                            {
-                            
-                                errorMessageAlert('Please check all form fields you have missed the fields to enter the value'); 
-                                $("#formReplace").html(form_res.html);
-                                triggerSteps();
-                                return false;  
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown)
-                        {
-                            if(textStatus && textStatus == 'error'){
-                                if(jqXHR.responseJSON.message){
-                                    errorMessageAlert(jqXHR.responseJSON.message); 
-                                    return false;
-                                }
-                            }
-                        }
-                });
+                url: base_url+'/csrf_token',
+                type: 'GET',
+                data: {},
+                dataType: 'json',
+                success: function (form_res) 
+                {
+                    token_res = form_res;
+                        // Get the selected file
+                        var files                   = $('#nominator_photo')[0].files;
+                        var justification_letter    = $('#justification_letter')[0].files;
+                        var supervisor_certifying   = $('#supervisor_certifying')[0].files;
+                        
+                        var fd = new FormData();
+                        // Append data 
+                        fd.append('nominator_photo',files[0]);
+                        fd.append('justification_letter',justification_letter[0]);
+                        fd.append('supervisor_certifying',supervisor_certifying[0]);
+
+                        var category = $("#category").val();
+                        var nominee_name = $("#nominee_name").val();
+                        var date_of_birth = $("#date_of_birth").val();
+                        var citizenship = $("#citizenship").val();
+                        var designation_and_office_address = $("#designation_and_office_address").val();
+                        var residence_address = $("#residence_address").val();
+                        var mobile_no = $("#mobile_no").val();
+                        var nominee_email = $("#nominee_email").val();
+                        var nominator_name = $("#nominator_name").val();
+                        var nominator_office_address = $("#nominator_office_address").val();
+                        var nominator_mobile = $("#nominator_mobile").val();
+                        var nominator_email = $("#nominator_email").val();
+                        var ongoing_course  = $("#ongoing_course").val();
+                        var research_project  = $("#research_project").val();
+
+                        fd.append('category',category);
+                        fd.append('nominee_name',nominee_name);
+                        fd.append('date_of_birth',date_of_birth);
+                        fd.append('citizenship',citizenship);
+                        fd.append('designation_and_office_address',designation_and_office_address);
+                        fd.append('residence_address',residence_address);
+                        fd.append('mobile_no',mobile_no);
+                        fd.append('email',nominee_email);
+                        fd.append('nominator_name',nominator_name);
+                        fd.append('nominator_office_address',nominator_office_address);
+                        fd.append('nominator_mobile',nominator_mobile);
+                        fd.append('nominator_email',nominator_email);
+                        fd.append('ongoing_course',ongoing_course);
+                        fd.append('research_project',research_project);
+                        fd.append('formType','spsfn');
+                        fd.append('app_csrf',token_res.token);
+                        fd.append('formTypeStatus','preview');
+                    
+                            $.ajax({
+                                        url: base_url+'/spsfn',
+                                        type: 'post',
+                                        data: fd,
+                                        contentType: false,
+                                        processData: false,
+                                        dataType: 'json',
+                                        cache:false,
+                                        success: function (form_res) 
+                                        {
+                                            if(form_res.status && form_res.status == 'success'){
+                                                if(form_res.message && form_res.message == 'preview')
+                                                $('#formPreview').html(form_res.html);
+                                            }  
+                                            else
+                                            {
+                                                errorMessageAlert('Please check all form fields you have missed the fields to enter the value'); 
+                                                $("#formReplace").html(form_res.html);
+                                                setTimeout(function(){
+                                                    triggerSteps();
+                                                 },5000);
+                                                return false;  
+                                            }
+                                        },
+                                        error: function (jqXHR, textStatus, errorThrown)
+                                        {
+                                            if(textStatus && textStatus == 'error'){
+                                                if(jqXHR.responseJSON.message){
+                                                    errorMessageAlert(jqXHR.responseJSON.message);
+                                                    setTimeout(function(){
+                                                        triggerSteps();
+                                                    },5000); 
+                                                    return false;
+                                                }
+                                            }
+                                        }
+                                   });
+                              }
+                        }); 
 
                 return form.valid();
             }
@@ -441,16 +453,9 @@ form.children("div").steps({
         },
         onFinished: function (event, currentIndex)
         {
-            form.submit();
-            successMessageAlert('Thank you. Your application is under review , you should receive an email soon!');
-            setTimeout(function(){
-                window.location.href=base_url+'/success';
-            },3000);
+            formSubmit();
         }
     });
-    
-
-
 }
 
 
@@ -479,7 +484,6 @@ function formSubmit()
         {
             token_res = form_res;
              
-            
             var files                   = $('#nominator_photo')[0].files;
             var justification_letter    = $('#justification_letter')[0].files;
             var supervisor_certifying   = $('#supervisor_certifying')[0].files;
@@ -496,8 +500,8 @@ function formSubmit()
             else 
                 fd.append('justification_letter','');
 
-            if(passport[0])  
-                fd.append('supervisor_certifying',passport[0]);
+            if(supervisor_certifying[0])  
+                fd.append('supervisor_certifying',supervisor_certifying[0]);
             else  
                 fd.append('supervisor_certifying','');
 

@@ -16,7 +16,7 @@ class Nomination extends BaseController
            
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('ssan'));
+                $this->validation->setRules($this->validation_rules('spsfn'));
 
                 if($this->validation->withRequest($this->request)->run()) {
 
