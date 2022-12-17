@@ -5,7 +5,12 @@
                 <h3>Add/Modify Event</h3>
               </div>
               <div class="title_right">
-                <a href="<?=base_url();?>/admin/workshops"><h3 class="btn btn-secondary">BACK</h3></a>
+              <div class="actionbtns">
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/workshops">
+                  <i class="fa fa-arrow-left"></i> BACK
+                </a>                 
+              </div>
+
               </div>
             </div>
           
@@ -185,7 +190,8 @@
                       <div class="ln_solid"></div>
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <input type="reset" class="btn btn-primary" name="reset" value="RESET">
+                            <!-- <input type="reset" class="btn btn-primary" name="reset" value="RESET"> -->
+                            <a href="<?=base_url();?>/admin/workshop" class="btn btn-primary">CANCEL</a> 
                             <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
                           </div>
                         </div>

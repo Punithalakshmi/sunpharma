@@ -5,7 +5,9 @@
                 <h3>Profile Info</h3>
               </div>
               <div class="title_right">
-                <a href="<?=base_url();?>/admin/user"><h3 class="btn btn-secondary">BACK</h3></a>
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/user">
+                   <i class="fa fa-arrow-left"></i> BACK
+                </a>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -78,7 +80,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phonenumber</label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phone Number</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="phonenumber" class="form-control col-md-7 col-xs-12" type="number" name="phonenumber" value="<?php echo set_value('phonenumber',$editdata['phone']);?>">
                         </div>
@@ -109,7 +111,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="birthday" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
+                          <input id="single_cal3" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
                         </div>
                       </div>
                       
@@ -117,7 +119,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="cancel" class="btn btn-primary" onclick="window.location=base_url+'/admin/dashboard';return false;">Cancel</button>
+                          <button type="cancel" class="btn btn-primary" onclick="window.location=base_url+'/admin/dashboard';return false;">CANCEL</button>
 						              
                           <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                         </div>

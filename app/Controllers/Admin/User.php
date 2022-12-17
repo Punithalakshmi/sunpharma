@@ -34,7 +34,7 @@ class User extends BaseController
     {
       
         $getCategoryLists   = $this->categoryModel->getListsOfCategories();
-        $this->data['categories'] = $getCategoryLists;
+        $this->data['categories'] = $getCategoryLists->getResultArray();
 
      
         if(!empty($id)){
@@ -43,7 +43,7 @@ class User extends BaseController
         }
         
         if($this->request->getPost())
-            $id  = $this->request->getPost('id');
+           $id  = $this->request->getPost('id');
             
         $this->validation = $this->validate($this->validation_rules('user',$id));
         
@@ -78,6 +78,7 @@ class User extends BaseController
                 $ins_data['address']    = '';
                 $ins_data['dob']        =  $date_of_birth;
                 $ins_data['active']     =  '1';
+                $ins_data['gender']     =  $gender;
 
                 if($user_role == 1)
                     $ins_data['category'] =  $category;
@@ -150,7 +151,7 @@ class User extends BaseController
     public function profile()
     {
 
-            $id = $$this->data['userdata']['login_id'];
+           $id = $this->data['userdata']['login_id'];
             $getUserData = $this->userModel->getListsOfUsers($id);
             $edit_data   = $getUserData->getRowArray();
 
@@ -289,11 +290,12 @@ class User extends BaseController
 
         $validation_rules = array();
 
-        if($type =='profile' || $type == 'user'){
+         if($type =='profile' || $type == 'user'){
+           // echo $id;  die;
             $validation_rules = array(
                                             "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                             "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                            "email" => array("label" => "email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
+                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
                                             "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
                                             "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
             );
@@ -305,7 +307,7 @@ class User extends BaseController
         {
             $validation_rules = array(
                 "new_password" => array("label" => "Password",'rules' => 'required'),
-                "confirm_password" => array("label" => "Confirm Passwod",'rules' => 'required|matches[new_password]')
+                "confirm_password" => array("label" => "Confirm New Passwod",'rules' => 'required|matches[new_password]')
             );
         }  
 

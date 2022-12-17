@@ -53,7 +53,7 @@
                           <td>
                             <button type="button" class="btn btn-info btn-xs"><i class="fa fa-check"></i> Approve </button>
                             <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-ban"></i> Disapprove </buttonh fdd>
-                            <a href="<?=base_url().'/admin/nominee/view'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View </a>
+                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View </a>
                           </td>
                         </tr>
                         <?php endforeach;

@@ -29,6 +29,7 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
+                          <th>Title</th>
                           <th>Subject</th>
                           <th>Description</th>
                           <th>Start Date</th>
@@ -42,7 +43,7 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                          
+                        <td><?=$user['title'];?></td>
                           <td><?=$user['subject'];?></td>
                           <td><?=$user['description'];?></td>
                           <td><?=$user['start_date'];?></td>

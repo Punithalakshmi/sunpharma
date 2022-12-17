@@ -7,8 +7,6 @@ class Home extends BaseController
     public function index()
     {
         
-        
-
         $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
 
         $categoryNominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
@@ -18,13 +16,13 @@ class Home extends BaseController
         $nominationArr = array();
         
         $current_date = strtotime(date("Y-m-d"));
-        foreach($eventLists as $ekey => $evalue) {
+        // foreach($eventLists as $ekey => $evalue) {
          
-          $end_date     = strtotime($evalue['end_date']);
-          if($end_date > $current_date): 
-            array_push($nominationArr,$eventLists[$ekey]);
-          endif;  
-        }
+        //   $end_date     = strtotime($evalue['end_date']);
+        //   if($end_date > $current_date): 
+        //     array_push($nominationArr,$eventLists[$ekey]);
+        //   endif;  
+        // }
 
         foreach($categoryNominationLists as $ekey => $evalue) {
           //get category name
@@ -43,15 +41,15 @@ class Home extends BaseController
         $currentDate = strtotime(date('Y-m-d'));
         foreach($nominationLists as $nkey => $nvalue){
             $endDate = strtotime($nvalue['end_date']);
-          if($endDate >= $currentDate)  {
-            if($nvalue['type'] == 'Research Awards'){
-              $currentNominations['research_awards'] = 'yes';
+            if($endDate >= $currentDate)  {
+                if($nvalue['type'] == 'Research Awards'){
+                  $currentNominations['research_awards'] = 'yes';
+                }
+                else
+                {
+                  $currentNominations['science_scholars_awards'] = 'yes';
+                }
             }
-            else
-            {
-              $currentNominations['science_scholars_awards'] = 'yes';
-            }
-         }
         }
 
         $this->data['currentNominations'] = $currentNominations;

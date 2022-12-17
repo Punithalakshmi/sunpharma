@@ -28,6 +28,7 @@ class NomineeModel extends Model{
         if(empty($id)){
             $builder = $this->table('users');
             $builder->select('users.*,category.name as category_name');
+            $builder->join('nominee_details', 'nominee_details.nominee_id = users.id');
             $builder->join('category', 'category.id = users.category');
             $builder->where("users.role",'2');
             return $query = $builder->get();

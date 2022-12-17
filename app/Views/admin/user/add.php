@@ -8,9 +8,10 @@
               </div>
 
               <div class="actionbtns">
-  <a class="btn btn-primary" href="<?=base_url();?>/admin/user"><i class="fa fa-arrow-left"></i> BACK</a>
-                            
-           </div>
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/user">
+                  <i class="fa fa-arrow-left"></i> BACK
+                </a>           
+              </div>
 
 
             <div class="clearfix"></div>
@@ -116,7 +117,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required" style="color:red;">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="birthday" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
+                          <input id="single_cal3" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
@@ -170,8 +171,9 @@
                       <div class="ln_solid"></div>
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <input type="reset" class="btn btn-primary" name="reset" value="RESET">
-                            <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+                            
+                            <a href="<?=base_url();?>/admin/user" class="btn btn-primary">CANCEL</a>
+                            <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                           </div>
                         </div>
                     </form>
