@@ -37,7 +37,7 @@ class EventRegisteration extends BaseController
             if($this->request->getPost())
                $id  = $this->request->getPost('id');
                
-            $this->validation = $this->validate($this->validation_rules($id = ''));
+            $this->validation = $this->validate($this->validation_rules($id));
 
             $this->data['event_categories']  = $this->workshopModel->getEventTypes()->getResultArray();
 
@@ -45,11 +45,11 @@ class EventRegisteration extends BaseController
 
                 if($this->request->getPost()){
                 
-                    $firstname     = $this->request->getPost('firstname');
-                    $lastname      = $this->request->getPost('lastname');
-                    $email        = $this->request->getPost('email');
-                    $phone        = $this->request->getPost('phone');
-                    $address      = $this->request->getPost('address');
+                    $firstname         = $this->request->getPost('firstname');
+                    $lastname          = $this->request->getPost('lastname');
+                    $email             = $this->request->getPost('email');
+                    $phone             = $this->request->getPost('phone');
+                    $address           = $this->request->getPost('address');
                     $registeration_no  = $this->request->getPost('registeration_no');
                   
                     $ins_data = array();
@@ -86,8 +86,8 @@ class EventRegisteration extends BaseController
                         $editdata['email']                   = $edit_data['email'];
                         $editdata['phone']                   = $edit_data['phone'];
                         $editdata['address']                 = $edit_data['address'];
-                        $editdata['event_type']              = $edit_data['event_type'];
-                      //  $editdata['registeration_no']      = (!empty($edit_data['registeration_no']))?$edit_data['registeration_no']:'SPSFN-REG-'.$id;
+                    //    $editdata['event_type']              = $edit_data['event_type'];
+                        $editdata['registeration_no']      = (!empty($edit_data['registeration_no']))?$edit_data['registeration_no']:'SPSFN-REG-'.$id;
                         $editdata['id']                      = $edit_data['id'];
                     }
                     else
@@ -97,9 +97,9 @@ class EventRegisteration extends BaseController
                         $editdata['email']                    = ($this->request->getPost('email'))?$this->request->getPost('email'):'';
                         $editdata['phone']             = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
                         $editdata['address']             = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
-                      //  $editdata['registeration_no']             = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
+                        $editdata['registeration_no']             = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
                         $editdata['id']                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
-                        $editdata['event_type']                   = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
+                     //   $editdata['event_type']                   = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
                     }
                 
 

@@ -21,11 +21,12 @@ class CategoryModel extends Model{
         if(empty($id)){
             $builder = $this->table('category');
             $builder->select('category.*');
-            $builder->orderBy('id', 'DESC');
+         
             $builder->orderBy('name', 'ASC');  
+            $builder->orderBy('id', 'DESC');
             return $query = $builder->get();
        }
-        else 
+       else 
           return $this->getWhere(array('id' => $id)); 
     }
 
@@ -44,6 +45,7 @@ class CategoryModel extends Model{
             $builder->select('category.*');
           //  $builder->join('nominations','nominations.category_id = category.id');
             $builder->where("category.type",$type);
+            $builder->where("category.status",'Active');
             return $query = $builder->get();
     }
 
