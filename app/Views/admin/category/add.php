@@ -26,7 +26,7 @@
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Award Type <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10" for="first-name">Award Type <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="name" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',$editdata['name']);?>">
@@ -44,7 +44,7 @@
                       <div class="clearfix"></div>
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10">Status</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
                           <div id="gender" class="btn-group mt-10" data-toggle="buttons">
                             <p>
@@ -58,7 +58,7 @@
                       <div class="clearfix"></div>
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Type</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10">Type</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>

@@ -191,7 +191,7 @@
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <!-- <input type="reset" class="btn btn-primary" name="reset" value="RESET"> -->
-                            <a href="<?=base_url();?>/admin/workshop" class="btn btn-primary">CANCEL</a> 
+                            <a href="<?=base_url();?>/admin/workshops" class="btn btn-primary">CANCEL</a> 
                             <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
                           </div>
                         </div>
