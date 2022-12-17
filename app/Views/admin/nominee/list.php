@@ -119,7 +119,7 @@
           </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
         <button type="button" class="btn btn-primary" onclick="assignJuryToNominee();";>ASSIGN</button>
       </div>
     </div>

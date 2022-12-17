@@ -599,6 +599,13 @@ p.copyrightadmin {
     }
     .datecol{min-width:85px;}
 
+    #nprogress {
+        display:none;
+    }
+    #nprogress .spinner {
+        display:none;
+    }
+
 @media(max-width:767px){
     .login_content{padding: 30px;min-width: 100px;}
 }

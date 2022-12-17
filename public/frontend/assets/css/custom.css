@@ -377,6 +377,11 @@ form#eventRegistration .form-group .alert-danger {
 .col-md-6.winnercolright{text-align: right;}
 .carousel-control-prev, .carousel-control-next{width: 8%!important;}
 
+.bannercaption .me-2 {
+  margin: 0!important;
+  margin-bottom: 10px!important;
+}
+
 @media(min-width:992px){
   .dropdown-menu[data-bs-popper]{top:auto; left:auto;margin-top: 0;}
 .dropdown:hover .dropdown-menu{
