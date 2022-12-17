@@ -5,8 +5,10 @@
            
                 <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
                     <div class="carousel-inner h-100">
-                    <?php if(is_array($nominations) && count($nominations) > 0): 
-                        foreach($nominations as $nkey => $nvalue): 
+                    <?php 
+                            $current_date = strtotime(date("Y-m-d"));
+                            if(is_array($nominations) && count($nominations) > 0): 
+                                foreach($nominations as $nkey => $nvalue): 
                            
                         ?>
                         <div class="carousel-item <?php if($nkey == 0):?>active<?php endif;?> h-100">
@@ -23,10 +25,12 @@
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>
                                             <?php endif;?>  
                                             <?php if(isset($nvalue['type']) && ($nvalue['type'] == 'event') ):
-                                                  
-                                                ?>
-                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Registraton</a>
+                                                    $end_date = strtotime(date('Y-m-d',strtotime($nvalue['end_date'])));
 
+                                                     if($end_date >= $current_date):
+                                                ?>
+                                                     <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Registration</a>
+                                                     <?php endif;?>   
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/read_more/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Read More</a>
 
                                             <?php endif;?>  

@@ -34,8 +34,10 @@
 
     
       <script>
-      var base_url = '<?=base_url();?>';
-      </script>
+       var base_url = '<?=base_url();?>';
+
+       
+  </script>
   </head>
 
   <body class="nav-md">
@@ -55,6 +57,22 @@
 
     <!-- jQuery -->
     <?= script_tag('/vendors/jquery/dist/jquery.min.js');?>
+    <script type="text/javascript">
+        // $(function() {
+        //   setTimeout(function() {
+        //     $("body").addClass("hidden")
+        //   }, 100);
+        //   setTimeout(function() {
+        //     $(".spinner").addClass("end")
+        //   }, 1800);
+        //   setTimeout(function() {
+        //     $(".global-overlay").addClass("show")
+        //   }, 1900);
+        //   setTimeout(function() {
+        //     $("body").removeClass("hidden")
+        //   }, 2300);
+        // });
+    </script>
     <!-- Bootstrap -->
     <?= script_tag('/vendors/bootstrap/dist/js/bootstrap.min.js');?>
     <?= script_tag('/js/admin/bootstrap-msg.js');?>

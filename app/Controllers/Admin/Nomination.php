@@ -133,14 +133,14 @@ class Nomination extends BaseController
                     }
                
                     if(!empty($id)){
-                        $this->session->setFlashdata('msg', 'Nomination Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Award Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->nominationTypesModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
-                        $this->session->setFlashdata('msg', 'Nomination Added Successfully!');
+                        $this->session->setFlashdata('msg', 'Award Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                         $this->nominationTypesModel->save($ins_data);

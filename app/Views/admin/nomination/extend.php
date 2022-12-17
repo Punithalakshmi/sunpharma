@@ -18,7 +18,7 @@
                     <form id="categoryForm" action="<?php echo base_url();?>/admin/nominee/extend" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                     
                       <?= csrf_field(); ?>
-                      <input type="hidden" name="id" value="<?=$editdata['user_id'];?>"  >
+                      <input type="hidden" name="id" value="<?=(isset($editdata['user_id']) && !empty($editdata['user_id']))?$editdata['user_id']:"";?>"  >
                       
                       <div class="clearfix"></div>
                       <div class="form-group">
@@ -106,11 +106,11 @@
                     
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Extend Date</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-6 col-xs-12">Extend Date</label>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
-                            <input type="text" name="extend_date" id="single_cal1" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('extend_date',$editdata['extend_date']);?>">
+                            <input type="text" name="extend_date" id="single_cal3" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('extend_date',$editdata['extend_date']);?>">
                            </p>
                           </div>
                         </div>
@@ -122,7 +122,7 @@
                       <div class="ln_solid"></div>
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <input type="reset" class="btn btn-primary" name="reset" value="RESET">
+                          <a href="<?=base_url();?>/admin/nominee" class="btn btn-primary">CANCEL</a>
                             <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                           </div>
                         </div>
