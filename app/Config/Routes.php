@@ -84,7 +84,7 @@ $routes->post('uniqueValidation','User::uniqueValidation');
 $routes->get('success','Nomination::Success');
 
 $routes->get('event','EventRegistration::index');
-$routes->get('event/registration','EventRegistration::event');
+$routes->get('event/registration','EventRegistration::event',['filter' =>'checkEventStatus']);
 $routes->post('event/registration','EventRegistration::event');
 
 $routes->get('event/read_more','EventRegistration::read_more');

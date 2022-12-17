@@ -228,6 +228,7 @@ $(function(){
           {
               $('#loader').addClass('hidden');
               if(data.status && data.status == 'success'){
+                $("#juryListsModal").modal('show');
                 $("#juryListsModal #juryListss").html(data.html);
               }
               
