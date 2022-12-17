@@ -17,8 +17,7 @@ class EventRegistration extends BaseController
 
 
         $this->validation = $this->validation->setRules($this->validation_rules(),$this->validationMessages());
-
-      
+        
         $registerationNo = $this->getRegisterationNo();
 
         $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
@@ -144,8 +143,6 @@ class EventRegistration extends BaseController
 
         if($id){
             $eventData = $this->workshopModel->getLists($id)->getRowArray();
-
-            
         }
         else
         {
@@ -168,5 +165,9 @@ class EventRegistration extends BaseController
         return 'SPSFN-REG-'.$ct;
     }
 
+    function close()
+    {
+        return  render('frontend/event_close',$this->data);
+    }
     
 }

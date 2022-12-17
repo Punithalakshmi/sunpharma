@@ -5,7 +5,6 @@ if ( ! function_exists('captchaVerification'))
     function captchaVerification($recaptchaResponse = '',$userIp='')
     {
 
- 
             $secret='6Ldh61ojAAAAAFlBHQlMVa6jHJFxL2s1OctSrDIN';
             
             $credential = array(

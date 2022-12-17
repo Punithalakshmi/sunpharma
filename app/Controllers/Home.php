@@ -13,16 +13,18 @@ class Home extends BaseController
      
         $eventLists = $this->workshopModel->getActiveEvents()->getResultArray();
 
+      //  print_r($eventLists); die;
+
         $nominationArr = array();
         
         $current_date = strtotime(date("Y-m-d"));
-        // foreach($eventLists as $ekey => $evalue) {
+         foreach($eventLists as $ekey => $evalue) {
          
-        //   $end_date     = strtotime($evalue['end_date']);
-        //   if($end_date > $current_date): 
-        //     array_push($nominationArr,$eventLists[$ekey]);
-        //   endif;  
-        // }
+           //$end_date     = strtotime($evalue['end_date']);
+          // if($end_date > $current_date): 
+            array_push($nominationArr,$eventLists[$ekey]);
+          // endif;  
+       }
 
         foreach($categoryNominationLists as $ekey => $evalue) {
           //get category name
