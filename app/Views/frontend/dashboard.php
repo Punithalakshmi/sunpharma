@@ -29,7 +29,7 @@
 
                                                      if($end_date >= $current_date):
                                                 ?>
-                                                     <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration" style="background: #F7941E;border-color: #F7941E;">Registration</a>
+                                                     <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Registration</a>
                                                      <?php endif;?>   
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/read_more/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Read More</a>
 
