@@ -17,8 +17,7 @@ class EventRegistration extends BaseController
 
 
         $this->validation = $this->validation->setRules($this->validation_rules(),$this->validationMessages());
-
-      
+        
         $registerationNo = $this->getRegisterationNo();
 
         $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();

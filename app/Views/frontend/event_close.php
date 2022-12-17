@@ -9,7 +9,7 @@
                 <div class="col-md-12 text-center successseccont">
                     
                    <div class="successsec badge badge-success"> <p>
-                        Event closed.
+                         Registrations are closed for this event !
                     </p></div>
                     
                 </div>

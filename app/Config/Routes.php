@@ -84,7 +84,8 @@ $routes->post('uniqueValidation','User::uniqueValidation');
 $routes->get('success','Nomination::Success');
 
 $routes->get('event','EventRegistration::index');
-$routes->get('event/registration','EventRegistration::event',['filter' =>'check_event']);
+$routes->get('event/registration','EventRegistration::event');
+$routes->get('event/registration/(:any)','EventRegistration::event/$1',['filter' =>'check_event']);
 $routes->post('event/registration','EventRegistration::event');
 
 $routes->get('event/close','EventRegistration::close');
