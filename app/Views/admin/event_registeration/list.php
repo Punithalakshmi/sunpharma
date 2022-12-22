@@ -35,6 +35,7 @@
                           <th>Email</th>
                           <th>Phone</th>
                           <th>Registration No</th>
+                          <th>Participation Mode</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -49,6 +50,7 @@
                           <td><?=$user['email'];?></td>
                           <td><?=(isset($user['phone']) && ($user['phone']!='2147483647'))?$user['phone']:"-";?></td>
                           <td><?=$user['registeration_no'];?></td>
+                          <td><?=$user['mode'];?></td>
                           <td>
                             <a href="<?=base_url().'/admin/eventregisteration/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
                             <a onclick="userDelete('registration','<?=$user['id'];?>','/admin/eventregisteration/delete')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>

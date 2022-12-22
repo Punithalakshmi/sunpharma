@@ -140,7 +140,7 @@ $.fn.circleType = function(options) {
 
         if (document.readyState !== "complete") {
             elem.style.visibility = 'hidden';
-            $(window).load(function () {
+            $(window).on('load',function () {
                 elem.style.visibility = 'visible';
                 layout();
             });

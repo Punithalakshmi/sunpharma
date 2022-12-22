@@ -112,7 +112,7 @@
                           <textarea name="address" oninput="auto_grow(this)" style="height: 50px; width:310px;"><?=$editdata['address'];?></textarea>
                         </div>
                       </div>
-					  <div class="clearfix"></div>
+					          <div class="clearfix"></div>
                       
                       <div class="form-group mb-3">
                       <?php if(isset($validation) && $validation->getError('address')) {?>
@@ -122,7 +122,15 @@
                       <?php }?>
                       </div>
 
-                     
+                      <div class="form-group mb-3">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Participation Mode 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="radio" name="participation_mode" class="flat" value="Online" <?php echo set_radio('participation_mode','Online',(isset($editdata['participation_mode']) && ($editdata['participation_mode']=='Online'))?'checked':'');?> > Online
+                        <input type="radio" name="participation_mode" class="flat" value="Offline" <?php echo set_radio('participation_mode','Offline',(isset($editdata['participation_mode']) && ($editdata['participation_mode']=='Offline'))?'checked':'');?> > Offline
+                        </div>
+                      </div>
+					          
 <!-- 
                       <div class="clearfix"></div>
                       <div class="form-group mb-3">

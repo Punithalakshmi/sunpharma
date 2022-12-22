@@ -3,6 +3,7 @@ const progress = (value) => {
     document.getElementsByClassName('progress-bar')[0].style.width = `${value}%`;
  }
  
+ 
 
  function ongoingCourse(e){
     var courseVal = $(e).val();
@@ -363,7 +364,7 @@ form.children("div").steps({
                 dataType: 'json',
                 success: function (form_res) 
                 {
-                    token_res = form_res;
+                        token_res = form_res;
                         // Get the selected file
                         var files                   = $('#nominator_photo')[0].files;
                         var justification_letter    = $('#justification_letter')[0].files;

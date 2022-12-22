@@ -56,23 +56,13 @@
     </div>
 
     <!-- jQuery -->
-    <?= script_tag('/vendors/jquery/dist/jquery.min.js');?>
-    <script type="text/javascript">
-        // $(function() {
-        //   setTimeout(function() {
-        //     $("body").addClass("hidden")
-        //   }, 100);
-        //   setTimeout(function() {
-        //     $(".spinner").addClass("end")
-        //   }, 1800);
-        //   setTimeout(function() {
-        //     $(".global-overlay").addClass("show")
-        //   }, 1900);
-        //   setTimeout(function() {
-        //     $("body").removeClass("hidden")
-        //   }, 2300);
-        // });
-    </script>
+     <?=script_tag('/vendors/jquery/dist/jquery.min.js');?>
+     <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+     <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jQuery-migrate-3.6.js"></script>  -->
+     <? //script_tag('/js/admin/jQuery-migrate-3.6.js');?>
+    
     <!-- Bootstrap -->
     <?= script_tag('/vendors/bootstrap/dist/js/bootstrap.min.js');?>
     <?= script_tag('/js/admin/bootstrap-msg.js');?>

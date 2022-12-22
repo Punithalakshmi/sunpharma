@@ -6,13 +6,10 @@ class EventRegistration extends BaseController
 {
     public function index()
     {
-        
-
-        return  render('frontend/event',$this->data);
-            
+        return  render('frontend/event',$this->data);   
     }
 
-    public function event()
+    public function event($event_id = '')
     {
 
 
@@ -33,6 +30,7 @@ class EventRegistration extends BaseController
                 $address                     = $this->request->getPost('address');
                 $registerationNo             = $this->request->getPost('registeration_no');
                 $event_type                  = $this->request->getPost('event_type');
+                $mode                        = $this->request->getPost('participation_mode');
                
                 $registerationNo = $this->getRegisterationNo();
 
@@ -44,6 +42,8 @@ class EventRegistration extends BaseController
                 $ins_data['phone']         = $phone;
                 $ins_data['registeration_no'] = $registerationNo; 
                 $ins_data['event_type']       = $event_type;
+                $ins_data['mode']       = $mode;
+                $ins_data['event_id']       = $event_id;
                 
             
                 $this->session->setFlashdata('msg', 'Registeration Submitted Successfully!');
@@ -67,6 +67,7 @@ class EventRegistration extends BaseController
             $editdata['phone']            = ($this->request->getPost('phone'))?$this->request->getPost('phone'):'';
             $editdata['address']          = ($this->request->getPost('address'))?$this->request->getPost('address'):'';
             $editdata['registeration_no'] = ($this->request->getPost('registeration_no'))?$this->request->getPost('registeration_no'):$registerationNo;
+            $editdata['participation_mode'] = ($this->request->getPost('participation_mode'))?$this->request->getPost('participation_mode'):'';
           //  $editdata['event_type']       = ($this->request->getPost('event_type'))?$this->request->getPost('event_type'):'';
             
             if($this->request->getPost())

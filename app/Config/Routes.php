@@ -96,6 +96,12 @@ $routes->get('event/read_more/(:any)','EventRegistration::read_more/$1');
 
 $routes->get('csrf_token','Nomination::get_new_csrf_token');
 
+$routes->get('bulkEmails','User::bulkEmails');
+
+$routes->get('bulkEmailSuccess','User::bulkEmailSuccess');
+
+$routes->get('attendMode/(:any)/(:any)','User::attendMode/$1/$2');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index",['filter' =>'auth']);

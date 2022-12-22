@@ -15,7 +15,8 @@ class RegisterationModel extends Model{
         'updated_id',
         'updated_date',
         'address',
-        'registeration_no'
+        'registeration_no',
+        'is_mail_sent'
     ];
 
    
@@ -36,5 +37,9 @@ class RegisterationModel extends Model{
     }
    
 
+    public function getEventUserLists()
+    {
+        return $this->getWhere(array('is_mail_sent' => 0)); 
+    }
     
 }

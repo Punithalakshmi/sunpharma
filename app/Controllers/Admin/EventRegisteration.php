@@ -133,21 +133,27 @@ class EventRegisteration extends BaseController
     {
       
         if (strtolower($this->request->getMethod()) == "post") {  
-
-        
           $this->registerationModel->delete(array("id" => $id));
-         
-          if($this->request->isAJAX()){
-                
+          if($this->request->isAJAX()){         
             return $this->response->setJSON([
                 'status'            => 'success',
                 'message'           => 'Registration deleted Successfully'
             ]); 
          }
-
-        
-
       }
        
+    }
+
+    public function bulkEmails()
+    {
+        $message = '';
+        $registeredUsersLists = $this->registerationModel->getRegisteredUsers();
+
+        if(is_array($registeredUsersLists) && count($registeredUsersLists) > 0):
+            foreach($registeredUsersLists as $rkey=>$rvalue):
+                $message .= 'Your are attending the session, Whether <a class="btn btn-primary" href="'.base_url().'/event/attendMode/1">On-site</a> OR <a class="btn btn-primary" href="'.base_url().'/event/attendMode/2">Online</a>';
+                sendMail();
+            endforeach;
+        endif;
     }
 }
