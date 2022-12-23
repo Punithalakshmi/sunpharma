@@ -79,7 +79,7 @@
                                         placeholder="Date of Birth">
 
                                     <div class="hintcont">
-                                        <small>(Age should be less than 30 years as on August 01, 2022)</small>
+                                        <small></small>
                                     </div>
                                 </div>
                             </div>

@@ -11,6 +11,8 @@
     <title>SPSFN</title>
     <!-- Bootstrap -->
      <?=link_tag('/vendors/bootstrap/dist/css/bootstrap.min.css');?>
+     <!-- <link href="bootstrap.min.css" > -->
+     <?=link_tag('/css/admin/bootstrap.min.css');?>
     <!-- Font Awesome -->
     <?=link_tag('/vendors/font-awesome/css/font-awesome.min.css');?>
     <!-- NProgress -->
@@ -57,6 +59,8 @@
 
     <!-- jQuery -->
      <?=script_tag('/vendors/jquery/dist/jquery.min.js');?>
+     <!-- <script src=”https://code.jquery.com/jquery-3.5.1.js”></script> -->
+
      <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
      <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <!-- <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script> -->
@@ -64,7 +68,9 @@
      <? //script_tag('/js/admin/jQuery-migrate-3.6.js');?>
     
     <!-- Bootstrap -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>>
     <?= script_tag('/vendors/bootstrap/dist/js/bootstrap.min.js');?>
+   
     <?= script_tag('/js/admin/bootstrap-msg.js');?>
     <?= script_tag('/js/admin/jquery.confirmModal.min.js');?>
     <!-- FastClick -->
@@ -76,6 +82,7 @@
     <!-- Datatables -->
     <?= script_tag('/vendors/datatables.net/js/jquery.dataTables.min.js');?>
    <?= script_tag('/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js');?>
+   
    <?= script_tag('/vendors/datatables.net-buttons/js/dataTables.buttons.min.js');?>
    <?= script_tag('/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js');?>
    <?= script_tag('/vendors/datatables.net-buttons/js/buttons.flash.min.js');?>
