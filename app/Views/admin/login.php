@@ -11,7 +11,7 @@
             <input type="text" class="form-control" name="username" placeholder="Username" />
         </div>
         <div class="clearfix"></div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
         <?php if(isset($validation) && $validation->getError('username')) {?>
         <div class='alert alert-danger mt-6'>
             <?= $error = $validation->getError('username'); ?>
@@ -23,7 +23,7 @@
             <input type="password" class="form-control" name="password" placeholder="Password"  />
         </div>
         <div class="clearfix"></div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
         <?php if(isset($validation) && $validation->getError('password')) {?>
         <div class='alert alert-danger mt-6'>
             <?= $error = $validation->getError('password'); ?>
@@ -32,7 +32,7 @@
         </div>
         <div class="clearfix"></div>
         <?php if(session()->getFlashdata('msg')):?>
-                <h6 class="text-center" style="color:red;">  
+                <h6 class="text-center errorbox">  
                 <?=session()->getFlashdata('msg') ?>
                 </h6>  
         <?php endif;?>
