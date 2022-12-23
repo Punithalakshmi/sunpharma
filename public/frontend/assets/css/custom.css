@@ -46,7 +46,7 @@
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
-  --bs-body-font-size: 1rem;
+  --bs-body-font-size: 1.1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.6;
   --bs-body-color: #2d2d2d;
@@ -227,11 +227,11 @@ nav#mainNav {
 }
 
 .olddirectory h5 {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .olddirectory p.text-muted {
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .winnerinfo {
@@ -239,10 +239,24 @@ nav#mainNav {
 }
 
 .winnerimg {
-  max-height: 320px;
+  max-height: 330px;
   object-position: top;
 }
-
+.MultiCarousel-inner p.card-text {
+    font-size: 17px!important;
+}
+.fs-6 {
+    font-size: 1.1rem !important;
+}
+footer ul li a {
+    font-size: 1rem!important;
+}
+footer .text-muted p {
+    font-size: 1rem!important;
+}
+.smtxt{
+    font-size: 17px!important;
+}
 #button{
   display:block;
   margin:20px auto;
@@ -376,6 +390,9 @@ form#eventRegistration .form-group .alert-danger {
 }
 .col-md-6.winnercolright{text-align: right;}
 .carousel-control-prev, .carousel-control-next{width: 8%!important;}
+.bannercaption .btn {
+    padding: 10px 25px;
+}
 
 @media(min-width:992px){
   .dropdown-menu[data-bs-popper]{top:auto; left:auto;margin-top: 0;}
@@ -387,9 +404,6 @@ form#eventRegistration .form-group .alert-danger {
 
 
 @media(max-width:992px){
-  footer h3 {
-  text-align: left;
-}
   li.nav-item {
     width: 100%;
     border: 1px solid #dddddd6e!important;
@@ -414,12 +428,4 @@ form#eventRegistration .form-group{display: block;}
 
 @media(min-width:768px){
   .winnerimg{width: auto!important;}
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0; 
 }
