@@ -5,11 +5,12 @@
            
                 <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
                     <div class="carousel-inner h-100">
-                    <?php 
+                    <?php  //echo "<pre>";
                             $current_date = strtotime(date("Y-m-d"));
                             if(is_array($nominations) && count($nominations) > 0): 
                                 foreach($nominations as $nkey => $nvalue): 
-                           
+                         
+                                 $end_date = strtotime(date('Y-m-d',strtotime($nvalue['end_date'])));
                         ?>
                         <div class="carousel-item <?php if($nkey == 0):?>active<?php endif;?> h-100">
                             <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/uploads/events/<?=$nvalue['banner_image'];?>" alt="Slide Image" style="z-index: -1;">
@@ -20,12 +21,13 @@
                                             <h1 class="text-uppercase fw-bold" style="border-style: none;"><?=(isset($nvalue['title']))?$nvalue['title']:"";?></h1>
                                             <p class="my-3"><?=(isset($nvalue['subject']))?$nvalue['subject']:"";?></p>
                                             <?php if(isset($nvalue['category_type']) && ($nvalue['category_type'] == 'awards' || $nvalue['category_type'] == 'awards') ):
-                                                   $ntype = ($nvalue['category_type'] == 'Science Scholar Awards')?'spsfn':'ssan';
+                                                   $ntype = ($nvalue['main_category_id'] == 2)?'spsfn':'ssan';
+                                                   if($end_date >= $current_date):
                                                 ?>
-                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>
-                                            <?php endif;?>  
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>/<?=$nvalue['award_id']?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>
+                                            <?php endif; endif;?>  
                                             <?php if(isset($nvalue['type']) && ($nvalue['type'] == 'event') ):
-                                                    $end_date = strtotime(date('Y-m-d',strtotime($nvalue['end_date'])));
+                                                    
 
                                                      if($end_date >= $current_date):
                                                 ?>

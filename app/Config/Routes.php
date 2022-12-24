@@ -85,7 +85,7 @@ $routes->get('success','Nomination::Success');
 
 $routes->get('event','EventRegistration::index');
 $routes->get('event/registration','EventRegistration::event');
-$routes->get('event/registration/(:any)','EventRegistration::event/$1',['filter' =>'check_event']);
+$routes->get('event/registration/(:any)','EventRegistration::event/$1');
 $routes->post('event/registration','EventRegistration::event');
 
 $routes->get('event/close','EventRegistration::close');
@@ -101,6 +101,8 @@ $routes->get('bulkEmails','User::bulkEmails');
 $routes->get('bulkEmailSuccess','User::bulkEmailSuccess');
 
 $routes->get('attendMode/(:any)/(:any)','User::attendMode/$1/$2');
+
+$routes->get('sendMailToRegistrationUsers','User::sendMailToRegistrationUsers');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 

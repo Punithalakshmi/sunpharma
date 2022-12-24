@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 class Nomination extends BaseController
 {
-    public function index()
+    public function index($award_id = '')
     {
    
             //get categories lists
@@ -52,6 +52,8 @@ class Nomination extends BaseController
                             $ongoing_course              = $this->request->getPost('ongoing_course');
                             $research_project            = $this->request->getPost('research_project');
 
+                            //get award data
+                            $awardData = getAwardData($award_id);
                             
                             $ins_data = array();
                             $ins_data['firstname']  = $firstname;
@@ -62,10 +64,13 @@ class Nomination extends BaseController
                             $ins_data['status']     = 'Disapproved';
                             $ins_data['role']       = 2;
                             $ins_data['category']   = $category;
+                            $ins_data['extend_date']= $awardData['end_date'];
+                            $ins_data['award_id']   = $award_id;
+                            $ins_data['active']     = '0';
 
                             $nominee_details_data = array();
                             $nominee_details_data['category_id']        = $category;
-                            $nominee_details_data['citizenship']        = $citizenship ;
+                            $nominee_details_data['citizenship']        = $citizenship;
                             $nominee_details_data['nomination_type']    = 'spsfn';
                             $nominee_details_data['residence_address']  = $residence_address;
                             $nominee_details_data['nominator_name']     = $nominator_name;
@@ -147,7 +152,7 @@ class Nomination extends BaseController
      }
 
    
-    public function ssan()
+    public function ssan($award_id = '')
     {
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Research Awards');
@@ -193,6 +198,9 @@ class Nomination extends BaseController
                                 $nominator_email             = $this->request->getPost('nominator_email');
                                 $nominator_office_address    = $this->request->getPost('nominator_office_address');
 
+                                //get award data
+                                $awardData = getAwardData($award_id);
+
                                 $ins_data = array();
                                 $ins_data['firstname']  = $firstname;
                                 $ins_data['email']      = $email;
@@ -203,6 +211,9 @@ class Nomination extends BaseController
                                 $ins_data['role']       = 2;
                                 $ins_data['category']   = $category;
                                 $ins_data['active']     = '0';
+                                $ins_data['award_id']   = $award_id;
+                                $ins_data['extend_date']= $awardData['end_date'];
+                                
 
                                 $nominee_details_data = array();
                                 $nominee_details_data['category_id']        = $category;
