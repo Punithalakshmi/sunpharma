@@ -9,10 +9,13 @@
     <?=csrf_meta();?>
     
     <title>SPSFN</title>
-    <!-- Bootstrap -->
+    
+    <!-- Bootstrap new -->
      <?=link_tag('/vendors/bootstrap/dist/css/bootstrap.min.css');?>
      <!-- <link href="bootstrap.min.css" > -->
-     <?=link_tag('/css/admin/bootstrap.min.css');?>
+
+     <!-- old -->
+    
     <!-- Font Awesome -->
     <?=link_tag('/vendors/font-awesome/css/font-awesome.min.css');?>
     <!-- NProgress -->
@@ -68,7 +71,7 @@
      <? //script_tag('/js/admin/jQuery-migrate-3.6.js');?>
     
     <!-- Bootstrap -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
     <?= script_tag('/vendors/bootstrap/dist/js/bootstrap.min.js');?>
    
     <?= script_tag('/js/admin/bootstrap-msg.js');?>
