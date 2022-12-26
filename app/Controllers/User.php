@@ -188,11 +188,16 @@ class User extends BaseController
 
             $validation_rules = array();
             $validation_rules = array(
-                                      "username" => array("label" => "Username",'rules' => 'required'),
+                                      "username" => array("label" => "Username",'rules' => 'required|callback_user_check'),
                                       "password" => array("label" => "Password",'rules' => 'trim|required')
             ); 
             return $validation_rules;
       
+    }
+
+    public function user_check()
+    {
+        echo "testing"; die;
     }
 
     public function bulkEmails()
