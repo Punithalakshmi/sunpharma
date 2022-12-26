@@ -146,14 +146,61 @@ class EventRegisteration extends BaseController
 
     public function bulkEmails()
     {
-        $message = '';
-        $registeredUsersLists = $this->registerationModel->getRegisteredUsers();
+        
+    }
 
-        if(is_array($registeredUsersLists) && count($registeredUsersLists) > 0):
-            foreach($registeredUsersLists as $rkey=>$rvalue):
-                $message .= 'Your are attending the session, Whether <a class="btn btn-primary" href="'.base_url().'/event/attendMode/1">On-site</a> OR <a class="btn btn-primary" href="'.base_url().'/event/attendMode/2">Online</a>';
-                sendMail();
-            endforeach;
-        endif;
+    public function export()
+    {
+
+        if (strtolower($this->request->getMethod()) == "post") {  
+
+   
+                    
+                    $fileName = 'Registration_Lists_'.date('d-m-Y').'.xlsx';  
+
+                    $awardsLists = $this->registerationModel->getRegisteredUsers($category,$year)->getResultArray();
+
+
+                    $spreadsheet = new Spreadsheet();
+            
+                    $sheet = $spreadsheet->getActiveSheet();
+                    $sheet->setCellValue('A1', 'Registration Date');
+                    $sheet->setCellValue('B1', 'Registration No');
+                    $sheet->setCellValue('C1', 'Firstname');
+                    $sheet->setCellValue('D1', 'Lastname');
+                    $sheet->setCellValue('E1', 'Email');
+                    $sheet->setCellValue('F1', 'Phone Number');
+                    $sheet->setCellValue('G1', 'Address');
+                    $sheet->setCellValue('H1', 'Participation Mode');
+
+
+                    $sheet->getStyle('A1:H1')->getFont()->setBold(true);
+                    $sheet->getStyle('A1:H1')->getFont()->setSize(16);
+
+                    $rows = 2;
+            
+                    foreach ($awardsLists as $val){
+                        $sheet->setCellValue('A' . $rows, $val['category_name']);
+                        $sheet->setCellValue('B' . $rows, $val['firstname']);
+                        $sheet->setCellValue('C' . $rows, date("Y")."/".$val['id']);
+                        $sheet->setCellValue('D' . $rows, $val['dob']);
+                        $sheet->setCellValue('E' . $rows, $val['average_rating']);
+                        $rows++;  
+                    } 
+                    $writer = new Xlsx($spreadsheet);
+                    $writer->save("uploads/".$fileName);
+                    $fileDownload = base_url().'/uploads/'.$fileName;
+                    header("Content-Type: application/vnd.ms-excel");
+
+                    if($this->request->isAJAX()) {
+                        return $this->response->setJSON([
+                            'status'            => 'success',
+                            'filename'              => $fileDownload
+                        ]); 
+                        exit;
+                    }
+                
+            }
+        
     }
 }
