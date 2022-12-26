@@ -25,7 +25,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'auth'          => \App\Filters\Auth::class,
         'check_event'  => \App\Filters\checkEventStatus::class,
-
+        'check_date'   => \App\Filters\checkNominationDate::class,
     ];
 
     /**

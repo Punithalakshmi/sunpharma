@@ -5,13 +5,20 @@
               <div class="title_left">
                 <h3>Event Registration <small></small></h3>
               </div>
+              
             </div>
            
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/eventregisteration/add" class="btn btn-primary btn-xs">
                    <i class="fa fa-plus"></i>Add/Modify Registration
                 </a>
+
+                <a href="#" onclick="exportRegistrations();" class="btn btn-primary mb-2">
+                   <i class="fa fa-download"></i> Export
+                </a>
            </div>
+
+          
                 
            </div>
             <div class="clearfix"></div>

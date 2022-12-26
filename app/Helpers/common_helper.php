@@ -95,3 +95,16 @@ if ( ! function_exists('getAwardsArr'))
         return $awards;
     }
 }   
+
+if ( ! function_exists('getAwardData'))
+{
+ function getAwardData($award_id = '')
+    {
+
+        $nominationModel = model('App\Models\NominationTypesModel');
+
+        $awardData = $nominationModel->getListsOfNominations($award_id)->getRowArray();
+
+        return $awardData;
+    }
+} 

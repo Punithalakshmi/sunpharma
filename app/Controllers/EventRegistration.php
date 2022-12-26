@@ -132,8 +132,6 @@ class EventRegistration extends BaseController
         $message .= "<br/>";
         $message .= "Sunpharma Science Foundation Team";
        
-        
-		
 		sendMail($email,$subject, $message);
 
 

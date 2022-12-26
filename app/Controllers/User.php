@@ -198,7 +198,7 @@ class User extends BaseController
     public function bulkEmails()
     {
         $message = '';
-        $registeredUsersLists = $this->registerationModel->getEventUserLists();
+        $registeredUsersLists = array();
 
         if(is_array($registeredUsersLists) && count($registeredUsersLists) > 0):
             foreach($registeredUsersLists as $rkey=>$rvalue):
@@ -226,5 +226,6 @@ class User extends BaseController
         return view('/frontend/bulkEmailSuccess');
     }
 
+   
 
 }    

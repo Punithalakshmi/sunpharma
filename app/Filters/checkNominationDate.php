@@ -4,26 +4,26 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
  
-class checkEventStatus implements FilterInterface
+class checkNominationDate implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
         $current_date = strtotime(date("Y-m-d 23:59:59"));
 
-        $uri  = current_url(true);
+        $uri     = current_url(true);
 
-        $eventID = $uri->getSegment(3); 
+        $awardID = $uri->getSegment(2);  
 
-        $eventModel    = model('App\Models\WorkshopModel');
+        $nominationModel    = model('App\Models\NominationTypesModel');
 
-        $eventData     = $eventModel->getLists($eventID)->getRowArray();
+        $awardData     = $nominationModel->getListsOfNominations($awardID)->getRowArray();
 
-        if(is_array($eventData)) {
-                $eventEndDate  = strtotime(date("Y-m-d",strtotime($eventData['end_date'])));
+        if(is_array($awardData)) {
+           $nominationEndDate  = strtotime(date("Y-m-d",strtotime($awardData['end_date'])));
       
-        if($eventEndDate < $current_date){
+        if($nominationEndDate < $current_date){
             // then redirct to login page
-            return redirect()->to('event/close'); 
+            return redirect()->to('nomination/close'); 
         }
       }
     }

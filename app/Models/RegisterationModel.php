@@ -16,7 +16,8 @@ class RegisterationModel extends Model{
         'updated_date',
         'address',
         'registeration_no',
-        'is_mail_sent'
+        'is_mail_sent',
+        'mode'
     ];
 
    
