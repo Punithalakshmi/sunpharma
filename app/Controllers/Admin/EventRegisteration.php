@@ -3,6 +3,9 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 class EventRegisteration extends BaseController
 {
@@ -155,12 +158,9 @@ class EventRegisteration extends BaseController
         if (strtolower($this->request->getMethod()) == "post") {  
 
    
-                    
                     $fileName = 'Registration_Lists_'.date('d-m-Y').'.xlsx';  
 
-                    $awardsLists = $this->registerationModel->getRegisteredUsers($category,$year)->getResultArray();
-
-
+                    $awardsLists = $this->registerationModel->getRegisteredUsers();
                     $spreadsheet = new Spreadsheet();
             
                     $sheet = $spreadsheet->getActiveSheet();
@@ -180,11 +180,14 @@ class EventRegisteration extends BaseController
                     $rows = 2;
             
                     foreach ($awardsLists as $val){
-                        $sheet->setCellValue('A' . $rows, $val['category_name']);
-                        $sheet->setCellValue('B' . $rows, $val['firstname']);
-                        $sheet->setCellValue('C' . $rows, date("Y")."/".$val['id']);
-                        $sheet->setCellValue('D' . $rows, $val['dob']);
-                        $sheet->setCellValue('E' . $rows, $val['average_rating']);
+                        $sheet->setCellValue('A' . $rows, $val['created_date']);
+                        $sheet->setCellValue('B' . $rows, $val['registeration_no']);
+                        $sheet->setCellValue('C' . $rows, $val['firstname']);
+                        $sheet->setCellValue('D' . $rows, $val['lastname']);
+                        $sheet->setCellValue('E' . $rows, $val['email']);
+                        $sheet->setCellValue('F' . $rows, $val['phone']);
+                        $sheet->setCellValue('G' . $rows, $val['address']);
+                        $sheet->setCellValue('H' . $rows, $val['mode']);
                         $rows++;  
                     } 
                     $writer = new Xlsx($spreadsheet);
@@ -195,7 +198,8 @@ class EventRegisteration extends BaseController
                     if($this->request->isAJAX()) {
                         return $this->response->setJSON([
                             'status'            => 'success',
-                            'filename'              => $fileDownload
+                            'filename'              => $fileDownload,
+                            'message' => 'Exported Successfully'
                         ]); 
                         exit;
                     }

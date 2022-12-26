@@ -198,8 +198,7 @@ $(function(){
       },
       error: function (jqXHR, textStatus, errorThrown)
       {
-         console.log(jqXHR);
-         console.log(textStatus);
+         
          $('#loader').addClass('hidden');
          if(textStatus && textStatus == 'error'){
            if(jqXHR.responseJSON.message){
@@ -252,8 +251,6 @@ $(function(){
 function userDelete(type = '',id='',url = '',e)
 {
    
-
-
   $('#loader').removeClass('block');
     var msg = 'Are you sure you want to delete this '+type+'?';
 
@@ -351,6 +348,57 @@ function juryFinalSubmit()
                     setTimeout(function(){
                     return true
                     },2500);
+                }  
+                else
+                {
+                  return false;
+                }
+             }
+          );    
+}
+
+
+
+function exportRegistrations()
+{
+   
+  $('#loader').removeClass('block');
+    var msg = 'Are you sure you want to export all registration user lists?';
+    var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
+
+    console.log('csrfName',csrfHash);
+    $.confirmModal('<h2>'+msg+'</h2>', {
+      messageHeader: '',
+      backgroundBlur: ['.container'],
+      modalVerticalCenter: true
+    },function(el) {
+        if(el){
+                $('#loader').removeClass('hidden');
+                  $.ajax({
+                      url : base_url+'/admin/eventregisteration/export',
+                      type: "POST",
+                      data : {'app_csrf':csrfHash},
+                      dataType:'json',
+                      success: function(data, textStatus, jqXHR)
+                      {
+                        $('#loader').addClass('hidden');
+                            if(data.status && data.status == 'success'){
+                              if(data.message)
+                                successMessageAlert(data.message);
+
+                                window.location.href = data.filename;
+                            }  
+                      },
+                      error: function (jqXHR, textStatus, errorThrown)
+                      {
+                        $('#loader').addClass('hidden');
+                        if(textStatus && textStatus == 'error'){
+                          if(jqXHR.responseJSON.message){
+                            errorMessageAlert(jqXHR.responseJSON.message);
+                          }
+                        }
+                      }
+                  });
                 }  
                 else
                 {

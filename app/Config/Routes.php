@@ -186,6 +186,9 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nominee/extend/(:any)','Nominee::extend/$1',['filter' =>'auth']);
     $routes->post('nominee/extend','Nominee::extend',['filter' =>'auth']);
 
+    
+    $routes->post('eventregisteration/export','EventRegisteration::export',['filter' =>'auth']);
+
 });
 
 /*
