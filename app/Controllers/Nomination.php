@@ -780,6 +780,9 @@ class Nomination extends BaseController
        // }    
     }
 
-
+    public function close()
+    {
+        return  render('frontend/nomination_close',$this->data);
+    }
     
 }

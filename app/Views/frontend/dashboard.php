@@ -6,7 +6,7 @@
                 <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
                     <div class="carousel-inner h-100">
                     <?php  //echo "<pre>";
-                            $current_date = strtotime(date("Y-m-d"));
+                            $current_date = strtotime(date("Y-m-d 23:59:59"));
                             if(is_array($nominations) && count($nominations) > 0): 
                                 foreach($nominations as $nkey => $nvalue): 
                          
