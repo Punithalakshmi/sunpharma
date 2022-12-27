@@ -34,7 +34,7 @@ class Database extends Config
         'DSN'      => '',
         'hostname' => 'localhost',
         'username' => 'root',
-        'password' => 'hU3Q-cUx2_LW3pdc',
+        'password' => '',
         'database' => 'sunpharma',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',

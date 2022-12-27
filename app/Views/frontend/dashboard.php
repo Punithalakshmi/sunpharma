@@ -31,7 +31,7 @@
 
                                                      if($end_date >= $current_date):
                                                 ?>
-                                                     <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Registration</a>
+                                                     <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Register</a>
                                                      <?php endif;?>   
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/read_more/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Read More</a>
 
@@ -209,7 +209,7 @@
         <div class="container-fluid bg-primary-gradient py-5" style="padding: 48px 12px 0;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest winners of Research awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners Of Research Awards</h3>
                 </div>
             </div>
             <section class="pt-4 pt-xl-4">
@@ -223,7 +223,7 @@
                                             <div class="col-md-6 col-lg-8 winnercolleft">
                                                 <div class="text-white winnerinfo">
                                                     <h2 class="fw-bold text-white mb-3">Dr. Kaustuv Sanyal</h2>
-                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Basic Research<br></p>
+                                                    <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Medical Sciences- Basic Research<br></p>
                                                     <p class="mb-4" style="color: var(--bs-btn-border-color);">JC Bose National Fellow<br>
 Professor and Chair<br>
 Molecular Biology and Genetics Unit
@@ -241,7 +241,7 @@ Molecular Biology and Genetics Unit
                                             <div class="col-md-6 col-lg-8 winnercolleft">
                                                 <div class="text-white winnerinfo">
                                                     <h2 class="fw-bold text-white mb-3">Prof Sameer Bakhshi<br></h2>
-                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Medical Sciences- Clinical Research<br></p>
+                                                    <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Medical Sciences- Clinical Research<br></p>
                                                     <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Medical Oncology<br>
 Dr B.R.A. Institute Rotary Cancer Hospital<br>
 All India Institute of Medical Sciences
@@ -259,7 +259,7 @@ All India Institute of Medical Sciences
                                             <div class="col-md-6 col-lg-8 winnercolleft">
                                                 <div class="text-white winnerinfo">
                                                     <h2 class="fw-bold text-white mb-3">Professor T. Govindaraju</h2>
-                                                    <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Pahrmaceutical Sciences<br></p>
+                                                    <p class="mb-4 smtxt" style="color: var(--bs-gray-300);\">Pahrmaceutical Sciences<br></p>
                                                     <p class="mb-4" style="color: var(--bs-btn-border-color);">Bioorganic Chemistry Laboratory<br>   
 New Chesmitry Unit, Jawaharlal Nehru Centre for<br> Advanced Scientific Research (JNCASR)
 <br></p>
@@ -286,7 +286,7 @@ New Chesmitry Unit, Jawaharlal Nehru Centre for<br> Advanced Scientific Research
         <div class="container-fluid">
             <div class="row" style="padding-bottom: 20px;">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners of Scholars Awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners Of Scholar Awards</h3>
                 </div>
             </div>
         </div>
@@ -300,7 +300,7 @@ New Chesmitry Unit, Jawaharlal Nehru Centre for<br> Advanced Scientific Research
                                     <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
                                         <div class="text-white winnerinfo">
                                             <h2 class="fw-bold text-white mb-3">Mr. Arjun B S</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Biomedical Sciences<br></p>
+                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Biomedical Sciences<br></p>
                                             <p class="mb-4" style="color: var(--bs-btn-border-color);">(Ph.D. Scholar)<br>
 Biomedical and Electronic Engineering Systems Laboratory<br>
 Department of Electronic Systems Engineering
@@ -319,7 +319,7 @@ Department of Electronic Systems Engineering
                                     <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
                                         <div class="text-white winnerinfo">
                                             <h2 class="fw-bold text-white mb-3">Mr. Atish Roy Chowdhury</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Biomedical Sciences<br></p>
+                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Biomedical Sciences<br></p>
                                             <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Student<br>
 Department of Microbiology and Cell Biology<br>
 Indian Institute of Science
@@ -338,7 +338,7 @@ Indian Institute of Science
                                     <div class="col-md-6 col-lg-8 winnercolleft">
                                         <div class="text-white winnerinfo">
                                             <h2 class="fw-bold text-white mb-3">Mr. Deepak Kumar Sahel</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Pharmaceutical Sciences <br></p>
+                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Pharmaceutical Sciences <br></p>
                                             <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Research Scholar<br>
 ICMR-Senior Research Fellow (SRF)<br>
 Nanomedicine & Gene Delivery Lab
@@ -356,7 +356,7 @@ Nanomedicine & Gene Delivery Lab
                                     <div class="col-md-6 col-lg-8 winnercolleft">
                                         <div class="text-white winnerinfo">
                                             <h2 class="fw-bold text-white mb-3">Ms. Rachana Rao Battaje</h2>
-                                            <p class="mb-4" style="color: var(--bs-gray-300);font-size: 13px;">Pharmaceutical Sciences<br></p>
+                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Pharmaceutical Sciences<br></p>
                                             <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph. D. Candidate<br>
 Molecular Cell Biology Lab,<br>
 C/O Prof. Dulal Panda

@@ -302,8 +302,7 @@
 										<tbody>
 											<tr>
 												<td class="fluid-img"
-													style="font-size:0pt; line-height:0pt; text-align:left;">
-													<img src="<?php echo base_url();?>/frontend/assets/images/hero.jpg" width="650" height="358" border="0"
+													style="font-size:0pt; line-height:0pt; text-align:left;"><img src="<?php echo base_url();?>/frontend/assets/img/hero.jpg" width="650" height="350" border="0"
 														alt="">
 												</td>
 											</tr>
