@@ -71,7 +71,9 @@
      <? //script_tag('/js/admin/jQuery-migrate-3.6.js');?>
     
     <!-- Bootstrap -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
     <?= script_tag('/vendors/bootstrap/dist/js/bootstrap.min.js');?>
    
     <?= script_tag('/js/admin/bootstrap-msg.js');?>
