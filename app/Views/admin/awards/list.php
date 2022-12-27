@@ -39,11 +39,11 @@
                     </select>
             </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 searchbtn">
                     <button class="btn btn-primary mb-2" name="search" id="search" onclick="getAwardLists()">Search</button>
             </div>
             <div class="col-md-3 actionbtns">
-                <a href="#" onclick="exportResult();" class="btn btn-primary mb-2">
+                <a href="#" onclick="exportResult();" class="btn btn-primary mb-2 downloadbtnres">
                    <i class="fa fa-download"></i> Download Result
                 </a>
            </div>

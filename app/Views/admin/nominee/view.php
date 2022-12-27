@@ -278,7 +278,7 @@
                       <div class="page-title"  style="height: auto; border:0;">
                         <div class="container">
                           <div class="row">
-                              <div class="col-md-8 col-xl-6 text-center mx-auto">
+                              <div class="col-md-8 text-center mx-auto">
                                   <h3 class="fw-bold heading" style="color: #F7941E;">Input your score out of 100 in the rating box !</h3>
                               </div>
                           </div>
@@ -333,7 +333,7 @@
                                 
                                  
                                     <div class="form-group">
-                                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 text-right"><br>
                                         <?php if(isset($editdata['is_rate_submitted']) && ($editdata['is_rate_submitted'] == 0)):?>
                                         <input type="submit" class="btn btn-primary" name="submit" value="Save Draft">
                                         <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
@@ -352,7 +352,7 @@
                 <h3>Ratings</h3>
               </div>
             </div>
-            <div class="row">
+            <div class="row ratingslist">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_content">
@@ -375,7 +375,7 @@
                           <td><?=$rating['firstname'];?></td>
                           <td><?=$rating['rating'];?></td>
                           <td><?=$rating['comments'];?></td>
-                          <td><?=(isset($rating['is_rate_submitted']) && ($rating['is_rate_submitted'] == 1))?'Submitted':'Save Draft';?></td>
+                          <td><br><?=(isset($rating['is_rate_submitted']) && ($rating['is_rate_submitted'] == 1))?'Submitted':'Save Draft';?></td>
                           <td><?=$rating['created_date'];?></td>
                           <!-- <td>
                           <a href="<?//base_url().'/admin/rating/add/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
