@@ -650,7 +650,69 @@ p.copyrightadmin {
     .downloadbtnres {
         margin-top: auto;
     }
+    .top_nav .dropdown-menu li a:hover {color:#f5931e;
+    }
+    
+    .top_nav .dropdown-menu li {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+    }
 
+    
+    table.dataTable thead .sorting:after{opacity: .5;content: "\f062";display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;top: 16px;}
+        table.dataTable thead .sorting_asc:after{content: "\f063";display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;opacity: 1;}
+            th.sorting.sorting_asc {
+                background: #005b85;
+            }
+
+            .toggle a i {
+                font-size: 18px;
+                font-weight: normal;
+                background: #047cb2;
+                padding: 5px;
+                border-radius: 0 5px 5px 0;
+                color: white;
+                box-shadow: 2px 3px 5px #000;
+            }
+
+            a#menu_toggle {
+                margin-left: -15px;
+                z-index: 1;
+                padding-top: 0;
+                position: absolute;
+            }
+            
+            .toggle a:hover i {
+                background: #f7941e;
+            }
+            
+            .nav-sm a#menu_toggle {
+                transform: rotate(180deg);
+            }
+            .nav-sm a#menu_toggle i, .nav-md a#menu_toggle i{padding:19px 5px;}{padding:19px 5px;}
+            
+            
+            #menu_toggle .fa-navicon:before, #menu_toggle .fa-reorder:before, #menu_toggle .fa-bars:before {
+                content: "\f060";
+            }
+            .nav_menu .nav.toggle {
+                padding-top: 0;
+            }
+            .nav-sm a#menu_toggle i {
+                border-radius: 5px 0px 0px 5px;
+                color: white;
+                box-shadow: -1px -4px 5px #000;
+            }
     @media (min-width: 768px){
 .form-horizontal .control-label {
     padding-top: 7px;
@@ -658,7 +720,9 @@ p.copyrightadmin {
     text-align: right;
 }
 }
-
+@media(max-width: 1299px){
+    .container{max-width:100%;}
+}
     @media(min-width: 1300px){
         .container{max-width:1300px;}
     }
