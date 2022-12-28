@@ -1,8 +1,5 @@
 $(document).ready(function(){
-    var table = $('#datatable').DataTable( {
-      fixedHeader: true
-    });
-    
+
     $('#single_cal3').daterangepicker({
         singleDatePicker: true,
         singleClasses: "picker_3"
