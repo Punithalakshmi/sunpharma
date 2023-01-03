@@ -25,7 +25,8 @@ class UserModel extends Model{
         'status',
         'active',
         'is_rejected',
-        'extend_date'
+        'extend_date',
+        'review_status'
     ];
 
     public function Login($username, $password) {

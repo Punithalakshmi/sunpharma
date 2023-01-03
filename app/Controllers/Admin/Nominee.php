@@ -82,22 +82,17 @@ class Nominee extends BaseController
             $subject = 'Nomination Application Status - Sunpharma Science Foundation';
             $login_url = base_url().'/login';
             $message = '';
+            $pass = $this->generatePassword(8);
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
 
-                $pass = $this->generatePassword(8);
-
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
-                $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In';
-                $message .= 'Username: '.strtolower($getUserData['firstname']).'<br /><br />';
-                $message .= 'Password: '.$pass.'<br /><br /><br /><br />'; 
+               
 
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
-                $up_data['password'] = md5($pass);
-                $up_data['username'] = strtolower($getUserData['firstname']);
-                $up_data['original_password'] = $pass;
-                $this->userModel->update(array("id" => $getUserData['id']),$up_data);
+                
+               // $this->userModel->update(array("id" => $getUserData['id']),$up_data);
             }
             else
             {
@@ -105,23 +100,26 @@ class Nominee extends BaseController
                 $up_data['active']  = 0;
                 $up_data['is_rejected'] = 1;
                 $msg = 'Rejected Successfully';
-                $message .= 'Your Application has been rejected';
+                $message = 'Your Application has been rejected. Please use below credentials to login and resubmit the application. <br/><br/>';
             }
+
+            $up_data['password'] = md5($pass);
+            $up_data['username'] = strtolower($getUserData['firstname']);
+            $up_data['original_password'] = $pass;
+
             $this->userModel->update(array("id" => $id),$up_data);
+
+            $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In';
+            $message .= 'Username: '.strtolower($getUserData['firstname']).'<br /><br />';
+            $message .= 'Password: '.$pass.'<br /><br /><br /><br />'; 
+
             $message .= 'Thanks & Regards,<br/>';
             $message .= 'Sunpharma Science Foundation Team';
-           //$email->setMessage($message);
 
-            $header  = '';
-            $header .= "MIME-Version: 1.0\r\n";
-            $header .= "Content-type: text/html\r\n";
-
-            $this->data['content'] = $message;
-            $html = view('email/mail',$this->data,array('debug' => false));
-           // mail($getUserData['email'],$subject,$html,$header);
-            
+            $isMailSent = sendMail($getUserData['email'],$subject,$message);
+           
             $status = '';
-            if(mail($getUserData['email'],$subject,$html,$header)){
+            if($isMailSent){
                 $status = 'success';
                 $message = $msg;
             }
@@ -153,7 +151,6 @@ class Nominee extends BaseController
     public function view($nominee_id = '')
     {
       
-
         $nominee_id = ($this->request->getPost('nominee_id'))?$this->request->getPost('nominee_id'):$nominee_id;
 
         $id = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
@@ -161,7 +158,6 @@ class Nominee extends BaseController
         $getUserData  = $this->userModel->getUserData($nominee_id);
         $this->data['user'] = $getUserData->getRowArray();
 
-   
         //get nominee category
         if(isset($data['user']['category_id'])) {
     //    $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
@@ -169,17 +165,24 @@ class Nominee extends BaseController
         }
     
         $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['id'],$nominee_id)->getRowArray();
-        $this->validation = $this->validate($this->validation_rules());
-
+        
         $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
 
         $this->data['average_rating'] = $average_rating['avg_rating'];
 
         $this->data['ratings'] = $this->ratingModel->getRatingByJury($nominee_id)->getResultArray();
 
-            if($this->validation) {
-
-                if($this->request->getPost()){
+        if (strtolower($this->request->getMethod()) == "post") {  
+                
+            $this->validation->setRules($this->validation_rules());
+            
+               if(!$this->validation->withRequest($this->request)->run()) {
+                   $this->data['validation'] = $this->validation;
+                   $status = 'error';
+                   $message = 'Please check form fields!';
+               }
+               else
+               { 
                   
                     $category = '';
 
@@ -197,35 +200,66 @@ class Nominee extends BaseController
                     $this->session->setFlashdata('msg', 'Rated Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
                     $ins_data['created_id']    =  $this->data['userdata']['id'];
-                    $ratingModel->save($ins_data);
+                    $this->ratingModel->save($ins_data);
                      
 
-                    return redirect()->to('admin/nominee/view/'.$nominee_id)->withInput();
+                    //update nominee status
+                    $up_data = array();
+                    $up_data['review_status'] = ($this->request->getPost('submit') && ($this->request->getPost('submit') == 'Save Draft'))?'Draft Review':'Reviewed';
+                    $this->userModel->update(array('id' => $nominee_id),$up_data);
+                   
+                    // return redirect()->to('admin/nominee/view/'.$nominee_id)->withInput();
+                    $status = 'success';
+                    $message = 'Rated Successfully';
+
+                    if($this->request->isAJAX()){
+                        $html = view('admin/nominee/view',$this->data,array('debug' => false));
+                        return $this->response->setJSON([
+                            'status'            => $status,
+                            'html'              => $html,
+                            'message' => $message
+                        ]); 
+                        die;
+                    }
+                    else
+                    {
+                        return redirect()->to('admin/nominee/view/'.$nominee_id)->withInput();
+                    }
                 }
+            
+            } 
+
+            if(!empty($edit_data) && count($edit_data)){
+                $editdata['rating']    = $edit_data['rating'];
+                $editdata['comment']   = $edit_data['comments'];
+                $editdata['id']        =  $edit_data['id'];
+                $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
+            }
+            
+            else
+            {
+                $editdata['rating']      = ($this->request->getPost('rating'))?$this->request->getPost('rating'):'';
+                $editdata['comment']     = ($this->request->getPost('comment'))?$this->request->getPost('comment'):'';
+                $editdata['id']          = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
+                $editdata['is_rate_submitted'] = '0';
+            }
+
+            
+            $this->data['editdata'] = $editdata;
+            
+            if($this->request->isAJAX()){
+                $html = view('admin/nominee/view',$this->data,array('debug' => false));
+                return $this->response->setJSON([
+                    'status'            => $status,
+                    'html'              => $html,
+                    'message' => $message
+                ]); 
+                die;
             }
             else
-            {  
-
-                if(!empty($edit_data) && count($edit_data)){
-                    $editdata['rating']    = $edit_data['rating'];
-                    $editdata['comment']   = $edit_data['comments'];
-                    $editdata['id']        =  $edit_data['id'];
-                    $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
-                }
-                else
-                {
-                    $editdata['rating']      = ($this->request->getPost('rating'))?$this->request->getPost('rating'):'';
-                    $editdata['comment']     = ($this->request->getPost('comment'))?$this->request->getPost('comment'):'';
-                    $editdata['id']          = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
-                    $editdata['is_rate_submitted'] = '0';
-                }
-            } 
-            
-            if($this->request->getPost())
-               $this->data['validation'] = $this->validator;
-
-            $this->data['editdata'] = $editdata;
-            return  render('admin/nominee/view',$this->data);
+            {
+                return  render('admin/nominee/view',$this->data);        
+            }
                     
     }
 

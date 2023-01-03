@@ -28,6 +28,12 @@ Online Submission Of Nominations">
     <script>
         var base_url = '<?=base_url();?>';
     </script>
+    <?php $uri2 = $current_url->getSegment(2);
+             if($uri2 !==''): ?>
+        <script type="text/javascript">    
+            var uri2     = '<?=$current_url->getSegment(2);?>';
+        </script>
+    <?php endif;?>
     <script src="<?=base_url();?>/frontend/assets/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
   

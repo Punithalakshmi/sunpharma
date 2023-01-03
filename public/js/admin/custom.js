@@ -332,18 +332,48 @@ function errorMessageAlert(msg)
 function juryFinalSubmit()
 {
    
-  $('#loader').removeClass('hidden');
-    var msg = 'This is final review submission as it is not editable after that';
+          $('#loader').removeClass('hidden');
+            var msg = 'This is final review submission as it is not editable after that';
+
+            var csrfHash = $("input[name='app_csrf']").val();
+
+            var formData = $("#ratingForm").serialize();
+
+            console.log('formdata',formData);
     
-    
-  $.confirmModal('<h2>'+msg+'</h2>', {
-    messageHeader: '',
-    backgroundBlur: ['.container'],
-    modalVerticalCenter: true
-  },function(el) {
-        if(el){
-          alert(el.value);
-                $('#loader').addClass('hidden');
+            $.confirmModal('<h2>'+msg+'</h2>', {
+              messageHeader: '',
+              backgroundBlur: ['.container'],
+              modalVerticalCenter: true
+            },function(el) {
+                if(el){
+                  ///admin/nominee/view
+                        $('#loader').addClass('hidden');
+                        $.ajax({
+                          url : base_url+'/admin/nominee/view',
+                          type: "POST",
+                          data : formData,
+                          dataType:'json',
+                          success: function(data, textStatus, jqXHR)
+                          {
+                            $('#loader').addClass('hidden');
+                                if(data.status && data.status == 'success'){
+                                  if(data.message)
+                                    successMessageAlert(data.message);
+
+                                   // window.location.href = data.filename;
+                                }  
+                          },
+                          error: function (jqXHR, textStatus, errorThrown)
+                          {
+                            $('#loader').addClass('hidden');
+                            if(textStatus && textStatus == 'error'){
+                              if(jqXHR.responseJSON.message){
+                                errorMessageAlert(jqXHR.responseJSON.message);
+                              }
+                            }
+                          }
+                      });
                   //$("#ratingForm").submit();
                     setTimeout(function(){
                     return true

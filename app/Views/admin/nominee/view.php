@@ -16,10 +16,15 @@
                   <h3 class="disapprovedtxt"><span class="badge badge-info"><i class="fa fa-times-circle"></i> Pending </span></h3>
                   <?php endif; ?>
 
-                 
+                 <?php if(isset($userdata['role']) && ( $userdata['role'] == 1)): ?>
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/lists">
+                 <i class="fa fa-arrow-left"></i>BACK
+                </a>
+               <?php else: ?>
                 <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee">
-                <i class="fa fa-arrow-left"></i>BACK</a>
-              
+                 <i class="fa fa-arrow-left"></i>BACK
+                </a>
+                <?php endif;?> 
 
               </div>
              
@@ -285,8 +290,9 @@
                     </div>
                       
                       <div class="clearfix"></div>
-                      <form id="ratingForm" onSubmit="juryFinalSubmit();" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
-                                  <input type="hidden" name="nominee_id" value="<?=(isset($user['user_id']))?$user['user_id']:"";?>"  >
+                      <form id="ratingForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
+                      <?= csrf_field(); ?>           
+                      <input type="hidden" name="nominee_id" value="<?=(isset($user['user_id']))?$user['user_id']:"";?>"  >
 
                                   <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>"  >
 
@@ -333,10 +339,10 @@
                                 
                                  
                                     <div class="form-group">
-                                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 text-right"><br>
+                                      <div class=""><br>
                                         <?php if(isset($editdata['is_rate_submitted']) && ($editdata['is_rate_submitted'] == 0)):?>
                                         <input type="submit" class="btn btn-primary" name="submit" value="Save Draft">
-                                        <input type="submit" class="btn btn-success" name="submit" value="SUBMIT">
+                                        <input type="button" class="btn btn-success" name="submit" value="SUBMIT" onclick="juryFinalSubmit();">
                                         <?php endif;?>
                                       </div>
                                     </div>

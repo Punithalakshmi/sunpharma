@@ -56,7 +56,7 @@ class Login extends BaseController
                                 setSessionData('userdata',$ses_data);
 
                                 if( $data['role'] == 1 )
-                                  return redirect()->to('admin/nominee');
+                                  return redirect()->to('admin/nominee/lists');
                                 else
                                   return redirect()->to('admin/dashboard');
                             }

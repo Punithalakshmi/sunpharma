@@ -16,6 +16,10 @@ form.validate({
                         extension: "jpg,png,jpeg",
                         filesize: 500
                     },
+                    email: 
+                    {
+                        checkDuplication:'check'
+                    },
                     justification_letter:
                     {
                         extension: "pdf",
@@ -53,6 +57,9 @@ form.validate({
                 passport: {
                     required: "You should be upload password",
                     filesize: "Passport file size should be 500KB"
+                },
+                email:{
+                    checkDuplication: "This Mail id already registered with this award!",
                 }
             } 
     });
@@ -414,6 +421,53 @@ function additionalMethods()
         else
            return false;  
     });
+
+    $.validator.addMethod('checkDuplication',function(value,element,param){
+        //var csrfHash = $("input[name='app_csrf']").val();
+
+        token_res  = {};
+        $.ajax({
+            url: base_url+'/csrf_token',
+            type: 'GET',
+            data: {},
+            dataType: 'json',
+            success: function (form_res) 
+            {
+                token_res = form_res;  
+                $.ajax({
+                    url: base_url+'/nomination/check_unique_award_by_user',
+                    type: 'POST',
+                    data: {email:value,award_id:uri2,app_csrf:token_res.token},
+                    dataType: 'JSON',
+                    success: function(data) {
+                      
+                        if(data.status && data.status == 'error'){
+                          return false;
+                          //$("#nominee_email-error").text(data.message);
+                        }
+                        else
+                        {
+                            return true;
+                            // $("#nominee_email-error").text(data.message);
+                            // if (label.attr('for') == "nominee_email") {
+                            //     var element = '#' + label.attr('for');
+                            //     label.addClass("valid").text("Email Id available to register");
+                            // }
+                        } 
+                        
+                    },
+                    error: function(data){
+                        var errors = $.parseJSON(data.responseText).errors;
+                        if (errors.email) {
+                            validator.showErrors({
+                                "email": errors.email[0]
+                            });
+                        }
+                    }
+                });
+               }
+            });
+        });   
 }
 
 function getCsrfToken()

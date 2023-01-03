@@ -67,6 +67,7 @@ class Nomination extends BaseController
                             $ins_data['extend_date']= $awardData['end_date'];
                             $ins_data['award_id']   = $award_id;
                             $ins_data['active']     = '0';
+                            $ins_data['review_status'] = 'Pending';
 
                             $nominee_details_data = array();
                             $nominee_details_data['category_id']        = $category;
@@ -135,6 +136,7 @@ class Nomination extends BaseController
         }
         
         $this->data['editdata'] = $this->getRequestedData('spsfn');
+        $this->data['award_id'] = $this->uri->getSegment(2);
 
         if($this->request->isAJAX()){
             $html = view('frontend/spsfn_new',$this->data,array('debug' => false));
@@ -213,6 +215,7 @@ class Nomination extends BaseController
                                 $ins_data['active']     = '0';
                                 $ins_data['award_id']   = $award_id;
                                 $ins_data['extend_date']= $awardData['end_date'];
+                                $ins_data['review_status'] = 'Pending';
                                 
 
                                 $nominee_details_data = array();
@@ -278,6 +281,8 @@ class Nomination extends BaseController
         }
 
         $this->data['editdata'] = $this->getRequestedData('ssan');
+        $this->data['award_id'] = $this->uri->getSegment(2);
+
 
         if($this->request->isAJAX()){
             $html = view('frontend/ssan_new',$this->data,array('debug' => false));
@@ -291,8 +296,6 @@ class Nomination extends BaseController
         {
             return  render('frontend/ssan_new',$this->data);         
         }
-       
-
    }
 
     public function validation_rules($type='')
@@ -764,25 +767,57 @@ class Nomination extends BaseController
 
     public function get_new_csrf_token()
     {
-       // if (strtolower($this->request->getMethod()) == "post") {
-
-         //   if($this->validation->withRequest($this->request)->run()) {
-
-                if($this->request->isAJAX()){
-                
-                    return $this->response->setJSON([
-                        'status'            => 'success',
-                        'token'             => csrf_hash()
-                    ]); 
-                    die;
-                }
-           //}
-       // }    
+     
+        if($this->request->isAJAX()){
+        
+            return $this->response->setJSON([
+                'status'            => 'success',
+                'token'             => csrf_hash()
+            ]); 
+            die;
+        }
+        
     }
 
     public function close()
     {
         return  render('frontend/nomination_close',$this->data);
+    }
+
+    public function checkUniqueEmailForAward(){
+
+        if (strtolower($this->request->getMethod()) == "post") {
+           // echo $this->request->getMethod(); die;
+          //  if($this->validation->withRequest($this->request)->run()) {
+
+                $email    = $this->request->getPost('email');
+                $award_id = $this->request->getPost('award_id');
+
+                $checkUserData = $this->userModel->where(array("email"=> $email,"award_id" => $award_id,"role" => 2))->first();
+               // echo "<pre>"; 
+               // print_r($checkUserData);die;
+                if(is_array($checkUserData) && count($checkUserData) > 0){
+                    if($this->request->isAJAX()){
+                        return $this->response->setJSON([
+                            'status'   => 'error',
+                            'message'  => 'Already email registered for this Award Category'
+                        ]); 
+                        die;
+                    }
+                   
+                }
+                else
+                {
+                    if($this->request->isAJAX()){
+                        return $this->response->setJSON([
+                            'status'   => 'success',
+                            'message'  => 'Available'
+                        ]); 
+                        die;
+                    }
+                }
+         }         
+
     }
     
 }

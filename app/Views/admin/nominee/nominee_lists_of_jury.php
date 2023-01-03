@@ -31,6 +31,7 @@
                           <th>Phone</th>
                           <th>Complete By</th>
                           <th>Created Date</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -48,9 +49,12 @@
                           <td><?=$user['phone'];?></td>
                           <td><?=$user['end_date'];?></td>
                           <td><?=$user['created_date'];?></td>
+                          <td><?=$user['review_status'];?></td>
                           <td>
                            
-                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View </a>
+                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">
+                               <i class="fa fa-eye"></i><?=(isset($user['review_status']) && ($user['review_status'] == 'Pending'))?'Review':'View';?> 
+                            </a>
                           </td>
                         </tr>
                         <?php endforeach;

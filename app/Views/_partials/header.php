@@ -1,6 +1,8 @@
 
 
-  <?php if(is_array($userdata)): ?>
+  <?php if(is_array($userdata)):  
+          $logoUrl = ($userdata['role'] == 3)?'/admin':'/admin/nominee/lists';
+     ?>
     <div class="container body">
 
       <div class="main_container">
@@ -8,7 +10,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-              <a href="<?=base_url();?>/admin" class="site_title">
+              <a href="<?=base_url();?>/<?=$logoUrl;?>" class="site_title">
                 <img class="logo img-responsive desklogo" src="<?php echo base_url();?>/images/logo.jpg" alt="Sun Pharma Science Foundation" />
                 <img class="logo img-responsive mobilelogo" src="<?php echo base_url();?>/images/logo-mini.svg" alt="Sun Pharma Science Foundation" />
               </a>

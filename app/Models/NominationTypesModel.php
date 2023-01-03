@@ -60,6 +60,7 @@ class NominationTypesModel extends Model{
           $builder->select('nominations.*,IF(category.type!="","awards","awards") as category_type,category.type,nominations.id as award_id');
           $builder->join('category','category.id = nominations.category_id');
           $builder->join('awards_creation_category','awards_creation_category.id = nominations.main_category_id');
+          $builder->where('nominations.status',1);
           return $query = $builder->get();
 
     }

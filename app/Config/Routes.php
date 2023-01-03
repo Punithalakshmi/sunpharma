@@ -106,6 +106,8 @@ $routes->get('sendMailToRegistrationUsers','User::sendMailToRegistrationUsers');
 
 $routes->get('nomination/close','EventRegistration::close');
 
+$routes->post('nomination/check_unique_award_by_user','Nomination::checkUniqueEmailForAward');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index",['filter' =>'auth']);
