@@ -21,6 +21,7 @@
         <?= csrf_field(); ?>
         <input type="hidden" name="formTypeStatus" value="submit">
         <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
+        <input type="hidden" name="award_id" value="" >
         <input type="hidden" name="detail_id" value="<?=(isset($editdata['detail_id']))?$editdata['detail_id']:"";?>" >
         <div>
             <h3>Personal Info</h3>

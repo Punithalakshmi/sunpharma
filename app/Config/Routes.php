@@ -104,7 +104,7 @@ $routes->get('attendMode/(:any)/(:any)','User::attendMode/$1/$2');
 
 $routes->get('sendMailToRegistrationUsers','User::sendMailToRegistrationUsers');
 
-$routes->get('nomination/close','EventRegistration::close');
+$routes->get('nomination/close','Nomination::close');
 
 $routes->post('nomination/check_unique_award_by_user','Nomination::checkUniqueEmailForAward');
 

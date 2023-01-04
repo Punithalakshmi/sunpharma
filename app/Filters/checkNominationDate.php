@@ -8,7 +8,7 @@ class checkNominationDate implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        $current_date = strtotime(date("Y-m-d 23:59:59"));
+        $current_date = strtotime(date("Y-m-d H:i:s"));
 
         $uri     = current_url(true);
 
@@ -17,11 +17,11 @@ class checkNominationDate implements FilterInterface
         $nominationModel    = model('App\Models\NominationTypesModel');
 
         $awardData     = $nominationModel->getListsOfNominations($awardID)->getRowArray();
-
+       
         if(is_array($awardData)) {
-           $nominationEndDate  = strtotime(date("Y-m-d",strtotime($awardData['end_date'])));
+         $nominationEndDate  = strtotime(date("Y-m-d 23:59:59",strtotime($awardData['end_date'])));
       
-        if($nominationEndDate < $current_date){
+        if($nominationEndDate < $current_date || $awardData['status'] == 0){
             // then redirct to login page
             return redirect()->to('nomination/close'); 
         }

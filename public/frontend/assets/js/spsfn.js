@@ -20,6 +20,7 @@ const progress = (value) => {
 
  $(document).ready(function(){
 
+    
    
       $.validator.addMethod('filesize', function (value, element,param) {
       

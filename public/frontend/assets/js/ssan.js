@@ -4,10 +4,11 @@ const progress = (value) => {
 }
  
 $(document).ready(function(){   
+var form = $("#formsection");
    
 additionalMethods();
 
-var form = $("#formsection");
+
 form.validate({
         errorPlacement: function errorPlacement(error, element) { element.before(error); },
         rules: {
@@ -59,7 +60,7 @@ form.validate({
                     filesize: "Passport file size should be 500KB"
                 },
                 email:{
-                    checkDuplication: "This Mail id already registered with this award!",
+                    checkDuplication:'Email already registered for this Award!'
                 }
             } 
     });
@@ -406,6 +407,8 @@ function errorMessageAlert(msg)
 
 function additionalMethods()
 {
+
+    
     $.validator.addMethod('filesize', function (value, element,param) {
       
         var size=element.files[0].size;
@@ -422,9 +425,10 @@ function additionalMethods()
            return false;  
     });
 
+    var emailStatus = '';
     $.validator.addMethod('checkDuplication',function(value,element,param){
         //var csrfHash = $("input[name='app_csrf']").val();
-
+      //  return this.optional(element)
         token_res  = {};
         $.ajax({
             url: base_url+'/csrf_token',
@@ -440,20 +444,15 @@ function additionalMethods()
                     data: {email:value,award_id:uri2,app_csrf:token_res.token},
                     dataType: 'JSON',
                     success: function(data) {
-                      
                         if(data.status && data.status == 'error'){
-                          return false;
-                          //$("#nominee_email-error").text(data.message);
+                        
+                            emailStatus = false;
                         }
                         else
                         {
-                            return true;
-                            // $("#nominee_email-error").text(data.message);
-                            // if (label.attr('for') == "nominee_email") {
-                            //     var element = '#' + label.attr('for');
-                            //     label.addClass("valid").text("Email Id available to register");
-                            // }
-                        } 
+                            
+                            emailStatus = true; 
+                        }
                         
                     },
                     error: function(data){
@@ -465,8 +464,13 @@ function additionalMethods()
                         }
                     }
                 });
+
                }
             });
+         
+        if(emailStatus !='')
+          return emailStatus;  
+
         });   
 }
 

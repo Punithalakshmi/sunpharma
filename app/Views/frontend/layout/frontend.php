@@ -28,7 +28,7 @@ Online Submission Of Nominations">
     <script>
         var base_url = '<?=base_url();?>';
     </script>
-    <?php $uri2 = $current_url->getSegment(2);
+    <?php $uri2 = $current_url->setSilent()->getSegment(2);
              if($uri2 !==''): ?>
         <script type="text/javascript">    
             var uri2     = '<?=$current_url->getSegment(2);?>';

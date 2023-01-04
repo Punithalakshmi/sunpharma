@@ -8,7 +8,7 @@ class checkEventStatus implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        $current_date = strtotime(date("Y-m-d 23:59:59"));
+        $current_date = strtotime(date("Y-m-d H:i:s"));
 
         $uri  = current_url(true);
 
@@ -19,9 +19,9 @@ class checkEventStatus implements FilterInterface
         $eventData     = $eventModel->getLists($eventID)->getRowArray();
 
         if(is_array($eventData)) {
-                $eventEndDate  = strtotime(date("Y-m-d",strtotime($eventData['end_date'])));
+            $eventEndDate  = strtotime(date("Y-m-d 23:59:59",strtotime($eventData['end_date'])));
       
-        if($eventEndDate < $current_date){
+        if($eventEndDate < $current_date || $eventData['status'] == 0){
             // then redirct to login page
             return redirect()->to('event/close'); 
         }
