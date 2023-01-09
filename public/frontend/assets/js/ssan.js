@@ -66,23 +66,23 @@ form.validate({
         {
            console.log('currentIndex',currentIndex);
 
-           if(currentIndex == 0)
-           {
-              form.validate();
-              $("#nominee_email").rules("add",{
-                                                checkDuplication: true, 
-                                                  messages:{
-                                                    checkDuplication:'Email already registered for this Award!'
-                                                }
-                                            }
-                                        );
+        //    if(currentIndex == 0)
+        //    {
+        //       form.validate();
+        //       $("#nominee_email").rules("add",{
+        //                                         checkDuplication: true, 
+        //                                           messages:{
+        //                                             checkDuplication:'Email already registered for this Award!'
+        //                                         }
+        //                                     }
+        //                                 );
 
-              checkDuplicationEmail(false);
-           }
-           else
-           {
-              $("#nominee_email").rules( "remove", "checkDuplication");
-           }
+        //       checkDuplicationEmail(false);
+        //    }
+        //    else
+        //    {
+        //       $("#nominee_email").rules( "remove", "checkDuplication");
+        //    }
 
           
             $("#overlay").fadeIn(300);
