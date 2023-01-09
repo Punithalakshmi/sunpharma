@@ -23,51 +23,9 @@ const progress = (value) => {
       var form = $("#science_scholar_awards");
       var isEmailVerified = false;
       
-      checkDuplicationEmail(isEmailVerified);
+      additionalMethods()
 
-      $.validator.addMethod('filesize', function (value, element,param) {
       
-        var size=element.files[0].size;
-        size=size/1024;
-        size = Math.round(size);
-
-        if(size <= 500 && $("#nominato_photo"))
-          return this.optional(element) || size <=param;
-        else if(size <= 500 && $("#justification_letter"))
-          return this.optional(element) || size <=param;
-        else
-           return false;  
-
-    });    
-    
-    $.validator.addMethod('eligibleType', function (value, element,param) {
-      
-        if(value == 'Yes')
-          return this.optional(element) || value == param;
-        else
-           return false;  
-    }); 
-
-    $.validator.addMethod(
-        "validDOB",
-        function(value, element) {              
-        
-            console.log('valueDate',value);
-            var dob = new Date(value);
-            var today = new Date('08/01/2022');
-            var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-            console.log('valueDate',age);
-       
-            if (age <= 30){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    );
-
 
 
 form.validate({
@@ -92,9 +50,6 @@ form.validate({
             minlength:10,
             maxlength:10
          },
-         email:{
-            checkDuplication:'check'
-         },
          nominator_mobile:{
             minlength:10,
             maxlength:10
@@ -118,9 +73,6 @@ form.validate({
         },
         research_project:{
             eligibleType: "Your are not eligible to register, you should be completed project"
-        },
-        email:{
-            checkDuplication:'Email already registered for this Award!'
         }
       }
 });
@@ -201,6 +153,7 @@ form.children("div").steps({
                         cache:false,
                         success: function (form_res) 
                         {
+                            $("#overlay").fadeOut(300);
                             if(form_res.status && form_res.status == 'success'){
                                 if(form_res.message && form_res.message == 'preview')
                                 $('#formPreview').html(form_res.html);
@@ -219,6 +172,7 @@ form.children("div").steps({
                         },
                         error: function (jqXHR, textStatus, errorThrown)
                         {
+                            $("#overlay").fadeOut(300);
                             if(textStatus && textStatus == 'error'){
                                 if(jqXHR.responseJSON.message){
                                     errorMessageAlert(jqXHR.responseJSON.message); 
@@ -265,86 +219,50 @@ form.children("div").steps({
 function triggerSteps()
 {
 
-    $.validator.addMethod('filesize', function (value, element,param) {
-      
-        var size=element.files[0].size;
-        size=size/1024;
-        size = Math.round(size);
-
-        if(size <= 500 && $("#nominato_photo"))
-          return this.optional(element) || size <=param;
-        else if(size <= 500 && $("#justification_letter"))
-          return this.optional(element) || size <=param;
-        else
-           return false;  
-
-    });    
-    
-    $.validator.addMethod(
-        "validDOB",
-        function(value, element) {              
-        
-             console.log('valueDate',value);
-            var dob = new Date(value);
-            var today = new Date('08/01/2022');
-            var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-           
-            console.log('valueDate',age);
-            if (age <= 30){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    );
-
-
 var form = $("#science_scholar_awards");
-form.validate({
-    errorPlacement: function errorPlacement(error, element) { element.before(error); },
-    rules: {
-        nominator_photo: {
-            extension: "jpg,png,jpeg",
-            filesize: 500
-        },
-        date_of_birth:{
-           validDOB:30
-        },
-        supervisor_certifying:{
-           extension: "pdf",
-           filesize: 500
-        },
-        justification_letter:{
-           extension: "pdf",
-           filesize: 500
-        },
-        mobile_no:{
-            minlength:10,
-            maxlength:10
-         },
-         nominator_mobile:{
-            minlength:10,
-            maxlength:10
-         }
-    },
-    messages: {
-        nominator_photo:{
-            filesize:" Nominator Photo size not more than 500KB."
-        },
-        date_of_birth:{
-            validDOB: 'Age should be less than 30 years.'
-        },
-        supervisor_certifying:{
-            filesize:"File size not more than 500KB"
-        },
-        justification_letter:{
-            filesize:"File size not more than 500KB"
-        }
+// form.validate({
+//     errorPlacement: function errorPlacement(error, element) { element.before(error); },
+//     rules: {
+//         nominator_photo: {
+//             extension: "jpg,png,jpeg",
+//             filesize: 500
+//         },
+//         date_of_birth:{
+//            validDOB:30
+//         },
+//         supervisor_certifying:{
+//            extension: "pdf",
+//            filesize: 500
+//         },
+//         justification_letter:{
+//            extension: "pdf",
+//            filesize: 500
+//         },
+//         mobile_no:{
+//             minlength:10,
+//             maxlength:10
+//          },
+//          nominator_mobile:{
+//             minlength:10,
+//             maxlength:10
+//          }
+//     },
+//     messages: {
+//         nominator_photo:{
+//             filesize:" Nominator Photo size not more than 500KB."
+//         },
+//         date_of_birth:{
+//             validDOB: 'Age should be less than 30 years.'
+//         },
+//         supervisor_certifying:{
+//             filesize:"File size not more than 500KB"
+//         },
+//         justification_letter:{
+//             filesize:"File size not more than 500KB"
+//         }
         
-      }
-});
+//       }
+// });
 form.children("div").steps({
     headerTag: "h3",
     bodyTag: "section",
@@ -421,6 +339,7 @@ form.children("div").steps({
                                         cache:false,
                                         success: function (form_res) 
                                         {
+                                            $("#overlay").fadeOut(300);
                                             if(form_res.status && form_res.status == 'success'){
                                                 if(form_res.message && form_res.message == 'preview')
                                                 $('#formPreview').html(form_res.html);
@@ -437,6 +356,7 @@ form.children("div").steps({
                                         },
                                         error: function (jqXHR, textStatus, errorThrown)
                                         {
+                                            $("#overlay").fadeOut(300);
                                             if(textStatus && textStatus == 'error'){
                                                 if(jqXHR.responseJSON.message){
                                                     errorMessageAlert(jqXHR.responseJSON.message);
@@ -460,7 +380,7 @@ form.children("div").steps({
         },
         onFinishing: function (event, currentIndex)
         {
-            //console.log('testing');
+           
             form.validate().settings.ignore = ":disabled";
             if(!$("#acceptTerms").is(":checked")) {
                 errorMessageAlert('Please accept terms & condition'); 
@@ -475,6 +395,52 @@ form.children("div").steps({
     });
 }
 
+
+function additionalMethods()
+{
+    $.validator.addMethod('filesize', function (value, element,param) {
+      
+        var size=element.files[0].size;
+        size=size/1024;
+        size = Math.round(size);
+
+        if(size <= 500 && $("#nominato_photo"))
+          return this.optional(element) || size <=param;
+        else if(size <= 500 && $("#justification_letter"))
+          return this.optional(element) || size <=param;
+        else
+           return false;  
+
+    });    
+    
+    $.validator.addMethod('eligibleType', function (value, element,param) {
+      
+        if(value == 'Yes')
+          return this.optional(element) || value == param;
+        else
+           return false;  
+    }); 
+    
+    $.validator.addMethod(
+        "validDOB",
+        function(value, element) {              
+        
+             console.log('valueDate',value);
+            var dob = new Date(value);
+            var today = new Date('08/01/2022');
+            var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+           
+            console.log('valueDate',age);
+            if (age <= 30){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    );
+}
 
 function successMessageAlert(msg)
 {
@@ -491,6 +457,7 @@ function errorMessageAlert(msg)
 
 function formSubmit()
 {
+    $("#overlay").fadeIn(300);
     token_res  = {};
     $.ajax({
         url: base_url+'/csrf_token',
@@ -572,6 +539,7 @@ function formSubmit()
                 cache:false,
                 success: function (form_res) 
                 {
+                    $("#overlay").fadeOut(300);
                     if(form_res.status && form_res.status == 'success'){
                         successMessageAlert('Thank you. Your application is under review , you should receive an email soon!');
                         setTimeout(function(){
@@ -581,6 +549,7 @@ function formSubmit()
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
+                    $("#overlay").fadeOut(300);
                     if(textStatus && textStatus == 'error'){
                         if(jqXHR.responseJSON.message){
                             errorMessageAlert(jqXHR.responseJSON.message); 

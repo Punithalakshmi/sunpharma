@@ -15,7 +15,7 @@ class Nomination extends BaseController
             
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('spsfn'));
+                $this->validation->setRules($this->validation_rules('spsfn',$award_id));
 
                 if($this->validation->withRequest($this->request)->run()) {
 
@@ -172,7 +172,7 @@ class Nomination extends BaseController
 
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('ssan'));
+                $this->validation->setRules($this->validation_rules('ssan',$award_id));
 
                 if($this->validation->withRequest($this->request)->run()) {
 
@@ -314,7 +314,7 @@ class Nomination extends BaseController
         }
    }
 
-    public function validation_rules($type='')
+    public function validation_rules($type='',$id='')
     {
 
             $validation_rules = array();
@@ -325,7 +325,7 @@ class Nomination extends BaseController
                                             "citizenship" => array("label" => "Citizenship",'rules' => 'required'),
                                             "designation_and_office_address" => array("label" => "Designation & Office Address",'rules' => 'required'),
                                             "residence_address" => array("label" => "Residence Address",'rules' => 'required'),
-                                            "email" => array("label" => "Email",'rules' => 'required|valid_email'),
+                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[users.email,award_id,'.$id.']'),
                                             "mobile_no" => array("label" => "Mobile No.",'rules' => 'required|numeric|max_length[10]'),
                                             "nominator_name" => array("label" => "Naminator Name",'rules' => 'required'),
                                             "nominator_mobile" => array("label" => "Naminator Mobile",'rules' => 'required|numeric|max_length[10]'),

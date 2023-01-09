@@ -5,7 +5,6 @@ const progress = (value) => {
  
 $(document).ready(function(){   
 var form = $("#formsection");
-var isEmailVerified = false;
 
 additionalMethods();
 
@@ -85,7 +84,7 @@ form.validate({
         //    }
 
           
-            $("#overlay").fadeIn(300);
+           
             event.preventDefault();
             form.validate().settings.ignore = ":disabled,:hidden";
            
@@ -93,6 +92,8 @@ form.validate({
             if(currentIndex && currentIndex == 1)
             {
     
+                $("#overlay").fadeIn(300);
+
                     $.ajax({
                         url: base_url+'/csrf_token',
                         type: 'GET',
@@ -164,7 +165,9 @@ form.validate({
                                             cache:false,
                                             success: function (form_res) 
                                             { 
+                                                $("#overlay").fadeOut(300);
                                                 if(form_res.status && form_res.status == 'success'){
+                                                    
                                                     if(form_res.message && form_res.message == 'preview')
                                                     $('#formPreview').html(form_res.html);
                                                 }  
@@ -182,6 +185,7 @@ form.validate({
                                             },
                                             error: function (jqXHR, textStatus, errorThrown)
                                             {
+                                                $("#overlay").fadeOut(300);
                                                 if(textStatus && textStatus == 'error'){
                                                     if(jqXHR.responseJSON.message){
                                                         errorMessageAlert(jqXHR.responseJSON.message); 
@@ -200,7 +204,7 @@ form.validate({
                                     }
                             });  
 
-                            $("#overlay").fadeOut(300);
+                           
                             
                             return form.valid();
             }
@@ -244,9 +248,7 @@ function triggerSteps(csrf)
                 
                     // Get the selected file
                     if(currentIndex && currentIndex == 1){
-            
-                        $("#overlay").fadeIn(300);
-                  
+                        
                        
                         token_res  = {};
 
@@ -257,8 +259,11 @@ function triggerSteps(csrf)
                             dataType: 'json',
                             success: function (form_res) 
                             {
-                                token_res = form_res;
 
+                                $("#overlay").fadeIn(300);
+
+                                token_res = form_res;
+                                
                                 var files                   = $('#nominator_photo')[0].files;
                                 var justification_letter    = $('#justification_letter')[0].files;
                                 var passport                = $('#passport')[0].files;
@@ -320,6 +325,7 @@ function triggerSteps(csrf)
                                     cache:false,
                                     success: function (form_res) 
                                     {
+                                        $("#overlay").fadeOut(300);
                                         if(form_res.status && form_res.status == 'success'){
                                             if(form_res.message && form_res.message == 'preview')
                                             $('#formPreview').html(form_res.html);
@@ -336,6 +342,7 @@ function triggerSteps(csrf)
                                     },
                                     error: function (jqXHR, textStatus, errorThrown)
                                     {
+                                        $("#overlay").fadeOut(300);
                                         if(textStatus && textStatus == 'error'){
                                             if(jqXHR.responseJSON.message){
                                                 errorMessageAlert(jqXHR.responseJSON.message); 
@@ -428,6 +435,8 @@ function getCsrfToken()
 
 function formSubmit()
 {
+    $("#overlay").fadeIn(300);
+
     token_res  = {};
     $.ajax({
         url: base_url+'/csrf_token',
@@ -498,6 +507,7 @@ function formSubmit()
                 cache:false,
                 success: function (form_res) 
                 {
+                    $("#overlay").fadeOut(300);
                     if(form_res.status && form_res.status == 'success'){
                         successMessageAlert('Thank you. Your application is under review , you should receive an email soon!');
                         setTimeout(function(){
@@ -507,6 +517,7 @@ function formSubmit()
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
+                    $("#overlay").fadeOut(300);
                     if(textStatus && textStatus == 'error'){
                         if(jqXHR.responseJSON.message){
                             errorMessageAlert(jqXHR.responseJSON.message); 
