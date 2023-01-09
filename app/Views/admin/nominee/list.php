@@ -26,11 +26,12 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          
+                        <th>Nomination No</th>
                           <th>Firstname</th>
                           <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
+                          
                           <th>Award Category</th>
                           <th>Approval Status</th>
                           <th>Created Date</th>
@@ -55,7 +56,7 @@
 
                             ?>
                         <tr>
-                         
+                          <td><?=$user['registration_no'];?></td>
                           <td><?=$user['firstname'];?></td>
                           <td><?=strtolower($user['firstname']);?></td>
                           <td><?=$user['email'];?></td>

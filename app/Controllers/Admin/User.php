@@ -112,7 +112,7 @@ class User extends BaseController
                 $editdata['phone']      = $edit_data['phone'];
                 $editdata['role']       = $edit_data['role'];
                 $editdata['address']    = '';
-                $editdata['dob']        =  $edit_data['dob'];
+                $editdata['dob']        =  (isset($edit_data['dob']) && !empty($edit_data['dob']))?date("m/d/Y",strtotime($edit_data['dob'])):date("m/d/Y");
                 $editdata['gender']     =  $edit_data['gender'];
 
                 if($edit_data['role'] == 1)

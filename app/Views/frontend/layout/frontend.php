@@ -10,6 +10,7 @@
 Online Submission Of Nominations">
 
         <?=link_tag('frontend/assets/bootstrap/css/bootstrap.min.css')?>
+        <?=link_tag('frontend/assets/bootstrap/css/datepicker.css')?>
         <?=link_tag('frontend/assets/css/bootstrap-msg.css')?>
         
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
@@ -54,6 +55,9 @@ Online Submission Of Nominations">
     <?= view('frontend/_partials/footer'); ?>
 
     <?= script_tag('frontend/assets/bootstrap/js/bootstrap.min.js'); ?>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    
     <?= script_tag('frontend/assets/js/bootstrap-msg.js');?>
     <?= script_tag('frontend/assets/js/jquery.confirmModal.min.js');?>
     <!-- FastClick -->

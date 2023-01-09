@@ -56,7 +56,12 @@
           <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
             <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?> </h3>
-
+            <div class="form-group row formitem">
+              <label class="col-sm-3 col-form-label">Nomination NO</label>
+              <div class="col-sm-9">
+                  <?=$user['registration_no'];?>
+              </div>
+          </div> 
             <div class="form-group row formitem">
                 <label class="col-sm-3 col-form-label">Award Category</label>
                 <div class="col-sm-9"><?=$user['category_name'];?></div>

@@ -115,7 +115,15 @@ class Nomination extends BaseController
                     
                             $this->nominationModel->save($nominee_details_data);
 
-                            $this->sendMail($firstname,$lastInsertID,$email);
+                            $registrationID = $this->nominationModel->insertID();
+
+                            $registrationNo = date('Y')."/".$registrationID;
+
+                            $update_regisno_arr = array();
+                            $update_regisno_arr['registration_no'] = $registrationNo;
+                            $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
+
+                            $this->sendMail($firstname,$registrationNo,$email);
 
                             if($this->request->isAJAX()){
                                 return $this->response->setJSON([
@@ -257,7 +265,15 @@ class Nomination extends BaseController
                                 $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
                                 $this->nominationModel->save($nominee_details_data);
 
-                                $this->sendMail($firstname,$lastInsertID,$email);
+                                $registrationID = $this->nominationModel->insertID();
+
+                                $registrationNo = date('Y')."/".$registrationID;
+
+                                $update_regisno_arr = array();
+                                $update_regisno_arr['registration_no'] = $registrationNo;
+                                $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
+
+                                $this->sendMail($firstname,$registrationNo,$email);
 
                                 if($this->request->isAJAX()){
                                     //   $html = view('frontend/ssan_new',$this->data,array('debug' => false));
@@ -661,7 +677,7 @@ class Nomination extends BaseController
         $subject = " Approve Nomination - Sun Pharma Science Foundation ";
         $message  = "Dear Admin,";
         $message .= '<br/><br/>';
-        $message .= ucfirst($nominee_name)." with <b>Nomination No: ".date("Y")."/".$nomination_no."</b> has submitted his/her nomination and is waiting for your approval";
+        $message .=  ucfirst($nominee_name)." with <b>Nomination No: ".$nomination_no."</b> has submitted his/her nomination and is waiting for your approval";
         $message .= "<br/><br/>";
         $message .=  "Please <a href='". $admin_url."'>click here</a> to approve his/her nomination.";
         $message .= "<br/><br/><br/>";
@@ -793,9 +809,8 @@ class Nomination extends BaseController
                 $email    = $this->request->getPost('email');
                 $award_id = $this->request->getPost('award_id');
 
-                $checkUserData = $this->userModel->where(array("email"=> $email,"award_id" => $award_id,"role" => 2))->first();
-               // echo "<pre>"; 
-               // print_r($checkUserData);die;
+                $checkUserData = $this->userModel->checkUniqueEmail(array("email"=> $email,"award_id" => $award_id,"role" => 2));
+              //print_r($checkUserData); die;
                 if(is_array($checkUserData) && count($checkUserData) > 0){
                     if($this->request->isAJAX()){
                         return $this->response->setJSON([

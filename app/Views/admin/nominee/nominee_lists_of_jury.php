@@ -23,7 +23,7 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                         
+                          <th>Nomination No</th>
                           <th>Nominee Name</th>
                           <th>Category</th>
                           <th>Email</th>
@@ -42,7 +42,7 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                  
+                        <td><?=$user['registration_no'];?></td>
                           <td><?=$user['firstname'].' '.$user['lastname'];?></td>
                           <td><?=$user['category_name'];?></td>
                           <td><?=$user['email'];?></td>

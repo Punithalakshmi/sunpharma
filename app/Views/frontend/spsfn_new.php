@@ -70,10 +70,11 @@
                                 </div>
                             </div>
 
+                  
                             <div class="col-lg-12">
-                                <div class="mb-3 form-items">
+                                <div class=" mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth</label>
-                                    <input class="form-control required" id="date_of_birth_spsfn" name="date_of_birth" type="date" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
+                                    <input min="01/01/1991" max="08/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth_spsfn" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
                                         placeholder="Date of Birth">
 
                                     <div class="hintcont">

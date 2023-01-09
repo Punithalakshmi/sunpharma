@@ -5,9 +5,9 @@ const progress = (value) => {
  
 $(document).ready(function(){   
 var form = $("#formsection");
-   
-additionalMethods();
+var isEmailVerified = false;
 
+additionalMethods();
 
 form.validate({
         errorPlacement: function errorPlacement(error, element) { element.before(error); },
@@ -16,10 +16,6 @@ form.validate({
                     {
                         extension: "jpg,png,jpeg",
                         filesize: 500
-                    },
-                    email: 
-                    {
-                        checkDuplication:'check'
                     },
                     justification_letter:
                     {
@@ -56,11 +52,8 @@ form.validate({
                     filesize:"Justification Letter file size should be 500KB"
                 },
                 passport: {
-                    required: "You should be upload password",
+                    required: "You should be upload passport",
                     filesize: "Passport file size should be 500KB"
-                },
-                email:{
-                    checkDuplication:'Email already registered for this Award!'
                 }
             } 
     });
@@ -71,7 +64,28 @@ form.validate({
         transitionEffect: "slideLeft",
         onStepChanging: function (event, currentIndex, newIndex)
         {
-           
+           console.log('currentIndex',currentIndex);
+
+           if(currentIndex == 0)
+           {
+              form.validate();
+              $("#nominee_email").rules("add",{
+                                                checkDuplication: true, 
+                                                  messages:{
+                                                    checkDuplication:'Email already registered for this Award!'
+                                                }
+                                            }
+                                        );
+
+              checkDuplicationEmail(false);
+           }
+           else
+           {
+              $("#nominee_email").rules( "remove", "checkDuplication");
+           }
+
+          
+            $("#overlay").fadeIn(300);
             event.preventDefault();
             form.validate().settings.ignore = ":disabled,:hidden";
            
@@ -79,103 +93,116 @@ form.validate({
             if(currentIndex && currentIndex == 1)
             {
     
-                    $("#overlay").fadeIn(300);
-
-                    var csrfHash = $("input[name='app_csrf']").val(); 
-                    
-                    var files                   = $('#nominator_photo')[0].files;
-                    var justification_letter    = $('#justification_letter')[0].files;
-                    var passport                = $('#passport')[0].files;
-                    
-                    var fd = new FormData();
-                    // Append data 
-                    if(files[0])  
-                        fd.append('nominator_photo',files[0]);
-                    else 
-                        fd.append('nominator_photo',''); 
-
-                    if(justification_letter[0]) 
-                        fd.append('justification_letter',justification_letter[0]);
-                    else 
-                        fd.append('justification_letter','');
-
-                    if(passport[0])  
-                        fd.append('passport',passport[0]);
-                    else  
-                        fd.append('passport','');
-                        
-                    var category                       = $("#category").val();
-                    var nominee_name                   = $("#nominee_name").val();
-                    var date_of_birth                  = $("#date_of_birth").val();
-                    var citizenship                    = $("#citizenship").val();
-                    var designation_and_office_address = $("#designation_and_office_address").val();
-                    var residence_address              = $("#residence_address").val();
-                    var mobile_no                      = $("#mobile_no").val();
-                    var nominee_email                  = $("#nominee_email").val();
-                    var nominator_name                 = $("#nominator_name").val();
-                    var nominator_office_address       = $("#nominator_office_address").val();
-                    var nominator_mobile               = $("#nominator_mobile").val();
-                    var nominator_email                = $("#nominator_email").val();
-
-                    fd.append('category',category);
-                    fd.append('nominee_name',nominee_name);
-                    fd.append('date_of_birth',date_of_birth);
-                    fd.append('citizenship',citizenship);
-                    fd.append('designation_and_office_address',designation_and_office_address);
-                    fd.append('residence_address',residence_address);
-                    fd.append('mobile_no',mobile_no);
-                    fd.append('email',nominee_email);
-                    fd.append('nominator_name',nominator_name);
-                    fd.append('nominator_office_address',nominator_office_address);
-                    fd.append('nominator_mobile',nominator_mobile);
-                    fd.append('nominator_email',nominator_email);
-                    fd.append('formType','ssan');
-                    fd.append('app_csrf',csrfHash);
-                    fd.append('formTypeStatus','preview');
-    
                     $.ajax({
-                            url: base_url+'/ssan',
-                            type: 'POST',
-                            data: fd,
-                            contentType: false,
-                            processData: false,
-                            dataType: 'json',
-                            cache:false,
-                            success: function (form_res) 
-                            { 
-                                if(form_res.status && form_res.status == 'success'){
-                                    if(form_res.message && form_res.message == 'preview')
-                                       $('#formPreview').html(form_res.html);
-                                }  
-                                else
-                                {
-                                    errorMessageAlert('Please check all form fields you have missed the fields to enter the value'); 
-                                    $("#formReplace").html(form_res.html);
+                        url: base_url+'/csrf_token',
+                        type: 'GET',
+                        data: {},
+                        dataType: 'json',
+                        success: function (form_res) 
+                        {
+                            token_res = form_res;
 
-                                    setTimeout(function(){
-                                          triggerSteps();
-                                        },5000);
-                                    
-                                    return false;  
-                                }
-                            },
-                            error: function (jqXHR, textStatus, errorThrown)
-                            {
-                                if(textStatus && textStatus == 'error'){
-                                    if(jqXHR.responseJSON.message){
-                                        errorMessageAlert(jqXHR.responseJSON.message); 
+                         //   var csrfHash = $("input[name='app_csrf']").val(); 
+                    
+                            var files                   = $('#nominator_photo')[0].files;
+                            var justification_letter    = $('#justification_letter')[0].files;
+                            var passport                = $('#passport')[0].files;
+                            
+                            var fd = new FormData();
+                            // Append data 
+                            if(files[0])  
+                                fd.append('nominator_photo',files[0]);
+                            else 
+                                fd.append('nominator_photo',''); 
+        
+                            if(justification_letter[0]) 
+                                fd.append('justification_letter',justification_letter[0]);
+                            else 
+                                fd.append('justification_letter','');
+        
+                            if(passport[0])  
+                                fd.append('passport',passport[0]);
+                            else  
+                                fd.append('passport','');
+                                
+                            var category                       = $("#category").val();
+                            var nominee_name                   = $("#nominee_name").val();
+                            var date_of_birth                  = $("#date_of_birth").val();
+                            var citizenship                    = $("#citizenship").val();
+                            var designation_and_office_address = $("#designation_and_office_address").val();
+                            var residence_address              = $("#residence_address").val();
+                            var mobile_no                      = $("#mobile_no").val();
+                            var nominee_email                  = $("#nominee_email").val();
+                            var nominator_name                 = $("#nominator_name").val();
+                            var nominator_office_address       = $("#nominator_office_address").val();
+                            var nominator_mobile               = $("#nominator_mobile").val();
+                            var nominator_email                = $("#nominator_email").val();
+        
+                            fd.append('category',category);
+                            fd.append('nominee_name',nominee_name);
+                            fd.append('date_of_birth',date_of_birth);
+                            fd.append('citizenship',citizenship);
+                            fd.append('designation_and_office_address',designation_and_office_address);
+                            fd.append('residence_address',residence_address);
+                            fd.append('mobile_no',mobile_no);
+                            fd.append('email',nominee_email);
+                            fd.append('nominator_name',nominator_name);
+                            fd.append('nominator_office_address',nominator_office_address);
+                            fd.append('nominator_mobile',nominator_mobile);
+                            fd.append('nominator_email',nominator_email);
+                            fd.append('formType','ssan');
+                            fd.append('app_csrf',token_res.token);
+                            fd.append('formTypeStatus','preview');
 
-                                        setTimeout(function(){
-                                            triggerSteps();
-                                          },5000);
-                                     
-                                        return false;
+                                    $.ajax({
+                                            url: base_url+'/ssan/'+uri2,
+                                            type: 'POST',
+                                            data: fd,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: 'json',
+                                            cache:false,
+                                            success: function (form_res) 
+                                            { 
+                                                if(form_res.status && form_res.status == 'success'){
+                                                    if(form_res.message && form_res.message == 'preview')
+                                                    $('#formPreview').html(form_res.html);
+                                                }  
+                                                else
+                                                {
+                                                    errorMessageAlert('Please check all form fields you have missed the fields to enter the value'); 
+                                                    $("#formReplace").html(form_res.html);
+
+                                                    setTimeout(function(){
+                                                        triggerSteps();
+                                                        },5000);
+                                                    
+                                                    return false;  
+                                                }
+                                            },
+                                            error: function (jqXHR, textStatus, errorThrown)
+                                            {
+                                                if(textStatus && textStatus == 'error'){
+                                                    if(jqXHR.responseJSON.message){
+                                                        errorMessageAlert(jqXHR.responseJSON.message); 
+
+                                                        setTimeout(function(){
+                                                            triggerSteps();
+                                                        },5000);
+                                                    
+                                                        return false;
+                                                    }
+                                                }
+                                            }
+                                        });
+
+                                        
                                     }
-                                }
-                            }
-                        });
+                            });  
 
-                return form.valid();
+                            $("#overlay").fadeOut(300);
+                            
+                            return form.valid();
             }
             else
             {
@@ -203,54 +230,9 @@ form.validate({
 function triggerSteps(csrf)
 {
 
-    
-       additionalMethods();
-       var form = $("#formsection");
+           var form = $("#formsection");
 
-        form.validate({
-            errorPlacement: function errorPlacement(error, element) { element.before(error); },
-            rules: {
-                nominator_photo: {
-                    extension: "jpg,png,jpeg",
-                    filesize: 500
-                },
-                justification_letter:{
-                    extension: "pdf",
-                    filesize: 500
-                },
-                passport:{
-                    required: {
-                        depends: function(elem) {
-                                if($("#citizenship").val() == 2)
-                                    return true;
-                            }
-                    },
-                    extension: "pdf"
-                },
-                mobile_no:
-                {
-                    minlength:10,
-                    maxlength:10
-                },
-                nominator_mobile:
-                {
-                    minlength:10,
-                    maxlength:10
-                }
-            },
-            messages: {
-                nominator_photo:{
-                    filesize:" Nominator Photo should be size 500KB."
-                },
-                justification_letter:{
-                    filesize:"Justification Letter file size should be 500KB"
-                },
-                passport: {
-                    filesize: "Passport file size should be 500KB"
-                }
-            } 
-            });
-            form.children("div").steps({
+           form.children("div").steps({
                 headerTag: "h3",
                 bodyTag: "section",
                 transitionEffect: "slideLeft",
@@ -328,8 +310,8 @@ function triggerSteps(csrf)
                                 fd.append('formTypeStatus','preview');
                                 fd.append('app_csrf',token_res.token);
             
-                            $.ajax({
-                                    url: base_url+'/ssan',
+                                $.ajax({
+                                    url: base_url+'/ssan/'+uri2,
                                     type: 'POST',
                                     data: fd,
                                     contentType: false,
@@ -378,6 +360,7 @@ function triggerSteps(csrf)
                 },
                 onFinishing: function (event, currentIndex)
                 {
+
                     form.validate().settings.ignore = ":disabled";
                     if(!$("#acceptTerms").is(":checked")) {
                         errorMessageAlert('Please accept terms & condition'); 
@@ -387,6 +370,7 @@ function triggerSteps(csrf)
                 },
                 onFinished: function (event, currentIndex)
                 {
+                    isEmailVerified = true;
                     formSubmit();
                 }    
         });
@@ -408,7 +392,6 @@ function errorMessageAlert(msg)
 function additionalMethods()
 {
 
-    
     $.validator.addMethod('filesize', function (value, element,param) {
       
         var size=element.files[0].size;
@@ -425,53 +408,7 @@ function additionalMethods()
            return false;  
     });
 
-    var emailStatus = '';
-    $.validator.addMethod('checkDuplication',function(value,element,param){
-        //var csrfHash = $("input[name='app_csrf']").val();
-      //  return this.optional(element)
-        token_res  = {};
-        $.ajax({
-            url: base_url+'/csrf_token',
-            type: 'GET',
-            data: {},
-            dataType: 'json',
-            success: function (form_res) 
-            {
-                token_res = form_res;  
-                $.ajax({
-                    url: base_url+'/nomination/check_unique_award_by_user',
-                    type: 'POST',
-                    data: {email:value,award_id:uri2,app_csrf:token_res.token},
-                    dataType: 'JSON',
-                    success: function(data) {
-                        if(data.status && data.status == 'error'){
-                        
-                            emailStatus = false;
-                        }
-                        else
-                        {
-                            
-                            emailStatus = true; 
-                        }
-                        
-                    },
-                    error: function(data){
-                        var errors = $.parseJSON(data.responseText).errors;
-                        if (errors.email) {
-                            validator.showErrors({
-                                "email": errors.email[0]
-                            });
-                        }
-                    }
-                });
-
-               }
-            });
-         
-        if(emailStatus !='')
-          return emailStatus;  
-
-        });   
+ 
 }
 
 function getCsrfToken()
@@ -552,7 +489,7 @@ function formSubmit()
             fd.append('formTypeStatus','submit');
 
             $.ajax({
-                url: base_url+'/ssan',
+                url: base_url+'/ssan/'+uri2,
                 type: 'POST',
                 data: fd,
                 contentType: false,
@@ -580,4 +517,57 @@ function formSubmit()
             });
         }
     });
+}
+
+function checkDuplicationEmail(isEmailVerified = true) {
+
+    var emailStatus = '';
+    if(!isEmailVerified) {
+    $.validator.addMethod('checkDuplication',function(value,element,param){
+        //var csrfHash = $("input[name='app_csrf']").val();
+      //  return this.optional(element)
+        token_res  = {};
+        $.ajax({
+            url: base_url+'/csrf_token',
+            type: 'GET',
+            data: {},
+            dataType: 'json',
+            success: function (form_res) 
+            {
+                token_res = form_res;  
+                $.ajax({
+                    url: base_url+'/nomination/check_unique_award_by_user',
+                    type: 'POST',
+                    data: {email:value,award_id:uri2,app_csrf:token_res.token},
+                    dataType: 'JSON',
+                    success: function(data) {
+                        isEmailVerified = true;
+                        $("#nominee_email").rules( "remove", "checkDuplication");
+                        if(data.status && data.status == 'error'){
+                            emailStatus = false;
+                        }
+                        else
+                        {
+                            console.log('data',data);
+                            emailStatus = true;
+                           $("#nominee_email").valid();
+                           // return true; 
+                        }
+                        
+                    },
+                    error: function(data){
+                        console.log('errors',data);
+                    }
+                });
+
+               }
+            });
+         
+        if(emailStatus !='') {
+          if(emailStatus)
+             return $("#formsection").valid();
+        }   
+
+        },'Please enter unique email!');  
+    }   
 }

@@ -26,7 +26,7 @@
                       <?= csrf_field(); ?>
                       <div class="clearfix"></div>
                       <div id="categorySelection" class="form-group" >
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Event</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Event Type</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <select class="select2_single form-control" name="category" tabindex="-1">
                               <option value=""></option>

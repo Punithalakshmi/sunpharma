@@ -28,7 +28,12 @@
             <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?></h3>
 
             <p><?=$user['address'];?></p>
-           
+            <div class="form-group row formitem">
+              <label class="col-sm-3 col-form-label">Nomination NO</label>
+              <div class="col-sm-9">
+                  <?=$user['registration_no'];?>
+              </div>
+          </div>          
 <div class="form-group row formitem">
   <label class="col-sm-3 col-form-label">Email</label>
   <div class="col-sm-9">

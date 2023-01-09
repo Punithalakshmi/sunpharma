@@ -36,9 +36,8 @@ class Nominee extends BaseController
             $juryLists  = $this->nomineeModel->getJuryLists()->getResultArray();
 
             if(count($juryLists) > 0)
-                 $this->data['juryLists'] = $juryLists;
+               $this->data['juryLists'] = $juryLists;
                  
-
             return render('admin/nominee/list',$this->data);
               
        
@@ -87,7 +86,6 @@ class Nominee extends BaseController
                 $msg = 'Approved Successfully';
 
                 $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
-               
 
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;

@@ -26,7 +26,10 @@ class UserModel extends Model{
         'active',
         'is_rejected',
         'extend_date',
-        'review_status'
+        'review_status',
+        'award_id',
+        'gender'
+
     ];
 
     public function Login($username, $password) {
@@ -138,4 +141,8 @@ class UserModel extends Model{
         return $this->getWhere(array('category' => $category_id,'role' => 1))->getResultArray(); 
     }
     
+    public function checkUniqueEmail($where = array())
+    {
+        return $this->getWhere($where)->getResultArray(); 
+    }
 }

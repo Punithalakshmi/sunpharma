@@ -45,7 +45,8 @@ class NominationModel extends Model{
         'number_of_attempts',
         'age_proof',
         'declaration_candidate',
-        'is_submitted'
+        'is_submitted',
+        'registration_no'
     ];
 
 

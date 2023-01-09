@@ -265,7 +265,8 @@ footer .text-muted p {
   border:solid #ccc 1px;
   cursor: pointer;
 }
-#overlay{	display:none!important;
+#overlay{	
+  display:none !important;
   position: fixed;
   top: 0;
   z-index: 100;
@@ -428,4 +429,9 @@ form#eventRegistration .form-group{display: block;}
 
 @media(min-width:768px){
   .winnerimg{width: auto!important;}
+}
+
+
+.input-group-append {
+  cursor: pointer;
 }

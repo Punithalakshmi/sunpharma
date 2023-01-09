@@ -58,7 +58,7 @@
                       <div class="clearfix"></div>
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10">Type</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10">Award</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
