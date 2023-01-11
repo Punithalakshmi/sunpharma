@@ -108,3 +108,11 @@ if ( ! function_exists('getAwardData'))
         return $awardData;
     }
 } 
+
+
+if(!function_exists('getNominationDays'))
+{
+    function getNominationDays() {
+        
+    }
+}

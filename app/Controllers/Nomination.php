@@ -550,6 +550,7 @@ class Nomination extends BaseController
             $this->data['validation'] = $this->validator;
 
         $this->data['user']     = $edit_data;
+        //$this->data['']
         $this->data['editdata'] = $editdata;
 
         return  render('frontend/preview',$this->data);

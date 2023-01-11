@@ -8,8 +8,8 @@ class User extends BaseController
     public function login()
     {
 
-        try
-        {
+        // try
+        // {
             if (strtolower($this->request->getMethod()) == "post") {  
 
               //  echo "dsdsdsds"; die;
@@ -26,46 +26,49 @@ class User extends BaseController
                     $password   = $this->request->getVar('password');
             
                     $data       = $this->userModel->where('username', $username)->first();
-                   // print_r($data); die;
+                   // print_r($data);
                     if($data){
 
                         $pass = trim($data['password']);
                      
-                        $authenticatePassword = password_verify($password, $pass);
+                      //  $authenticatePassword = password_verify($password, $pass);
                        //    echo $authenticatePassword; die;
                        if($pass == md5($password)){
-                          
-                            $ses_data = [ 
+                         // echo "testing"; 
+                         $redirect_route = 'view/'.$data['id'];
+        
+                       
+                            $ses_data = array(
                                 'id' => $data['id'],
-                                'name' => $data['name'],
+                                'name' => $data['firstname'],
                                 'email' => $data['email'],
                                 'isLoggedIn' => TRUE,
                                 'role' => $data['role'],
                                 'isNominee' => 'yes'
-                            ];
+                            );
 
-                            $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$data['extend_date']);
+                        //    print_r($ses_data);
+
+                         //   $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$data['extend_date']);
+        //    die;
+                           // $ses_data['nominationEndDays'] =  $nominationEndDays;  
             
-                            $ses_data['nominationEndDays'] =  $nominationEndDays;  
-            
-                            $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
+           //                 $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
                           
                             setSessionData('fuserdata',$ses_data);
 
-                           echo $redirect_route = 'view/'.$data['id']; die;
-        
-                            return redirect()->to('/');
+                            return redirect()->to('view/'.$data['id']);
                         
                         }
                         else
                         {
-                           // throw new \Exception('Password is incorrect.');
+                            $this->session->setFlashdata('msg', "Password is incorrect!");
                             return render('frontend/login',$this->data);
                         }
                     }
                     else
                     {
-                        //throw new \Exception('Username does not match.');
+                        $this->session->setFlashdata('msg', "Username is incorrect!");
                         return render('frontend/login',$this->data);
                     }
                 }     
@@ -75,13 +78,15 @@ class User extends BaseController
                 $editdata['username'] = ($this->request->getVar('username'))?$this->request->getVar('username'):"";
                 $editdata['password'] = ($this->request->getVar('password'))?$this->request->getVar('password'):"";
                 $this->data['editdata'] = $editdata;
+
+              
             }
 
             return  render('frontend/login',$this->data);
-        }
-        catch(\Exception $e){
-            $this->session->setFlashdata($e->getMessage());
-        }
+        // }
+        // catch(\Exception $e){
+        //     $this->session->setFlashdata($e->getMessage());
+        // }
        
 
        
@@ -188,7 +193,7 @@ class User extends BaseController
 
             $validation_rules = array();
             $validation_rules = array(
-                                      "username" => array("label" => "Username",'rules' => 'required|callback_user_check'),
+                                      "username" => array("label" => "Username",'rules' => 'required'),
                                       "password" => array("label" => "Password",'rules' => 'trim|required')
             ); 
             return $validation_rules;
