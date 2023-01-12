@@ -51,7 +51,7 @@ class User extends BaseController
 
                          //   $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$data['extend_date']);
         //    die;
-                           // $ses_data['nominationEndDays'] =  $nominationEndDays;  
+                            $ses_data['nominationEndDays'] =  getNominationDays($data['extend_date']);  
             
            //                 $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
                           

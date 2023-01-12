@@ -112,7 +112,14 @@ if ( ! function_exists('getAwardData'))
 
 if(!function_exists('getNominationDays'))
 {
-    function getNominationDays() {
-        
+    function getNominationDays($extendDate) {
+
+        $date1_ts = strtotime(date("Y-m-d"));
+        $date2_ts = strtotime($extendDate);
+        $diff = $date2_ts - $date1_ts;
+        $nominationEndDays = round($diff / 86400);
+    
+        return $nominationEndDays;
+
     }
 }

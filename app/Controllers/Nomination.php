@@ -359,7 +359,6 @@ class Nomination extends BaseController
     public function view($id = '')
     {
 
-       
         $id = (!empty($id))?$id:$this->request->getPost('id');
 
         if(!empty($id)){
@@ -374,12 +373,12 @@ class Nomination extends BaseController
             }
         }
 
-        $this->validation = $this->validate($this->awards_validation_rules($edit_data['nomination_type']));
+        if (strtolower($this->request->getMethod()) == "post") {
 
+            $this->validation->setRules($this->awards_validation_rules($edit_data['nomination_type']));
+
+          if($this->validation->withRequest($this->request)->run()) {
     
-        if($this->validation) {
-
-        if($this->request->getPost()){
 
             $nominee_details_data = array();
             $fileUploadDir = 'uploads/'.$edit_data['user_id'];
@@ -511,9 +510,17 @@ class Nomination extends BaseController
             return redirect()->to('view/'.$edit_data['user_id'])->withInput();
 
           }
-        }
-        else
-        {
+          else
+          {  
+              if(is_array($this->validation->getErrors()) && count($this->validation->getErrors()) > 0){
+                  $this->data['validation'] = $this->validation;
+                  $status = 'error';
+              }
+
+          }
+
+        } 
+            $editdata['id']                                  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
             if(isset($edit_data['nomination_type']) && ($edit_data['nomination_type'] == 'ssan')){
                 $editdata['complete_bio_data']                   = ($this->request->getFile('complete_bio_data'))?$this->request->getFile('complete_bio_data'):'';
                 $editdata['statement_of_research_achievements']  = ($this->request->getFile('statement_of_research_achievements'))?$this->request->getFile('statement_of_research_achievements'):'';
@@ -541,18 +548,12 @@ class Nomination extends BaseController
                 $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
                 $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
 
-            }    
-                $editdata['id']                                  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
-  
-        }
+            } 
 
-        if($this->request->getPost())
-            $this->data['validation'] = $this->validator;
+           $this->data['editdata'] = $editdata;
 
         $this->data['user']     = $edit_data;
-        //$this->data['']
-        $this->data['editdata'] = $editdata;
-
+      
         return  render('frontend/preview',$this->data);
                                  
     }
@@ -834,6 +835,65 @@ class Nomination extends BaseController
                 }
          }         
 
+    }
+
+
+    public function downloadData()
+    {
+        // Creating the new document...
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+       
+        $section = $phpWord->addSection();
+       
+        $section->addText(
+            '"Learn from yesterday, live for today, hope for tomorrow. '
+                . 'The important thing is not to stop questioning." '
+                . '(Albert Einstein)'
+        );
+
+       
+        $section->addText(
+            '"Great achievement is usually born of great sacrifice, '
+                . 'and is never the result of selfishness." '
+                . '(Napoleon Hill)',
+            array('name' => 'Tahoma', 'size' => 10)
+        );
+
+       
+        $fontStyleName = 'oneUserDefinedStyle';
+        $phpWord->addFontStyle(
+            $fontStyleName,
+            array('name' => 'Tahoma', 'size' => 10, 'color' => '1B2232', 'bold' => true)
+        );
+        $section->addText(
+            '"The greatest accomplishment is not in never falling, '
+                . 'but in rising again after you fall." '
+                . '(Vince Lombardi)',
+            $fontStyleName
+        );
+
+       
+        $fontStyle = new \PhpOffice\PhpWord\Style\Font();
+        $fontStyle->setBold(true);
+        $fontStyle->setName('Tahoma');
+        $fontStyle->setSize(13);
+        $myTextElement = $section->addText('"Believe you can and you\'re halfway there." (Theodor Roosevelt)');
+        $myTextElement->setFontStyle($fontStyle);
+
+      
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter->save('helloWorld.docx');
+
+        // Saving the document as ODF file...
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'ODText');
+        $objWriter->save('helloWorld.odt');
+
+        // Saving the document as HTML file...
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
+        $objWriter->save('helloWorld.html');
+
+       
     }
     
 }

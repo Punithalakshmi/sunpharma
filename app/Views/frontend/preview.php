@@ -44,7 +44,8 @@
             
             <div id="qbox-container">
             <form method="post" name="nomination_data" action="<?=base_url();?>/view" enctype="multipart/form-data">
-              <input type="hidden" name="id" value="<?=(isset($editdata['id']) && !empty($editdata['id']))?$editdata['id']:"";?>" />
+            <?= csrf_field(); ?>   
+            <input type="hidden" name="id" value="<?=(isset($editdata['id']) && !empty($editdata['id']))?$editdata['id']:"";?>" />
                     <div id="steps-container">
                         <div class="step">
 
