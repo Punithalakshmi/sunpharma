@@ -63,7 +63,7 @@
               </div>
           </div> 
             <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Award Category</label>
+                <label class="col-sm-3 col-form-label">Award Type</label>
                 <div class="col-sm-9"><?=$user['category_name'];?></div>
               </div>
 
@@ -305,7 +305,7 @@
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rating <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="text" id="first-name" name="rating" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',((isset($editdata['rating']) && !empty($editdata['rating']))?$editdata['rating']:""));?>">
+                                      <input type="text" id="rating" name="rating" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',((isset($editdata['rating']) && !empty($editdata['rating']))?$editdata['rating']:""));?>">
                                     </div>
                                   </div>
                                   <div class="clearfix"></div>
@@ -324,7 +324,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                       <div id="gender" class="btn-group ratingcommentcont" data-toggle="buttons">
                                         
-                                          <textarea oninput="auto_grow(this)" style="height: 100px;" class="ratingcomment col-xs-12" name="comment"><?=$editdata['comment'];?></textarea>
+                                          <textarea oninput="auto_grow(this)" style="height: 100px;" class="ratingcomment col-xs-12" name="comment" id="comment"><?=$editdata['comment'];?></textarea>
                                           
                                           <script>function auto_grow(element) {
                                             element.style.height = "5px";
@@ -358,6 +358,8 @@
             </div></div>
 
             <?php endif; ?>
+
+            
               <div class="page-title">
               <div class="title_left">
                 <h3>Ratings</h3>
@@ -386,7 +388,7 @@
                           <td><?=$rating['firstname'];?></td>
                           <td><?=$rating['rating'];?></td>
                           <td><?=$rating['comments'];?></td>
-                          <td><br><?=(isset($rating['is_rate_submitted']) && ($rating['is_rate_submitted'] == 1))?'Submitted':'Save Draft';?></td>
+                          <td><?=(isset($rating['is_rate_submitted']) && ($rating['is_rate_submitted'] == 1))?'Submitted':'Draft';?></td>
                           <td><?=$rating['created_date'];?></td>
                           <!-- <td>
                           <a href="<?//base_url().'/admin/rating/add/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>

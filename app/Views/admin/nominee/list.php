@@ -26,13 +26,14 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                        <th>Nomination No</th>
+                           <th>Nomination No</th>
+                           <th>Award</th>
+                           <th>Award Type</th>
+                           <th>Award Title</th>
                           <th>Firstname</th>
                           <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
-                          
-                          <th>Award Category</th>
                           <th>Approval Status</th>
                           <th>Created Date</th>
                           <th>Action</th>
@@ -57,11 +58,13 @@
                             ?>
                         <tr>
                           <td><?=$user['registration_no'];?></td>
+                          <td><?=$user['main_category_name'];?></td>
+                          <td><?=$user['category_name'];?></td>
+                          <td><?=$user['title'];?></td>
                           <td><?=$user['firstname'];?></td>
                           <td><?=strtolower($user['firstname']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
-                          <td><?=$user['category_name'];?></td>
                           <td><?=$status;?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>

@@ -348,33 +348,56 @@ function juryFinalSubmit()
             },function(el) {
                 if(el){
                   ///admin/nominee/view
-                        $('#loader').addClass('hidden');
-                        $.ajax({
-                          url : base_url+'/admin/nominee/view',
-                          type: "POST",
-                          data : formData,
-                          dataType:'json',
-                          success: function(data, textStatus, jqXHR)
-                          {
-                            $('#loader').addClass('hidden');
-                                if(data.status && data.status == 'success'){
-                                  if(data.message)
-                                    successMessageAlert(data.message);
+                      //  $('#loader').addClass('hidden');
+                      $.ajax({
+                        url: base_url+'/csrf_token',
+                        type: 'GET',
+                        data: {},
+                        dataType: 'json',
+                        success: function (form_res) 
+                        {
 
-                                   // window.location.href = data.filename;
-                                }  
-                          },
-                          error: function (jqXHR, textStatus, errorThrown)
-                          {
-                            $('#loader').addClass('hidden');
-                            if(textStatus && textStatus == 'error'){
-                              if(jqXHR.responseJSON.message){
-                                errorMessageAlert(jqXHR.responseJSON.message);
-                              }
-                            }
-                          }
-                      });
-                  //$("#ratingForm").submit();
+                            //  $("#overlay").fadeIn(300);
+
+                            token_res = form_res;
+
+                            var fd = new FormData();
+
+                            var comment = $("#comment").val();
+                            var rating  = $("#rating").val();
+
+                            fd.append('app_csrf',token_res.token);
+                            fd.append('comment',comment);
+                            fd.append('rating',rating);
+
+                              $.ajax({
+                                url : base_url+'/admin/nominee/view',
+                                type: "POST",
+                                data : fd,
+                                dataType:'json',
+                                success: function(data, textStatus, jqXHR)
+                                {
+                                  $('#loader').addClass('hidden');
+                                      if(data.status && data.status == 'success'){
+                                        if(data.message)
+                                          successMessageAlert(data.message);
+
+                                        // window.location.href = data.filename;
+                                      }  
+                                },
+                                error: function (jqXHR, textStatus, errorThrown)
+                                {
+                                  $('#loader').addClass('hidden');
+                                  if(textStatus && textStatus == 'error'){
+                                    if(jqXHR.responseJSON.message){
+                                      errorMessageAlert(jqXHR.responseJSON.message);
+                                    }
+                                  }
+                                }
+                            });
+                       }
+                  }); 
+                  
                     setTimeout(function(){
                     return true
                     },2500);

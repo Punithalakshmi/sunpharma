@@ -111,7 +111,7 @@ form.children("div").steps({
 
                     var category      = $("#category").val();
                     var nominee_name  = $("#nominee_name").val();
-                    var date_of_birth = $("#date_of_birth").val();
+                    var date_of_birth = $("#date_of_birth_spsfn").val();
                     var citizenship   = $("#citizenship").val();
                     var designation_and_office_address = $("#designation_and_office_address").val();
                     var residence_address = $("#residence_address").val();
@@ -123,6 +123,7 @@ form.children("div").steps({
                     var nominator_email      = $("#nominator_email").val();
                     var ongoing_course       = $("#ongoing_course").val();
                     var research_project     = $("#research_project").val();
+                    var award_id            = $("#award_id").val();
 
                 
                     fd.append('category',category);
@@ -142,6 +143,7 @@ form.children("div").steps({
                     fd.append('formType','spsfn');
                     fd.append('app_csrf',token_res.token);
                     fd.append('formTypeStatus','preview');
+                    
        
                     $.ajax({
                         url: base_url+'/spsfn/'+uri2,
@@ -298,7 +300,7 @@ form.children("div").steps({
 
                         var category = $("#category").val();
                         var nominee_name = $("#nominee_name").val();
-                        var date_of_birth = $("#date_of_birth").val();
+                        var date_of_birth = $("#date_of_birth_spsfn").val();
                         var citizenship = $("#citizenship").val();
                         var designation_and_office_address = $("#designation_and_office_address").val();
                         var residence_address = $("#residence_address").val();
@@ -310,6 +312,7 @@ form.children("div").steps({
                         var nominator_email = $("#nominator_email").val();
                         var ongoing_course  = $("#ongoing_course").val();
                         var research_project  = $("#research_project").val();
+                        var award_id          = $("#award_id").val();
 
                         fd.append('category',category);
                         fd.append('nominee_name',nominee_name);
@@ -328,6 +331,7 @@ form.children("div").steps({
                         fd.append('formType','spsfn');
                         fd.append('app_csrf',token_res.token);
                         fd.append('formTypeStatus','preview');
+                        fd.append('award_id',award_id);
                     
                             $.ajax({
                                         url: base_url+'/spsfn/'+uri2,

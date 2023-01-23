@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-
 class Nomination extends BaseController
 {
     public function index($award_id = '')
@@ -15,7 +14,7 @@ class Nomination extends BaseController
             
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('spsfn',$award_id));
+                $this->validation->setRules($this->validation_rules('spsfn',$award_id),$this->validationMessages());
 
                 if($this->validation->withRequest($this->request)->run()) {
 
@@ -172,7 +171,7 @@ class Nomination extends BaseController
 
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('ssan',$award_id));
+                $this->validation->setRules($this->validation_rules('ssan',$award_id),$this->validationMessages());
 
                 if($this->validation->withRequest($this->request)->run()) {
 
@@ -253,14 +252,17 @@ class Nomination extends BaseController
                                 $justification_letter = $this->request->getFile('justification_letter');
                                 $justification_letter->move($fileUploadDir);
 
-                                $passport = $this->request->getFile('passport');
-                                $passport->move($fileUploadDir);
+                                if($this->request->getFile('passport')) {
+                                    $passport = $this->request->getFile('passport');
+                                    $passport->move($fileUploadDir);
+                                    $nominee_details_data['passport_filename']                  = $passport->getClientName();
+                                }
 
                                 $nominator_photo = $this->request->getFile('nominator_photo');
                                 $nominator_photo->move($fileUploadDir);
 
                                 $nominee_details_data['nominee_id']                         = $lastInsertID;
-                                $nominee_details_data['passport_filename']                  = $passport->getClientName();
+                                
                                 $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
                                 $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
                                 $this->nominationModel->save($nominee_details_data);
@@ -287,11 +289,9 @@ class Nomination extends BaseController
                     }
                     else
                     {  
-
                         if(is_array($this->validation->getErrors()) && count($this->validation->getErrors()) > 0){
-                        $this->data['validation'] = $this->validation;
-                        $status = 'error';
-                        
+                            $this->data['validation'] = $this->validation;
+                            $status = 'error';
                         }    
                     }
         }
@@ -316,7 +316,8 @@ class Nomination extends BaseController
 
     public function validation_rules($type='',$id='')
     {
-
+           
+       
             $validation_rules = array();
             $validation_rules = array(
                                             "category" => array("label" => "Category",'rules' => 'required'),
@@ -325,7 +326,7 @@ class Nomination extends BaseController
                                             "citizenship" => array("label" => "Citizenship",'rules' => 'required'),
                                             "designation_and_office_address" => array("label" => "Designation & Office Address",'rules' => 'required'),
                                             "residence_address" => array("label" => "Residence Address",'rules' => 'required'),
-                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[users.email,award_id,'.$id.']'),
+                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|checkUniqueEmail['.$id.']'),
                                             "mobile_no" => array("label" => "Mobile No.",'rules' => 'required|numeric|max_length[10]'),
                                             "nominator_name" => array("label" => "Naminator Name",'rules' => 'required'),
                                             "nominator_mobile" => array("label" => "Naminator Mobile",'rules' => 'required|numeric|max_length[10]'),
@@ -338,9 +339,10 @@ class Nomination extends BaseController
                 $validation_rules['nominator_photo'] = array("label" => "Applicant Photo",'rules' => 'uploaded[nominator_photo]');
             }
 
-            if($type == 'ssan' && $this->request->getPost('citizenship') == 2)
+            if($type == 'ssan' && $this->request->getPost('citizenship') == 2) {
                 $validation_rules['passport'] =  array("label" => "Attached Passport",'rules' => 'uploaded[passport]|ext_in[passport,pdf]');
-
+            }
+                
             if($type == 'spsfn') {
 
                 if($this->request->getPost('ongoing_course') == 'other')
@@ -355,6 +357,29 @@ class Nomination extends BaseController
       
     }
 
+    public function validationMessages()
+    {
+
+        $validationMessages = array("category" => array("required" => "Please select category"),
+                                    "nominee_name" => array("required" => "Please enter name"),
+                                    "date_of_birth" => array("required" => "Please enter date of birth"),
+                                    "citizenship" => array("required" => "Please select citizenship"),
+                                    "designation_and_office_address" => array("required" => "Please enter designation and address"),
+                                    "residence_address" => array("required" => "Please enter residence address"),
+                                    "email" => array("required" => "Please enter Email","checkUniqueEmail"=>"A nomination with this email already exists"),
+                                    "mobile_no" => array("required" => "Please enter mobile no"),
+                                    "nominator_name" => array("required" => "Please enter nominator name"),
+                                    "nominator_mobile" => array("required" => "Please enter nominator mobile"),
+                                    "nominator_email" => array("required" => "Please enter nominator email"),
+                                    "nominator_office_address" => array("required" => "Please enter nominator office address"),
+                                    "justification_letter" => array("uploaded" => "Please select justification letter","max_size" => "File size should be below 500KB", "ext_in" => "File type should be pdf"),
+                                    "nominator_photo" => array("uploaded" => "Please select the photo")
+                              );
+
+         return $validationMessages;
+    }
+
+    
 
     public function view($id = '')
     {
@@ -364,7 +389,7 @@ class Nomination extends BaseController
         if(!empty($id)){
             $getUserData = $this->userModel->getUserData($id);
             $edit_data   = $getUserData->getRowArray();
-
+ 
             $edit_data['category_name'] = '';
             if(isset($edit_data['category_id'])) {
                 $category   = $this->categoryModel->getCategoriesById($edit_data['category_id']);
@@ -372,7 +397,7 @@ class Nomination extends BaseController
                 $edit_data['category_name'] = $categoryDt['name'];
             }
         }
-
+  
         if (strtolower($this->request->getMethod()) == "post") {
 
             $this->validation->setRules($this->awards_validation_rules($edit_data['nomination_type']));
@@ -549,8 +574,8 @@ class Nomination extends BaseController
                 $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
 
             } 
-
-           $this->data['editdata'] = $editdata;
+        
+        $this->data['editdata'] = $editdata;
 
         $this->data['user']     = $edit_data;
       
@@ -566,6 +591,7 @@ class Nomination extends BaseController
     public function getPostedData()
     {
        
+        //print_r($this->request->getFile('justification_letter'))
        // if($this->request->getPost()){
 
             $editdata = array();
@@ -689,7 +715,8 @@ class Nomination extends BaseController
        
         $this->data['content'] = $message;
         $html = view('email/mail',$this->data,array('debug' => false));
-        mail("punitha@izaaptech.in",$subject,$html,$header);
+     //   mail("punitha@izaaptech.in",$subject,$html,$header);
+        sendMail('rafi@izaaptech.com',$subject,$message);
 
 
         $header  = '';
@@ -707,7 +734,8 @@ class Nomination extends BaseController
        
         $this->data['content'] = $message;
         $html = view('email/mail',$this->data,array('debug' => false));
-        mail($nominee_email,$subject,$html,$header);
+       // mail($nominee_email,$subject,$html,$header);
+       sendMail($nominee_email,$subject,$message);
 
     }
 
@@ -737,7 +765,8 @@ class Nomination extends BaseController
                    
                     $this->data['content'] = $message;
                     $html = view('email/mail',$this->data,array('debug' => false));
-                     mail($jvalue['email'],$subject,$html,$header);
+                  //   mail($jvalue['email'],$subject,$html,$header);
+                  sendMail($jvalue['email'],$subject,$message);
                 }
             }
         }
@@ -837,6 +866,7 @@ class Nomination extends BaseController
 
     }
 
+  
 
     public function downloadData()
     {

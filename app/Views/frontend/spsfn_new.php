@@ -22,6 +22,7 @@
     <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
         <input type="hidden" name="detail_id" value="<?=(isset($editdata['detail_id']))?$editdata['detail_id']:"";?>" >
         <input type="hidden" name="formTypeStatus" value="submit">
+        <input type="hidden" name="award_id" id="award_id" value="<?=$award_id;?>" >
         <div>
             <h3>Personal Info</h3>
             <section>
@@ -74,7 +75,7 @@
                             <div class="col-lg-12">
                                 <div class=" mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth</label>
-                                    <input min="01/01/1991" max="08/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth_spsfn" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
+                                    <input min="01/01/1992" max="08/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth_spsfn" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
                                         placeholder="Date of Birth">
 
                                     <div class="hintcont">

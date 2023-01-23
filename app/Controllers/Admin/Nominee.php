@@ -51,12 +51,10 @@ class Nominee extends BaseController
             $getUserData  = $this->nomineeModel->getNomineeInfo($id);
             
             $this->data['user'] = $getUserData->getRowArray();
-           // print_r($getUserData); die;
+       
             $this->data['editdata'] = $this->data;
             return render('admin/nominee/nominee_view',$this->data);
                
-
-         
     }
 
     public function approve()
@@ -72,6 +70,8 @@ class Nominee extends BaseController
             $getUserData  = $this->userModel->getListsOfUsers($id);
             $getUserData  = $getUserData->getRowArray();
 
+            $getUserNominationNo = $this->nominationModel->getNominationData($id)->getRowArray();
+
            // $email = \Config\Services::email();
 
           //  $email->setFrom('punitha@izaaptech.in', 'Punithalakshmi');
@@ -85,7 +85,7 @@ class Nominee extends BaseController
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
 
-                $message  = 'Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
+                $message  = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
 
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
@@ -98,7 +98,7 @@ class Nominee extends BaseController
                 $up_data['active']  = 0;
                 $up_data['is_rejected'] = 1;
                 $msg = 'Rejected Successfully';
-                $message = 'Your Application has been rejected. Please use below credentials to login and resubmit the application. <br/><br/>';
+                $message = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please use below credentials to login and resubmit the application. <br/><br/>';
             }
 
             $up_data['password'] = md5($pass);
@@ -107,9 +107,9 @@ class Nominee extends BaseController
 
             $this->userModel->update(array("id" => $id),$up_data);
 
-            $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In';
-            $message .= 'Username: '.strtolower($getUserData['firstname']).'<br /><br />';
-            $message .= 'Password: '.$pass.'<br /><br /><br /><br />'; 
+            $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
+            $message .= '<b>Username: </b>'.strtolower($getUserData['firstname']).'<br />';
+            $message .= '<b>Password: </b>'.$pass.'<br /><br /><br /><br />'; 
 
             $message .= 'Thanks & Regards,<br/>';
             $message .= 'Sunpharma Science Foundation Team';
@@ -140,8 +140,22 @@ class Nominee extends BaseController
     public function nominee_lists_of_jury()
     {
         $nomineeLists  = $this->userModel->getListsNominations();
-        $this->data['lists'] = $nomineeLists->getResultArray();
+        $lists         = $nomineeLists->getResultArray();
+
+        $jury_id = $this->data['userdata']['id'];
+        foreach($lists as $lkey => $lvalue){
+            $reviewStatus = $this->ratingModel->getRatingData($jury_id,$lvalue['id'])->getRowArray();
+             
+            if(is_array($reviewStatus) && count($reviewStatus) > 0){
+                $lists[$lkey]['review_status'] = (isset($reviewStatus['is_rate_submitted']) && ($reviewStatus['is_rate_submitted'] == 0))?'Draft Review':'Reviewed';
+            }
+            else
+            {
+                $lists[$lkey]['review_status'] = 'Pending';
+            }
+        }
         
+        $this->data['lists'] = $lists;
         return render('admin/nominee/nominee_lists_of_jury',$this->data);         
     }
     
@@ -159,7 +173,7 @@ class Nominee extends BaseController
         //get nominee category
         if(isset($data['user']['category_id'])) {
     //    $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
-        $data['user']['category_name'] =  $this->data['user']['category_name'];
+          $data['user']['category_name'] =  $this->data['user']['category_name'];
         }
     
         $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['id'],$nominee_id)->getRowArray();
@@ -168,7 +182,12 @@ class Nominee extends BaseController
 
         $this->data['average_rating'] = $average_rating['avg_rating'];
 
-        $this->data['ratings'] = $this->ratingModel->getRatingByJury($nominee_id)->getResultArray();
+        $jury_id = '';
+        if($this->data['userdata']['role'] == 1){
+            $jury_id = $this->data['userdata']['id'];
+        }
+
+        $this->data['ratings'] = $this->ratingModel->getRatingByJury($nominee_id,$jury_id)->getResultArray();
 
         if (strtolower($this->request->getMethod()) == "post") {  
                 
@@ -414,7 +433,7 @@ class Nominee extends BaseController
         $this->data['content'] = $message;
         $html = view('email/mail',$this->data,array('debug' => false));
 
-        mail($mail,$subject,$html,$header);
+        sendMail($mail,$subject,$message);
     }
 
 }

@@ -934,7 +934,7 @@
                           if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && ($userdata['nominationEndDays'] > 0)):   ?>           
                         <div id="q-box__buttons">
                             <button id="next-btn" class="btn btn-primary" type="reset">Reset</button>
-                            <button id="submit-btn" class="btn btn-success ms-2" type="submit">Save</button>
+                            <button id="submit-btn" class="btn btn-success ms-2" type="submit">Submit</button>
                         </div>
                         <?php else:?>
                             <div id="q-box__buttons">

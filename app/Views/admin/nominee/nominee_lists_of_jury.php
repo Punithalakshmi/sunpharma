@@ -24,10 +24,11 @@
                       <thead>
                         <tr>
                           <th>Nomination No</th>
+                          <th>Award</th>
+                           <th>Award Type</th>
+                           <th>Award Title</th>
                           <th>Nominee Name</th>
-                          <th>Category</th>
                           <th>Email</th>
-                          
                           <th>Phone</th>
                           <th>Complete By</th>
                           <th>Created Date</th>
@@ -43,8 +44,11 @@
                             ?>
                         <tr>
                         <td><?=$user['registration_no'];?></td>
-                          <td><?=$user['firstname'].' '.$user['lastname'];?></td>
+                          <td><?=$user['main_category_name'];?></td>
                           <td><?=$user['category_name'];?></td>
+                          <td><?=$user['title'];?></td>
+                          <td><?=$user['firstname'].' '.$user['lastname'];?></td>
+                          
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
                           <td><?=$user['end_date'];?></td>
@@ -53,7 +57,7 @@
                           <td>
                            
                             <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">
-                               <i class="fa fa-eye"></i><?=(isset($user['review_status']) && ($user['review_status'] == 'Pending'))?'Review':'View';?> 
+                               <i class="fa fa-eye"></i><?=(isset($user['review_status']) && ($user['review_status'] == 'Pending'))?' Review':' View';?> 
                             </a>
                           </td>
                         </tr>

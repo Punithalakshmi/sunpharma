@@ -21,7 +21,7 @@
         <?= csrf_field(); ?>
         <input type="hidden" name="formTypeStatus" value="submit">
         <input type="hidden" name="id" value="<?=(isset($editdata['id']))?$editdata['id']:"";?>" >
-        <input type="hidden" name="award_id" value="" >
+        <input type="hidden" name="award_id" id="award_id" value="<?=$award_id;?>" >
         <input type="hidden" name="detail_id" value="<?=(isset($editdata['detail_id']))?$editdata['detail_id']:"";?>" >
         <div>
             <h3>Personal Info</h3>
@@ -40,7 +40,7 @@
                                             <img class="uploadPreview" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="200"
                                                 height="200" />
 
-                                               <input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo" />
+                                               <input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
                                         </label>
                                         <div class="hintcont">
                                             <small>Not more than 500 KB</small>
@@ -120,7 +120,7 @@
                             <div class="mb-3 form-items">
                                  <label class="form-label " for="">Mobile No.</label>
                                         
-                                <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
+                                <input type="number" min="0" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('mobile_no')) {?>
                                     <?= $error = $validation->getError('mobile_no'); ?>
@@ -199,7 +199,7 @@
                             <div class="mb-3 form-items">
                                 <label class="form-label " for="">Mobile No of the Nominator</label>
                                 
-                                <input  class="form-control required" type="number" placeholder="" id="nominator_mobile" name="nominator_mobile" value="<?=set_value('nominator_mobile',$editdata['nominator_mobile']);?>">
+                                <input  class="form-control required" min="0" type="number" placeholder="" id="nominator_mobile" name="nominator_mobile" value="<?=set_value('nominator_mobile',$editdata['nominator_mobile']);?>">
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('nominator_mobile')) {?>
                                     <?= $error = $validation->getError('nominator_mobile'); ?>

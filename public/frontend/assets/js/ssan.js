@@ -25,9 +25,12 @@ form.validate({
                     {
                         required: {
                             depends: function(elem) {
-                                    if($("#citizenship").val() == 2)
-                                        return true;
-                                }
+                                console.log('elem',elem);
+                                 if($("#citizenship").val() == 2)
+                                    return true;
+                                 else
+                                    return false;   
+                            }
                         },
                         extension: "pdf"
                     },
@@ -64,27 +67,9 @@ form.validate({
         onStepChanging: function (event, currentIndex, newIndex)
         {
            console.log('currentIndex',currentIndex);
+           console.log('uri2',uri2);
 
-        //    if(currentIndex == 0)
-        //    {
-        //       form.validate();
-        //       $("#nominee_email").rules("add",{
-        //                                         checkDuplication: true, 
-        //                                           messages:{
-        //                                             checkDuplication:'Email already registered for this Award!'
-        //                                         }
-        //                                     }
-        //                                 );
-
-        //       checkDuplicationEmail(false);
-        //    }
-        //    else
-        //    {
-        //       $("#nominee_email").rules( "remove", "checkDuplication");
-        //    }
-
-          
-           
+      
             event.preventDefault();
             form.validate().settings.ignore = ":disabled,:hidden";
            
@@ -138,6 +123,7 @@ form.validate({
                             var nominator_office_address       = $("#nominator_office_address").val();
                             var nominator_mobile               = $("#nominator_mobile").val();
                             var nominator_email                = $("#nominator_email").val();
+                            var award_id                       = $("#award_id").val();
         
                             fd.append('category',category);
                             fd.append('nominee_name',nominee_name);
@@ -154,6 +140,7 @@ form.validate({
                             fd.append('formType','ssan');
                             fd.append('app_csrf',token_res.token);
                             fd.append('formTypeStatus','preview');
+                            fd.append('award_id',award_id);
 
                                     $.ajax({
                                             url: base_url+'/ssan/'+uri2,
@@ -187,15 +174,15 @@ form.validate({
                                             {
                                                 $("#overlay").fadeOut(300);
                                                 if(textStatus && textStatus == 'error'){
-                                                    if(jqXHR.responseJSON.message){
-                                                        errorMessageAlert(jqXHR.responseJSON.message); 
+                                                   // if(jqXHR.responseJSON.message){
+                                                    //    errorMessageAlert(jqXHR.responseJSON.message); 
 
                                                         setTimeout(function(){
                                                             triggerSteps();
                                                         },5000);
                                                     
                                                         return false;
-                                                    }
+                                                  //  }
                                                 }
                                             }
                                         });
@@ -234,6 +221,8 @@ form.validate({
 function triggerSteps(csrf)
 {
 
+    $("#overlay").fadeIn(300);
+    console.log('uri2',uri2);
            var form = $("#formsection");
 
            form.children("div").steps({
@@ -260,7 +249,7 @@ function triggerSteps(csrf)
                             success: function (form_res) 
                             {
 
-                                $("#overlay").fadeIn(300);
+                              //  $("#overlay").fadeIn(300);
 
                                 token_res = form_res;
                                 

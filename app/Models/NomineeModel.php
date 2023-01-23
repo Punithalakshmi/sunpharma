@@ -27,9 +27,11 @@ class NomineeModel extends Model{
     {
         if(empty($id)){
             $builder = $this->table('users');
-            $builder->select('users.*,category.name as category_name,nominee_details.registration_no');
+            $builder->select('users.*,category.name as category_name,nominee_details.registration_no,nominations.title,awards_creation_category.name as main_category_name');
             $builder->join('nominee_details', 'nominee_details.nominee_id = users.id');
-            $builder->join('category', 'category.id = users.category');
+            $builder->join('category', 'category.id = nominee_details.category_id');
+            $builder->join('nominations','nominations.id = users.award_id AND nominations.status=1');
+            $builder->join('awards_creation_category','awards_creation_category.id=nominations.main_category_id');
             $builder->where("users.role",'2');
             return $query = $builder->get();
         }

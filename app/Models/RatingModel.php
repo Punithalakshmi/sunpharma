@@ -35,12 +35,15 @@ class RatingModel extends Model{
         return $query = $builder->get();
     }
 
-    public function getRatingByJury($nominee_id = '')
+    public function getRatingByJury($nominee_id = '',$jury_id = '')
     {
         $builder = $this->table('ratings');
         $builder->select('ratings.*,users.firstname,users.lastname');
         $builder->join('users','users.id = ratings.jury_id AND users.role=1');
         $builder->where("ratings.nominee_id",$nominee_id);
+        if(!empty($jury_id)) {
+            $builder->where("ratings.jury_id",$jury_id);
+        }
         $builder->orderBy('id','DESC');
         return $query = $builder->get();
     }
