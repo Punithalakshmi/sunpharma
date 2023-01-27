@@ -6,7 +6,7 @@
               </div>
               <div class="title_right">
                
-                <h3>Average Rating: <span class="badge badge-warning">
+                <h3>Total Score: <span class="badge badge-warning">
                   <i class="fa fa-star"></i> <?=($average_rating>0)?round($average_rating):0;?></span></h3>
                 <?php if(isset($user['status']) && $user['status'] == 'Approved' && $user['active'] == 1): ?>
                   <h3 class="approvedtxt"><span class="badge badge-success">

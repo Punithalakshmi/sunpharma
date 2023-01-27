@@ -51,7 +51,7 @@ class RatingModel extends Model{
     public function getNomineeAverageRating($nominee_id = '')
     {
         $builder = $this->table('ratings');
-        $builder->select('AVG(rating) as avg_rating');
+        $builder->select('SUM(rating) as avg_rating');
         $builder->where("ratings.nominee_id",$nominee_id);
         $builder->where('ratings.is_rate_submitted',1);
         return $query = $builder->get();

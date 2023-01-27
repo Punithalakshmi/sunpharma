@@ -297,7 +297,7 @@ class User extends BaseController
                                             "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                             "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
                                             "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
-                                            "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
+                                        //    "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
             );
         
             if($type == 'user')
@@ -332,7 +332,7 @@ class User extends BaseController
         $this->data['content'] = $message;
         $html = view('email/mail',$this->data,array('debug' => false));
 
-        mail($mail,$subject,$html,$header);
+        sendMail($mail,$subject,$message);
     }
 
 }

@@ -94,7 +94,9 @@
                       </div>
                         <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender <span class="required" style="color:red;">*</span> </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender 
+                          <!-- <span class="required" style="color:red;">*</span>  -->
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group mt-10" data-toggle="buttons">
                             <p>
@@ -105,29 +107,30 @@
                         </div>
                       </div>
                       <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('gender')) {?>
-                          <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('gender'); ?>
-                          </div>
-                      <?php }?>
-                      </div>
+                      <!-- <div class="form-group col-md-6"> -->
+                      <?php //if(isset($validation) && $validation->getError('gender')) {?>
+                          <!-- <div class='alert alert-danger mt-2'>
+                            <?// $error = $validation->getError('gender'); ?>
+                          </div> -->
+                      <?php //}?>
+                      <!-- </div> -->
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required" style="color:red;">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth 
+                             <!-- <span class="required" style="color:red;">*</span> -->
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="single_cal3" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('date_of_birth')) {?>
+                      <!-- <div class="form-group col-md-6">
+                      <?php //if(isset($validation) && $validation->getError('date_of_birth')) {?>
                           <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('date_of_birth'); ?>
+                            <?// $error = $validation->getError('date_of_birth'); ?>
                           </div>
-                      <?php }?>
-                      </div>
+                      <?php //}?>
+                      </div> -->
                       <div class="clearfix"></div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Role 
