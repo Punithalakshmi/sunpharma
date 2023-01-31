@@ -868,7 +868,7 @@ class Nomination extends BaseController
 
   
 
-    public function downloadData()
+    public function print($nominee_id = '')
     {
         // Creating the new document...
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -916,12 +916,12 @@ class Nomination extends BaseController
         $objWriter->save('helloWorld.docx');
 
         // Saving the document as ODF file...
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'ODText');
-        $objWriter->save('helloWorld.odt');
+    //    $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'ODText');
+   //     $objWriter->save('helloWorld.odt');
 
         // Saving the document as HTML file...
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
-        $objWriter->save('helloWorld.html');
+      //  $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
+    //    $objWriter->save('helloWorld.html');
 
        
     }

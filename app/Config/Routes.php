@@ -110,6 +110,8 @@ $routes->get('nomination/close','Nomination::close');
 
 $routes->post('nomination/check_unique_award_by_user','Nomination::checkUniqueEmailForAward');
 
+$routes->get('print','Nomination::print');
+
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index",['filter' =>'auth']);

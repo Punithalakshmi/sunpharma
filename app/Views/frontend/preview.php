@@ -939,7 +939,7 @@
                         <?php else:?>
                             <div id="q-box__buttons">
                             
-                            <button id="submit-btn" class="btn btn-success ms-2" type="submit">Print</button>
+                            <a  href="<?=base_url();?>/print/<?=$editdata['id'];?>" id="submit-btn" class="btn btn-success ms-2" >Print</a>
                         </div>  
                     <?php endif;?>
                 </form>

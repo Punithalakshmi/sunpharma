@@ -17,6 +17,9 @@ $(document).ready(function(){
     //successMessageAlert('');
    
     
+    $("#rating").onkeyup(function(){
+      alert('should');
+    })
 
 
 });
