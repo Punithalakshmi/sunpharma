@@ -12,7 +12,8 @@ class CategoryModel extends Model{
         'created_date',
         'updated_date',
         'created_id',
-        'updated_id'
+        'updated_id',
+        'main_category_id'
     ];
 
  
@@ -61,5 +62,13 @@ class CategoryModel extends Model{
         $builder->select('category.*');
         $builder->join('nominations','nominations.category_id != category.id');
         return $query = $builder->get();
+    }
+
+    public function getCategoryByMainCategoryID($id)
+    {
+        $builder = $this->table('category');
+            $builder->select('category.*');
+            $builder->where("category.main_category_id",$id);
+            return $query = $builder->get();
     }
 }

@@ -160,6 +160,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nomination/add/(:any)','Nomination::add/$1',['filter' =>'auth']);
     $routes->get('nomination/delete/(:any)','Nomination::delete/$1',['filter' =>'auth']);
     $routes->post('nomination/delete/(:any)','Nomination::delete/$1',['filter' =>'auth']);
+    $routes->post('nomination/getCategoryById','Nomination::getCategoryById',['filter' => 'auth']);
 
     $routes->get('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
     $routes->post('rating/add','Rating::add',['filter' =>'auth']);
@@ -194,6 +195,9 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
 
     
     $routes->post('eventregisteration/export','EventRegisteration::export',['filter' =>'auth']);
+
+    $routes->post('jury/mapping','JuryMapping::mapping',['filter' =>'auth']);
+    $routes->get('jury/mapping','JuryMapping::mapping',['filter' =>'auth']);
 
 });
 

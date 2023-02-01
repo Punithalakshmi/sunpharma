@@ -42,6 +42,7 @@ class Category extends BaseController
                     $ins_data['name']       = $category;
                     $ins_data['type']       = $type;
                     $ins_data['status']     = $active;
+                    $ins_data['main_category_id'] = ($type == 'Research Awards')?1:2;
                     
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Category Updated Successfully!');

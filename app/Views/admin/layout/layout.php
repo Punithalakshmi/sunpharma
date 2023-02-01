@@ -12,6 +12,7 @@
     
     <!-- Bootstrap new -->
      <?=link_tag('/vendors/bootstrap/dist/css/bootstrap.min.css');?>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
      <!-- <link href="bootstrap.min.css" > -->
 
      <!-- old -->
@@ -73,7 +74,7 @@
     <!-- Bootstrap -->
     <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
     <?= script_tag('/vendors/bootstrap/dist/js/bootstrap.min.js');?>
    
     <?= script_tag('/js/admin/bootstrap-msg.js');?>

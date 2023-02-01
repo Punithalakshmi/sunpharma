@@ -33,6 +33,9 @@
                   <li><a href="<?php echo base_url();?>/admin/nominee">
                     <i class="fa fa-solid fa-users"></i> Nominees </a>
                   </li>
+                  <li><a href="<?php echo base_url();?>/admin/jury/mapping">
+                    <i class="fa fa-solid fa-users"></i> Jury Mapping </a>
+                  </li>
                   <li><a href="<?php echo base_url();?>/admin/category">
                     <i class="fa fa-solid fa-list"></i> Award Types </a>
                   </li>

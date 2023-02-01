@@ -231,5 +231,27 @@ class Nomination extends BaseController
         
     }
 
+    public function getCategoryById()
+    {
+        if (strtolower($this->request->getMethod()) == "post") {  
+
+            $category = $this->request->getPost('category');
+
+            $categories = $this->categoryModel->getCategoryByMainCategoryID($category);
+
+            $this->data['categories'] = $categories->getResultArray();
+
+            $html = view('admin/nomination/award_type_list',$this->data,array('debug' => false));
+             
+            if($this->request->isAJAX()){
+                  return $this->response->setJSON([
+                      'status' => 'success',
+                      'html'   => $html
+                  ]); 
+              }
+            
+          }
+    }
+
     
 }

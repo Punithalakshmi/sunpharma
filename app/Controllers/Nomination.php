@@ -312,7 +312,7 @@ class Nomination extends BaseController
         {
             return  render('frontend/ssan_new',$this->data);         
         }
-   }
+    }
 
     public function validation_rules($type='',$id='')
     {

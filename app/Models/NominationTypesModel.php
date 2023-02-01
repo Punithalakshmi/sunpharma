@@ -2,8 +2,8 @@
 namespace App\Models;  
 use CodeIgniter\Model;
 
+class NominationTypesModel extends Model {
 
-class NominationTypesModel extends Model{
     protected $table = 'nominations';
     
     protected $allowedFields = [
@@ -36,33 +36,41 @@ class NominationTypesModel extends Model{
             return $query = $builder->get();
         }
         else 
-          return $this->getWhere(array('id' => $id)); 
+            return $this->getWhere(array('id' => $id)); 
     }
 
     public function getCategoryWiseNominations()
     {
-            $builder = $this->table('nominations');
-            $builder->select('nominations.*,category.type');
-            $builder->join('category','category.id = nominations.category_id');
-            return $query = $builder->get();
+        $builder = $this->table('nominations');
+        $builder->select('nominations.*,category.type');
+        $builder->join('category','category.id = nominations.category_id');
+        return $query = $builder->get();
     }
 
     public function getCategoryNomination($id='')
     {
-          return $this->getWhere(array('category_id' => $id)); 
+        return $this->getWhere(array('category_id' => $id)); 
     }
  
     public function getActiveNomination()
     {
-        //  return $this->getWhere(array('status' => 1)); 
-
-          $builder = $this->table('nominations');
-          $builder->select('nominations.*,IF(category.type!="","awards","awards") as category_type,category.type,nominations.id as award_id');
-          $builder->join('category','category.id = nominations.category_id');
-          $builder->join('awards_creation_category','awards_creation_category.id = nominations.main_category_id');
-          $builder->where('nominations.status',1);
-          return $query = $builder->get();
+       
+        $builder = $this->table('nominations');
+        $builder->select('nominations.*,IF(category.type!="","awards","awards") as category_type,category.type,nominations.id as award_id');
+        $builder->join('category','category.id = nominations.category_id');
+        $builder->join('awards_creation_category','awards_creation_category.id = nominations.main_category_id');
+        $builder->where('nominations.status',1);
+        return $query = $builder->get();
 
     }
+
+    public function getAwardLists()
+    {
+        $builder = $this->table('nominations');
+        $builder->select('nominations.*');
+        $builder->where('nominations.status',1);
+        return $query = $builder->get();
+    }
+    
     
 }

@@ -17,9 +17,9 @@ $(document).ready(function(){
     //successMessageAlert('');
    
     
-    $("#rating").onkeyup(function(){
-      alert('should');
-    })
+    // $("#rating").onkeyup(function(){
+    //   alert('should');
+    // })
 
 
 });
@@ -183,8 +183,6 @@ $(function(){
 
     var category = $("#category").val();
     var year     = $("#year").val();
-
-   
     var csrfHash = $("input[name='app_csrf']").val();
    
     $('#loader').removeClass('hidden');
@@ -463,4 +461,42 @@ function exportRegistrations()
              }
           );    
     
+}
+
+
+function getCategories(e)
+{
+
+  //var csrfHash = $("input[name='app_csrf']").val();
+  var mainCategoryID = e.value;
+
+  $('#loader').removeClass('hidden');
+  $.ajax({
+    url: base_url+'/csrf_token',
+    type: 'GET',
+    data: {},
+    dataType: 'json',
+    success: function (form_res) 
+    {
+        $.ajax({
+            url : base_url+'/admin/nomination/getCategoryById',
+            type: "POST",
+            data : {'app_csrf':form_res.token,'category':mainCategoryID},
+            dataType:'json',
+            success: function(data, textStatus, jqXHR)
+            {
+                $('#loader').addClass('hidden');
+                if(data.status && data.status == 'success'){
+                  $("#awardTypeList").html(data.html);
+                }
+                
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+              $('#loader').addClass('hidden');  
+            }
+        });
+    }
+  });
+
 }
