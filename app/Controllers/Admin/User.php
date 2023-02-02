@@ -353,4 +353,54 @@ class User extends BaseController
         sendMail($mail,$subject,$message);
     }
 
+    public function resetpassword($id = '')
+    {
+
+                if (strtolower($this->request->getMethod()) == "post") {  
+                    
+                    $this->validation->setRules($this->validation_rules('change_password',$id));
+
+                    if(!$this->validation->withRequest($this->request)->run()) {
+                        $this->data['validation'] = $this->validator;
+                    }
+                    else
+                    {     
+
+                        $newPassword     = $this->request->getPost('new_password');
+                        $id              = $this->request->getPost('id');
+
+                        $ins_data = array();
+                        $ins_data['password']  = md5($newPassword);
+
+                        $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
+                        
+                        if(!empty($id)){
+                            $this->session->setFlashdata('msg', 'Password Updated Successfully!');
+                            $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                            $ins_data['updated_id']    = $this->data['userdata']['login_id'];
+                            $this->userModel->update(array("id" => $id),$ins_data);
+                        }
+                        
+                  //  if(isset($userData['email']) && !empty($userData['email'])) 
+                      //  $this->sendMail($userData['email'],$newPassword);
+
+                        return redirect()->route('admin/user');
+                   }
+            }
+            else
+            {  
+                $editdata['new_password']       = ($this->request->getPost('new_password'))?$this->request->getPost('new_password'):'';
+                $editdata['confirm_password']   = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):'';
+                $editdata['id']                 = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;   
+            } 
+
+     
+            $this->data['editdata'] = $editdata;
+
+            return  render('admin/user/resetpassword',$this->data);
+
+    }
+
+  
+
 }

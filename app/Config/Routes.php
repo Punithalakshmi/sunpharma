@@ -124,6 +124,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get("login", "Login::index");
     $routes->get("logout", "Login::logout");
     $routes->get("user", "User::index",['filter' =>'auth']);
+    $routes->get("reset_password/(:any)", "User::resetpassword/$1",['filter' =>'auth']);
+    $routes->post("reset_password", "User::resetpassword",['filter' =>'auth']);
     //$routes->get("user/add", "User::add");
     ///$routes->match(["get", "post"], "user/add/(:any)", "User::add/$1");
 
@@ -134,7 +136,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post("user/delete/(:any)", "User::delete/$1",['filter' =>'auth']);
     $routes->get("user/changepassword/(:any)", "User::changepassword/$1",['filter' =>'auth']);
     $routes->post("user/changepassword", "User::changepassword",['filter' =>'auth']);
-
+    
     $routes->get("profile", "User::profile",['filter' =>'auth']);
     $routes->post("profile", "User::profile",['filter' =>'auth']);
 
@@ -195,7 +197,6 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nominee/extend/(:any)','Nominee::extend/$1',['filter' =>'auth']);
     $routes->post('nominee/extend','Nominee::extend',['filter' =>'auth']);
 
-    
     $routes->post('eventregisteration/export','EventRegisteration::export',['filter' =>'auth']);
 
     $routes->post('jury/mapping','JuryMapping::mapping',['filter' =>'auth']);

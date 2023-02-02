@@ -180,7 +180,7 @@ class Workshops extends BaseController
 
         $this->validation_rules = array();
         $this->validation_rules = array(   "subject" => array("label" => "Subject",'rules' => 'required'),
-                                     "description" => array("label" => "Description",'rules' => 'required')
+                                           "description" => array("label" => "Description",'rules' => 'required')
                                 );
     
         return $this->validation_rules;

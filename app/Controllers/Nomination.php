@@ -528,6 +528,9 @@ class Nomination extends BaseController
 
             $this->nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data); 
 
+            //inactive the user
+            $this->userModel->update(array("id" => $id),array("active" => 0));
+
             //sendmail to jury
             $this->sendMailToJury($edit_data['category_id']);
 

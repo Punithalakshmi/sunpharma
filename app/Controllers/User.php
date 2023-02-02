@@ -28,7 +28,7 @@ class User extends BaseController
 
                         $pass = trim($data['password']);
                     
-                       if($pass == md5($password)){
+                       if(($pass == md5($password)) && ($data['active'] == 1)){
                         
                          $redirect_route = 'view/'.$data['id'];
         

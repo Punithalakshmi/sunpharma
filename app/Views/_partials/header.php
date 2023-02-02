@@ -92,6 +92,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="<?php echo base_url();?>/admin/profile"><i class="fa fa-user pull-right"></i> Profile</a></li>
+                    <li><a href="<?php echo base_url();?>/admin/reset_password/<?=$userdata['id'];?>"><i class="fa fa-user pull-right"></i> Reset Password</a></li>
                     <li><a href="<?php echo base_url();?>/admin/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
