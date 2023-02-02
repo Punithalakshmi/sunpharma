@@ -330,7 +330,7 @@ function errorMessageAlert(msg)
 
 }
 
-function juryFinalSubmit()
+function juryFinalSubmit(nominee_id = '')
 {
    
           $('#loader').removeClass('hidden');
@@ -362,19 +362,19 @@ function juryFinalSubmit()
 
                             token_res = form_res;
 
-                            var fd = new FormData();
+                           // var fd = new FormData();
 
                             var comment = $("#comment").val();
                             var rating  = $("#rating").val();
 
-                            fd.append('app_csrf',token_res.token);
-                            fd.append('comment',comment);
-                            fd.append('rating',rating);
-
+                        //    fd.append('app_csrf',token_res.token);
+                         //   fd.append('comment',comment);
+                          //  fd.append('rating',rating);
+                                                                                                                                                                                                               
                               $.ajax({
-                                url : base_url+'/admin/nominee/view',
+                                url: base_url+'/admin/nominee/view/'+nominee_id,
                                 type: "POST",
-                                data : fd,
+                                data: {app_csrf:token_res.token,comment:comment,rating:rating},
                                 dataType:'json',
                                 success: function(data, textStatus, jqXHR)
                                 {
@@ -382,8 +382,6 @@ function juryFinalSubmit()
                                       if(data.status && data.status == 'success'){
                                         if(data.message)
                                           successMessageAlert(data.message);
-
-                                        // window.location.href = data.filename;
                                       }  
                                 },
                                 error: function (jqXHR, textStatus, errorThrown)

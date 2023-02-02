@@ -35,7 +35,7 @@ class RatingModel extends Model{
         return $query = $builder->get();
     }
 
-    public function getRatingByJury($nominee_id = '',$jury_id = '')
+    public function getRatingByJury($nominee_id = '',$jury_id = '',$is_rate_submitted = '')
     {
         $builder = $this->table('ratings');
         $builder->select('ratings.*,users.firstname,users.lastname');
@@ -44,6 +44,9 @@ class RatingModel extends Model{
         if(!empty($jury_id)) {
             $builder->where("ratings.jury_id",$jury_id);
         }
+        if($is_rate_submitted == 'yes')
+         $builder->where("ratings.is_rate_submitted",1);
+
         $builder->orderBy('id','DESC');
         return $query = $builder->get();
     }

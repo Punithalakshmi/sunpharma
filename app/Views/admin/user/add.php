@@ -79,17 +79,49 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required" style="color:red;">*</span></label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Username <span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" class="form-control col-md-7 col-xs-12" type="text" name="email" value="<?php echo set_value('email',$editdata['email']);?>">
+                          <input id="username" class="form-control col-md-7 col-xs-12" type="text" name="username" value="<?php echo set_value('username',$editdata['username']);?>">
                         </div>
                        
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('email')) {?>
+                      <?php if(isset($validation) && $validation->getError('username')) {?>
                         <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('email'); ?>
+                          <?= $error = $validation->getError('username'); ?>
+                            </div>
+                        <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Password <span class="required" style="color:red;">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="password" class="form-control col-md-7 col-xs-12" type="password" name="password" value="<?php echo set_value('password',$editdata['password']);?>">
+                        </div>
+                       
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('password')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?= $error = $validation->getError('password'); ?>
+                            </div>
+                        <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password <span class="required" style="color:red;">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="confirm_password" class="form-control col-md-7 col-xs-12" type="password" name="confirm_password" value="<?php echo set_value('confirm_password',$editdata['confirm_password']);?>">
+                        </div>
+                       
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('confirm_password')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?= $error = $validation->getError('confirm_password'); ?>
                             </div>
                         <?php }?>
                       </div>
@@ -170,6 +202,27 @@
                             <?= $error = $validation->getError('user_role'); ?>
                           </div>
                       <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
+                          <div id="gender" class="btn-group mt-10" data-toggle="buttons">
+                            <p>
+                            <input type="radio" class="flat" name="status" id="statusActive" value="1" <?php echo set_radio('status','1',(isset($editdata['status']) && ($editdata['status']=='1'))?'checked':'');?> /> Active &nbsp;&nbsp;
+                            <input type="radio" class="flat" name="status" id="statusInActive" value="0" <?php echo set_radio('status','0',(isset($editdata['status']) && ($editdata['status']=='0'))?'checked':'');?> /> InActive
+                           </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>          
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('status')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?= $error = $validation->getError('status'); ?>
+                            </div>
+                        <?php }?>
                       </div>
                       <div class="clearfix"></div>
                         <div id="categorySelection" class="form-group" style="display:<?=(isset($editdata['role']) && ($editdata['role'] == 1))?'block':'none';?>">

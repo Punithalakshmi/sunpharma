@@ -140,6 +140,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
 
     $routes->get("nominee", "Nominee::index",['filter' =>'auth']);
     $routes->get('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
+    $routes->post('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
     $routes->get('nominee/lists','Nominee::nominee_lists_of_jury',['filter' =>'auth']);
     $routes->post('nominee/assignJury','Nominee::assignJury',['filter' =>'auth']);
     $routes->post('nominee/view','Nominee::view',['filter' =>'auth']);
@@ -163,6 +164,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('nomination/getCategoryById','Nomination::getCategoryById',['filter' => 'auth']);
 
     $routes->get('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
+    $routes->post('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
     $routes->post('rating/add','Rating::add',['filter' =>'auth']);
     $routes->get('rating/delete/(:any)/(:any)','Rating::delete/$1/$1',['filter' =>'auth']);
     $routes->post('rating/delete/(:any)/(:any)','Rating::delete/$1/$1',['filter' =>'auth']);

@@ -8,12 +8,9 @@ class User extends BaseController
     public function login()
     {
 
-        // try
-        // {
+        
             if (strtolower($this->request->getMethod()) == "post") {  
-
-              //  echo "dsdsdsds"; die;
-                
+ 
                 $this->validation->setRules($this->validation_rules());
             
                 if(!$this->validation->withRequest($this->request)->run()) {
@@ -30,14 +27,11 @@ class User extends BaseController
                     if($data){
 
                         $pass = trim($data['password']);
-                     
-                      //  $authenticatePassword = password_verify($password, $pass);
-                       //    echo $authenticatePassword; die;
+                    
                        if($pass == md5($password)){
-                         // echo "testing"; 
+                        
                          $redirect_route = 'view/'.$data['id'];
         
-                       
                             $ses_data = array(
                                 'id' => $data['id'],
                                 'name' => $data['firstname'],
@@ -47,13 +41,7 @@ class User extends BaseController
                                 'isNominee' => 'yes'
                             );
 
-                        //    print_r($ses_data);
-
-                         //   $nominationEndDays =  $this->dateDiff(date("Y-m-d"),$data['extend_date']);
-        //    die;
                             $ses_data['nominationEndDays'] =  getNominationDays($data['extend_date']);  
-            
-           //                 $ses_data['nominationEndDate'] = $getNominationDaysCt['end_date'];
                           
                             setSessionData('fuserdata',$ses_data);
 
@@ -83,12 +71,6 @@ class User extends BaseController
             }
 
             return  render('frontend/login',$this->data);
-        // }
-        // catch(\Exception $e){
-        //     $this->session->setFlashdata($e->getMessage());
-        // }
-       
-
        
     }
 

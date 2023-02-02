@@ -347,7 +347,7 @@
                                       <div class=""><br>
                                         <?php if(isset($editdata['is_rate_submitted']) && ($editdata['is_rate_submitted'] == 0)):?>
                                         <input type="submit" class="btn btn-primary" name="submit" value="Save Draft">
-                                        <input type="button" class="btn btn-success" name="submit" value="SUBMIT" onclick="juryFinalSubmit();">
+                                        <input type="button" class="btn btn-success" name="submit" value="SUBMIT" onclick="juryFinalSubmit('<?=$user['user_id'];?>');">
                                         <?php endif;?>
                                       </div>
                                     </div>
@@ -359,7 +359,7 @@
 
             <?php endif; ?>
 
-            
+            <?php // echo "<<pre>"; print_r($user); ?>
               <div class="page-title">
               <div class="title_left">
                 <h3>Ratings</h3>
@@ -377,7 +377,9 @@
                           <th>Comments</th>
                           <th>Mode</th>
                           <th>Rated Date</th>
-                          <!-- <th>Action</th> -->
+                          <?php if($userdata['role'] == 3): ?>
+                            <th>Action</th>
+                          <?php endif; ?>
                         </tr>
                       </thead>
                       <tbody>
@@ -390,10 +392,12 @@
                           <td><?=$rating['comments'];?></td>
                           <td><?=(isset($rating['is_rate_submitted']) && ($rating['is_rate_submitted'] == 1))?'Submitted':'Draft';?></td>
                           <td><?=$rating['created_date'];?></td>
-                          <!-- <td>
-                          <a href="<?//base_url().'/admin/rating/add/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                          <a href="<?//base_url().'/admin/rating/delete/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td> -->
+                          <?php if($userdata['role'] == 3): ?>
+                           <td>
+                          <a href="<?=base_url().'/admin/rating/add/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                          <a href="<?=base_url().'/admin/rating/delete/'.$rating['id'].'/'.$rating['nominee_id'];?>" class="btn btn-info btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                          </td>
+                          <?php endif;?>
                         </tr>
                         <?php endforeach;
                                 endif;

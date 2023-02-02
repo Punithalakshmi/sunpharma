@@ -58,12 +58,15 @@ class User extends BaseController
 
                 $firstname     = $this->request->getPost('firstname');
                 $lastname      = $this->request->getPost('lastname');
+                $username      = $this->request->getPost('username');
                 $middlename    = $this->request->getPost('middlename');
                 $email         = $this->request->getPost('email');
                 $phonenumber   = $this->request->getPost('phonenumber');
                 $gender        = $this->request->getPost('gender');
                 $date_of_birth = $this->request->getPost('date_of_birth');
                 $user_role     = $this->request->getPost('user_role');
+                $password      = $this->request->getPost('password');
+                $status        = $this->request->getPost('status');
 
                 if($this->request->getPost('category'))
                     $category      = $this->request->getPost('category');
@@ -72,13 +75,15 @@ class User extends BaseController
                 $ins_data['firstname']  = $firstname;
                 $ins_data['lastname']   = $lastname;
                 $ins_data['middlename'] = $middlename;
+                $ins_data['username']   = $username;
                 $ins_data['email']      = $email;
                 $ins_data['phone']      = $phonenumber;
                 $ins_data['role']       = $user_role;
                 $ins_data['address']    = '';
                 $ins_data['dob']        =  $date_of_birth;
-                $ins_data['active']     =  '1';
+                $ins_data['active']     =  $status;
                 $ins_data['gender']     =  $gender;
+                $ins_data['password']   =  md5($password);
 
                 if($user_role == 1)
                     $ins_data['category'] =  $category;
@@ -114,6 +119,10 @@ class User extends BaseController
                 $editdata['address']    = '';
                 $editdata['dob']        =  (isset($edit_data['dob']) && !empty($edit_data['dob']))?date("m/d/Y",strtotime($edit_data['dob'])):date("m/d/Y");
                 $editdata['gender']     =  $edit_data['gender'];
+                $editdata['username']     =  $edit_data['username'];
+                $editdata['password']     =  $edit_data['password'];
+                $editdata['status']     =  $edit_data['active'];
+                
 
                 if($edit_data['role'] == 1)
                     $editdata['category']  =  $edit_data['category'];
@@ -134,6 +143,10 @@ class User extends BaseController
                 $editdata['dob']        = ($this->request->getPost('date_of_birth'))?$this->request->getPost('date_of_birth'):'';
                 $editdata['gender']     = ($this->request->getPost('gender'))?$this->request->getPost('gender'):'';
                 $editdata['category']   = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                $editdata['username']   = ($this->request->getPost('username'))?$this->request->getPost('username'):'';
+                $editdata['password']   = ($this->request->getPost('password'))?$this->request->getPost('password'):'';
+                $editdata['confirm_password']   = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):'';
+                $editdata['status']   = ($this->request->getPost('status'))?$this->request->getPost('status'):'';
                 $editdata['id']         = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
             }
 
@@ -297,11 +310,16 @@ class User extends BaseController
                                             "lastname" => array("label" => "Lastname",'rules' => 'required'),
                                             "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
                                             "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
-                                        //    "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required')
+                                            
             );
         
-            if($type == 'user')
-                $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');  
+            if($type == 'user'){
+                $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');
+                $validation_rules["username"] = array("label" => "Username",'rules' => 'required');
+                $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
+                $validation_rules['status']  = array("label" => "Status",'rules' => 'required');
+                $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
+            }      
         }
         else
         {

@@ -39,7 +39,7 @@ class Login extends BaseController
                         {
                             $pass = $data['password'];
                           
-                            $authenticatePassword = password_verify(trim($password), $pass); 
+                        //    $authenticatePassword = password_verify(trim($password), $pass); 
 
                             if($pass == md5($password)){
                              

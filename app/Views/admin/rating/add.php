@@ -12,9 +12,10 @@
                 
                   <div class="x_content">
                     <br />
-                    <form id="categoryForm" action="<?php echo base_url();?>/admin/rating/add" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                    <?php $uri4 = $current_url->getSegment(4); $uri5 = $current_url->getSegment(5); ?>
+                    <form id="ratingForm" action="<?php echo base_url();?>/admin/rating/add/<?=$uri4;?>/<?=$uri5;?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
-                      <?= csrf_field(); ?>
+                      <?=csrf_field();?>
                       <input type="hidden" name="nominee_id" value="<?=$editdata['nominee_id'];?>"  >
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rating <span class="required">*</span>
@@ -45,7 +46,8 @@
                         <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <!-- <input type="reset" class="btn btn-primary" name="reset" value="RESET"> -->
-                            <a href="<?=base_url();?>/admin/rating" class="btn btn-primary">CANCEL</a> 
+                            
+                            <a href="<?=base_url();?>/admin/nominee/view/<?=$uri;?>" class="btn btn-primary">CANCEL</a> 
                             <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                           </div>
                         </div>

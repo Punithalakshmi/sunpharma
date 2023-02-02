@@ -10,59 +10,54 @@ class Rating extends BaseController
     public function add($id='',$nominee_id='')
     {
         
-           
-            if($this->request->getPost())
-               $id  = $this->request->getPost('id');
+        if (strtolower($this->request->getMethod()) == "post") {  
 
-               $edit_data = $this->ratingModel->getLists($id);   
-               $edit_data = $edit_data->getRowArray();
-             
-               $this->validation = $this->validate($this->validation_rules());
+            $this->validation->setRules($this->validation_rules());
 
-            if($this->validation) {
-
-                if($this->request->getPost()){
-                
-                    $rating        = $this->request->getPost('rating');
-                    $comments      = $this->request->getPost('comments');
-                   
-                    $ins_data = array();
-                    $ins_data['rating']     = $rating;
-                    $ins_data['comments']   = $comments;
-                    
-                    if(!empty($id)){
-                        $this->session->setFlashdata('msg', 'Rating Updated Successfully!');
-                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
-                        $this->ratingModel->update(array("id" => $id),$ins_data);
-                    }
-                   
-                    $nominee_id = $this->request->getPost('nominee_id');
-                    return redirect()->to('admin/nominee/view/'.$nominee_id);
-                }
+            if(!$this->validation->withRequest($this->request)->run()) {
+                $this->data['validation'] = $this->validation;
             }
             else
-            {  
-            
-                    if(!empty($edit_data) && count($edit_data)){
-                        $editdata['rating']     = $edit_data['rating'];
-                        $editdata['comments']   = $edit_data['comments'];
-                        $editdata['id']         = $edit_data['id'];
-                        $editdata['nominee_id'] = $edit_data['nominee_id'];
-                    }
+            { 
+                $rating        = $this->request->getPost('rating');
+                $comments      = $this->request->getPost('comments');
+               
+                $ins_data = array();
+                $ins_data['rating']     = $rating;
+                $ins_data['comments']   = $comments;
+                $ins_data['is_rate_submitted']   = 1;
 
-                    if($this->request->getPost())
-                        $this->data['validation'] = $this->validator;
+                if(!empty($id)){
+                    $this->session->setFlashdata('msg', 'Rating Updated Successfully!');
+                    $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                    $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
+                    $this->ratingModel->update(array("id" => $id),$ins_data);
+                }
+                
+                $nominee_id = $this->request->getPost('nominee_id');
+                return redirect()->to('admin/nominee/view/'.$nominee_id);
+            }
+        }
+        else
+        {  
 
-
-                    $this->data['editdata'] = $editdata;
-                    
-                    return render('admin/rating/add',$this->data);
-                        
-            }       
+            $edit_data = $this->ratingModel->getLists($id);   
+            $edit_data = $edit_data->getRowArray(); 
         
+            if(!empty($edit_data) && count($edit_data)){
+                $editdata['rating']     = $edit_data['rating'];
+                $editdata['comments']   = $edit_data['comments'];
+                $editdata['id']         = $edit_data['id'];
+                $editdata['nominee_id'] = $edit_data['nominee_id'];
+            }
 
-
+            
+            $this->data['editdata'] = $editdata;
+            
+            return render('admin/rating/add',$this->data);
+                    
+        }       
+        
     }
 
 
@@ -70,7 +65,8 @@ class Rating extends BaseController
     {
         $validation_rules = array();
         $validation_rules = array(
-                                        "rating" => array("label" => "Rating",'rules' => 'required')
+                                    "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero|less_than[100]|greater_than[0]'),
+                                    "comments" => array("label" => "Comment",'rules' => 'required')
                                 );
         return $validation_rules;
     }

@@ -187,7 +187,9 @@ class Nominee extends BaseController
             $jury_id = $this->data['userdata']['id'];
         }
 
-        $this->data['ratings'] = $this->ratingModel->getRatingByJury($nominee_id,$jury_id)->getResultArray();
+        $rateList = ($this->data['userdata']['role'] == 3)?'yes':'no';
+
+        $this->data['ratings'] = $this->ratingModel->getRatingByJury($nominee_id,$jury_id,$rateList)->getResultArray();
 
         if (strtolower($this->request->getMethod()) == "post") {  
                 
@@ -230,6 +232,13 @@ class Nominee extends BaseController
                     $message = 'Rated Successfully';
 
                     if($this->request->isAJAX()){
+                        $editdata['rating']    = $edit_data['rating'];
+                        $editdata['comment']   = $edit_data['comments'];
+                        $editdata['id']        =  $edit_data['id'];
+                        $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
+
+                        $this->data['editdata'] = $editdata;
+                        
                         $html = view('admin/nominee/view',$this->data,array('debug' => false));
                         return $this->response->setJSON([
                             'status'            => $status,
@@ -252,7 +261,6 @@ class Nominee extends BaseController
                 $editdata['id']        =  $edit_data['id'];
                 $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
             }
-            
             else
             {
                 $editdata['rating']      = ($this->request->getPost('rating'))?$this->request->getPost('rating'):'';
@@ -265,6 +273,7 @@ class Nominee extends BaseController
             $this->data['editdata'] = $editdata;
             
             if($this->request->isAJAX()){
+               // echo "testing";die;
                 $html = view('admin/nominee/view',$this->data,array('debug' => false));
                 return $this->response->setJSON([
                     'status'            => $status,
@@ -314,7 +323,7 @@ class Nominee extends BaseController
         $this->validation_rules = array();
 
         $this->validation_rules = array(
-                                        "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero'),
+                                        "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero|less_than[100]|greater_than[0]'),
                                         "comment" => array("label" => "Comment",'rules' => 'required')
         );
     
