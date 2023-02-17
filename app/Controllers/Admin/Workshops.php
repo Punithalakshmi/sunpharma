@@ -11,11 +11,10 @@ class Workshops extends BaseController
     public function index()
     {
        
+        $workshopLists = $this->workshopModel->getLists();
 
-            $workshopLists = $this->workshopModel->getLists();
-
-            $this->data['lists'] = $workshopLists;
-            return render('admin/workshop/list',$this->data);
+        $this->data['lists'] = $workshopLists;
+        return render('admin/workshop/list',$this->data);
                
     }
 

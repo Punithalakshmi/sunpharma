@@ -50,10 +50,23 @@ class CategoryModel extends Model{
             return $query = $builder->get();
     }
 
-    public function getCategoriesById($id = ''){
+    public function getCategoriesById($id = '',$name=''){
         $builder = $this->table('category');
         $builder->select('category.*');
-        $builder->where("category.id",$id);
+        if($name=='yes')
+            $builder->where("category.name",$id);
+        else
+            $builder->where("category.id",$id);
+        return $query = $builder->get();
+    }
+
+    public function getCategoriesByIdMain($id = '',$main_category_id=''){
+        $builder = $this->table('category');
+        $builder->select('category.*');
+    
+        $builder->where("category.name",$id);
+    
+        $builder->where("main_category_id",$main_category_id);
         return $query = $builder->get();
     }
 

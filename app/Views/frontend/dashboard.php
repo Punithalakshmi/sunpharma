@@ -205,6 +205,8 @@
 </div>
     </section>
      
+    <?php if(is_array($latestWinnersOfResearchAwards) && count($latestWinnersOfResearchAwards) > 0 ): ?>
+
     <section>
         <div class="container-fluid bg-primary-gradient py-5" style="padding: 48px 12px 0;">
             <div class="row">
@@ -217,59 +219,30 @@
                     <div class="simple-slider">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
+                                
+                                <?php foreach($latestWinnersOfResearchAwards as $wkey => $wvalue):  ?>
                                 <div class="swiper-slide">
                                     <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                         <div class="row g-0">
+
                                             <div class="col-md-6 col-lg-8 winnercolleft">
                                                 <div class="text-white winnerinfo">
-                                                    <h2 class="fw-bold text-white mb-3">Dr. Kaustuv Sanyal</h2>
-                                                    <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Medical Sciences- Basic Research<br></p>
-                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">JC Bose National Fellow<br>
-Professor and Chair<br>
-Molecular Biology and Genetics Unit
-<br></p>
+                                                    <h2 class="fw-bold text-white mb-3"><?=$wvalue['name'];?></h2>
+                                                    <p class="mb-4 smtxt" style="color: var(--bs-gray-300);\"><?=$wvalue['category'];?><br></p>
+                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);"><?=$wvalue['designation'];?><br>   
+                                                    <?=$wvalue['address'];?>
+                                                             <br>
+                                                    </p>
                                                     <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Prof.-Kaustuv-Sanyal_Hi-Res-Photo[15].jpg"></div>
+
+                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/uploads/winners/<?=$wvalue['photo'];?>"></div>
                                         </div>
+
                                     </div>
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
-                                        <div class="row g-0">
-                                            <div class="col-md-6 col-lg-8 winnercolleft">
-                                                <div class="text-white winnerinfo">
-                                                    <h2 class="fw-bold text-white mb-3">Prof Sameer Bakhshi<br></h2>
-                                                    <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Medical Sciences- Clinical Research<br></p>
-                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Department of Medical Oncology<br>
-Dr B.R.A. Institute Rotary Cancer Hospital<br>
-All India Institute of Medical Sciences
-<br></p>
-                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Prof.-Sameer-Bhakshi-Hi-Res-Photo[95].jpg"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
-                                        <div class="row g-0">
-                                            <div class="col-md-6 col-lg-8 winnercolleft">
-                                                <div class="text-white winnerinfo">
-                                                    <h2 class="fw-bold text-white mb-3">Professor T. Govindaraju</h2>
-                                                    <p class="mb-4 smtxt" style="color: var(--bs-gray-300);\">Pahrmaceutical Sciences<br></p>
-                                                    <p class="mb-4" style="color: var(--bs-btn-border-color);">Bioorganic Chemistry Laboratory<br>   
-New Chesmitry Unit, Jawaharlal Nehru Centre for<br> Advanced Scientific Research (JNCASR)
-<br></p>
-                                                    <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_research_awards">Know More</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Prof.-T.-Govindaraju[79].JPG"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php endforeach;?>
                                 
                             </div>
                             <div class="swiper-pagination bottom-0"></div>
@@ -281,7 +254,12 @@ New Chesmitry Unit, Jawaharlal Nehru Centre for<br> Advanced Scientific Research
             </section>
         </div>
     </section>
+<?php endif;?>
     <section></section>
+
+
+    <?php if(is_array($latestWinnersOfScholarAwards) && count($latestWinnersOfScholarAwards) > 0 ): ?>
+
     <section style="padding-top: 60px;">
         <div class="container-fluid">
             <div class="row" style="padding-bottom: 20px;">
@@ -294,80 +272,29 @@ New Chesmitry Unit, Jawaharlal Nehru Centre for<br> Advanced Scientific Research
             <div class="simple-slider">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
+                    <?php foreach($latestWinnersOfScholarAwards as $wkey => $wvalue):  ?>
                         <div class="swiper-slide">
                             <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
                                 <div class="row g-0">
                                     <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
                                         <div class="text-white winnerinfo">
-                                            <h2 class="fw-bold text-white mb-3">Mr. Arjun B S</h2>
-                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Biomedical Sciences<br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">(Ph.D. Scholar)<br>
-Biomedical and Electronic Engineering Systems Laboratory<br>
-Department of Electronic Systems Engineering
-<br></p>
+                                            <h2 class="fw-bold text-white mb-3"><?=$wvalue['name'];?></h2>
+                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);"><?=$wvalue['category'];?><br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);"><?=$wvalue['designation'];?><br>
+                                                <?=$wvalue['address'];?><br>
+                                            </p>
                                             <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Know More</a></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Arjun-B-S.jpg"></div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/uploads/winners/<?=$wvalue['photo'];?>"></div>
                                 </div>
                             </div>
                         </div>
 						
-						<div class="swiper-slide">
-                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
-                                <div class="row g-0">
-                                    <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
-                                        <div class="text-white winnerinfo">
-                                            <h2 class="fw-bold text-white mb-3">Mr. Atish Roy Chowdhury</h2>
-                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Biomedical Sciences<br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Student<br>
-Department of Microbiology and Cell Biology<br>
-Indian Institute of Science
-<br></p>
-                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Know More</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Atish-Roy-Chowdhury-SSA-2022.jpg"></div>
-                                </div>
-                            </div>
-                        </div>
+						<?php endforeach;?>
 						
-                        <div class="swiper-slide">
-                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
-                                <div class="row g-0">
-                                    <div class="col-md-6 col-lg-8 winnercolleft">
-                                        <div class="text-white winnerinfo">
-                                            <h2 class="fw-bold text-white mb-3">Mr. Deepak Kumar Sahel</h2>
-                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Pharmaceutical Sciences <br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph.D. Research Scholar<br>
-ICMR-Senior Research Fellow (SRF)<br>
-Nanomedicine & Gene Delivery Lab
-<br></p>
-                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Know More</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Deepak-Kumar-Sahel.jpg"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
-                                <div class="row g-0">
-                                    <div class="col-md-6 col-lg-8 winnercolleft">
-                                        <div class="text-white winnerinfo">
-                                            <h2 class="fw-bold text-white mb-3">Ms. Rachana Rao Battaje</h2>
-                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);">Pharmaceutical Sciences<br></p>
-                                            <p class="mb-4" style="color: var(--bs-btn-border-color);">Ph. D. Candidate<br>
-Molecular Cell Biology Lab,<br>
-C/O Prof. Dulal Panda
-<br></p>
-                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Know More</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/frontend/assets/img/Rachana-Rao-Battaje[26].jpg"></div>
-                                </div>
-                            </div>
-                        </div>
+                       
+                      
                     </div>
                     <div class="swiper-pagination bottom-0"></div>
                     <div class="text-light swiper-button-prev" style="margin: -24px 0px 0px;"></div>
@@ -376,7 +303,8 @@ C/O Prof. Dulal Panda
             </div>
         </div>
     </section>
-  
+    <?php endif;?>
+
     <section style="margin:60px 0;">
         <div class="row mx-0">
             <div class="col-md-8 col-xl-6 text-center mx-auto">

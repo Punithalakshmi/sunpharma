@@ -83,6 +83,7 @@ abstract class BaseController extends Controller
         $this->extendModel          = model('App\Models\ExtendModel');
         $this->awardsCategoryModel  = model('App\Models\AwardsCategoryModel');
         $this->contactModel         = model('App\Models\ContactModel');
+        $this->winnersModel         = model('App\Models\WinnersModel');
 
         $this->session     = \Config\Services::session();
         $this->validation  = \Config\Services::validation();

@@ -95,13 +95,14 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Password <span class="required" style="color:red;">*</span></label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Password <?php if($editdata['id'] =='') {?><span class="required" style="color:red;">*</span><?php } ?></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="password" class="form-control col-md-7 col-xs-12" type="password" name="password" value="<?php echo set_value('password',$editdata['password']);?>">
                         </div>
                        
                       </div>
                       <div class="clearfix"></div>
+                      <?php if($editdata['id'] =='') {?>
                       <div class="form-group col-md-6">
                       <?php if(isset($validation) && $validation->getError('password')) {?>
                         <div class='alert alert-danger mt-2'>
@@ -109,15 +110,19 @@
                             </div>
                         <?php }?>
                       </div>
+                      <?php } ?>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password <span class="required" style="color:red;">*</span></label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password 
+                        <?php if($editdata['id'] =='') {?><span class="required" style="color:red;">*</span><?php } ?>
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="confirm_password" class="form-control col-md-7 col-xs-12" type="password" name="confirm_password" value="<?php echo set_value('confirm_password',$editdata['confirm_password']);?>">
                         </div>
                        
                       </div>
                       <div class="clearfix"></div>
+                      <?php if($editdata['id'] =='') {?>
                       <div class="form-group col-md-6">
                       <?php if(isset($validation) && $validation->getError('confirm_password')) {?>
                         <div class='alert alert-danger mt-2'>
@@ -125,6 +130,7 @@
                             </div>
                         <?php }?>
                       </div>
+                      <?php } ?>
                       <div class="clearfix"></div>
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phone Number <span class="required" style="color:red;">*</span> </label>

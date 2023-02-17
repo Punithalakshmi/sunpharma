@@ -73,8 +73,7 @@ class Rating extends BaseController
 
     public function delete($id='',$nominee_id='')
     {
-        
-       
+    
           $this->ratingModel->delete(array("id" => $id));
           return redirect()->to('admin/nominee/view/'.$nominee_id);
        

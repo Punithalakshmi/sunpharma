@@ -78,8 +78,8 @@
                            
                             <?php endif; ?>   
                             <?php if( ($user['active']==0 && $user['status']=='Disapproved' && $user['is_rejected'] == 0)){ ?>
-                            <button type="button" onclick="nominee_approve('approve','<?=$user['id'];?>');" class="btn btn-success greenbg btn-xs">Approve</button>
-                              <button type="button" class="btn btn-danger btn-xs" onclick="nominee_approve('disapprove','<?=$user['id'];?>');">
+                            <button type="button" onclick="getRemarks(this,'approve','<?=$user['id'];?>');" class="btn btn-success greenbg btn-xs">Approve</button>
+                              <button type="button" class="btn btn-danger btn-xs" onclick="getRemarks(this,'disapprove','<?=$user['id'];?>');">
                                 <i class="fa fa-ban"></i> Reject 
                             </button>
                             <?php } ?>  
@@ -138,3 +138,26 @@
         <!-- /footer content -->
       </div>
     </div>
+
+  
+
+<!-- Modal -->
+<div class="modal fade" id="remarksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remarks</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <textarea class="form-control" name="remarks" id="remarks"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" id="remarksSubmit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

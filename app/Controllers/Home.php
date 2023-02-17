@@ -57,14 +57,14 @@ class Home extends BaseController
         // $this->data['currentNominations'] = $currentNominations;
 
         //get latest winners of research awards
-        $researchAwards = $this->awardsModel->getLatestWinnersofResearchAwards()->getResultArray();
+        $researchAwards = $this->winnersModel->getLatestWinnersByCategory(1)->getResultArray();
 
         //get latest winners of science scholars awards
-        $scienceScholarAwards = $this->awardsModel->getLatestWinnersofScienceScholarAwards()->getResultArray();
+        $scienceScholarAwards = $this->winnersModel->getLatestWinnersByCategory(2)->getResultArray();
 
         $this->data['nominations'] = $nominationArr;
-        $this->data['latestWinnersOfResearchAwards'] = getAwardsArr($researchAwards);
-        $this->data['latestWinnersOfScholarAwards']  = getAwardsArr($scienceScholarAwards);
+        $this->data['latestWinnersOfResearchAwards'] = $researchAwards;
+        $this->data['latestWinnersOfScholarAwards']  = $scienceScholarAwards;
         return  render('frontend/dashboard',$this->data);
               
     }
@@ -270,7 +270,7 @@ class Home extends BaseController
     public function sendMailtoAdmin($email='',$name="",$msg = '')
     {
 
-      $adminEmail = 'punitha@izaaptech.in';
+      $adminEmail = 'Thangachan.Anthappan@sunpharma.com';
       $subject = " New Contact Request - Sun Pharma Science Foundation ";
       $message  = "Dear Admin,";
       $message .= '<br/><br/>';

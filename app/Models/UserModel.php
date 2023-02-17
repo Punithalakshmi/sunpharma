@@ -28,8 +28,15 @@ class UserModel extends Model{
         'extend_date',
         'review_status',
         'award_id',
-        'gender'
-
+        'gender',
+        'approved_by',
+        'approved_on_time',
+        'approved',
+        'nomination_upload',
+        'nomination_upload_time',
+        'nomination_upload_by',
+        'old_user_id',
+        'remarks'
     ];
 
     public function Login($username, $password) {
@@ -146,5 +153,15 @@ class UserModel extends Model{
     public function checkUniqueEmail($where = array())
     {
         return $this->getWhere($where)->getResultArray(); 
+    }
+
+    public function getDataByOldID($user_id = '',$type='')
+    {
+        $builder = $this->table('users');
+        $builder->select('nominee_details.id as nominee_detail_id,nominee_details.*');
+        $builder->join('nominee_details','nominee_details.nominee_id = users.id');
+        $builder->where('nominee_details.nomination_type',$type);
+        $builder->where("users.old_user_id",$user_id);
+        return $query = $builder->get();   
     }
 }

@@ -63,14 +63,33 @@ class Nomination extends BaseController
                 $edit_data   = $getUserData->getRowArray();
             }
             
-            if($this->request->getPost())
-               $id  = $this->request->getPost('id');
                
-            $validation = $this->validate($this->validation_rules());
-            if($validation) {
+            if (strtolower($this->request->getMethod()) == "post") {  
 
-                if($this->request->getPost()){
-                
+                $id  = $this->request->getPost('id');
+
+                $this->validation->setRules($this->validation_rules());
+    
+                if(!$this->validation->withRequest($this->request)->run()) {
+
+                    $this->data['validation'] = $this->validation;
+
+                    $editdata['title']                = ($this->request->getPost('title'))?$this->request->getPost('title'):'';
+                    $editdata['subject']              = ($this->request->getPost('subject'))?$this->request->getPost('subject'):'';
+                    $editdata['description']          = ($this->request->getPost('description'))?$this->request->getPost('description'):'';
+                    $editdata['category']            = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                    $editdata['main_category_id']       = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
+                  //  $editdata['year']           = ($this->request->getPost('year'))?$this->request->getPost('year'):date("Y");
+                    $editdata['start_date']     = ($this->request->getPost('start_date'))?$this->request->getPost('start_date'):date("m/d/Y");
+                    $editdata['end_date']       = ($this->request->getPost('end_date'))?$this->request->getPost('end_date'):date("m/d/Y");
+                    $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';
+                    $editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
+                    $editdata['status']               = ($this->request->getPost('status'))?$this->request->getPost('status'):'0';
+                    $editdata['id']             = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
+                }
+                else
+                { 
+                  // echo "test"; die;
                     $category      = $this->request->getPost('category');
                     $main_category_id = $this->request->getPost('main_category_id');
                     $start_date    = $this->request->getPost('start_date');
@@ -92,6 +111,8 @@ class Nomination extends BaseController
                     $ins_data['subject']           = $subject; 
                     $ins_data['description']       = $description;
                     $ins_data['title']             = $title;
+
+                   // print_r($ins_data); die;
 
                     if($this->request->getFile('banner_image') != ''){
                         $fileUploadDir = 'uploads/events/';
@@ -181,17 +202,11 @@ class Nomination extends BaseController
                     $editdata['status']               = ($this->request->getPost('status'))?$this->request->getPost('status'):'0';
                     $editdata['id']             = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                 }
-
-                  if($this->request->getPost())
-                    $this->data['validation'] = $this->validator;
-
-
-                    $this->data['editdata'] = $editdata;
-                    return render('admin/nomination/add',$this->data);
                        
             }       
        
-
+            $this->data['editdata'] = $editdata;
+            return render('admin/nomination/add',$this->data);
     }
 
 
@@ -202,6 +217,7 @@ class Nomination extends BaseController
         $validation_rules = array(
                                         "main_category_id" => array("label" => "Award",'rules' => 'required'),
                                         "category" => array("label" => "Award Type",'rules' => 'required'),
+                                        "title" => array("label" => "Title",'rules' => 'required'),
                                         "subject" => array("label" => "Subject",'rules' => 'required'),
                                         "description" => array("label" => "Description",'rules' => 'required'),
                                         "start_date" => array("label" => "Start Date",'rules' => 'required'),
@@ -231,26 +247,24 @@ class Nomination extends BaseController
         
     }
 
-    public function getCategoryById()
+    public function getCategoryById($id='')
     {
-        if (strtolower($this->request->getMethod()) == "post") {  
+      
 
-            $category = $this->request->getPost('category');
+        $categories = $this->categoryModel->getCategoryByMainCategoryID($id);
 
-            $categories = $this->categoryModel->getCategoryByMainCategoryID($category);
+        $this->data['categories'] = $categories->getResultArray();
 
-            $this->data['categories'] = $categories->getResultArray();
-
-            $html = view('admin/nomination/award_type_list',$this->data,array('debug' => false));
-             
-            if($this->request->isAJAX()){
-                  return $this->response->setJSON([
-                      'status' => 'success',
-                      'html'   => $html
-                  ]); 
-              }
+        $html = view('admin/nomination/award_type_list',$this->data,array('debug' => false));
             
-          }
+        if($this->request->isAJAX()){
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'html'   => $html
+                ]); 
+        }
+            
+          
     }
 
     

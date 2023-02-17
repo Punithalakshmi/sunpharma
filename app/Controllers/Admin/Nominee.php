@@ -60,8 +60,9 @@ class Nominee extends BaseController
     public function approve()
     {
 
-            $id     = $this->request->getPost('id');
-            $type   = $this->request->getPost('type');
+            $id        = $this->request->getPost('id');
+            $type      = $this->request->getPost('type');
+            $remarks   = $this->request->getPost('remarks');
 
             $up_data = array();
             $up_data['updated_date']  =  date("Y-m-d H:i:s");
@@ -86,9 +87,16 @@ class Nominee extends BaseController
                 $msg = 'Approved Successfully';
 
                 $message  = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
+                $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
+                $message .= '<b>Username: </b>'.strtolower($getUserData['firstname']).'<br />';
+                $message .= '<b>Password: </b>'.$pass.'<br /><br />';
+               
 
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
+                $up_data['password'] = md5($pass);
+                $up_data['username'] = strtolower($getUserData['firstname']);
+                $up_data['original_password'] = $pass;
                 
                // $this->userModel->update(array("id" => $getUserData['id']),$up_data);
             }
@@ -98,18 +106,17 @@ class Nominee extends BaseController
                 $up_data['active']  = 0;
                 $up_data['is_rejected'] = 1;
                 $msg = 'Rejected Successfully';
-                $message = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please use below credentials to login and resubmit the application. <br/><br/>';
+                $message = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please resubmit the application. <br/><br/>';
             }
 
-            $up_data['password'] = md5($pass);
-            $up_data['username'] = strtolower($getUserData['firstname']);
-            $up_data['original_password'] = $pass;
+            $message .= '<b>Remarks:</b> '.$remarks;
+
+          
+            $up_data['remarks'] = $remarks;
 
             $this->userModel->update(array("id" => $id),$up_data);
 
-            $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
-            $message .= '<b>Username: </b>'.strtolower($getUserData['firstname']).'<br />';
-            $message .= '<b>Password: </b>'.$pass.'<br /><br /><br /><br />'; 
+            
 
             $message .= 'Thanks & Regards,<br/>';
             $message .= 'Sunpharma Science Foundation Team';

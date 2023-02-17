@@ -46,7 +46,9 @@ class NominationModel extends Model{
         'age_proof',
         'declaration_candidate',
         'is_submitted',
-        'registration_no'
+        'registration_no',
+        'nomination_year',
+        'course_name'
     ];
 
 

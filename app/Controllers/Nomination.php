@@ -873,59 +873,241 @@ class Nomination extends BaseController
 
     public function print($nominee_id = '')
     {
-        // Creating the new document...
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
+        //get nominee data
+        if(!empty($nominee_id)){
+
+             // Creating the new document...
+            $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+            $header = ['size' => 16, 'bold' => true];
+            $section = $phpWord->addSection();
+            
+            $getUserData = $this->userModel->getUserData($nominee_id);
+            $nomineeData = $getUserData->getRowArray();
+ 
+            $nomineeData['category_name'] = '';
+            if(isset($nomineeData['category_id'])) {
+                $category   = $this->categoryModel->getCategoriesById($nomineeData['category_id']);
+                $categoryDt = $category->getRowArray();
+                $nomineeData['category_name'] = $categoryDt['name'];
+            }
+
+            $nomineeData['award'] = '';
+            if(isset($nomineeData['award_id'])) {
+                $awardDt   = $this->nominationTypesModel->getListsOfNominations($nomineeData['award_id']);
+                $awardDt   = $awardDt->getRowArray();
+                $nomineeData['award'] = $awardDt['title'];
+            }
+
+            //Nomination type
+            $nominationType = ($awardDt['main_category_id']=='1')?'Research Awards':'Science Scholar Awards';
+            $nominationType = 'Nomination of '.$nominationType.' - 2022'; 
+            $section->addTextBreak(1);
+            $section->addText($nominationType, $header);
+
+            $fancyTableStyleName = 'Fancy Table';
+            $fancyTableStyle = ['borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50];
+            $fancyTableFirstRowStyle = ['borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF'];
+            $fancyTableCellStyle = ['valign' => 'center'];
+            $fancyTableCellBtlrStyle = ['valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR];
+            $fancyTableFontStyle = ['bold' => true];
+            $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
+            $table = $section->addTable($fancyTableStyleName);
+
+            $uploadDir = base_url().'/uploads/'.$nominee_id.'/';
+
+            $wrappingStyles = ['inline', 'behind', 'infront', 'square', 'tight'];
+
+            $table->addRow(900);
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Applicant Photo', $fancyTableFontStyle);
+            $table->addCell(2000)->addImage($uploadDir.$nomineeData['nominator_photo'],array(
+                'positioning' => 'relative',
+                'marginTop' => -1,
+                'marginLeft' => 1,
+                'marginBottom' => 1,
+                'width' => 80,
+                'height' => 45 
+            ));
+
+            $table->addRow(900);
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Award', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['award']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Award Type', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['category_name']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Nomination No', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['registration_no']);
+   
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Name', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['firstname'].' '.$nomineeData['lastname']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Date of Birth', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['dob']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Email', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['email']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Mobile No', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['phone']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Gender', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['gender']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Address', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['address']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Residence Address', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['residence_address']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Designation', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['designation']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Name', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['nominator_name']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Email', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['nominator_email']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Mobile', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['nominator_phone']);
+
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Designation', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['nominator_designation']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Address', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['nominator_address']);
+
+            
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Justification Letter', $fancyTableFontStyle);
+            $table->addCell(2000)->addLink($uploadDir.$nomineeData['justification_letter_filename']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Bio-Data', $fancyTableFontStyle);
+            $table->addCell(2000)->addLink($uploadDir.$nomineeData['complete_bio_data']);
+
+            
+
+            if($nomineeData['nomination_type'] == 'spsfn'){
+    
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Supervisor Certifying Research Work', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['supervisor_certifying']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Excellence Research Work', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['excellence_research_work']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Lists of Publications', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['lists_of_publications']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Statement of Applicant', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['statement_of_applicant']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Ethical Clearance', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['ethical_clearance']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Statement of duly signed by Nominee', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['statement_of_duly_signed_by_nominee']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Citation', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['citation']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Aggregate Marks', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['aggregate_marks']);
+
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Age Proof', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['age_proof']);
+
+                    $table->addRow();
+                    $table->addCell(2000, $fancyTableCellStyle)->addText('Declaration Candidate', $fancyTableFontStyle);
+                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['declaration_candidate']);
+                
+            }
+            else
+            {
+                
+
+                $table->addRow();
+                $table->addCell(2000, $fancyTableCellStyle)->addText('Passport', $fancyTableFontStyle);
+                $table->addCell(2000)->addLink($uploadDir.$nomineeData['passport_filename']);
+
+                $table->addRow();
+                $table->addCell(2000, $fancyTableCellStyle)->addText('Research Work', $fancyTableFontStyle);
+                $table->addCell(2000)->addLink($uploadDir.$nomineeData['signed_details']);
+
+                $table->addRow();
+                $table->addCell(2000, $fancyTableCellStyle)->addText('Citation', $fancyTableFontStyle);
+                $table->addCell(2000)->addLink($uploadDir.$nomineeData['citation']);
+
+                $table->addRow();
+                $table->addCell(2000, $fancyTableCellStyle)->addText('Signed Statement', $fancyTableFontStyle);
+                $table->addCell(2000)->addLink($uploadDir.$nomineeData['signed_statement']);
+
+                $table->addRow();
+                $table->addCell(2000, $fancyTableCellStyle)->addText('Publications', $fancyTableFontStyle);
+                $table->addCell(2000)->addLink($uploadDir.$nomineeData['specific_publications']);
+
+                $table->addRow();
+                $table->addCell(2000, $fancyTableCellStyle)->addText('Best Papers', $fancyTableFontStyle);
+                $table->addCell(2000)->addLink($uploadDir.$nomineeData['best_papers']);
+
+                $table->addRow();
+                $table->addCell(2000, $fancyTableCellStyle)->addText('Award Received', $fancyTableFontStyle);
+                $table->addCell(2000)->addLink($uploadDir.$nomineeData['statement_of_research_achievements']);
+
+                
+
+            }     
+            
+            $firstname = $nomineeData['firstname'];
+
+            if ( preg_match('/\s/',$firstname) ){
+              $firstname = str_replace(' ', '_', $firstname);
+            }
+
+             $filename = $firstname.'.docx';
+             $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+             $xmlWriter->save("php://output");
+             header("Content-Description: File Transfer");
+             header('Content-Disposition: attachment; filename='.$filename);
+             header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+             header('Content-Transfer-Encoding: binary');
+             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+             header('Expires: 0');
+           
+
+
+        }
        
-        $section = $phpWord->addSection();
-       
-        $section->addText(
-            '"Learn from yesterday, live for today, hope for tomorrow. '
-                . 'The important thing is not to stop questioning." '
-                . '(Albert Einstein)'
-        );
-
-       
-        $section->addText(
-            '"Great achievement is usually born of great sacrifice, '
-                . 'and is never the result of selfishness." '
-                . '(Napoleon Hill)',
-            array('name' => 'Tahoma', 'size' => 10)
-        );
-
-       
-        $fontStyleName = 'oneUserDefinedStyle';
-        $phpWord->addFontStyle(
-            $fontStyleName,
-            array('name' => 'Tahoma', 'size' => 10, 'color' => '1B2232', 'bold' => true)
-        );
-        $section->addText(
-            '"The greatest accomplishment is not in never falling, '
-                . 'but in rising again after you fall." '
-                . '(Vince Lombardi)',
-            $fontStyleName
-        );
-
-       
-        $fontStyle = new \PhpOffice\PhpWord\Style\Font();
-        $fontStyle->setBold(true);
-        $fontStyle->setName('Tahoma');
-        $fontStyle->setSize(13);
-        $myTextElement = $section->addText('"Believe you can and you\'re halfway there." (Theodor Roosevelt)');
-        $myTextElement->setFontStyle($fontStyle);
-
-      
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        $objWriter->save('helloWorld.docx');
-
-        // Saving the document as ODF file...
-    //    $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'ODText');
-   //     $objWriter->save('helloWorld.odt');
-
-        // Saving the document as HTML file...
-      //  $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
-    //    $objWriter->save('helloWorld.html');
-
+        
        
     }
     

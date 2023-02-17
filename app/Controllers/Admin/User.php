@@ -69,7 +69,7 @@ class User extends BaseController
                 $status        = $this->request->getPost('status');
 
                 if($this->request->getPost('category'))
-                    $category      = $this->request->getPost('category');
+                  $category = $this->request->getPost('category');
 
                 $ins_data = array();
                 $ins_data['firstname']  = $firstname;
@@ -83,7 +83,7 @@ class User extends BaseController
                 $ins_data['dob']        =  $date_of_birth;
                 $ins_data['active']     =  $status;
                 $ins_data['gender']     =  $gender;
-                $ins_data['password']   =  md5($password);
+               
 
                 if($user_role == 1)
                     $ins_data['category'] =  $category;
@@ -100,6 +100,7 @@ class User extends BaseController
                     $this->session->setFlashdata('msg', 'User Added Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
                     $ins_data['created_id']    =  $this->data['userdata']['login_id'];
+                    $ins_data['password']   =  md5($password);
                     $this->userModel->save($ins_data);
                 } 
 
@@ -120,7 +121,8 @@ class User extends BaseController
                 $editdata['dob']        =  (isset($edit_data['dob']) && !empty($edit_data['dob']))?date("m/d/Y",strtotime($edit_data['dob'])):date("m/d/Y");
                 $editdata['gender']     =  $edit_data['gender'];
                 $editdata['username']     =  $edit_data['username'];
-                $editdata['password']     =  $edit_data['password'];
+                $editdata['password']     =  '';
+                $editdata['confirm_password']     =  '';
                 $editdata['status']     =  $edit_data['active'];
                 
 
@@ -316,9 +318,12 @@ class User extends BaseController
             if($type == 'user'){
                 $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');
                 $validation_rules["username"] = array("label" => "Username",'rules' => 'required');
-                $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
+               
                 $validation_rules['status']  = array("label" => "Status",'rules' => 'required');
-                $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
+                if($id==''){
+                    $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
+                    $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
+                }
             }      
         }
         else

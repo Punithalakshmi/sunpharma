@@ -57,6 +57,11 @@
                       <i class="fa fa-solid fa-trophy"></i> Award Results 
                     </a>
                   </li>
+                  <li>
+                    <a href="<?php echo base_url();?>/admin/winners">
+                      <i class="fa fa-solid fa-trophy"></i> Posting Winners 
+                    </a>
+                  </li>
                   <?php } else if($userdata['role'] == 1){ ?>
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">
                       <i class="fa fa-solid fa-users"></i> Nominations </a>

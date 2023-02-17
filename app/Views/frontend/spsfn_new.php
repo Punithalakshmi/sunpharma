@@ -110,9 +110,9 @@
                             <label for="" class="fw-bold">Ongoing Course </label>
                                 <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="ongoing_course" id="ongoing_course" onChange="ongoingCourse(this);">
                                     <option value="">-- select --</option>
-                                    <option value="MD" <?=set_select('ongoing_course', 1, ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='MD'))?TRUE:FALSE));?>>MD</option>
-                                    <option value="PhD" <?=set_select('ongoing_course', 1, ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='PhD'))?TRUE:FALSE));?>>PhD</option>
-                                    <option value="other" <?=set_select('ongoing_course', 1, ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='other'))?TRUE:FALSE));?>>Other</option>
+                                    <option value="MD" <?=set_select('ongoing_course', 'MD', ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='MD'))?TRUE:FALSE));?>>MD</option>
+                                    <option value="PhD" <?=set_select('ongoing_course', 'PhD', ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='PhD'))?TRUE:FALSE));?>>PhD</option>
+                                    <option value="other" <?=set_select('ongoing_course', 'other', ((isset($editdata['ongoing_course']) && ($editdata['ongoing_course']=='other'))?TRUE:FALSE));?>>Other</option>
                                 </select>
                                                 
                             </div>
@@ -154,8 +154,8 @@
                                 <label for="" class="fw-bold">Whether the applicant has completed a Research Project</label>
                                 <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="research_project" id="research_project">
                                     <option value="">-- select --</option>
-                                    <option value="Yes" <?=set_select('research_project', 1, ((isset($editdata['research_project']) && ($editdata['research_project']=='Yes'))?TRUE:FALSE));?>>Yes</option>
-                                    <option value="No" <?=set_select('research_project', 1, ((isset($editdata['research_project']) && ($editdata['research_project']=='No'))?TRUE:FALSE));?>>No</option>
+                                    <option value="Yes" <?=set_select('research_project', 'Yes', ((isset($editdata['research_project']) && ($editdata['research_project']=='Yes'))?TRUE:FALSE));?>>Yes</option>
+                                    <option value="No" <?=set_select('research_project', 'No', ((isset($editdata['research_project']) && ($editdata['research_project']=='No'))?TRUE:FALSE));?>>No</option>
                                 </select>
                             </div>
                         </div>

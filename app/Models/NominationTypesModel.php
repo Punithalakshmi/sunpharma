@@ -51,6 +51,11 @@ class NominationTypesModel extends Model {
     {
         return $this->getWhere(array('category_id' => $id)); 
     }
+
+    public function getCategoryNominationByType($id='',$main_categoy='')
+    {
+        return $this->getWhere(array('category_id' => $id,'main_category_id' => $main_categoy)); 
+    }
  
     public function getActiveNomination()
     {

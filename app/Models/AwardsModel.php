@@ -27,7 +27,7 @@ class AwardsModel extends Model{
         if(!empty($category))
           $builder->where("nominee_details.category_id",$category);
         if(!empty($year))
-            $builder->where("YEAR(nominee_details.created_date)",$year);
+          $builder->where("YEAR(nominee_details.created_date)",$year);
             
         $builder->where("ratings.is_rate_submitted","1");
         $builder->orderBy("average_rating","DESC");
@@ -69,5 +69,7 @@ class AwardsModel extends Model{
         $builder->limit(5);
         return $query = $builder->get();
     }
+
+    
    
 }

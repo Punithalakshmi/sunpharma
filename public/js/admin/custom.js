@@ -1,3 +1,4 @@
+var remarksSubmitClicked = false;
 $(document).ready(function(){
 
     $('#single_cal3').daterangepicker({
@@ -21,6 +22,7 @@ $(document).ready(function(){
     //   alert('should');
     // })
 
+   
 
 });
 
@@ -29,9 +31,33 @@ function auto_grow(element) {
   element.style.height = (element.scrollHeight)+"px";
 }
 
-function nominee_approve(type = '',id='')
+function getRemarks(e,type,id)
+{
+
+  $("#remarksModal").modal('show'); 
+
+ 
+
+   $("#remarksSubmit").on('click',function(e){
+ 
+    //console.log('button click',e);
+   /// if()
+
+   var remarksText = $("#remarks").val();
+
+     console.log('remarksText',remarksText);
+
+     nominee_approve(type,id,remarksText);
+  
+  }); 
+
+}
+
+function nominee_approve(type = '',id='',remarks)
 {
   
+    
+  $("#remarksModal").modal('hide'); 
     var msg = (type && type == 'approve')?'approve':'reject';
 
     msg = "Are you sure you want to "+msg+" this Nominee?";
@@ -44,12 +70,13 @@ function nominee_approve(type = '',id='')
       modalVerticalCenter: true
     },function(el) {
           if(el){
-
+                        
             $('#loader').removeClass('hidden');
+            
             $.ajax({
                 url : base_url+'/admin/nominee/approve',
                 type: "POST",
-                data : {type:type,id:id,'app_csrf':csrfHash},
+                data : {type:type,id:id,'app_csrf':csrfHash,'remarks':remarks},
                 dataType:'json',
                 success: function(data, textStatus, jqXHR)
                 {
@@ -464,22 +491,14 @@ function exportRegistrations()
 
 function getCategories(e)
 {
-
-  //var csrfHash = $("input[name='app_csrf']").val();
-  var mainCategoryID = e.value;
-
-  $('#loader').removeClass('hidden');
-  $.ajax({
-    url: base_url+'/csrf_token',
-    type: 'GET',
-    data: {},
-    dataType: 'json',
-    success: function (form_res) 
-    {
+        var mainCategoryID = e.value;
+       
+        $('#loader').removeClass('hidden');
+  
         $.ajax({
-            url : base_url+'/admin/nomination/getCategoryById',
-            type: "POST",
-            data : {'app_csrf':form_res.token,'category':mainCategoryID},
+            url : base_url+'/admin/nomination/getCategoryById/'+mainCategoryID,
+            type: "GET",
+            data : {},
             dataType:'json',
             success: function(data, textStatus, jqXHR)
             {
@@ -494,7 +513,20 @@ function getCategories(e)
               $('#loader').addClass('hidden');  
             }
         });
-    }
-  });
+}
 
+
+function getCsrfToken()
+{
+    $.ajax({
+            url: base_url+'/csrf_token',
+            type: 'GET',
+            data: {},
+            dataType: 'json',
+            success: function (form_res) 
+            {
+                return form_res;
+            }
+    });
+    //return true;
 }

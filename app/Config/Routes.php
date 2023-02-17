@@ -110,7 +110,19 @@ $routes->get('nomination/close','Nomination::close');
 
 $routes->post('nomination/check_unique_award_by_user','Nomination::checkUniqueEmailForAward');
 
-$routes->get('print','Nomination::print');
+$routes->get('print/(:any)','Nomination::print/$1');
+
+$routes->get('import/users','Import::usersImport');
+
+$routes->get('import/nominationsImport','Import::nominationsImport');
+
+$routes->get('import/uploadAttachment','Import::uploadAttachment');
+
+$routes->get('import/ratingImport','Import::ratingImport');
+
+$routes->get('import/nominationsImportSS','Import::nominationsImportSS');
+
+$routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
@@ -163,7 +175,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nomination/add/(:any)','Nomination::add/$1',['filter' =>'auth']);
     $routes->get('nomination/delete/(:any)','Nomination::delete/$1',['filter' =>'auth']);
     $routes->post('nomination/delete/(:any)','Nomination::delete/$1',['filter' =>'auth']);
-    $routes->post('nomination/getCategoryById','Nomination::getCategoryById',['filter' => 'auth']);
+    $routes->get('nomination/getCategoryById/(:any)','Nomination::getCategoryById/$1',['filter' => 'auth']);
 
     $routes->get('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
     $routes->post('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
@@ -201,6 +213,11 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
 
     $routes->post('jury/mapping','JuryMapping::mapping',['filter' =>'auth']);
     $routes->get('jury/mapping','JuryMapping::mapping',['filter' =>'auth']);
+
+    $routes->get('winners','Winners::lists',['filter' =>'auth']);
+    $routes->get('winners/add','Winners::add',['filter' =>'auth']);
+    $routes->post('winners/add','Winners::add',['filter' =>'auth']);
+    $routes->get('winners/add/(:any)','Winners::add/$1',['filter' =>'auth']);
 
 });
 

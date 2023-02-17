@@ -9,9 +9,9 @@ class LatestWinnersOfResearchAwards extends BaseController
     {
        
         //get latest winners of research awards
-        $researchAwards = $this->awardsModel->getLatestWinnersofResearchAwards()->getResultArray();
-        
-        $this->data['latestWinnersOfResearchAwards'] = getAwardsArr($researchAwards);
+        $researchAwards = $this->winnersModel->getLatestWinnersByCategory(1)->getResultArray();
+
+        $this->data['latestWinnersOfResearchAwards'] = $researchAwards;
         
         return render('frontend/latest_winners_of_research_awards', $this->data);
      

@@ -41,7 +41,7 @@ class Login extends BaseController
                           
                         //    $authenticatePassword = password_verify(trim($password), $pass); 
 
-                            if($pass == md5($password)){
+                            if(($pass == md5($password)) && ($data['active'] == 1)){
                              
                                 $ses_data = [
                                     'id' => $data['id'],
