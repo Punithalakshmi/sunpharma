@@ -17,7 +17,7 @@ if ( ! function_exists('getSessionData'))
        
         $session = session();
         if($name != ''){
-          $session->get($name);
+             return $session->get($name);
         }
         else
         {
@@ -61,5 +61,14 @@ if ( ! function_exists('sessionDestroy'))
     }
 }
 
+
+if(!function_exists('sessionRemove'))
+{
+    function sessionRemove($remove = array())
+    {
+        $session = session();
+        $session->remove($remove);
+    }
+}
 
 ?>

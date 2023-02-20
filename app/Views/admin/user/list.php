@@ -45,7 +45,7 @@
                             ?>
                         <tr>
                           <td><?=$user['firstname'].' '.$user['lastname'];?></td>
-                          <td><?=strtolower($user['firstname']);?></td>
+                          <td><?=strtolower($user['username']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
                           <td><?=$user['category'];?></td>

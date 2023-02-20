@@ -277,7 +277,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Complete Bio-data of the Applicant
-                                            (Max 1.5 MB) </label>
+                                            (Max 1.5 MB) <span class="required" style="color:red;">*</span></label>
                                             <?php if(!empty($user['complete_bio_data'])): ?>
                                             <div>
                                               <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank">
@@ -317,7 +317,7 @@
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> In order of Importance, list of 10
                                             best papers of the applicant highlighting the important
-                                            discoveries/contributions described in them briefly (Max. 1 MB) </label>
+                                            discoveries/contributions described in them briefly (Max. 1 MB) <span class="required" style="color:red;">*</span> </label>
                                             <?php if(!empty($user['best_papers'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['best_papers'];?>" target="_blank">
@@ -357,7 +357,7 @@
                                         <label class="form-label " for=""> Statement of Research Achievements, if
                                             any, on which any Award has already been Received by the Applicant. Please
                                             also upload brief citations on the research works for which the applicant
-                                            has already received the awards (Max. 1 MB) </label>
+                                            has already received the awards (Max. 1 MB) <span class="required" style="color:red;">*</span></label>
                                             <?php if(!empty($user['statement_of_research_achievements'])): ?>
                                             <div >
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_research_achievements'];?>" target="_blank">
@@ -400,7 +400,7 @@
                                         <label class="form-label " for=""> Signed details of the excellence in
                                             research work for which the Sun Pharma Research Award is claimed, including
                                             references & illustra- tions (Max. 2.5 MB). The candidate should duly sign
-                                            on the details </label>
+                                            on the details <span class="required" style="color:red;">*</span></label>
                                             <?php if(!empty($user['signed_details'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_details'];?>" target="_blank">
@@ -441,7 +441,7 @@
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Two specific publications/research
                                             papers of the applicant relevant to the research work mentioned above (Max.
-                                            2.5 MB) </label>
+                                            2.5 MB) <span class="required" style="color:red;">*</span></label>
                                             <?php if(!empty($user['specific_publications'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['specific_publications'];?>" target="_blank">
@@ -481,7 +481,7 @@
                                             that the research work under reference has not been given any award. The
                                             applicant should also indicate the extent of the contribution of others
                                             associated with the research and he/she should clearly acknowledge his/her
-                                            achievements. (Max. 500 KB) </label>
+                                            achievements. (Max. 500 KB) <span class="required" style="color:red;">*</span></label>
                                             <?php if(!empty($user['signed_statement'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_statement'];?>" target="_blank">
@@ -523,7 +523,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                          <label class="form-label " for=""> Citation on the Research Work of the
-                                            Applicant duly signed by the Nominator (Max. 300 KB) </label> 
+                                            Applicant duly signed by the Nominator (Max. 300 KB) <span class="required" style="color:red;">*</span></label> 
                                             <?php if(!empty($user['citation'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank">
@@ -565,7 +565,7 @@
                              
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> 
+                                        <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB) <span class="required" style="color:red;">*</span></label> 
                                         <?php if(!empty($user['excellence_research_work'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['excellence_research_work'];?>" target="_blank">
@@ -601,7 +601,7 @@
                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB) </label>
+                                        <label class="form-label " for=""> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['lists_of_publications'])): ?>
                                             <div >
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['lists_of_publications'];?>" target="_blank">
@@ -638,7 +638,7 @@
                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB) </label>
+                                        <label class="form-label " for=""> Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['statement_of_applicant'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_applicant'];?>" target="_blank">
@@ -673,7 +673,7 @@
                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB) </label>
+                                        <label class="form-label " for=""> A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['ethical_clearance'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['ethical_clearance'];?>" target="_blank">
@@ -705,7 +705,7 @@
                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </label>
+                                        <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['statement_of_duly_signed_by_nominee'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_duly_signed_by_nominee'];?>" target="_blank">
@@ -740,7 +740,7 @@
                                 <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB) </label>
+                                        <label class="form-label " for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['citation'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank">
@@ -774,7 +774,7 @@
                                   <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB) </label>
+                                        <label class="form-label " for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['aggregate_marks'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['aggregate_marks'];?>" target="_blank">
@@ -807,7 +807,7 @@
                                     <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Year of Passing </label>
+                                        <label class="form-label " for=""> Year of Passing <span class="required" style="color:red;">*</span></label>
                                             <div>
                                               <?=$user['year_of_passing'];?>
                                             </div>
@@ -833,7 +833,7 @@
                                    <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Number of Attempts </label>
+                                        <label class="form-label " for=""> Number of Attempts <span class="required" style="color:red;">*</span></label>
                                             <div>
                                               <?=$user['number_of_attempts'];?>
                                             </div>
@@ -859,7 +859,7 @@
                                    <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Age proof (Max: 250KB) </label>
+                                        <label class="form-label " for=""> Age proof (Max: 250KB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['age_proof'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['age_proof'];?>" target="_blank">
@@ -892,7 +892,7 @@
                                    <?php endif;?>
                                    <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB) </label>
+                                        <label class="form-label " for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['declaration_candidate'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['declaration_candidate'];?>" target="_blank">

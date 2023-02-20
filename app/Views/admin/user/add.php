@@ -190,7 +190,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Role 
                           <span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select2_single form-control" name="user_role" tabindex="-1" onchange="categoryRestrictionByRole(this);">
+                          <select class="select2_single form-control" name="user_role" tabindex="-1" >
                             <option value=""></option>
                             <?php if(is_array($roles)):
                                     foreach($roles as $rvalue): ?>

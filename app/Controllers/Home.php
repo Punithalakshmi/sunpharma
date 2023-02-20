@@ -35,7 +35,7 @@ class Home extends BaseController
          // endif;  
         }
     
-      //  echo "<pre>";
+       // echo "<pre>";
       //  print_r($nominationArr);
       //  die;
         // $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");

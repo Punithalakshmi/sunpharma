@@ -24,21 +24,20 @@ class JuryMapping extends BaseController
 
                 if (strtolower($this->request->getMethod()) == "post") {
                 
-                    $juryIDS      = $this->request->getPost('jury');
-                    $awardID      = $this->request->getPost('award');
+                    $juryID      = $this->request->getPost('jury');
+                    $awardIDS      = $this->request->getPost('award');
 
                     //print_r($juryIDS); die;
                     $ins_data = array();
-                    $ins_data['award_id']      = $awardID;
+                    $ins_data['jury_id']      = $juryID;
                     $ins_data['assign_by']     = $this->data['userdata']['login_id'];
 
-                    for($i=0;$i<count($juryIDS);$i++){
-                        $mappingData = $this->juryModel->getMappingData(array("jury_id" => $juryIDS[$i],"award_id" => $awardID))->getRowArray();
-                       // print_r($mappingData); die;
-                        $ins_data['jury_id']  = $juryIDS[$i];
+                    for($i=0;$i<count($awardIDS);$i++){
+                        $mappingData = $this->juryModel->getMappingData(array("jury_id" => $juryID,"award_id" => $awardIDS[$i]))->getRowArray();
+                       
+                        $ins_data['award_id']  = $awardIDS[$i];
                         if(is_array($mappingData)){
-                          //  echo "test";
-                           // print_r($ins_data); die;
+                         
                             $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                             $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                             $this->juryModel->update(array("id" => $mappingData['id']),$ins_data);

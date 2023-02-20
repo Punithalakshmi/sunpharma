@@ -123,3 +123,11 @@ if(!function_exists('getNominationDays'))
 
     }
 }
+
+if(!function_exists('getFileInfo'))
+{
+    function getFileInfo($filename)
+    {
+        return new \CodeIgniter\Files\File($filename,true);
+    }
+}

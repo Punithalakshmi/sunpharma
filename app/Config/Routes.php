@@ -74,7 +74,7 @@ $routes->get('forget_password','User::forget_password');
 
 $routes->post('reset_password','User::reset_password');
 $routes->get('reset_password','User::reset_password');
-$routes->get('view/(:any)','Nomination::view/$1');
+$routes->get('view/(:any)/(:any)','Nomination::view/$1/$1');
 $routes->post('view','Nomination::view');
 
 $routes->get('logout','User::logout');

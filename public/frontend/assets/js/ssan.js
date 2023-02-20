@@ -221,9 +221,13 @@ form.validate({
 function triggerSteps(csrf)
 {
 
-    $("#overlay").fadeIn(300);
-    console.log('uri2',uri2);
+  //  $("#overlay").fadeIn(300);
+  //  console.log('uri2',uri2);
            var form = $("#formsection");
+
+           form.validate();
+
+           removeRules();
 
            form.children("div").steps({
                 headerTag: "h3",
@@ -570,4 +574,33 @@ function checkDuplicationEmail(isEmailVerified = true) {
 
         },'Please enter unique email!');  
     }   
+}
+
+
+function removeRules()
+{
+
+    var nominatorFilename     = $("#nominator_photo_uploaded_file").val();
+    var passportFilename    = $("#passport_uploaded_file").val();
+    var justificationFilename = $("#justification_letter_uploaded_file").val();
+
+    console.log('nominatorFile',nominatorFilename);
+    console.log('passportFilename',passportFilename);
+    console.log('justificationFile',justificationFilename);
+
+    if(nominatorFilename!='' && $("#nominator_photo")){
+      $("#nominator_photo").rules("remove");
+      $("#nominator_photo").removeClass('required');
+    }  
+        
+    if(justificationFilename!='' ){
+      $("#justification_letter").rules("remove");
+      $("#justification_letter").removeClass('required');
+    }  
+        
+    if(passportFilename!=''){
+      $("#passport").rules("remove");
+      $("#passport").removeClass('required');
+    }  
+
 }

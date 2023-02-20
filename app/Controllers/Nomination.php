@@ -6,7 +6,7 @@ class Nomination extends BaseController
 {
     public function index($award_id = '')
     {
-   
+           // sessionDestroy();
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Science Scholar Awards');
             
@@ -97,21 +97,50 @@ class Nomination extends BaseController
                             if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
                             mkdir($fileUploadDir, 0777, true);
                             
+                            $getSessionFiles = getSessionData('uploadedFile');
+
                             //upload documents to respestive nominee folder
-                            $justification_letter = $this->request->getFile('justification_letter');
-                            $justification_letter->move($fileUploadDir);
+                            if($this->request->getFile('justification_letter')!=''){
+                                 $justification_letter = $this->request->getFile('justification_letter');
+                                 $justification_letter->move($fileUploadDir);
+                                 $nominee_details_data['justification_letter_filename'] = $justification_letter->getClientName();
+                            }     
+                            else
+                            {
+                                 $justification_letter = getFileInfo($getSessionFiles['justification_letter']); 
+                                 $justification_letter->move($fileUploadDir);  
+                                 $nominee_details_data['justification_letter_filename'] = $justification_letter->getBasename();    
+                            }
+                            
 
-                            $supervisor_certifying = $this->request->getFile('supervisor_certifying');
-                            $supervisor_certifying->move($fileUploadDir);
+                            if($this->request->getFile('supervisor_certifying')!=''){
+                                $supervisor_certifying = $this->request->getFile('supervisor_certifying');
+                                $supervisor_certifying->move($fileUploadDir);
+                                $nominee_details_data['supervisor_certifying'] = $supervisor_certifying->getClientName();
+                            }    
+                            else
+                            {
+                                $supervisor_certifying = getFileInfo($getSessionFiles['supervisor_certifying']);
+                                $supervisor_certifying->move($fileUploadDir);
+                                $nominee_details_data['supervisor_certifying'] = $supervisor_certifying->getBasename();
+                            }
 
-                            $nominator_photo = $this->request->getFile('nominator_photo');
-                            $nominator_photo->move($fileUploadDir);
-
-                            $nominee_details_data['nominee_id']                         = $lastInsertID;
-                            $nominee_details_data['supervisor_certifying']              = $supervisor_certifying->getClientName();
-                            $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
-                            $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
-                    
+                            
+                            if($this->request->getFile('nominator_photo') != ''){
+                                $nominator_photo = $this->request->getFile('nominator_photo');
+                                $nominator_photo->move($fileUploadDir);
+                                $nominee_details_data['nominator_photo']  = $nominator_photo->getClientName();
+                            }    
+                            else
+                            {
+                                $nominator_photo = getFileInfo($getSessionFiles['nominator_photo']); 
+                                $nominator_photo->move($fileUploadDir);
+                                $nominee_details_data['nominator_photo']  = $nominator_photo->getBasename();
+                            }    
+                           
+                            
+                            $nominee_details_data['nominee_id'] = $lastInsertID;
+                           
                             $this->nominationModel->save($nominee_details_data);
 
                             $registrationID = $this->nominationModel->insertID();
@@ -142,10 +171,11 @@ class Nomination extends BaseController
                     }
         }
         
-        $this->data['editdata'] = $this->getRequestedData('spsfn');
+        
         $this->data['award_id'] = $this->uri->getSegment(2);
 
         if($this->request->isAJAX()){
+            $this->data['editdata'] = $this->getRequestedData('spsfn','ajax');
             $html = view('frontend/spsfn_new',$this->data,array('debug' => false));
             return $this->response->setJSON([
                 'status'            => $status,
@@ -155,6 +185,7 @@ class Nomination extends BaseController
         }
         else
         {
+            $this->data['editdata'] = $this->getRequestedData('spsfn','no');
             return  render('frontend/spsfn_new',$this->data);        
         }
        
@@ -166,12 +197,14 @@ class Nomination extends BaseController
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Research Awards');
             $categories         = $getCategoryLists->getResultArray();
-         
+          //  sessionDestroy();
             $this->data['categories'] = $categories;
+
+            $getSessionFiles = getSessionData('uploadedFile');
 
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('ssan',$award_id),$this->validationMessages());
+                $this->validation->setRules($this->validation_rules('ssan',$award_id,$getSessionFiles),$this->validationMessages());
 
                 if($this->validation->withRequest($this->request)->run()) {
 
@@ -246,25 +279,53 @@ class Nomination extends BaseController
                                 $fileUploadDir = 'uploads/'.$lastInsertID;
                             
                                 if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                                mkdir($fileUploadDir, 0777, true);
-                                
-                                //upload documents to respestive nominee folder
-                                $justification_letter = $this->request->getFile('justification_letter');
-                                $justification_letter->move($fileUploadDir);
+                                     mkdir($fileUploadDir, 0777, true);
 
-                                if($this->request->getFile('passport')) {
+                                //upload documents to respestive nominee folder
+                                if($this->request->getFile('justification_letter')!=''){
+                                    $justification_letter = $this->request->getFile('justification_letter');
+                                    $justification_letter->move($fileUploadDir);
+                                    $nominee_details_data['justification_letter_filename'] = $justification_letter->getClientName();
+                               
+                                }    
+                                else
+                                {
+                                    $justification_letter = getFileInfo($getSessionFiles['justification_letter']);
+                                    $justification_letter->move($fileUploadDir); 
+                                    $nominee_details_data['justification_letter_filename'] = $justification_letter->getBasename();
+                                }        
+                                
+                                
+                                $nominee_details_data['passport_filename'] = '';
+                                if($this->request->getFile('passport')!=''){
                                     $passport = $this->request->getFile('passport');
                                     $passport->move($fileUploadDir);
-                                    $nominee_details_data['passport_filename']                  = $passport->getClientName();
-                                }
+                                    $nominee_details_data['passport_filename']  = $passport->getClientName();
+                                }    
+                                else
+                                {
+                                    if(!empty($getSessionFiles['passport'])){
+                                        $passport = getFileInfo($getSessionFiles['passport']);
+                                        $passport->move($fileUploadDir);
+                                        $nominee_details_data['passport_filename']  = $passport->getBasename();
+                                    }
+                                }    
+                            
 
-                                $nominator_photo = $this->request->getFile('nominator_photo');
-                                $nominator_photo->move($fileUploadDir);
-
-                                $nominee_details_data['nominee_id']                         = $lastInsertID;
+                                if($this->request->getFile('nominator_photo') != ''){
+                                    $nominator_photo = $this->request->getFile('nominator_photo');
+                                    $nominator_photo->move($fileUploadDir);
+                                    $nominee_details_data['nominator_photo'] = $nominator_photo->getClientName();
+                                }    
+                                else
+                                {
+                                    $nominator_photo = getFileInfo($getSessionFiles['nominator_photo']); 
+                                    $nominator_photo->move($fileUploadDir);
+                                    $nominee_details_data['nominator_photo'] = $nominator_photo->getBasename();
+                                }    
                                 
-                                $nominee_details_data['justification_letter_filename']      = $justification_letter->getClientName();
-                                $nominee_details_data['nominator_photo']                    = $nominator_photo->getClientName();
+                                $nominee_details_data['nominee_id'] = $lastInsertID;
+                                 
                                 $this->nominationModel->save($nominee_details_data);
 
                                 $registrationID = $this->nominationModel->insertID();
@@ -296,11 +357,12 @@ class Nomination extends BaseController
                     }
         }
 
-        $this->data['editdata'] = $this->getRequestedData('ssan');
+       
         $this->data['award_id'] = $this->uri->getSegment(2);
 
 
         if($this->request->isAJAX()){
+            $this->data['editdata'] = $this->getRequestedData('ssan','ajax');
             $html = view('frontend/ssan_new',$this->data,array('debug' => false));
             return $this->response->setJSON([
                 'status'            => $status,
@@ -310,14 +372,14 @@ class Nomination extends BaseController
         }
         else
         {
+            $this->data['editdata'] = $this->getRequestedData('ssan','no');
             return  render('frontend/ssan_new',$this->data);         
         }
     }
 
-    public function validation_rules($type='',$id='')
+    public function validation_rules($type='',$id='',$session = array())
     {
-           
-       
+ 
             $validation_rules = array();
             $validation_rules = array(
                                             "category" => array("label" => "Category",'rules' => 'required'),
@@ -335,13 +397,19 @@ class Nomination extends BaseController
             ); 
 
             if($type == 'ssan') {
+
+              if($session['justification_letter'] == '')
                 $validation_rules['justification_letter'] = array("label" => "Attached Justification Letter",'rules' => 'uploaded[justification_letter]|max_size[justification_letter,500]|ext_in[justification_letter,pdf]'); 
+
+              if($session['nominator_photo'] == '')  
                 $validation_rules['nominator_photo'] = array("label" => "Applicant Photo",'rules' => 'uploaded[nominator_photo]');
+
+              if($this->request->getPost('citizenship') == 2 ) 
+                $validation_rules['passport'] =  array("label" => "Attached Passport",'rules' => 'uploaded[passport]|ext_in[passport,pdf]');
+            
             }
 
-            if($type == 'ssan' && $this->request->getPost('citizenship') == 2) {
-                $validation_rules['passport'] =  array("label" => "Attached Passport",'rules' => 'uploaded[passport]|ext_in[passport,pdf]');
-            }
+            
                 
             if($type == 'spsfn') {
 
@@ -349,9 +417,7 @@ class Nomination extends BaseController
                     $validation_rules['course_name'] = array("label" => "Course Name",'rules' => 'required');
 
                 if($this->request->getPost('research_project') == 'No')
-                    $validation_rules['research_project'] = array("label" => "Course Name",'rules' => 'required');  
-
-                
+                   $validation_rules['research_project'] = array("label" => "Research Project",'rules' => 'required');   
             }    
             return $validation_rules;
       
@@ -381,7 +447,7 @@ class Nomination extends BaseController
 
     
 
-    public function view($id = '')
+    public function view($id = '',$award_id = '')
     {
 
         $id = (!empty($id))?$id:$this->request->getPost('id');
@@ -532,7 +598,7 @@ class Nomination extends BaseController
             $this->userModel->update(array("id" => $id),array("active" => 0));
 
             //sendmail to jury
-            $this->sendMailToJury($edit_data['category_id']);
+            $this->sendMailToJury($award_id);
 
 
             return redirect()->to('view/'.$edit_data['user_id'])->withInput();
@@ -594,9 +660,6 @@ class Nomination extends BaseController
     public function getPostedData()
     {
        
-        //print_r($this->request->getFile('justification_letter'))
-       // if($this->request->getPost()){
-
             $editdata = array();
 
             $editdata['nominee_name']                   = $this->request->getPost('nominee_name');
@@ -628,41 +691,63 @@ class Nomination extends BaseController
                 $editdata['citizenship'] = ($editdata['citizenship'] ==1)?'Indian':'Other';
             }
 
-            if($this->request->getFile('nominator_photo')) {
+            $getSessionFiles = getSessionData('uploadedFile');
+          //  echo "test";
+          //  print_r($getSessionFiles); die;
+
+            if($this->request->getFile('nominator_photo')!='') {
                 //nominator photo
                 $nominator_pht = file_get_contents($this->request->getFile('nominator_photo'));
-                $editdata['nominator_photo'] = 'data:image/jpeg;base64,'.base64_encode($nominator_pht);
-            }   
+            } 
+            else
+            { 
+                $nominator_pht = ($getSessionFiles['nominator_photo']!='')?file_get_contents(getFileInfo($getSessionFiles['nominator_photo'])):'';
+            }  
             
-            if($this->request->getFile('justification_letter')){
+            $editdata['nominator_photo'] = 'data:image/jpeg;base64,'.base64_encode($nominator_pht);
+
+            if($this->request->getFile('justification_letter')!=''){
                 $justification_lt = file_get_contents($this->request->getFile('justification_letter'));
-                $editdata['justification_letter'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($justification_lt));
+            }
+            else
+            {
+                $justification_lt = ($getSessionFiles['justification_letter']!='')?file_get_contents(getFileInfo($getSessionFiles['justification_letter'])):'';
             }
 
-            if($this->request->getFile('passport')){
-                $passport_ft = file_get_contents($this->request->getFile('passport'));
-                $editdata['passport'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($passport_ft));
-            }
-            
-            if($this->request->getFile('supervisor_certifying')){
-                $supervisor_certifying = file_get_contents($this->request->getFile('supervisor_certifying'));
+            $editdata['justification_letter'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($justification_lt));
+
+            if($formtype == 'ssan'){
+                //echo $getSessionFiles['passport']; die;
+                if($this->request->getFile('passport')!=''){
+                    $passport_ft = file_get_contents($this->request->getFile('passport')); 
+                }
+                else
+                {
+                    $passport_ft = ($getSessionFiles['passport']!='')?file_get_contents(getFileInfo($getSessionFiles['passport'])):'';
+                }
+
+                if($passport_ft!='')
+                    $editdata['passport'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($passport_ft));
+           }
+
+            if($formtype == 'spsfn'){
+                if($this->request->getFile('supervisor_certifying')!=''){
+                    $supervisor_certifying = file_get_contents($this->request->getFile('supervisor_certifying'));     
+                }
+                else
+                {
+                    $supervisor_certifying = ($getSessionFiles['supervisor_certifying']!='')?file_get_contents(getFileInfo($getSessionFiles['supervisor_certifying'])):'';
+                }
+
                 $editdata['supervisor_certifying'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($supervisor_certifying));
-            }
-        
+           }
             $this->data['editdata']  = $editdata;
 
             $filename          = ($formtype == 'ssan')?'frontend/ssan_preview':'frontend/spsfn_preview';
 
-          // if($this->request->isAJAX()){
-           return   $html = view($filename,$this->data,array('debug' => false));
-            //      return $this->response->setJSON([
-            //          'status'            => 'success',
-            //          'html'              => $html
-            //      ]); 
-            //    }
-            // die;
-       // }
 
+           return   $html = view($filename,$this->data,array('debug' => false));
+            
     }
 
 
@@ -717,7 +802,7 @@ class Nomination extends BaseController
         $message .= "Sunpharma Science Foundation Team";
        
         $this->data['content'] = $message;
-        $html = view('email/mail',$this->data,array('debug' => false));
+       // $html = view('email/mail',$this->data,array('debug' => false));
      //   mail("punitha@izaaptech.in",$subject,$html,$header);
         sendMail('rafi@izaaptech.com',$subject,$message);
 
@@ -736,13 +821,13 @@ class Nomination extends BaseController
         $message .= "Sunpharma Science Foundation Team";
        
         $this->data['content'] = $message;
-        $html = view('email/mail',$this->data,array('debug' => false));
+       // $html = view('email/mail',$this->data,array('debug' => false));
        // mail($nominee_email,$subject,$html,$header);
        sendMail($nominee_email,$subject,$message);
 
     }
 
-    public function sendMailToJury($category_id = ''){
+    public function sendMailToJury($award_id = ''){
 
         $header  = '';
         $header .= "MIME-Version: 1.0\r\n";
@@ -753,7 +838,7 @@ class Nomination extends BaseController
         $subject  = "New Nomination - Sun Pharma Science Foundation ";
        
 
-        $juryLists = $this->userModel->getJuryListsByCategory($category_id);
+        $juryLists = $this->juryModel->getAwardMappingLists($award_id);
 
         if(is_array($juryLists) && count($juryLists) > 0){
             foreach($juryLists as $jkey=>$jvalue){
@@ -767,7 +852,7 @@ class Nomination extends BaseController
                     $message .= "Sunpharma Science Foundation Team";
                    
                     $this->data['content'] = $message;
-                    $html = view('email/mail',$this->data,array('debug' => false));
+                  //  $html = view('email/mail',$this->data,array('debug' => false));
                   //   mail($jvalue['email'],$subject,$html,$header);
                   sendMail($jvalue['email'],$subject,$message);
                 }
@@ -781,8 +866,10 @@ class Nomination extends BaseController
     }
 
 
-    public function getRequestedData($type='')
+    public function getRequestedData($type='',$requestType='')
     {
+
+        
         $editdata['category']                      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
         $editdata['nominee_name']                  = ($this->request->getPost('nominee_name'))?$this->request->getPost('nominee_name'):'';
         $editdata['citizenship']                   = ($this->request->getPost('citizenship'))?$this->request->getPost('citizenship'):'';
@@ -797,19 +884,126 @@ class Nomination extends BaseController
         $editdata['nominator_office_address']      = ($this->request->getPost('nominator_office_address'))?$this->request->getPost('nominator_office_address'):'';
         $editdata['id']                            = ($this->request->getPost('id'))?$request->getPost('id'):'';
       
+        $documentRoot =  $_SERVER['DOCUMENT_ROOT'];
+
+        //folder path
+        $uploadedFolderPath = 'uploads/nominations/';
+
+        $files = array('nominator_photo' => '','justification_letter' => '',
+                       'supervisor_certifying'=> '','passport' =>'',
+                        'nominator_photo_name'=>'','passport_name'=>'',
+                        'justification_letter_name' =>'','supervisor_certifying_name' =>'');
+       
+        
         if($type == 'ssan'){
-            $editdata['justification_letter']          = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
-            $editdata['passport']                      = ($this->request->getFile('passport'))?$this->request->getFile('passport'):'';
-            $editdata['nominator_photo']               = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
+
+            if($this->request->getFile('nominator_photo')!=''){
+                $editdata['nominator_photo_name'] = $this->request->getFile('nominator_photo')->getName();
+                $photo = $this->request->getFile('nominator_photo');
+                $photo->move($uploadedFolderPath);
+                $files['nominator_photo'] = $documentRoot.'/'.$uploadedFolderPath.$photo->getClientName();
+                $files['nominator_photo_name'] = $editdata['nominator_photo_name'];
+            } 
+
+            if($this->request->getFile('justification_letter')!='') {
+                $editdata['justification_letter_name'] = $this->request->getFile('justification_letter')->getName();
+                $letter_name =  $this->request->getFile('justification_letter');
+                $letter_name->move($uploadedFolderPath);
+                $files['justification_letter'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['justification_letter_name'] = $editdata['justification_letter_name'];
+            }   
+             //passport
+           
+             if($this->request->getFile('passport')!='') {
+                $editdata['passport_name'] = $this->request->getFile('passport')->getName();
+                $passport_name =  $this->request->getFile('passport');
+                $passport_name->move($uploadedFolderPath);
+                $files['passport'] = $documentRoot.'/'.$uploadedFolderPath.$passport_name->getClientName();
+                $files['passport_name'] = $editdata['passport_name'];
+             }
+ 
+          //  $editdata['justification_letter']          = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
+          //  $editdata['passport']                      = ($this->request->getFile('passport'))?$this->request->getFile('passport'):'';
+          //  $editdata['nominator_photo']               = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
         }
         else
         {
-            $editdata['ongoing_course']                      = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
-            $editdata['research_project']                      = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
-            $editdata['supervisor_certifying']                = ($this->request->getFile('supervisor_certifying'))?$this->request->getFile('supervisor_certifying'):'';
-            $editdata['justification_letter']               = ($this->request->getFile('justification_letter'))?$this->request->getFile('justification_letter'):'';
-            $editdata['nominator_photo']               = ($this->request->getFile('nominator_photo'))?$this->request->getFile('nominator_photo'):'';
-        }
+
+          
+            if($this->request->getFile('nominator_photo')!=''){
+                $editdata['nominator_photo_name'] = $this->request->getFile('nominator_photo')->getName();
+                $photo = $this->request->getFile('nominator_photo');
+                $photo->move($uploadedFolderPath);
+                $files['nominator_photo'] = $documentRoot.'/'.$uploadedFolderPath.$photo->getClientName();
+                $files['nominator_photo_name'] = $editdata['nominator_photo_name'];
+            }    
+
+            //justification letter
+           
+            if($this->request->getFile('justification_letter')!='') {
+                $editdata['justification_letter_name'] = $this->request->getFile('justification_letter')->getName();
+                $letter_name =  $this->request->getFile('justification_letter');
+                $letter_name->move($uploadedFolderPath);
+                $files['justification_letter'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['justification_letter_name'] = $editdata['justification_letter_name'];
+            }   
+
+            //supervisor
+            
+            if($this->request->getFile('supervisor_certifying')!='') {
+               $editdata['supervisor_certifying_name'] = $this->request->getFile('supervisor_certifying')->getName();
+               $supervisor_name =  $this->request->getFile('supervisor_certifying');
+               $supervisor_name->move($uploadedFolderPath);
+               $files['supervisor_certifying'] = $documentRoot.'/'.$uploadedFolderPath.$supervisor_name->getClientName();
+               $files['supervisor_certifying_name'] = $editdata['supervisor_certifying_name'];
+            }   
+
+           } 
+
+
+            if(count($files) > 0 && ($files['nominator_photo']!='' || $files['justification_letter'] != '' || $files['supervisor_certifying']!='' || $files['passport']!=''))
+              setSessionData('uploadedFile',$files);
+
+            //already uploaded files get
+            $getSessionFiles = getSessionData('uploadedFile');
+
+         //   print_r($getSessionFiles); 
+
+            if(is_array($getSessionFiles) && count($getSessionFiles) > 0 && $requestType == 'ajax') {
+                $nominatorSessionDt = (isset($getSessionFiles['nominator_photo']) && $getSessionFiles['nominator_photo']!='')?getFileInfo($getSessionFiles['nominator_photo']):'';
+                $letterSessionDt = (isset($getSessionFiles['justification_letter']) && $getSessionFiles['justification_letter']!='')?getFileInfo($getSessionFiles['justification_letter']):'';
+                $supervisorSessionDt = (isset($getSessionFiles['supervisor_certifying']) && $getSessionFiles['supervisor_certifying']!='')?getFileInfo($getSessionFiles['supervisor_certifying']):'';
+                $passportDt = (isset($getSessionFiles['passport']) && $getSessionFiles['passport']!='')?getFileInfo($getSessionFiles['passport']):'';
+                $editdata['passport_name'] =  $getSessionFiles['passport_name'];
+                $editdata['supervisor_certifying_name'] =  $getSessionFiles['supervisor_certifying_name'];
+                $editdata['justification_letter_name'] =  $getSessionFiles['justification_letter_name'];
+                $editdata['nominator_photo_name'] =  $getSessionFiles['nominator_photo_name'];
+            }
+            else
+            {
+                $nominatorSessionDt = ''; $letterSessionDt= ''; $supervisorSessionDt='';
+                $passportDt = '';
+                $editdata['passport_name'] = '';
+                $editdata['supervisor_certifying_name'] = '';
+                $editdata['justification_letter_name']  = '';
+                $editdata['nominator_photo_name'] = '';
+
+            }
+            
+            $nominatorPt = ($this->request->getFile('nominator_photo')!='')?$this->request->getFile('nominator_photo'):$nominatorSessionDt;
+            $justificationLt = ($this->request->getFile('justification_letter')!='')?$this->request->getFile('justification_letter'):$letterSessionDt;
+            $supervisorCt = ($this->request->getFile('supervisor_certifying')!='')?$this->request->getFile('supervisor_certifying'):$supervisorSessionDt;
+            $passportCt = ($this->request->getFile('passport')!='')?$this->request->getFile('passport'):$passportDt;
+
+
+            $editdata['ongoing_course']              = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
+            $editdata['research_project']            = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
+            $editdata['supervisor_certifying']       = $supervisorCt;
+            $editdata['justification_letter']        = $justificationLt;
+            $editdata['nominator_photo']             = $nominatorPt;
+            $editdata['passport']                    = $passportCt;
+
+        
 
         return $editdata;
     }

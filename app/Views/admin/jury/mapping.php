@@ -10,7 +10,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
                        
-                        <select class="selectpicker" multiple name="jury[]">
+                        <select class="selectpicker" multiple name="jury">
                         <?php if(count($juryLists)): 
                                 foreach($juryLists as $jkey=>$jvalue): ?>
                                 <option value="<?=$jvalue['id'];?>"><?=$jvalue['firstname'].' '.$jvalue['lastname'];?></option>
@@ -19,7 +19,7 @@
                     </div>
                     
                     <div class="col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
-                        <select class="selectpicker" name="award" >
+                        <select class="selectpicker" multiple name="award[]" >
                         <?php if(count($awardLists)): 
                                 foreach($awardLists as $akey=>$avalue): ?>
                                 <option value="<?=$avalue['id'];?>"><?=$avalue['title'];?></option>

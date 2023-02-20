@@ -32,5 +32,15 @@ class JuryModel extends Model{
         return $this->getWhere($where); 
     }
     
-   
+    public function getAwardMappingLists($award_id = '')
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('jury_mapping');
+        $builder->select('users.*');
+        $builder->join('jury_mapping','jury_mapping.jury_id = users.id');
+        $builder->where("jury_mapping.award_id",$award_id);
+        $builder->where("users.role",'1');
+        return $query = $builder->get();
+        
+    }
 }

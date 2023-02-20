@@ -35,12 +35,16 @@
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
                                         <label class="form-check-label question__label noLabel">
-                                            <div class="form-label mb-2 " for=""> Photograph of the Applicant
+                                            <div class="form-label mb-2 " for=""> Photograph of the Applicant <span class="required" style="color:red;">*</span>
                                             </div>
                                             <img class="uploadPreview" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="200"
                                                 height="200" />
 
                                                <input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
+                                               <?php if(isset($editdata['nominator_photo_name']) && !empty($editdata['nominator_photo_name'])): ?>
+                                                    <span id="nominator_pt_name"><?=$editdata['nominator_photo_name'];?></span>
+                                                <?php endif;?>
+                                               <input type="hidden" name="nominator_photo_uploaded_file" id="nominator_photo_uploaded_file" value="<?=(isset($editdata['nominator_photo']) && !empty($editdata['nominator_photo']))?$editdata['nominator_photo']:'';?>" />
                                         </label>
                                         <div class="hintcont">
                                             <small>Not more than 500 KB</small>
@@ -53,7 +57,7 @@
                         <div class="col-lg-6">
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
-                                    <label class="form-label " for="">Category of the Award</label>
+                                    <label class="form-label " for="">Category of the Award <span class="required" style="color:red;">*</span></label>
                                     <select class="form-control required" name="category" id="category">
                                     <option value="">-- Select --</option>
                                     <!-- <option value="Pharmaceutical Sciences" <?//set_select('category',"Pharmaceutical Sciences", ((isset($editdata['category']) && ($editdata['category']=='Pharmaceutical Sciences'))?TRUE:FALSE));?>>Pharmaceutical Sciences</option>
@@ -69,13 +73,13 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
-                                    <label class="form-label" for="">Name of the Applicant</label>
+                                    <label class="form-label" for="">Name of the Applicant <span class="required" style="color:red;">*</span></label>
                                     <input class="form-control required" id="nominee_name" name="nominee_name" type="text" placeholder="" value="<?=set_value('nominee_name',$editdata['nominee_name']);?>">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
-                                    <label class="form-label " for="">Date of Birth</label>
+                                    <label class="form-label " for="">Date of Birth <span class="required" style="color:red;">*</span></label>
                                     <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
                                         placeholder="Date of Birth">
 
@@ -90,7 +94,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Residence Address</label>
+                                <label class="form-label " for="">Residence Address <span class="required" style="color:red;">*</span></label>
                                 <textarea name="residence_address" class="form-control required" id="residence_address" placeholder="Write a message"><?=$editdata['residence_address'];?></textarea>
                                 <small class="text-danger">
                                     <?php if(isset($validation) && $validation->getError('residence_address')) {?>
@@ -103,7 +107,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                            <label class="form-label " for="">Designation & Office Address</label>
+                            <label class="form-label " for="">Designation & Office Address <span class="required" style="color:red;">*</span></label>
                                 <textarea class="form-control required" name="designation_and_office_address" id="designation_and_office_address" placeholder="Write a message"><?=$editdata['designation_and_office_address'];?></textarea>
                                 <small class="text-danger">
                                     <?php if(isset($validation) && $validation->getError('designation_and_office_address')) {?>
@@ -118,7 +122,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                 <label class="form-label " for="">Mobile No.</label>
+                                 <label class="form-label " for="">Mobile No. <span class="required" style="color:red;">*</span></label>
                                         
                                 <input type="number" min="0" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
                                 <small class="text-danger">
@@ -131,7 +135,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Email ID</label>
+                                <label class="form-label " for="">Email ID <span class="required" style="color:red;">*</span></label>
                                 
                                 <input type="email" class="form-control required" placeholder="Please Enter Email" id="nominee_email" name="email" value="<?=set_value('email',$editdata['email']);?>">
                                 <small class="text-danger">
@@ -144,7 +148,7 @@
 
                         <div class="col-lg-12">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Citizenship</label>
+                                <label class="form-label " for="">Citizenship <span class="required" style="color:red;">*</span></label>
                                 <select class="form-control selectpicker mt-2 required"
                                     aria-label="Default select example" id="citizenship" name="citizenship" value="<?=set_value('citizenship',$editdata['citizenship']);?>">
                                     <option value="">-- Select --</option>
@@ -173,7 +177,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                            <label class="form-label " for="">Name of the Nominator</label>
+                            <label class="form-label " for="">Name of the Nominator <span class="required" style="color:red;">*</span></label>
                             <input type="text" placeholder="" class="form-control required" name="nominator_name" id="nominator_name" value="<?=set_value('nominator_name',$editdata['nominator_name']);?>">
                             <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('nominator_name')) {?>
@@ -185,7 +189,7 @@
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
                             <label class="form-label " for="">Designation & Office Address of the
-                                Nominator</label>
+                                Nominator <span class="required" style="color:red;">*</span></label>
                                 <textarea class="form-control required" name="nominator_office_address" id="nominator_office_address" placeholder="Write a Address" style="height:auto;"><?=$editdata['nominator_office_address'];?></textarea>
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('nominator_office_address')) {?>
@@ -197,7 +201,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Mobile No of the Nominator</label>
+                                <label class="form-label " for="">Mobile No of the Nominator <span class="required" style="color:red;">*</span></label>
                                 
                                 <input  class="form-control required" min="0" type="number" placeholder="" id="nominator_mobile" name="nominator_mobile" value="<?=set_value('nominator_mobile',$editdata['nominator_mobile']);?>">
                                 <small class="text-danger">
@@ -210,7 +214,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Email ID of the Nominator</label>
+                                <label class="form-label " for="">Email ID of the Nominator <span class="required" style="color:red;">*</span></label>
                             
                                 <input type="email" class="form-control required" placeholder="" id="nominator_email" name="nominator_email" value="<?=set_value('nominator_email',$editdata['nominator_email']);?>">
                                 <small class="text-danger">
@@ -223,13 +227,17 @@
 
                         <div class="col-lg-12">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for=""> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB) </label>
+                                <label class="form-label " for=""> Attach Justification Letter in pdf format <span class="required" style="color:red;">*</span> (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB) </label>
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
                                         <input class="form-control required" name="justification_letter" type="file" id="justification_letter" value="<?=$editdata['justification_letter'];?>" accept="application/pdf">
-                                        <?php if(!empty($editdata['justification_letter'])): ?>
-                                            <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['justification_letter'];?>" style="color:blue;"><?=$editdata['justification_letter'];?></a>
-                                            <?php endif;?>
+                                        
+                                        <?php if(isset($editdata['justification_letter_name']) && !empty($editdata['justification_letter_name'])): ?>
+                                            <span id="justification_letter_nm"><?=$editdata['justification_letter_name'];?></span>
+                                        <?php endif;?>
+                                        <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                        
+                                    
                                         <small class="text-danger">
                                         <?php if(isset($validation) && $validation->getError('justification_letter')) {?>
                                             <?= $error = $validation->getError('justification_letter'); ?>
@@ -246,15 +254,17 @@
                         <div class="col-lg-12">
                         <div class="mb-3 form-items">
                             <label class="form-label"> 
-                                Attach Indian Passport Copy in pdf format  (<i class="fas fa-file-pdf text-danger">if citizenship is NRI</i>)
+                                Attach Indian Passport Copy in pdf format   (<i class="fas fa-file-pdf text-danger">if citizenship is NRI</i>)
                             </label>
                             <div class="form-check ps-0 q-box">
                                 <div class="q-box__question col me-2">
                                     <input class="form-control mb-3" name="passport" type="file" id="passport" value="<?=$editdata['passport'];?>" accept=".pdf">                                            
-                                                
-                                    <?php if(!empty($editdata['passport'])): ?>
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['id'];?>/<?=$editdata['passport'];?>" style="color:blue;"><?=$editdata['passport'];?></a>
-                                    <?php endif;?> 
+                                    <?php if(isset($editdata['passport_name']) && !empty($editdata['passport_name'])): ?>
+                                            <span id="passport_nm"><?=$editdata['passport_name'];?></span>
+                                        <?php endif;?>
+                                        <input type="hidden" name="passport_uploaded_file" id="passport_uploaded_file" value="<?=(isset($editdata['passport']) && !empty($editdata['passport']))?$editdata['passport']:'';?>" />
+
+                                  
                                     <small class="text-danger">
                                         <?php if(isset($validation) && $validation->getError('passport')) {?>
                                             <?= $error = $validation->getError('passport'); ?>

@@ -45,7 +45,9 @@ class User extends BaseController
                           
                             setSessionData('fuserdata',$ses_data);
 
-                            return redirect()->to('view/'.$data['id']);
+                            $redirect = 'view/'.$data['id'].'/'.$data['award_id'];
+                            
+                            return redirect()->to($redirect);
                         
                         }
                         else
