@@ -46,7 +46,7 @@
                                                     <span id="nominator_pt_name"><?=$editdata['nominator_photo_name'];?></span>
                                                 <?php endif;?>
                                                <input type="hidden" name="nominator_photo_uploaded_file" id="nominator_photo_uploaded_file" value="<?=(isset($editdata['nominator_photo']) && !empty($editdata['nominator_photo']))?$editdata['nominator_photo']:'';?>" />
-                                        </label>
+                                           </label>
                                         <div class="hintcont">
                                             <small>Not more than 500 KB</small>
                                         </div>

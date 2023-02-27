@@ -36,7 +36,8 @@ class UserModel extends Model{
         'nomination_upload_time',
         'nomination_upload_by',
         'old_user_id',
-        'remarks'
+        'remarks',
+        'updated_time'
     ];
 
     public function Login($username, $password) {
@@ -164,4 +165,20 @@ class UserModel extends Model{
         $builder->where("users.old_user_id",$user_id);
         return $query = $builder->get();   
     }
+
+    public function checkEmail($where = array())
+    {
+        return $this->getWhere($where)->getRowArray(); 
+    }
+
+    public function updateTime($id=''){
+        $builder = $this->table('users');
+        $builder->update(array("updated_time" => date("Y-m-d H:i:s")));
+        $builder->where("id",$id);
+        if($this->db->affectedRows()==1)
+          return true;
+        else 
+          return false;
+    }
+
 }

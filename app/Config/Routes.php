@@ -69,8 +69,8 @@ $routes->post('getPostedData','Nomination::getPostedData');
 $routes->post('login','User::login');
 $routes->get('login','User::login');
 
-$routes->post('forget_password','User::forget_password');
-$routes->get('forget_password','User::forget_password');
+$routes->post('forgot_password','User::forget_password');
+$routes->get('forgot_password','User::forget_password');
 
 $routes->post('reset_password','User::reset_password');
 $routes->get('reset_password','User::reset_password');
@@ -161,6 +161,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nominee/ratings','Nominee::ratings',['filter' =>'auth']);
     $routes->get('nominee/getApproval/(:any)','Nominee::getApproval/$1',['filter' =>'auth']);
     $routes->post('nominee/approve','Nominee::approve',['filter' =>'auth']);
+    $routes->get('nominee/update/(:any)','Nominee::update/$1',['filter' =>'auth']);
+    $routes->post('nominee/update/(:any)','Nominee::update/$1',['filter' =>'auth']);
 
     $routes->get('category','Category::index',['filter' =>'auth']);
     $routes->post('category/add','Category::add',['filter' =>'auth']);

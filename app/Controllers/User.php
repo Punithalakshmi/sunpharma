@@ -8,7 +8,6 @@ class User extends BaseController
     public function login()
     {
 
-        
             if (strtolower($this->request->getMethod()) == "post") {  
  
                 $this->validation->setRules($this->validation_rules());
@@ -21,9 +20,19 @@ class User extends BaseController
 
                     $username   = $this->request->getVar('username');
                     $password   = $this->request->getVar('password');
+
+                    $recaptchaResponse = trim($this->request->getVar('g-recaptcha-response'));
+            
+                    $userIp=$this->request->getIPAddress();
+                  
+                    //captcha verification
+                    $captchaVerify = captchaVerification($recaptchaResponse,$userIp='');
+               
+                    if(isset($captchaVerify['success']) && $captchaVerify['success']){ 
             
                     $data       = $this->userModel->where('username', $username)->first();
-                   // print_r($data);
+                 
+
                     if($data){
 
                         $pass = trim($data['password']);
@@ -61,15 +70,20 @@ class User extends BaseController
                         $this->session->setFlashdata('msg', "Username is incorrect!");
                         return render('frontend/login',$this->data);
                     }
-                }     
+                }
+                else
+                {
+                    $this->session->setFlashdata('msg', 'Please verify Captcha!');
+                    return render('frontend/login',$this->data);
+                }   
+
+              }     
             }
             else
             {
                 $editdata['username'] = ($this->request->getVar('username'))?$this->request->getVar('username'):"";
                 $editdata['password'] = ($this->request->getVar('password'))?$this->request->getVar('password'):"";
                 $this->data['editdata'] = $editdata;
-
-              
             }
 
             return  render('frontend/login',$this->data);
@@ -78,34 +92,145 @@ class User extends BaseController
 
     public function forget_password()
     {
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
 
+        $editdata['email'] = ($this->request->getVar('email'))?$this->request->getVar('email'):"";
+      
         if(strtolower($this->request->getMethod()) == 'post'){
           
-            $this->validation->setRules($this->validation_rules());
+            $this->validation->setRules($this->forgot_password_validation_rules(),$this->forgotPasswordValidationMessages());
                   
             if(!$this->validation->withRequest($this->request)->run()) {
-                $data['validation'] = $this->validation;
+                $this->data['validation'] = $this->validation;
             }
             else
             {
-                $email  = $this->request->getVar('email');  
+                $email  = $this->request->getPost('email');  
+
+                $recaptchaResponse = trim($this->request->getVar('g-recaptcha-response'));
+            
+                $userIp=$this->request->getIPAddress();
+               
+                //captcha verification
+                $captchaVerify = captchaVerification($recaptchaResponse,$userIp='');
+           
+                if(isset($captchaVerify['success']) && $captchaVerify['success']){ 
                 
-                $userData = $this->userModel->where("email",$email);
+                    $userData = $this->userModel->checkEmail(array("email" => $email));
+
+                    if(is_array($userData)){
+                            //check update the time while sending email
+                            $updatedTime = $this->userModel->updateTime($userData['id']);
+
+                            if($updatedTime){
+                                $to = $email;
+                                $subject  = "Reset Password Link - Sunpharma Science Foundation";
+                                $token    = urlencode($userData['id']);
+                                $message  = "Hi  ".ucfirst($userData['firstname']).",<br/></br>";
+                                $message .= 'Your reset password request has been received. Please click the below link to reset your password. <br/><br/>';
+                                $message .= '<a href="'.base_url().'/reset_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
+                                $message .= 'Thanks,<br/>';
+
+                               $isMailSent =  sendMail($email,$subject,$message);
+
+                               if($isMailSent){
+                                 $this->session->setFlashdata('msg', 'Reset Password link sent to your registered email. Please verify within 15mins');
+                               }
+                               else
+                               {
+                                $this->session->setFlashdata('msg', 'Unable to send mail');
+                               }
+                            }  
+                            else
+                            {
+                                $this->session->setFlashdata('msg', 'User not found for this mail id!');
+                            }
+                    }
+                    else
+                    {
+                        $this->session->setFlashdata('msg',' Email not found!');
+                    }
+                }
+                else
+                {
+                    $this->session->setFlashdata('msg', 'Please verify Captcha!');
+                }    
             }
             
         }    
 
-        $editdata['email'] = ($this->request->getVar('email'))?$this->request->getVar('email'):"";
-
-        $data['editdata'] = $editdata;
-        return  render('frontend/forget_password',$data);
+       
+        $this->data['editdata'] = $editdata;
+        
+        return  render('frontend/forget_password',$this->data);
     }
 
-    public function reset_password()
+    public function reset_password($token='')
     {
-        return  render('frontend/reset_password');
+
+        $userData = array();
+
+        $editdata['password'] = ($this->request->getPost('password'))?$this->request->getPost('password'):"";
+        $editdata['confirm_password'] = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):"";
+        
+        if(!empty($token)){
+
+            $id = urldecode($token);
+            $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
+
+            if(is_array($userData)){
+                //check if expired the link
+                $checkExpiredTime = $userData['updated_time'];
+
+                if(checkExpireTime($checkExpiredTime)){
+            
+                 if(strtolower($this->request->getMethod()) == 'post'){
+
+                    $this->validation->setRules($this->reset_password_validation_rules(),$this->resetPasswordValidationMessages());
+                    
+                    if(!$this->validation->withRequest($this->request)->run()) {
+                        $this->data['validation'] = $this->validation;
+                    }
+                    else
+                    {
+
+                        $password = $this->request->getPost('password');
+
+                        $update_data = array();
+                        $update_data['password'] = md5($password);
+                        $upd = $this->userModel->update(array("id" => $userData['id']),$update_data);
+
+                        if($upd){
+                            $this->session->setFlashdata('success','Password updated Sccessfully');
+                            return redirect()->to('login');
+                        }
+                        else
+                        {
+                            $this->session->setFlashdata('error','Unable to reset the password Please try again!');
+                            return redirect()->to('login');
+                        }
+
+                    }    
+                }
+
+             }
+             else
+             {
+                $this->session->setFlashdata('msg','Reset password link was expired!');   
+             }
+
+            }
+            else
+            {
+                $this->session->setFlashdata('msg','Unable to find the user account');
+            } 
+        }
+        else
+        {
+            $this->session->setFlashdata('msg','Sorry! Unauthorized Access');
+        }
+
+        $this->data['editdata'] = $editdata;
+        return render('frontend/reset_password',$this->data);
              
     }
 
@@ -117,13 +242,7 @@ class User extends BaseController
     }
 
 
-    public function validForm()
-    {
-        $uri = current_url(true);
-        $data['uri'] = $uri->getSegment(1); 
-        return view('frontend/formvalid',$data);
-    }
-
+  
      
     public function sendMail()
     {
@@ -164,11 +283,23 @@ class User extends BaseController
     public function forgot_password_validation_rules()
     {
 
-            $validation_rules = array();
-            $validation_rules = array(
-                                      "email" => array("label" => "Email",'rules' => 'required|valid_email')
-            ); 
-            return $validation_rules;
+        $validation_rules = array();
+        $validation_rules = array(
+                                    "email" => array("label" => "Email",'rules' => 'required|valid_email')
+        ); 
+        return $validation_rules;
+      
+    }
+
+    public function reset_password_validation_rules()
+    {
+
+        $validation_rules = array();
+        $validation_rules = array(
+                                    "password" => array("label" => "Password",'rules' => 'required'),
+                                    "confirm_password" => array("label" => "Confirm Password",'rules' => 'required|matches[password]')
+        ); 
+        return $validation_rules;
       
     }
 
@@ -220,6 +351,27 @@ class User extends BaseController
         return view('/frontend/bulkEmailSuccess');
     }
 
+    public function forgotPasswordValidationMessages()
+    {
+
+        $validationMessages = array("email" => array("required" => "Please enter email","valid_email" => "Email should be valid!"),
+                                    
+                              );
+
+         return $validationMessages;
+    }
+
+
+    public function resetPasswordValidationMessages()
+    {
+
+        $validationMessages = array("password" => array("required" => "Please enter new password"),
+                                     "confirm_password" => array("confirm_password" => "Please enter confirm new password","matches" => "Please enter correct password")
+                                    
+                              );
+
+         return $validationMessages;
+    }
    
 
 }    

@@ -25,37 +25,10 @@ class Home extends BaseController
        }
 
         foreach($categoryNominationLists as $ekey => $evalue) {
-          //get category name
-        //  $categoryDt =  $this->awardsCategoryModel->getListsOfCategories($evalue['main_category_id'])->getRowArray();
-       //   $categoryNominationLists[$ekey]['category'] = $categoryDt['name'];
-        //  $categoryNominationLists[$ekey]['category_type'] =  'awards';
-          //$end_date     = strtotime($evalue['end_date']);
-         // if($end_date > $current_date): 
-            array_push($nominationArr,$categoryNominationLists[$ekey]);
-         // endif;  
+          array_push($nominationArr,$categoryNominationLists[$ekey]); 
         }
     
-       // echo "<pre>";
-      //  print_r($nominationArr);
-      //  die;
-        // $currentNominations = array("research_awards" => "no", "science_scholars_awards" => "no");
-
-        // $currentDate = strtotime(date('Y-m-d'));
-        // foreach($nominationLists as $nkey => $nvalue){
-        //     $endDate = strtotime($nvalue['end_date']);
-        //     if($endDate >= $currentDate)  {
-        //         if($nvalue['type'] == 'Research Awards'){
-        //           $currentNominations['research_awards'] = 'yes';
-        //         }
-        //         else
-        //         {
-        //           $currentNominations['science_scholars_awards'] = 'yes';
-        //         }
-        //     }
-        // }
-
-        // $this->data['currentNominations'] = $currentNominations;
-
+       
         //get latest winners of research awards
         $researchAwards = $this->winnersModel->getLatestWinnersByCategory(1)->getResultArray();
 
@@ -71,43 +44,33 @@ class Home extends BaseController
 
     public function aboutus()
     {
-
-        return  render('frontend/mission',$this->data);
-              
+        return  render('frontend/mission',$this->data);         
     }
 
     public function annualActivities()
     {
-
         return render('frontend/annual_activities',$this->data);
-   
     }
 
     public function nominationPreview()
     {
-      
         return  render('frontend/nomination_preview',$this->data);
-
     }
 
     public function contact()
     {
-
        
         $editdata = array();
 
-       
         if(strtolower($this->request->getMethod()) == 'post'){
-        //  echo $this->request->getMethod(); die;
+       
               $this->validation->setRules($this->validation_rules());
                     
               if(!$this->validation->withRequest($this->request)->run()) {
                   $this->data['validation'] = $this->validation;
                   $editdata['contact_name']     = ($this->request->getVar('contact_name'))?$this->request->getVar('contact_name'):'';
-          $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
-          $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
-    
-                  
+                  $editdata['email']    = ($this->request->getVar('email'))?$this->request->getVar('email'):'';
+                  $editdata['message']  = ($this->request->getVar('message'))?$this->request->getVar('message'):'';
               }
               else
               {
@@ -143,7 +106,7 @@ class Home extends BaseController
                     $this->session->setFlashdata('msg', 'Please verify Captcha!');
                    }
 				   
-				   redirect()->to('/contact');
+				           redirect()->to('/contact');
               }
               
         }

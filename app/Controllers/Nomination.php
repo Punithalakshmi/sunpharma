@@ -398,10 +398,10 @@ class Nomination extends BaseController
 
             if($type == 'ssan') {
 
-              if($session['justification_letter'] == '')
+              if(!isset($session['justification_letter']))
                 $validation_rules['justification_letter'] = array("label" => "Attached Justification Letter",'rules' => 'uploaded[justification_letter]|max_size[justification_letter,500]|ext_in[justification_letter,pdf]'); 
 
-              if($session['nominator_photo'] == '')  
+              if(!isset($session['nominator_photo']))  
                 $validation_rules['nominator_photo'] = array("label" => "Applicant Photo",'rules' => 'uploaded[nominator_photo]');
 
               if($this->request->getPost('citizenship') == 2 ) 

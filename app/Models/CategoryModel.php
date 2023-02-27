@@ -13,7 +13,8 @@ class CategoryModel extends Model{
         'updated_date',
         'created_id',
         'updated_id',
-        'main_category_id'
+        'main_category_id',
+        'id'
     ];
 
  
@@ -44,7 +45,6 @@ class CategoryModel extends Model{
     public function getCategoriesByType($type){
             $builder = $this->table('category');
             $builder->select('category.*');
-          //  $builder->join('nominations','nominations.category_id = category.id');
             $builder->where("category.type",$type);
             $builder->where("category.status",'Active');
             return $query = $builder->get();
@@ -63,9 +63,7 @@ class CategoryModel extends Model{
     public function getCategoriesByIdMain($id = '',$main_category_id=''){
         $builder = $this->table('category');
         $builder->select('category.*');
-    
         $builder->where("category.name",$id);
-    
         $builder->where("main_category_id",$main_category_id);
         return $query = $builder->get();
     }
@@ -80,8 +78,18 @@ class CategoryModel extends Model{
     public function getCategoryByMainCategoryID($id)
     {
         $builder = $this->table('category');
-            $builder->select('category.*');
-            $builder->where("category.main_category_id",$id);
-            return $query = $builder->get();
+        $builder->select('category.*');
+        $builder->where("category.main_category_id",$id);
+        return $query = $builder->get();
+    }
+
+    public function getCategoriesListsByID($id = '')
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('category c');
+        $builder->select('a.*');
+        $builder->join('category a','a.main_category_id=c.main_category_id','left');
+        $builder->where("c.id",$id);
+        return $query = $builder->get();
     }
 }

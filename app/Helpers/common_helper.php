@@ -131,3 +131,16 @@ if(!function_exists('getFileInfo'))
         return new \CodeIgniter\Files\File($filename,true);
     }
 }
+
+if(!function_exists('checkExpireTime')) {
+    function checkExpireTime($time = '')
+    {
+        $updated_time = strtotime($time);
+        $current_time = strtotime(date("Y-m-d H:i:s"));
+        $timeDiff  = ($current_time - $updated_time)/60;
+        if($timeDiff < 900)
+          return true;
+        else
+          return false;  
+    }
+}

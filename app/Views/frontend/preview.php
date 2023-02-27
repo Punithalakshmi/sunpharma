@@ -297,9 +297,9 @@
                                             (Max 1.5 MB) </label> -->
                                             <div>
                                                 <input class="form-control mb-3 required" accept=".pdf" name="complete_bio_data" type="file" id="complete_bio_data" value="<?=$editdata['complete_bio_data'];?>">   
-                                                    <div class="">
-                                                        <small>Upload the Bio-data (Not more than 1.5 MB)</small>
-                                                    </div>
+                                                <div class="">
+                                                    <small>Upload the Bio-data (Not more than 1.5 MB)</small>
+                                                </div>
                                             </div>
                                             <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('complete_bio_data')) {?>
@@ -315,7 +315,7 @@
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> In order of Importance, list of 10
+                                        <label class="form-label"> In order of Importance, list of 10
                                             best papers of the applicant highlighting the important
                                             discoveries/contributions described in them briefly (Max. 1 MB) <span class="required" style="color:red;">*</span> </label>
                                             <?php if(!empty($user['best_papers'])): ?>
@@ -332,9 +332,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> In order of Importance, list of 10
-                                            best papers of the applicant highlighting the important
-                                            discoveries/contributions described in them briefly (Max. 1 MB) </label> -->
+                                       
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="best_papers" type="file" id="best_papers" value="<?=$editdata['best_papers'];?>">  
@@ -415,10 +413,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> Signed details of the excellence in
-                                            research work for which the Sun Pharma Research Award is claimed, including
-                                            references & illustra- tions (Max. 2.5 MB). The candidate should duly sign
-                                            on the details </label> -->
+                                       
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="signed_details" type="file" id="signed_details" value="<?=$editdata['signed_details'];?>">    
@@ -497,11 +492,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> A signed statement by the applicant
-                                            that the research work under reference has not been given any award. The
-                                            applicant should also indicate the extent of the contribution of others
-                                            associated with the research and he/she should clearly acknowledge his/her
-                                            achievements. (Max. 500 KB) </label> -->
+                                       
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="signed_statement" type="file" id="signed_statement" value="<?=$editdata['signed_statement'];?>">   

@@ -10,16 +10,10 @@
                                     <a href="index.html"><img src="<?=base_url();?>/frontend/assets/images/resources/footer-logo.png" alt=""></a>
                                 </div>
                                 <div class="footer-widget__about-text-box">
-                                    <p class="footer-widget__about-text">We’re happy to invite entries for excellence in original research work in medical and pharmaceutical sciences from scientists and young researchers. Nominations for Sun Pharma Science Foundation Awards 2022 are open.
-
+                                    <p class="footer-widget__about-text">
+                                        We’re happy to invite entries for excellence in original research work in medical and pharmaceutical sciences from scientists and young researchers. Nominations for Sun Pharma Science Foundation Awards 2022 are open.
                                     </p>
                                 </div>
-                                <!-- <div class="site-footer__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div> -->
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
@@ -87,7 +81,7 @@
             <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
 
             <div class="logo-box">
-                <a href="index.html" aria-label="logo image"><img src="<?=base_url();?>/frontend/assets/images/resources/logo-2.png" width="143"
+                <a href="<?=base_url();?>" aria-label="logo image"><img src="<?=base_url();?>/frontend/assets/images/resources/logo-2.png" width="143"
                         alt="" /></a>
             </div>
             <!-- /.logo-box -->
@@ -112,17 +106,14 @@
                     <a href="#" class="fab fa-instagram"></a>
                 </div><!-- /.mobile-nav__social -->
             </div><!-- /.mobile-nav__top -->
-
-
-
         </div>
         <!-- /.mobile-nav__content -->
     </div>
     <!-- /.mobile-nav__wrapper -->
 
-    <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
-
-
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
     <script src="<?=base_url();?>/frontend/assets/vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="<?=base_url();?>/frontend/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="<?=base_url();?>/frontend/assets/vendors/jarallax/jarallax.min.js"></script>
@@ -147,10 +138,6 @@
     <script src="<?=base_url();?>/frontend/assets/vendors/timepicker/timePicker.js"></script>
     <script src="<?=base_url();?>/frontend/assets/vendors/circleType/jquery.circleType.js"></script>
     <script src="<?=base_url();?>/frontend/assets/vendors/circleType/jquery.lettering.min.js"></script>
-
-
-
-
     <!-- template js -->
     <script src="<?=base_url();?>/frontend/assets/js/insur.js"></script>
 </body>

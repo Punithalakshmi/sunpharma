@@ -15,16 +15,32 @@ $(document).ready(function(){
         console.log(start.toISOString(), end.toISOString(), label);
     });
       
-    //successMessageAlert('');
-   
-    
-    // $("#rating").onkeyup(function(){
-    //   alert('should');
-    // })
-
-   
-
 });
+
+function addMoreRows()
+{
+
+    var max_fields = 10; //Maximum allowed input fields 
+    var wrapper    = $(".wrapper"); //Input fields wrapper
+    var add_button = $(".add_fields"); //Add button class or ID
+    var x = 1; //Initial input field is set to 1
+	
+	//When user click on add input button
+	$(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){ 
+            x++; 
+            $(wrapper).append('<div><input type="text" name="input_array_name[]" placeholder="Input Text Here" /> <a href="javascript:void(0);" class="remove_field">Remove</a></div>');
+        }
+    });
+	
+    //when user click on remove button
+    $(wrapper).on("click",".remove_field", function(e){ 
+        e.preventDefault();
+		$(this).parent('div').remove(); //remove inout field
+		x--; 
+    });
+}
 
 function auto_grow(element) {
   element.style.height = "5px";
@@ -36,13 +52,8 @@ function getRemarks(e,type,id)
 
   $("#remarksModal").modal('show'); 
 
- 
-
    $("#remarksSubmit").on('click',function(e){
  
-    //console.log('button click',e);
-   /// if()
-
    var remarksText = $("#remarks").val();
 
      console.log('remarksText',remarksText);
@@ -82,9 +93,7 @@ function nominee_approve(type = '',id='',remarks)
                 {
                   $('#loader').addClass('hidden');
                     if(data.status && data.status == 'success')
-                      successMessageAlert(data.message)
-    
-                      //location.reload();
+                      successMessageAlert(data.message);
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {

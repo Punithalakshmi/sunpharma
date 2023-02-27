@@ -14,11 +14,16 @@
                 </h6>  
         <?php endif;?>
         <div class="form-group mb-3"></div>
-        <div class="form-group mb-3"><button class="btn btn-primary btn-sm d-block create-account w-100" name="submit" type="submit">Login</button></div>
+
+        <div class="clearfix"></div>
+            <div class="g-recaptcha" data-sitekey="6Ldh61ojAAAAAAamaHiBZ5mAv702yCK9qbqUQQu3"></div>
+        <div class="clearfix"></div>    
+        <div class="form-group mb-3">
+            <button class="btn btn-primary btn-sm d-block create-account w-100" name="submit" type="submit">Login</button></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                          <!-- <a  href="<//=base_url();?>/forget_password"><u>Forget Password</u></a> -->
+                           <a  href="<?=base_url();?>/forgot_password"><u>Forgot Password</u></a>
                           <a onclick="history.back()" href="#"><u>Back</u></a>
                  </div>
             </div>

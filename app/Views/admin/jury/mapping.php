@@ -10,7 +10,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
                        
-                        <select class="selectpicker" multiple name="jury">
+                        <select class="selectpicker" name="jury">
                         <?php if(count($juryLists)): 
                                 foreach($juryLists as $jkey=>$jvalue): ?>
                                 <option value="<?=$jvalue['id'];?>"><?=$jvalue['firstname'].' '.$jvalue['lastname'];?></option>
