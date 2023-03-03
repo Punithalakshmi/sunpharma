@@ -18,6 +18,23 @@
                   <?= session()->getFlashdata('msg') ?>
               </div>
             <?php endif;?>
+
+            <div class="row topformsec">
+            
+            <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label for="" class="fw-bold">Select Award </label>
+                        <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="main_category_id" id="main_category_id" >
+                            <option ></option>
+                            <option value="1">Research Awards</option>
+                            <option value="2">Science Scholar Awards</option>
+                        </select>
+                       
+                    </div>
+              </div>
+              
+            </div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -25,7 +42,7 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="awardTypeDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Award Type</th>

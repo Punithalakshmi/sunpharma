@@ -12,10 +12,111 @@ class EventRegisteration extends BaseController
 
     public function index()
     {
-            $workshopLists = $this->registerationModel->getRegisteredUsers();
-            $this->data['lists'] = $workshopLists;
-            return render('admin/event_registeration/list',$this->data);   
             
+             
+            $filter = array();
+            $filter['title']      = '';
+            $filter['email']      = '';
+            $filter['phone']      = '';
+            $filter['mode']       = '';
+            $filter['start']      = '0';
+            $filter['limit']      = '10';
+            $filter['orderField'] = 'id';
+            $filter['orderBy']    = 'desc';
+            $totalRecords  = $this->registerationModel->CountAll();
+            
+            if (strtolower($this->request->getMethod()) == "post") { 
+    
+                if(!$this->validation->withRequest($this->request)->run()) {
+    
+                    $dtpostData = $this->request->getPost('data');
+    
+                    $response = array();
+        
+                    $draw            = $dtpostData['draw'];
+                    $start           = $dtpostData['start'];
+                    $rowperpage      = $dtpostData['length']; // Rows display per page
+                    $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                    $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
+                    $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                    $searchValue     = $dtpostData['search']['value']; // Search value
+    
+                     // Custom filter
+                    $title      = $dtpostData['title'];
+                    $email      = $dtpostData['email'];
+                 //   $start_date = $dtpostData['start_date'];
+                    $phone      = $dtpostData['phone'];
+                    $mode      = $dtpostData['mode'];
+                    
+                    $filter['title']       = $title;
+                    $filter['email']       = $email;
+                  //  $filter['start_date']  = $start_date;
+                    $filter['phone']       = $phone;
+                    $filter['mode']        = $mode;
+                    $filter['limit']       = $rowperpage;
+                    $filter['orderField']  = $columnName;
+                    $filter['orderBy']     = $columnSortOrder;
+    
+                    $workshopLists = $this->registerationModel->getRegisterationByFilter($filter)->getResultArray();
+                   
+                    $filter['totalRows'] = 'yes';
+                   
+                    $totalRecordsWithFilterCt = $this->registerationModel->getRegisterationByFilter($filter);
+                   
+                    $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
+                
+              }
+    
+            }
+            else
+            {    
+    
+                $workshopLists = $this->registerationModel->getRegisterationByFilter($filter)->getResultArray();
+                
+                $totalRecordsWithFilter = count($workshopLists);
+            }
+    
+           
+            $this->data['lists'] = $workshopLists;
+            
+            $data = array();
+            foreach($workshopLists as $ukey => $uvalue){
+                
+                    $data[] = array('title' => $uvalue['title'],
+                                    'created_date' => $uvalue['created_date'],
+                                    'registeration_no' => $uvalue['registeration_no'],
+                                    'firstname' => $uvalue['firstname'],
+                                    'lastname' => $uvalue['lastname'],
+                                    'email' => $uvalue['email'],
+                                    'phone' => $uvalue['phone'],
+                                    'address' => $uvalue['address'],
+                                    'mode' => $uvalue['mode'],
+                                    'action' => ''
+                                 );
+             }
+               
+            
+            if($this->request->isAJAX()) {
+                
+                $end  = $filter['start'] + $filter['limit'];
+                    return $this->response->setJSON(array(
+                                            'status' => 'success',
+                                            'data'  => $data,
+                                            'token' => csrf_hash(),
+                                            "draw" => intval($draw),
+                                            "iTotalRecords" => $totalRecords,
+                                            "start" => $filter['start'],
+                                            "end" => $end,
+                                            "length" => $filter['limit'],
+                                            "page" => $draw,
+                                            "iTotalDisplayRecords" => $totalRecordsWithFilter
+                                        )); 
+                    exit;
+              }
+              else
+              {
+                return render('admin/event_registeration/list',$this->data);
+              }
     }
 
     public function add($id='')
@@ -157,37 +258,54 @@ class EventRegisteration extends BaseController
 
         if (strtolower($this->request->getMethod()) == "post") {  
 
-   
+
+               $dtpostData = $this->request->getPost();
+    
+
+                // Custom filter
+                $title      = $dtpostData['title'];
+                $email      = $dtpostData['email'];
+            //   $start_date = $dtpostData['start_date'];
+                $phone      = $dtpostData['phone'];
+                $mode       = $dtpostData['mode'];
+
+                    $filter = array();
+                    $filter['title']      = $title;
+                    $filter['email']      = $email;
+                    $filter['phone']      = $phone;
+                    $filter['mode']       = $mode;
                     $fileName = 'Registration_Lists_'.date('d-m-Y').'.xlsx';  
 
-                    $awardsLists = $this->registerationModel->getRegisteredUsers();
+                    $awardsLists = $this->registerationModel->getRegisterationByFilter($filter)->getResultArray();
                     $spreadsheet = new Spreadsheet();
             
                     $sheet = $spreadsheet->getActiveSheet();
-                    $sheet->setCellValue('A1', 'Registration Date');
-                    $sheet->setCellValue('B1', 'Registration No');
-                    $sheet->setCellValue('C1', 'Firstname');
-                    $sheet->setCellValue('D1', 'Lastname');
-                    $sheet->setCellValue('E1', 'Email');
-                    $sheet->setCellValue('F1', 'Phone Number');
-                    $sheet->setCellValue('G1', 'Address');
-                    $sheet->setCellValue('H1', 'Participation Mode');
+                    $sheet->setCellValue('A1', 'Event Title');
+                    $sheet->setCellValue('B1', 'Registration Date');
+                    $sheet->setCellValue('C1', 'Registration No');
+                    $sheet->setCellValue('D1', 'Firstname');
+                    $sheet->setCellValue('E1', 'Lastname');
+                    $sheet->setCellValue('F1', 'Email');
+                    $sheet->setCellValue('G1', 'Phone Number');
+                    $sheet->setCellValue('H1', 'Address');
+                    $sheet->setCellValue('I1', 'Participation Mode');
 
 
-                    $sheet->getStyle('A1:H1')->getFont()->setBold(true);
-                    $sheet->getStyle('A1:H1')->getFont()->setSize(16);
+                    $sheet->getStyle('A1:I1')->getFont()->setBold(true);
+                    $sheet->getStyle('A1:I1')->getFont()->setSize(16);
 
                     $rows = 2;
             
                     foreach ($awardsLists as $val){
-                        $sheet->setCellValue('A' . $rows, $val['created_date']);
-                        $sheet->setCellValue('B' . $rows, $val['registeration_no']);
-                        $sheet->setCellValue('C' . $rows, $val['firstname']);
-                        $sheet->setCellValue('D' . $rows, $val['lastname']);
-                        $sheet->setCellValue('E' . $rows, $val['email']);
-                        $sheet->setCellValue('F' . $rows, $val['phone']);
-                        $sheet->setCellValue('G' . $rows, $val['address']);
-                        $sheet->setCellValue('H' . $rows, $val['mode']);
+                        $sheet->setCellValue('A' . $rows, $val['title']);
+                        $sheet->setCellValue('B' . $rows, $val['created_date']);
+                        $sheet->setCellValue('C' . $rows, $val['registeration_no']);
+                        $sheet->setCellValue('D' . $rows, $val['firstname']);
+                        $sheet->setCellValue('E' . $rows, $val['lastname']);
+                        $sheet->setCellValue('F' . $rows, $val['email']);
+                        $sheet->setCellValue('G' . $rows, $val['phone']);
+                        $sheet->setCellValue('H' . $rows, $val['address']);
+                        $sheet->setCellValue('I' . $rows, $val['mode']);
                         $rows++;  
                     } 
                     $writer = new Xlsx($spreadsheet);

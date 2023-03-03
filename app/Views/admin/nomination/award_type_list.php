@@ -1,4 +1,4 @@
-<select class="select2_single form-control col-md-7 col-xs-12" name="category" tabindex="-1" >
+<select class="select2_single form-control col-md-7 col-xs-12" name="category" id="category" tabindex="-1" >
     <option value=""></option>
     <?php if(is_array($categories)):
             foreach($categories as $rvalue): ?>

@@ -46,4 +46,36 @@ class WorkshopModel extends Model{
          return $this->getWhere(array('status' => 1)); 
     }
 
+    public function getEventsByFilter($filter)
+    {
+        $builder = $this->table('events');
+        $builder->select('events.*');
+        
+        if(!empty($filter['title']))
+         $builder->like('events.title',$filter['title']);
+
+        if(!empty($filter['subject']))
+         $builder->like('events.subject',$filter['subject']); 
+
+         $status = (isset($filter['status']) && ($filter['status'] == 'active'))?1:0;
+         
+        if(!empty($filter['status']))
+         $builder->like('events.status',$status);
+         
+        $builder->orderBy('id','DESC');
+        
+        if((!empty($filter['limit']) || !empty($filter['start'])))
+          $builder->limit($filter['limit'],$filter['start']);
+
+        if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
+            return $builder->countAllResults();
+        else 
+            return $query = $builder->get();
+    }
+
+    public function getEventLists()
+    {
+        return $this->table('events')->countAll();
+    }
+
 }

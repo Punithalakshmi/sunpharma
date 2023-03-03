@@ -17,7 +17,7 @@ class AwardsModel extends Model{
         'name'
     ];
 
-    public function getLists($category='',$year='')
+    public function getLists($category='',$main_category_id='')
     {
         $builder = $this->table('category');
         $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,ratings.nominee_id,users.category');
@@ -26,8 +26,8 @@ class AwardsModel extends Model{
         $builder->join('ratings', 'ratings.nominee_id = users.id');
         if(!empty($category))
           $builder->where("nominee_details.category_id",$category);
-        if(!empty($year))
-          $builder->where("YEAR(nominee_details.created_date)",$year);
+       // if(!empty($main_category_id))
+       //   $builder->where("category.main_category_id",$main_category_id);
             
         $builder->where("ratings.is_rate_submitted","1");
         $builder->orderBy("average_rating","DESC");

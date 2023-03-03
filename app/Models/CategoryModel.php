@@ -92,4 +92,28 @@ class CategoryModel extends Model{
         $builder->where("c.id",$id);
         return $query = $builder->get();
     }
+
+    public function getCategoryLists()
+    {
+        return $this->table('category')->countAll();
+    }
+
+    public function getCategoryByFilter($filter = array())
+    {
+
+        $builder = $this->table('category');
+        $builder->select('category.*');
+        
+        if(!empty($filter['award']))
+          $builder->where('category.main_category_id',$filter['award']);
+
+        if((!empty($filter['limit']) || !empty($filter['start'])))
+          $builder->limit($filter['limit'],$filter['start']);
+
+        if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
+            return $builder->countAllResults();
+        else 
+            return $query = $builder->get();
+
+    }
 }

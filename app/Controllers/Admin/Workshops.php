@@ -11,11 +11,102 @@ class Workshops extends BaseController
     public function index()
     {
        
-        $workshopLists = $this->workshopModel->getLists();
+        $filter = array();
+        $filter['title']      = '';
+        $filter['subject']    = '';
+        $filter['status']     = '';
+        $filter['start']      = '0';
+        $filter['limit']      = '10';
+        $filter['orderField'] = 'id';
+        $filter['orderBy']    = 'desc';
+        $totalRecords  = $this->workshopModel->getEventLists();
+        
+        if (strtolower($this->request->getMethod()) == "post") { 
+
+            if(!$this->validation->withRequest($this->request)->run()) {
+
+                $dtpostData = $this->request->getPost('data');
+
+                $response = array();
+    
+                $draw            = $dtpostData['draw'];
+                $start           = $dtpostData['start'];
+                $rowperpage      = $dtpostData['length']; // Rows display per page
+                $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
+                $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                $searchValue     = $dtpostData['search']['value']; // Search value
+
+                 // Custom filter
+                $title      = $dtpostData['title'];
+                $subject    = $dtpostData['subject'];
+             //   $start_date = $dtpostData['start_date'];
+                $status     = $dtpostData['status'];
+                
+                $filter['title']       = $title;
+                $filter['subject']     = $subject;
+              //  $filter['start_date']  = $start_date;
+                $filter['status']      = $status;
+                $filter['limit']       = $rowperpage;
+                $filter['orderField']  = $columnName;
+                $filter['orderBy']     = $columnSortOrder;
+
+                $workshopLists = $this->workshopModel->getEventsByFilter($filter)->getResultArray();
+               
+                $filter['totalRows'] = 'yes';
+               
+                $totalRecordsWithFilterCt = $this->workshopModel->getEventsByFilter($filter);
+               
+                $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
+            
+          }
+
+        }
+        else
+        {    
+
+            $workshopLists = $this->workshopModel->getEventsByFilter($filter)->getResultArray();
+            
+            $totalRecordsWithFilter = count($workshopLists);
+        }
 
         $this->data['lists'] = $workshopLists;
-        return render('admin/workshop/list',$this->data);
-               
+         
+        $data = array();
+        foreach($workshopLists as $ukey => $uvalue){
+            
+                $data[] = array('title' => $uvalue['title'],
+                                'subject' => $uvalue['subject'],
+                                'description' => $uvalue['description'],
+                                'start_date' => $uvalue['start_date'],
+                                'end_date' => $uvalue['end_date'],
+                                'created_date' => $uvalue['created_date'],
+                                'action' => ''
+                             );
+         }
+           
+        
+        if($this->request->isAJAX()) {
+            
+            $end  = $filter['start'] + $filter['limit'];
+                return $this->response->setJSON(array(
+                                        'status' => 'success',
+                                        'data'  => $data,
+                                        'token' => csrf_hash(),
+                                        "draw" => intval($draw),
+                                        "iTotalRecords" => $totalRecords,
+                                        "start" => $filter['start'],
+                                        "end" => $end,
+                                        "length" => $filter['limit'],
+                                        "page" => $draw,
+                                        "iTotalDisplayRecords" => $totalRecordsWithFilter
+                                    )); 
+                exit;
+          }
+          else
+          {
+            return render('admin/workshop/list',$this->data);
+          } 
     }
 
     public function add($id='')

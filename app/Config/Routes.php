@@ -136,6 +136,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get("login", "Login::index");
     $routes->get("logout", "Login::logout");
     $routes->get("user", "User::index",['filter' =>'auth']);
+    $routes->post("user", "User::index",['filter' =>'auth']);
     $routes->get("reset_password/(:any)", "User::resetpassword/$1",['filter' =>'auth']);
     $routes->post("reset_password", "User::resetpassword",['filter' =>'auth']);
     //$routes->get("user/add", "User::add");
@@ -153,6 +154,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post("profile", "User::profile",['filter' =>'auth']);
 
     $routes->get("nominee", "Nominee::index",['filter' =>'auth']);
+    $routes->post("nominee", "Nominee::index",['filter' =>'auth']);
     $routes->get('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
     $routes->post('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
     $routes->get('nominee/lists','Nominee::nominee_lists_of_jury',['filter' =>'auth']);
@@ -165,6 +167,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('nominee/update/(:any)','Nominee::update/$1',['filter' =>'auth']);
 
     $routes->get('category','Category::index',['filter' =>'auth']);
+    $routes->post('category','Category::index',['filter' =>'auth']);
     $routes->post('category/add','Category::add',['filter' =>'auth']);
     $routes->get('category/add','Category::add',['filter' =>'auth']);
     $routes->get('category/add/(:any)','Category::add/$1',['filter' =>'auth']);
@@ -186,6 +189,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('rating/delete/(:any)/(:any)','Rating::delete/$1/$1',['filter' =>'auth']);
 
     $routes->get('workshops','Workshops::index',['filter' =>'auth']);
+    $routes->post('workshops','Workshops::index',['filter' =>'auth']);
     $routes->get('workshops/add','Workshops::add',['filter' =>'auth']);
     $routes->get('workshops/add/(:any)','Workshops::add/$1',['filter' =>'auth']);
     $routes->post('workshops/add','Workshops::add',['filter' =>'auth']);
@@ -202,6 +206,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('awards/getJuryListsByNominee','Awards::getJuryListsByNominee',['filter' =>'auth']);
 
     $routes->get('eventregisteration','EventRegisteration::index',['filter' =>'auth']);
+    $routes->post('eventregisteration','EventRegisteration::index',['filter' =>'auth']);
     $routes->post('eventregisteration/add','EventRegisteration::add',['filter' =>'auth']);
     $routes->get('eventregisteration/add','EventRegisteration::add',['filter' =>'auth']);
     $routes->get('eventregisteration/add/(:any)','EventRegisteration::add/$1',['filter' =>'auth']);

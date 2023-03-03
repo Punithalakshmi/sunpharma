@@ -9,38 +9,37 @@
             <div class="clearfix"></div>
             <?= csrf_field(); ?>
             <div class="row topformsec">
-            <div class="col-md-3">
-            <div class="get-sunpharma__input-box mt-2 form-inline">
-            <label for="" class="fw-bold">Category</label>
-                    <select class="selectpicker mt-2 form-control"
-                        aria-label="Default select example" name="category" id="category">
-                        <option></option>
-                        <?php if(is_array($categories)):
-                                foreach($categories as $ckey=>$cvalue):?>
-                        <option value="<?=$cvalue['id'];?>" <?=set_select('category',$cvalue['id'], ((isset($editdata['category']) && ($editdata['category']==$cvalue['id']))?TRUE:FALSE));?>><?=$cvalue['name'];?></option>
-                        <?php endforeach; endif; ?> 
-                    </select>
-                    <small class="text-danger">
-                    <?php if(isset($validation) && $validation->getError('category')) {?>
-                        <?= $error = $validation->getError('category'); ?>
-                    <?php }?>
-                    </small>  
-                </div>
-            </div>
+              
+                  <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label for="" class="fw-bold">Select Award </label>
+                        <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="main_category_id" id="main_category_id" onchange="getCategories(this);" >
+                            <option></option>
+                            <?php if(is_array($main_categories)):
+                                    foreach($main_categories as $ckey=>$cvalue):?>
+                            <option value="<?=$cvalue['id'];?>" ><?=$cvalue['name'];?></option>
+                            <?php endforeach; endif; ?> 
+                        </select>
+                       
+                    </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label for="" class="fw-bold">Award Types</label>
+                    <div class="col-md-12" id="awardTypeList">
+                        <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="category" id="category">
+                            <option></option>
+                          
+                        </select>
+                    </div>    
+                    </div>
+              </div>
           
-            <div class="col-md-3">
-            <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Year</label>
-                    <select class="selectpicker mt-2 form-control"
-                        aria-label="Default select example" name="year" id="year">
-                        <option></option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option> 
-                    </select>
-            </div>
-            </div>
             <div class="col-md-3 searchbtn">
-                    <button class="btn btn-primary mb-2" name="search" id="search" onclick="getAwardLists()">Search</button>
+                <button class="btn btn-primary mb-2" name="search" id="search" onclick="getAwardLists()">Search</button>
             </div>
             <div class="col-md-3 actionbtns">
                 <a href="#" onclick="exportResult();" class="btn btn-primary mb-2 downloadbtnres">
@@ -62,22 +61,11 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-                    <!-- <table id="datatable" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Award Category</th>
-                          <th>Nominee Name</th>
-                          <th>Nomination No</th>
-                          <th>DOB</th>
-                          <th>Rating</th>
-                        </tr>
-                      </thead>
-                      <tbody id="getLists"> -->
+                    
                       <div id="getLists">
                           <?php 
                             if(is_array($lists)):
-                                    foreach($lists as $user):
+                              foreach($lists as $user):
                             ?>
 
                               <div data-toggle="modal" data-target="#juryListsModal" class="col-md-3 col-xs-12 mt-30" onclick="geJuryLists(<?=$user['id'];?>);">
@@ -93,16 +81,7 @@
                               <?php endforeach;
                                      endif; ?>  
                               </div>       
-                                <!-- <tr> <td class="iconcal"><i class="expandChildTable fa fa-plus-circle"></i></td>
-                                    <td><?//$user['category_name'];?></td>
-                                    <td><?//$user['firstname'];?></td>
-                                    <td><?//date("Y")."/".$user['id'];?></td>
-                                    <td><?//$user['dob'];?></td>
-                                    <td><?//round($user['average_rating']);?></td>
-                                </tr> -->
-                               
-                      <!-- </tbody>
-                    </table> -->
+                                
                   </div>
                 </div>
               </div>

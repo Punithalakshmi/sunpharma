@@ -14,7 +14,14 @@ $(document).ready(function(){
       }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
     });
-      
+
+    userDatatable();
+
+    nomineeDatatable();
+
+    eventDatatable();
+    registrationDatatable();
+    awardTypeDatatable();
 });
 
 function addMoreRows()
@@ -172,7 +179,8 @@ $(function(){
  {
    
     var category = $("#category").val();
-    var year     = $("#year").val();
+    var main_category_id = $("#main_category_id").val();
+    
 
     if(category == ''){
       errorMessageAlert('Please select category');
@@ -185,32 +193,37 @@ $(function(){
     $('#loader').removeClass('hidden');
 
     $.ajax({
-      url : base_url+'/admin/awards/index',
-      type: "POST",
-      data : {category:category,year:year,'app_csrf':csrfHash},
-      dataType:'json',
-      success: function(data, textStatus, jqXHR)
+      url: base_url+'/csrf_token',
+      type: 'GET',
+      data: {},
+      dataType: 'json',
+      success: function (form_res) 
       {
-        $('#loader').addClass('hidden');
-          if(data.data)
-            $("#getLists").html(data.data);
-      },
-      error: function (jqXHR, textStatus, errorThrown)
-      {
-        console.log(jqXHR);
-         console.log(textStatus);
-         $('#loader').addClass('hidden');
-         if(textStatus && textStatus == 'error'){
-          if(jqXHR.responseJSON.message){
-            errorMessageAlert(jqXHR.responseJSON.message);
-           
-            
+
+        $.ajax({
+          url : base_url+'/admin/awards/index',
+          type: "POST",
+          data : {category:category,main_category_id:main_category_id,'app_csrf':form_res.token},
+          dataType:'json',
+          success: function(data, textStatus, jqXHR)
+          {
+            $('#loader').addClass('hidden');
+              if(data.data)
+                $("#getLists").html(data.data);
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+            $('#loader').addClass('hidden');
+            if(textStatus && textStatus == 'error'){
+              if(jqXHR.responseJSON.message){
+                errorMessageAlert(jqXHR.responseJSON.message);     
+              }
+            }
           }
-        }
-      }
 
-    });
-
+        });
+     }
+  });
 
  }
 
@@ -218,34 +231,44 @@ $(function(){
  {
 
     var category = $("#category").val();
-    var year     = $("#year").val();
-    var csrfHash = $("input[name='app_csrf']").val();
-   
-    $('#loader').removeClass('hidden');
+    var main_category_id = $("#main_category_id").val();
+    
     $.ajax({
-      url : base_url+'/admin/awards/export',
-      type: "POST",
-      data : {category:category,year:year,'app_csrf':csrfHash},
-      dataType:'json',
-      success: function(data, textStatus, jqXHR)
+      url: base_url+'/csrf_token',
+      type: 'GET',
+      data: {},
+      dataType: 'json',
+      success: function (form_res) 
       {
-        $('#loader').addClass('hidden');
-         
-          window.location.href = data.filename;
-      },
-      error: function (jqXHR, textStatus, errorThrown)
-      {
-         
-         $('#loader').addClass('hidden');
-         if(textStatus && textStatus == 'error'){
-           if(jqXHR.responseJSON.message){
-              errorMessageAlert(jqXHR.responseJSON.message); 
-           }
-         }
-          
-      }
+   
+        $('#loader').removeClass('hidden');
+        $.ajax({
+          url : base_url+'/admin/awards/export',
+          type: "POST",
+          data : {category:category,'app_csrf':form_res.token,'main_category_id':main_category_id},
+          dataType:'json',
+          success: function(data, textStatus, jqXHR)
+          {
+             $('#loader').addClass('hidden');
+              window.location.href = data.filename;
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+            
+            $('#loader').addClass('hidden');
+            if(textStatus && textStatus == 'error'){
+              if(jqXHR.responseJSON.message){
+                  errorMessageAlert(jqXHR.responseJSON.message); 
+                  location.reload();
+              }
+            }
+              
+          }
 
-    });
+        }); 
+
+      }
+    });   
    
  }
 
@@ -462,10 +485,15 @@ function exportRegistrations()
     },function(el) {
         if(el){
                 $('#loader').removeClass('hidden');
+                var title  = $('#title').val();
+                var email = $('#email').val();
+                var phone = $('#phone').val();
+                var mode = $('#mode').val();
+
                   $.ajax({
                       url : base_url+'/admin/eventregisteration/export',
                       type: "POST",
-                      data : {'app_csrf':csrfHash},
+                      data : {'app_csrf':csrfHash,title:title,email:email,phone:phone,mode:mode},
                       dataType:'json',
                       success: function(data, textStatus, jqXHR)
                       {
@@ -515,7 +543,6 @@ function getCategories(e)
                 if(data.status && data.status == 'success'){
                   $("#awardTypeList").html(data.html);
                 }
-                
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -538,4 +565,336 @@ function getCsrfToken()
             }
     });
     //return true;
+}
+
+
+function userDatatable()
+{
+  
+     
+          var empTable = $('#userDatatable').DataTable({
+                  'processing': true,
+                  'serverSide': true,
+                  'serverMethod': 'post',
+                  'searching': false, // Remove default Search Control
+                  'ajax': {
+                       'url': base_url+'/admin/user',
+                       'data': function(data){
+                               // CSRF Hash
+                               var csrfHash = $("input[name='app_csrf']").val();
+                               
+                               var role = $('#role_name').val();
+                               var category = $('#category').val();
+                               var firstname = $('#firstname').val();
+                               var email = $('#email').val();
+
+                                data.role_name = role;
+                                data.category  = category;
+                                data.firstname = firstname;
+                                data.email = email;
+
+                              console.log('datatables',data);
+                               return {
+                                    data: data,
+                                    app_csrf: csrfHash // CSRF Token
+                               };
+                       },
+                       dataSrc: function(data){
+
+                            // Update token hash
+                            $("input[name='app_csrf']").val(data.token);
+
+                            console.log('filtered data',data.data);
+                            // Datatable data
+                            return data.data;
+                       }
+                  },
+                  'columns': [
+                       { data: 'firstname' },
+                       { data: 'username' },
+                       { data: 'email' },
+                       { data: 'phone' },
+                       { data: 'category' },
+                       { data: 'role_name' },
+                       { data: 'created_date' },
+                       { data: 'action' },
+                  ]
+          });
+
+          $('#firstname').keyup(function(){
+            empTable.draw();
+         });
+
+        $('#email').keyup(function(){
+          empTable.draw();
+        });
+          // Custom filter
+          $('#role_name').change(function(){
+               empTable.draw();
+          });
+
+          $('#category').change(function(){
+            empTable.draw();
+       });
+
+}
+
+
+function nomineeDatatable()
+{
+  
+     
+      var empTable = $('#nomineeDatatable').DataTable({
+              'processing': true,
+              'serverSide': true,
+              'serverMethod': 'post',
+              'searching': false, // Remove default Search Control
+              'ajax': {
+                    'url': base_url+'/admin/nominee',
+                    'data': function(data){
+                            // CSRF Hash
+                            var csrfHash = $("input[name='app_csrf']").val();
+                            
+                            var award_title = $('#award_title').val();
+                            var status = $('#status').val();
+                            var firstname = $('#firstname').val();
+                            var email = $('#email').val();
+
+                            data.award_title = award_title;
+                            data.status  = status;
+                            data.firstname = firstname;
+                            data.email = email;
+
+                          console.log('datatables',data);
+                            return {
+                                data: data,
+                                app_csrf: csrfHash // CSRF Token
+                            };
+                    },
+                    dataSrc: function(data){
+
+                        // Update token hash
+                        $("input[name='app_csrf']").val(data.token);
+
+                        console.log('filtered data',data.data);
+                        // Datatable data
+                        return data.data;
+                    }
+              },
+              'columns': [
+                    { data: 'registration_no' },
+                    { data: 'main_category_name' },
+                    { data: 'category_name' },
+                    { data: 'title' },
+                    { data: 'firstname' },
+                    { data: 'username' },
+                    { data: 'email' },
+                    { data: 'phone' },
+                    { data: 'status' },
+                    { data: 'created_date' },
+                    { data: 'action' },
+              ]
+      });
+
+      $('#firstname').keyup(function(){
+        empTable.draw();
+      });
+
+    $('#email').keyup(function(){
+      empTable.draw();
+    });
+      // Custom filter
+      $('#award_title').keyup(function(){
+            empTable.draw();
+      });
+
+      $('#status').keyup(function(){
+        empTable.draw();
+    });
+
+}
+
+function eventDatatable()
+{
+  
+      var empTable = $('#eventDatatable').DataTable({
+              'processing': true,
+              'serverSide': true,
+              'serverMethod': 'post',
+              'searching': false, // Remove default Search Control
+              'ajax': {
+                    'url': base_url+'/admin/workshops',
+                    'data': function(data){
+
+                            // CSRF Hash
+                            var csrfHash = $("input[name='app_csrf']").val();
+                            
+                            var title  = $('#title').val();
+                            var status = $('#status').val();
+                          //  var start_date = $('#start_date').val();
+                            var subject = $('#subject').val();
+
+                            data.title      = title;
+                            data.status     = status;
+                           // data.start_date = start_date;
+                            data.subject    = subject;
+
+                          console.log('datatables',data);
+                            return {
+                                data: data,
+                                app_csrf: csrfHash // CSRF Token
+                            };
+                    },
+                    dataSrc: function(data){
+                        // Update token hash
+                        $("input[name='app_csrf']").val(data.token);
+                        // Datatable data
+                        return data.data;
+                    }
+              },
+              'columns': [
+                    { data: 'title' },
+                    { data: 'subject' },
+                    { data: 'description' },
+                    { data: 'start_date' },
+                    { data: 'end_date' },
+                    { data: 'created_date'},
+                    { data: 'action' },
+              ]
+      });
+
+      $('#title').keyup(function(){
+        empTable.draw();
+      });
+
+      $('#status').keyup(function(){
+        empTable.draw();
+      });
+      // Custom filter
+      $('#subject').keyup(function(){
+            empTable.draw();
+      });
+
+      $('#start_date').keyup(function(){
+        empTable.draw();
+      });
+
+}
+
+function registrationDatatable()
+{
+  
+      var empTable = $('#registrationDatatable').DataTable({
+              'processing': true,
+              'serverSide': true,
+              'serverMethod': 'post',
+              'searching': false, // Remove default Search Control
+              'ajax': {
+                    'url': base_url+'/admin/eventregisteration',
+                    'data': function(data){
+
+                            // CSRF Hash
+                            var csrfHash = $("input[name='app_csrf']").val();
+                            
+                            var title  = $('#title').val();
+                            var email = $('#email').val();
+                            var phone = $('#phone').val();
+                            var mode = $('#mode').val();
+       
+                            data.title      = title;
+                            data.email     = email;
+                           // data.start_date = start_date;
+                            data.phone    = phone;
+                            data.mode    = mode;
+
+                          console.log('datatables',data);
+                            return {
+                                data: data,
+                                app_csrf: csrfHash // CSRF Token
+                            };
+                    },
+                    dataSrc: function(data){
+                        // Update token hash
+                        $("input[name='app_csrf']").val(data.token);
+                        // Datatable data
+                        return data.data;
+                    }
+              },
+              'columns': [
+                    { data: 'title' },
+                    { data: 'created_date' },
+                    { data: 'registeration_no' },
+                    { data: 'firstname' },
+                    { data: 'lastname' },
+                    { data: 'email'},
+                    { data: 'phone'},
+                    { data: 'address'},
+                    { data: 'mode'},
+                    { data: 'action' },
+              ]
+      });
+
+      $('#title').keyup(function(){
+        empTable.draw();
+      });
+
+      $('#email').keyup(function(){
+        empTable.draw();
+      });
+      // Custom filter
+      $('#phone').keyup(function(){
+            empTable.draw();
+      });
+
+      $('#mode').keyup(function(){
+        empTable.draw();
+      });
+
+}
+
+
+function awardTypeDatatable()
+{
+  
+      var empTable = $('#awardTypeDatatable').DataTable({
+              'processing': true,
+              'serverSide': true,
+              'serverMethod': 'post',
+              'searching': false, // Remove default Search Control
+              'ajax': {
+                    'url': base_url+'/admin/category',
+                    'data': function(data){
+
+                            // CSRF Hash
+                            var csrfHash = $("input[name='app_csrf']").val();
+                            
+                            var award  = $("#main_category_id").val();
+                            data.award = award;
+                          
+                          console.log('datatables',data);
+                            return {
+                                data: data,
+                                app_csrf: csrfHash // CSRF Token
+                            };
+                    },
+                    dataSrc: function(data){
+                        // Update token hash
+                        $("input[name='app_csrf']").val(data.token);
+                        // Datatable data
+                        return data.data;
+                    }
+              },
+              'columns': [
+                    { data: 'name' },
+                    { data: 'created_date' },
+                    { data: 'type' },
+                    { data: 'status' },
+                    { data: 'action' },
+              ]
+      });
+
+      $("#main_category_id").change(function(){
+        empTable.draw();
+      });
+      
 }

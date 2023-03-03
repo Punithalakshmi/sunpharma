@@ -55,6 +55,14 @@ class NomineeModel extends Model{
         return $this->getWhere(array("role" => '1'));
     }
 
+    public function getNomineeLists()
+    {
+        $builder = $this->table('users');
+        $builder->select('*');
+        $builder->where("role",2);
+        return $builder->countAllResults();
+    }
+
     public function getNomineeInfo($id='')
     {
         $builder = $this->table('users');
@@ -64,6 +72,41 @@ class NomineeModel extends Model{
         return $query = $builder->get();
     }
 
+    public function getNomineeListsByCustomFilter($filter = array())
+    {
+
+        $builder = $this->table('users');
+        $builder->select('users.*,category.name as category_name,nominee_details.registration_no,nominations.title,awards_creation_category.name as main_category_name');
+        $builder->join('nominee_details', 'nominee_details.nominee_id = users.id');
+        $builder->join('category', 'category.id = nominee_details.category_id');
+        $builder->join('nominations','nominations.id = users.award_id AND nominations.status=1');
+        $builder->join('awards_creation_category','awards_creation_category.id=nominations.main_category_id');
+        $builder->where("users.role",'2');
+
+        if(!empty($filter['title']))
+         $builder->like('nominations.title',$filter['title']);
+
+        if(!empty($filter['status']))
+         $builder->where('users.status',$filter['status']); 
+
+        if(!empty($filter['email']))
+         $builder->like('users.email',$filter['email']);
+         
+        if(!empty($filter['firstname']))
+         $builder->like('users.firstname',$filter['firstname']);
+         
+        $builder->orderBy('id', 'DESC');
+        
+        if((!empty($filter['limit']) || !empty($filter['start'])))
+          $builder->limit($filter['limit'],$filter['start']);
+
+        if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
+            return $builder->countAllResults();
+        else 
+            return $query = $builder->get();
+
+
+    }
 
     
 }

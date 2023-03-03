@@ -20,23 +20,23 @@ class Awards extends BaseController
 
 
         $category = '';
-        $year = '';
+        $main_category_id = '';
         if (strtolower($this->request->getMethod()) == "post") {  
             
             $category      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-            $year          = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
+            $main_category_id    = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
         }
 
             //get categories lists
             $this->data['categories']   = $this->categoryModel->getListsOfCategories()->getResultArray();
-           //$this->data['categories'] = $getCategoryLists->getResultArray();
+              
+            $this->data['main_categories'] = $this->awardsCategoryModel->getListsOfCategories();
 
-            $awardsLists = $this->awardsModel->getLists($category,$year)->getResultArray();
+            $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
            
             $awardsLists = getAwardsArr($awardsLists);
             foreach($awardsLists as $akey => $avalue) {
 
-                //get jury lists 
                 $splitJuryIds = explode(',',$avalue['jury']);
                
                 for($i=0;$i<count($splitJuryIds);$i++) {
@@ -59,8 +59,7 @@ class Awards extends BaseController
              else
              {
                 return render('admin/awards/list',$this->data);
-                
-            }    
+             }    
            
     }
 
@@ -73,12 +72,12 @@ class Awards extends BaseController
           //  if($this->validation->withRequest($this->request)->run()) {
    
                     $category    = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-                    $year        = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
+                    $main_category_id        = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
             
                     
                     $fileName = 'AwardResult_'.date('d-m-Y').'.xlsx';  
 
-                    $awardsLists = $this->awardsModel->getLists($category,$year)->getResultArray();
+                    $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
 
                     $awardsLists = getAwardsArr($awardsLists);
                         

@@ -10,9 +10,94 @@ class Category extends BaseController
     public function index()
     {
         
-        $this->data['lists'] = $this->categoryModel->getListsOfCategories()->getResultArray();
+       // $this->data['lists'] = $this->categoryModel->getListsOfCategories()->getResultArray();
        
-        return render('admin/category/list',$this->data);
+      //  return render('admin/category/list',$this->data);
+
+        $filter = array();
+        $filter['award']      = '';
+       
+        $filter['start']      = '0';
+        $filter['limit']      = '10';
+        $filter['orderField'] = 'id';
+        $filter['orderBy']    = 'desc';
+        $totalRecords  = $this->categoryModel->getCategoryLists();
+        
+        if (strtolower($this->request->getMethod()) == "post") { 
+
+            if(!$this->validation->withRequest($this->request)->run()) {
+
+                $dtpostData = $this->request->getPost('data');
+
+                $response = array();
+    
+                $draw            = $dtpostData['draw'];
+                $start           = $dtpostData['start'];
+                $rowperpage      = $dtpostData['length']; // Rows display per page
+                $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
+                $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                $searchValue     = $dtpostData['search']['value']; // Search value
+
+                 // Custom filter
+                $award                 = $dtpostData['award'];
+                $filter['award']       = $award;
+                $filter['limit']       = $rowperpage;
+                $filter['orderField']  = $columnName;
+                $filter['orderBy']     = $columnSortOrder;
+
+                $categoryLists = $this->categoryModel->getCategoryByFilter($filter)->getResultArray();
+               
+                $filter['totalRows'] = 'yes';
+               
+                $totalRecordsWithFilterCt = $this->categoryModel->getCategoryByFilter($filter);
+               
+                $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
+            
+          }
+
+        }
+        else
+        {    
+            $categoryLists = $this->categoryModel->getCategoryByFilter($filter)->getResultArray();
+            $totalRecordsWithFilter = count($categoryLists);
+        }
+
+        $this->data['lists'] = $categoryLists;
+         
+        $data = array();
+        foreach($categoryLists as $ukey => $uvalue){
+            
+                $data[] = array('name' => $uvalue['name'],
+                                'type' => $uvalue['type'],
+                                'status' => $uvalue['status'],
+                                'created_date' => $uvalue['created_date'],
+                                'action' => ''
+                             );
+         }
+           
+        
+        if($this->request->isAJAX()) {
+            
+            $end  = $filter['start'] + $filter['limit'];
+                return $this->response->setJSON(array(
+                                        'status' => 'success',
+                                        'data'  => $data,
+                                        'token' => csrf_hash(),
+                                        "draw" => intval($draw),
+                                        "iTotalRecords" => $totalRecords,
+                                        "start" => $filter['start'],
+                                        "end" => $end,
+                                        "length" => $filter['limit'],
+                                        "page" => $draw,
+                                        "iTotalDisplayRecords" => $totalRecordsWithFilter
+                                    )); 
+                exit;
+          }
+          else
+          {
+            return render('admin/category/list',$this->data);
+          } 
         
     }
 

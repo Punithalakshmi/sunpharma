@@ -11,9 +11,12 @@
                                 foreach($nominations as $nkey => $nvalue): 
                          
                                  $end_date = strtotime(date('Y-m-d 23:59:59',strtotime($nvalue['end_date'])));
+
+                                 //event image 
+                                 $event_image = (isset($nvalue['banner_image']) && !empty($nvalue['banner_image']))?$nvalue['banner_image']:'default.jpg';
                         ?>
                         <div class="carousel-item <?php if($nkey == 0):?>active<?php endif;?> h-100">
-                            <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/uploads/events/<?=$nvalue['banner_image'];?>" alt="Slide Image" style="z-index: -1;">
+                            <img class="w-100 d-block position-absolute h-100 fit-cover" src="<?=base_url();?>/uploads/events/<?=$event_image;?>" alt="Slide Image" style="z-index: -1;">
                             <div class="container text-start d-flex flex-column justify-content-center h-100">
                                 <div class="row">
                                     <div class="col-md-8 col-xl-7 col-xxl-7 offset-md-0 banneroverlay" style="background: rgba(245,246,248,0.75);padding: 20px;border-radius: 6px;">

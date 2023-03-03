@@ -10,36 +10,131 @@ class Nominee extends BaseController
     public function index()
     {
         
-            $userLists = $this->nomineeModel->getListsOfNominees();
-            $lists     = $userLists->getResultArray();
-
-            //echo "<pre>";
-           // print_r($lists); die;
             $current_date = date("Y-m-d");
 
-            foreach($lists as $k => $user){
-             
-                $getNominationEndDate = $this->nominationTypesModel->getCategoryNomination($user['category']);
-               
-                $lists[$k]['nomination_end_date'] = '';
+            $filter = array();
+            $filter['firstname']  = '';
+            $filter['email']      = '';
+            $filter['title']      = '';
+            $filter['status']     = '';
+            $filter['start']      = '0';
+            $filter['limit']      = '10';
+            $filter['orderField'] = 'id';
+            $filter['orderBy']    = 'desc';
 
-                $isExpiredNomination =  isNominationExpired($user['extend_date']);
+            $totalRecords  = $this->nomineeModel->getNomineeLists();
+        
+        if (strtolower($this->request->getMethod()) == "post") { 
 
-                $lists[$k]['is_expired_nomination'] = ($isExpiredNomination)?'yes':'no';
+            if(!$this->validation->withRequest($this->request)->run()) {
+
+                $dtpostData = $this->request->getPost('data');
+
+                $response = array();
+    
+                $draw            = $dtpostData['draw'];
+                $start           = $dtpostData['start'];
+                $rowperpage      = $dtpostData['length']; // Rows display per page
+                $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
+                $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                $searchValue     = $dtpostData['search']['value']; // Search value
+
+                 // Custom filter
+                $award_title= $dtpostData['award_title'];
+                $status     = $dtpostData['status'];
+                $firstname  = $dtpostData['firstname'];
+                $email      = $dtpostData['email'];
                 
- 
-            }
+                $filter['title']      = $award_title;
+                $filter['status']     = $status;
+                $filter['firstname']  = $firstname;
+                $filter['email']      = $email;
+                $filter['start']      = $start;
+                $filter['limit']      = $rowperpage;
+                $filter['orderField'] = $columnName;
+                $filter['orderBy']    = $columnSortOrder;
 
-            $this->data['lists'] = $lists;
-            $juryLists = array();
-            $juryLists  = $this->nomineeModel->getJuryLists()->getResultArray();
+                $lists = $this->nomineeModel->getNomineeListsByCustomFilter($filter)->getResultArray();
+            
+               // $db      = \Config\Database::connect();
 
-            if(count($juryLists) > 0)
-               $this->data['juryLists'] = $juryLists;
-                 
+              //  echo $db->getLastQuery(); die;
+
+                $filter['totalRows'] = 'yes';
+               
+                $totalRecordsWithFilterCt = $this->nomineeModel->getNomineeListsByCustomFilter($filter);
+               
+                $totalRecordsWithFilter = (!empty($award_title) || !empty($status) || !empty($firstname) || !empty($email))?$totalRecordsWithFilterCt:$totalRecords;
+            
+          }
+
+        }
+        else
+        {    
+
+            $lists = $this->nomineeModel->getNomineeListsByCustomFilter($filter)->getResultArray();
+            
+            $totalRecordsWithFilter = count($lists);
+        }
+
+         $data = array();
+         foreach($lists as $k => $user){
+             
+            $getNominationEndDate = $this->nominationTypesModel->getCategoryNomination($user['category']);
+           
+            $lists[$k]['nomination_end_date'] = '';
+
+            $isExpiredNomination =  isNominationExpired($user['extend_date']);
+
+            $lists[$k]['is_expired_nomination'] = ($isExpiredNomination)?'yes':'no';
+
+             $data[] = array('registration_no' => $user['registration_no'],
+                            'main_category_name' => $user['main_category_name'],
+                            'category_name' => $user['category_name'],
+                            'title' => $user['title'],
+                            'firstname' => $user['firstname'],
+                            'username' => $user['username'],
+                            'email' => $user['email'],
+                            'phone' => $user['phone'],
+                            'status' => $user['status'],
+                            'created_date' => $user['created_date'],
+                            'action' => ''
+                        );
+         }
+
+        $this->data['lists'] = $lists;
+        $juryLists = array();
+        $juryLists  = $this->nomineeModel->getJuryLists()->getResultArray();
+
+        if(count($juryLists) > 0)
+            $this->data['juryLists'] = $juryLists;
+
+
+
+        if($this->request->isAJAX()) {
+            $html = view('admin/nominee/list',$this->data,array('debug' => false));
+            $end  = $filter['start'] + $filter['limit'];
+                return $this->response->setJSON(array(
+                                        'status' => 'success',
+                                        'data'  => $data,
+                                        'token' => csrf_hash(),
+                                        "draw" => intval($draw),
+                                        "iTotalRecords" => $totalRecords,
+                                        "start" => $filter['start'],
+                                        "end" => $end,
+                                        "length" => $filter['limit'],
+                                        "page" => $draw,
+                                        "iTotalDisplayRecords" => $totalRecordsWithFilter
+                                    )); 
+                exit;
+          }
+          else
+          {
             return render('admin/nominee/list',$this->data);
-              
-       
+          }          
+            
+           
     }
 
     public function getApproval($id = '')
@@ -72,12 +167,6 @@ class Nominee extends BaseController
 
             $getUserNominationNo = $this->nominationModel->getNominationData($id)->getRowArray();
 
-           // $email = \Config\Services::email();
-
-          //  $email->setFrom('punitha@izaaptech.in', 'Punithalakshmi');
-          //  $email->setTo($getUserData['email']);
-          
-         //   $email->setSubject('Your Application Approval Status');
             $subject = 'Nomination Application Status - Sunpharma Science Foundation';
             $login_url = base_url().'/login';
             $message = '';

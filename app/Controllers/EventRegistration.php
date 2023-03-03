@@ -13,9 +13,9 @@ class EventRegistration extends BaseController
     {
 
 
-        $this->validation = $this->validation->setRules($this->validation_rules(),$this->validationMessages());
+        $this->validation = $this->validation->setRules($this->validation_rules($event_id),$this->validationMessages());
         
-        $registerationNo = $this->getRegisterationNo();
+        $registerationNo = $this->getRegisterationNo($event_id);
 
         $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
         
@@ -32,7 +32,7 @@ class EventRegistration extends BaseController
                 $event_type                  = $this->request->getPost('event_type');
                 $mode                        = $this->request->getPost('participation_mode');
                
-                $registerationNo = $this->getRegisterationNo();
+                $registerationNo = $this->getRegisterationNo($event_id);
 
                 $ins_data = array();
                 $ins_data['firstname']     = $firstname;
@@ -82,14 +82,14 @@ class EventRegistration extends BaseController
     }
 
 
-    public function validation_rules()
+    public function validation_rules($id='')
     {
 
         $validation_rules = array();
         $validation_rules = array(
                                     "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                     "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                    "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[event_registerations.email]'),
+                                    "email" => array("label" => "Email",'rules' => 'required|valid_email|checkUniqueEmailForRegisteration['.$id.']'),
                                     "phone" => array("label" => "Phone",'rules' => 'required|min_length[10]'),
                                     "address" => array("label" => "Official Address",'rules' => 'required'),
                                    // "registeration_no" => array("label" => "Registration No",'rules' => 'required'),
@@ -105,7 +105,7 @@ class EventRegistration extends BaseController
 
         $validationMessages = array("firstname" => array("required" => "Please enter firstname"),
                                     "lastname" => array("required" => "Please enter lastname"),
-                                    "email" => array("required" => "Please enter Email","is_unique"=>"A registration with this email already exists"),
+                                    "email" => array("required" => "Please enter Email","checkUniqueEmailForRegisteration"=>"A registration with this email already exists"),
                               );
 
          return $validationMessages;
@@ -157,11 +157,11 @@ class EventRegistration extends BaseController
         return  render('frontend/read_more',$this->data);
     }
 
-    public function getRegisterationNo()
+    public function getRegisterationNo($event_id='')
     {
         $count = $this->registerationModel->CountAll(); 
         $ct = $count + 1;  
-        return 'SPSFN-REG-'.$ct;
+        return 'SPSFN-'.$event_id.'-REG-'.$ct;
     }
 
     function close()

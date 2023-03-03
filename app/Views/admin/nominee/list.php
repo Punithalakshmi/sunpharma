@@ -16,6 +16,39 @@
                   <?= session()->getFlashdata('msg') ?>
               </div>
             <?php endif;?>
+
+            <div class="row topformsec">
+            
+          
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Award Title</label>
+                    <input type="text" class="mt-2 form-control" name="award_title" id="award_title" />
+            </div>
+            </div>
+
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Firstname</label>
+                    <input type="text" class="mt-2 form-control" name="firstname" id="firstname" />
+            </div>
+            </div>
+
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Email</label>
+                    <input type="text" class="mt-2 form-control" name="email" id="email" />
+            </div>
+            </div>
+            <div class="col-md-3">
+              <div class="get-sunpharma__input-box mt-2 form-inline">
+              <label for="" class="fw-bold">Approval Status</label>
+                    
+                 <input type="text" class="mt-2 form-control" name="status" id="status" />
+                </div>
+            </div>
+            </div> 
+
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -23,20 +56,20 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="nomineeDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                            <th>Nomination No</th>
                            <th>Award</th>
                            <th>Award Type</th>
                            <th>Award Title</th>
-                          <th>Firstname</th>
-                          <th>Username</th>
-                          <th>Email</th>
-                          <th>Phone</th>
-                          <th>Approval Status</th>
-                          <th>Created Date</th>
-                          <th>Action</th>
+                            <th>Firstname</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Approval Status</th>
+                            <th>Created Date</th>
+                            <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -62,7 +95,7 @@
                           <td><?=$user['category_name'];?></td>
                           <td><?=$user['title'];?></td>
                           <td><?=$user['firstname'];?></td>
-                          <td><?=strtolower($user['firstname']);?></td>
+                          <td><?=$user['username'];?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
                           <td><?=$status;?></td>

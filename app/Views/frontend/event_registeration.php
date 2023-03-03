@@ -123,7 +123,7 @@
                       </div>
 
                       <div class="form-group mb-3">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Participation Mode 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Participation Mode <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="radio" name="participation_mode" class="flat" value="Online" <?php echo set_radio('participation_mode','Online',(isset($editdata['participation_mode']) && ($editdata['participation_mode']=='Online'))?'checked':'');?> > Online

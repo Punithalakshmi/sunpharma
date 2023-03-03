@@ -17,17 +17,26 @@ class RegisterationModel extends Model{
         'address',
         'registeration_no',
         'is_mail_sent',
-        'mode'
+        'mode',
+        'mail_log',
+        'event_id'
     ];
 
    
 
     public function getRegisteredUsers($id='')
     {
-        if(empty($id))
-         return $this->findAll();
-        else 
-          return $this->getWhere(array('id' => $id)); 
+        if(empty($id)){
+	    $builder = $this->table('event_registerations');
+            $builder->select('event_registerations.*,events.title');
+            $builder->join('events','events.id = event_registerations.event_id','left');
+	     $builder->orderBy('event_registerations.id', 'DESC');
+            return $query = $builder->get()->getResultArray();	
+	}
+        else
+	{ 
+          return $this->getWhere(array('id' => $id));
+	} 
     }
     
     public function CountAll()
@@ -41,6 +50,36 @@ class RegisterationModel extends Model{
     public function getEventUserLists()
     {
         return $this->getWhere(array('is_mail_sent' => 0)); 
+    }
+
+    public function getRegisterationByFilter($filter = array())
+    {
+        $builder = $this->table('event_registerations');
+        $builder->select('event_registerations.*,events.title');
+        $builder->join('events','events.id = event_registerations.event_id','left');
+       
+
+        if(!empty($filter['title']))
+         $builder->like('events.title',$filter['title']);
+
+        if(!empty($filter['email']))
+         $builder->like('event_registerations.email',$filter['email']); 
+
+        if(!empty($filter['phone']))
+          $builder->like('event_registerations.phone',$filter['phone']);
+
+        if(!empty($filter['mode']))
+          $builder->like('event_registerations.mode',$filter['mode']);  
+         
+        $builder->orderBy('id', 'DESC');
+      
+        if((!empty($filter['limit']) || !empty($filter['start'])))
+          $builder->limit($filter['limit'],$filter['start']);
+
+        if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
+            return $builder->countAllResults();
+        else 
+            return $query = $builder->get();
     }
     
 }

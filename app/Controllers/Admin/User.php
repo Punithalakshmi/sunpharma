@@ -10,24 +10,120 @@ class User extends BaseController
     public function index()
     {
         
-            $userLists = $this->userModel->getUserLists()->getResultArray();
+        $filter = array();
+        $filter['role']       = '';
+        $filter['category']   = '';
+        $filter['firstname']  = '';
+        $filter['email']      = '';
+        $filter['start']      = '0';
+        $filter['limit']      = '10';
+        $filter['orderField'] = 'id';
+        $filter['orderBy']    = 'desc';
+        $totalRecords  = $this->userModel->countAllResults();
+        
+        if (strtolower($this->request->getMethod()) == "post") { 
+
+            if(!$this->validation->withRequest($this->request)->run()) {
+
+                $dtpostData = $this->request->getPost('data');
+
+                $response = array();
+    
+                $draw            = $dtpostData['draw'];
+                $start           = $dtpostData['start'];
+                $rowperpage      = $dtpostData['length']; // Rows display per page
+                $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
+                $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                $searchValue     = $dtpostData['search']['value']; // Search value
+
+                 // Custom filter
+                $role     = $dtpostData['role_name'];
+                $category = $dtpostData['category'];
+                $firstname = $dtpostData['firstname'];
+                $email = $dtpostData['email'];
+                
+                $filter['role']       = $role;
+                $filter['category']   = $category;
+                $filter['firstname']  = $firstname;
+                $filter['email']      = $email;
+                $filter['start']      = $start;
+                $filter['limit']      = $rowperpage;
+                $filter['orderField'] = $columnName;
+                $filter['orderBy']    = $columnSortOrder;
+
+                $userLists = $this->userModel->getUsersByFilter($filter)->getResultArray();
+               
+
+                $filter['totalRows'] = 'yes';
+               
             
-            foreach($userLists as $ukey => $uvalue){
-               if(!empty($uvalue['category'])){ 
+               $totalRecordsWithFilterCt = $this->userModel->getUsersByFilter($filter);
+               
+             
+                $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
+            
+          }
+
+        }
+        else
+        {    
+
+            $userLists = $this->userModel->getUsersByFilter($filter)->getResultArray();
+            
+            $totalRecordsWithFilter = count($userLists);
+        }
+
+       
+        $data = array();
+        foreach($userLists as $ukey => $uvalue){
+            if(!empty($uvalue['category'])){ 
                 $category = $this->categoryModel->getListsOfCategories($uvalue['category']);
 
                 $category = $category->getRowArray();
                 $userLists[$ukey]['category'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
-               }
-               else
-               {
-                $userLists[$ukey]['category'] = '-';
-               }
             }
+            else
+            {
+                 $userLists[$ukey]['category'] = '-';
+            }
+                $data[] = array('firstname' => $uvalue['firstname'],
+                                'username' => $uvalue['username'],
+                                'email' => $uvalue['email'],
+                                'phone' => $uvalue['phone'],
+                                'category' => (isset($category['name']) && !empty($category['name']))?$category['name']:'-',
+                                'role_name' => $uvalue['role_name'],
+                                'created_date' => $uvalue['created_date'],
+                                'action' => ''
+                             );
+         }
            
-            $this->data['lists'] = $userLists;
+        $this->data['roles']   = $this->roleModel->getListsOfRoles();
+        $this->data['categories']   = $this->categoryModel->getListsOfCategories()->getResultArray();    
+        $this->data['lists'] = $userLists;
+
+        if($this->request->isAJAX()) {
+            $html = view('admin/user/list',$this->data,array('debug' => false));
+            $end  = $filter['start'] + $filter['limit'];
+                return $this->response->setJSON(array(
+                                        'status' => 'success',
+                                        'data'  => $data,
+                                        'token' => csrf_hash(),
+                                        "draw" => intval($draw),
+                                        "iTotalRecords" => $totalRecords,
+                                        "start" => $filter['start'],
+                                        "end" => $end,
+                                        "length" => $filter['limit'],
+                                        "page" => $draw,
+                                        "iTotalDisplayRecords" => $totalRecordsWithFilter
+                                    )); 
+                exit;
+          }
+          else
+          {
             return render('admin/user/list',$this->data);
-             
+          } 
+           
     }
 
     public function add($id='')
@@ -166,7 +262,7 @@ class User extends BaseController
     public function profile()
     {
 
-           $id = $this->data['userdata']['login_id'];
+            $id = $this->data['userdata']['login_id'];
             $getUserData = $this->userModel->getListsOfUsers($id);
             $edit_data   = $getUserData->getRowArray();
 

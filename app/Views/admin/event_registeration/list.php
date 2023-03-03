@@ -18,7 +18,7 @@
                 </a>
            </div>
 
-          
+           <?= csrf_field(); ?>
                 
            </div>
             <div class="clearfix"></div>
@@ -27,15 +27,49 @@
                   <?= session()->getFlashdata('msg') ?>
               </div>
             <?php endif;?>
-            <?= csrf_field(); ?>
+           
+            <div class="row topformsec">
+            
+              <div class="col-md-3">
+              <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Title</label>
+                    <input type="text" class="mt-2 form-control" name="title" id="title" />
+              </div>
+              </div>
+
+              <div class="col-md-3">
+              <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Email</label>
+                    <input type="text" class="mt-2 form-control" name="email" id="email" />
+              </div>
+              </div>
+
+            
+              <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                  <label for="" class="fw-bold">Phone</label> 
+                  <input type="text" class="mt-2 form-control" name="phone" id="phone" />
+                </div>
+              </div>
+            
+              <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                  <label for="" class="fw-bold">Participation Mode</label> 
+                  <input type="text" class="mt-2 form-control" name="mode" id="mode" />
+                </div>
+              </div>
+
+            </div> 
+
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30"></p>
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="registrationDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
+                          <th>Title</th>
                           <th>Registration Date</th>
                           <th>Registration No</th>
                           <th>Firstname</th>
@@ -52,6 +86,7 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
+                         <td><?=$user['title'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td><?=$user['registeration_no'];?></td>
                           <td><?=$user['firstname'];?></td>

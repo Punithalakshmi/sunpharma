@@ -98,8 +98,12 @@ class UserModel extends Model{
         $builder = $this->table('users');
         $builder->select('users.*,users.id as user_id,roles.name as role_name');
         $builder->join('roles','roles.id = users.role');
+        if(!empty($role))
+         $builder->where('users.role',$role);
+         
         $builder->orderBy('id', 'DESC');
         $builder->orderBy('firstname', 'ASC');
+        $builder->limit($limit,$start);
         return $query = $builder->get();
     }
 
@@ -179,6 +183,39 @@ class UserModel extends Model{
           return true;
         else 
           return false;
+    }
+
+
+    public function getUsersByFilter($filter = array())
+    {
+
+        $builder = $this->table('users');
+        $builder->select('users.*,users.id as user_id,roles.name as role_name');
+        $builder->join('roles','roles.id = users.role');
+
+        if(!empty($filter['role']))
+         $builder->where('users.role',$filter['role']);
+
+        if(!empty($filter['category']))
+         $builder->where('users.category',$filter['category']); 
+
+        if(!empty($filter['email']))
+         $builder->where('users.email',$filter['email']);
+         
+        if(!empty($filter['firstname']))
+         $builder->where('users.firstname',$filter['firstname']);
+         
+        $builder->orderBy('id', 'DESC');
+        $builder->orderBy('firstname', 'ASC');
+
+        if((!empty($filter['limit']) || !empty($filter['start'])))
+          $builder->limit($filter['limit'],$filter['start']);
+
+        if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
+            return $builder->countAllResults();
+        else 
+            return $query = $builder->get();
+
     }
 
 }

@@ -241,9 +241,6 @@ class User extends BaseController
         return redirect()->route('/');
     }
 
-
-  
-     
     public function sendMail()
     {
 
