@@ -88,7 +88,7 @@ class Nomination extends BaseController
 
                             $this->session->setFlashdata('msg', 'Submitted Successfully!');
                             $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                            $ins_data['created_id']    =  1;
+                            $ins_data['created_id']    =  '';
                             $this->userModel->save($ins_data);
                             $lastInsertID = $this->userModel->insertID();
 

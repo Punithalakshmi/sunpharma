@@ -11,10 +11,7 @@
                             
            </div>
 
-            <?php  if(isset($validation)){
-                  print_r($validation->getErrors()); } ?>
-            
-
+          
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -28,7 +25,7 @@
                           
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Award</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Award<span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6">
                         <!--onchange="getCategories(this);" -->
                           <select class="select2_single form-control col-md-7 col-xs-12" name="main_category_id" tabindex="-1" onchange="getCategories(this);" >
@@ -55,7 +52,7 @@
 
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Award Type</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Award Type<span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6"  id="awardTypeList">
                           <select class="select2_single form-control col-md-7 col-xs-12" name="category" tabindex="-1" >
                             <option value=""></option>
@@ -81,7 +78,7 @@
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                          Winner Name
+                          Winner Name<span class="required" style="color:red;">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="name" name="name" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',$editdata['name']);?>">
@@ -98,7 +95,7 @@
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                          Bio
+                          Bio <span class="required" style="color:red;">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <textarea class="form-control" name="bio"><?=$editdata['bio'];?></textarea>
@@ -125,7 +122,7 @@
                     <div class="clearfix"></div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Address</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Address<span class="required" style="color:red;">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <textarea class="form-control" name="address"><?=$editdata['address'];?></textarea>
                         
@@ -141,7 +138,7 @@
 
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Designation</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Designation<span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
@@ -175,7 +172,7 @@
                       <div class="clearfix"></div>
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status<span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
                           <div id="gender" class="btn-group mt-10" data-toggle="buttons">
                             <p>

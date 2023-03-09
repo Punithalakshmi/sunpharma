@@ -21,7 +21,7 @@
                 
                   <div class="x_content">
                     <br />
-                    <form id="nomineeUpdate" action="<?php echo base_url();?>/admin/nominee/update" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="nomineeUpdate" enctype="multipart/form-data" action="<?php echo base_url();?>/admin/nominee/update" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
@@ -149,7 +149,7 @@
                         <div class="clearfix"></div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender 
-                          <!-- <span class="required" style="color:red;">*</span>  -->
+                          
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group mt-10" data-toggle="buttons">

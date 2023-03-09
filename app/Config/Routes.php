@@ -175,6 +175,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('category/delete/(:any)','Category::delete/$1',['filter' =>'auth']);
 
     $routes->get('nomination','Nomination::index',['filter' =>'auth']);
+    $routes->post('nomination','Nomination::index',['filter' =>'auth']);
     $routes->post('nomination/add','Nomination::add',['filter' =>'auth']);
     $routes->get('nomination/add','Nomination::add',['filter' =>'auth']);
     $routes->get('nomination/add/(:any)','Nomination::add/$1',['filter' =>'auth']);
@@ -222,9 +223,11 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('jury/mapping','JuryMapping::mapping',['filter' =>'auth']);
 
     $routes->get('winners','Winners::lists',['filter' =>'auth']);
+    $routes->post('winners','Winners::lists',['filter' =>'auth']);
     $routes->get('winners/add','Winners::add',['filter' =>'auth']);
     $routes->post('winners/add','Winners::add',['filter' =>'auth']);
     $routes->get('winners/add/(:any)','Winners::add/$1',['filter' =>'auth']);
+    $routes->post('winners/delete/(:any)','Winners::delete/$1',['filter' =>'auth']);
 
 });
 

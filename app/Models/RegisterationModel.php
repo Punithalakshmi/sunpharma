@@ -56,7 +56,7 @@ class RegisterationModel extends Model{
     {
         $builder = $this->table('event_registerations');
         $builder->select('event_registerations.*,events.title');
-        $builder->join('events','events.id = event_registerations.event_id','left');
+        $builder->join('events','events.id = event_registerations.event_id');
        
 
         if(!empty($filter['title']))

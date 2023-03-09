@@ -21,25 +21,20 @@
                 
                   <div class="x_content">
                     <br />
-                    <form id="nomineeUpdate" action="<?php echo base_url();?>/admin/nominee/update/<?=$editdata['user_id'];?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="nomineeUpdate" action="<?php echo base_url();?>/admin/nominee/update/<?=$editdata['user_id'];?>" method="POST" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
-                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                
-                                      Photograph of the Applicant 
-                                      <span class="required" style="color:red;">*</span>
-                                      <div class="hintcont">
-                                        <small>Not more than 500 KB</small>
-                                     </div>
-                                      </label>
-                                      <input type="file" class="form-control col-md-6 required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
-                                <img  src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="50"
-                                height="50" />
-                                <br />
-                                
-                                
-                            
+                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Photograph of the Applicant 
+                                <span class="required" style="color:red;">*</span>
+                                  <div class="hintcont">
+                                    <small>Not more than 500 KB</small>
+                                </div>
+                              </label>
+                              <input type="file" class="form-control col-md-6 required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
+                              <img  src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="50"
+                              height="50" />
+                              <br />
                       </div>
                       <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Award <span class="required" style="color:red;">*</span></label>
@@ -278,14 +273,16 @@
                                     <small>Upload the Bio-data (Not more than 1.5 MB)</small>
                                 </div>
                             </label>
-                            <button class="btn btn-primary btn-sm add_more_bio_data" type="button">
-                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                    </svg> ADD
-                                  </button>
-                            <div class="bioDataWrapper">
-                                <input class="form-control mb-3 required" accept=".pdf" name="complete_bio_data" type="file" id="complete_bio_data" value="<?=$editdata['complete_bio_data'];?>">   
-                            </div>
+                            
+                              <button type="button" name="bio_add" id="add_more_bio_data" onclick="addMoreRows('bioDataWrapper','complete_bio_data','complete_bio_data');" class="btn btn-primary btn-sm add_more_bio_data">
+                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                  </svg> ADD
+                                </button>
+                              <div class="bioDataWrapper" id="bioDataWrapper">
+                                  <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[]" type="file" value="<?=$editdata['complete_bio_data'];?>">   
+                                  
+                              </div>
                             <small class="text-danger">
                             <?php if(isset($validation) && $validation->getError('complete_bio_data')) {?>
                                 <?= $error = $validation->getError('complete_bio_data'); ?>
@@ -315,11 +312,17 @@
                                             <small>Upload the List of Publication (Not more than 1 MB) </small>
                                         </div>
                               </label>
-                                <div class="bestPapersWrapper">
+
+                              <button type="button" name="best_pappers_add" id="add_more_best_papers" onclick="addMoreRows('bestPapersWrapper','best_papers','best_papers');" class="btn btn-primary btn-sm">
+                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                  </svg> ADD
+                                </button>
+
+                                <div class="bestPapersWrapper" id="bestPapersWrapper">
                                         
-                                   <input class="form-control mb-3 required" accept=".pdf" name="best_papers" type="file" id="best_papers" value="<?=$editdata['best_papers'];?>">  
-                                       
-                                        
+                                   <input class="form-control mb-3 required best_papers" accept=".pdf" name="best_papers[]" type="file" id="best_papers" value="<?=$editdata['best_papers'];?>">  
+                                               
                                 </div>
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('best_papers')) {?>
@@ -351,9 +354,14 @@
                                                 </small>
                                             </div>
                                           </label>
-                                          <div class="statementResearchWrapper">
-                                                  <input class="form-control mb-3 required" accept=".pdf" name="statement_of_research_achievements" type="file" id="statement_of_research_achievements" value="<?=$editdata['statement_of_research_achievements'];?>">      
-                                          </div>
+                                          <button type="button" name="statement_of_research_achievements_add" id="add_more_statement_of_research_achievements" onclick="addMoreRows('statementResearchWrapper','statement_of_research_achievements','statement_of_research_achievements');" class="btn btn-primary btn-sm">
+                                            <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                              <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                            </svg> ADD
+                                          </button>
+                                            <div class="statementResearchWrapper" id="statementResearchWrapper">
+                                                    <input class="form-control mb-3 required statement_of_research_achievements" accept=".pdf" name="statement_of_research_achievements[]" type="file" id="statement_of_research_achievements" value="<?=$editdata['statement_of_research_achievements'];?>">      
+                                            </div>
                                                
                                             
                                             <small class="text-danger">
@@ -385,8 +393,13 @@
                                             is being sent(Not more than 2.5 MB)</small>
                                       </div>
                                     </label>
-                                    <div class="signedDetailsWrapper">
-                                        <input class="form-control mb-3 required" accept=".pdf" name="signed_details" type="file" id="signed_details" value="<?=$editdata['signed_details'];?>">                    
+                                    <button type="button" name="signed_details_add" id="add_more_signed_details" onclick="addMoreRows('signedDetailsWrapper','signed_details','signed_details');" class="btn btn-primary btn-sm">
+                                            <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                              <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                            </svg> ADD
+                                          </button>
+                                    <div class="signedDetailsWrapper" id="signedDetailsWrapper">
+                                        <input class="form-control mb-3 required signed_details" accept=".pdf" name="signed_details[]" type="file" id="signed_details" value="<?=$editdata['signed_details'];?>">                    
                                     </div>
                                    
                                 <small class="text-danger">
@@ -417,8 +430,13 @@
                                                     <small>Upload the publication/Research paper (Not more than 2.5 MB)</small>
                                                 </div>
                                         </label>
-                                        <div class="publicationsWrapper">
-                                          <input class="form-control mb-3 required" accept=".pdf" name="specific_publications" type="file" id="specific_publications" value="<?=$editdata['specific_publications'];?>">  
+                                          <button type="button" name="specific_publications_add" id="add_more_specific_publications" onclick="addMoreRows('publicationsWrapper','specific_publications','specific_publications');" class="btn btn-primary btn-sm">
+                                            <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                              <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                            </svg> ADD
+                                          </button>
+                                        <div class="publicationsWrapper" id="publicationsWrapper">
+                                          <input class="form-control mb-3 required specific_publications" accept=".pdf" name="specific_publications[]" type="file" id="specific_publications" value="<?=$editdata['specific_publications'];?>">  
                                         </div>
                                                 
                                            
@@ -446,11 +464,17 @@
                                             applicant should also indicate the extent of the contribution of others
                                             associated with the research and he/she should clearly acknowledge his/her
                                             achievements. (Max. 500 KB) <span class="required" style="color:red;">*</span></label>
+                                              
                                                 <div>
                                                     <small>Upload the signed statement (Not more than 500 KB) </small>
                                                 </div>
-                                            <div class="signedStatement">                                           
-                                                <input class="form-control mb-3 required" accept=".pdf" name="signed_statement" type="file" id="signed_statement" value="<?=$editdata['signed_statement'];?>">   
+                                                <button type="button" name="signed_statement_add" id="add_more_signed_statement" onclick="addMoreRows('signedStatementWrapper','signed_statement','signed_statement');" class="btn btn-primary btn-sm">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg> ADD
+                                                </button>
+                                            <div class="signedStatementWrapper" id="signedStatementWrapper">                                           
+                                                <input class="form-control mb-3 required signed_statement" accept=".pdf" name="signed_statement[]" type="file" id="signed_statement" value="<?=$editdata['signed_statement'];?>">   
                                             </div>
                                             <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('signed_statement')) {?>
@@ -469,19 +493,23 @@
                                             <?php endif;?>
                                     </div>
                                 </div>                       
-                        <div class="clearfix"></div>
-                        <div class="form-group">
-                        <div class="mb-3 form-items">
-                                <label class="form-label" for=""> Citation on the Research Work of the
-                                Applicant duly signed by the Nominator (Max. 300 KB) <span class="required" style="color:red;">*</span>
-                                <div class="">
-                                    <small>Upload the Citation (Not more than 300KB) </small>
-                                </div>
-                              </label>
-                                 
-                                <div class="citationWrapper">
+                              <div class="clearfix"></div>
+                              <div class="form-group">
+                              <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> Citation on the Research Work of the
+                                      Applicant duly signed by the Nominator (Max. 300 KB) <span class="required" style="color:red;">*</span>
+                                      <div class="">
+                                          <small>Upload the Citation (Not more than 300KB) </small>
+                                      </div>
+                                    </label>
+                                    <button type="button" name="citation_add" id="add_more_citation" onclick="addMoreRows('citationWrapper','citation','citation');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                <div class="citationWrapper" id="citationWrapper">
                         
-                                  <input class="form-control mb-3 required" accept=".pdf" name="citation" type="file" id="citation" value="<?=$editdata['citation'];?>">   
+                                  <input class="form-control mb-3 required citation" accept=".pdf" name="citation[]" type="file" id="citation" value="<?=$editdata['citation'];?>">   
                                   </div> 
                                   <small class="text-danger">
                                   <?php if(isset($validation) && $validation->getError('citation')) {?>

@@ -111,10 +111,10 @@
                            
                             <?php endif; ?>   
                             <?php if( ($user['active']==0 && $user['status']=='Disapproved' && $user['is_rejected'] == 0)){ ?>
-                            <button type="button" onclick="getRemarks(this,'approve','<?=$user['id'];?>');" class="btn btn-success greenbg btn-xs">Approve</button>
+                              <button type="button" onclick="getRemarks(this,'approve','<?=$user['id'];?>');" class="btn btn-success greenbg btn-xs">Approve</button>
                               <button type="button" class="btn btn-danger btn-xs" onclick="getRemarks(this,'disapprove','<?=$user['id'];?>');">
                                 <i class="fa fa-ban"></i> Reject 
-                            </button>
+                              </button>
                             <?php } ?>  
                           </td>
                         </tr>

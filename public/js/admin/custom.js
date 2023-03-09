@@ -22,6 +22,12 @@ $(document).ready(function(){
     eventDatatable();
     registrationDatatable();
     awardTypeDatatable();
+    manageAwardsDatatable();
+    postWinnersDatatable();
+
+    
+  
+  
 });
 
 function addMoreRows()
@@ -232,44 +238,60 @@ $(function(){
 
     var category = $("#category").val();
     var main_category_id = $("#main_category_id").val();
-    
-    $.ajax({
-      url: base_url+'/csrf_token',
-      type: 'GET',
-      data: {},
-      dataType: 'json',
-      success: function (form_res) 
-      {
+
+    $("#loader").removeClass('hidden');
+
+    $('#loader').removeClass('block');
+    var msg = 'Are you sure you want to export nomination lists?';
+
+    var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
+
    
-        $('#loader').removeClass('hidden');
-        $.ajax({
-          url : base_url+'/admin/awards/export',
-          type: "POST",
-          data : {category:category,'app_csrf':form_res.token,'main_category_id':main_category_id},
-          dataType:'json',
-          success: function(data, textStatus, jqXHR)
-          {
-             $('#loader').addClass('hidden');
-              window.location.href = data.filename;
-          },
-          error: function (jqXHR, textStatus, errorThrown)
-          {
-            
-            $('#loader').addClass('hidden');
-            if(textStatus && textStatus == 'error'){
-              if(jqXHR.responseJSON.message){
-                  errorMessageAlert(jqXHR.responseJSON.message); 
-                  location.reload();
-              }
+    $.confirmModal('<h2>'+msg+'</h2>', {
+      messageHeader: '',
+      backgroundBlur: ['.container'],
+      modalVerticalCenter: true
+    },function(el) {
+      if(el){
+          $.ajax({
+            url: base_url+'/csrf_token',
+            type: 'GET',
+            data: {},
+            dataType: 'json',
+            success: function (form_res) 
+            {
+        
+              //$('#loader').removeClass('hidden');
+              $.ajax({
+                url : base_url+'/admin/awards/export',
+                type: "POST",
+                data : {category:category,'app_csrf':form_res.token,'main_category_id':main_category_id},
+                dataType:'json',
+                success: function(data, textStatus, jqXHR)
+                {
+                  $('#loader').addClass('hidden');
+                    window.location.href = data.filename;
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                  
+                  $('#loader').addClass('hidden');
+                  if(textStatus && textStatus == 'error'){
+                    if(jqXHR.responseJSON.message){
+                        errorMessageAlert(jqXHR.responseJSON.message); 
+                        location.reload();
+                    }
+                  }
+                    
+                }
+
+              }); 
+
             }
-              
-          }
-
-        }); 
-
-      }
-    });   
-   
+          });   
+        }
+      } 
+    ); 
  }
 
  function geJuryLists(nominee_id = '')
@@ -477,13 +499,23 @@ function exportRegistrations()
     var msg = 'Are you sure you want to export all registration user lists?';
     var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
 
-    console.log('csrfName',csrfHash);
-    $.confirmModal('<h2>'+msg+'</h2>', {
-      messageHeader: '',
-      backgroundBlur: ['.container'],
-      modalVerticalCenter: true
-    },function(el) {
+   
+      $.confirmModal('<h2>'+msg+'</h2>', {
+        messageHeader: '',
+        backgroundBlur: ['.container'],
+        modalVerticalCenter: true
+      },function(el) {
         if(el){
+
+          $("#loader").removeClass('hidden');
+    
+          $.ajax({
+            url: base_url+'/csrf_token',
+            type: 'GET',
+            data: {},
+            dataType: 'json',
+            success: function (form_res) 
+            {
                 $('#loader').removeClass('hidden');
                 var title  = $('#title').val();
                 var email = $('#email').val();
@@ -493,7 +525,7 @@ function exportRegistrations()
                   $.ajax({
                       url : base_url+'/admin/eventregisteration/export',
                       type: "POST",
-                      data : {'app_csrf':csrfHash,title:title,email:email,phone:phone,mode:mode},
+                      data : {'app_csrf':form_res.token,title:title,email:email,phone:phone,mode:mode},
                       dataType:'json',
                       success: function(data, textStatus, jqXHR)
                       {
@@ -515,6 +547,10 @@ function exportRegistrations()
                         }
                       }
                   });
+
+                }
+                });
+
                 }  
                 else
                 {
@@ -571,7 +607,6 @@ function getCsrfToken()
 function userDatatable()
 {
   
-     
           var empTable = $('#userDatatable').DataTable({
                   'processing': true,
                   'serverSide': true,
@@ -617,7 +652,10 @@ function userDatatable()
                        { data: 'category' },
                        { data: 'role_name' },
                        { data: 'created_date' },
-                       { data: 'action' },
+                       { data: 'action',render:function(data,type,row) {
+                        btn = '<a href="'+base_url+'/admin/user/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'user\','+row.id+',\'/admin/user/delete\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a><a href="'+base_url+'/admin/user/changepassword/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-key"></i> Change Password </a>';
+                        return btn;
+                      }},
                   ]
           });
 
@@ -643,7 +681,6 @@ function userDatatable()
 function nomineeDatatable()
 {
   
-     
       var empTable = $('#nomineeDatatable').DataTable({
               'processing': true,
               'serverSide': true,
@@ -692,7 +729,17 @@ function nomineeDatatable()
                     { data: 'phone' },
                     { data: 'status' },
                     { data: 'created_date' },
-                    { data: 'action' },
+                    { data: 'action',render:function(data,type,row) {
+                      console.log('row',row);
+                      btn = '<a href="'+base_url+'/admin/nominee/view/'+row.id+'" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</a>';
+                      if(row.is_expired == 'yes'){
+                        btn += '<a href="'+base_url+'/admin/nominee/extend/'+row.id+'" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Extend Nomination</a>';
+                      }
+                      if(row.active == 0 && row.status == 'Disapproved' && row.is_rejected == 0){
+                        btn +='<button type="button" onclick="getRemarks(this,\'approve\','+row.id+')" class="btn btn-success greenbg btn-xs">Approve</button><button type="button" class="btn btn-danger btn-xs" onclick="getRemarks(this,\'disapprove\','+row.id+')"><i class="fa fa-ban"></i> Reject</button>'
+                      }
+                      return btn;
+                    }},
               ]
       });
 
@@ -759,7 +806,10 @@ function eventDatatable()
                     { data: 'start_date' },
                     { data: 'end_date' },
                     { data: 'created_date'},
-                    { data: 'action' },
+                    { data: 'action',render:function(data,type,row) {
+                      btn = '<a href="'+base_url+'/admin/workshops/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'Event\','+row.id+',\'/admin/workshops/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      return btn;
+                    }},
               ]
       });
 
@@ -830,7 +880,10 @@ function registrationDatatable()
                     { data: 'phone'},
                     { data: 'address'},
                     { data: 'mode'},
-                    { data: 'action' },
+                    { data: 'action',render:function(data,type,row) {
+                      btn = '<a href="'+base_url+'/admin/eventregisteration/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'registration\','+row.id+',\'/admin/eventregisteration/delete\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      return btn;
+                    }},
               ]
       });
 
@@ -886,10 +939,13 @@ function awardTypeDatatable()
               },
               'columns': [
                     { data: 'name' },
-                    { data: 'created_date' },
                     { data: 'type' },
                     { data: 'status' },
-                    { data: 'action' },
+                    { data: 'created_date' },
+                    { data: 'action',render:function(data,type,row) {
+                      btn = '<a href="'+base_url+'/admin/category/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'award type\','+row.id+',\'/admin/category/delete\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      return btn;
+                    }},
               ]
       });
 
@@ -897,4 +953,158 @@ function awardTypeDatatable()
         empTable.draw();
       });
       
+}
+
+
+function manageAwardsDatatable()
+{
+  
+      var empTable = $('#manageAwardsDatatable').DataTable({
+              'processing': true,
+              'serverSide': true,
+              'serverMethod': 'post',
+              'searching': false, // Remove default Search Control
+              'ajax': {
+                    'url': base_url+'/admin/nomination',
+                    'data': function(data){
+
+                            // CSRF Hash
+                            var csrfHash = $("input[name='app_csrf']").val();
+                            
+                            var title  = $("#title").val();
+                            var subject  = $("#subject").val();
+                            var award  = $("#award").val();
+                            var type  = $("#type").val();
+
+                            data.award = award;
+                            data.subject = subject;
+                            data.title = title;
+                            data.type = type;
+                          
+                          console.log('datatables',data);
+                            return {
+                                data: data,
+                                app_csrf: csrfHash // CSRF Token
+                            };
+                    },
+                    dataSrc: function(data){
+                        // Update token hash
+                        $("input[name='app_csrf']").val(data.token);
+                        // Datatable data
+                        return data.data;
+                    }
+              },
+              'columns': [
+                    { data: 'main_category_id' },
+                    { data: 'category_id' },
+                    { data: 'title' },
+                    { data: 'subject' },
+                    { data: 'start_date' },
+                    { data: 'end_date' },
+                    { data: 'status' },
+                    { data: 'action', render:function(data,type,row) {
+                      btn = '<a href="'+base_url+'/admin/nomination/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'award\','+row.id+',\'/admin/nomination/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      return btn;
+                    }},
+              ]
+      });
+
+      $("#award").keyup(function(){
+        empTable.draw();
+      });
+
+      $("#title").keyup(function(){
+        empTable.draw();
+      });
+
+      $("#type").keyup(function(){
+        empTable.draw();
+      });
+
+      $("#subject").keyup(function(){
+        empTable.draw();
+      });
+      
+}
+
+
+function postWinnersDatatable()
+{
+  
+      var empTable = $('#postWinnersDatatable').DataTable({
+              'processing': true,
+              'serverSide': true,
+              'serverMethod': 'post',
+              'searching': false, // Remove default Search Control
+              'ajax': {
+                    'url': base_url+'/admin/winners',
+                    'data': function(data){
+
+                            // CSRF Hash
+                            var csrfHash = $("input[name='app_csrf']").val();
+                            
+                            var year  = $("#year").val();
+                            var award  = $("#award").val();
+                            var type  = $("#type").val();
+
+                            data.award = award;
+                            data.year = year;
+                            data.type = type;
+                          
+                          console.log('datatables',data);
+                            return {
+                                data: data,
+                                app_csrf: csrfHash // CSRF Token
+                            };
+                    },
+                    dataSrc: function(data){
+                        // Update token hash
+                        $("input[name='app_csrf']").val(data.token);
+                        // Datatable data
+                        return data.data;
+                    }
+              },
+              'columns': [
+                    { data: 'name' },
+                    { data: 'main_category' },
+                    { data: 'category' },
+                    { data: 'photo' },
+                    { data: 'designation' },
+                    { data: 'year' },
+                    { data: 'status' },
+                    { data: 'action',render:function(data,type,row) {
+                      btn = '<a href="'+base_url+'/admin/winners/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'Winner\','+row.id+',\'/admin/winners/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      return btn;
+                    }},
+              ]
+      });
+      $("#award").keyup(function(){
+        empTable.draw();
+      });
+
+      $("#type").keyup(function(){
+        empTable.draw();
+      });
+
+      $("#year").keyup(function(){
+        empTable.draw();
+      });
+      
+}
+
+function addMoreRows(selectorID='',fieldName = '',className = '')
+{
+     var len = $("."+className).length;
+     
+     var field = len + 1;
+
+     var removeBtnID = "#"+selectorID+"row"+field;
+
+    $('#'+selectorID).append('<div id="'+selectorID+'row'+field+'"><input class="form-control mb-3 required '+className+'" id="complete_bio_data'+field+'" accept=".pdf" name="'+fieldName+'[]" type="file" /><button type="button" name="remove" id="'+field+'" class="btn btn-danger btn_remove" onclick="removeButton(\''+removeBtnID+'\','+field+');">X</button></div>');
+   
+}
+
+function removeButton(id = ''){
+ 
+  $(id).remove();
 }

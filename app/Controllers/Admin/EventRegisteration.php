@@ -44,27 +44,24 @@ class EventRegisteration extends BaseController
                      // Custom filter
                     $title      = $dtpostData['title'];
                     $email      = $dtpostData['email'];
-                 //   $start_date = $dtpostData['start_date'];
                     $phone      = $dtpostData['phone'];
                     $mode      = $dtpostData['mode'];
                     
                     $filter['title']       = $title;
                     $filter['email']       = $email;
-                  //  $filter['start_date']  = $start_date;
                     $filter['phone']       = $phone;
                     $filter['mode']        = $mode;
                     $filter['limit']       = $rowperpage;
                     $filter['orderField']  = $columnName;
                     $filter['orderBy']     = $columnSortOrder;
+                    $filter['start']      =  $start;
     
                     $workshopLists = $this->registerationModel->getRegisterationByFilter($filter)->getResultArray();
                    
                     $filter['totalRows'] = 'yes';
                    
-                    $totalRecordsWithFilterCt = $this->registerationModel->getRegisterationByFilter($filter);
-                   
-                    $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
-                
+                    $totalRecordsWithFilterCt = $this->registerationModel->getRegisterationByFilter($filter);                
+                    $totalRecordsWithFilter = (!empty($title) || !empty($email) || !empty($phone) || !empty($mode))?$totalRecordsWithFilterCt:$totalRecords;
               }
     
             }
@@ -91,6 +88,7 @@ class EventRegisteration extends BaseController
                                     'phone' => $uvalue['phone'],
                                     'address' => $uvalue['address'],
                                     'mode' => $uvalue['mode'],
+                                    'id' => $uvalue['id'],
                                     'action' => ''
                                  );
              }
@@ -98,7 +96,7 @@ class EventRegisteration extends BaseController
             
             if($this->request->isAJAX()) {
                 
-                $end  = $filter['start'] + $filter['limit'];
+                    $end  = $filter['start'] + $filter['limit'];
                     return $this->response->setJSON(array(
                                             'status' => 'success',
                                             'data'  => $data,
@@ -258,14 +256,11 @@ class EventRegisteration extends BaseController
 
         if (strtolower($this->request->getMethod()) == "post") {  
 
-
                $dtpostData = $this->request->getPost();
     
-
                 // Custom filter
                 $title      = $dtpostData['title'];
                 $email      = $dtpostData['email'];
-            //   $start_date = $dtpostData['start_date'];
                 $phone      = $dtpostData['phone'];
                 $mode       = $dtpostData['mode'];
 
@@ -274,7 +269,7 @@ class EventRegisteration extends BaseController
                     $filter['email']      = $email;
                     $filter['phone']      = $phone;
                     $filter['mode']       = $mode;
-                    $fileName = 'Registration_Lists_'.date('d-m-Y').'.xlsx';  
+                    $fileName = 'Registration_Lists_'.date('d-m-Y H:i:s').'.xlsx';  
 
                     $awardsLists = $this->registerationModel->getRegisterationByFilter($filter)->getResultArray();
                     $spreadsheet = new Spreadsheet();

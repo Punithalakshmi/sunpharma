@@ -10,13 +10,8 @@ class Category extends BaseController
     public function index()
     {
         
-       // $this->data['lists'] = $this->categoryModel->getListsOfCategories()->getResultArray();
-       
-      //  return render('admin/category/list',$this->data);
-
         $filter = array();
         $filter['award']      = '';
-       
         $filter['start']      = '0';
         $filter['limit']      = '10';
         $filter['orderField'] = 'id';
@@ -45,6 +40,7 @@ class Category extends BaseController
                 $filter['limit']       = $rowperpage;
                 $filter['orderField']  = $columnName;
                 $filter['orderBy']     = $columnSortOrder;
+                $filter['start']      =  $start;
 
                 $categoryLists = $this->categoryModel->getCategoryByFilter($filter)->getResultArray();
                
@@ -52,7 +48,7 @@ class Category extends BaseController
                
                 $totalRecordsWithFilterCt = $this->categoryModel->getCategoryByFilter($filter);
                
-                $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
+                $totalRecordsWithFilter = (!empty($award))?$totalRecordsWithFilterCt:$totalRecords;
             
           }
 
@@ -72,6 +68,7 @@ class Category extends BaseController
                                 'type' => $uvalue['type'],
                                 'status' => $uvalue['status'],
                                 'created_date' => $uvalue['created_date'],
+                                'id' => $uvalue['id'],
                                 'action' => ''
                              );
          }
@@ -130,14 +127,14 @@ class Category extends BaseController
                     $ins_data['main_category_id'] = ($type == 'Research Awards')?1:2;
                     
                     if(!empty($id)){
-                        $this->session->setFlashdata('msg', 'Category Updated Successfully!');
+                        $this->session->setFlashdata('msg', 'Award Type Updated Successfully!');
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->categoryModel->update(array("id" => $id),$ins_data);
                     }
                     else
                     {
-                        $this->session->setFlashdata('msg', 'Category Added Successfully!');
+                        $this->session->setFlashdata('msg', 'Award Type Added Successfully!');
                         $ins_data['created_date']  =  date("Y-m-d H:i:s");
                         $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                         $this->categoryModel->save($ins_data);
@@ -180,7 +177,7 @@ class Category extends BaseController
 
         $validation_rules = array();
         $validation_rules = array(
-                                        "name" => array("label" => "Category Name",'rules' => 'required|is_unique[category.name,id,'.$id.']')
+                                        "name" => array("label" => "Award Type Name",'rules' => 'required|is_unique[category.name,id,'.$id.']')
         );
     
         return $validation_rules;
@@ -197,7 +194,7 @@ class Category extends BaseController
                             
                         return $this->response->setJSON([
                             'status'            => 'success',
-                            'message'              => 'Category deleted Successfully'
+                            'message'              => 'Award Type deleted Successfully'
                         ]); 
                     }
             

@@ -77,5 +77,40 @@ class NominationTypesModel extends Model {
         return $query = $builder->get();
     }
     
+    public function getNominationLists()
+    {
+        return $this->table('nominations')->countAll();
+    }
+
+
+    public function getNominationsByFilter($filter = array())
+    {
+        $builder = $this->table('nominations');
+        $builder->select('nominations.*,category.name as type,awards_creation_category.name as award');
+        $builder->join('category','category.id = nominations.category_id');
+        $builder->join('awards_creation_category','awards_creation_category.id = nominations.main_category_id');
+        
+        if(!empty($filter['type']))
+          $builder->like('category.name',$filter['type']);
+
+        if(!empty($filter['award']))
+          $builder->like('awards_creation_category.name',$filter['award']);
+          
+        if(!empty($filter['subject']))
+          $builder->where('nominations.subject',$filter['subject']);
+
+        if(!empty($filter['title']))
+          $builder->like('nominations.title',$filter['title']);
+
+        if((!empty($filter['limit']) || !empty($filter['start'])))
+          $builder->limit($filter['limit'],$filter['start']);
+
+          $builder->orderBy('nominations.title', 'ASC'); 
+
+        if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
+            return $builder->countAllResults();
+        else 
+            return $query = $builder->get();
+    }
     
 }

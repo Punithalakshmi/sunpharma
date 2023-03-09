@@ -18,6 +18,40 @@
                   <?= session()->getFlashdata('msg') ?>
               </div>
             <?php endif;?>
+
+            <div class="row topformsec">
+            
+          
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Award</label>
+                    <input type="text" class="mt-2 form-control" name="award" id="award" />
+            </div>
+            </div>
+
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Award Types</label>
+                    <input type="text" class="mt-2 form-control" name="type" id="type" />
+            </div>
+            </div>
+
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Title</label>
+                    <input type="text" class="mt-2 form-control" name="title" id="title" />
+            </div>
+            </div>
+            <div class="col-md-3">
+              <div class="get-sunpharma__input-box mt-2 form-inline">
+              <label for="" class="fw-bold">Subject</label>
+                    
+                 <input type="text" class="mt-2 form-control" name="subject" id="subject" />
+                </div>
+            </div>
+            </div> 
+
+
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -25,7 +59,7 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="manageAwardsDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Award</th>

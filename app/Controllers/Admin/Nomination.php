@@ -12,43 +12,106 @@ class Nomination extends BaseController
         
             $nominationTypeLists = $this->nominationTypesModel->getListsOfNominations()->getResultArray();
 
-            foreach($nominationTypeLists as $ukey => $uvalue){
-                
-                if(!empty($uvalue['category_id'])){ 
-                 $category = $this->categoryModel->getListsOfCategories($uvalue['category_id']);
-                    
-                 $category = $category->getRowArray();
-                 
-                 $nominationTypeLists[$ukey]['category_id'] = (isset($category['name']) && !empty($category['name']))?$category['name']:'';
-                }
-                else
-                {
-                 $nominationTypeLists[$ukey]['category_id'] = '-';
-                }
+            $filter = array();
+            $filter['title']      = '';
+            $filter['subject']    = '';
+            $filter['type']       = '';
+            $filter['award']      = '';
+            $filter['start']      = '0';
+            $filter['limit']      = '10';
+            $filter['orderField'] = 'id';
+            $filter['orderBy']    = 'desc';
+            $totalRecords  = $this->nominationTypesModel->getNominationLists();
+            
+            if (strtolower($this->request->getMethod()) == "post") { 
 
-                
+                if(!$this->validation->withRequest($this->request)->run()) {
 
-                if(!empty($uvalue['main_category_id'])){ 
-                
-                    $main_categories = $this->awardsCategoryModel->getListsOfCategories($uvalue['main_category_id']);
-                       
-                    $main_categories = $main_categories->getRowArray();
-                    
-                    $nominationTypeLists[$ukey]['main_category_id'] = (isset($main_categories['name']) && !empty($main_categories['name']))?$main_categories['name']:'';
-                   }
-                   else
-                   {
-                    $nominationTypeLists[$ukey]['main_category_id'] = '-';
-                   }
+                    $dtpostData = $this->request->getPost('data');
 
-             }
-           
-            $this->data['lists'] = $nominationTypeLists;
-
+                    $response = array();
         
-            return render('admin/nomination/list',$this->data);
+                    $draw            = $dtpostData['draw'];
+                    $start           = $dtpostData['start'];
+                    $rowperpage      = $dtpostData['length']; // Rows display per page
+                    $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                    $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
+                    $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                    $searchValue     = $dtpostData['search']['value']; // Search value
+
+                    // Custom filter
+                    $title                 = $dtpostData['title'];
+                    $subject               = $dtpostData['subject'];
+                    $type                 = $dtpostData['type'];
+                    $award                 = $dtpostData['award'];
+                    $filter['title']      = $title;
+                    $filter['subject']    = $subject;
+                    $filter['type']       = $type;
+                    $filter['award']      = $award;
+                    $filter['limit']       = $rowperpage;
+                    $filter['orderField']  = $columnName;
+                    $filter['orderBy']     = $columnSortOrder;
+                    $filter['start']      =  $start;
+
+                    $nominationLists = $this->nominationTypesModel->getNominationsByFilter($filter)->getResultArray();
                 
-              
+                    $filter['totalRows'] = 'yes';
+                
+                    $totalRecordsWithFilterCt = $this->nominationTypesModel->getNominationsByFilter($filter);
+                
+                    $totalRecordsWithFilter = (!empty($title) || !empty($subject) || !empty($type) || !empty($award))?$totalRecordsWithFilterCt:$totalRecords;
+                
+               }
+
+            }
+            else
+            {    
+                $nominationLists = $this->nominationTypesModel->getNominationsByFilter($filter)->getResultArray();
+                $totalRecordsWithFilter = count($nominationLists);
+            }
+
+            $this->data['lists'] = $nominationLists;
+            
+            $data = array();
+            foreach($nominationLists as $ukey => $uvalue){
+                
+                $data[] = array(
+                                'main_category_id' => $uvalue['award'],
+                                'category_id' => $uvalue['type'],
+                                'title' => $uvalue['title'],
+                                'subject' => $uvalue['subject'],
+                                'start_date' => $uvalue['start_date'],
+                                'end_date' => $uvalue['end_date'],
+                                'status' => ($uvalue['status'] == 1)?'Active':'InActive',
+                                'id' => $uvalue['id'],
+                                'action' => ''
+                            );
+            }
+           
+            if($this->request->isAJAX()) {
+                
+                $end  = $filter['start'] + $filter['limit'];
+                    return $this->response->setJSON(array(
+                                            'status' => 'success',
+                                            'data'  => $data,
+                                            'token' => csrf_hash(),
+                                            "draw" => intval($draw),
+                                            "iTotalRecords" => $totalRecords,
+                                            "start" => $filter['start'],
+                                            "end" => $end,
+                                            "length" => $filter['limit'],
+                                            "page" => $draw,
+                                            "iTotalDisplayRecords" => $totalRecordsWithFilter
+                                        )); 
+                    exit;
+            }
+            else
+            {
+                return render('admin/nomination/list',$this->data);
+            } 
+
+           
+             
     }
 
     public function add($id='')

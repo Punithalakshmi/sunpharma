@@ -15,10 +15,102 @@ class Winners extends BaseController
 
     public function lists()
     {
-        $winnerLists = $this->winnersModel->getWinnersLists()->getResultArray();
-       // print_r($winnerLists);
-        $this->data['lists'] = $winnerLists;
-        return render('admin/winners/list',$this->data);
+        
+            $filter = array();
+         
+            $filter['year']    = '';
+            $filter['type']       = '';
+            $filter['award']      = '';
+            $filter['start']      = '0';
+            $filter['limit']      = '10';
+            $filter['orderField'] = 'id';
+            $filter['orderBy']    = 'desc';
+            $totalRecords  = $this->winnersModel->getTotalWinners();
+            
+            if (strtolower($this->request->getMethod()) == "post") { 
+
+                if(!$this->validation->withRequest($this->request)->run()) {
+
+                    $dtpostData = $this->request->getPost('data');
+
+                    $response = array();
+        
+                    $draw            = $dtpostData['draw'];
+                    $start           = $dtpostData['start'];
+                    $rowperpage      = $dtpostData['length']; // Rows display per page
+                    $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                    $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
+                    $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                    $searchValue     = $dtpostData['search']['value']; // Search value
+
+                    // Custom filter
+                    $year                 = $dtpostData['year'];
+                    $type                 = $dtpostData['type'];
+                    $award                 = $dtpostData['award'];
+                    $filter['year']      = $year;
+                    $filter['award']    = $award;
+                    $filter['type']       = $type;
+                    $filter['start']      =  $start;
+                    $filter['limit']       = $rowperpage;
+                    $filter['orderField']  = $columnName;
+                    $filter['orderBy']     = $columnSortOrder;
+
+                    $winnerLists = $this->winnersModel->getWinnersByFilter($filter)->getResultArray();
+                
+                    $filter['totalRows'] = 'yes';
+                
+                    $totalRecordsWithFilterCt = $this->winnersModel->getWinnersByFilter($filter);
+                
+                    $totalRecordsWithFilter = (!empty($year) || !empty($type) || !empty($award))?$totalRecordsWithFilterCt:$totalRecords;
+                
+               }
+
+            }
+            else
+            {    
+                $winnerLists = $this->winnersModel->getWinnersByFilter($filter)->getResultArray();
+                $totalRecordsWithFilter = count($winnerLists);
+            }
+
+            $this->data['lists'] = $winnerLists;
+            
+            $data = array();
+            foreach($winnerLists as $ukey => $uvalue){
+                
+                $data[] = array(
+                                'name' => $uvalue['name'],
+                                'main_category' => $uvalue['main_category'],
+                                'category' => $uvalue['category'],
+                                'photo' => $uvalue['photo'],
+                                'designation' => $uvalue['designation'],
+                                'year' => $uvalue['year'],
+                                'status' => ($uvalue['status'] == 1)?'Active':'InActive',
+                                'id' => $uvalue['id'],
+                                'action' => ''
+                            );
+            }
+           
+            if($this->request->isAJAX()) {
+                
+                $end  = $filter['start'] + $filter['limit'];
+                    return $this->response->setJSON(array(
+                                            'status' => 'success',
+                                            'data'  => $data,
+                                            'token' => csrf_hash(),
+                                            "draw" => intval($draw),
+                                            "iTotalRecords" => $totalRecords,
+                                            "start" => $filter['start'],
+                                            "end" => $end,
+                                            "length" => $filter['limit'],
+                                            "page" => $draw,
+                                            "iTotalDisplayRecords" => $totalRecordsWithFilter
+                                        )); 
+                    exit;
+            }
+            else
+            {
+                return render('admin/winners/list',$this->data);
+            } 
     }
 
 
@@ -30,7 +122,6 @@ class Winners extends BaseController
                     $category    = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
                     $year        = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
             
-                    
                     $fileName = 'AwardResult_'.date('d-m-Y').'.xlsx';  
 
                     $awardsLists = $this->awardsModel->getLists($category,$year)->getResultArray();
@@ -237,8 +328,15 @@ class Winners extends BaseController
 
     public function delete($id='',$nominee_id='')
     {
-        $this->ratingModel->delete(array("id" => $id));
-        return redirect()->to('admin/winners'.$nominee_id); 
+        if (strtolower($this->request->getMethod()) == "post") {  
+            if($this->request->isAJAX()){
+                $this->winnersModel->delete(array("id" => $id));
+                return $this->response->setJSON([
+                    'status'            => 'success',
+                    'message'           => 'Winners deleted Successfully'
+                ]); 
+            }
+        }
     }
 
 }

@@ -61,7 +61,7 @@ class User extends BaseController
                $totalRecordsWithFilterCt = $this->userModel->getUsersByFilter($filter);
                
              
-                $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
+                $totalRecordsWithFilter = (!empty($role) || !empty($category) || !empty($firstname) || !empty($email))?$totalRecordsWithFilterCt:$totalRecords;
             
           }
 
@@ -94,6 +94,7 @@ class User extends BaseController
                                 'category' => (isset($category['name']) && !empty($category['name']))?$category['name']:'-',
                                 'role_name' => $uvalue['role_name'],
                                 'created_date' => $uvalue['created_date'],
+                                'id' => $uvalue['id'],
                                 'action' => ''
                              );
          }
@@ -330,21 +331,14 @@ class User extends BaseController
     {
         
         if (strtolower($this->request->getMethod()) == "post") {  
-
-           
                 if($this->request->isAJAX()){
-                
                     $this->userModel->delete(array("id" => $id));
-                
                     return $this->response->setJSON([
                         'status'            => 'success',
-                        'message'              => 'User deleted Successfully'
+                        'message'           => 'User deleted Successfully'
                     ]); 
                 }
-         
-          
-          
-       }
+        }
 
     }
 
@@ -402,7 +396,7 @@ class User extends BaseController
         $validation_rules = array();
 
          if($type =='profile' || $type == 'user'){
-           // echo $id;  die;
+           
             $validation_rules = array(
                                             "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                             "lastname" => array("label" => "Lastname",'rules' => 'required'),

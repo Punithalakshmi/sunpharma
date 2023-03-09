@@ -50,6 +50,7 @@ class Workshops extends BaseController
                 $filter['limit']       = $rowperpage;
                 $filter['orderField']  = $columnName;
                 $filter['orderBy']     = $columnSortOrder;
+                $filter['start']      =  $start;
 
                 $workshopLists = $this->workshopModel->getEventsByFilter($filter)->getResultArray();
                
@@ -57,7 +58,7 @@ class Workshops extends BaseController
                
                 $totalRecordsWithFilterCt = $this->workshopModel->getEventsByFilter($filter);
                
-                $totalRecordsWithFilter = (!empty($role) || !empty($category))?$totalRecordsWithFilterCt:$totalRecords;
+                $totalRecordsWithFilter = (!empty($title) || !empty($subject) || !empty($status) )?$totalRecordsWithFilterCt:$totalRecords;
             
           }
 
@@ -81,6 +82,7 @@ class Workshops extends BaseController
                                 'start_date' => $uvalue['start_date'],
                                 'end_date' => $uvalue['end_date'],
                                 'created_date' => $uvalue['created_date'],
+                                'id' => $uvalue['id'],
                                 'action' => ''
                              );
          }

@@ -21,12 +21,38 @@
               </div>
             <?php endif;?>
             <?= csrf_field(); ?>
+
+            <div class="row topformsec">
+            
+          
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Award</label>
+                    <input type="text" class="mt-2 form-control" name="award" id="award" />
+            </div>
+            </div>
+
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Award Types</label>
+                    <input type="text" class="mt-2 form-control" name="type" id="type" />
+            </div>
+            </div>
+
+            <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label class="fw-bold">Year</label>
+                    <input type="text" class="mt-2 form-control" name="year" id="year" />
+            </div>
+            </div>
+            
+            </div> 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30"></p>
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="postWinnersDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Name</th>
