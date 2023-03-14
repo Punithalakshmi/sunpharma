@@ -330,6 +330,7 @@
                                           <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$justificationLetter;?>','<?=$editdata['user_id'];?>','justificationLtr-1','justification_letter_filename',<?=$editdata['nominee_detail_id']?>);">X</button>
                                       </div>  
                                   <?php endif; endif;?> 
+                                  
                                   <div class="justificationWrapper" id="justificationWrapper"> 
                                   </div> 
                              </div>

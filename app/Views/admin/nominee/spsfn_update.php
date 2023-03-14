@@ -8,7 +8,7 @@
               </div>
 
               <div class="actionbtns">
-                <a class="btn btn-primary" href="<?=base_url();?>/admin/user">
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/editdata">
                   <i class="fa fa-arrow-left"></i> BACK
                 </a>           
               </div>
@@ -18,7 +18,68 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                
+                  <?php 
+                      if(strpos($editdata['justification_letter_filename'],','))
+                         $justificationLetter = explode(',',$editdata['justification_letter_filename']);
+                      else
+                         $justificationLetter = $editdata['justification_letter_filename'];
+
+                      if(strpos($editdata['supervisor_certifying'],','))
+                        $supervisorCertifying = explode(',',$editdata['supervisor_certifying']);
+                      else
+                        $supervisorCertifying = $editdata['supervisor_certifying'];  
+
+                      if(strpos($editdata['complete_bio_data'],','))
+                        $completeBiodata = explode(',',$editdata['complete_bio_data']);
+                      else
+                        $completeBiodata = $editdata['complete_bio_data'];  
+
+                      if(strpos($editdata['excellence_research_work'],','))
+                        $excellenceResearchWork = explode(',',$editdata['excellence_research_work']);
+                      else
+                        $excellenceResearchWork = $editdata['excellence_research_work']; 
+
+                      if(strpos($editdata['lists_of_publications'],','))
+                         $listsOfPublications = explode(',',$editdata['lists_of_publications']);
+                      else
+                         $listsOfPublications = $editdata['lists_of_publications']; 
+
+                      if(strpos($editdata['statement_of_applicant'],','))
+                         $statementOfApplicant = explode(',',$editdata['statement_of_applicant']);
+                      else
+                         $statementOfApplicant = $editdata['statement_of_applicant']; 
+
+                      if(strpos($editdata['ethical_clearance'],','))
+                         $ethicalClearance = explode(',',$editdata['ethical_clearance']);
+                      else
+                         $ethicalClearance  = $editdata['ethical_clearance']; 
+
+                      if(strpos($editdata['statement_of_duly_signed_by_nominee'],','))
+                         $statementOfDulySigned = explode(',',$editdata['statement_of_duly_signed_by_nominee']);
+                      else
+                         $statementOfDulySigned  = $editdata['statement_of_duly_signed_by_nominee']; 
+
+                      if(strpos($editdata['aggregate_marks'],','))
+                         $aggregateMarks = explode(',',$editdata['aggregate_marks']);
+                      else
+                         $aggregateMarks  = $editdata['aggregate_marks'];  
+
+                      if(strpos($editdata['age_proof'],','))
+                        $ageProof = explode(',',$editdata['age_proof']);
+                      else
+                        $ageProof  = $editdata['age_proof'];    
+
+                      if(strpos($editdata['declaration_candidate'],','))
+                         $declarationCandidate = explode(',',$editdata['declaration_candidate']);
+                      else
+                         $declarationCandidate = $editdata['declaration_candidate']; 
+
+                      if(strpos($editdata['citation'],','))
+                         $citation = explode(',',$editdata['citation']);
+                      else
+                         $citation = $editdata['citation']; 
+
+                    ?>
                   <div class="x_content">
                     <br />
                     <form id="nomineeUpdate" enctype="multipart/form-data" action="<?php echo base_url();?>/admin/nominee/update" method="POST" data-parsley-validate class="form-horizontal form-label-left">
@@ -32,7 +93,7 @@
                                 </div>
                               </label>
                               <input type="file" class="form-control col-md-6 required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
-                              <img  src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="50"
+                              <img  src="<?=base_url();?>/frontend/assets/img/editdata--default-Image.png" width="50"
                               height="50" />
                               <br />
                       </div>
@@ -187,74 +248,117 @@
                         </div>
                       </div>
                       <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                    
-                      </div>
+                        <div class="form-group col-md-6"></div>
                         <div class="clearfix"></div>
                         <div class="form-group">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for="">  
-                                        Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant
-                                     </label>
+                                  <label class="form-label">
+                                      Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant
+                                  </label>
                                     <button type="button" name="supervisor_certifying_add" id="add_more_supervisor_certifying" onclick="addMoreRows('supervisorWrapper','supervisor_certifying','supervisor_certifying');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                      </svg> ADD
+                                      </svg>ADD
                                     </button>
-                                    <div class="supervisorWrapper" id="supervisorWrapper">
-                                       <!-- <input class="form-control mb-3 required supervisor_certifying" accept=".pdf" name="supervisor_certifying[]" type="file" id="supervisor_certifying" value="<?//$editdata['supervisor_certifying'];?>">    -->
-                                    </div> 
-                                    <?php if(!empty($editdata['supervisor_certifying'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['supervisor_certifying'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
+
+                                    <?php if(is_array($supervisorCertifying)): 
+                                            for($i=0; $i<count($supervisorCertifying); $i++): 
+                                              if(!empty($supervisorCertifying[$i])): ?>
+                                     <div class="mb-3 form-items" id="supervisorCertifying<?=$i;?>">
+                                        <input class="form-control mb-3 required supervisor_certifying" accept=".pdf" name="supervisor_certifying[<?=$supervisorCertifying[$i];?>]" type="file">
+                                       
+                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$supervisorCertifying[$i];?>" target="_blank" title="<?=$supervisorCertifying[$i];?>">
+                                              <button class="btn btn-primary btn-sm" type="button">
+                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg>
+                                                <?=$supervisorCertifying[$i];?>
+                                              </button>
                                           </a>
-                                      </div>
-                                    <?php endif;?>
+                                        <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$supervisorCertifying[$i];?>','<?=$editdata['user_id'];?>','supervisorCertifying<?=$i;?>','supervisor_certifying',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                    </div>   
+                                  <?php endif; endfor; 
+                                      else:
+                                        if(!empty($supervisorCertifying)): ?>
+                                      <div class="mb-3 form-items" id="supervisorCertifying-1">
+                                         
+                                        <input class="form-control mb-3 required supervisor_certifying" accept=".pdf" name="supervisor_certifying[<?=$supervisorCertifying;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$supervisorCertifying;?>" target="_blank" title="<?=$supervisorCertifying;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg>
+                                               <?=$supervisorCertifying;?>
+                                               </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$supervisorCertifying;?>','<?=$editdata['user_id'];?>','supervisorCertifying-1','supervisor_certifying',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>  
+                                  <?php endif; endif;?>
+
+                                    <div class="supervisorWrapper" id="supervisorWrapper">
+                                    </div> 
+                                    
                                   </div>                    
                               </div>  
 
                               <div class="clearfix"></div>
                               <div class="form-group">
                                 <div class="mb-3 form-items">
-                                    <label class="form-label " for=""> Complete Bio-data of the Applicant
+                                    <label class="form-label"> Complete Bio-data of the Applicant
                                         (Max 1.5 MB) <span class="required" style="color:red;">*</span>
                                         <div class="">
                                             <small>Upload the Bio-data (Not more than 1.5 MB)</small>
                                         </div>
                                     </label>
                                     
-                                      <button type="button" name="bio_add" id="add_more_bio_data" onclick="addMoreRows('bioDataWrapper','complete_bio_data','complete_bio_data');" class="btn btn-primary btn-sm add_more_bio_data">
+                                       <button type="button" name="bio_add" id="add_more_bio_data" onclick="addMoreRows('bioDataWrapper','complete_bio_data','complete_bio_data');" class="btn btn-primary btn-sm add_more_bio_data">
                                           <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                             <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                          </svg> ADD
+                                          </svg>ADD
                                         </button>
-                                      <div class="bioDataWrapper" id="bioDataWrapper">
-                                         
-                                      </div>
-                                  
-                                    <div class="clearfix"></div>
-                                    <?php if(!empty($editdata['complete_bio_data'])): ?>
-                                    <div>
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['complete_bio_data'];?>" target="_blank">
-                                          <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                            <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                            </svg> View
-                                          </button>
+
+                                        <?php if(is_array($completeBiodata)): 
+                                    for($i=0; $i<count($completeBiodata); $i++): if(!empty($completeBiodata[$i])): ?>
+                                     <div class="mb-3 form-items" id="complete_bio_data<?=$i;?>">
+                                        <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata[$i];?>]" type="file">
+                                       
+                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" title="<?=$completeBiodata[$i];?>">
+                                              <button class="btn btn-primary btn-sm" type="button">
+                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg>
+                                                <?=$completeBiodata[$i];?>
+                                            </button>
                                         </a>
-                                    </div>
-                                    <?php endif;?>
+                                        <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$completeBiodata[$i];?>','<?=$editdata['user_id'];?>','complete_bio_data<?=$i;?>','complete_bio_data',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                    </div>   
+                                  <?php endif; endfor; 
+                                      else: 
+                                         if(!empty($completeBiodata)): ?>
+                                      <div class="mb-3 form-items" id="complete_bio_data-1">
+                                         
+                                        <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata;?>]" type="file">
+                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$completeBiodata;?>" target="_blank" title="<?=$completeBiodata;?>">
+                                          <button class="btn btn-primary btn-sm" type="button">
+                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg>
+                                               <?=$completeBiodata;?>
+                                               </button>
+                                              </a>
+                                        <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$completeBiodata;?>','<?=$editdata['user_id'];?>','complete_bio_data-1','complete_bio_data',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>  
+                                  <?php endif; endif;?> 
+                                  <div class="bioDataWrapper" id="bioDataWrapper"></div>
+                                  
                                 </div>
                             </div>
+
                             <div class="clearfix"></div>
+
                               <div class="form-group">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB) <span class="required" style="color:red;">*</span>
-                                         
-                                     </label>
+                                    <label class="form-label"> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB) <span class="required" style="color:red;">*</span></label>
                                     <button type="button" name="excellence_research_work_add" id="add_more_excellence_research_work" onclick="addMoreRows('excellenceResearchWrapper','excellence_research_work','excellence_research_work');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -303,7 +407,7 @@
                                   </div>                    
                               </div>  
 
-                              <div class="clearfix"></div>
+                        <div class="clearfix"></div>
                         <div class="form-group">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for="">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)
@@ -329,7 +433,7 @@
                                   </div>                    
                               </div>  
 
-                              <div class="clearfix"></div>
+                            <div class="clearfix"></div>
                         <div class="form-group">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for="">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)
@@ -356,7 +460,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                        <div class="form-group">
+                              <div class="form-group">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)
                                      </label>
@@ -365,14 +469,14 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
-                                    <div class="statementOfDulySignedWrapper" id="statementOfDulySignedWrapper">
-                                       
-                                    </div> 
+                                      <div class="statementOfDulySignedWrapper" id="statementOfDulySignedWrapper">
+                                      </div> 
                                     <?php if(!empty($editdata['statement_of_duly_signed_by_nominee'])): ?>
                                       <div>
                                           <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['statement_of_duly_signed_by_nominee'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                                 </svg> View
                                             </button>
                                           </a>
@@ -460,9 +564,9 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                        <div class="form-group">
+                         <div class="form-group">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)
+                                    <label class="form-label" for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)
                                      </label>
                                     <button type="button" name="declaration_candidate_add" id="add_more_declaration_candidate" onclick="addMoreRows('declarationWrapper','declaration_candidate','declaration_candidate');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -484,43 +588,13 @@
                                     <?php endif;?>
                                   </div>                    
                               </div>  
-
-                              <div class="clearfix"></div>
-                              <div class="form-group">
-                                 <div class="mb-3 form-items">
-                                      <label class="form-label" for=""> Citation on the Research Work of the
-                                           Applicant duly signed by the Nominator (Max. 300 KB) <span class="required" style="color:red;">*</span>
-                                          <div class=""><small>Upload the Citation (Not more than 300KB) </small></div>
-                                     </label>
-                                    <button type="button" name="citation_add" id="add_more_citation" onclick="addMoreRows('citationWrapper','citation','citation');" class="btn btn-primary btn-sm">
-                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                      </svg> ADD
-                                    </button>
-                                    <div class="citationWrapper" id="citationWrapper">
-                                      
-                                    </div> 
-                                    <?php if(!empty($editdata['citation'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['citation'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
-                                  </div>                    
-                              </div>  
-
-
-                          <div class="clearfix"></div>
-                         
+                         <div class="clearfix"></div>
+                             
                          <div class="ln_solid"></div>
                           <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                               
-                              <a href="<?=base_url();?>/admin/user" class="btn btn-primary">CANCEL</a>
+                              <a href="<?=base_url();?>/admin/editdata" class="btn btn-primary">CANCEL</a>
                                 <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                             </div>
                           </div>
