@@ -73,8 +73,7 @@ class Import extends BaseController
            
            // Skip first row & check number of fields
            if($i > 0 && $num == $numberOfFields){ 
-               // print_r($filedata[$i]); 
-               // echo $filedata[$i][21];
+             
                 //insert user table, create user
                 $ins_data = array();
                 $ins_data['firstname'] = $filedata[3];

@@ -405,9 +405,9 @@ function errorMessageAlert(msg)
     Msg.icon = Msg.ICONS.FONTAWESOME;
     Msg['danger'](msg);
 
-    setTimeout(function(){
-      location.reload();
-      },2500);
+    // setTimeout(function(){
+    //   location.reload();
+    //   },2500);
 
 }
 
@@ -1100,11 +1100,62 @@ function addMoreRows(selectorID='',fieldName = '',className = '')
 
      var removeBtnID = "#"+selectorID+"row"+field;
 
-    $('#'+selectorID).append('<div id="'+selectorID+'row'+field+'"><input class="form-control mb-3 required '+className+'" id="complete_bio_data'+field+'" accept=".pdf" name="'+fieldName+'[]" type="file" /><button type="button" name="remove" id="'+field+'" class="btn btn-danger btn_remove" onclick="removeButton(\''+removeBtnID+'\','+field+');">X</button></div>');
+    $('#'+selectorID).append('<div id="'+selectorID+'row'+field+'"><input class="form-control mb-3 required '+className+'" id="'+fieldName+field+'" accept=".pdf" name="'+fieldName+'[]" type="file" /><button type="button" name="remove" id="'+field+'" class="btn btn-danger btn_remove" onclick="removeButton(\''+removeBtnID+'\','+field+');">X</button></div>');
    
 }
 
 function removeButton(id = ''){
  
   $(id).remove();
+}
+
+function removeFile(filename='',user_id='',div_id='',field='',id=''){
+
+ 
+  msg = "Are you sure you want to delete this File?";
+
+  var csrfHash = $("input[name='app_csrf']").val();
+
+  $.confirmModal('<h2>'+msg+'</h2>', {
+    messageHeader: '',
+    backgroundBlur: ['.container'],
+    modalVerticalCenter: true
+  },function(el) {
+        if(el){
+                      
+          $('#loader').removeClass('hidden');
+          $("#"+div_id).remove();
+          
+          $.ajax({
+              url : base_url+'/admin/nominee/removeFile',
+              type: "POST",
+              data : {filename:filename,user_id:user_id,'app_csrf':csrfHash,div_id:div_id,field:field,id:id},
+              dataType:'json',
+              success: function(data, textStatus, jqXHR)
+              {
+                $('#loader').addClass('hidden');
+                  if(data.status && data.status == 'success')
+                    successMessageAlert(data.message);
+
+                    window.location.href = base_url+'/admin/nominee/update/'+user_id;
+              },
+              error: function (jqXHR, textStatus, errorThrown)
+              {
+                $('#loader').addClass('hidden');
+                if(textStatus && textStatus == 'error'){
+                 if(jqXHR.responseJSON.message){
+                   errorMessageAlert(jqXHR.responseJSON.message);
+                   
+                   
+                 }
+               }
+              }
+          });
+
+        }
+        
+      }); 
+
+
+
 }

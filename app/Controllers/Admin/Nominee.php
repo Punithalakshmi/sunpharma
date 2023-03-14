@@ -487,10 +487,6 @@ class Nominee extends BaseController
                 $editdata['id']          = '';
                 
             }
-           
-                     
-              
-       
         
         $this->data['editdata'] = $editdata; 
 
@@ -552,18 +548,8 @@ class Nominee extends BaseController
             
                 if (strtolower($this->request->getMethod()) == "post") { 
 
-
-                   // print_r($this->request->getPost()); die;
-                  //  $this->validation->setRules($this->validation_rules());
-                    
-                    // if(!$this->validation->withRequest($this->request)->run()) {
-                    //     $this->data['validation'] = $this->validation;
-                    //     $status = 'error';
-                    //     $message = 'Please check form fields!';
-                    // }
-                    // else
-                    // { 
-
+                        $ltr = $this->request->getFile('justification_letter');
+                        
                         
                         $category                    = $this->request->getPost('category');
                         $firstname                   = $this->request->getPost('firstname');
@@ -581,22 +567,22 @@ class Nominee extends BaseController
                         $research_project            = $this->request->getPost('research_project');
 
                         $user_data = array();
-                        $user_data['firstname'] = $firstname;
-                        $user_data['dob']       = $dob;
-                        $user_data['email']     = $email;
-                        $user_data['phone']     = $phonenumber;
-                        $user_data['address']   = $address;
-                        $user_data['category']  = $category;
+                        $user_data['firstname']     = (!empty($firstname))?$firstname:$nomineeData['firstname'];
+                        $user_data['dob']           = (!empty($dob))?$dob:$nomineeData['dob'];
+                        $user_data['email']         = (!empty($email))?$email:$nomineeData['email'];
+                        $user_data['phone']         = (!empty($phonenumber))?$phonenumber:$nomineeData['phone'];
+                        $user_data['address']       = (!empty($address))?$address:$nomineeData['address'];
+                        $user_data['category']      = (!empty($category))?$category:$nomineeData['category'];
                         $user_data['updated_date']  = date("Y-m-d H:i:s");
 
                         $nominee_details_data   = array();
-                        $nominee_details_data['residence_address']               = $residence_address;
-                        $nominee_details_data['nominator_name']                  = $nominator_name;
-                        $nominee_details_data['nominator_email']                 = $nominator_email;
-                        $nominee_details_data['nominator_phone']                 = $nominator_mobile;
-                        $nominee_details_data['is_completed_a_research_project'] = $research_project;
-                        $nominee_details_data['nominator_address']               = $nominator_office_address;
-                        $nominee_details_data['ongoing_course']                  = $ongoing_course;
+                        $nominee_details_data['residence_address']               = (!empty($residence_address))?$residence_address:$nomineeData['residence_address'];
+                        $nominee_details_data['nominator_name']                  = (!empty($nominator_name))?$nominator_name:$nomineeData['nominator_name'];
+                        $nominee_details_data['nominator_email']                 = (!empty($nominator_email))?$nominator_email:$nomineeData['nominator_email'];
+                        $nominee_details_data['nominator_phone']                 = (!empty($nominator_mobile))?$nominator_mobile:$nomineeData['nominator_phone'];
+                        $nominee_details_data['is_completed_a_research_project'] = (!empty($research_project))?$research_project:$nomineeData['is_completed_a_research_project'];
+                        $nominee_details_data['nominator_address']               = (!empty($nominator_office_address))?$nominator_office_address:$nomineeData['nominator_address'];
+                        $nominee_details_data['ongoing_course']                  = (!empty($ongoing_course))?$ongoing_course:$nomineeData['ongoing_course'];
                         
                         if($this->request->getPost('course_name')) {
                             $course_name  = $this->request->getPost('course_name');
@@ -610,12 +596,19 @@ class Nominee extends BaseController
                         }
                         
                         if($this->request->getFileMultiple('justification_letter')){
-                             echo  $nominee_details_data['justification_letter_filename']= multipleFileUpload('justification_letter',$id);
-                             exit;
+                          
+                            $filenames = multipleFileUpload('justification_letter',$id);
+                            
+                            if($filenames!=''){
+                                $filenames = fileNameUpdate($id,$filenames,'justification_letter_filename');
+                                $nominee_details_data['justification_letter_filename'] = $filenames;
+                            }    
+                            
                         }   
                         else
                         {
                             if($this->request->getFile('justification_letter')!=''){
+                               
                                 $justification_letter = $this->request->getFile('justification_letter');
                                 $justification_letter->move($fileUploadDir);
                                 $nominee_details_data['justification_letter_filename'] = $justification_letter->getClientName();
@@ -624,9 +617,14 @@ class Nominee extends BaseController
                     
                         if(isset($nomineeData['nomination_type'])
                         && ($nomineeData['nomination_type'] == 'ssan')){
-                             //   echo "ssan";
+                           
                             if($this->request->getFileMultiple('passport')){
-                                  $nominee_details_data['passport_filename'] = multipleFileUpload('passport',$id);
+                                  $filenames = multipleFileUpload('passport',$id);
+                                  
+                                  if($filenames!=''){
+                                    $filenames = fileNameUpdate($id,$filenames,'passport_filename');
+                                    $nominee_details_data['passport_filename'] = $filenames;
+                                  }  
                             }   
                             else
                             {
@@ -637,9 +635,14 @@ class Nominee extends BaseController
                                 }
                             }
 
+                        
                             if(is_array($this->request->getFileMultiple('complete_bio_data'))){
-                            $nominee_details_data['complete_bio_data'] = multipleFileUpload('complete_bio_data',$id);
-                            //    die;
+                                   $filenames = multipleFileUpload('complete_bio_data',$id);
+                                  
+                                  if($filenames!="") {
+                                    $filenames = fileNameUpdate($id,$filenames,'complete_bio_data');
+                                    $nominee_details_data['complete_bio_data'] = $filenames;
+                                  }  
                             }   
                             else
                             {
@@ -651,7 +654,12 @@ class Nominee extends BaseController
                             }
 
                             if($this->request->getFileMultiple('best_papers')){
-                                $nominee_details_data['best_papers'] = multipleFileUpload('best_papers',$id);
+                                   $filenames = multipleFileUpload('best_papers',$id);
+                                   
+                                  if($filenames!='') {
+                                    $filenames = fileNameUpdate($id,$filenames,'best_papers');
+                                    $nominee_details_data['best_papers'] = $filenames;
+                                  }   
                             }   
                             else
                             {
@@ -663,7 +671,12 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('statement_of_research_achievements')){
-                                $nominee_details_data['statement_of_research_achievements'] = multipleFileUpload('statement_of_research_achievements',$id);
+                                   $filenames = multipleFileUpload('statement_of_research_achievements',$id);
+                                   
+                                 if($filenames!='')  {
+                                    $filenames = fileNameUpdate($id,$filenames,'statement_of_research_achievements');
+                                    $nominee_details_data['statement_of_research_achievements'] = $filenames;
+                                 } 
                             }   
                             else
                             {
@@ -675,7 +688,12 @@ class Nominee extends BaseController
                             }
 
                             if($this->request->getFileMultiple('signed_details')){
-                                $nominee_details_data['signed_details'] = multipleFileUpload('signed_details',$id);
+                                $filenames = multipleFileUpload('signed_details',$id);
+                               
+                               if($filenames!='') {
+                                  $filenames = fileNameUpdate($id,$filenames,'signed_details');
+                                  $nominee_details_data['signed_details'] = $filenames;
+                               }  
                             }   
                             else
                             {
@@ -687,7 +705,12 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('specific_publications')){
-                                $nominee_details_data['specific_publications'] = multipleFileUpload('specific_publications',$id);
+                                $filenames = multipleFileUpload('specific_publications',$id);
+                               
+                                if($filenames!=''){
+                                    $filenames = fileNameUpdate($id,$filenames,'specific_publications');
+                                    $nominee_details_data['specific_publications'] = $filenames;
+                                }    
                             }   
                             else
                             {
@@ -699,7 +722,12 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('signed_statement')){
-                                $nominee_details_data['signed_statement'] = multipleFileUpload('signed_statement',$id);
+                                $filenames = multipleFileUpload('signed_statement',$id);
+                                  
+                                if($filenames!=''){
+                                    $filenames = fileNameUpdate($id,$filenames,'signed_statement');  
+                                    $nominee_details_data['signed_statement'] = $filenames;
+                                }   
                             }   
                             else
                             {
@@ -711,7 +739,12 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('citation')){
-                                $nominee_details_data['citation'] = multipleFileUpload('citation',$id);
+                                $filenames = multipleFileUpload('citation',$id);
+                               
+                                if($filenames!=''){
+                                    $filenames = fileNameUpdate($id,$filenames,'citation');
+                                    $nominee_details_data['citation'] = $filenames;
+                                }    
                             }   
                             else
                             {
@@ -726,11 +759,22 @@ class Nominee extends BaseController
                     else
                     {
 
-                        if($this->request->getFile('supervisor_certifying')!=''){
-                            $supervisor_certifying = $this->request->getFile('supervisor_certifying');
-                            $supervisor_certifying->move($fileUploadDir);
-                            $nominee_details_data['supervisor_certifying'] = $supervisor_certifying->getClientName();
-                        } 
+                        if($this->request->getFileMultiple('supervisor_certifying')){
+                            $filenames = multipleFileUpload('supervisor_certifying',$id);
+                           
+                           if($filenames!='') {
+                             $filenames = fileNameUpdate($id,$filenames,'supervisor_certifying'); 
+                             $nominee_details_data['supervisor_certifying'] = $filenames;
+                           }  
+                       }   
+                       else
+                       {
+                            if($this->request->getFile('supervisor_certifying')!=''){
+                                $supervisor_certifying = $this->request->getFile('supervisor_certifying');
+                                $supervisor_certifying->move($fileUploadDir);
+                                $nominee_details_data['supervisor_certifying'] = $supervisor_certifying->getClientName();
+                            } 
+                       }  
 
                         if($this->request->getPost('year_of_passing'))
                           $nominee_details_data['year_of_passing'] = $this->request->getPost('year_of_passing');
@@ -739,7 +783,12 @@ class Nominee extends BaseController
                            $nominee_details_data['number_of_attempts'] = $this->request->getPost('number_of_attempts');
                     
                            if($this->request->getFileMultiple('complete_bio_data')){
-                                 $nominee_details_data['complete_bio_data'] = multipleFileUpload('complete_bio_data',$id);
+                                 $filenames = multipleFileUpload('complete_bio_data',$id);
+                                 
+                                if($filenames!='') {
+                                    $filenames = fileNameUpdate($id,$filenames,'complete_bio_data'); 
+                                  $nominee_details_data['complete_bio_data'] = $filenames;
+                                }  
                             }   
                             else
                             {
@@ -751,7 +800,13 @@ class Nominee extends BaseController
                             }
 
                             if($this->request->getFileMultiple('excellence_research_work')){
-                                 $nominee_details_data['excellence_research_work'] = multipleFileUpload('excellence_research_work',$id);
+                                 $filenames = multipleFileUpload('excellence_research_work',$id);
+                                 
+
+                                 if($filenames!='') {
+                                    $filenames = fileNameUpdate($id,$filenames,'excellence_research_work');
+                                    $nominee_details_data['excellence_research_work'] = $filenames;
+                                 }   
                            }   
                            else
                            {
@@ -764,7 +819,12 @@ class Nominee extends BaseController
 
                            
                            if($this->request->getFileMultiple('lists_of_publications')){
-                              $nominee_details_data['lists_of_publications'] = multipleFileUpload('lists_of_publications',$id);
+                            $filenames = multipleFileUpload('lists_of_publications',$id);   
+                            
+                                if($filenames!='') {
+                                    $filenames = fileNameUpdate($id,$filenames,'lists_of_publications');
+                                        $nominee_details_data['lists_of_publications'] = $filenames;
+                                }        
                             }   
                             else
                             {
@@ -777,7 +837,12 @@ class Nominee extends BaseController
                         
                         
                             if($this->request->getFileMultiple('statement_of_applicant')){
-                                $nominee_details_data['statement_of_applicant'] = multipleFileUpload('statement_of_applicant',$id);
+                                $filenames = multipleFileUpload('statement_of_applicant',$id);
+                                
+                                if($filenames!=''){
+                                    $filenames = fileNameUpdate($id,$filenames,'statement_of_applicant');
+                                  $nominee_details_data['statement_of_applicant'] = $filenames;
+                                }  
                               }   
                               else
                               {
@@ -790,7 +855,12 @@ class Nominee extends BaseController
                           
                        
                               if($this->request->getFileMultiple('ethical_clearance')){
-                                $nominee_details_data['ethical_clearance'] = multipleFileUpload('ethical_clearance',$id);
+                                $filenames = multipleFileUpload('ethical_clearance',$id);
+                                
+                                if($filenames!=''){
+                                    $filenames = fileNameUpdate($id,$filenames,'ethical_clearance');
+                                  $nominee_details_data['ethical_clearance'] = $filenames;
+                                }  
                               }   
                               else
                               {
@@ -802,7 +872,12 @@ class Nominee extends BaseController
                               }
                         
                               if($this->request->getFileMultiple('statement_of_duly_signed_by_nominee')){
-                                $nominee_details_data['statement_of_duly_signed_by_nominee'] = multipleFileUpload('statement_of_duly_signed_by_nominee',$id);
+                                $filenames = multipleFileUpload('statement_of_duly_signed_by_nominee',$id);
+                                
+                                if( $filenames!=''){
+                                    $filenames = fileNameUpdate($id,$filenames,'statement_of_duly_signed_by_nominee');
+                                   $nominee_details_data['statement_of_duly_signed_by_nominee'] =  $filenames;
+                                }   
                               }   
                               else
                               {
@@ -814,7 +889,12 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('citation')){
-                                $nominee_details_data['citation'] = multipleFileUpload('citation',$id);
+                                $filenames = multipleFileUpload('citation',$id);
+                               
+                                if($filenames != ''){
+                                    $filenames = fileNameUpdate($id,$filenames,'citation');
+                                  $nominee_details_data['citation'] = $filenames;
+                                }  
                               }   
                               else
                               {
@@ -826,7 +906,12 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('aggregate_marks')){
-                                $nominee_details_data['aggregate_marks'] = multipleFileUpload('aggregate_marks',$id);
+                                $filenames = multipleFileUpload('aggregate_marks',$id);
+                                
+                                if($filenames!=""){
+                                    $filenames = fileNameUpdate($id,$filenames,'aggregate_marks');
+                                    $nominee_details_data['aggregate_marks'] = $filenames; 
+                                }    
                               }   
                               else
                               {
@@ -839,7 +924,12 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('age_proof')){
-                                $nominee_details_data['age_proof'] = multipleFileUpload('age_proof',$id);
+                                $filenames = multipleFileUpload('age_proof',$id);
+                                
+                                if($filenames!=""){
+                                    $filenames = fileNameUpdate($id,$filenames,'age_proof');
+                                  $nominee_details_data['age_proof'] = $filenames; 
+                                }  
                               }   
                               else
                               {
@@ -852,12 +942,18 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('declaration_candidate')){
-                                   $nominee_details_data['declaration_candidate'] = multipleFileUpload('declaration_candidate',$id);
+                                  $filenames = multipleFileUpload('declaration_candidate',$id);
+                                 
+                                 if($filenames!=""){   
+                                    $filenames = fileNameUpdate($id,$filenames,'declaration_candidate');
+                                   $nominee_details_data['declaration_candidate'] = $filenames;
+                                 }  
                               }   
                               else
                               {
                                 if($this->request->getFile('declaration_candidate')) {
                                     $declaration_candidate = $this->request->getFile('declaration_candidate');
+
                                     $declaration_candidate->move($fileUploadDir);
                                     $nominee_details_data['declaration_candidate']   = $declaration_candidate->getClientName();
                                 } 
@@ -867,7 +963,8 @@ class Nominee extends BaseController
                     }
 
                     $this->nominationModel->update(array("id" => $nomineeData['nominee_detail_id']),$nominee_details_data);
-                    
+                    $this->session->setFlashdata('msg', 'Nomination Info Updated Successfully!');
+                    return redirect()->to('admin/nominee/view/'.$id);
                 //}    
             }
 
@@ -880,5 +977,54 @@ class Nominee extends BaseController
         }  
 
   }  
+
+
+  public function removeFile()
+  {
+
+        if (strtolower($this->request->getMethod()) == "post") { 
+
+            $removeFile = $this->request->getPost('filename');
+            $user_id    = $this->request->getPost('user_id');
+            $field      = $this->request->getPost('field');
+            $id         = $this->request->getPost('id');
+
+            $getNomineeFilename = $this->nominationModel->getNominationFileData($user_id,$field)->getRowArray();
+            //print_r($getNomineeFilename); die;
+            //convert array and remove file
+            if(strpos($getNomineeFilename[$field],',')){
+                $files = explode(',',$getNomineeFilename[$field]);
+                $key = array_search($removeFile,$files,true);
+                if ($key !== false) {
+                    unset($files[$key]);
+                }
+                $remainingFiles = implode(",",$files);
+            }
+            else
+            {
+                if($getNomineeFilename[$field] == $removeFile){
+                    $remainingFiles = '';
+                }
+            }
+            //remove file from folder
+            $filepath = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$user_id."/".$removeFile;
+            unlink($filepath);
+
+            //update field
+            $up_data = array();
+            $up_data[$field] = $remainingFiles;
+            $this->nominationModel->update(array("id"=> $id),$up_data);
+
+            if($this->request->isAJAX()){
+                 return $this->response->setJSON([
+                     'status'  => "success",
+                     'message' => "Removed File Successfully"
+                 ]); 
+                 die;
+             }
+            
+        }     
+
+  }
 
 }

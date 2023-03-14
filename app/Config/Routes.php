@@ -165,6 +165,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('nominee/approve','Nominee::approve',['filter' =>'auth']);
     $routes->get('nominee/update/(:any)','Nominee::update/$1',['filter' =>'auth']);
     $routes->post('nominee/update/(:any)','Nominee::update/$1',['filter' =>'auth']);
+    $routes->post('nominee/removeFile','Nominee::removeFile',['filter' => 'auth']);
 
     $routes->get('category','Category::index',['filter' =>'auth']);
     $routes->post('category','Category::index',['filter' =>'auth']);

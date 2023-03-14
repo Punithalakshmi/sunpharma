@@ -112,25 +112,95 @@
                 <div class="col-sm-9">
                 <?=$user['nominator_address'];?> </div>
               </div>
-            <?php if(isset($user['nomination_type']) && ($user['nomination_type'] == 'ssan')): ?>
+            <?php if(isset($user['nomination_type']) && ($user['nomination_type'] == 'ssan')): 
+              //$files split section
+              if(strpos($user['justification_letter_filename'],','))
+                $justificationLetter = explode(',',$user['justification_letter_filename']);
+              else
+                $justificationLetter = $user['justification_letter_filename'];
+                
+              if(strpos($user['passport_filename'],','))
+                $passport = explode(',',$user['passport_filename']);
+              else
+                $passport = $user['passport_filename'];  
+
+              if(strpos($user['complete_bio_data'],','))
+                $completeBiodata = explode(',',$user['complete_bio_data']);
+              else
+                $completeBiodata = $user['complete_bio_data'];  
+
+              if(strpos($user['best_papers'],','))
+                $bestPapers = explode(',',$user['best_papers']);
+              else
+                $bestPapers = $user['best_papers']; 
+                
+              if(strpos($user['statement_of_research_achievements'],','))
+                $researchAchievements = explode(',',$user['statement_of_research_achievements']);
+              else
+                $researchAchievements = $user['statement_of_research_achievements']; 
+
+              if(strpos($user['signed_details'],','))
+                $signedDetails = explode(',',$user['signed_details']);
+              else
+                $signedDetails = $user['signed_details']; 
+
+              if(strpos($user['specific_publications'],','))
+                $specificPublicaions = explode(',',$user['specific_publications']);
+              else
+                $specificPublicaions = $user['specific_publications']; 
+
+              if(strpos($user['signed_statement'],','))
+                $signedStatement = explode(',',$user['signed_statement']);
+              else
+                $signedStatement = $user['signed_statement']; 
+
+             // echo $user['citation']; die;  
+              if(strpos($user['citation'],','))
+                $citation = explode(',',$user['citation']);
+              else
+                $citation = $user['citation']; 
+
+
+//                print_r($citation); die;
+
+              ?>
               <div class="form-group row formitem graybox">
                 <label class="col-sm-3 col-form-label">Justification Letter</label>
                 <div class="col-sm-9">
-                   <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['justification_letter_filename'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['justification_letter_filename'];?></a>
-               </div>
+                      <?php if(is_array($justificationLetter)): 
+                        for($i=0; $i<count($justificationLetter); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
+                      <?php endif;?> 
+                   </div>
               </div>
 
               <div class="form-group row formitem graybox">
                 <label class="col-sm-3 col-form-label">Passport</label>
                 <div class="col-sm-9">
-                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['passport_filename'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['passport_filename'];?></a> 
+                <?php if(is_array($passport)): 
+                        for($i=0; $i<count($passport); $i++): ?>
+                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$passport[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$passport[$i];?></a> 
+                  <?php endfor; 
+                          else:?>
+                           <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$passport;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$passport;?></a> 
+                     <?php endif;?>      
                 </div>
               </div>
+
              <?php if(!empty($user['complete_bio_data'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col-sm-3 col-form-label">Complete Bio-data of the applicant</label>
                 <div class="col-sm-9">
-                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['complete_bio_data'];?></a>  
+                <?php if(is_array($completeBiodata)): 
+                        for($i=0; $i<count($completeBiodata); $i++): ?>
+                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
+                  <?php endfor; 
+                          else:?>
+                           <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
+                     <?php endif;?>       
                 </div>
               </div>
              <?php endif;
@@ -138,7 +208,13 @@
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">In Order of Importance list of 10 best papers of the applicant highlighting the important discoveries/contribution described in them briefly.(Max 1 MB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['best_papers'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['best_papers'];?></a> 
+                <?php if(is_array($bestPapers)): 
+                        for($i=0; $i<count($bestPapers); $i++): ?>
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$bestPapers[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$bestPapers[$i];?></a> 
+                <?php endfor; 
+                          else:?>
+                    <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$bestPapers;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$bestPapers;?></a> 
+                 <?php endif;?>
                 </div>
               </div>
 
@@ -146,7 +222,13 @@
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the awards</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_research_achievements'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['statement_of_research_achievements'];?></a> 
+                <?php if(is_array($researchAchievements)): 
+                        for($i=0; $i<count($researchAchievements); $i++): ?>
+                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchAchievements[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchAchievements[$i];?></a> 
+                 <?php endfor; 
+                      else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchAchievements;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchAchievements;?></a> 
+                        <?php endif;?>
                 </div>
               </div>
              
@@ -154,100 +236,258 @@
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references and illustrations. The candidate should duly sign on the details.</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_details'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['signed_details'];?></a> 
+                <?php if(is_array($signedDetails)): 
+                        for($i=0; $i<count($signedDetails ); $i++): ?>
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedDetails[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedDetails[$i];?></a> 
+                <?php endfor; 
+                      else:?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedDetails;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedDetails;?></a> 
+                      <?php endif;?>
                 </div>
               </div>
               <?php endif; if(!empty($user['specific_publications'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Two specific publications/research papers of the applicant relevent to the research work mentioned above.(Max: 2.5MB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['specific_publications'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['specific_publications'];?></a> 
+                <?php if(is_array($specificPublicaions)): 
+                        for($i=0; $i<count($specificPublicaions ); $i++): ?>
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$specificPublicaions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$specificPublicaions[$i];?></a> 
+                <?php endfor; 
+                      else:?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$specificPublicaions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$specificPublicaions;?></a> 
+                      <?php endif;?>
                 </div>
               </div>
               <?php endif; if(!empty($user['signed_statement'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">A signed statement by the applicant that the research work under reference has not been given any award. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['signed_statement'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['signed_statement'];?></a> 
+                <?php if(is_array($signedStatement)): 
+                        for($i=0; $i<count($signedStatement); $i++): ?>
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedStatement[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedStatement[$i];?></a> 
+                <?php endfor; 
+                      else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedStatement;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedStatement;?></a>
+                      <?php endif;?>
                 </div>
               </div>
-              <?php endif; if(!empty($user['citation'])):?>
+              <?php endif;  if(!empty($user['citation'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Citation on the Research Work of the Applicant duly signed by the Naminator(Max: 300 KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['citation'];?></a> 
+                <?php if(is_array($citation)): 
+                        for($i=0; $i<count($citation); $i++): ?>
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation[$i];?></a> 
+                <?php endfor; 
+                      else:?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation;?></a> 
+                      <?php endif;?>
                 </div>
               </div>
               <?php endif;?>
-              <?php else: ?>
+              <?php else: 
+
+                if(strpos($user['justification_letter_filename'],','))
+                  $justificationLetter = explode(',',$user['justification_letter_filename']);
+                else
+                  $justificationLetter = $user['justification_letter_filename'];
+
+                if(strpos($user['supervisor_certifying'],','))
+                    $supervisorCertifying = explode(',',$user['supervisor_certifying']);
+                else
+                    $supervisorCertifying = $user['supervisor_certifying'];  
+
+                if(strpos($user['complete_bio_data'],','))
+                    $completeBiodata = explode(',',$user['complete_bio_data']);
+                else
+                    $completeBiodata = $user['complete_bio_data'];  
+
+                if(strpos($user['excellence_research_work'],','))
+                  $excellenceResearchWork = explode(',',$user['excellence_research_work']);
+                else
+                  $excellenceResearchWork = $user['excellence_research_work']; 
+
+                if(strpos($user['lists_of_publications'],','))
+                  $listsOfPublications = explode(',',$user['lists_of_publications']);
+                else
+                  $listsOfPublications = $user['lists_of_publications']; 
+
+                if(strpos($user['statement_of_applicant'],','))
+                   $statementOfApplicant = explode(',',$user['statement_of_applicant']);
+                else
+                   $statementOfApplicant = $user['statement_of_applicant']; 
+
+                if(strpos($user['ethical_clearance'],','))
+                   $ethicalClearance = explode(',',$user['ethical_clearance']);
+                else
+                  $ethicalClearance  = $user['ethical_clearance']; 
+                  
+                if(strpos($user['statement_of_duly_signed_by_nominee'],','))
+                    $statementOfDulySigned = explode(',',$user['statement_of_duly_signed_by_nominee']);
+                else
+                   $statementOfDulySigned  = $user['statement_of_duly_signed_by_nominee']; 
+
+               if(strpos($user['aggregate_marks'],','))
+                   $aggregateMarks = explode(',',$user['aggregate_marks']);
+               else
+                   $aggregateMarks  = $user['aggregate_marks'];  
+                  
+                if(strpos($user['age_proof'],','))
+                    $ageProof = explode(',',$user['age_proof']);
+                else
+                    $ageProof  = $user['age_proof'];    
+
+                if(strpos($user['declaration_candidate'],','))
+                  $declarationCandidate = explode(',',$user['declaration_candidate']);
+                else
+                  $declarationCandidate = $user['declaration_candidate']; 
+
+                if(strpos($user['citation'],','))
+                  $citation = explode(',',$user['citation']);
+                else
+                  $citation = $user['citation']; 
+                
+                ?>
                 <?php if(!empty($user['justification_letter_filename'])):?>
                 <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB)</label>
+                <label class="col col-form-label nonecolan"> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)</label>
                 <div class="col-sm-9">
-                   <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['justification_letter_filename'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['justification_letter_filename'];?></a>
+                <?php if(is_array($justificationLetter)): 
+                        for($i=0; $i<count($justificationLetter); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
+                      <?php endif;?>
                </div>
               </div>
               <?php endif; if(!empty($user['supervisor_certifying'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Justification for Sponsoring the Nomination duly signed by the Nominator/Supervisor(500 KB)</label>
+                <label class="col col-form-label nonecolan">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB)</label>
                 <div class="col-sm-9">
-                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['supervisor_certifying'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['supervisor_certifying'];?></a> 
+                    <?php if(is_array($supervisorCertifying)): 
+                        for($i=0; $i<count($supervisorCertifying); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$supervisorCertifying[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$supervisorCertifying[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$supervisorCertifying;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$supervisorCertifying;?></a>
+                      <?php endif;?>
                 </div>
               </div>
               <?php endif; if(!empty($user['complete_bio_data'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Complete Bio-data of the applicant(Max: 1MB) pdf format</label>
                 <div class="col-sm-9">
-                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['complete_bio_data'];?></a>  
+                <?php if(is_array($completeBiodata)): 
+                        for($i=0; $i<count($completeBiodata); $i++): ?>
+                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
+                  <?php endfor; 
+                          else:?>
+                           <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
+                     <?php endif;?> 
                 </div>
               </div>
               <?php endif; if(!empty($user['excellence_research_work'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['excellence_research_work'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['excellence_research_work'];?></a> 
+                  
+                   <?php if(is_array($excellenceResearchWork)): 
+                        for($i=0; $i<count($excellenceResearchWork); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$excellenceResearchWork[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$excellenceResearchWork[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$excellenceResearchWork;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$excellenceResearchWork;?></a>
+                      <?php endif;?>
                 </div>
               </div>
               <?php endif; if(!empty($user['lists_of_publications'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['lists_of_publications'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['lists_of_publications'];?></a> 
+                
+                  <?php if(is_array($listsOfPublications)): 
+                        for($i=0; $i<count($listsOfPublications); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$listsOfPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$listsOfPublications[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$listsOfPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$listsOfPublications;?></a>
+                      <?php endif;?>
                 </div>
               </div>
+
+
               <?php endif; if(!empty($user['statement_of_applicant'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_applicant'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['statement_of_applicant'];?></a> 
+               
+                <?php if(is_array($statementOfApplicant)): 
+                        for($i=0; $i<count($statementOfApplicant); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfApplicant[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfApplicant[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfApplicant;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfApplicant;?></a>
+                      <?php endif;?>
+
                 </div>
               </div>
               <?php endif; if(!empty($user['ethical_clearance'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['ethical_clearance'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['ethical_clearance'];?></a> 
+               
+                <?php if(is_array($ethicalClearance)): 
+                        for($i=0; $i<count($ethicalClearance); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ethicalClearance[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ethicalClearance[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ethicalClearance;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ethicalClearance;?></a>
+                      <?php endif;?>
+
                 </div>
               </div>
               <?php endif; if(!empty($user['statement_of_duly_signed_by_nominee'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_duly_signed_by_nominee'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['statement_of_duly_signed_by_nominee'];?></a> 
+              
+                <?php if(is_array($statementOfDulySigned)): 
+                        for($i=0; $i<count($statementOfDulySigned); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfDulySigned[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfDulySigned[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfDulySigned;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfDulySigned;?></a>
+                      <?php endif;?>
+
                 </div>
               </div>
-              <?php endif; if(!empty($user['citation'])):?>
+              <?php endif;  if(!empty($user['citation'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['citation'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['citation'];?></a> 
+                <?php if(is_array($citation)): 
+                        for($i=0; $i<count($citation); $i++): ?>
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$$citation[$i];?></a> 
+                <?php endfor; 
+                      else:?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation;?></a> 
+                      <?php endif;?>
                 </div>
               </div>
               <?php endif; if(!empty($user['aggregate_marks'])):?>
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['aggregate_marks'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['aggregate_marks'];?></a> 
+               
+                <?php if(is_array($aggregateMarks)): 
+                        for($i=0; $i<count($aggregateMarks); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$aggregateMarks[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$aggregateMarks[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$aggregateMarks;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$aggregateMarks;?></a>
+                      <?php endif;?>
+
                 </div>
               </div>
               <?php endif; if(!empty($user['age_proof'])):?>
@@ -255,7 +495,15 @@
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">Age proof (Max: 250KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['age_proof'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['age_proof'];?></a> 
+             
+                <?php if(is_array($ageProof)): 
+                        for($i=0; $i<count($ageProof); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ageProof[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ageProof[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ageProof;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ageProof;?></a>
+                      <?php endif;?>
+
                 </div>
               </div>
               <?php endif; if(!empty($user['declaration_candidate'])):?>
@@ -263,7 +511,14 @@
               <div class="form-group row formitem graybox">
                 <label class="col col-form-label nonecolan">A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)</label>
                 <div class="col-sm-9">
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['declaration_candidate'];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$user['declaration_candidate'];?></a> 
+                <?php if(is_array($declarationCandidate)): 
+                        for($i=0; $i<count($declarationCandidate); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$declarationCandidate[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$declarationCandidate[$i];?></a>
+                      <?php endfor; 
+                          else:?>
+                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$declarationCandidate;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$declarationCandidate;?></a>
+                      <?php endif;?>
+
                 </div>
               </div>
               <?php endif;?>

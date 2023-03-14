@@ -57,4 +57,13 @@ class NominationModel extends Model{
         return $this->getWhere(array('nominee_id' => $id)); 
     }
 
+
+    public function getNominationFileData($id = "",$field='')
+    {
+        $builder = $this->table('nominee_details');
+        $builder->select($field);
+        $builder->where("nominee_id",$id);
+        return $query = $builder->get();
+    }
+
 }

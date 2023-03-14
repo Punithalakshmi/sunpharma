@@ -7,7 +7,7 @@ if ( ! function_exists('multipleFileUpload'))
 
         $request = \Config\Services::request();
 
-        $uploadFolder = '/uploads/'.$folderID."/";
+        $uploadFolder = 'uploads/'.$folderID."/";
 
         $fileNames = array();
 
@@ -23,8 +23,14 @@ if ( ! function_exists('multipleFileUpload'))
                         $fileNames[] = $filename;
                     }  
                 }
-                $names = implode(',',$fileNames);
-                return $names;
+                $names = '';
+                if(count($fileNames) > 0)
+                  $names = implode(',',$fileNames);
+
+                if($names!='')
+                   return $names;
+                else
+                   return false;  
         }
     }
 }       
@@ -50,3 +56,37 @@ if ( ! function_exists('singleFileUpload'))
         }
     }
 } 
+
+
+if ( ! function_exists('getFileObject'))
+{
+    function getFileObject($fieldName='')
+    {
+        $fileAp = new \CodeIgniter\Files\File($fieldName,true);
+        return $fileAp;
+    }
+} 
+
+if(!function_exists('fileNameUpdate')) {
+
+    function fileNameUpdate($id = '',$fileNames='',$fieldName='')
+    {
+        $nominationModel = model('App\Models\NominationModel');
+
+        $getAlreadyUploadedFiles = $nominationModel->getNominationFileData($id,$fieldName)->getRowArray();
+
+        $fname = '';
+        if(!empty($getAlreadyUploadedFiles[$fieldName])){
+            $fname .= $getAlreadyUploadedFiles[$fieldName];
+            $fname .= ',';
+            $fname .= $fileNames;
+        }
+        else
+        {
+            $fname = $fileNames;
+        }
+
+        return $fname;
+    }
+
+}

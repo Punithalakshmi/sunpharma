@@ -25,7 +25,31 @@
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required" style="color:red;">*</span>
+                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Photograph of the Applicant 
+                                <span class="required" style="color:red;">*</span>
+                                  <div class="hintcont">
+                                    <small>Not more than 500 KB</small>
+                                </div>
+                              </label>
+                              <input type="file" class="form-control col-md-6 required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
+                              <img  src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="50"
+                              height="50" />
+                              <br />
+                      </div>
+                      <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Award <span class="required" style="color:red;">*</span></label>
+                                    <select class="form-control col-md-6 selectpicker mt-2 required" name="category" id="category">
+                                    <option value="">-- Select --</option>
+                                        <?php if(is_array($categories)):
+                                                foreach($categories as $ckey=>$cvalue):?>
+                                         <option value="<?=$cvalue['id'];?>" <?=set_select('category',$cvalue['id'], ((isset($editdata['category']) && ($editdata['category']==$cvalue['id']))?TRUE:FALSE));?>><?=$cvalue['name'];?></option>
+                                        <?php   endforeach; 
+                                                endif; ?>     
+                                    </select>
+                                </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                              Applicant Name <span class="required" style="color:red;">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="firstname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('firstname',$editdata['firstname']);?>">
@@ -33,35 +57,11 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('firstname')) {?>
-                          <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('firstname'); ?>
-                          </div>
-                      <?php }?>
+                      
                       </div>
                       <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required" style="color:red;">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="last-name" name="lastname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('lastname',$editdata['lastname']);?>">
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('lastname')) {?>
-                        <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('lastname'); ?>
-                            </div>
-                        <?php }?>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middlename" value="<?php echo set_value('middlename',$editdata['middlename']);?>">
-                        </div>
-                      </div>
+                    
+                      
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -71,177 +71,459 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('email')) {?>
-                        <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('email'); ?>
-                            </div>
-                        <?php }?>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Username <span class="required" style="color:red;">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="username" class="form-control col-md-7 col-xs-12" type="text" name="username" value="<?php echo set_value('username',$editdata['username']);?>">
-                        </div>
-                       
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('username')) {?>
-                        <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('username'); ?>
-                            </div>
-                        <?php }?>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Password <?php if($editdata['id'] =='') {?><span class="required" style="color:red;">*</span><?php } ?></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password" class="form-control col-md-7 col-xs-12" type="password" name="password" value="<?php echo set_value('password',$editdata['password']);?>">
-                        </div>
-                       
-                      </div>
-                      <div class="clearfix"></div>
-                      <?php if($editdata['id'] =='') {?>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('password')) {?>
-                        <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('password'); ?>
-                            </div>
-                        <?php }?>
-                      </div>
-                      <?php } ?>
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password 
-                        <?php if($editdata['id'] =='') {?><span class="required" style="color:red;">*</span><?php } ?>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="confirm_password" class="form-control col-md-7 col-xs-12" type="password" name="confirm_password" value="<?php echo set_value('confirm_password',$editdata['confirm_password']);?>">
-                        </div>
-                       
-                      </div>
-                      <div class="clearfix"></div>
-                      <?php if($editdata['id'] =='') {?>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('confirm_password')) {?>
-                        <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('confirm_password'); ?>
-                            </div>
-                        <?php }?>
-                      </div>
-                      <?php } ?>
-                      <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phone Number <span class="required" style="color:red;">*</span> </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="phonenumber" class="form-control col-md-7 col-xs-12" type="number" name="phonenumber" value="<?php echo set_value('phonenumber',$editdata['phone']);?>">
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('phonenumber')) {?>
-                        <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('phonenumber'); ?>
-                            </div>
-                        <?php }?>
-                      </div>
-                        <div class="clearfix"></div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender 
-                          
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group mt-10" data-toggle="buttons">
-                            <p>
-                              M: <input type="radio" class="flat" name="gender" id="genderM" value="M" <?php echo set_radio('gender','M',(isset($editdata['gender']) && ($editdata['gender']=='M'))?'checked':'');?> /> &nbsp;&nbsp;
-                              F: <input type="radio" class="flat" name="gender" id="genderF" value="F" <?php echo set_radio('gender','F',(isset($editdata['gender']) && ($editdata['gender']=='F'))?'checked':'');?> />
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
                      
+                      </div>
+                    
                       <div class="clearfix"></div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth 
-                             <!-- <span class="required" style="color:red;">*</span> -->
+                              <span class="required" style="color:red;">*</span> 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="single_cal3" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
-                      
-                      <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Role 
-                          <span class="required" style="color:red;">*</span> </label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phone Number <span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select2_single form-control" name="user_role" tabindex="-1" >
-                            <option value=""></option>
-                            <?php if(is_array($roles)):
-                                    foreach($roles as $rvalue): ?>
-                            <option value="<?=$rvalue['id'];?>" <?=set_select('user_role',$rvalue['id'],(isset($editdata['role']) && ($editdata['role']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
-                            <?php endforeach;
-                                  endif;
-                                  ?>
-                          </select>
+                         <input id="mobile_no" class="form-control col-md-7 col-xs-12" type="number" name="mobile_no" value="<?php echo set_value('mobile_no',$editdata['phone']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('user_role')) {?>
-                          <div class='alert alert-danger mt-2'>
-                            <?= $error = $validation->getError('user_role'); ?>
-                          </div>
-                      <?php }?>
-                      </div>
-                      <div class="clearfix"></div>
                       
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
-                          <div id="gender" class="btn-group mt-10" data-toggle="buttons">
-                            <p>
-                            <input type="radio" class="flat" name="status" id="statusActive" value="1" <?php echo set_radio('status','1',(isset($editdata['status']) && ($editdata['status']=='1'))?'checked':'');?> /> Active &nbsp;&nbsp;
-                            <input type="radio" class="flat" name="status" id="statusInActive" value="0" <?php echo set_radio('status','0',(isset($editdata['status']) && ($editdata['status']=='0'))?'checked':'');?> /> InActive
-                           </p>
-                          </div>
-                        </div>
                       </div>
-                      <div class="clearfix"></div>          
-                      <div class="form-group col-md-6">
-                      <?php if(isset($validation) && $validation->getError('status')) {?>
-                        <div class='alert alert-danger mt-2'>
-                          <?= $error = $validation->getError('status'); ?>
-                            </div>
-                        <?php }?>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Address <span class="required" style="color:red;">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           <textarea name="designation_and_office_address" class="form-control col-md-7 col-xs-12"><?=$editdata['address'];?></textarea>
+                        </div>
                       </div>
                       <div class="clearfix"></div>
-                        <div id="categorySelection" class="form-group" style="display:<?=(isset($editdata['role']) && ($editdata['role'] == 1))?'block':'none';?>">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select class="select2_single form-control" name="category" tabindex="-1">
-                              <option value=""></option>
-                              <?php if(is_array($categories)):
-                                      foreach($categories as $rvalue): ?>
-                              <option value="<?=$rvalue['id'];?>" <?=set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
-                              <?php endforeach;
-                                    endif;
-                                    ?>
-                            </select>
-                          </div>
+                      <div class="form-group col-md-6">
+                      
                       </div>
+                        <div class="clearfix"></div>
 
-                      <div class="ln_solid"></div>
                         <div class="form-group">
-                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            
-                            <a href="<?=base_url();?>/admin/user" class="btn btn-primary">CANCEL</a>
-                            <input type="submit" class="btn btn-success" name="submit" value="SAVE">
-                          </div>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12 " for="">Citizenship <span class="required" style="color:red;">*</span></label>
+                            <select class="form-control col-md-6 selectpicker mt-2 required"
+                                aria-label="Default select example" id="citizenship" name="citizenship" value="<?=set_value('citizenship',$editdata['citizenship']);?>">
+                                <option value="">-- Select --</option>
+                                <option value="1" <?=set_select('citizenship', 1, ((isset($editdata['citizenship']) && ($editdata['citizenship']==1))?TRUE:FALSE));?>>Indian</option>
+                                <option value="2" <?=set_select('citizenship', 2, ((isset($editdata['citizenship']) && ($editdata['citizenship']==2))?TRUE:FALSE));?>>Other</option>
+                            </select>
+                           
+                        </div>      
+                        <div class="clearfix"></div>
+
+                        <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Residence Address <span class="required" style="color:red;">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                             <textarea name="residence_address" class="form-control col-md-7 col-xs-12"><?=$editdata['residence_address'];?></textarea>
+                         
                         </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      
+                      </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Name <span class="required" style="color:red;">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input id="nominator_name" class="form-control col-md-7 col-xs-12" type="text" name="nominator_name" value="<?php echo set_value('nominator_name',$editdata['nominator_name']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                    
+                      </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Mobile <span class="required" style="color:red;">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input id="nominator_mobile" class="form-control col-md-7 col-xs-12" type="number" name="nominator_mobile" value="<?php echo set_value('nominator_mobile',$editdata['nominator_phone']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                     
+                      </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Email<span class="required" style="color:red;">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input id="nominator_email" class="form-control col-md-7 col-xs-12" type="number" name="nominator_email" value="<?php echo set_value('nominator_email',$editdata['nominator_email']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      
+                      </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Designation <span class="required" style="color:red;">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input id="nominator_designation" class="form-control col-md-7 col-xs-12" type="number" name="nominator_designation" value="<?php echo set_value('nominator_designation',$editdata['nominator_designation']);?>">
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                      
+                      </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Address <span class="required" style="color:red;">*</span> </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           <textarea name="nominator_address" class="form-control col-md-7 col-xs-12"><?=$editdata['nominator_address'];?></textarea>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="form-group col-md-6">
+                    
+                      </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for="">  
+                                        Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant
+                                     </label>
+                                    <button type="button" name="supervisor_certifying_add" id="add_more_supervisor_certifying" onclick="addMoreRows('supervisorWrapper','supervisor_certifying','supervisor_certifying');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="supervisorWrapper" id="supervisorWrapper">
+                                       <!-- <input class="form-control mb-3 required supervisor_certifying" accept=".pdf" name="supervisor_certifying[]" type="file" id="supervisor_certifying" value="<?//$editdata['supervisor_certifying'];?>">    -->
+                                    </div> 
+                                    <?php if(!empty($editdata['supervisor_certifying'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['supervisor_certifying'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                              <div class="form-group">
+                                <div class="mb-3 form-items">
+                                    <label class="form-label " for=""> Complete Bio-data of the Applicant
+                                        (Max 1.5 MB) <span class="required" style="color:red;">*</span>
+                                        <div class="">
+                                            <small>Upload the Bio-data (Not more than 1.5 MB)</small>
+                                        </div>
+                                    </label>
+                                    
+                                      <button type="button" name="bio_add" id="add_more_bio_data" onclick="addMoreRows('bioDataWrapper','complete_bio_data','complete_bio_data');" class="btn btn-primary btn-sm add_more_bio_data">
+                                          <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                            <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                          </svg> ADD
+                                        </button>
+                                      <div class="bioDataWrapper" id="bioDataWrapper">
+                                         
+                                      </div>
+                                  
+                                    <div class="clearfix"></div>
+                                    <?php if(!empty($editdata['complete_bio_data'])): ?>
+                                    <div>
+                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['complete_bio_data'];?>" target="_blank">
+                                          <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                            <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                            </svg> View
+                                          </button>
+                                        </a>
+                                    </div>
+                                    <?php endif;?>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                              <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB) <span class="required" style="color:red;">*</span>
+                                         
+                                     </label>
+                                    <button type="button" name="excellence_research_work_add" id="add_more_excellence_research_work" onclick="addMoreRows('excellenceResearchWrapper','excellence_research_work','excellence_research_work');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="excellenceResearchWrapper" id="excellenceResearchWrapper">
+                                      
+                                    </div> 
+                                    <?php if(!empty($editdata['excellence_research_work'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['excellence_research_work'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                              <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label"> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)
+                                         
+                                     </label>
+                                    <button type="button" name="lists_of_publications_add" id="add_more_lists_of_publications" onclick="addMoreRows('listofPublicationsWrapper','lists_of_publications','lists_of_publications');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="listofPublicationsWrapper" id="listofPublicationsWrapper">
+                                       
+                                    </div> 
+                                    <?php if(!empty($editdata['lists_of_publications'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['lists_of_publications'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for="">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)
+                                     </label>
+                                    <button type="button" name="statement_of_applicant_add" id="add_more_statement_of_applicant" onclick="addMoreRows('statementOfApplicantWrapper','statement_of_applicant','statement_of_applicant');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="statementOfApplicantWrapper" id="statementOfApplicantWrapper">
+                                      
+                                    </div> 
+                                    <?php if(!empty($editdata['statement_of_applicant'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['statement_of_applicant'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for="">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)
+                                     </label>
+                                    <button type="button" name="ethical_clearance_add" id="add_more_ethical_clearance" onclick="addMoreRows('ethicalClearanceWrapper','ethical_clearance','ethical_clearance');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="ethicalClearanceWrapper" id="ethicalClearanceWrapper">
+                                      
+                                    </div> 
+                                    <?php if(!empty($editdata['ethical_clearance'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['ethical_clearance'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)
+                                     </label>
+                                    <button type="button" name="statement_of_duly_signed_by_nominee_add" id="add_more_statement_of_duly_signed_by_nominee" onclick="addMoreRows('statementOfDulySignedWrapper','statement_of_duly_signed_by_nominee','statement_of_duly_signed_by_nominee');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="statementOfDulySignedWrapper" id="statementOfDulySignedWrapper">
+                                       
+                                    </div> 
+                                    <?php if(!empty($editdata['statement_of_duly_signed_by_nominee'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['statement_of_duly_signed_by_nominee'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB)
+                                     </label>
+                                    <button type="button" name="citation_add" id="add_more_citation" onclick="addMoreRows('citationWrapper','citation','citation');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="citationWrapper" id="citationWrapper">
+                                       
+                                    </div> 
+                                    <?php if(!empty($editdata['citation'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['citation'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB)
+                                     </label>
+                                    <button type="button" name="aggregate_marks_add" id="add_more_aggregate_marks" onclick="addMoreRows('aggregateMarksWrapper','aggregate_marks','aggregate_marks');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="aggregateMarksWrapper" id="aggregateMarksWrapper">
+                                       
+                                    </div> 
+                                    <?php if(!empty($editdata['aggregate_marks'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['aggregate_marks'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> Age proof (Max: 250KB)
+                                     </label>
+                                    <button type="button" name="age_proof_add" id="add_more_age_proof" onclick="addMoreRows('ageProofWrapper','age_proof','age_proof');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="ageProofWrapper" id="ageProofWrapper">
+                                      
+                                    </div> 
+                                    <?php if(!empty($editdata['age_proof'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['age_proof'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                        <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)
+                                     </label>
+                                    <button type="button" name="declaration_candidate_add" id="add_more_declaration_candidate" onclick="addMoreRows('declarationWrapper','declaration_candidate','declaration_candidate');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="declarationWrapper" id="declarationWrapper">
+                                      
+                                    </div> 
+                                    <?php if(!empty($editdata['declaration_candidate'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['declaration_candidate'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+                              <div class="clearfix"></div>
+                              <div class="form-group">
+                                 <div class="mb-3 form-items">
+                                      <label class="form-label" for=""> Citation on the Research Work of the
+                                           Applicant duly signed by the Nominator (Max. 300 KB) <span class="required" style="color:red;">*</span>
+                                          <div class=""><small>Upload the Citation (Not more than 300KB) </small></div>
+                                     </label>
+                                    <button type="button" name="citation_add" id="add_more_citation" onclick="addMoreRows('citationWrapper','citation','citation');" class="btn btn-primary btn-sm">
+                                      <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                        <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                      </svg> ADD
+                                    </button>
+                                    <div class="citationWrapper" id="citationWrapper">
+                                      
+                                    </div> 
+                                    <?php if(!empty($editdata['citation'])): ?>
+                                      <div>
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['citation'];?>" target="_blank">
+                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg> View
+                                            </button>
+                                          </a>
+                                      </div>
+                                    <?php endif;?>
+                                  </div>                    
+                              </div>  
+
+
+                          <div class="clearfix"></div>
+                         
+                         <div class="ln_solid"></div>
+                          <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                              
+                              <a href="<?=base_url();?>/admin/user" class="btn btn-primary">CANCEL</a>
+                                <input type="submit" class="btn btn-success" name="submit" value="SAVE">
+                            </div>
+                          </div>
                     </form>
                   </div>
                 </div>
