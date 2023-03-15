@@ -854,7 +854,7 @@
     opacity: .5;
 }
 
-.form-horizontal.addformsec .form-group.uploadseciz .form-items .form-items {border-bottom: 1px solid #ddd;padding: 0px 10px 20px 10px;margin: 0;}
+.form-horizontal.addformsec .form-group.uploadseciz .form-items .form-items {border-bottom: 1px solid #ddd;padding: 0px 10px 20px 0px;margin: 0;}
 
 .form-horizontal.addformsec .form-group.uploadseciz .form-items > div button[name="remove"]:hover {
     opacity: 1;
