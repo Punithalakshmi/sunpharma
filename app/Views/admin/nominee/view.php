@@ -56,9 +56,11 @@
           <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
             <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?>
-            <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/update/<?=$user['user_id'];?>">
+            <?php if($user['role'] == 3): ?>
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/update/<?=$user['user_id'];?>">
                    EDIT
                 </a>
+            <?php endif;?>    
              </h3>
             <div class="form-group row formitem">
               <label class="col-sm-3 col-form-label">Nomination NO</label>
@@ -159,10 +161,6 @@
                 $citation = explode(',',$user['citation']);
               else
                 $citation = $user['citation']; 
-
-
-//                print_r($citation); die;
-
               ?>
               <div class="form-group row formitem graybox">
                 <label class="col-sm-3 col-form-label">Justification Letter</label>
