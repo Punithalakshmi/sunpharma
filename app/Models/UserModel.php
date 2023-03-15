@@ -144,7 +144,7 @@ class UserModel extends Model {
         $builder->join('awards_creation_category','awards_creation_category.id=nominations.main_category_id');
         $builder->where("users.role",'2');
         $builder->where("users.status",'Approved');
-        $builder->where("users.active",'1');
+      //  $builder->where("users.active",'1');
         $builder->where("nominee_details.is_submitted",1);
         return $query = $builder->get();
     }
