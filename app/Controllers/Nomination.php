@@ -692,9 +692,7 @@ class Nomination extends BaseController
             }
 
             $getSessionFiles = getSessionData('uploadedFile');
-          //  echo "test";
-          //  print_r($getSessionFiles); die;
-
+          
             if($this->request->getFile('nominator_photo')!='') {
                 //nominator photo
                 $nominator_pht = file_get_contents($this->request->getFile('nominator_photo'));
@@ -713,11 +711,11 @@ class Nomination extends BaseController
             {
                 $justification_lt = ($getSessionFiles['justification_letter']!='')?file_get_contents(getFileInfo($getSessionFiles['justification_letter'])):'';
             }
-
+          //  print_r($justification_lt); die;
             $editdata['justification_letter'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($justification_lt));
 
-            if($formtype == 'ssan'){
-                //echo $getSessionFiles['passport']; die;
+            if($formtype == 'ssan' && $this->request->getFile('passport')!=''){
+               
                 if($this->request->getFile('passport')!=''){
                     $passport_ft = file_get_contents($this->request->getFile('passport')); 
                 }
@@ -729,7 +727,7 @@ class Nomination extends BaseController
                 if($passport_ft!='')
                     $editdata['passport'] = 'data:application/pdf;base64,'.chunk_split(base64_encode($passport_ft));
            }
-
+        
             if($formtype == 'spsfn'){
                 if($this->request->getFile('supervisor_certifying')!=''){
                     $supervisor_certifying = file_get_contents($this->request->getFile('supervisor_certifying'));     
@@ -745,9 +743,7 @@ class Nomination extends BaseController
 
             $filename          = ($formtype == 'ssan')?'frontend/ssan_preview':'frontend/spsfn_preview';
 
-
-           return   $html = view($filename,$this->data,array('debug' => false));
-            
+            return   $html = view($filename,$this->data,array('debug' => false)); 
     }
 
 

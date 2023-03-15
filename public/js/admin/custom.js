@@ -356,14 +356,14 @@ function userDelete(type = '',id='',url = '',e)
                       success: function(data, textStatus, jqXHR)
                       {
                         $('#loader').addClass('hidden');
-                          if(data.status && data.status == 'success')
-                            {
-                              
+                            if(data.status && data.status == 'success'){
                               if(data.message)
                                 successMessageAlert(data.message);
-                            }
-
-                            
+                            } 
+                            else
+                            {
+                               errorMessageAlert(data.message);
+                            }  
                       },
                       error: function (jqXHR, textStatus, errorThrown)
                       {
@@ -518,14 +518,14 @@ function exportRegistrations()
             {
                 $('#loader').removeClass('hidden');
                 var title  = $('#title').val();
-                var email = $('#email').val();
-                var phone = $('#phone').val();
+              //  var email = $('#email').val();
+             //   var phone = $('#phone').val();
                 var mode = $('#mode').val();
 
                   $.ajax({
                       url : base_url+'/admin/eventregisteration/export',
                       type: "POST",
-                      data : {'app_csrf':form_res.token,title:title,email:email,phone:phone,mode:mode},
+                      data : {'app_csrf':form_res.token,title:title,mode:mode},
                       dataType:'json',
                       success: function(data, textStatus, jqXHR)
                       {
@@ -847,14 +847,14 @@ function registrationDatatable()
                             var csrfHash = $("input[name='app_csrf']").val();
                             
                             var title  = $('#title').val();
-                            var email = $('#email').val();
-                            var phone = $('#phone').val();
+                           // var email = $('#email').val();
+                         //   var phone = $('#phone').val();
                             var mode = $('#mode').val();
        
                             data.title      = title;
-                            data.email     = email;
+                          //  data.email     = email;
                            // data.start_date = start_date;
-                            data.phone    = phone;
+                          //  data.phone    = phone;
                             data.mode    = mode;
 
                           console.log('datatables',data);
@@ -887,19 +887,19 @@ function registrationDatatable()
               ]
       });
 
-      $('#title').keyup(function(){
+      $('#title').change(function(){
         empTable.draw();
       });
 
-      $('#email').keyup(function(){
-        empTable.draw();
-      });
-      // Custom filter
-      $('#phone').keyup(function(){
-            empTable.draw();
-      });
+      // $('#email').keyup(function(){
+      //   empTable.draw();
+      // });
+      // // Custom filter
+      // $('#phone').keyup(function(){
+      //       empTable.draw();
+      // });
 
-      $('#mode').keyup(function(){
+      $('#mode').change(function(){
         empTable.draw();
       });
 

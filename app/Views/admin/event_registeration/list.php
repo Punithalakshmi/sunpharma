@@ -33,11 +33,19 @@
               <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
                     <label class="fw-bold">Title</label>
-                    <input type="text" class="mt-2 form-control" name="title" id="title" />
+                    <!-- <input type="text" class="mt-2 form-control" name="title" id="title" /> -->
+                    <select class="selectpicker mt-2 form-control"
+                      aria-label="Default select example" name="title" id="title">
+                      <option></option>
+                      <?php if(is_array($events)):
+                              foreach($events as $ckey=>$cvalue):?>
+                      <option value="<?=$cvalue['id'];?>" ><?=$cvalue['title'];?></option>
+                      <?php endforeach; endif; ?> 
+                  </select>
               </div>
               </div>
 
-              <div class="col-md-3">
+              <!-- <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
                     <label class="fw-bold">Email</label>
                     <input type="text" class="mt-2 form-control" name="email" id="email" />
@@ -50,13 +58,20 @@
                   <label for="" class="fw-bold">Phone</label> 
                   <input type="text" class="mt-2 form-control" name="phone" id="phone" />
                 </div>
-              </div>
+              </div> -->
             
+             
+
               <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                  <label for="" class="fw-bold">Participation Mode</label> 
-                  <input type="text" class="mt-2 form-control" name="mode" id="mode" />
-                </div>
+                    <label for="" class="fw-bold">Participation Mode </label>
+                        <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="mode" id="mode" >
+                            <option value="Online">Online</option>
+                            <option value="Onsite">Onsite</option>
+                        </select>
+                       
+                    </div>
               </div>
 
             </div> 
