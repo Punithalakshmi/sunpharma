@@ -83,7 +83,7 @@
                     ?>
                   <div class="x_content">
                     <br />
-                    <form id="nomineeUpdate" enctype="multipart/form-data" action="<?php echo base_url();?>/admin/nominee/update" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="nomineeUpdate" enctype="multipart/form-data" action="<?php echo base_url();?>/admin/nominee/update" method="POST" data-parsley-validate class="form-horizontal form-label-left addformsec">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
@@ -251,7 +251,7 @@
                       <div class="clearfix"></div>
                         <div class="form-group col-md-6"></div>
                         <div class="clearfix"></div>
-                        <div class="form-group">
+                        <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                   <label class="form-label">
                                       Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant
@@ -303,7 +303,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                              <div class="form-group">
+                              <div class="form-group uploadseciz">
                                 <div class="mb-3 form-items">
                                     <label class="form-label"> Complete Bio-data of the Applicant
                                         (Max 1.5 MB) <span class="required" style="color:red;">*</span>
@@ -357,7 +357,7 @@
 
                             <div class="clearfix"></div>
 
-                              <div class="form-group">
+                              <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                     <label class="form-label"> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB) <span class="required" style="color:red;">*</span></label>
                                     <button type="button" name="excellence_research_work_add" id="add_more_excellence_research_work" onclick="addMoreRows('excellenceResearchWrapper','excellence_research_work','excellence_research_work');" class="btn btn-primary btn-sm">
@@ -407,7 +407,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                              <div class="form-group">
+                              <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                     <label class="form-label"> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)
                                          
@@ -459,7 +459,7 @@
                               </div>  
 
                         <div class="clearfix"></div>
-                        <div class="form-group">
+                        <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for="">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)
                                      </label>
@@ -510,7 +510,7 @@
                               </div>  
 
                             <div class="clearfix"></div>
-                        <div class="form-group">
+                        <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for="">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)
                                      </label>
@@ -560,7 +560,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                              <div class="form-group">
+                              <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)
                                      </label>
@@ -608,7 +608,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                        <div class="form-group">
+                        <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for=""> Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB)
                                      </label>
@@ -657,7 +657,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                        <div class="form-group">
+                        <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for=""> Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB)
                                      </label>
@@ -706,7 +706,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                        <div class="form-group">
+                        <div class="form-group  uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for=""> Age proof (Max: 250KB)
                                      </label>
@@ -755,7 +755,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                         <div class="form-group">
+                         <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                     <label class="form-label" for=""> A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)
                                      </label>
@@ -817,3 +817,60 @@
                 </div>
               </div>
             </div>
+
+            <style>
+
+.form-horizontal.addformsec .form-group.uploadseciz{background:#fdfdfd;border:1px solid #d9d9d9;padding:8px 15px;display:flex;width: 100%;}
+
+.form-horizontal.addformsec .form-group.uploadseciz label.form-label {
+    display: flex;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-control {margin-top: 15px;width: 60%;min-width: 200px;padding-bottom: 36px!important;}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div {
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items {
+    width: 100%;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div a button {
+    display: inline-block;
+    min-width: 200px;
+    background: #047cb2;
+    border: 0px solid #047cb2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    margin-right: 0;
+    color: #fff;
+    text-align: left;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div button[name="remove"] {
+    padding: 2px 10px;
+    opacity: .5;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items .form-items {border-bottom: 1px solid #ddd;padding: 0px 10px 20px 10px;margin: 0;}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div button[name="remove"]:hover {
+    opacity: 1;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div a button:hover {
+    background: #015379;
+    color: white;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div > div {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 23px;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div > div:last-child {
+    border: 0;
+}
+            </style>

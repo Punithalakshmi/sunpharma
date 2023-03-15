@@ -109,7 +109,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Official Address <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="address" oninput="auto_grow(this)" style="height: 50px; width:310px;"><?=$editdata['address'];?></textarea>
+                          <textarea class="form-control col-md-7 col-xs-12" name="address" oninput="auto_grow(this)" ><?=$editdata['address'];?></textarea>
                         </div>
                       </div>
 					          <div class="clearfix"></div>
@@ -126,8 +126,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Participation Mode <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="radio" name="participation_mode" class="flat" value="Online" <?php echo set_radio('participation_mode','Online',(isset($editdata['participation_mode']) && ($editdata['participation_mode']=='Online'))?'checked':'');?> > Online
-                        <input type="radio" name="participation_mode" class="flat" value="Offline" <?php echo set_radio('participation_mode','Offline',(isset($editdata['participation_mode']) && ($editdata['participation_mode']=='Offline'))?'checked':'');?> > Offline
+                        <label style="min-width: 82px;font-size: 16px;"><input type="radio" name="participation_mode" class="flat" value="Online" <?php echo set_radio('participation_mode','Online',(isset($editdata['participation_mode']) && ($editdata['participation_mode']=='Online'))?'checked':'');?> > Online</label>
+
+                        <label  style="min-width: 82px;font-size: 16px;"><input type="radio" name="participation_mode" class="flat" value="Offline" <?php echo set_radio('participation_mode','Offline',(isset($editdata['participation_mode']) && ($editdata['participation_mode']=='Offline'))?'checked':'');?> > Offline</label>
                         </div>
                       </div>
 					          

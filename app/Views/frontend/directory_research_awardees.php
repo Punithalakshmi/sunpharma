@@ -17,7 +17,7 @@
                     <h3 class="heading" style="color: #F7941E;"><?=$akey;?><br></h3>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-4 mx-auto" style="max-width: 900px;">
+            <div class="row row-cols-1 row-cols-md-4 mx-auto justify-content-center" style="max-width: 900px;">
                 <?php foreach($avalue as $k => $v): ?>
                 <div class="col mb-4">
                     <div class="text-center"><a href="#" data-bs-target="#<?=$v['modalname'];?>" data-bs-toggle="modal"><img class="rounded mb-3 fit-cover" width="150" height="150" src="<?=base_url();?>/uploads/winners/<?=$v['photo'];?>"></a>
