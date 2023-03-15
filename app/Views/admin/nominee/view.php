@@ -468,7 +468,7 @@
                 <div class="col-sm-9">
                 <?php if(is_array($citation)): 
                         for($i=0; $i<count($citation); $i++): ?>
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$$citation[$i];?></a> 
+                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation[$i];?></a> 
                 <?php endfor; 
                       else:?>
                       <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation;?></a> 
