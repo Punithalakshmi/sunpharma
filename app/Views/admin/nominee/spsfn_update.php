@@ -19,6 +19,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <?php 
+
                       if(strpos($editdata['justification_letter_filename'],','))
                          $justificationLetter = explode(',',$editdata['justification_letter_filename']);
                       else
@@ -52,22 +53,22 @@
                       if(strpos($editdata['ethical_clearance'],','))
                          $ethicalClearance = explode(',',$editdata['ethical_clearance']);
                       else
-                         $ethicalClearance  = $editdata['ethical_clearance']; 
+                         $ethicalClearance = $editdata['ethical_clearance']; 
 
                       if(strpos($editdata['statement_of_duly_signed_by_nominee'],','))
                          $statementOfDulySigned = explode(',',$editdata['statement_of_duly_signed_by_nominee']);
                       else
-                         $statementOfDulySigned  = $editdata['statement_of_duly_signed_by_nominee']; 
+                         $statementOfDulySigned = $editdata['statement_of_duly_signed_by_nominee']; 
 
                       if(strpos($editdata['aggregate_marks'],','))
                          $aggregateMarks = explode(',',$editdata['aggregate_marks']);
                       else
-                         $aggregateMarks  = $editdata['aggregate_marks'];  
+                         $aggregateMarks = $editdata['aggregate_marks'];  
 
                       if(strpos($editdata['age_proof'],','))
-                        $ageProof = explode(',',$editdata['age_proof']);
+                         $ageProof = explode(',',$editdata['age_proof']);
                       else
-                        $ageProof  = $editdata['age_proof'];    
+                         $ageProof = $editdata['age_proof'];    
 
                       if(strpos($editdata['declaration_candidate'],','))
                          $declarationCandidate = explode(',',$editdata['declaration_candidate']);
@@ -364,26 +365,51 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+
+                                    <?php if(is_array($excellenceResearchWork)): 
+                                    for($i=0; $i<count($excellenceResearchWork); $i++): if(!empty($excellenceResearchWork[$i])): ?>
+                                     <div class="mb-3 form-items" id="excellence_research_work<?=$i;?>">
+                                        <input class="form-control mb-3 required excellence_research_work" accept=".pdf" name="excellence_research_work[<?=$excellenceResearchWork[$i];?>]" type="file">
+                                       
+                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$excellenceResearchWork[$i];?>" target="_blank" title="<?=$excellenceResearchWork[$i];?>">
+                                              <button class="btn btn-primary btn-sm" type="button">
+                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg>
+                                                <?=$excellenceResearchWork[$i];?>
+                                            </button>
+                                        </a>
+                                        <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$excellenceResearchWork[$i];?>','<?=$editdata['user_id'];?>','excellence_research_work<?=$i;?>','excellence_research_work',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                    </div>   
+                                  <?php endif; endfor; 
+                                      else: 
+                                         if(!empty($excellenceResearchWork)): ?>
+                                      <div class="mb-3 form-items" id="excellence_research_work-1">
+                                         
+                                        <input class="form-control mb-3 required excellence_research_work" accept=".pdf" name="excellence_research_work[<?=$excellenceResearchWork;?>]" type="file">
+                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$excellenceResearchWork;?>" target="_blank" title="<?=$excellenceResearchWork;?>">
+                                          <button class="btn btn-primary btn-sm" type="button">
+                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg>
+                                               <?=$excellenceResearchWork;?>
+                                               </button>
+                                              </a>
+                                        <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$excellenceResearchWork;?>','<?=$editdata['user_id'];?>','excellence_research_work-1','excellence_research_work',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>  
+                                  <?php endif; endif;?> 
+
                                     <div class="excellenceResearchWrapper" id="excellenceResearchWrapper">
                                       
                                     </div> 
-                                    <?php if(!empty($editdata['excellence_research_work'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['excellence_research_work'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                   
                                   </div>                    
                               </div>  
 
                               <div class="clearfix"></div>
                               <div class="form-group">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label"> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)
+                                    <label class="form-label"> List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)
                                          
                                      </label>
                                     <button type="button" name="lists_of_publications_add" id="add_more_lists_of_publications" onclick="addMoreRows('listofPublicationsWrapper','lists_of_publications','lists_of_publications');" class="btn btn-primary btn-sm">
@@ -391,19 +417,44 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+
+                                    <?php if(is_array($listsOfPublications)): 
+                                      for($i=0; $i<count($listsOfPublications); $i++): if(!empty($listsOfPublications[$i])): ?>
+                                      <div class="mb-3 form-items" id="lists_of_publications<?=$i;?>">
+                                          <input class="form-control mb-3 required lists_of_publications" accept=".pdf" name="lists_of_publications[<?=$listsOfPublications[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$listsOfPublications[$i];?>" target="_blank" title="<?=$listsOfPublications[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$listsOfPublications[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$listsOfPublications[$i];?>','<?=$editdata['user_id'];?>','lists_of_publications<?=$i;?>','lists_of_publications',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($listsOfPublications)): ?>
+                                        <div class="mb-3 form-items" id="lists_of_publications-1">
+                                          
+                                          <input class="form-control mb-3 required lists_of_publications" accept=".pdf" name="lists_of_publications[<?=$listsOfPublications;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$listsOfPublications;?>" target="_blank" title="<?=$listsOfPublications;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$listsOfPublications;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$listsOfPublications;?>','<?=$editdata['user_id'];?>','lists_of_publications-1','lists_of_publications',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
+
                                     <div class="listofPublicationsWrapper" id="listofPublicationsWrapper">
                                        
                                     </div> 
-                                    <?php if(!empty($editdata['lists_of_publications'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['lists_of_publications'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                   
                                   </div>                    
                               </div>  
 
@@ -417,19 +468,44 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+
+                                    <?php if(is_array($statementOfApplicant)): 
+                                      for($i=0; $i<count($statementOfApplicant); $i++): if(!empty($statementOfApplicant[$i])): ?>
+                                      <div class="mb-3 form-items" id="statementOfApplicant<?=$i;?>">
+                                          <input class="form-control mb-3 required statement_of_applicant" accept=".pdf" name="statement_of_applicant[<?=$statementOfApplicant[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfApplicant[$i];?>" target="_blank" title="<?=$statementOfApplicant[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$statementOfApplicant[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$statementOfApplicant[$i];?>','<?=$editdata['user_id'];?>','statementOfApplicant<?=$i;?>','statement_of_applicant',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($statementOfApplicant)): ?>
+                                        <div class="mb-3 form-items" id="statementOfApplicant-1">
+                                          
+                                          <input class="form-control mb-3 required statement_of_applicant" accept=".pdf" name="statement_of_applicant[<?=$statementOfApplicant;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfApplicant;?>" target="_blank" title="<?=$statementOfApplicant;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$statementOfApplicant;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$statementOfApplicant;?>','<?=$editdata['user_id'];?>','statementOfApplicant-1','statement_of_applicant',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
+
                                     <div class="statementOfApplicantWrapper" id="statementOfApplicantWrapper">
                                       
                                     </div> 
-                                    <?php if(!empty($editdata['statement_of_applicant'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['statement_of_applicant'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                    
                                   </div>                    
                               </div>  
 
@@ -443,19 +519,43 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
-                                    <div class="ethicalClearanceWrapper" id="ethicalClearanceWrapper">
-                                      
-                                    </div> 
-                                    <?php if(!empty($editdata['ethical_clearance'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['ethical_clearance'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
+
+                                    <?php if(is_array($ethicalClearance)): 
+                                      for($i=0; $i<count($ethicalClearance); $i++): if(!empty($ethicalClearance[$i])): ?>
+                                      <div class="mb-3 form-items" id="ethical_clearance<?=$i;?>">
+                                          <input class="form-control mb-3 required ethical_clearance" accept=".pdf" name="ethical_clearance[<?=$ethicalClearance[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ethicalClearance[$i];?>" target="_blank" title="<?=$ethicalClearance[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$ethicalClearance[$i];?>
+                                              </button>
                                           </a>
-                                      </div>
-                                    <?php endif;?>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$ethicalClearance[$i];?>','<?=$editdata['user_id'];?>','ethical_clearance<?=$i;?>','ethical_clearance',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($ethicalClearance)): ?>
+                                        <div class="mb-3 form-items" id="ethical_clearance-1">
+                                          
+                                          <input class="form-control mb-3 required ethical_clearance" accept=".pdf" name="ethical_clearance[<?=$ethicalClearance;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ethicalClearance;?>" target="_blank" title="<?=$ethicalClearance;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$ethicalClearance;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$ethicalClearance;?>','<?=$editdata['user_id'];?>','ethical_clearance-1','ethical_clearance',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
+                                    <div class="ethicalClearanceWrapper" id="ethicalClearanceWrapper">
+                                    
+                                    </div> 
+                                    
                                   </div>                    
                               </div>  
 
@@ -469,19 +569,41 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+                                    <?php if(is_array($statementOfDulySigned)): 
+                                      for($i=0; $i<count($statementOfDulySigned); $i++): if(!empty($statementOfDulySigned[$i])): ?>
+                                      <div class="mb-3 form-items" id="statement_of_duly_signed_by_nominee<?=$i;?>">
+                                          <input class="form-control mb-3 required statement_of_duly_signed_by_nominee" accept=".pdf" name="statement_of_duly_signed_by_nominee[<?=$statementOfDulySigned[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfDulySigned[$i];?>" target="_blank" title="<?=$statementOfDulySigned[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$statementOfDulySigned[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$statementOfDulySigned[$i];?>','<?=$editdata['user_id'];?>','statement_of_duly_signed_by_nominee<?=$i;?>','statement_of_duly_signed_by_nominee',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($statementOfDulySigned)): ?>
+                                        <div class="mb-3 form-items" id="statement_of_duly_signed_by_nominee-1">
+                                          
+                                          <input class="form-control mb-3 required statement_of_duly_signed_by_nominee" accept=".pdf" name="statement_of_duly_signed_by_nominee[<?=$statementOfDulySigned;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfDulySigned;?>" target="_blank" title="<?=$statementOfDulySigned;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$statementOfDulySigned;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$statementOfDulySigned;?>','<?=$editdata['user_id'];?>','statement_of_duly_signed_by_nominee-1','statement_of_duly_signed_by_nominee',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
                                       <div class="statementOfDulySignedWrapper" id="statementOfDulySignedWrapper">
                                       </div> 
-                                    <?php if(!empty($editdata['statement_of_duly_signed_by_nominee'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['statement_of_duly_signed_by_nominee'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button">
-                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                    
                                   </div>                    
                               </div>  
 
@@ -495,19 +617,42 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+                                    <?php if(is_array($citation)): 
+                                      for($i=0; $i<count($citation); $i++): if(!empty($citation[$i])): ?>
+                                      <div class="mb-3 form-items" id="citation<?=$i;?>">
+                                          <input class="form-control mb-3 required citation" accept=".pdf" name="complete_bio_data[<?=$citation[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$citation[$i];?>" target="_blank" title="<?=$citation[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$citation[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$citation[$i];?>','<?=$editdata['user_id'];?>','citation<?=$i;?>','citation',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($citation)): ?>
+                                        <div class="mb-3 form-items" id="citation-1">
+                                          
+                                          <input class="form-control mb-3 required citation" accept=".pdf" name="citation[<?=$citation;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$citation;?>" target="_blank" title="<?=$citation;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$citation;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$citation;?>','<?=$editdata['user_id'];?>','citation-1','citation',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
                                     <div class="citationWrapper" id="citationWrapper">
                                        
                                     </div> 
-                                    <?php if(!empty($editdata['citation'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['citation'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                    
                                   </div>                    
                               </div>  
 
@@ -521,19 +666,42 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+                                    <?php if(is_array($aggregateMarks)): 
+                                      for($i=0; $i<count($aggregateMarks); $i++): if(!empty($aggregateMarks[$i])): ?>
+                                      <div class="mb-3 form-items" id="aggregate_marks<?=$i;?>">
+                                          <input class="form-control mb-3 required aggregate_marks" accept=".pdf" name="aggregate_marks[<?=$aggregateMarks[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$aggregateMarks[$i];?>" target="_blank" title="<?=$aggregateMarks[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$aggregateMarks[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$aggregateMarks[$i];?>','<?=$editdata['user_id'];?>','aggregate_marks<?=$i;?>','aggregate_marks',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($aggregateMarks)): ?>
+                                        <div class="mb-3 form-items" id="aggregate_marks-1">
+                                          
+                                          <input class="form-control mb-3 required aggregate_marks" accept=".pdf" name="aggregate_marks[<?=$aggregateMarks;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$aggregateMarks;?>" target="_blank" title="<?=$aggregateMarks;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$aggregateMarks;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$aggregateMarks;?>','<?=$editdata['user_id'];?>','aggregate_marks-1','aggregate_marks',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
                                     <div class="aggregateMarksWrapper" id="aggregateMarksWrapper">
                                        
                                     </div> 
-                                    <?php if(!empty($editdata['aggregate_marks'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['aggregate_marks'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                    
                                   </div>                    
                               </div>  
 
@@ -547,19 +715,42 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+                                    <?php if(is_array($ageProof)): 
+                                      for($i=0; $i<count($ageProof); $i++): if(!empty($ageProof[$i])): ?>
+                                      <div class="mb-3 form-items" id="ageProof<?=$i;?>">
+                                          <input class="form-control mb-3 required age_proof" accept=".pdf" name="age_proof[<?=$ageProof[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ageProof[$i];?>" target="_blank" title="<?=$ageProof[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$ageProof[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$ageProof[$i];?>','<?=$editdata['user_id'];?>','ageProof<?=$i;?>','age_proof',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($ageProof)): ?>
+                                        <div class="mb-3 form-items" id="ageProof-1">
+                                          
+                                          <input class="form-control mb-3 required age_proof" accept=".pdf" name="age_proof[<?=$ageProof;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ageProof;?>" target="_blank" title="<?=$ageProof;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$ageProof;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$ageProof;?>','<?=$editdata['user_id'];?>','ageProof-1','age_proof',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
                                     <div class="ageProofWrapper" id="ageProofWrapper">
                                       
                                     </div> 
-                                    <?php if(!empty($editdata['age_proof'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['age_proof'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                    
                                   </div>                    
                               </div>  
 
@@ -573,19 +764,42 @@
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                       </svg> ADD
                                     </button>
+                                    <?php if(is_array($declarationCandidate)): 
+                                      for($i=0; $i<count($declarationCandidate); $i++): if(!empty($declarationCandidate[$i])): ?>
+                                      <div class="mb-3 form-items" id="declaration_candidate<?=$i;?>">
+                                          <input class="form-control mb-3 required declaration_candidate" accept=".pdf" name="declaration_candidate[<?=$declarationCandidate[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$declarationCandidate[$i];?>" target="_blank" title="<?=$declarationCandidate[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$declarationCandidate[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$declarationCandidate[$i];?>','<?=$editdata['user_id'];?>','declaration_candidate<?=$i;?>','declaration_candidate',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($declarationCandidate)): ?>
+                                        <div class="mb-3 form-items" id="declarationCandidate-1">
+                                          
+                                          <input class="form-control mb-3 required declaration_candidate" accept=".pdf" name="declaration_candidate[<?=$declarationCandidate;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$declarationCandidate;?>" target="_blank" title="<?=$declarationCandidate;?>">
+                                            <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                <?=$declarationCandidate;?>
+                                                </button>
+                                                </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$declarationCandidate;?>','<?=$editdata['user_id'];?>','declarationCandidate-1','declaration_candidate',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                        </div>  
+                                    <?php endif; endif;?> 
                                     <div class="declarationWrapper" id="declarationWrapper">
                                       
                                     </div> 
-                                    <?php if(!empty($editdata['declaration_candidate'])): ?>
-                                      <div>
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['declaration_candidate'];?>" target="_blank">
-                                            <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                                </svg> View
-                                            </button>
-                                          </a>
-                                      </div>
-                                    <?php endif;?>
+                                   
                                   </div>                    
                               </div>  
                          <div class="clearfix"></div>

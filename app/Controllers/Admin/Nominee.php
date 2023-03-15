@@ -801,8 +801,6 @@ class Nominee extends BaseController
 
                             if($this->request->getFileMultiple('excellence_research_work')){
                                  $filenames = multipleFileUpload('excellence_research_work',$id);
-                                 
-
                                  if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'excellence_research_work');
                                     $nominee_details_data['excellence_research_work'] = $filenames;
@@ -810,20 +808,19 @@ class Nominee extends BaseController
                            }   
                            else
                            {
-                                    if($this->request->getFile('excellence_research_work')) {
-                                        $excellence_research_work = $this->request->getFile('excellence_research_work');
-                                        $excellence_research_work->move($fileUploadDir);
-                                        $nominee_details_data['excellence_research_work']  = $excellence_research_work->getClientName();
-                                    }
+                                if($this->request->getFile('excellence_research_work')) {
+                                    $excellence_research_work = $this->request->getFile('excellence_research_work');
+                                    $excellence_research_work->move($fileUploadDir);
+                                    $nominee_details_data['excellence_research_work']  = $excellence_research_work->getClientName();
+                                }
                            }
 
                            
                            if($this->request->getFileMultiple('lists_of_publications')){
-                            $filenames = multipleFileUpload('lists_of_publications',$id);   
-                            
+                                $filenames = multipleFileUpload('lists_of_publications',$id);   
                                 if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'lists_of_publications');
-                                        $nominee_details_data['lists_of_publications'] = $filenames;
+                                    $nominee_details_data['lists_of_publications'] = $filenames;
                                 }        
                             }   
                             else
@@ -838,7 +835,6 @@ class Nominee extends BaseController
                         
                             if($this->request->getFileMultiple('statement_of_applicant')){
                                 $filenames = multipleFileUpload('statement_of_applicant',$id);
-                                
                                 if($filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'statement_of_applicant');
                                   $nominee_details_data['statement_of_applicant'] = $filenames;
