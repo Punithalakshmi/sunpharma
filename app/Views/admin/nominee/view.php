@@ -56,7 +56,7 @@
           <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
             <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?>
-            <?php if($user['role'] == 3): ?>
+            <?php if($userdata['role'] == 3): ?>
                 <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/update/<?=$user['user_id'];?>">
                    EDIT
                 </a>

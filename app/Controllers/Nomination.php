@@ -7,14 +7,17 @@ class Nomination extends BaseController
     public function index($award_id = '')
     {
            // sessionDestroy();
+
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Science Scholar Awards');
             
             $this->data['categories'] = $getCategoryLists->getResultArray();
+
+            $getSessionFiles = getSessionData('uploadedFile');
             
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('spsfn',$award_id),$this->validationMessages());
+                $this->validation->setRules($this->validation_rules('spsfn',$award_id,$getSessionFiles),$this->validationMessages('spsfn'));
 
                 if($this->validation->withRequest($this->request)->run()) {
 
@@ -204,7 +207,7 @@ class Nomination extends BaseController
 
             if (strtolower($this->request->getMethod()) == "post") {
 
-                $this->validation->setRules($this->validation_rules('ssan',$award_id,$getSessionFiles),$this->validationMessages());
+                $this->validation->setRules($this->validation_rules('ssan',$award_id,$getSessionFiles),$this->validationMessages('ssan'));
 
                 if($this->validation->withRequest($this->request)->run()) {
 
@@ -360,7 +363,6 @@ class Nomination extends BaseController
        
         $this->data['award_id'] = $this->uri->getSegment(2);
 
-
         if($this->request->isAJAX()){
             $this->data['editdata'] = $this->getRequestedData('ssan','ajax');
             $html = view('frontend/ssan_new',$this->data,array('debug' => false));
@@ -382,48 +384,53 @@ class Nomination extends BaseController
  
             $validation_rules = array();
             $validation_rules = array(
-                                            "category" => array("label" => "Category",'rules' => 'required'),
-                                            "nominee_name" => array("label" => "Applicant Name",'rules' => 'required'),
-                                            "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required'),
-                                            "citizenship" => array("label" => "Citizenship",'rules' => 'required'),
-                                            "designation_and_office_address" => array("label" => "Designation & Office Address",'rules' => 'required'),
-                                            "residence_address" => array("label" => "Residence Address",'rules' => 'required'),
-                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|checkUniqueEmail['.$id.']'),
-                                            "mobile_no" => array("label" => "Mobile No.",'rules' => 'required|numeric|max_length[10]'),
-                                            "nominator_name" => array("label" => "Naminator Name",'rules' => 'required'),
-                                            "nominator_mobile" => array("label" => "Naminator Mobile",'rules' => 'required|numeric|max_length[10]'),
-                                            "nominator_email" => array("label" => "Naminator Email",'rules' => 'required|valid_email'),
-                                            "nominator_office_address" => array("label" => "Naminator Office Address",'rules' => 'required')
+                                        "category" => array("label" => "Category",'rules' => 'required'),
+                                        "nominee_name" => array("label" => "Applicant Name",'rules' => 'required'),
+                                        "date_of_birth" => array("label" => "Date Of Birth",'rules' => 'required'),
+                                        "citizenship" => array("label" => "Citizenship",'rules' => 'required'),
+                                        "designation_and_office_address" => array("label" => "Designation & Office Address",'rules' => 'required'),
+                                        "residence_address" => array("label" => "Residence Address",'rules' => 'required'),
+                                        "email" => array("label" => "Email",'rules' => 'required|valid_email|checkUniqueEmail['.$id.']'),
+                                        "mobile_no" => array("label" => "Mobile No.",'rules' => 'required|numeric|max_length[10]'),
+                                        "nominator_name" => array("label" => "Naminator Name",'rules' => 'required'),
+                                        "nominator_mobile" => array("label" => "Naminator Mobile",'rules' => 'required|numeric|max_length[10]'),
+                                        "nominator_email" => array("label" => "Naminator Email",'rules' => 'required|valid_email'),
+                                        "nominator_office_address" => array("label" => "Naminator Office Address",'rules' => 'required')
             ); 
 
             if($type == 'ssan') {
 
               if(!isset($session['justification_letter']))
-                $validation_rules['justification_letter'] = array("label" => "Attached Justification Letter",'rules' => 'uploaded[justification_letter]|max_size[justification_letter,500]|ext_in[justification_letter,pdf]'); 
+                $validation_rules['justification_letter'] = array("label" => "Justification Letter",'rules' => 'uploaded[justification_letter]|max_size[justification_letter,500]|ext_in[justification_letter,pdf]'); 
 
               if(!isset($session['nominator_photo']))  
-                $validation_rules['nominator_photo'] = array("label" => "Applicant Photo",'rules' => 'uploaded[nominator_photo]');
+                $validation_rules['nominator_photo'] = array("label" => "Applicant Photo",'rules' => 'uploaded[nominator_photo]|max_size[nominator_photo,500]');
 
-              if($this->request->getPost('citizenship') == 2 ) 
-                $validation_rules['passport'] =  array("label" => "Attached Passport",'rules' => 'uploaded[passport]|ext_in[passport,pdf]');
+              if($this->request->getPost('citizenship') == 2 && !isset($session['passport'])) 
+                $validation_rules['passport'] =  array("label" => "Passport",'rules' => 'uploaded[passport]|max_size[passport,500]|ext_in[passport,pdf]');
             
             }
 
-            
-                
             if($type == 'spsfn') {
 
                 if($this->request->getPost('ongoing_course') == 'other')
-                    $validation_rules['course_name'] = array("label" => "Course Name",'rules' => 'required');
+                   $validation_rules['course_name'] = array("label" => "Course Name",'rules' => 'required');
 
                 if($this->request->getPost('research_project') == 'No')
                    $validation_rules['research_project'] = array("label" => "Research Project",'rules' => 'required');   
+
+               if(!isset($session['justification_letter']))
+                   $validation_rules['justification_letter'] = array("label" => "Justification Letter",'rules' => 'uploaded[justification_letter]|max_size[justification_letter,500]|ext_in[justification_letter,pdf]');
+                   
+               if(!isset($session['supervisor_certifying']))  
+                   $validation_rules['supervisor_certifying'] = array("label" => "Supervisor Certifying",'rules' => 'uploaded[supervisor_certifying]|max_size[supervisor_certifying,500]|ext_in[supervisor_certifying,pdf]');  
+      
             }    
             return $validation_rules;
       
     }
 
-    public function validationMessages()
+    public function validationMessages($type='')
     {
 
         $validationMessages = array("category" => array("required" => "Please select category"),
@@ -438,9 +445,20 @@ class Nomination extends BaseController
                                     "nominator_mobile" => array("required" => "Please enter nominator mobile"),
                                     "nominator_email" => array("required" => "Please enter nominator email"),
                                     "nominator_office_address" => array("required" => "Please enter nominator office address"),
-                                    "justification_letter" => array("uploaded" => "Please select justification letter","max_size" => "File size should be below 500KB", "ext_in" => "File type should be pdf"),
-                                    "nominator_photo" => array("uploaded" => "Please select the photo")
+                                    "justification_letter" => array("uploaded" => "Please upload justification letter","max_size" => "File size should be below 500KB", "ext_in" => "File type should be pdf"),
+                                    "nominator_photo" => array("uploaded" => "Please upload the photo","max_size" => "File size should be below 500KB")
                               );
+
+                                if($type == 'ssan') {
+
+                                    if($this->request->getPost('citizenship') == 2 ) 
+                                        $validationMessages['passport'] =  array("uploaded" => "Please upload the passport","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
+                                }  
+                                
+                                if($type == 'spsfn') {
+
+                                        $validationMessages['supervisor_certifying'] =  array("uploaded" => "Please upload the supervisor certifying the research work","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
+                                }
 
          return $validationMessages;
     }
@@ -466,7 +484,7 @@ class Nomination extends BaseController
   
         if (strtolower($this->request->getMethod()) == "post") {
 
-            $this->validation->setRules($this->awards_validation_rules($edit_data['nomination_type']));
+            $this->validation->setRules($this->awards_validation_rules($edit_data['nomination_type']),$this->awardValidationMessages($edit_data['nomination_type']));
 
           if($this->validation->withRequest($this->request)->run()) {
     
@@ -752,28 +770,28 @@ class Nomination extends BaseController
         $validation_rules = array();
       
         if($type == 'ssan') {
-                $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,500]|ext_in[complete_bio_data,pdf]');
-                $validation_rules['best_papers']                        = array("label" => "Best Papers",'rules' => 'uploaded[best_papers]|max_size[best_papers,500]|ext_in[best_papers,pdf]');
+                $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,1500]|ext_in[complete_bio_data,pdf]');
+                $validation_rules['best_papers']                        = array("label" => "Best Papers",'rules' => 'uploaded[best_papers]|max_size[best_papers,1000]|ext_in[best_papers,pdf]');
                 $validation_rules['statement_of_research_achievements'] = array("label" => "Statement of Research Achievements",'rules' => 'uploaded[statement_of_research_achievements]|max_size[statement_of_research_achievements,1000]|ext_in[statement_of_research_achievements,pdf]');
-                $validation_rules['signed_details']                     = array("label" => "Signed Details",'rules' => 'uploaded[signed_details]');
-                $validation_rules['specific_publications']              = array("label" => "Specific Publications",'rules' => 'uploaded[specific_publications]');
-                $validation_rules['signed_statement']                   = array("label" => "Signed Statement",'rules' => 'uploaded[signed_statement]');
-                $validation_rules['citation']                           = array("label" => "Citation",'rules' => 'uploaded[citation]');
+                $validation_rules['signed_details']                     = array("label" => "Signed Details",'rules' => 'uploaded[signed_details]|max_size[signed_details,2500]|ext_in[signed_details,pdf]');
+                $validation_rules['specific_publications']              = array("label" => "Specific Publications",'rules' => 'uploaded[specific_publications]|max_size[specific_publications,2500]|ext_in[specific_publications,pdf]');
+                $validation_rules['signed_statement']                   = array("label" => "Signed Statement",'rules' => 'uploaded[signed_statement]|max_size[signed_statement,500]|ext_in[signed_statement,pdf]');
+                $validation_rules['citation']                           = array("label" => "Citation",'rules' => 'uploaded[citation]|max_size[citation,300]|ext_in[citation,pdf]');
         }
         else
         {
-                $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,500]|ext_in[complete_bio_data,pdf]');
-                $validation_rules['excellence_research_work']           = array("label" => "Excellence Research Work",'rules' => 'uploaded[excellence_research_work]|max_size[excellence_research_work,500]|ext_in[excellence_research_work,pdf]');
-                $validation_rules['lists_of_publications']              = array("label" => "Lists of Publications",'rules' => 'uploaded[lists_of_publications]|max_size[lists_of_publications,1000]|ext_in[lists_of_publications,pdf]');
-                $validation_rules['statement_of_applicant']             = array("label" => "Statement Of Applicant",'rules' => 'uploaded[statement_of_applicant]');
-                $validation_rules['ethical_clearance']                  = array("label" => "Ethical Clearance",'rules' => 'uploaded[ethical_clearance]');
-                $validation_rules['statement_of_duly_signed_by_nominee']= array("label" => "Statement of duly signed",'rules' => 'uploaded[statement_of_duly_signed_by_nominee]');
-                $validation_rules['citation']                           = array("label" => "Citation",'rules' => 'uploaded[citation]');
-                $validation_rules['aggregate_marks']                    = array("label" => "Aggregate Marks",'rules' => 'uploaded[aggregate_marks]');
+                $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,1000]|ext_in[complete_bio_data,pdf]');
+                $validation_rules['excellence_research_work']           = array("label" => "Excellence Research Work",'rules' => 'uploaded[excellence_research_work]|max_size[excellence_research_work,2000]|ext_in[excellence_research_work,pdf]');
+                $validation_rules['lists_of_publications']              = array("label" => "Lists of Publications",'rules' => 'uploaded[lists_of_publications]|max_size[lists_of_publications,2000]|ext_in[lists_of_publications,pdf]');
+                $validation_rules['statement_of_applicant']             = array("label" => "Statement Of Applicant",'rules' => 'uploaded[statement_of_applicant]|max_size[statement_of_applicant,1000]|ext_in[statement_of_applicant,pdf]');
+                $validation_rules['ethical_clearance']                  = array("label" => "Ethical Clearance",'rules' => 'uploaded[ethical_clearance]|max_size[ethical_clearance,250]|ext_in[ethical_clearance,pdf]');
+                $validation_rules['statement_of_duly_signed_by_nominee']= array("label" => "Statement of duly signed",'rules' => 'uploaded[statement_of_duly_signed_by_nominee]|max_size[statement_of_duly_signed_by_nominee,250]|ext_in[statement_of_duly_signed_by_nominee,pdf]');
+                $validation_rules['citation']                           = array("label" => "Citation",'rules' => 'uploaded[citation]|max_size[citation,300]|ext_in[citation,pdf]');
+                $validation_rules['aggregate_marks']                    = array("label" => "Aggregate Marks",'rules' => 'uploaded[aggregate_marks]|max_size[aggregate_marks,250]|ext_in[aggregate_marks,pdf]');
                 $validation_rules['year_of_passing']                    = array("label" => "Year of Passing",'rules' => 'required');
                 $validation_rules['number_of_attempts']                 = array("label" => "Number of attempts",'rules' => 'required');
-                $validation_rules['age_proof']                          = array("label" => "Age Proof",'rules' => 'uploaded[age_proof]');
-                $validation_rules['declaration_candidate']              = array("label" => "Declaration Candidate",'rules' => 'uploaded[declaration_candidate]');
+                $validation_rules['age_proof']                          = array("label" => "Age Proof",'rules' => 'uploaded[age_proof]|max_size[age_proof,250]|ext_in[age_proof,pdf]');
+                $validation_rules['declaration_candidate']              = array("label" => "Declaration Candidate",'rules' => 'uploaded[declaration_candidate]|max_size[declaration_candidate,250]|ext_in[declaration_candidate,pdf]');
         }
         return $validation_rules;
     }
@@ -1299,6 +1317,42 @@ class Nomination extends BaseController
        
         
        
+    }
+
+
+    public function awardValidationMessages($type='')
+    {
+        $awardValidationMessages = array();
+        if($type == 'ssan') {
+            
+            $awardValidationMessages = array("complete_bio_data" => array("uploaded" => "Please upload the Bio-data","max_size" => "File size should be below 1.5MB","ext_in" => "File type should be pdf"),
+                                                "best_papers" => array("uploaded" => "Please upload the Best Papers","max_size" => "File size should be below 1MB","ext_in" => "File type should be pdf"),
+                                                "statement_of_research_achievements" => array("uploaded" => "Please upload the Research Achievements","max_size" => "File size should be below 1MB","ext_in" => "File type should be pdf"),
+                                                "signed_details" => array("uploaded" => "Please upload the Signed Details","max_size" => "File size should be below 2.5MB","ext_in" => "File type should be pdf"),
+                                                "specific_publications" => array("uploaded" => "Please upload the Specific Publications","max_size" => "File size should be below 2.5MB","ext_in" => "File type should be pdf"),
+                                                "signed_statement" => array("uploaded" => "Please upload the Signed Statement","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf"),
+                                                "citation" => array("uploaded" => "Please upload the Citation","max_size" => "File size should be below 300KB","ext_in" => "File type should be pdf")
+                                            );
+            }
+            else
+            {
+                
+                    $awardValidationMessages = array(   "complete_bio_data" => array("uploaded" => "Please upload the Bio-data","max_size" => "File size should be below 1MB","ext_in" => "File type should be pdf"),
+                                                        "excellence_research_work" => array("uploaded" => "Please upload the Excellence Research Work","max_size" => "File size should be below 1MB","ext_in" => "File type should be pdf"),
+                                                        "lists_of_publications" => array("uploaded" => "Please upload the Publications","max_size" => "File size should be below 1MB","ext_in" => "File type should be pdf"),
+                                                        "statement_of_applicant" => array("uploaded" => "Please upload the Statement","max_size" => "File size should be below 2.5MB","ext_in" => "File type should be pdf"),
+                                                        "ethical_clearance" => array("uploaded" => "Please upload the Ethical Clearance","max_size" => "File size should be below 2.5MB","ext_in" => "File type should be pdf"),
+                                                        "statement_of_duly_signed_by_nominee" => array("uploaded" => "Please upload the Statement of duly signed by nominee","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf"),
+                                                        "citation" => array("uploaded" => "Please upload the Citation","max_size" => "File size should be below 300KB","ext_in" => "File type should be pdf"),
+                                                        "aggregate_marks" => array("uploaded" => "Please upload the Aggregate Marks","max_size" => "File size should be below 300KB","ext_in" => "File type should be pdf"),
+                                                        "year_of_passing" => array("required" => "Please enter year of passing"),
+                                                        "number_of_attempts" => array("required" => "Please enter number of attempts"),
+                                                        "age_proof" => array("uploaded" => "Please upload the Age Proof","max_size" => "File size should be below 300KB","ext_in" => "File type should be pdf"),
+                                                        "declaration_candidate" => array("uploaded" => "Please upload the Declaration Candidate","max_size" => "File size should be below 300KB","ext_in" => "File type should be pdf")
+                                                );
+            }
+        
+          return $awardValidationMessages;
     }
     
 }
