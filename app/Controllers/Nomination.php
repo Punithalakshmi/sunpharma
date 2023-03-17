@@ -618,6 +618,8 @@ class Nomination extends BaseController
             //sendmail to jury
             $this->sendMailToJury($award_id);
 
+            //send mail to admin
+            finalNominationSubmit($edit_data['firstname']);
 
             return redirect()->to('view/'.$edit_data['user_id'])->withInput();
 
@@ -816,8 +818,7 @@ class Nomination extends BaseController
         $message .= "Sunpharma Science Foundation Team";
        
         $this->data['content'] = $message;
-       // $html = view('email/mail',$this->data,array('debug' => false));
-     //   mail("punitha@izaaptech.in",$subject,$html,$header);
+       
         sendMail('rafi@izaaptech.com',$subject,$message);
 
 
@@ -835,23 +836,16 @@ class Nomination extends BaseController
         $message .= "Sunpharma Science Foundation Team";
        
         $this->data['content'] = $message;
-       // $html = view('email/mail',$this->data,array('debug' => false));
-       // mail($nominee_email,$subject,$html,$header);
+       
        sendMail($nominee_email,$subject,$message);
 
     }
 
     public function sendMailToJury($award_id = ''){
 
-        $header  = '';
-        $header .= "MIME-Version: 1.0\r\n";
-        $header .= "Content-type: text/html\r\n";
-
+    
         $login_url = base_url().'/admin';
-
-        $subject  = "New Nomination - Sun Pharma Science Foundation ";
-       
-
+        $subject   = "New Nomination - Sun Pharma Science Foundation ";
         $juryLists = $this->juryModel->getAwardMappingLists($award_id);
 
         if(is_array($juryLists) && count($juryLists) > 0){
@@ -866,8 +860,7 @@ class Nomination extends BaseController
                     $message .= "Sunpharma Science Foundation Team";
                    
                     $this->data['content'] = $message;
-                  //  $html = view('email/mail',$this->data,array('debug' => false));
-                  //   mail($jvalue['email'],$subject,$html,$header);
+                 
                   sendMail($jvalue['email'],$subject,$message);
                 }
             }

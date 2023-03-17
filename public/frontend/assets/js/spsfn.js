@@ -83,6 +83,26 @@ form.children("div").steps({
         form.validate().settings.ignore = ":disabled,:hidden";
        
         if(currentIndex && currentIndex == 1){
+            
+            var isValid = true;
+    
+
+            $('#formsection input[type="text"],input[type="file"],input[type="email"],input[type="number"],textarea,select,input[type="date"]').each(function() {
+                console.log('Value',$(this).val());
+                if(($(this).val())===''){ 
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();          
+               }
+               else
+               {
+                  isValid = true;
+               } 
+           
+            });
+
+            if(isValid){
 
             $("#overlay").fadeIn(300);
 
@@ -184,10 +204,12 @@ form.children("div").steps({
                         }
                     });  
             
-             }
+                 }
              });
 
             return form.valid();
+          }
+
          }
         else
         {
@@ -231,11 +253,31 @@ function triggerSteps()
     {
         
         form.validate().settings.ignore = ":disabled,:hidden";
+
+        var isValid = true;
         
         if(currentIndex && currentIndex == 1){
 
+            $('#formsection input[type="text"],input[type="file"],input[type="email"],input[type="number"],textarea,select,input[type="date"]').each(function() {
+                console.log('Value',$(this).val());
+                if(($(this).val())===''){ 
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();          
+               }
+               else
+               {
+                  isValid = true;
+               } 
+           
+            });
+
+            if(isValid){
+
             $("#overlay").fadeIn(300);
 
+            
             token_res  = {};
 
             $.ajax({
@@ -335,6 +377,8 @@ function triggerSteps()
                         }); 
 
                 return form.valid();
+
+               }
             }
             else
             {

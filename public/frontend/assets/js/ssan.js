@@ -274,7 +274,37 @@ function triggerSteps(csrf)
                     // Get the selected file
                     if(currentIndex && currentIndex == 1){
                         
-                       
+                        $('#formsection input[type="text"],input[type="file"],input[type="email"],input[type="number"],textarea,select,input[type="date"]').each(function() {
+                            console.log('Value',$(this).val());
+                           if(($("#citizenship").val()== 2 && (($(this).val())===''))){ 
+                                isValid = false;
+                                console.log('isValid',isValid);
+                                form.validate().settings.ignore = ":disabled,:hidden";
+                                return form.valid();          
+                           } 
+                           else if(($("#citizenship").val()== 1 && (($(this).val())===''))){
+                               
+                                  var nm = $(this).attr('name');
+                                 if(nm !== 'passport'){
+                                    isValid = false;
+                                   
+                                    console.log('attribute',nm);
+                                    form.validate().settings.ignore = ":disabled,:hidden";
+                                    return form.valid(); 
+                                 }
+                                 else
+                                 {
+                                    isValid = true;
+                                 }
+        
+                           }
+                          
+                        });
+        
+                        console.log('isValid',isValid);
+
+                    if(isValid){
+
                         token_res  = {};
 
                         $.ajax({
@@ -379,11 +409,10 @@ function triggerSteps(csrf)
                                         }
                                     }
                                 });
-                            }
-
+                             }
                          });  
-
                         return form.valid();
+                      }  
                     }
                     else
                     {
@@ -392,7 +421,6 @@ function triggerSteps(csrf)
                 },
                 onFinishing: function (event, currentIndex)
                 {
-
                     form.validate().settings.ignore = ":disabled";
                     if(!$("#acceptTerms").is(":checked")) {
                         errorMessageAlert('Please accept terms & condition'); 
