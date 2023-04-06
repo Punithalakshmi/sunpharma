@@ -27,16 +27,15 @@ class RegisterationModel extends Model{
     public function getRegisteredUsers($id='')
     {
         if(empty($id)){
-	    $builder = $this->table('event_registerations');
+	          $builder = $this->table('event_registerations');
             $builder->select('event_registerations.*,events.title');
             $builder->join('events','events.id = event_registerations.event_id','left');
-	     $builder->orderBy('event_registerations.id', 'DESC');
+	          $builder->orderBy('event_registerations.id', 'DESC');
             return $query = $builder->get()->getResultArray();	
-	}
-        else
-	{ 
-          return $this->getWhere(array('id' => $id));
-	} 
+        }
+        else{ 
+                return $this->getWhere(array('id' => $id));
+        } 
     }
     
     public function CountAll()
@@ -60,7 +59,7 @@ class RegisterationModel extends Model{
        
 
         if(!empty($filter['title']))
-         $builder->like('events.title',$filter['title']);
+         $builder->like('events.id',$filter['title']);
 
         if(!empty($filter['email']))
          $builder->like('event_registerations.email',$filter['email']); 

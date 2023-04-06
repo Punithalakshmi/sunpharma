@@ -331,62 +331,78 @@ class User extends BaseController
     {
         
         if (strtolower($this->request->getMethod()) == "post") {  
-                if($this->request->isAJAX()){
-                    $this->userModel->delete(array("id" => $id));
-                    return $this->response->setJSON([
-                        'status'            => 'success',
-                        'message'           => 'User deleted Successfully'
-                    ]); 
-                }
-        }
+
+           if($this->request->isAJAX()){
+
+                    $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
+
+                    if(is_array($userData) && count($userData) > 0) {
+
+                        if(!isNominationExpired($userData['end_date'])){
+                            $status  = 'error';
+                            $message = ucfirst($userData['firstname']).' registered this nomination '.$userData['title'].'. The nomination is not yet complete. you can delete this user after finish the nomination.';
+                         }
+                         else
+                         {
+                            $this->userModel->delete(array("id" => $id));
+                            $status  = "success";
+                            $message = 'User deleted Successfully'; 
+                        } 
+                        
+                        return $this->response->setJSON([
+                            'status'    => $status,
+                            'message'   => $message
+                        ]); 
+                 }
+             }
+         }
 
     }
 
     public function changepassword($id='')
     {
-      
-           
-            $this->validation = $this->validate($this->validation_rules('change_password',$id));
-            
-            if($this->validation) {
+       
+        $this->validation = $this->validate($this->validation_rules('change_password',$id));
+        
+        if($this->validation) {
 
-                if (strtolower($this->request->getMethod()) == "post") {  
+            if (strtolower($this->request->getMethod()) == "post") {  
+            
+                $newPassword     = $this->request->getPost('new_password');
+                $id              = $this->request->getPost('id');
+
+                $ins_data = array();
+                $ins_data['password']  = md5($newPassword);
+
+                $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
                 
-                    $newPassword     = $this->request->getPost('new_password');
-                    $id              = $this->request->getPost('id');
-
-                    $ins_data = array();
-                    $ins_data['password']  = md5($newPassword);
-
-                    $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
-                    
-                    if(!empty($id)){
-                        $this->session->setFlashdata('msg', 'Password Updated Successfully!');
-                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                        $ins_data['updated_id']    = $this->data['userdata']['login_id'];
-                        $this->userModel->update(array("id" => $id),$ins_data);
-                    }
-                    
-                   if(isset($userData['email']) && !empty($userData['email'])) 
-                      $this->sendMail($userData['email'],$newPassword);
-
-                    return redirect()->route('admin/user');
+                if(!empty($id)){
+                    $this->session->setFlashdata('msg', 'Password Updated Successfully!');
+                    $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                    $ins_data['updated_id']    = $this->data['userdata']['login_id'];
+                    $this->userModel->update(array("id" => $id),$ins_data);
                 }
+                
+                if(isset($userData['email']) && !empty($userData['email'])) 
+                    $this->sendMail($userData['email'],$newPassword);
+
+                return redirect()->route('admin/user');
             }
-            else
-            {  
-            
-                $editdata['new_password']       = ($this->request->getPost('new_password'))?$this->request->getPost('new_password'):'';
-                $editdata['confirm_password']   = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):'';
-                $editdata['id']                 = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;   
-            } 
+        }
+        else
+        {  
+        
+            $editdata['new_password']       = ($this->request->getPost('new_password'))?$this->request->getPost('new_password'):'';
+            $editdata['confirm_password']   = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):'';
+            $editdata['id']                 = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;   
+        } 
 
-            if($this->request->getPost())
-              $this->data['validation'] = $this->validator;
+        if($this->request->getPost())
+            $this->data['validation'] = $this->validator;
 
-            $this->data['editdata'] = $editdata;
+        $this->data['editdata'] = $editdata;
 
-            return  render('admin/user/changepassword',$this->data);
+        return  render('admin/user/changepassword',$this->data);
             
     }
 
@@ -439,7 +455,7 @@ class User extends BaseController
         $message .= '<br/><br/>';
         $message .= "Your Account Password has been changed successfully.";
         $message .= "<br/>";
-        $message .= "Please use this Password:".$password;
+        $message .= "Please use this Password: ".$password;
         $message .= "<br/>";
      
         $this->data['content'] = $message;

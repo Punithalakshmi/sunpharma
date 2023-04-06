@@ -51,22 +51,51 @@ if ( ! function_exists('captchaVerification'))
        }     
 }
 
+
+if ( ! function_exists('finalNominationSubmit'))
+   {
+        function finalNominationSubmit($name='')
+        {
+
+            $email    =  \Config\Services::email();
+
+            $subject  = 'Final Submission of Nomination';
+            $message   = 'Hi,';
+            $message  .= ucfirst($name).' submitted the all documents, Please login and check.';
+
+            $data['content'] = $message;
+            $html = view('email/mail',$data,array('debug' => false));
+            
+            $email->setTo('punitha@izaaptech.in');
+
+            $email->setSubject($subject);
+
+            $email->setMessage($html);
+            if ($email->send()){
+                return true;
+            }
+            else
+            {
+                return $email->printDebugger(['headers']);
+            }
+       }     
+}
+
+
     
-if ( ! function_exists('isNominationExpired'))
-{
+if ( ! function_exists('isNominationExpired')) {
+    
     function isNominationExpired($extendDate)
     {
-       
         $date1_ts = strtotime(date("Y-m-d"));
         $date2_ts = strtotime($extendDate);
         $diff = $date2_ts - $date1_ts;
         $nominationEndDays = round($diff / 86400);
     
         if($nominationEndDays <= 0 )
-          return true;
-       else
-          return false ;
-        
+           return true;
+        else
+           return false;   
     }
 }
 

@@ -77,7 +77,7 @@
                                 foreach($lists as $user):
                                   $status = '';
 
-                                  if($user['active']==1 && $user['status']=='Approved'){
+                                  if($user['status']=='Approved'){
                                     $status = "Approved";
                                   }
                                   else if($user['is_rejected'] == 1){

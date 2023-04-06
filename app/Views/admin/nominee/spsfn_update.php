@@ -83,7 +83,8 @@
                     ?>
                   <div class="x_content">
                     <br />
-                    <form id="nomineeUpdate" enctype="multipart/form-data" action="<?php echo base_url();?>/admin/nominee/update" method="POST" data-parsley-validate class="form-horizontal form-label-left addformsec">
+                   
+                    <form id="nomineeUpdate" enctype="multipart/form-data" action="<?php echo base_url();?>/admin/nominee/update/<?=$editdata['user_id'];?>" method="POST" data-parsley-validate class="form-horizontal form-label-left addformsec">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">

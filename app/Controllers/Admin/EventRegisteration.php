@@ -16,14 +16,16 @@ class EventRegisteration extends BaseController
              
             $filter = array();
             $filter['title']      = '';
-            $filter['email']      = '';
-            $filter['phone']      = '';
+           // $filter['email']      = '';
+          //  $filter['phone']      = '';
             $filter['mode']       = '';
             $filter['start']      = '0';
             $filter['limit']      = '10';
             $filter['orderField'] = 'id';
             $filter['orderBy']    = 'desc';
             $totalRecords  = $this->registerationModel->CountAll();
+
+            $this->data['events']  = $this->workshopModel->getLists();
             
             if (strtolower($this->request->getMethod()) == "post") { 
     
@@ -43,13 +45,13 @@ class EventRegisteration extends BaseController
     
                      // Custom filter
                     $title      = $dtpostData['title'];
-                    $email      = $dtpostData['email'];
-                    $phone      = $dtpostData['phone'];
+                 //   $email      = $dtpostData['email'];
+                //    $phone      = $dtpostData['phone'];
                     $mode      = $dtpostData['mode'];
                     
                     $filter['title']       = $title;
-                    $filter['email']       = $email;
-                    $filter['phone']       = $phone;
+                  //  $filter['email']       = $email;
+                  //  $filter['phone']       = $phone;
                     $filter['mode']        = $mode;
                     $filter['limit']       = $rowperpage;
                     $filter['orderField']  = $columnName;
@@ -233,16 +235,37 @@ class EventRegisteration extends BaseController
 
     public function delete($id='')
     {
-      
         if (strtolower($this->request->getMethod()) == "post") {  
-          $this->registerationModel->delete(array("id" => $id));
+          
+          $registeredUser = $this->registerationModel->getRegisteredUsers($id)->getRowArray(); 
+
+          if(is_array($registeredUser) && count($registeredUser) > 0) { 
+
+             $event  =  $this->workshopModel->getLists($registeredUser['event_id'])->getRowArray();
+
+             if(!isNominationExpired($event['end_date'])){
+                $status  = 'error';
+                $message = ucfirst($registeredUser['firstname']).' registered this event '.$event['title'].'. The event is not yet complete. you can delete this user after finish the event.';
+             }
+             else
+             {
+                $this->registerationModel->delete(array("id" => $id));
+                $status  = 'success';
+                $message = 'Registration deleted Successfully';
+             }
+          }
+          else
+          {
+
+          }
+
           if($this->request->isAJAX()){         
             return $this->response->setJSON([
-                'status'            => 'success',
-                'message'           => 'Registration deleted Successfully'
+                'status'            => $status,
+                'message'           => $message
             ]); 
-         }
-      }
+          }
+       }
        
     }
 
@@ -260,8 +283,8 @@ class EventRegisteration extends BaseController
     
                 // Custom filter
                 $title      = $dtpostData['title'];
-                $email      = $dtpostData['email'];
-                $phone      = $dtpostData['phone'];
+              //  $email      = $dtpostData['email'];
+              //  $phone      = $dtpostData['phone'];
                 $mode       = $dtpostData['mode'];
 
                     $filter = array();

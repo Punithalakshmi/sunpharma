@@ -25,11 +25,15 @@ form.validate({
                     {
                         required: {
                             depends: function(elem) {
-                                console.log('elem',elem);
-                                 if($("#citizenship").val() == 2)
+                               
+                                 if($("#citizenship").val() == 2){
+                                    console.log('passport');
                                     return true;
+                                 }   
                                  else
+                                 {
                                     return false;   
+                                 }    
                             }
                         },
                         extension: "pdf"
@@ -66,17 +70,45 @@ form.validate({
         transitionEffect: "slideLeft",
         onStepChanging: function (event, currentIndex, newIndex)
         {
-           console.log('currentIndex',currentIndex);
-           console.log('uri2',uri2);
-
-      
+          
             event.preventDefault();
             form.validate().settings.ignore = ":disabled,:hidden";
            
             // Get the selected file
             if(currentIndex && currentIndex == 1)
             {
-    
+                var isValid = true;
+                
+                $('#formsection input[type="text"],input[type="file"],input[type="email"],input[type="number"],textarea,select,input[type="date"]').each(function() {
+                    console.log('Value',$(this).val());
+                   if(($("#citizenship").val()== 2 && (($(this).val())===''))){ 
+                        isValid = false;
+                        console.log('isValid',isValid);
+                        form.validate().settings.ignore = ":disabled,:hidden";
+                        return form.valid();          
+                   } 
+                   else if(($("#citizenship").val()== 1 && (($(this).val())===''))){
+                       
+                          var nm = $(this).attr('name');
+                         if(nm !== 'passport'){
+                            isValid = false;
+                           
+                            console.log('attribute',nm);
+                            form.validate().settings.ignore = ":disabled,:hidden";
+                            return form.valid(); 
+                         }
+                         else
+                         {
+                            isValid = true;
+                         }
+
+                   }
+                  
+                });
+
+                console.log('isValid',isValid);
+                if(isValid){
+
                 $("#overlay").fadeIn(300);
 
                     $.ajax({
@@ -194,6 +226,8 @@ form.validate({
                            
                             
                             return form.valid();
+                     }    
+
             }
             else
             {
@@ -221,8 +255,6 @@ form.validate({
 function triggerSteps(csrf)
 {
 
-  //  $("#overlay").fadeIn(300);
-  //  console.log('uri2',uri2);
            var form = $("#formsection");
 
            form.validate();
@@ -242,7 +274,37 @@ function triggerSteps(csrf)
                     // Get the selected file
                     if(currentIndex && currentIndex == 1){
                         
-                       
+                        $('#formsection input[type="text"],input[type="file"],input[type="email"],input[type="number"],textarea,select,input[type="date"]').each(function() {
+                            console.log('Value',$(this).val());
+                           if(($("#citizenship").val()== 2 && (($(this).val())===''))){ 
+                                isValid = false;
+                                console.log('isValid',isValid);
+                                form.validate().settings.ignore = ":disabled,:hidden";
+                                return form.valid();          
+                           } 
+                           else if(($("#citizenship").val()== 1 && (($(this).val())===''))){
+                               
+                                  var nm = $(this).attr('name');
+                                 if(nm !== 'passport'){
+                                    isValid = false;
+                                   
+                                    console.log('attribute',nm);
+                                    form.validate().settings.ignore = ":disabled,:hidden";
+                                    return form.valid(); 
+                                 }
+                                 else
+                                 {
+                                    isValid = true;
+                                 }
+        
+                           }
+                          
+                        });
+        
+                        console.log('isValid',isValid);
+
+                    if(isValid){
+
                         token_res  = {};
 
                         $.ajax({
@@ -347,11 +409,10 @@ function triggerSteps(csrf)
                                         }
                                     }
                                 });
-                            }
-
+                             }
                          });  
-
                         return form.valid();
+                      }  
                     }
                     else
                     {
@@ -360,7 +421,6 @@ function triggerSteps(csrf)
                 },
                 onFinishing: function (event, currentIndex)
                 {
-
                     form.validate().settings.ignore = ":disabled";
                     if(!$("#acceptTerms").is(":checked")) {
                         errorMessageAlert('Please accept terms & condition'); 

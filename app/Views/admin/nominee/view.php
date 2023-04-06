@@ -8,7 +8,7 @@
                
                 <h3>Total Score: <span class="badge badge-warning">
                   <i class="fa fa-star"></i> <?=($average_rating>0)?round($average_rating):0;?></span></h3>
-                <?php if(isset($user['status']) && $user['status'] == 'Approved' && $user['active'] == 1): ?>
+                <?php if(isset($user['status']) && $user['status'] == 'Approved' ): ?>
                   <h3 class="approvedtxt"><span class="badge badge-success">
                     <i class="fa fa-check-circle"></i> Approved</span>
                 </h3>
@@ -56,9 +56,11 @@
           <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
             <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?>
-            <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/update/<?=$user['user_id'];?>">
+            <?php if($userdata['role'] == 3): ?>
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/update/<?=$user['user_id'];?>">
                    EDIT
                 </a>
+            <?php endif;?>    
              </h3>
             <div class="form-group row formitem">
               <label class="col-sm-3 col-form-label">Nomination NO</label>
@@ -159,10 +161,6 @@
                 $citation = explode(',',$user['citation']);
               else
                 $citation = $user['citation']; 
-
-
-//                print_r($citation); die;
-
               ?>
               <div class="form-group row formitem graybox">
                 <label class="col-sm-3 col-form-label">Justification Letter</label>
@@ -526,8 +524,8 @@
 
               <?php if(isset($userdata['role']) && ($userdata['role'] == '3') && (($user['status'] == 'Disapproved' && $user['is_rejected'] == '0') || ($user['status'] == 'Disapproved' && $user['active'] == '0'))): ?>
                 <div class="">
-                  <button type="button" onclick="nominee_approve('approve','<?=$user['user_id'];?>');" class="btn btn-success greenbg btn-lg">Approve</button>
-                  <button type="button" class="btn btn-danger btn-lg" onclick="nominee_approve('disapprove','<?=$user['user_id'];?>');">
+                  <button type="button" onclick="getRemarks(this,'approve','<?=$user['user_id'];?>');" class="btn btn-success greenbg btn-lg">Approve</button>
+                  <button type="button" class="btn btn-danger btn-lg" onclick="getRemarks(this,'disapprove','<?=$user['user_id'];?>');">
                     <i class="fa fa-ban"></i> Reject 
                 </button>
               </div>
@@ -668,6 +666,25 @@
               </div>
             </div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="remarksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remarks</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <textarea class="form-control" name="remarks" id="remarks"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" id="remarksSubmit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
         

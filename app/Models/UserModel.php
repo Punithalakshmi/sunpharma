@@ -2,7 +2,7 @@
 namespace App\Models;  
 use CodeIgniter\Model;
   
-class UserModel extends Model{
+class UserModel extends Model {
     protected $table = 'users';
     
     protected $allowedFields = [
@@ -87,7 +87,7 @@ class UserModel extends Model{
     public function getListsOfUsers($id='')
     {
         if(empty($id))
-         return $this->findAll();
+          return $this->findAll();
         else 
           return $this->getWhere(array('id' => $id)); 
     }
@@ -144,7 +144,7 @@ class UserModel extends Model{
         $builder->join('awards_creation_category','awards_creation_category.id=nominations.main_category_id');
         $builder->where("users.role",'2');
         $builder->where("users.status",'Approved');
-        $builder->where("users.active",'1');
+      //  $builder->where("users.active",'1');
         $builder->where("nominee_details.is_submitted",1);
         return $query = $builder->get();
     }
@@ -216,6 +216,15 @@ class UserModel extends Model{
         else 
             return $query = $builder->get();
 
+    }
+
+
+    public function getAwardData($id = ''){
+        $builder = $this->table('users');
+        $builder->select('nominations.*,users.*');
+        $builder->join('nominations','nominations.id = users.award_id');
+        $builder->where("users.id",$id);
+        return $query = $builder->get();
     }
 
 }
