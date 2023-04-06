@@ -22,7 +22,8 @@ class WorkshopModel extends Model{
         'banner_image',
         'thumb_image',
         'status',
-        'agenda'
+        'agenda',
+        'onsite_user_limit'
     ];
 
     public function getLists($id='')
@@ -43,7 +44,7 @@ class WorkshopModel extends Model{
 
     public function getActiveEvents()
     {
-         return $this->getWhere(array('status' => 1)); 
+        return $this->getWhere(array('status' => 1)); 
     }
 
     public function getEventsByFilter($filter)

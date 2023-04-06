@@ -54,7 +54,21 @@ form.validate({
          },
          research_project:{
             eligibleType:'Yes'
-         }
+         },
+         course_name:
+         {
+             required: {
+                 depends: function(elem) {
+                      if($("#ongoing_course").val() == 'other'){
+                         return true;
+                      }   
+                      else
+                      {
+                         return false;   
+                      }    
+                 }
+             }
+         },
     },
     messages: {
         nominator_photo:{
@@ -88,8 +102,32 @@ form.children("div").steps({
     
 
             $('#formsection input[type="text"],input[type="file"],input[type="email"],input[type="number"],textarea,select,input[type="date"]').each(function() {
-                console.log('Value',$(this).val());
-                if(($(this).val())===''){ 
+                var inputType = $(this).attr('type');
+                var inputName = $(this).attr('name');
+
+                var nomineePhoto         = $("#nominator_photo_uploaded_file").val();
+                var justificationLr      = $("#justification_letter_uploaded_file").val();
+                var supervisorCertifying = $("#supervisor_certifying_uploaded_file").val();
+
+                if((inputType == 'file') && (inputName == 'nominator_photo' &&  ($(this).val()) === '' ) && ( nomineePhoto == '' ) ){
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                }
+                else if((inputType == 'file') && (inputName == 'supervisor_certifying' &&  ($(this).val()) === '' ) && ( supervisorCertifying == '' ) ){
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                }
+                else if((inputType == 'file') && (inputName == 'justification_letter' &&  ($(this).val()) === '' ) && ( justificationLr == '' ) ){
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                }
+                else if((inputType != 'file') && ($(this).val())===''){ 
                     isValid = false;
                     console.log('isValid',isValid);
                     form.validate().settings.ignore = ":disabled,:hidden";
@@ -98,6 +136,9 @@ form.children("div").steps({
                else
                {
                   isValid = true;
+                  
+                  if(inputName == 'justification_letter')
+                    $('.wizard .actions ul li a[href="#next"]').trigger('click');
                } 
            
             });
@@ -259,8 +300,32 @@ function triggerSteps()
         if(currentIndex && currentIndex == 1){
 
             $('#formsection input[type="text"],input[type="file"],input[type="email"],input[type="number"],textarea,select,input[type="date"]').each(function() {
-                console.log('Value',$(this).val());
-                if(($(this).val())===''){ 
+                var inputType = $(this).attr('type');
+                var inputName = $(this).attr('name');
+
+                var nomineePhoto         = $("#nominator_photo_uploaded_file").val();
+                var justificationLr      = $("#justification_letter_uploaded_file").val();
+                var supervisorCertifying = $("#supervisor_certifying_uploaded_file").val();
+
+                if((inputType == 'file') && (inputName == 'nominator_photo' &&  ($(this).val()) === '' ) && ( nomineePhoto == '' ) ){
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                }
+                else if((inputType == 'file') && (inputName == 'supervisor_certifying' &&  ($(this).val()) === '' ) && ( supervisorCertifying == '' ) ){
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                }
+                else if((inputType == 'file') && (inputName == 'justification_letter' &&  ($(this).val()) === '' ) && ( justificationLr == '' ) ){
+                    isValid = false;
+                    console.log('isValid',isValid);
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                }
+                else if((inputType != 'file') && ($(this).val())===''){ 
                     isValid = false;
                     console.log('isValid',isValid);
                     form.validate().settings.ignore = ":disabled,:hidden";
@@ -274,11 +339,11 @@ function triggerSteps()
             });
 
             if(isValid){
-
-            $("#overlay").fadeIn(300);
+              
+              $("#overlay").fadeIn(300);
 
             
-            token_res  = {};
+              token_res  = {};
 
             $.ajax({
                 url: base_url+'/csrf_token',

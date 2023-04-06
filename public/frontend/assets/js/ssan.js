@@ -100,6 +100,7 @@ form.validate({
                          else
                          {
                             isValid = true;
+                          //  $('.wizard .actions ul li a[href="#next"]').trigger('click');
                          }
 
                    }
@@ -295,6 +296,8 @@ function triggerSteps(csrf)
                                  else
                                  {
                                     isValid = true;
+                                    if(inputName != 'nominator_photo' && inputType == 'file')
+                                      $('.wizard .actions ul li a[href="#next"]').trigger('click');
                                  }
         
                            }

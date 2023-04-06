@@ -39,13 +39,12 @@
                                                 Photograph of the Applicant
                                                 <span class="required" style="color:red;">*</span>
                                             </div>
-                                            <img class="uploadPreview" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="200"
-                                                height="200" />
-                                               <input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo"  />
-                                                <?php if(isset($editdata['nominator_photo_name']) && !empty($editdata['nominator_photo_name'])): ?>
-                                                    <span id="nominator_pt_name"><?=$editdata['nominator_photo_name'];?></span>
-                                                <?php endif;?>
-                                               <input type="hidden" name="nominator_photo_uploaded_file" id="nominator_photo_uploaded_file" value="<?=(isset($editdata['nominator_photo']) && !empty($editdata['nominator_photo']))?$editdata['nominator_photo']:'';?>" />
+                                            <img class="uploadPreview" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="200" height="200" />
+                                            <input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo"  />
+                                            <?php if(isset($editdata['nominator_photo_name']) && !empty($editdata['nominator_photo_name'])): ?>
+                                                <span id="nominator_pt_name"><?=$editdata['nominator_photo_name'];?></span>
+                                            <?php endif;?>
+                                            <input type="hidden" name="nominator_photo_uploaded_file" id="nominator_photo_uploaded_file" value="<?=(isset($editdata['nominator_photo']) && !empty($editdata['nominator_photo']))?$editdata['nominator_photo']:'';?>" />
                                            </label>
                                         <div class="hintcont">
                                             <small>Not more than 500 KB</small>
@@ -80,9 +79,7 @@
                             <div class="col-lg-12">
                                 <div class=" mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth<span class="required" style="color:red;">*</span></label>
-                                    <input min="01/01/1992" max="08/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth_spsfn" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
-                                        placeholder="Date of Birth">
-
+                                    <input min="01/01/1992" max="08/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth_spsfn" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>" placeholder="Date of Birth">
                                     <div class="hintcont">
                                         <small>(Age should be less than 30 years as on August 01, 2022)</small>
                                     </div>
@@ -256,11 +253,10 @@
                                     <div class="q-box__question col me-2">
                                         <input class="form-control required" name="supervisor_certifying" accept=".pdf" type="file" id="supervisor_certifying" value="<?=$editdata['supervisor_certifying'];?>">
                                         <?php if(isset($editdata['supervisor_certifying_name']) && !empty($editdata['supervisor_certifying_name'])): ?>
-                                                    <span id="supervisor_certifying_nm"><?=$editdata['supervisor_certifying_name'];?></span>
-                                                <?php endif;?>
+                                            <span id="supervisor_certifying_nm"><?=$editdata['supervisor_certifying_name'];?></span>
+                                        <?php endif;?>
                                         <input type="hidden" name="supervisor_certifying_uploaded_file" id="supervisor_certifying_uploaded_file" value="<?=(isset($editdata['supervisor_certifying']) && !empty($editdata['supervisor_certifying']))?$editdata['supervisor_certifying']:'';?>" />
 
-                                  
                                         <small class="text-danger">
                                         <?php if(isset($validation) && $validation->getError('supervisor_certifying')) {?>
                                             <?= $error = $validation->getError('supervisor_certifying'); ?>

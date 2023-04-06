@@ -5,13 +5,11 @@ if ( ! function_exists('captchaVerification'))
     function captchaVerification($recaptchaResponse = '',$userIp='')
     {
 
-            $secret='6Ldh61ojAAAAAFlBHQlMVa6jHJFxL2s1OctSrDIN';
-            
+            $secret='6Ldh61ojAAAAAFlBHQlMVa6jHJFxL2s1OctSrDIN';            
             $credential = array(
                 'secret' => $secret,
                 'response' => $recaptchaResponse
             );
-
             $verify = curl_init();
             curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
             curl_setopt($verify, CURLOPT_POST, true);
@@ -19,27 +17,21 @@ if ( ! function_exists('captchaVerification'))
             curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
             $response = curl_exec($verify);
-
-           return $status= json_decode($response, true);
+            return $status= json_decode($response, true);
 
        }
     }       
 
 
-    if ( ! function_exists('sendMail'))
-   {
+    if(!function_exists('sendMail')) {
+        
         function sendMail($to='',$subject = '',$message = '')
         {
-
             $email  =  \Config\Services::email();
-
             $data['content'] = $message;
             $html = view('email/mail',$data,array('debug' => false));
-            
             $email->setTo($to);
-
             $email->setSubject($subject);
-
             $email->setMessage($html);
             if ($email->send()){
                 return true;
@@ -54,21 +46,35 @@ if ( ! function_exists('captchaVerification'))
 
 if ( ! function_exists('finalNominationSubmit'))
    {
-        function finalNominationSubmit($name='')
+        function finalNominationSubmit($name='',$file='')
         {
 
             $email    =  \Config\Services::email();
 
+            $login_url = base_url().'/admin';
+
             $subject  = 'Final Submission of Nomination';
             $message   = 'Hi,';
-            $message  .= ucfirst($name).' submitted the all documents, Please login and check.';
+            $message  .= '<br/><br/>';
+            $message  .= '<b>'.ucfirst($name).'</b> has been submitted the all documents, ';
+            $message  .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nomination.';
+            $message  .= '<br/><br/>';
+            $message  .= '<b>Please check the attachment.<b/>';
 
+            $message .= "<br/><br/><br/>";
+            $message .= "Thanks & Regards,";
+            $message .= "<br/>";
+            $message .= "Sunpharma Science Foundation Team";
+            
             $data['content'] = $message;
             $html = view('email/mail',$data,array('debug' => false));
             
             $email->setTo('punitha@izaaptech.in');
 
             $email->setSubject($subject);
+
+            // file attach here //
+            $email->attach($file);
 
             $email->setMessage($html);
             if ($email->send()){
@@ -101,14 +107,12 @@ if ( ! function_exists('isNominationExpired')) {
 
 if ( ! function_exists('getAwardsArr'))
 {
- function getAwardsArr($awards = array())
-    {
+ function getAwardsArr($awards = array()){
 
         $nominationModel      = model('App\Models\NominationModel');
         $categoryModel        = model('App\Models\CategoryModel');
 
         if(is_array($awards)) {
-
           foreach($awards as $akey => $avalue){
              $categoryArr = $categoryModel->getListsOfCategories($avalue['category'])->getRowArray();
              $awards[$akey]['category_name'] = $categoryArr['type'];
@@ -116,24 +120,17 @@ if ( ! function_exists('getAwardsArr'))
 
              $nomineePhoto = $nominationModel->getNominationData($avalue['id'])->getRowArray();
              $awards[$akey]['nominator_photo'] = $nomineePhoto['nominator_photo'];
-
           }
-  
         }
-
         return $awards;
     }
 }   
 
 if ( ! function_exists('getAwardData'))
 {
- function getAwardData($award_id = '')
-    {
-
+ function getAwardData($award_id = ''){
         $nominationModel = model('App\Models\NominationTypesModel');
-
         $awardData = $nominationModel->getListsOfNominations($award_id)->getRowArray();
-
         return $awardData;
     }
 } 
@@ -143,13 +140,37 @@ if(!function_exists('getNominationDays'))
 {
     function getNominationDays($extendDate) {
 
-        $date1_ts = strtotime(date("Y-m-d"));
-        $date2_ts = strtotime($extendDate);
-        $diff = $date2_ts - $date1_ts;
-        $nominationEndDays = round($diff / 86400);
-    
-        return $nominationEndDays;
+        //$date1_ts = strtotime(date("Y-m-d 11:59:59"));
+        $date2_ts = date("Y-m-d H:i:s", strtotime($extendDate));
 
+        $d1 = new DateTime(date("Y-m-d 23:59:59"));
+        $d2 = new DateTime($date2_ts);
+        $interval = $d1->diff($d2);
+
+        $mins    = $interval->i;
+        $hrs     = $interval->h;
+        $days    = $interval->d;
+        $months  = $interval->m;
+        $seconds = $interval->s;
+
+        $expire = 0;
+
+        if($mins >= 1 && $mins < 60){
+            $expire = $mins;
+        }	  
+        else if($mins < 1){	  
+            $expire = $seconds;
+        }
+        else if($mins >= 60 ){
+            $expire = $hrs;
+        }	
+        else if($hrs >= 24) {
+            $expire = $days;  
+        }
+
+       // $diff = $date2_ts - $date1_ts;
+       // $nominationEndDays = round($diff / 86400);
+        return $expire;
     }
 }
 

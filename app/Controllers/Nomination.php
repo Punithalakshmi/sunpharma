@@ -213,22 +213,22 @@ class Nomination extends BaseController
 
                         $formTypeStatus = $this->request->getPost('formTypeStatus');
 
-                        if($formTypeStatus && $formTypeStatus == 'preview') {
-                               
-                                $html = $this->getPostedData('ssan');
+                            if($formTypeStatus && $formTypeStatus == 'preview') {
+                                
+                                    $html = $this->getPostedData('ssan');
 
-                                if($this->request->isAJAX()){
-                               
-                                    return $this->response->setJSON([
-                                        'status'            => 'success',
-                                        'message'          => 'preview',
-                                        'html'              => $html
-                                    ]); 
-                                    die;
-                                }
-                        }  
-                        else
-                        {  
+                                    if($this->request->isAJAX()){
+                                
+                                        return $this->response->setJSON([
+                                            'status'            => 'success',
+                                            'message'          => 'preview',
+                                            'html'              => $html
+                                        ]); 
+                                        die;
+                                    }
+                            }  
+                            else
+                            {  
 
                                 $category                    = $this->request->getPost('category');
                                 $firstname                   = $this->request->getPost('nominee_name');
@@ -282,7 +282,7 @@ class Nomination extends BaseController
                                 $fileUploadDir = 'uploads/'.$lastInsertID;
                             
                                 if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                                     mkdir($fileUploadDir, 0777, true);
+                                  mkdir($fileUploadDir, 0777, true);
 
                                 //upload documents to respestive nominee folder
                                 if($this->request->getFile('justification_letter')!=''){
@@ -468,12 +468,14 @@ class Nomination extends BaseController
     public function view($id = '',$award_id = '')
     {
 
-        $id = (!empty($id))?$id:$this->request->getPost('id');
+        $id       = (!empty($id))?$id:$this->request->getPost('id');
+       // $award_id = (!empty($award_id))?$award_id:$this->request->getPost('award_id');
 
         if(!empty($id)){
             $getUserData = $this->userModel->getUserData($id);
             $edit_data   = $getUserData->getRowArray();
- 
+            
+          //  $edit_data['award_id'] = $award_id;
             $edit_data['category_name'] = '';
             if(isset($edit_data['category_id'])) {
                 $category   = $this->categoryModel->getCategoriesById($edit_data['category_id']);
@@ -615,13 +617,21 @@ class Nomination extends BaseController
             //inactive the user
             $this->userModel->update(array("id" => $id),array("active" => 0));
 
+            $award_id = $edit_data['award_id'];
+
             //sendmail to jury
             $this->sendMailToJury($award_id);
 
+            $this->print($id);
             //send mail to admin
-            finalNominationSubmit($edit_data['firstname']);
+            $filename  = $edit_data['firstname'].'.docx';
+            $attachmentFilePath =  'uploads/'.$id.'/'.$filename;
+            $isMailSent = finalNominationSubmit($edit_data['firstname'],$attachmentFilePath);
 
-            return redirect()->to('view/'.$edit_data['user_id'])->withInput();
+            $redirectUrl = 'view/'.$edit_data['user_id'].'/'.$award_id;
+
+            if($isMailSent)
+              return redirect()->to($redirectUrl)->withInput();
 
           }
           else
@@ -665,11 +675,8 @@ class Nomination extends BaseController
             } 
         
         $this->data['editdata'] = $editdata;
-
         $this->data['user']     = $edit_data;
-      
-        return  render('frontend/preview',$this->data);
-                                 
+        return  render('frontend/preview',$this->data);                           
     }
 
     public function check_if_loggedin($id='')
@@ -846,8 +853,8 @@ class Nomination extends BaseController
     
         $login_url = base_url().'/admin';
         $subject   = "New Nomination - Sun Pharma Science Foundation ";
-        $juryLists = $this->juryModel->getAwardMappingLists($award_id);
-
+        $juryLists = $this->juryModel->getAwardMappingLists($award_id)->getResultArray();
+        //print_r($juryLists); die;
         if(is_array($juryLists) && count($juryLists) > 0){
             foreach($juryLists as $jkey=>$jvalue){
                 if(isset($jvalue['email']) && !empty($jvalue['email'])){
@@ -861,7 +868,7 @@ class Nomination extends BaseController
                    
                     $this->data['content'] = $message;
                  
-                  sendMail($jvalue['email'],$subject,$message);
+                    sendMail($jvalue['email'],$subject,$message);
                 }
             }
         }
@@ -898,8 +905,8 @@ class Nomination extends BaseController
 
         $files = array('nominator_photo' => '','justification_letter' => '',
                        'supervisor_certifying'=> '','passport' =>'',
-                        'nominator_photo_name'=>'','passport_name'=>'',
-                        'justification_letter_name' =>'','supervisor_certifying_name' =>'');
+                       'nominator_photo_name'=>'','passport_name'=>'',
+                       'justification_letter_name' =>'','supervisor_certifying_name' =>'');
        
         
         if($type == 'ssan'){
@@ -997,11 +1004,10 @@ class Nomination extends BaseController
 
             }
             
-            $nominatorPt = ($this->request->getFile('nominator_photo')!='')?$this->request->getFile('nominator_photo'):$nominatorSessionDt;
-            $justificationLt = ($this->request->getFile('justification_letter')!='')?$this->request->getFile('justification_letter'):$letterSessionDt;
-            $supervisorCt = ($this->request->getFile('supervisor_certifying')!='')?$this->request->getFile('supervisor_certifying'):$supervisorSessionDt;
-            $passportCt = ($this->request->getFile('passport')!='')?$this->request->getFile('passport'):$passportDt;
-
+            $nominatorPt      = ($this->request->getFile('nominator_photo')!='')?$this->request->getFile('nominator_photo'):$nominatorSessionDt;
+            $justificationLt  = ($this->request->getFile('justification_letter')!='')?$this->request->getFile('justification_letter'):$letterSessionDt;
+            $supervisorCt     = ($this->request->getFile('supervisor_certifying')!='')?$this->request->getFile('supervisor_certifying'):$supervisorSessionDt;
+            $passportCt       = ($this->request->getFile('passport')!='')?$this->request->getFile('passport'):$passportDt;
 
             $editdata['ongoing_course']              = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
             $editdata['research_project']            = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
@@ -1009,8 +1015,6 @@ class Nomination extends BaseController
             $editdata['justification_letter']        = $justificationLt;
             $editdata['nominator_photo']             = $nominatorPt;
             $editdata['passport']                    = $passportCt;
-
-        
 
         return $editdata;
     }
@@ -1075,6 +1079,7 @@ class Nomination extends BaseController
     public function print($nominee_id = '')
     {
 
+       // $this->sendMailToJury($award_id);
         //get nominee data
         if(!empty($nominee_id)){
 
@@ -1196,8 +1201,6 @@ class Nomination extends BaseController
             $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Address', $fancyTableFontStyle);
             $table->addCell(2000)->addText($nomineeData['nominator_address']);
 
-            
-
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Justification Letter', $fancyTableFontStyle);
             $table->addCell(2000)->addLink($uploadDir.$nomineeData['justification_letter_filename']);
@@ -1205,8 +1208,6 @@ class Nomination extends BaseController
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Bio-Data', $fancyTableFontStyle);
             $table->addCell(2000)->addLink($uploadDir.$nomineeData['complete_bio_data']);
-
-            
 
             if($nomineeData['nomination_type'] == 'spsfn'){
     
@@ -1255,7 +1256,6 @@ class Nomination extends BaseController
             else
             {
                 
-
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Passport', $fancyTableFontStyle);
                 $table->addCell(2000)->addLink($uploadDir.$nomineeData['passport_filename']);
@@ -1284,8 +1284,6 @@ class Nomination extends BaseController
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Award Received', $fancyTableFontStyle);
                 $table->addCell(2000)->addLink($uploadDir.$nomineeData['statement_of_research_achievements']);
 
-                
-
             }     
             
             $firstname = $nomineeData['firstname'];
@@ -1296,19 +1294,21 @@ class Nomination extends BaseController
 
              $filename = $firstname.'.docx';
              $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-             $xmlWriter->save("php://output");
+             //save to file to nominee folder
+             $fileUploadDir = 'uploads/'.$nominee_id.'/'.$filename;
+                            
+             if(!file_exists($fileUploadDir))
+               $xmlWriter->save($fileUploadDir);
+
+             $filepath = $_SERVER['DOCUMENT_ROOT'].'/'.$fileUploadDir;   
              header("Content-Description: File Transfer");
-             header('Content-Disposition: attachment; filename='.$filename);
+             header('Content-Disposition: attachment; filename='.basename($filepath));
              header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
              header('Content-Transfer-Encoding: binary');
              header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
              header('Expires: 0');
-           
-
-
+             readfile($filepath);
         }
-       
-        
        
     }
 

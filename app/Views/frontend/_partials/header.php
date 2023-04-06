@@ -1,6 +1,3 @@
-
-
-
 <div id="overlay">
   <div class="cv-spinner">
     <span class="spinner"></span>
@@ -10,7 +7,8 @@
     
     <nav class="navbar navbar-light navbar-expand-lg sticky-top" id="mainNav" style="padding: 0;">
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="<?=base_url();?>"><span>
-            <img src="<?=base_url();?>/frontend/assets/img/logo-dark.svg" height="120" style="object-fit: cover;"></span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <img src="<?=base_url();?>/frontend/assets/img/logo-dark.svg" height="120" style="object-fit: cover;"></span></a>
+               <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="<?=base_url();?>/aboutus">About Us</a></li>

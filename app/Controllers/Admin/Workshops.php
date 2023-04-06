@@ -114,9 +114,8 @@ class Workshops extends BaseController
     public function add($id='')
     {
        
-        $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
+            $this->data['eventTypes']  = $this->workshopModel->getEventTypes()->getResultArray();
 
-         
             if(!empty($id)){
                 $edit_data   = $this->workshopModel->getLists($id);
                 $edit_data   = $edit_data->getRowArray();
@@ -137,7 +136,6 @@ class Workshops extends BaseController
                     $description  = $this->request->getPost('description');
                     $start_date   = $this->request->getPost('start_date');
                     $end_date     = $this->request->getPost('end_date');
-                //    $year         = $this->request->getPost('year');
                     $status       = $this->request->getPost('status');
 
                     $ins_data = array();
@@ -147,15 +145,13 @@ class Workshops extends BaseController
                     $ins_data['title']             = $title;
                     $ins_data['start_date']        = date("Y-m-d",strtotime($start_date));
                     $ins_data['end_date']          = date("Y-m-d",strtotime($end_date));
-                   // $ins_data['year']              = $year;
                     $ins_data['status']            = $status;
                     
-
                     if($this->request->getFile('event_document') != ''){
                         $fileUploadDir = 'uploads/events/';
                             
                         if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                        mkdir($fileUploadDir, 0777, true);
+                          mkdir($fileUploadDir, 0777, true);
                         
                         //upload documents to respestive nominee folder
                         $event_document = $this->request->getFile('event_document');
@@ -168,7 +164,7 @@ class Workshops extends BaseController
                         $fileUploadDir = 'uploads/events/';
                             
                         if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                        mkdir($fileUploadDir, 0777, true);
+                          mkdir($fileUploadDir, 0777, true);
                         
                         //upload documents to respestive nominee folder
                         $agenda = $this->request->getFile('agenda');
@@ -181,7 +177,7 @@ class Workshops extends BaseController
                         $fileUploadDir = 'uploads/events/';
                             
                         if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                        mkdir($fileUploadDir, 0777, true);
+                            mkdir($fileUploadDir, 0777, true);
                         
                         //upload documents to respestive nominee folder
                         $banner_image = $this->request->getFile('banner_image');
@@ -194,7 +190,7 @@ class Workshops extends BaseController
                         $fileUploadDir = 'uploads/events/';
                             
                         if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                        mkdir($fileUploadDir, 0777, true);
+                          mkdir($fileUploadDir, 0777, true);
                         
                         //upload documents to respestive nominee folder
                         $thumb_image = $this->request->getFile('thumb_image');
@@ -202,7 +198,6 @@ class Workshops extends BaseController
 
                         $ins_data['thumb_image']  = $thumb_image->getClientName();
                     }
-                   
                    
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Event Updated Successfully!');
@@ -218,7 +213,7 @@ class Workshops extends BaseController
                         $this->workshopModel->save($ins_data);
                     } 
 
-                    return redirect()->route('admin/workshops');
+                        return redirect()->route('admin/workshops');
                 }
             }
             else
@@ -229,7 +224,6 @@ class Workshops extends BaseController
                     $editdata['subject']               = $edit_data['subject'];
                     $editdata['description']           = $edit_data['description'];
                     $editdata['category']              = $edit_data['category'];
-                  //  $editdata['year']                  = $edit_data['year'];
                     $editdata['start_date']            = date("m/d/Y",strtotime($edit_data['start_date']));
                     $editdata['end_date']              = date("m/d/Y",strtotime($edit_data['end_date']));
                     $editdata['event_document']        = $edit_data['document'];
@@ -245,7 +239,6 @@ class Workshops extends BaseController
                     $editdata['subject']              = ($this->request->getPost('subject'))?$this->request->getPost('subject'):'';
                     $editdata['description']          = ($this->request->getPost('description'))?$this->request->getPost('description'):'';
                     $editdata['category']             = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-                  //  $editdata['year']                 = ($this->request->getPost('year'))?$this->request->getPost('year'):date("Y");
                     $editdata['start_date']           = ($this->request->getPost('start_date'))?$this->request->getPost('start_date'):date("m/d/Y");
                     $editdata['end_date']             = ($this->request->getPost('end_date'))?$this->request->getPost('end_date'):date("m/d/Y");
                     $editdata['event_document']       = ($this->request->getFile('event_document'))?$this->request->getFile('event_document'):'';
@@ -283,17 +276,34 @@ class Workshops extends BaseController
     {
         if (strtolower($this->request->getMethod()) == "post") {  
 
-           
                 $this->workshopModel->delete(array("id" => $id));
-                if($this->request->isAJAX()){
-                    
-                    return $this->response->setJSON([
-                        'status'            => 'success',
-                        'message'              => 'Event deleted Successfully'
-                    ]); 
-                }
-         
-       }
+                    if($this->request->isAJAX()){
+                        
+                        return $this->response->setJSON([
+                            'status'            => 'success',
+                            'message'              => 'Event deleted Successfully'
+                        ]); 
+                    }
+         }
        
+    }
+
+
+    public function onsite_user_limit($limit='',$eventID='')
+    {
+        $upd_data = array();
+        $upd_data['onsite_user_limit'] = trim($limit);
+
+        //update the user limit for onsite mode
+        $up = $this->workshopModel->update(array("id" => $eventID),$upd_data);
+
+        if($up){
+            if($this->request->isAJAX()){            
+                return $this->response->setJSON(array(
+                    'status'   => 'success',
+                    'message'  => 'Onsite user limit added successfully'
+                )); 
+            }
+        } 
     }
 }

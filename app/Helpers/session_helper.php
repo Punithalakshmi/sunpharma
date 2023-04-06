@@ -14,20 +14,16 @@ if ( ! function_exists('getSessionData'))
 {
     function getSessionData(string $name = '')
     {
-       
         $session = session();
         if($name != ''){
-             return $session->get($name);
+            return $session->get($name);
         }
         else
         {
             $uri  = current_url(true);
             $segment =  $uri->getSegment(1);
-
-              return $sessData = ($segment=='admin')?$session->get('userdata'):$session->get('fuserdata');
+            return $sessData = ($segment=='admin')?$session->get('userdata'):$session->get('fuserdata');
         }  
-
-       // print_r($session->get('userdaa')); 
     }
 }
 
@@ -36,9 +32,7 @@ if ( ! function_exists('getUserRole'))
 {
     function getUserRole()
     {
-        
        $sessionData =  $this->getSessionData();
-       
        return $sessionData['role'];
     }
 }

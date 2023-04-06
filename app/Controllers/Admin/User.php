@@ -334,13 +334,13 @@ class User extends BaseController
 
            if($this->request->isAJAX()){
 
-                    $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
+                    $userData = $this->userModel->getAwardData($id)->getRowArray();
 
                     if(is_array($userData) && count($userData) > 0) {
 
-                        if(!isNominationExpired($userData['end_date'])){
+                        if(!isNominationExpired($userData['extend_date'])){
                             $status  = 'error';
-                            $message = ucfirst($userData['firstname']).' registered this nomination '.$userData['title'].'. The nomination is not yet complete. you can delete this user after finish the nomination.';
+                            $message = ucfirst($userData['firstname']).' registered this award '.$userData['title'].'. The award is not yet complete. you can delete this user after finish the nomination.';
                          }
                          else
                          {

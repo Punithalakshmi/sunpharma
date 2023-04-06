@@ -196,14 +196,12 @@ class Nominee extends BaseController
                 $message = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please resubmit the application. <br/><br/>';
             }
 
-            $message .= '<b>Remarks:</b> '.$remarks;
+            $message .= '<b>Remarks:</b> '.$remarks.'<br/><br/>';
 
           
             $up_data['remarks'] = $remarks;
 
             $this->userModel->update(array("id" => $id),$up_data);
-
-            
 
             $message .= 'Thanks & Regards,<br/>';
             $message .= 'Sunpharma Science Foundation Team';
