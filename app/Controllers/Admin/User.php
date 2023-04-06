@@ -347,7 +347,7 @@ class User extends BaseController
                             $this->userModel->delete(array("id" => $id));
                             $status  = "success";
                             $message = 'User deleted Successfully'; 
-                        } 
+                         } 
                         
                         return $this->response->setJSON([
                             'status'    => $status,

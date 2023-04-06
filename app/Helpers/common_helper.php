@@ -56,10 +56,10 @@ if ( ! function_exists('finalNominationSubmit'))
             $subject  = 'Final Submission of Nomination';
             $message   = 'Hi,';
             $message  .= '<br/><br/>';
-            $message  .= '<b>'.ucfirst($name).'</b> has been submitted the all documents, ';
-            $message  .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nomination.';
-            $message  .= '<br/><br/>';
-            $message  .= '<b>Please check the attachment.<b/>';
+            $message  .= 'The user <b>'.ucfirst($name).'</b> has completed the nomination process. ';
+            //$message  .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nomination.';
+           // $message  .= '<br/><br/>';
+          //  $message  .= '<b>Please check the attachment.<b/>';
 
             $message .= "<br/><br/><br/>";
             $message .= "Thanks & Regards,";
@@ -69,7 +69,7 @@ if ( ! function_exists('finalNominationSubmit'))
             $data['content'] = $message;
             $html = view('email/mail',$data,array('debug' => false));
             
-            $email->setTo('punitha@izaaptech.in');
+            $email->setTo('rafi@izaaptech.com');
 
             $email->setSubject($subject);
 

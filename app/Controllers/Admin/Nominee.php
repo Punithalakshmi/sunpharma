@@ -312,7 +312,6 @@ class Nominee extends BaseController
                     $ins_data['created_id']    =  $this->data['userdata']['id'];
                     $this->ratingModel->save($ins_data);
                      
-
                     //update nominee status
                     $up_data = array();
                     $up_data['review_status'] = ($this->request->getPost('submit') && ($this->request->getPost('submit') == 'Save Draft'))?'Draft Review':'Reviewed';
@@ -323,10 +322,10 @@ class Nominee extends BaseController
                     $message = 'Rated Successfully';
 
                     if($this->request->isAJAX()){
-                        $editdata['rating']    = $edit_data['rating'];
-                        $editdata['comment']   = $edit_data['comments'];
-                        $editdata['id']        =  $edit_data['id'];
-                        $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
+                        $editdata['rating']    = (isset($edit_data['rating']) && !empty($edit_data['rating']))?$edit_data['rating']:'';
+                        $editdata['comment']   = (isset($edit_data['comments']) && !empty($edit_data['comments']))?$edit_data['comments']:'';
+                        $editdata['id']        =  (isset($edit_data['id']) && !empty($edit_data['id']))?$edit_data['id']:'';
+                        $editdata['is_rate_submitted']  =  (isset($edit_data['is_rate_submitted']) && !empty($edit_data['is_rate_submitted']))?$edit_data['is_rate_submitted']:'0';
 
                         $this->data['editdata'] = $editdata;
                         
@@ -349,7 +348,7 @@ class Nominee extends BaseController
             if(!empty($edit_data) && count($edit_data)){
                 $editdata['rating']    = $edit_data['rating'];
                 $editdata['comment']   = $edit_data['comments'];
-                $editdata['id']        =  $edit_data['id'];
+                $editdata['id']                 =  $edit_data['id'];
                 $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
             }
             else
@@ -412,7 +411,7 @@ class Nominee extends BaseController
 
         $this->validation_rules = array();
         $this->validation_rules = array(
-                                        "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero|less_than[100]|greater_than[0]'),
+                                        "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero|less_than_equal_to[100]|greater_than[0]'),
                                         "comment" => array("label" => "Comment",'rules' => 'required')
         );
     
