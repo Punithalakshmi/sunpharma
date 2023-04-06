@@ -277,6 +277,8 @@ class EventRegisteration extends BaseController
     public function export()
     {
 
+
+
         if (strtolower($this->request->getMethod()) == "post") {  
 
                $dtpostData = $this->request->getPost();
@@ -289,8 +291,8 @@ class EventRegisteration extends BaseController
 
                     $filter = array();
                     $filter['title']      = $title;
-                    $filter['email']      = $email;
-                    $filter['phone']      = $phone;
+                  //  $filter['email']      = $email;
+                  //  $filter['phone']      = $phone;
                     $filter['mode']       = $mode;
                     $fileName = 'Registration_Lists_'.date('d-m-Y H:i:s').'.xlsx';  
 
@@ -343,4 +345,6 @@ class EventRegisteration extends BaseController
             }
         
     }
+
+
 }

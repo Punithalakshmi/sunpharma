@@ -81,8 +81,11 @@
                           <td><?=$user['end_date'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
-                          <a href="<?=base_url().'/admin/workshops/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                            
+                            <a href="<?=base_url().'/admin/workshops/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
                             <a onclick="userDelete('Event','<?=$user['id'];?>','/admin/workshops/delete/')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>
+                            <a onclick="setUserLimit('<?=$user['title'];?>','<?=$user['id'];?>','/admin/workshops/set_limit/')" class="btn btn-danger btn-xs"><i class="fa fa-edit"></i> Set Limit</a>
+                            
                           </td>
                         </tr>
                         <?php endforeach;
@@ -93,3 +96,24 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Modal -->
+<div class="modal fade" id="setLimitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Set Limit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <input type="number" name="limit" id="limit"  />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        <button type="button" class="btn btn-secondary" id="setLimitSubmit">SAVE</button>
+      </div>
+    </div>
+  </div>
+</div>

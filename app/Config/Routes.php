@@ -197,6 +197,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('workshops/add','Workshops::add',['filter' =>'auth']);
     $routes->get('workshops/delete/(:any)','Workshops::delete/$1',['filter' =>'auth']);
     $routes->post('workshops/delete/(:any)','Workshops::delete/$1',['filter' =>'auth']);
+ //   $routes->post('workshops/onsite_user_limit','Workshops::onsite_user_limit',['filter' =>'auth']);
+    $routes->get('workshops/onsite_user_limit/(:any)/(:any)','Workshops::onsite_user_limit/$1/$1',['filter' =>'auth']);
     
     $routes->get('awards','Awards::index',['filter' =>'auth']);
     $routes->post('awards/index','Awards::index',['filter' =>'auth']);

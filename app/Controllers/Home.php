@@ -6,29 +6,22 @@ class Home extends BaseController
 {
     public function index()
     {
-        
-       // $nominationLists = $this->nominationTypesModel->getCategoryWiseNominations()->getResultArray();
-
+      
         $categoryNominationLists = $this->nominationTypesModel->getActiveNomination()->getResultArray();
      
         $eventLists = $this->workshopModel->getActiveEvents()->getResultArray();
 
-      //  print_r($eventLists); die;
-
         $nominationArr = array();
         
         $current_date = strtotime(date("Y-m-d"));
-         foreach($eventLists as $ekey => $evalue) {
-         
-            array_push($nominationArr,$eventLists[$ekey]);
-        
-       }
+        foreach($eventLists as $ekey => $evalue) {
+          array_push($nominationArr,$eventLists[$ekey]);
+        }
 
         foreach($categoryNominationLists as $ekey => $evalue) {
           array_push($nominationArr,$categoryNominationLists[$ekey]); 
         }
     
-       
         //get latest winners of research awards
         $researchAwards = $this->winnersModel->getLatestWinnersByCategory(1)->getResultArray();
 

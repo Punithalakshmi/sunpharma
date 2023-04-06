@@ -153,7 +153,7 @@
                                                 </button>
                                             </div>
                                     </div>
-                                    <?php if(!empty($editdata['passport'])){ ?>
+                                    <?php if(isset($editdata['passport']) && !empty($editdata['passport'])){ ?>
                                     <div class="col-lg-12">
                                         <div class="mb-3 form-items">
                                             <label class="form-label " for=""> Passport(Max 1.5 MB) </label>

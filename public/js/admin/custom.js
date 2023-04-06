@@ -16,18 +16,12 @@ $(document).ready(function(){
     });
 
     userDatatable();
-
     nomineeDatatable();
-
     eventDatatable();
     registrationDatatable();
     awardTypeDatatable();
     manageAwardsDatatable();
     postWinnersDatatable();
-
-    
-  
-  
 });
 
 function addMoreRows()
@@ -69,7 +63,10 @@ function getRemarks(e,type,id)
  
    var remarksText = $("#remarks").val();
 
-     console.log('remarksText',remarksText);
+   if(remarksText == ''){
+    alert('Please enter text');
+    return false;
+   } 
 
      nominee_approve(type,id,remarksText);
   
@@ -79,8 +76,7 @@ function getRemarks(e,type,id)
 
 function nominee_approve(type = '',id='',remarks)
 {
-  
-    
+   
   $("#remarksModal").modal('hide'); 
     var msg = (type && type == 'approve')?'approve':'reject';
 
@@ -128,7 +124,7 @@ function nominee_approve(type = '',id='',remarks)
   
 }
 
-$(function(){
+ $(function(){
     $('.selectAll').click(function(){
        if (this.checked) {
           $(".assign_jury_to_nominee").prop("checked", true);
@@ -187,12 +183,10 @@ $(function(){
     var category = $("#category").val();
     var main_category_id = $("#main_category_id").val();
     
-
     if(category == ''){
       errorMessageAlert('Please select category');
       return false;
    }
-
 
     var csrfHash = $("input[name='app_csrf']").val();
 
@@ -261,7 +255,6 @@ $(function(){
             success: function (form_res) 
             {
         
-              //$('#loader').removeClass('hidden');
               $.ajax({
                 url : base_url+'/admin/awards/export',
                 type: "POST",
@@ -336,11 +329,9 @@ function userDelete(type = '',id='',url = '',e)
   $('#loader').removeClass('block');
     var msg = 'Are you sure you want to delete this '+type+'?';
 
-   // CSRF Hash
-  
+   // CSRF Hash  
    var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
 
-    console.log('csrfName',csrfHash);
   $.confirmModal('<h2>'+msg+'</h2>', {
     messageHeader: '',
     backgroundBlur: ['.container'],
@@ -384,7 +375,6 @@ function userDelete(type = '',id='',url = '',e)
                 }
              }
           );    
-    
 }
 
 
@@ -404,10 +394,6 @@ function errorMessageAlert(msg)
 
     Msg.icon = Msg.ICONS.FONTAWESOME;
     Msg['danger'](msg);
-
-    // setTimeout(function(){
-    //   location.reload();
-    //   },2500);
 
 }
 
@@ -429,8 +415,7 @@ function juryFinalSubmit(nominee_id = '')
               modalVerticalCenter: true
             },function(el) {
                 if(el){
-                  ///admin/nominee/view
-                      //  $('#loader').addClass('hidden');
+                
                       $.ajax({
                         url: base_url+'/csrf_token',
                         type: 'GET',
@@ -439,18 +424,10 @@ function juryFinalSubmit(nominee_id = '')
                         success: function (form_res) 
                         {
 
-                            //  $("#overlay").fadeIn(300);
-
                             token_res = form_res;
-
-                           // var fd = new FormData();
 
                             var comment = $("#comment").val();
                             var rating  = $("#rating").val();
-
-                        //    fd.append('app_csrf',token_res.token);
-                         //   fd.append('comment',comment);
-                          //  fd.append('rating',rating);
                                                                                                                                                                                                                
                               $.ajax({
                                 url: base_url+'/admin/nominee/view/'+nominee_id,
@@ -499,7 +476,6 @@ function exportRegistrations()
     var msg = 'Are you sure you want to export all registration user lists?';
     var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
 
-   
       $.confirmModal('<h2>'+msg+'</h2>', {
         messageHeader: '',
         backgroundBlur: ['.container'],
@@ -518,8 +494,6 @@ function exportRegistrations()
             {
                 $('#loader').removeClass('hidden');
                 var title  = $('#title').val();
-              //  var email = $('#email').val();
-             //   var phone = $('#phone').val();
                 var mode = $('#mode').val();
 
                   $.ajax({
@@ -600,7 +574,7 @@ function getCsrfToken()
                 return form_res;
             }
     });
-    //return true;
+   
 }
 
 
@@ -807,7 +781,7 @@ function eventDatatable()
                     { data: 'end_date' },
                     { data: 'created_date'},
                     { data: 'action',render:function(data,type,row) {
-                      btn = '<a href="'+base_url+'/admin/workshops/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'Event\','+row.id+',\'/admin/workshops/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      btn = '<button type="button" onclick="setLimit(\'Event\','+row.id+',\'/admin/workshops/onsite_user_limit/\')" class="btn btn-info btn-xs"><i class="fas fa-ban"></i>Set Limit</button><a href="'+base_url+'/admin/workshops/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'Event\','+row.id+',\'/admin/workshops/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
                       return btn;
                     }},
               ]
@@ -1156,6 +1130,84 @@ function removeFile(filename='',user_id='',div_id='',field='',id=''){
         
       }); 
 
+}
 
+function setLimit(type,id,url)
+{
 
+    $("#setLimitModal").modal('show'); 
+
+    $("#setLimitSubmit").on('click',function(e){
+  
+    var remarksText = $("#limit").val();
+
+    if(remarksText == ''){
+      alert('Please enter limit');
+      return false;
+    }
+    setUserLimit(type,id,url,remarksText);
+  
+  }); 
+
+}
+function setUserLimit(type = '',id='',url = '',limit='')
+{
+   
+  $('#loader').removeClass('block');
+    var msg = 'Are you sure you want to set Onsite user registration limit to this event?';
+
+  $.confirmModal('<h2>'+msg+'</h2>', {
+    messageHeader: '',
+    backgroundBlur: ['.container'],
+    modalVerticalCenter: true
+  },function(el) {
+        if(el){
+              $('#loader').removeClass('hidden');
+
+              // $.ajax({
+              //   url: base_url+'/csrf_token',
+              //   type: 'GET',
+              //   data: {},
+              //   dataType: 'json',
+              //   success: function (form_res) 
+              //   {
+              //     var token = form_res.token;
+                
+                $.ajax({
+                    url : base_url+url+limit+"/"+id,
+                    type: "GET",
+                  //  data : {'app_csrf':token,limit:limit,id:id},
+                    dataType:'json',
+                    success: function(data, textStatus, jqXHR)
+                    {
+                          $('#loader').addClass('hidden');
+                          if(data.status && data.status == 'success'){
+                            if(data.message)
+                              successMessageAlert(data.message);
+                          } 
+                          else
+                          {
+                              errorMessageAlert(data.message);
+                          }  
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                      $('#loader').addClass('hidden');
+                      if(textStatus && textStatus == 'error'){
+                        if(jqXHR.responseJSON.message){
+                          errorMessageAlert(jqXHR.responseJSON.message);
+                        }
+                        }
+                      }
+                    });
+                //  }
+              //  });
+            
+              }  
+              else
+              {
+                return false;
+              }
+          }
+      );    
 }
