@@ -23,10 +23,10 @@ class Home extends BaseController
         }
     
         //get latest winners of research awards
-        $researchAwards = $this->winnersModel->getLatestWinnersByCategory(1)->getResultArray();
+        $researchAwards = $this->winnersModel->getLatestWinnersByCategory(1,true)->getResultArray();
 
         //get latest winners of science scholars awards
-        $scienceScholarAwards = $this->winnersModel->getLatestWinnersByCategory(2)->getResultArray();
+        $scienceScholarAwards = $this->winnersModel->getLatestWinnersByCategory(2,true)->getResultArray();
 
         $this->data['nominations'] = $nominationArr;
         $this->data['latestWinnersOfResearchAwards'] = $researchAwards;

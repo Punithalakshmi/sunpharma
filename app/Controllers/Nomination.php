@@ -620,7 +620,7 @@ class Nomination extends BaseController
             $award_id = $edit_data['award_id'];
 
             //sendmail to jury
-            $this->sendMailToJury($award_id);
+           // $this->sendMailToJury($award_id);
 
             $this->print($id);
             //send mail to admin
@@ -848,31 +848,7 @@ class Nomination extends BaseController
 
     }
 
-    public function sendMailToJury($award_id = ''){
-
-    
-        $login_url = base_url().'/admin';
-        $subject   = "New Nomination - Sun Pharma Science Foundation ";
-        $juryLists = $this->juryModel->getAwardMappingLists($award_id)->getResultArray();
-        //print_r($juryLists); die;
-        if(is_array($juryLists) && count($juryLists) > 0){
-            foreach($juryLists as $jkey=>$jvalue){
-                if(isset($jvalue['email']) && !empty($jvalue['email'])){
-                    $message  = "Hi ".ucfirst($jvalue['firstname']).",";
-                    $message .= '<br/><br/>';
-                    $message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
-                    $message .= "<br/><br/><br/>";
-                    $message .= "Thanks & Regards,";
-                    $message .= "<br/>";
-                    $message .= "Sunpharma Science Foundation Team";
-                   
-                    $this->data['content'] = $message;
-                 
-                    sendMail($jvalue['email'],$subject,$message);
-                }
-            }
-        }
-    }
+   
 
     public function success()
     {

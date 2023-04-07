@@ -54,15 +54,11 @@ class User extends BaseController
 
                 $userLists = $this->userModel->getUsersByFilter($filter)->getResultArray();
                
-
                 $filter['totalRows'] = 'yes';
                
-            
-               $totalRecordsWithFilterCt = $this->userModel->getUsersByFilter($filter);
+                $totalRecordsWithFilterCt = $this->userModel->getUsersByFilter($filter);
                
-             
                 $totalRecordsWithFilter = (!empty($role) || !empty($category) || !empty($firstname) || !empty($email))?$totalRecordsWithFilterCt:$totalRecords;
-            
           }
 
         }
@@ -88,10 +84,11 @@ class User extends BaseController
                  $userLists[$ukey]['category'] = '-';
             }
                 $data[] = array('firstname' => $uvalue['firstname'],
+                                'lastname' => $uvalue['lastname'],
                                 'username' => $uvalue['username'],
                                 'email' => $uvalue['email'],
                                 'phone' => $uvalue['phone'],
-                                'category' => (isset($category['name']) && !empty($category['name']))?$category['name']:'-',
+                               // 'category' => (isset($category['name']) && !empty($category['name']))?$category['name']:'-',
                                 'role_name' => $uvalue['role_name'],
                                 'created_date' => $uvalue['created_date'],
                                 'id' => $uvalue['id'],
@@ -185,7 +182,6 @@ class User extends BaseController
                 if($user_role == 1)
                     $ins_data['category'] =  $category;
 
-                
                 if(!empty($id)){
                     $this->session->setFlashdata('msg', 'User Updated Successfully!');
                     $ins_data['updated_date']  =  date("Y-m-d H:i:s");
@@ -200,6 +196,9 @@ class User extends BaseController
                     $ins_data['password']   =  md5($password);
                     $this->userModel->save($ins_data);
                 } 
+
+                //Send mail to jury
+                $this->sendMailToJury($email,$firstname,$username,$password);
 
                 return redirect()->route('admin/user');
             }
@@ -513,5 +512,25 @@ class User extends BaseController
     }
 
   
+    public function sendMailToJury($mail,$name,$username,$password){
 
+    
+        $login_url = base_url().'/admin';
+        $subject   = "Authentication Info - SunPharma Science Foundation ";
+        
+        $message  = "Hi ".ucfirst($name).",";
+        $message .= '<br/><br/>';
+      //  $message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
+        $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
+        $message .= '<b>Username: </b>'.strtolower($username).'<br />';
+        $message .= '<b>Password: </b>'.$password.'<br /><br />';
+        $message .= "<br/><br/><br/>";
+        $message .= "Thanks & Regards,";
+        $message .= "<br/>";
+        $message .= "Sunpharma Science Foundation Team";
+        
+        
+        sendMail($mail,$subject,$message);
+                
+    }
 }

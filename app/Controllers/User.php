@@ -241,28 +241,7 @@ class User extends BaseController
         return redirect()->route('/');
     }
 
-    public function sendMail()
-    {
-
-        $header  = '';
-        $header .= "MIME-Version: 1.0\r\n";
-        $header .= "Content-type: text/html\r\n";
-
-        $subject = " New Nomination ";
-        $message  = "Hi, ";
-        $message .= '<br/><br/>';
-        $message .= "New candidate was submitted application, Please login and check the nomination data in admin panel";
-        $message .= "<br/>";
-        $message .= "<br/>";
-        $message .= "<br/>";
-        $message .= "Thanks & Regards,";
-        $message .= "Sunpharma Team";
-
-        //$html = view('email/mail',array(),array('debug' => false));
-         
-        mail("punitha@izaaptech.in",$subject,'Testing',$header);
-
-    }
+    
 
     public function uniqueValidation()
     {

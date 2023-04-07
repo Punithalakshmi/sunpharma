@@ -135,6 +135,14 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
 
     $routes->get("login", "Login::index");
     $routes->get("logout", "Login::logout");
+
+    $routes->post('forgot_password','Login::forget_password');
+    $routes->get('forgot_password','Login::forget_password');
+
+    $routes->post('update_password','Login::reset_password');
+    $routes->get('update_password','Login::reset_password');
+
+
     $routes->get("user", "User::index",['filter' =>'auth']);
     $routes->post("user", "User::index",['filter' =>'auth']);
     $routes->get("reset_password/(:any)", "User::resetpassword/$1",['filter' =>'auth']);

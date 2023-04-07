@@ -131,6 +131,7 @@ class UserModel extends Model {
         $builder->join('ratings','ratings.jury_id = users.id AND ratings.nominee_id='.$nominee_id);
         $builder->where("users.role",'1');
         $builder->where("users.id",$jury_id);
+        $builder->where('ratings.is_rate_submitted',1);
         return $query = $builder->get();
     }
 

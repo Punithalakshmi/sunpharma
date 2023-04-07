@@ -168,17 +168,16 @@ class Nominee extends BaseController
 
             $subject = 'Nomination Application Status - Sunpharma Science Foundation';
             $login_url = base_url().'/login';
-            $message = '';
+            $message = 'Hi,';
             $pass = $this->generatePassword(8);
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
-
-                $message  = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
+                $message .= '<br/><br/>';
+                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
                 $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
                 $message .= '<b>Username: </b>'.strtolower($getUserData['firstname']).'<br />';
                 $message .= '<b>Password: </b>'.$pass.'<br /><br />';
                
-
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
                 $up_data['password'] = md5($pass);
@@ -193,7 +192,7 @@ class Nominee extends BaseController
                 $up_data['active']  = 0;
                 $up_data['is_rejected'] = 1;
                 $msg = 'Rejected Successfully';
-                $message = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please resubmit the application. <br/><br/>';
+                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please resubmit the application. <br/><br/>';
             }
 
             $message .= '<b>Remarks:</b> '.$remarks.'<br/><br/>';
@@ -269,8 +268,11 @@ class Nominee extends BaseController
         }
     
         $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['id'],$nominee_id)->getRowArray();
+
+        $userID = $this->data['userdata']['id'];
+        $role   = $this->data['userdata']['role'];
         
-        $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
+        $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id,$userID,$role)->getRowArray();
 
         $this->data['average_rating'] = $average_rating['avg_rating'];
 

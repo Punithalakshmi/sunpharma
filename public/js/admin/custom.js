@@ -620,10 +620,11 @@ function userDatatable()
                   },
                   'columns': [
                        { data: 'firstname' },
+                       { data: 'lastname' },
                        { data: 'username' },
                        { data: 'email' },
                        { data: 'phone' },
-                       { data: 'category' },
+                     //  { data: 'category' },
                        { data: 'role_name' },
                        { data: 'created_date' },
                        { data: 'action',render:function(data,type,row) {

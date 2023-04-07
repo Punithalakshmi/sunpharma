@@ -41,6 +41,17 @@ class JuryModel extends Model{
         $builder->where("jury_mapping.award_id",$award_id);
         $builder->where("users.role",'1');
         return $query = $builder->get();
+    }
+
+    public function getJuriesByAwards()
+    {
+
+    }
+
+    public function getAwardsByJuries()
+    {
         
+        
+
     }
 }

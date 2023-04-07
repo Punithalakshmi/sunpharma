@@ -72,10 +72,11 @@
                       <thead>
                         <tr>
                           <th>Firstname</th>
+                          <th>Lastname</th>
                           <th>Username</th>
                           <th>Email</th>
                           <th>Phone</th>
-                          <th>Award Types</th>
+                          <!-- <th>Award Types</th> -->
                           <th>Role</th>
                           <th>Created Date</th>
                           <th>Action</th>
@@ -88,11 +89,12 @@
                                 foreach($lists as $user):
                             ?>
                         <tr>
-                          <td><?=$user['firstname'].' '.$user['lastname'];?></td>
+                          <td><?=$user['firstname'];?></td>
+                          <td><?=$user['lastname'];?></td>
                           <td><?=strtolower($user['username']);?></td>
                           <td><?=$user['email'];?></td>
                           <td><?=$user['phone'];?></td>
-                          <td><?=$user['category'];?></td>
+                          <!-- <td><?//$user['category'];?></td> -->
                           <td><?=$user['role_name'];?></td>
                           <td><?=$user['created_date'];?></td>
                           <td>
