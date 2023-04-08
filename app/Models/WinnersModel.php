@@ -18,7 +18,8 @@ class WinnersModel extends Model{
         'updated_date',
         'address',
         'year',
-        'status'
+        'status',
+        'is_latest'
     ];
 
     

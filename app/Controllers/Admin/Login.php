@@ -99,7 +99,7 @@ class Login extends BaseController
 
     public function forget_password()
     {
-
+        $this->session->setFlashdata('msg','');
         $editdata['email'] = ($this->request->getVar('email'))?$this->request->getVar('email'):"";
       
         if(strtolower($this->request->getMethod()) == 'post'){
@@ -126,21 +126,21 @@ class Login extends BaseController
 
                     if(is_array($userData)){
                             //check update the time while sending email
-                            $updatedTime = $this->userModel->updateTime($userData['id']);
+                            $updatedTime = $this->userModel->update($userData['id'],array("updated_time" => date("Y-m-d H:i:s")));
 
                             if($updatedTime){
                                 $to = $email;
                                 $subject  = "Reset Password Link - Sunpharma Science Foundation";
-                                $token    = urlencode($userData['id']);
+                                $token    = $userData['id'];
                                 $message  = "Hi  ".ucfirst($userData['firstname']).",<br/></br>";
                                 $message .= 'Your reset password request has been received. Please click the below link to reset your password. <br/><br/>';
                                 $message .= '<a href="'.base_url().'/admin/update_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
                                 $message .= 'Thanks,<br/>';
 
-                                $isMailSent =  sendMail($email,$subject,$message);
+                               $isMailSent =  sendMail($email,$subject,$message);
 
                                if($isMailSent){
-                                 $this->session->setFlashdata('msg', 'Reset Password link sent to your registered email. Please verify within 15mins');
+                                 $this->session->setFlashdata('msg', 'Reset Password link sent to your registered email.');
                                }
                                else
                                {
@@ -168,20 +168,23 @@ class Login extends BaseController
        
         $this->data['editdata'] = $editdata;
         
-        return  render('admin/forget_password',$this->data);
+        return  render('frontend/forget_password',$this->data);
     }
 
-    public function reset_password($token='')
+    public function reset_password($id='')
     {
 
         $userData = array();
-
+        $this->session->setFlashdata('msg','');
         $editdata['password'] = ($this->request->getPost('password'))?$this->request->getPost('password'):"";
         $editdata['confirm_password'] = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):"";
-        
-        if(!empty($token)){
+       
+      //  $token = urldecode(base64_decode($token));
+        $editdata['token']  = $id;
 
-            $id = urldecode($token);
+        
+
+            $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
             $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
 
             if(is_array($userData)){
@@ -208,12 +211,12 @@ class Login extends BaseController
 
                         if($upd){
                             $this->session->setFlashdata('success','Password updated Sccessfully');
-                            return redirect()->to('admin/login');
+                            return redirect()->to('login');
                         }
                         else
                         {
                             $this->session->setFlashdata('error','Unable to reset the password Please try again!');
-                            return redirect()->to('admin/login');
+                            return redirect()->to('login');
                         }
 
                     }    
@@ -230,16 +233,14 @@ class Login extends BaseController
             {
                 $this->session->setFlashdata('msg','Unable to find the user account');
             } 
-        }
-        else
-        {
-            $this->session->setFlashdata('msg','Sorry! Unauthorized Access');
-        }
+        
 
         $this->data['editdata'] = $editdata;
-        return render('admin/reset_password',$this->data);
+        return render('frontend/reset_password',$this->data);
              
     }
+
+
 
     public function forgot_password_validation_rules()
     {
@@ -263,6 +264,17 @@ class Login extends BaseController
         return $validation_rules;
       
     }
+
+    public function forgotPasswordValidationMessages()
+    {
+
+        $validationMessages = array("email" => array("required" => "Please enter email","valid_email" => "Email should be valid!"),
+                                    
+                              );
+
+         return $validationMessages;
+    }
+
 
     public function resetPasswordValidationMessages()
     {

@@ -36,7 +36,7 @@
                     <a href="#" data-bs-target="#<?=$modalname;?>" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0"><?=$wvalue['name'];?><br></h5>
                         </a>
-                        <p class="text-muted mb-2"><?=$wvalue['category'];?></p>
+                        <p class="text-muted mb-2"><?=($wvalue['category'] == 'Pharmaceutical Sciences - SS')?'Pharmaceutical Sciences':$wvalue['category'];?></p>
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>

@@ -139,15 +139,14 @@ class User extends BaseController
         if($this->request->getPost())
            $id  = $this->request->getPost('id');
             
-        $this->validation = $this->validate($this->validation_rules('user',$id));
-        
         $this->data['roles']    = $this->roleModel->getListsOfRoles();
-        
-        
-        if($this->validation) {
 
             if (strtolower($this->request->getMethod()) == "post") {  
-                    
+               
+                $this->validation->setRules($this->validation_rules('user',$id),$this->validationMessages());
+               
+                if($this->validation->withRequest($this->request)->run()) {   
+                 
                 $category = '';
 
                 $firstname     = $this->request->getPost('firstname');
@@ -195,16 +194,18 @@ class User extends BaseController
                     $ins_data['created_id']    =  $this->data['userdata']['login_id'];
                     $ins_data['password']   =  md5($password);
                     $this->userModel->save($ins_data);
-                } 
 
-                //Send mail to jury
-                $this->sendMailToJury($email,$firstname,$username,$password);
+                      //Send mail to jury
+                    if(!empty($password)) 
+                      $this->sendMailToJury($email,$firstname,$username,$password);
+                } 
 
                 return redirect()->route('admin/user');
             }
+           
+
         }
-        else
-        {  
+         
         
             if(!empty($edit_data) && count($edit_data)){
                 $editdata['firstname']  = $edit_data['firstname'];
@@ -247,15 +248,17 @@ class User extends BaseController
                 $editdata['status']   = ($this->request->getPost('status'))?$this->request->getPost('status'):'';
                 $editdata['id']         = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
             }
+            if(is_array($this->validation->getErrors()) && count($this->validation->getErrors()) > 0){
+                $this->data['validation'] = $this->validation;
+               
+            }  
+            
+                
+           
+         
+         $this->data['editdata'] = $editdata;
 
-                if($this->request->getPost())
-                $this->data['validation'] = $this->validator;
-
-
-                $this->data['editdata'] = $editdata;
-
-                return render('admin/user/add',$this->data);
-         }       
+        return render('admin/user/add',$this->data);
        
     }
 
@@ -415,7 +418,7 @@ class User extends BaseController
             $validation_rules = array(
                                             "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                             "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|is_unique[users.email,id,'.$id.']'),
+                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|checkUniqueEmailForExceptNominee['.$id.']'),
                                             "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
                                             
             );
@@ -425,10 +428,10 @@ class User extends BaseController
                 $validation_rules["username"] = array("label" => "Username",'rules' => 'required');
                
                 $validation_rules['status']  = array("label" => "Status",'rules' => 'required');
-                if($id==''){
-                    $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
-                    $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
-                }
+                // if($id==''){
+                //     $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
+                //     $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
+                // }
             }      
         }
         else
@@ -440,7 +443,6 @@ class User extends BaseController
         }  
 
         return $validation_rules;
-      
     }
 
     public function sendMail($mail,$password)
@@ -514,13 +516,13 @@ class User extends BaseController
   
     public function sendMailToJury($mail,$name,$username,$password){
 
-    
+        
         $login_url = base_url().'/admin';
         $subject   = "Authentication Info - SunPharma Science Foundation ";
         
         $message  = "Hi ".ucfirst($name).",";
         $message .= '<br/><br/>';
-      //  $message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
+      //$message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
         $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
         $message .= '<b>Username: </b>'.strtolower($username).'<br />';
         $message .= '<b>Password: </b>'.$password.'<br /><br />';
@@ -528,9 +530,21 @@ class User extends BaseController
         $message .= "Thanks & Regards,";
         $message .= "<br/>";
         $message .= "Sunpharma Science Foundation Team";
-        
-        
-        sendMail($mail,$subject,$message);
-                
+        sendMail($mail,$subject,$message);        
+    }
+
+    public function validationMessages()
+    {
+
+        $validationMessages = array("firstname" => array("required" => "Please enter Firstname"),
+                                    "lastname" => array("required" => "Please enter Lastname"),
+                                    "email" => array("required" => "Please enter Email","valid_email" => "Please enter valid email","checkUniqueEmailForExceptNominee"=>"Email already exists!"),
+                                    "phonenumber" => array("required" => "Please enter phonenumber","numeric"=>"Please enter number only!","max_length"=>"Enter 10 digits only"),
+                                    "user_role" => array("required" => "Please select user role"),
+                                    "username" => array("required" => "Please enter username"),
+                                    "status" => array("required" => "Please select status"),
+                                    //"password" =>
+                              );             
+         return $validationMessages;
     }
 }

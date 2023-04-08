@@ -94,8 +94,8 @@ class Awards extends BaseController
             
                     $sheet = $spreadsheet->getActiveSheet();
                     $sheet->setCellValue('A1', 'Award Category');
-                    $sheet->setCellValue('B1', 'Nominee Name');
-                    $sheet->setCellValue('C1', 'Nomination No');
+                    $sheet->setCellValue('B1', 'Nomination No');
+                    $sheet->setCellValue('C1', 'Applicant Name');
                     $sheet->setCellValue('D1', 'Date of Birth');
                     $sheet->setCellValue('E1', 'Rating');
 
@@ -136,7 +136,6 @@ class Awards extends BaseController
                                 $rows++;
                             }
                         }
-                        
                     } 
                     $writer = new Xlsx($spreadsheet);
                     $writer->save("uploads/".$fileName);

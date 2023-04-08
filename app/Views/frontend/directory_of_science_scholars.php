@@ -13,14 +13,15 @@
             </div>
         </div>
         <?php if(is_array($awardees)): 
-               foreach($awardees as $akey=>$avalue): ?>
+               foreach($awardees as $akey=>$avalue): 
+                $column = (count($avalue)>0 && count($avalue) <=4)?'4':5; ?>
         <div class="container olddirectory">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <h3 class="heading" style="color: #F7941E;"><?=$akey;?></h3>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-4 text-start d-lg-flex mx-auto justify-content-lg-center" style="max-width: 900px;">
+            <div class="row row-cols-1 row-cols-md-<?=$column;?> text-start d-lg-flex mx-auto justify-content-lg-center" style="max-width: 900px;">
              
                <?php foreach($avalue as $k => $v): ?>
                     <div class="col mb-4">
@@ -28,7 +29,7 @@
                         <a href="#" data-bs-target="#<?=$v['modalname'];?>" data-bs-toggle="modal">
                                 <h5 class="fw-bold mb-0"><?=$v['name'];?><br></h5>
                             </a>
-                            <p class="text-muted mb-2"><?=$v['category'];?>&nbsp;</p>
+                            <p class="text-muted mb-2"><?=($v['category'] == 'Pharmaceutical Sciences - SS')?'Pharmaceutical Sciences':$v['category'];?>&nbsp;</p>
                             <p class="text-muted mb-2"></p>
                         </div>
                     </div>

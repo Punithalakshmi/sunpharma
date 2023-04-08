@@ -73,7 +73,9 @@ $routes->post('forgot_password','User::forget_password');
 $routes->get('forgot_password','User::forget_password');
 
 $routes->post('reset_password','User::reset_password');
+$routes->get('reset_password/(:any)','User::reset_password/$1');
 $routes->get('reset_password','User::reset_password');
+$routes->post('reset_password/(:any)','User::reset_password/$1');
 $routes->get('view/(:any)/(:any)','Nomination::view/$1/$1');
 $routes->post('view','Nomination::view');
 
@@ -139,8 +141,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('forgot_password','Login::forget_password');
     $routes->get('forgot_password','Login::forget_password');
 
-    $routes->post('update_password','Login::reset_password');
-    $routes->get('update_password','Login::reset_password');
+    $routes->post('update_password/(:any)','Login::reset_password/$1');
+    $routes->get('update_password/(:any)','Login::reset_password/$1');
 
 
     $routes->get("user", "User::index",['filter' =>'auth']);

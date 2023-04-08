@@ -14,7 +14,8 @@
               
                 <div class="col-md-6 col-xl-4">
                     <div>
-                        <form class="p-3 p-xl-4" name="reset_password" method="post" action="<?=base_url();?>/admin/update_password">
+                        <form class="p-3 p-xl-4" name="reset_password" method="post" action="<?=base_url();?>/update_password/<?=$editdata['token'];?>">
+                        <input type="hidden" name="id" value="<?=$editdata['token'];?>">
                         <?=csrf_field(); ?>
                             <div class="clearfix"></div>
                             <div class="mb-3">

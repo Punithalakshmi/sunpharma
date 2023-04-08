@@ -92,7 +92,7 @@ class User extends BaseController
 
     public function forget_password()
     {
-
+        $this->session->setFlashdata('msg','');
         $editdata['email'] = ($this->request->getVar('email'))?$this->request->getVar('email'):"";
       
         if(strtolower($this->request->getMethod()) == 'post'){
@@ -119,12 +119,12 @@ class User extends BaseController
 
                     if(is_array($userData)){
                             //check update the time while sending email
-                            $updatedTime = $this->userModel->updateTime($userData['id']);
+                            $updatedTime = $this->userModel->update($userData['id'],array("updated_time" => date("Y-m-d H:i:s")));
 
                             if($updatedTime){
                                 $to = $email;
                                 $subject  = "Reset Password Link - Sunpharma Science Foundation";
-                                $token    = urlencode($userData['id']);
+                                $token    = $userData['id'];
                                 $message  = "Hi  ".ucfirst($userData['firstname']).",<br/></br>";
                                 $message .= 'Your reset password request has been received. Please click the below link to reset your password. <br/><br/>';
                                 $message .= '<a href="'.base_url().'/reset_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
@@ -133,7 +133,7 @@ class User extends BaseController
                                $isMailSent =  sendMail($email,$subject,$message);
 
                                if($isMailSent){
-                                 $this->session->setFlashdata('msg', 'Reset Password link sent to your registered email. Please verify within 15mins');
+                                 $this->session->setFlashdata('msg', 'Reset Password link sent to your registered email.');
                                }
                                else
                                {
@@ -164,17 +164,20 @@ class User extends BaseController
         return  render('frontend/forget_password',$this->data);
     }
 
-    public function reset_password($token='')
+    public function reset_password($id='')
     {
 
         $userData = array();
-
+        $this->session->setFlashdata('msg','');
         $editdata['password'] = ($this->request->getPost('password'))?$this->request->getPost('password'):"";
         $editdata['confirm_password'] = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):"";
-        
-        if(!empty($token)){
+       
+      //  $token = urldecode(base64_decode($token));
+        $editdata['token']  = $id;
 
-            $id = urldecode($token);
+        
+
+            $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
             $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
 
             if(is_array($userData)){
@@ -223,11 +226,7 @@ class User extends BaseController
             {
                 $this->session->setFlashdata('msg','Unable to find the user account');
             } 
-        }
-        else
-        {
-            $this->session->setFlashdata('msg','Sorry! Unauthorized Access');
-        }
+        
 
         $this->data['editdata'] = $editdata;
         return render('frontend/reset_password',$this->data);

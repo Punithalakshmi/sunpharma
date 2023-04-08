@@ -452,12 +452,11 @@ class Nomination extends BaseController
                                 if($type == 'ssan') {
 
                                     if($this->request->getPost('citizenship') == 2 ) 
-                                        $validationMessages['passport'] =  array("uploaded" => "Please upload the passport","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
+                                      $validationMessages['passport'] =  array("uploaded" => "Please upload the passport","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
                                 }  
                                 
                                 if($type == 'spsfn') {
-
-                                        $validationMessages['supervisor_certifying'] =  array("uploaded" => "Please upload the supervisor certifying the research work","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
+                                    $validationMessages['supervisor_certifying'] =  array("uploaded" => "Please upload the supervisor certifying the research work","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
                                 }
 
          return $validationMessages;
