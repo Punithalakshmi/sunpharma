@@ -71,8 +71,8 @@ class Awards extends BaseController
 
           //  if($this->validation->withRequest($this->request)->run()) {
    
-                    $category    = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-                    $main_category_id        = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
+                    $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+                    $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):1;
             
                     
                     $fileName = 'AwardResult_'.date('d-m-Y').'.xlsx';  
@@ -80,13 +80,15 @@ class Awards extends BaseController
                     $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
 
                     $awardsLists = getAwardsArr($awardsLists);
-                        
+
+                    
                     foreach($awardsLists as $akey => $avalue) {
                         //get jury lists 
-                        $splitJuryIds = explode(',',$avalue['jury']);
+                        $splitJuryIds = explode(',',$avalue.['jury']);
+                        
                         for($i=0;$i<count($splitJuryIds);$i++) {
                             $getJuryRateData = $this->userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
-                            $awardsLists[$akey]['juries'][$i]=$getJuryRateData;
+                            $awardsLists[$akey]['juries'][$i] =$getJuryRateData;
                         }
                     }
 
@@ -112,13 +114,13 @@ class Awards extends BaseController
                         $sheet->setCellValue('E' . $rows, $val['average_rating']);
                         $rows++;
                         if(is_array($val['juries']) && count($val['juries']) > 0){
-                            $start = 'A'.$rows;
-                            $end   = 'E'.$rows;
+                                $start = 'A'.$rows;
+                                $end   = 'E'.$rows;
                                 $sheet->setCellValue($start,'Jury Info');
                                 $sheet->getStyle($start.":".$end)->getFont()->setBold(true);
                                 $sheet->getStyle($start.":".$end)->getFont()->setSize(16);
                                 $sheet->mergeCells($start.":".$end);
-                            $rows++;
+                                $rows++;
                                 $sheet->setCellValue('A'.$rows, 'Jury Name');
                                 $sheet->mergeCells('A'.$rows.":".'B'.$rows);
                                 $sheet->setCellValue('C'.$rows, 'Rating');
@@ -127,14 +129,14 @@ class Awards extends BaseController
                                 $sheet->getStyle('A'.$rows,'B'.$rows)->getFont()->setSize(14);
                                 $sheet->getStyle('C'.$rows,'E'.$rows)->getFont()->setBold(true);
                                 $sheet->getStyle('C'.$rows,'E'.$rows)->getFont()->setSize(14);
-                            $rows++;
-                            foreach($val['juries'] as $ukey => $uvalue){
-                                $sheet->setCellValue('A'.$rows, $uvalue['firstname'].' '.$uvalue['lastname']);
-                                $sheet->mergeCells('A'.$rows.":".'B'.$rows);
-                                $sheet->setCellValue('C'.$rows, $uvalue['rating']);
-                                $sheet->mergeCells('C'.$rows.":".'E'.$rows);
                                 $rows++;
-                            }
+                                foreach($val['juries'] as $ukey => $uvalue){
+                                    $sheet->setCellValue('A'.$rows, $uvalue['firstname'].' '.$uvalue['lastname']);
+                                    $sheet->mergeCells('A'.$rows.":".'B'.$rows);
+                                    $sheet->setCellValue('C'.$rows, $uvalue['rating']);
+                                    $sheet->mergeCells('C'.$rows.":".'E'.$rows);
+                                    $rows++;
+                                }
                         }
                     } 
                     $writer = new Xlsx($spreadsheet);
@@ -149,8 +151,7 @@ class Awards extends BaseController
                         ]); 
                         exit;
                     }
-              //  }
-                
+              //  }   
             }
         
     }
