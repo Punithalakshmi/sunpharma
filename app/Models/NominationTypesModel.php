@@ -112,5 +112,18 @@ class NominationTypesModel extends Model {
         else 
             return $query = $builder->get();
     }
+
+
+    function getJuriesByAward($award='')
+    {
+
+        $builder = $this->table('nominations');
+        $builder->select('nominations.id as award_id,users.id as jury_id,users.firstname,users.lastname,jury_mapping.id as map_id');
+        $builder->join('jury_mapping','jury_mapping.award_id = nominations.id');
+        $builder->join('users','users.id = jury_mapping.jury_id AND users.role=1');
+        $builder->where('nominations.id',$award);
+        return $query = $builder->get();
+
+    }
     
 }

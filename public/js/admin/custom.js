@@ -22,6 +22,7 @@ $(document).ready(function(){
     awardTypeDatatable();
     manageAwardsDatatable();
     postWinnersDatatable();
+    juryMappingDatatable();
 });
 
 function addMoreRows()
@@ -978,7 +979,7 @@ function manageAwardsDatatable()
                     { data: 'end_date' },
                     { data: 'status' },
                     { data: 'action', render:function(data,type,row) {
-                      btn = '<a href="'+base_url+'/admin/nomination/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'award\','+row.id+',\'/admin/nomination/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      btn = '<a href="'+base_url+'/admin/nomination/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'award\','+row.id+',\'/admin/nomination/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a><a onclick="assignedJuries('+row.id+')"  class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View Mapped Juries </a>';
                       return btn;
                     }},
               ]
@@ -1151,10 +1152,12 @@ function setLimit(type,id,url)
   }); 
 
 }
+
+
 function setUserLimit(type = '',id='',url = '',limit='')
 {
    
-  $('#loader').removeClass('block');
+    $('#loader').removeClass('block');
     var msg = 'Are you sure you want to set Onsite user registration limit to this event?';
 
   $.confirmModal('<h2>'+msg+'</h2>', {
@@ -1212,3 +1215,127 @@ function setUserLimit(type = '',id='',url = '',limit='')
           }
       );    
 }
+
+
+
+function juryMappingDatatable()
+{
+  
+      var empTable = $('#juryMappingDatatable').DataTable({
+              'processing': true,
+              'serverSide': true,
+              'serverMethod': 'post',
+              'searching': false, // Remove default Search Control
+              'ajax': {
+                    'url': base_url+'/admin/mappedjuries',
+                    'data': function(data){
+
+                            // CSRF Hash
+                            var csrfHash = $("input[name='app_csrf']").val();
+                            
+                            var jury  = $("#jury").val();
+                            var award  = $("#award").val();
+                           
+                            data.award = award;
+                            data.jury = jury;
+                           
+                          console.log('datatables',data);
+                            return {
+                                data: data,
+                                app_csrf: csrfHash // CSRF Token
+                            };
+                    },
+                    dataSrc: function(data){
+                        // Update token hash
+                        $("input[name='app_csrf']").val(data.token);
+                        // Datatable data
+                        return data.data;
+                    }
+              },
+              'columns': [
+                { data: 'jury' },
+                    { data: 'award' },
+                   
+                    // { data: 'action',render:function(data,type,row) {
+                    //   btn = '<a href="'+base_url+'/admin/winners/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'Winner\','+row.id+',\'/admin/winners/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                    //   return btn;
+                    // }},
+              ]
+      });
+      $("#award").change(function(){
+        empTable.draw();
+      });
+
+      $("#jury").change(function(){
+        empTable.draw();
+      });
+     
+}
+
+function assignedJuries(award_id ='')
+{
+ 
+      $('#loader').removeClass('hidden');
+      $.ajax({
+          url : base_url+'/admin/nomination/assigned_jury_lists/'+award_id,
+          type: "GET",
+          dataType:'json',
+          success: function(data, textStatus, jqXHR)
+          {
+              $('#loader').addClass('hidden');
+              if(data.status && data.status == 'success'){
+                $("#juryListsModal").modal('show');
+                $("#juryListsModal #juryListss").html(data.html);
+              }
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              $("#juryListsModal").hide(); 
+              $('#loader').addClass('hidden');
+              if(textStatus && textStatus == 'error'){
+                if(jqXHR.responseJSON.message){
+                  errorMessageAlert(jqXHR.responseJSON.message);
+                 
+                
+                }
+              }
+          }
+      });
+
+ }
+
+ function removeJuryFromAward(id='')
+ {
+
+  $('#loader').removeClass('hidden');
+  $.ajax({
+      url : base_url+'/admin/nomination/remove_jury_from_award/'+id,
+      type: "GET",
+      dataType:'json',
+      success: function(data, textStatus, jqXHR)
+      {
+          $('#loader').addClass('hidden');
+          if(data.status && data.status == 'success'){
+            $("#juryListsModal").hide(); 
+            if(data.message)
+              successMessageAlert(data.message);
+          } 
+          else
+          {
+              errorMessageAlert(data.message);
+          }
+          
+      },
+      error: function (jqXHR, textStatus, errorThrown)
+      {
+          $("#juryListsModal").hide(); 
+          $('#loader').addClass('hidden');
+          if(textStatus && textStatus == 'error'){
+            if(jqXHR.responseJSON.message){
+              errorMessageAlert(jqXHR.responseJSON.message);
+            }
+          }
+      }
+  });
+ }

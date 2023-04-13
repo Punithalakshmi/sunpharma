@@ -1,6 +1,4 @@
-
-
-  <?php if(is_array($userdata)):  
+<?php if(is_array($userdata)):  
           $logoUrl = ($userdata['role'] == 3)?'/admin':'/admin/nominee/lists';
      ?>
     <div class="container body">
@@ -33,7 +31,7 @@
                   <li><a href="<?php echo base_url();?>/admin/nominee">
                     <i class="fa fa-solid fa-users"></i> Nominees </a>
                   </li>
-                  <li><a href="<?php echo base_url();?>/admin/jury/mapping">
+                  <li><a href="<?php echo base_url();?>/admin/mappedjuries">
                     <i class="fa fa-solid fa-users"></i> Jury Mapping </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/category">
@@ -66,9 +64,9 @@
                     <li><a href="<?php echo base_url();?>/admin/nominee/lists">
                       <i class="fa fa-solid fa-users"></i> Nominations </a>
                     </li>
-                    <!-- <li><a href="<?php //echo base_url();?>/admin/nominee/ratings">
-                      <i class="fa fa-user"></i> Rated Nominees </a>
-                  </li> -->
+                      <!-- <li><a href="<?php //echo base_url();?>/admin/nominee/ratings">
+                        <i class="fa fa-user"></i> Rated Nominees </a>
+                    </li> -->
                   <?php }else{}?>
                 </ul>
               </div>
