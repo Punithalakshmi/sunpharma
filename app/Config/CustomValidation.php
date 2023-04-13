@@ -46,4 +46,19 @@ class CustomValidation{
 
     }
 
+
+    public function checkUniqueEmailForExceptNominee($str, string $passValue, array $postData): bool
+    {
+     
+        $userModel = model('App\Models\UserModel');
+
+        $getUniqueData = $userModel->getWhere(array("email" => $str,"id!=" => $passValue))->getRowArray();
+
+         if(is_array($getUniqueData) && count($getUniqueData) > 0){
+            return false;
+         }
+         return true;
+
+    }
+
 }

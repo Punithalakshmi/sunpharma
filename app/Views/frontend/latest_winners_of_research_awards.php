@@ -19,7 +19,14 @@
            
             <?php if(is_array($latestWinnersOfResearchAwards) && count($latestWinnersOfResearchAwards) > 0 ): 
                         foreach($latestWinnersOfResearchAwards as $wkey => $wvalue):
-                            $modalname =  str_replace(' ', '', $wvalue['name']); ?>
+                           // $modalname =  str_replace(' ', '', $wvalue['name']); 
+                            $modalName = str_replace(".","",$wvalue['name']);
+                            $modalName1 = str_replace(",","",$modalName);
+                            $modalName1 = str_replace("(","",$modalName1);
+                            $modalName1 = str_replace(")","",$modalName1);
+                            $modalname = str_replace(" ","",$modalName1);
+                            
+                            ?>
                         
                         
                 <div class="col mb-4">
@@ -40,7 +47,14 @@
 
     <?php if(is_array($latestWinnersOfResearchAwards) && count($latestWinnersOfResearchAwards) > 0 ): 
                         foreach($latestWinnersOfResearchAwards as $wkey => $wvalue): 
-                          $modalname =  str_replace(' ', '', $wvalue['name']); ?>
+                         // $modalname =  str_replace(' ', '', $wvalue['name']);
+                          $modalName = str_replace(".","",$wvalue['name']);
+                          $modalName1 = str_replace(",","",$modalName);
+                          $modalName1 = str_replace("(","",$modalName1);
+                          $modalName1 = str_replace(")","",$modalName1);
+                          $modalname = str_replace(" ","",$modalName1);
+
+                          ?>
     <div class="modal fade" role="dialog" tabindex="-1" id="<?=$modalname;?>">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">

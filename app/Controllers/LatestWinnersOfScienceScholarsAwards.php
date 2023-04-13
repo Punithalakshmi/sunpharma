@@ -10,7 +10,7 @@ class LatestWinnersOfScienceScholarsAwards extends BaseController
 
         //get latest winners of science scholars awards
       
-        $scienceScholarAwards  = $this->winnersModel->getLatestWinnersByCategory(2)->getResultArray();
+        $scienceScholarAwards  = $this->winnersModel->getLatestWinnersByCategory(2,true)->getResultArray();
         
         $this->data['latestWinnersOfScholarAwards'] = $scienceScholarAwards;
         

@@ -168,17 +168,16 @@ class Nominee extends BaseController
 
             $subject = 'Nomination Application Status - Sunpharma Science Foundation';
             $login_url = base_url().'/login';
-            $message = '';
+            $message = 'Hi,';
             $pass = $this->generatePassword(8);
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
-
-                $message  = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
+                $message .= '<br/><br/>';
+                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
                 $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
                 $message .= '<b>Username: </b>'.strtolower($getUserData['firstname']).'<br />';
                 $message .= '<b>Password: </b>'.$pass.'<br /><br />';
                
-
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
                 $up_data['password'] = md5($pass);
@@ -193,7 +192,7 @@ class Nominee extends BaseController
                 $up_data['active']  = 0;
                 $up_data['is_rejected'] = 1;
                 $msg = 'Rejected Successfully';
-                $message = 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please resubmit the application. <br/><br/>';
+                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please resubmit the application. <br/><br/>';
             }
 
             $message .= '<b>Remarks:</b> '.$remarks.'<br/><br/>';
@@ -269,8 +268,11 @@ class Nominee extends BaseController
         }
     
         $edit_data  = $this->ratingModel->getRatingData($this->data['userdata']['id'],$nominee_id)->getRowArray();
+
+        $userID = $this->data['userdata']['id'];
+        $role   = $this->data['userdata']['role'];
         
-        $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id)->getRowArray();
+        $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id,$userID,$role)->getRowArray();
 
         $this->data['average_rating'] = $average_rating['avg_rating'];
 
@@ -312,7 +314,6 @@ class Nominee extends BaseController
                     $ins_data['created_id']    =  $this->data['userdata']['id'];
                     $this->ratingModel->save($ins_data);
                      
-
                     //update nominee status
                     $up_data = array();
                     $up_data['review_status'] = ($this->request->getPost('submit') && ($this->request->getPost('submit') == 'Save Draft'))?'Draft Review':'Reviewed';
@@ -323,10 +324,10 @@ class Nominee extends BaseController
                     $message = 'Rated Successfully';
 
                     if($this->request->isAJAX()){
-                        $editdata['rating']    = $edit_data['rating'];
-                        $editdata['comment']   = $edit_data['comments'];
-                        $editdata['id']        =  $edit_data['id'];
-                        $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
+                        $editdata['rating']    = (isset($edit_data['rating']) && !empty($edit_data['rating']))?$edit_data['rating']:'';
+                        $editdata['comment']   = (isset($edit_data['comments']) && !empty($edit_data['comments']))?$edit_data['comments']:'';
+                        $editdata['id']        =  (isset($edit_data['id']) && !empty($edit_data['id']))?$edit_data['id']:'';
+                        $editdata['is_rate_submitted']  =  (isset($edit_data['is_rate_submitted']) && !empty($edit_data['is_rate_submitted']))?$edit_data['is_rate_submitted']:'0';
 
                         $this->data['editdata'] = $editdata;
                         
@@ -349,7 +350,7 @@ class Nominee extends BaseController
             if(!empty($edit_data) && count($edit_data)){
                 $editdata['rating']    = $edit_data['rating'];
                 $editdata['comment']   = $edit_data['comments'];
-                $editdata['id']        =  $edit_data['id'];
+                $editdata['id']                 =  $edit_data['id'];
                 $editdata['is_rate_submitted']  =  $edit_data['is_rate_submitted'];
             }
             else
@@ -412,7 +413,7 @@ class Nominee extends BaseController
 
         $this->validation_rules = array();
         $this->validation_rules = array(
-                                        "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero|less_than[100]|greater_than[0]'),
+                                        "rating" => array("label" => "Rating",'rules' => 'required|numeric|is_natural_no_zero|less_than_equal_to[100]|greater_than[0]'),
                                         "comment" => array("label" => "Comment",'rules' => 'required')
         );
     

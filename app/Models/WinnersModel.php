@@ -18,7 +18,8 @@ class WinnersModel extends Model{
         'updated_date',
         'address',
         'year',
-        'status'
+        'status',
+        'is_latest'
     ];
 
     
@@ -48,8 +49,10 @@ class WinnersModel extends Model{
         $builder->where('posting_winners.main_category_id',$main_category_id);
 
         if($isLatestWinner)
-          $builder->where('posting_winners.year',date('Y'));
-
+           $builder->where('is_latest',1);
+        else  
+           $builder->where('is_latest',0);
+           
         return $query = $builder->get();
     }
 

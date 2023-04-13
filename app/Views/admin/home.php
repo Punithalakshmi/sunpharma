@@ -21,7 +21,7 @@
                   <li><a href="<?php echo base_url();?>/admin/nominee">
                     <i class="fa fa-solid fa-users"></i> Nominees </a>
                   </li>
-                  <li><a href="<?php echo base_url();?>/admin/jury/mapping">
+                  <li><a href="<?php echo base_url();?>/admin/mappedjuries">
                     <i class="fa fa-solid fa-users"></i> Jury Mapping </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/category">

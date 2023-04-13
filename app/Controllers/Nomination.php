@@ -452,12 +452,11 @@ class Nomination extends BaseController
                                 if($type == 'ssan') {
 
                                     if($this->request->getPost('citizenship') == 2 ) 
-                                        $validationMessages['passport'] =  array("uploaded" => "Please upload the passport","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
+                                      $validationMessages['passport'] =  array("uploaded" => "Please upload the passport","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
                                 }  
                                 
                                 if($type == 'spsfn') {
-
-                                        $validationMessages['supervisor_certifying'] =  array("uploaded" => "Please upload the supervisor certifying the research work","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
+                                    $validationMessages['supervisor_certifying'] =  array("uploaded" => "Please upload the supervisor certifying the research work","max_size" => "File size should be below 500KB","ext_in" => "File type should be pdf");
                                 }
 
          return $validationMessages;
@@ -620,7 +619,7 @@ class Nomination extends BaseController
             $award_id = $edit_data['award_id'];
 
             //sendmail to jury
-            $this->sendMailToJury($award_id);
+           // $this->sendMailToJury($award_id);
 
             $this->print($id);
             //send mail to admin
@@ -848,31 +847,7 @@ class Nomination extends BaseController
 
     }
 
-    public function sendMailToJury($award_id = ''){
-
-    
-        $login_url = base_url().'/admin';
-        $subject   = "New Nomination - Sun Pharma Science Foundation ";
-        $juryLists = $this->juryModel->getAwardMappingLists($award_id)->getResultArray();
-        //print_r($juryLists); die;
-        if(is_array($juryLists) && count($juryLists) > 0){
-            foreach($juryLists as $jkey=>$jvalue){
-                if(isset($jvalue['email']) && !empty($jvalue['email'])){
-                    $message  = "Hi ".ucfirst($jvalue['firstname']).",";
-                    $message .= '<br/><br/>';
-                    $message .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nominations.';
-                    $message .= "<br/><br/><br/>";
-                    $message .= "Thanks & Regards,";
-                    $message .= "<br/>";
-                    $message .= "Sunpharma Science Foundation Team";
-                   
-                    $this->data['content'] = $message;
-                 
-                    sendMail($jvalue['email'],$subject,$message);
-                }
-            }
-        }
-    }
+   
 
     public function success()
     {
@@ -1203,54 +1178,54 @@ class Nomination extends BaseController
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Justification Letter', $fancyTableFontStyle);
-            $table->addCell(2000)->addLink($uploadDir.$nomineeData['justification_letter_filename']);
+            $table->addCell(2000)->addText($nomineeData['justification_letter_filename']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Bio-Data', $fancyTableFontStyle);
-            $table->addCell(2000)->addLink($uploadDir.$nomineeData['complete_bio_data']);
+            $table->addCell(2000)->addText($nomineeData['complete_bio_data']);
 
             if($nomineeData['nomination_type'] == 'spsfn'){
     
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Supervisor Certifying Research Work', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['supervisor_certifying']);
+                    $table->addCell(2000)->addText($nomineeData['supervisor_certifying']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Excellence Research Work', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['excellence_research_work']);
+                    $table->addCell(2000)->addText($nomineeData['excellence_research_work']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Lists of Publications', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['lists_of_publications']);
+                    $table->addCell(2000)->addText($nomineeData['lists_of_publications']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Statement of Applicant', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['statement_of_applicant']);
+                    $table->addCell(2000)->addText($nomineeData['statement_of_applicant']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Ethical Clearance', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['ethical_clearance']);
+                    $table->addCell(2000)->addText($nomineeData['ethical_clearance']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Statement of duly signed by Nominee', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['statement_of_duly_signed_by_nominee']);
+                    $table->addCell(2000)->addText($nomineeData['statement_of_duly_signed_by_nominee']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Citation', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['citation']);
+                    $table->addCell(2000)->addText($nomineeData['citation']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Aggregate Marks', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['aggregate_marks']);
+                    $table->addCell(2000)->addText($nomineeData['aggregate_marks']);
 
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Age Proof', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['age_proof']);
+                    $table->addCell(2000)->addText($nomineeData['age_proof']);
 
                     $table->addRow();
                     $table->addCell(2000, $fancyTableCellStyle)->addText('Declaration Candidate', $fancyTableFontStyle);
-                    $table->addCell(2000)->addLink($uploadDir.$nomineeData['declaration_candidate']);
+                    $table->addCell(2000)->addText($nomineeData['declaration_candidate']);
                 
             }
             else
@@ -1258,31 +1233,31 @@ class Nomination extends BaseController
                 
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Passport', $fancyTableFontStyle);
-                $table->addCell(2000)->addLink($uploadDir.$nomineeData['passport_filename']);
+                $table->addCell(2000)->addText($nomineeData['passport_filename']);
 
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Research Work', $fancyTableFontStyle);
-                $table->addCell(2000)->addLink($uploadDir.$nomineeData['signed_details']);
+                $table->addCell(2000)->addText($nomineeData['signed_details']);
 
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Citation', $fancyTableFontStyle);
-                $table->addCell(2000)->addLink($uploadDir.$nomineeData['citation']);
+                $table->addCell(2000)->addText($nomineeData['citation']);
 
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Signed Statement', $fancyTableFontStyle);
-                $table->addCell(2000)->addLink($uploadDir.$nomineeData['signed_statement']);
+                $table->addCell(2000)->addText($nomineeData['signed_statement']);
 
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Publications', $fancyTableFontStyle);
-                $table->addCell(2000)->addLink($uploadDir.$nomineeData['specific_publications']);
+                $table->addCell(2000)->addText($nomineeData['specific_publications']);
 
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Best Papers', $fancyTableFontStyle);
-                $table->addCell(2000)->addLink($uploadDir.$nomineeData['best_papers']);
+                $table->addCell(2000)->addText($nomineeData['best_papers']);
 
                 $table->addRow();
                 $table->addCell(2000, $fancyTableCellStyle)->addText('Award Received', $fancyTableFontStyle);
-                $table->addCell(2000)->addLink($uploadDir.$nomineeData['statement_of_research_achievements']);
+                $table->addCell(2000)->addText($nomineeData['statement_of_research_achievements']);
 
             }     
             

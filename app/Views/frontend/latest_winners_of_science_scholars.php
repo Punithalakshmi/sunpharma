@@ -20,7 +20,14 @@
                 
             <?php if(is_array($latestWinnersOfScholarAwards) && count($latestWinnersOfScholarAwards) > 0 ): 
                         foreach($latestWinnersOfScholarAwards as $wkey => $wvalue):
-                            $modalname =  str_replace(' ', '', $wvalue['name']); ?>
+                          //  $modalname =  str_replace(' ', '', $wvalue['name']); 
+                            $modalName = str_replace(".","",$wvalue['name']);
+                            $modalName1 = str_replace(",","",$modalName);
+                            $modalName1 = str_replace("(","",$modalName1);
+                            $modalName1 = str_replace(")","",$modalName1);
+                            $modalname = str_replace(" ","",$modalName1);
+                            
+                            ?>
                        
                        
                 <div class="col mb-4">
@@ -29,7 +36,7 @@
                     <a href="#" data-bs-target="#<?=$modalname;?>" data-bs-toggle="modal">
                             <h5 class="fw-bold mb-0"><?=$wvalue['name'];?><br></h5>
                         </a>
-                        <p class="text-muted mb-2"><?=$wvalue['category'];?></p>
+                        <p class="text-muted mb-2"><?=($wvalue['category'] == 'Pharmaceutical Sciences - SS')?'Pharmaceutical Sciences':$wvalue['category'];?></p>
                         <p class="text-muted mb-2"></p>
                     </div>
                 </div>
@@ -41,7 +48,14 @@
     
     <?php if(is_array($latestWinnersOfScholarAwards) && count($latestWinnersOfScholarAwards) > 0 ): 
                         foreach($latestWinnersOfScholarAwards as $wkey => $wvalue): 
-                          $modalname =  str_replace(' ', '', $wvalue['name']); ?>
+                         // $modalname =  str_replace(' ', '', $wvalue['name']); 
+                          $modalName = str_replace(".","",$wvalue['name']);
+                          $modalName1 = str_replace(",","",$modalName);
+                          $modalName1 = str_replace("(","",$modalName1);
+                          $modalName1 = str_replace(")","",$modalName1);
+                          $modalname = str_replace(" ","",$modalName1);
+                          
+                          ?>
     <div class="modal fade" role="dialog" tabindex="-1" id="<?=$modalname;?>">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">

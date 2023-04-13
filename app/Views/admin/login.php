@@ -42,6 +42,15 @@
         </div>
 
         <div class="clearfix"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                   <a  href="<?=base_url();?>/admin/forgot_password"><u>Forgot Password</u></a>
+                          
+                 </div>
+            </div>
+        </div>
  
     </form>
     </section>

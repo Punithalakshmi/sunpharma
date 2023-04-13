@@ -83,9 +83,12 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="name" name="name" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',$editdata['name']);?>">
                       </div>
+                      <div class="clearfix"></div> 
                       <small class="text-danger">
                       <?php if(isset($validation) && $validation->getError('name')) {?>
+                        <div class='alert alert-danger mt-2'>
                           <?= $error = $validation->getError('name'); ?>
+                        </div>  
                       <?php }?>
                       </small>
                     </div>
@@ -100,9 +103,12 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <textarea class="form-control" name="bio"><?=$editdata['bio'];?></textarea>
                       </div>
+                      <div class="clearfix"></div> 
                       <small class="text-danger">
                         <?php if(isset($validation) && $validation->getError('bio')) {?>
+                          <div class='alert alert-danger mt-2'>
                             <?= $error = $validation->getError('bio'); ?>
+                        </div>
                         <?php }?>
                       </small>
                     </div>
@@ -127,9 +133,12 @@
                         <textarea class="form-control" name="address"><?=$editdata['address'];?></textarea>
                         
                       </div>
+                      <div class="clearfix"></div> 
                       <small class="text-danger">
                       <?php if(isset($validation) && $validation->getError('address')) {?>
+                        <div class='alert alert-danger mt-2'>
                           <?= $error = $validation->getError('address'); ?>
+                        </div> 
                       <?php }?>
                       </small>
                     </div>
@@ -146,9 +155,12 @@
                            </p>
                           </div>
                         </div>
+                        <div class="clearfix"></div> 
                         <small class="text-danger">
                       <?php if(isset($validation) && $validation->getError('designation')) {?>
+                        <div class='alert alert-danger mt-2'>
                           <?= $error = $validation->getError('designation'); ?>
+                       </div>  
                       <?php }?>
                       </small>
                       </div>
@@ -187,6 +199,28 @@
                       <?php if(isset($validation) && $validation->getError('status')) {?>
                         <div class='alert alert-danger mt-2'>
                           <?= $error = $validation->getError('status'); ?>
+                            </div>
+                        <?php }?>
+                      </div>
+
+                      <div class="clearfix"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Is Latest Winner<span class="required" style="color:red;">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
+                          <div id="gender" class="btn-group mt-10" data-toggle="buttons">
+                            <p>
+                              <input type="radio" class="flat" name="is_latest" id="latestActive" value="1" <?php echo set_radio('is_latest','1',(isset($editdata['is_latest']) && ($editdata['is_latest']=='1'))?'checked':'');?> /> Yes &nbsp;&nbsp;
+                              <input type="radio" class="flat" name="is_latest" id="latestInActive" value="0" <?php echo set_radio('is_latest','0',(isset($editdata['is_latest']) && ($editdata['is_latest']=='0'))?'checked':'');?> /> No
+                           </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>  
+                      <div class="form-group col-md-6">
+                      <?php if(isset($validation) && $validation->getError('is_latest')) {?>
+                        <div class='alert alert-danger mt-2'>
+                          <?= $error = $validation->getError('is_latest'); ?>
                             </div>
                         <?php }?>
                       </div>

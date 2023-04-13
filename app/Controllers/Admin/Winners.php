@@ -234,6 +234,7 @@ class Winners extends BaseController
                 $category      = $this->request->getPost('category');
                 $year          = $this->request->getPost('year');
                 $status        = $this->request->getPost('status');
+                $is_latest     = $this->request->getPost('is_latest');
 
                 $id            = $this->request->getPost('id');
     
@@ -247,6 +248,7 @@ class Winners extends BaseController
                 $ins_data['category_id']         = $category;
                 $ins_data['year']             = $year;
                 $ins_data['status']             = $status;
+                $ins_data['is_latest']       = $is_latest;
 
                 $fileUploadDir = 'uploads/winners/';
 
@@ -288,6 +290,7 @@ class Winners extends BaseController
             $editdata['address']            = $edit_data['address'];
             $editdata['winner_photo']       = $edit_data['photo'];
             $editdata['status']             = $edit_data['status'];
+            $editdata['is_latest']          = $edit_data['is_latest'];
             $editdata['id']                 = $edit_data['id'];
         }
         else
@@ -303,6 +306,7 @@ class Winners extends BaseController
             $editdata['winner_photo']         = ($this->request->getFile('winner_photo'))?$this->request->getFile('winner_photo'):'';
             //$editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
             $editdata['status']               = ($this->request->getPost('status'))?$this->request->getPost('status'):'0';
+            $editdata['is_latest']           = ($this->request->getPost('is_latest'))?$this->request->getPost('is_latest'):'0';
             $editdata['id']                   = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
         }
 
@@ -322,6 +326,7 @@ class Winners extends BaseController
                                     "designation" => array("label" => "Designation",'rules' => 'required'),
                                     "address" => array("label" => "Address",'rules' => 'required'),
                                     "status" => array("label" => "Status",'rules' => 'required'),
+                                    "is_latest" => array("label" => "Latest Winner",'rules' => 'required'),
                                 );
         return $validation_rules;
     }

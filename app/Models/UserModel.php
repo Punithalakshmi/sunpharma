@@ -56,7 +56,9 @@ class UserModel extends Model {
                 'id'                => $result->id
             ];
             return $data;
-        } else {
+        } 
+        else 
+        {
             return 0;
         }
         
@@ -121,7 +123,7 @@ class UserModel extends Model {
 
     public function getListsOfNominees()
     { 
-          return $this->getWhere(array('role' => 2,'status' => 'Approved','active' => 1)); 
+        return $this->getWhere(array('role' => 2,'status' => 'Approved','active' => 1)); 
     }
 
     public function getJuryRateData($jury_id = '',$nominee_id = '')
@@ -131,6 +133,7 @@ class UserModel extends Model {
         $builder->join('ratings','ratings.jury_id = users.id AND ratings.nominee_id='.$nominee_id);
         $builder->where("users.role",'1');
         $builder->where("users.id",$jury_id);
+        $builder->where('ratings.is_rate_submitted',1);
         return $query = $builder->get();
     }
 
@@ -141,10 +144,10 @@ class UserModel extends Model {
         $builder->join('nominee_details','nominee_details.nominee_id = users.id');
         $builder->join('category','category.id=nominee_details.category_id');
         $builder->join('nominations','nominations.id = users.award_id AND nominations.status=1');
+        $builder->join('jury_mapping','jury_mapping.jury_id=users.id');
         $builder->join('awards_creation_category','awards_creation_category.id=nominations.main_category_id');
         $builder->where("users.role",'2');
         $builder->where("users.status",'Approved');
-      //  $builder->where("users.active",'1');
         $builder->where("nominee_details.is_submitted",1);
         return $query = $builder->get();
     }
@@ -185,10 +188,8 @@ class UserModel extends Model {
           return false;
     }
 
-
     public function getUsersByFilter($filter = array())
     {
-
         $builder = $this->table('users');
         $builder->select('users.*,users.id as user_id,roles.name as role_name');
         $builder->join('roles','roles.id = users.role');
@@ -215,9 +216,7 @@ class UserModel extends Model {
             return $builder->countAllResults();
         else 
             return $query = $builder->get();
-
     }
-
 
     public function getAwardData($id = ''){
         $builder = $this->table('users');

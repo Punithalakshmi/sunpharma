@@ -330,5 +330,32 @@ class Nomination extends BaseController
           
     }
 
+    public function assigned_jury_lists($award_id = '')
+    {
+  
+        $this->data['juries'] = $this->nominationTypesModel->getJuriesByAward($award_id)->getResultArray();
+
+        if($this->request->isAJAX()) {
+            $html = view('admin/nomination/juryLists',$this->data,array('debug' => false));
+             return $this->response->setJSON([
+                 'status'            => 'success',
+                 'html'              => $html
+             ]); 
+             exit;
+        }
+
+    }
+
+    public function remove_jury_from_award($id='')
+    {
+        $this->juryModel->delete(array("id" => $id));
+        if($this->request->isAJAX()) {
+             return $this->response->setJSON([
+                 'status'            => 'success',
+                 'message'           => "Unassigned Successfully"
+             ]); 
+             exit;
+        }
+    }
     
 }

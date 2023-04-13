@@ -102,6 +102,8 @@
    <?= script_tag('/vendors/jszip/dist/jszip.min.js');?>
    <?= script_tag('/vendors/pdfmake/build/pdfmake.min.js');?>
    <?= script_tag('/vendors/pdfmake/build/vfs_fonts.js');?>
+   <?= script_tag('https://www.google.com/recaptcha/api.js');?>
+  
 
     <!-- bootstrap-daterangepicker -->
     <?= script_tag('/vendors/moment/min/moment.min.js');?>
