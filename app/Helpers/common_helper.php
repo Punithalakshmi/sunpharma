@@ -194,3 +194,25 @@ if(!function_exists('checkExpireTime')) {
           return false;  
     }
 }
+
+
+if ( ! function_exists('getAwardsCategory'))
+{
+   function getAwardsCategory(){
+        $awardsModel = model('App\Models\AwardsCategoryModel');
+        $awardData = $awardsModel->getListsOfCategories();
+    //    $awardData = $awardData->getResultArray();
+        return $awardData;
+    }
+} 
+
+
+if ( ! function_exists('getAwardsTypes'))
+{
+    function getAwardsTypes($id=''){
+        $categoryModel = model('App\Models\CategoryModel');
+        $awardData = $categoryModel->getCategoryByMainCategoryID()->getResultArray();
+       //$awardData = $awardData->getResultArray();
+        return $awardData;
+    }
+} 

@@ -11,7 +11,12 @@ class Nomination extends BaseController
     {
         
             $nominationTypeLists = $this->nominationTypesModel->getListsOfNominations()->getResultArray();
-
+            $this->data['awardsLists']      = $nominationTypeLists;
+            $this->data['main_categories']  = getAwardsCategory();
+           // echo "<pre>";
+           // print_r($this->data['awards']); 
+            $this->data['awardTypes'] = getAwardsTypes();
+           // print_r($this->data['awardTypes']); die;
             $filter = array();
             $filter['title']      = '';
             $filter['subject']    = '';
@@ -110,8 +115,7 @@ class Nomination extends BaseController
                 return render('admin/nomination/list',$this->data);
             } 
 
-           
-             
+                 
     }
 
     public function add($id='')
@@ -126,7 +130,6 @@ class Nomination extends BaseController
                 $edit_data   = $getUserData->getRowArray();
             }
             
-               
             if (strtolower($this->request->getMethod()) == "post") {  
 
                 $id  = $this->request->getPost('id');
@@ -293,31 +296,22 @@ class Nomination extends BaseController
 
     public function delete($id='')
     {
-       
         if (strtolower($this->request->getMethod()) == "post") {  
-
-       
           $this->nominationTypesModel->delete(array("id" => $id));
-          
           if($this->request->isAJAX()){
                 return $this->response->setJSON([
                     'status'    => 'success',
                     'message'   => 'Award deleted Successfully'
                 ]); 
             }
-          
         }
         
     }
 
     public function getCategoryById($id='')
     {
-      
-
         $categories = $this->categoryModel->getCategoryByMainCategoryID($id);
-
         $this->data['categories'] = $categories->getResultArray();
-
         $html = view('admin/nomination/award_type_list',$this->data,array('debug' => false));
             
         if($this->request->isAJAX()){
@@ -325,9 +319,7 @@ class Nomination extends BaseController
                     'status' => 'success',
                     'html'   => $html
                 ]); 
-        }
-            
-          
+        }     
     }
 
     public function assigned_jury_lists($award_id = '')

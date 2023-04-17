@@ -26,6 +26,10 @@ class Winners extends BaseController
             $filter['orderField'] = 'id';
             $filter['orderBy']    = 'desc';
             $totalRecords  = $this->winnersModel->getTotalWinners();
+
+            $this->data['main_categories']  = getAwardsCategory();
+           
+            $this->data['awardTypes'] = getAwardsTypes();
             
             if (strtolower($this->request->getMethod()) == "post") { 
 

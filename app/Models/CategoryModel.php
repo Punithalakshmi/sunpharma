@@ -75,11 +75,14 @@ class CategoryModel extends Model{
         return $query = $builder->get();
     }
 
-    public function getCategoryByMainCategoryID($id)
+    public function getCategoryByMainCategoryID($id='')
     {
         $builder = $this->table('category');
         $builder->select('category.*');
-        $builder->where("category.main_category_id",$id);
+
+        if(!empty($id))
+            $builder->where("category.main_category_id",$id);
+
         return $query = $builder->get();
     }
 
@@ -100,7 +103,6 @@ class CategoryModel extends Model{
 
     public function getCategoryByFilter($filter = array())
     {
-
         $builder = $this->table('category');
         $builder->select('category.*');
         

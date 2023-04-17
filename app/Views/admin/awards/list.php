@@ -12,7 +12,7 @@
               
               <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Select Award </label>
+                    <label for="" class="fw-bold">Award </label>
                         <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="main_category_id" id="main_category_id" onchange="getCategories(this);" >
                             <option></option>

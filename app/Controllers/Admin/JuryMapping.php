@@ -129,7 +129,7 @@ class JuryMapping extends BaseController
                         }
                     }
                    
-                    return redirect()->route('admin/jury/mappedjuries');
+                    return redirect()->route('admin/mappedjuries');
                 }
             }
             else

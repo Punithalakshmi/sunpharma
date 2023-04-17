@@ -24,20 +24,36 @@
 
             <div class="row topformsec">
             
-          
-            <div class="col-md-3">
-            <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label class="fw-bold">Award</label>
-                    <input type="text" class="mt-2 form-control" name="award" id="award" />
-            </div>
-            </div>
+                <div class="col-md-3">
+                    <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label for="" class="fw-bold">Award </label>
+                        <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="award" id="award"  >
+                            <option></option>
+                            <?php if(is_array($main_categories)):
+                                    foreach($main_categories as $ckey=>$cvalue):?>
+                            <option value="<?=$cvalue['name'];?>" ><?=$cvalue['name'];?></option>
+                            <?php endforeach; endif; ?> 
+                        </select>
+                    </div>
+                    </div>
 
-            <div class="col-md-3">
-            <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label class="fw-bold">Award Types</label>
-                    <input type="text" class="mt-2 form-control" name="type" id="type" />
-            </div>
-            </div>
+           
+                   
+              <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label for="" class="fw-bold">Award Types</label>
+                    <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="type" id="type"  >
+                            <option></option>
+                            <?php if(is_array($awardTypes)):
+                                    foreach($awardTypes as $ckey=>$cvalue):?>
+                            <option value="<?=$cvalue['name'];?>" ><?=$cvalue['name'];?></option>
+                            <?php endforeach; endif; ?> 
+                        </select>
+                  </div>
+                  </div>
+          
 
             <div class="col-md-3">
             <div class="get-sunpharma__input-box mt-2 form-inline">

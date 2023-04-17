@@ -789,7 +789,7 @@ function eventDatatable()
               ]
       });
 
-      $('#title').keyup(function(){
+      $('#title').change(function(){
         empTable.draw();
       });
 
@@ -797,7 +797,7 @@ function eventDatatable()
         empTable.draw();
       });
       // Custom filter
-      $('#subject').keyup(function(){
+      $('#subject').change(function(){
             empTable.draw();
       });
 
@@ -957,7 +957,7 @@ function manageAwardsDatatable()
                             data.title = title;
                             data.type = type;
                           
-                          console.log('datatables',data);
+                            console.log('datatables',data);
                             return {
                                 data: data,
                                 app_csrf: csrfHash // CSRF Token
@@ -985,19 +985,19 @@ function manageAwardsDatatable()
               ]
       });
 
-      $("#award").keyup(function(){
+      $("#award").change(function(){
         empTable.draw();
       });
 
-      $("#title").keyup(function(){
+      $("#title").change(function(){
         empTable.draw();
       });
 
-      $("#type").keyup(function(){
+      $("#type").change(function(){
         empTable.draw();
       });
 
-      $("#subject").keyup(function(){
+      $("#subject").change(function(){
         empTable.draw();
       });
       
@@ -1054,11 +1054,11 @@ function postWinnersDatatable()
                     }},
               ]
       });
-      $("#award").keyup(function(){
+      $("#award").change(function(){
         empTable.draw();
       });
 
-      $("#type").keyup(function(){
+      $("#type").change(function(){
         empTable.draw();
       });
 

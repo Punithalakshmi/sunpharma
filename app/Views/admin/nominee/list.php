@@ -6,9 +6,7 @@
                 <h3>Nominees <small></small></h3>
               </div>
             </div>
-           
-       
-            <?= csrf_field(); ?>   
+            <?=csrf_field(); ?>   
            </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
@@ -17,33 +15,32 @@
               </div>
             <?php endif;?>
 
-            <div class="row topformsec">
-            
-          
-            <div class="col-md-3">
-            <div class="get-sunpharma__input-box mt-2 form-inline">
+            <div class="row topformsec">  
+
+              <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
                     <label class="fw-bold">Award Title</label>
                     <input type="text" class="mt-2 form-control" name="award_title" id="award_title" />
-            </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="col-md-3">
-            <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label class="fw-bold">Firstname</label>
-                    <input type="text" class="mt-2 form-control" name="firstname" id="firstname" />
-            </div>
-            </div>
-
-            <div class="col-md-3">
-            <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label class="fw-bold">Email</label>
-                    <input type="text" class="mt-2 form-control" name="email" id="email" />
-            </div>
-            </div>
             <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
-              <label for="" class="fw-bold">Approval Status</label>
-                    
+                  <label class="fw-bold">Firstname</label>
+                  <input type="text" class="mt-2 form-control" name="firstname" id="firstname" />
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="get-sunpharma__input-box mt-2 form-inline">
+                  <label class="fw-bold">Email</label>
+                  <input type="text" class="mt-2 form-control" name="email" id="email" />
+              </div>
+            </div>
+            
+            <div class="col-md-3">
+              <div class="get-sunpharma__input-box mt-2 form-inline">
+                 <label for="" class="fw-bold">Approval Status</label>   
                  <input type="text" class="mt-2 form-control" name="status" id="status" />
                 </div>
             </div>
@@ -52,17 +49,15 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                    </p>
+                    <p class="text-muted font-13 m-b-30"></p>
                     <table id="nomineeDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                           <th>Nomination No</th>
-                           <th>Award</th>
-                           <th>Award Type</th>
-                           <th>Award Title</th>
+                            <th>Nomination No</th>
+                            <th>Award</th>
+                            <th>Award Type</th>
+                            <th>Award Title</th>
                             <th>Firstname</th>
                             <th>Username</th>
                             <th>Email</th>
@@ -76,7 +71,6 @@
                         <?php if(count($lists) > 0 && is_array($lists)):
                                 foreach($lists as $user):
                                   $status = '';
-
                                   if($user['status']=='Approved'){
                                     $status = "Approved";
                                   }
@@ -87,7 +81,6 @@
                                   {
                                     $status = "Pending";
                                   }
-
                             ?>
                         <tr>
                           <td><?=$user['registration_no'];?></td>
@@ -119,12 +112,9 @@
                           </td>
                         </tr>
                         <?php endforeach; ?>
-
                         <?php else: ?>
                           <tr colspan="7"> <td>No Nominees Found</td></tr>
-                             <?php
-                                endif;
-                                ?>            
+                        <?php endif; ?>            
                       </tbody>
                     </table>
                   </div>

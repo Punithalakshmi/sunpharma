@@ -20,6 +20,8 @@ class Workshops extends BaseController
         $filter['orderField'] = 'id';
         $filter['orderBy']    = 'desc';
         $totalRecords  = $this->workshopModel->getEventLists();
+
+        $this->data['evts'] = $this->workshopModel->getLists();
         
         if (strtolower($this->request->getMethod()) == "post") { 
 

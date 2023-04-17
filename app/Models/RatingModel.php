@@ -19,10 +19,10 @@ class RatingModel extends Model{
 
     public function getLists($id='')
     {
-        if(empty($id))
-        return $this->findAll();
+       if(empty($id))
+          return $this->findAll();
        else 
-         return $this->getWhere(array('id' => $id)); 
+          return $this->getWhere(array('id' => $id)); 
     }
 
     public function getRatingData($jury_id='',$nominee_id='')
@@ -54,7 +54,11 @@ class RatingModel extends Model{
     public function getNomineeAverageRating($nominee_id,$userID,$role)
     {
         $builder = $this->table('ratings');
-        $builder->select('SUM(rating) as avg_rating');
+        if($role==1)
+           $builder->select('rating as avg_rating');
+        else
+           $builder->select('SUM(rating) as avg_rating');
+
         $builder->where("ratings.nominee_id",$nominee_id);
         $builder->where('ratings.is_rate_submitted',1);
         if($role==1)

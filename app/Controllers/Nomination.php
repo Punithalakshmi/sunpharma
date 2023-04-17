@@ -7,7 +7,6 @@ class Nomination extends BaseController
     public function index($award_id = '')
     {
            // sessionDestroy();
-
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Science Scholar Awards');
             
@@ -29,9 +28,9 @@ class Nomination extends BaseController
 
                                 if($this->request->isAJAX()){
                                     return $this->response->setJSON([
-                                        'status'            => 'success',
-                                        'message'          => 'preview',
-                                        'html'              => $html
+                                        'status' => 'success',
+                                        'message' => 'preview',
+                                        'html' => $html
                                     ]); 
                                     die;
                                 }
@@ -83,6 +82,7 @@ class Nomination extends BaseController
                             $nominee_details_data['ongoing_course']    = $ongoing_course;
                             $nominee_details_data['is_completed_a_research_project']  = $research_project;
                             $nominee_details_data['is_submitted'] = 0;
+                            $nominee_details_data['nomination_year'] = date('Y');
 
                             if($this->request->getPost('course_name')) {
                                 $course_name  = $this->request->getPost('course_name');
@@ -271,6 +271,7 @@ class Nomination extends BaseController
                                 $nominee_details_data['nominator_phone']    = $nominator_mobile;
                                 $nominee_details_data['nominator_address']  = $nominator_office_address;
                                 $nominee_details_data['is_submitted'] = 0;
+                                $nominee_details_data['nomination_year'] = date('Y');
 
                                 
                                 $this->session->setFlashdata('msg', 'Submitted Successfully!');

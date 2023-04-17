@@ -19,9 +19,40 @@
               </div>
             <?php endif;?>
            <div class="row topformsec">
-            
+
+           <div class="col-md-3">
+                    <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label for="" class="fw-bold">Title </label>
+                        <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="title" id="title"  >
+                            <option></option>
+                            <?php if(is_array($evts)):
+                                    foreach($evts as $ckey=>$cvalue):?>
+                            <option value="<?=$cvalue['title'];?>" ><?=$cvalue['title'];?></option>
+                            <?php endforeach; endif; ?> 
+                        </select>
+                    </div>
+                    </div>
+
+           
+                   
+              <div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                    <label for="" class="fw-bold">Subject</label>
+                    <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="subject" id="subject"  >
+                            <option></option>
+                            <?php if(is_array($evts)):
+                                    foreach($evts as $ckey=>$cvalue):?>
+                            <option value="<?=$cvalue['subject'];?>" ><?=$cvalue['subject'];?></option>
+                            <?php endforeach; endif; ?> 
+                        </select>
+                  </div>
+                  </div>
+<!--             
               <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
+              evts
                     <label class="fw-bold">Title</label>
                     <input type="text" class="mt-2 form-control" name="title" id="title" />
               </div>
@@ -32,7 +63,7 @@
                     <label class="fw-bold">Subject</label>
                     <input type="text" class="mt-2 form-control" name="subject" id="subject" />
               </div>
-              </div>
+              </div> -->
 
               <!-- <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
