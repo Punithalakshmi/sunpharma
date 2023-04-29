@@ -20,15 +20,16 @@ class AwardsModel extends Model{
     public function getLists($category='',$main_category_id='')
     {
         $builder = $this->table('category');
-        $builder->select('SUM(ratings.rating) as average_rating,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,ratings.nominee_id,users.category');
+        $builder->select('SUM(ratings.rating) as average_rating,category.name as category_name,category.main_category_id,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,ratings.nominee_id,users.category,nominee_details.registration_no');
         $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
         if(!empty($category))
           $builder->where("nominee_details.category_id",$category);
-       // if(!empty($main_category_id))
-       //   $builder->where("category.main_category_id",$main_category_id);
-            
+
+        if(!empty($main_category_id))
+          $builder->where("category.main_category_id",$main_category_id);
+
         $builder->where("ratings.is_rate_submitted","1");
         $builder->orderBy("average_rating","DESC");
         $builder->groupBy("ratings.nominee_id");

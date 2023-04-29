@@ -293,6 +293,7 @@ class Workshops extends BaseController
 
     public function onsite_user_limit($limit='',$eventID='')
     {
+        $eventID = $this->uri->getSegment(5);
         $upd_data = array();
         $upd_data['onsite_user_limit'] = trim($limit);
 

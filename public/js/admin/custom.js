@@ -597,11 +597,13 @@ function userDatatable()
                                var category = $('#category').val();
                                var firstname = $('#firstname').val();
                                var email = $('#email').val();
+                               var year = $('#year').val();
 
                                 data.role_name = role;
                                 data.category  = category;
                                 data.firstname = firstname;
                                 data.email = email;
+                                data.year = year;
 
                               console.log('datatables',data);
                                return {
@@ -642,6 +644,10 @@ function userDatatable()
         $('#email').keyup(function(){
           empTable.draw();
         });
+
+        $('#year').keyup(function(){
+          empTable.draw();
+        });
           // Custom filter
           $('#role_name').change(function(){
                empTable.draw();
@@ -669,12 +675,12 @@ function nomineeDatatable()
                             var csrfHash = $("input[name='app_csrf']").val();
                             
                             var award_title = $('#award_title').val();
-                            var status = $('#status').val();
+                            var year = $('#year').val();
                             var firstname = $('#firstname').val();
                             var email = $('#email').val();
 
                             data.award_title = award_title;
-                            data.status  = status;
+                            data.year  = year;
                             data.firstname = firstname;
                             data.email = email;
 
@@ -727,11 +733,11 @@ function nomineeDatatable()
       empTable.draw();
     });
       // Custom filter
-      $('#award_title').keyup(function(){
+      $('#award_title').change(function(){
             empTable.draw();
       });
 
-      $('#status').keyup(function(){
+      $('#year').keyup(function(){
         empTable.draw();
     });
 

@@ -61,4 +61,28 @@ class CustomValidation{
 
     }
 
+    public function checkRegistrationModeLimit($str, string $passValue, array $postData): bool
+    {
+      
+      $registerModel = model('App\Models\RegisterationModel');
+      $eventModel    = model('App\Models\WorkshopModel');
+
+         if($str == 'Onsite'){
+            $getUniqueData = $registerModel->getWhere(array("mode" => $str,"event_id" => $passValue))->getResultArray();
+            
+            //get user limit value
+            $limit = $eventModel->getWhere(array("id" => $passValue))->getRowArray();
+
+            if(is_array($getUniqueData) && count($getUniqueData) >= $limit['onsite_user_limit'] ){
+               return false;
+            }
+            return true;
+         }
+         else{
+               return true;
+         }	
+  
+    } 
+  
+
 }

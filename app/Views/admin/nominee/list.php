@@ -6,7 +6,7 @@
                 <h3>Nominees <small></small></h3>
               </div>
             </div>
-            <?=csrf_field(); ?>   
+            <?= csrf_field(); ?>   
            </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
@@ -17,33 +17,53 @@
 
             <div class="row topformsec">  
 
-              <div class="col-md-3">
+              <!-- <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
                     <label class="fw-bold">Award Title</label>
                     <input type="text" class="mt-2 form-control" name="award_title" id="award_title" />
                 </div>
-              </div>
+              </div> -->
+
+              <div class="col-md-3">
+            <div class="get-sunpharma__input-box mt-2 form-inline">
+            
+                    <label class="fw-bold">Award Title</label>
+                    <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="award_title" id="award_title"  >
+                            <option></option>
+                            <?php if(is_array($awardsLists)):
+                                    foreach($awardsLists as $ckey=>$cvalue):?>
+                            <option value="<?=$cvalue['title'];?>" ><?=$cvalue['title'];?></option>
+                            <?php endforeach; endif; ?> 
+                        </select>
+            </div>
+            </div>
 
             <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
                   <label class="fw-bold">Firstname</label>
                   <input type="text" class="mt-2 form-control" name="firstname" id="firstname" />
               </div>
-            </div>
+            </div> 
 
+           
+              
             <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
                   <label class="fw-bold">Email</label>
                   <input type="text" class="mt-2 form-control" name="email" id="email" />
               </div>
             </div>
+
+           
             
             <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
-                 <label for="" class="fw-bold">Approval Status</label>   
-                 <input type="text" class="mt-2 form-control" name="status" id="status" />
+                 <label for="" class="fw-bold">Nomination Year</label>   
+                 <input type="text" class="mt-2 form-control" name="year" id="year" />
                 </div>
             </div>
+
             </div> 
 
             <div class="row">

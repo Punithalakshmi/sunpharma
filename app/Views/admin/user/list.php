@@ -59,6 +59,14 @@
                           <input type="text" class="mt-2 form-control" name="email" id="email" />
                   </div>
                 </div>
+
+              <div class="col-md-3">
+              <div class="get-sunpharma__input-box mt-2 form-inline">
+                 <label for="" class="fw-bold">Nomination Year</label>   
+                 <input type="text" class="mt-2 form-control" name="year" id="year" />
+                </div>
+            </div>
+
           </div>
             
             <div class="row">

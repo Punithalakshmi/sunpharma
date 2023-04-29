@@ -193,6 +193,7 @@ class UserModel extends Model {
         $builder = $this->table('users');
         $builder->select('users.*,users.id as user_id,roles.name as role_name');
         $builder->join('roles','roles.id = users.role');
+        $builder->join('nominee_details', 'nominee_details.nominee_id = users.id');
 
         if(!empty($filter['role']))
          $builder->where('users.role',$filter['role']);
@@ -205,6 +206,9 @@ class UserModel extends Model {
          
         if(!empty($filter['firstname']))
          $builder->where('users.firstname',$filter['firstname']);
+
+         if(!empty($filter['year']))
+          $builder->where('nominee_details.nomination_year',$filter['year']); 
          
         $builder->orderBy('id', 'DESC');
         $builder->orderBy('firstname', 'ASC');
@@ -223,6 +227,15 @@ class UserModel extends Model {
         $builder->select('nominations.*,users.*');
         $builder->join('nominations','nominations.id = users.award_id');
         $builder->where("users.id",$id);
+        return $query = $builder->get();
+    }
+
+    public function getAllActiveJuryLists()
+    {
+        $builder = $this->table('users');
+        $builder->select('users.*');
+        $builder->where("users.role",'1');
+        $builder->where("users.active",'1');
         return $query = $builder->get();
     }
 

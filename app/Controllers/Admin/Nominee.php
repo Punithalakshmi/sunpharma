@@ -3,6 +3,8 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Nominee extends BaseController
 {
@@ -23,6 +25,9 @@ class Nominee extends BaseController
             $filter['orderBy']    = 'desc';
 
             $totalRecords  = $this->nomineeModel->getNomineeLists();
+
+            $nominationTypeLists = $this->nominationTypesModel->getListsOfNominations()->getResultArray();
+            $this->data['awardsLists'] = $nominationTypeLists;
         
         if (strtolower($this->request->getMethod()) == "post") { 
 
@@ -40,16 +45,16 @@ class Nominee extends BaseController
                 $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
                 $searchValue     = $dtpostData['search']['value']; // Search value
 
-                 // Custom filter
+                 //Custom filter
                 $award_title= $dtpostData['award_title'];
-                $status     = $dtpostData['status'];
                 $firstname  = $dtpostData['firstname'];
                 $email      = $dtpostData['email'];
+                $year       = $dtpostData['year'];
                 
                 $filter['title']      = $award_title;
-                $filter['status']     = $status;
                 $filter['firstname']  = $firstname;
                 $filter['email']      = $email;
+                $filter['year']       = $year;
                 $filter['start']      = $start;
                 $filter['limit']      = $rowperpage;
                 $filter['orderField'] = $columnName;
@@ -58,9 +63,8 @@ class Nominee extends BaseController
                 $lists = $this->nomineeModel->getNomineeListsByCustomFilter($filter)->getResultArray();
             
                 $filter['totalRows'] = 'yes';
-               
+
                 $totalRecordsWithFilterCt = $this->nomineeModel->getNomineeListsByCustomFilter($filter);
-               
                 $totalRecordsWithFilter = (!empty($award_title) || !empty($status) || !empty($firstname) || !empty($email))?$totalRecordsWithFilterCt:$totalRecords;
             
           }
@@ -68,9 +72,7 @@ class Nominee extends BaseController
         }
         else
         {    
-
             $lists = $this->nomineeModel->getNomineeListsByCustomFilter($filter)->getResultArray();
-            
             $totalRecordsWithFilter = count($lists);
         }
 
@@ -105,7 +107,7 @@ class Nominee extends BaseController
          }
 
         $this->data['lists'] = $lists;
-        $juryLists = array();
+        $juryLists  = array();
         $juryLists  = $this->nomineeModel->getJuryLists()->getResultArray();
 
         if(count($juryLists) > 0)
@@ -138,16 +140,11 @@ class Nominee extends BaseController
 
     public function getApproval($id = '')
     {
-       
             $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
-            
             $getUserData  = $this->nomineeModel->getNomineeInfo($id);
-            
             $this->data['user'] = $getUserData->getRowArray();
-       
             $this->data['editdata'] = $this->data;
-            return render('admin/nominee/nominee_view',$this->data);
-               
+            return render('admin/nominee/nominee_view',$this->data);          
     }
 
     public function approve()
@@ -230,10 +227,12 @@ class Nominee extends BaseController
 
     public function nominee_lists_of_jury()
     {
-        $nomineeLists  = $this->userModel->getListsNominations();
-        $lists         = $nomineeLists->getResultArray();
 
         $jury_id = $this->data['userdata']['id'];
+        $nomineeLists  = $this->userModel->getListsNominations($jury_id);
+        $lists         = $nomineeLists->getResultArray();
+
+       
         foreach($lists as $lkey => $lvalue){
             $reviewStatus = $this->ratingModel->getRatingData($jury_id,$lvalue['id'])->getRowArray();
              
@@ -971,7 +970,7 @@ class Nominee extends BaseController
             return render('admin/nominee/spsfn_update',$this->data);
         }  
 
-  }  
+   }  
 
 
   public function removeFile()
@@ -1021,5 +1020,166 @@ class Nominee extends BaseController
         }     
 
   }
+
+  public function export()
+  {
+
+        $path =  $_SERVER['DOCUMENT_ROOT'];
+        $year          = ($this->request->getPost('year'))?$this->request->getPost('year'):'2021';
+        $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
+
+        $typeOfAward = ($main_category_id == 1)?'RA':'SSA';
+
+        $fileName    = $typeOfAward.' Nomination List (Template) '.date('d-m-Y').'.xlsx';  
+
+        $filter = array();
+        $filter['year'] = $year;
+        $filter['main_category_id'] = $main_category_id;
+
+        $nomineeLists = $this->nomineeModel->getNominationsLists($filter)->getResultArray();
+
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        $typeOfTitle  = 'List of Applicants : Sun Pharma Science Foundation ';
+        $typeOfTitle .= ($main_category_id == 1)?' Research Awards ':' Science Scholar Awards ';
+
+        $title = $typeOfTitle.date('Y');
+
+        $sheet->setCellValue('A1',$title);
+        $sheet->getStyle("A1:K1")->getFont()->setBold(true);
+        $sheet->getStyle("A1:K1")->getFont()->setSize(11);
+        $sheet->mergeCells("A1:K1");
+        
+        $sheet->setCellValue('A2', '');
+        $sheet->setCellValue('B2', 'Nomination No');
+        $sheet->setCellValue('C2', 'Category');
+        $sheet->setCellValue('D2', 'Name');
+        $sheet->setCellValue('E2', 'Mobile No.');
+        $sheet->setCellValue('F2', 'Email ID');
+        $sheet->setCellValue('G2', 'Date of Birth');
+        $sheet->setCellValue('H2', 'Citizenship');
+        $sheet->setCellValue('I2', 'Nominator Name');
+        $sheet->setCellValue('J2', 'Mobile No.');
+        $sheet->setCellValue('K2', 'Email ID');
+        
+        
+        $sheet->getStyle("A2:K2")->getFont()->setBold(true);
+        $sheet->getStyle("A2:K2")->getFont()->setSize(12);
+        $sheet->getStyle('A2:K2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('EEEEEE');
+       // $sheet->mergeCells("A1:K1");
+       
+        $nominationsArr = array();
+        $i = 0;
+        foreach($nomineeLists as $akey => $avalue) {
+           
+                $nominationsArr[$avalue['category_name']][$i]['registration_no'] = $avalue['registration_no'];
+                $nominationsArr[$avalue['category_name']][$i]['firstname']     = $avalue['firstname'];
+                $nominationsArr[$avalue['category_name']][$i]['lastname']      = $avalue['lastname'];
+                $nominationsArr[$avalue['category_name']][$i]['category']      = $avalue['category_name'];
+                $nominationsArr[$avalue['category_name']][$i]['phone']      = $avalue['phone'];
+                $nominationsArr[$avalue['category_name']][$i]['email']      = $avalue['email'];
+                $nominationsArr[$avalue['category_name']][$i]['dob']      = $avalue['dob'];
+                $nominationsArr[$avalue['category_name']][$i]['citizenship']      = $avalue['citizenship'];
+                $nominationsArr[$avalue['category_name']][$i]['nominator_name']   = $avalue['nominator_name'];
+                $nominationsArr[$avalue['category_name']][$i]['nominator_phone']  = $avalue['nominator_phone'];
+                $nominationsArr[$avalue['category_name']][$i]['nominator_email']  = $avalue['nominator_email'];
+               
+                $i++;
+                                 
+        }
+
+        $rows = 3;
+        ksort($nominationsArr); 
+      
+         $nominationsCategoryArr = array();
+        foreach ($nominationsArr as $vl=>$dt){       
+            
+            if($main_category_id == 1){     
+                if($vl == 'Medical Sciences-Basic Research')
+                  $nominationsCategoryArr['Medical Sciences-Basic Research'] = count($dt);
+                
+                if($vl == 'Medical Sciences-Clinical Research')
+                  $nominationsCategoryArr['Medical Sciences-Clinical Research'] = count($dt);  
+               
+                if($vl == 'Pharmaceutical Sciences')
+                  $nominationsCategoryArr['Pharmaceutical Sciences'] = count($dt);  
+            }
+            else
+            {
+                if($vl == 'Pharmaceutical Sciences')
+                  $nominationsCategoryArr['Pharmaceutical Sciences'] = count($dt);  
+                
+                if($vl == 'Bio-Medical Sciences')
+                  $nominationsCategoryArr['Bio-Medical Sciences'] = count($dt);  
+            }
+            $k = 1;
+            foreach($dt as $v => $val){
+
+                $name = $val['firstname'].' '.$val['lastname'];
+                $citizenship = ($val['citizenship']==1)?'INDIAN':'Other';
+                $sheet->setCellValue('A' . $rows, $k);
+                $sheet->setCellValue('B' . $rows, $val['registration_no']);
+                $sheet->setCellValue('C' . $rows, $vl);
+                $sheet->setCellValue('D' . $rows, $name);
+                $sheet->setCellValue('E' . $rows, $val['phone']);
+                $sheet->setCellValue('F' . $rows, $val['email']);
+                $sheet->setCellValue('G' . $rows, $val['dob']);
+                $sheet->setCellValue('H' . $rows, $citizenship);
+                $sheet->setCellValue('I' . $rows, $val['nominator_name']);
+                $sheet->setCellValue('J' . $rows, $val['nominator_phone']);
+                $sheet->setCellValue('K' . $rows, $val['nominator_email']);
+                $rows++; 
+                $k++;
+            }
+            $stCl = "A".$rows; 
+            $edCl = "K".$rows;
+            $sheet->mergeCells($stCl.":".$edCl);
+            $rows++;
+        } 
+      
+       // Display total awards count
+        $header = ' Sun Pharma Science Foundation';
+        $header.=  ($main_category_id == 1)?' Research Awards ':' Science Scholar Awards ';
+        $header.= $year.' Nominations Received';
+        $rw = $rows + 2;
+        $startCell = 'C'.$rw;
+        $endCell   = 'D'.$rw;
+      
+       $sheet->setCellValue($startCell,$header);
+       $sheet->getStyle($startCell.":".$endCell)->getFont()->setBold(true);
+       $sheet->getStyle($startCell.":".$endCell)->getFont()->setSize(12);
+       $sheet->getStyle($startCell.":".$endCell)->getFont()->getColor()->setARGB('3A0BAF');
+
+       $sheet->mergeCells($startCell.":".$endCell);
+
+       $updateTotalRw = $rw + 1;
+       foreach($nominationsCategoryArr as $k=>$v ){
+        
+          $sheet->setCellValue('C' . $updateTotalRw, $k);
+          $sheet->setCellValue('D' . $updateTotalRw, $v);
+          $sheet->getStyle('C'.$updateTotalRw.":D".$updateTotalRw)->getFont()->setBold(true);
+          $sheet->getStyle('C'.$updateTotalRw.":D".$updateTotalRw)->getFont()->setSize(12);
+          $sheet->getStyle('C'.$updateTotalRw.":D".$updateTotalRw)->getFont()->getColor()->setARGB('3A0BAF');   
+          $updateTotalRw++;
+         
+       }
+
+       $writer = new Xlsx($spreadsheet);
+       $writer->save('uploads/'.$fileName);
+       $fileDownload = base_url().'/uploads/'.$fileName;
+       header('Cache-Control: max-age=0');
+
+        if($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'status'   => 'success',
+                'filename' => $fileDownload
+            ]); 
+            exit;
+        }
+        
+    }
+
 
 }

@@ -99,6 +99,8 @@ class Import extends BaseController
 
                 //get category id
                 $getCategoryName = $this->categoryModel->getCategoriesById(trim($filedata[2]),'yes')->getRowArray();
+                //get main category
+                $mainCat = (isset($getCategoryName) && !empty($getCategoryName['main_category_id']) && ($getCategoryName['main_category_id']==1))?'RA':'SSA'; 
                 $ins_data['category'] = $getCategoryName['id'];
                 $ins_data['review_status'] = 'Reviewed';
                 $ins_data['created_id'] = 1;
@@ -110,7 +112,7 @@ class Import extends BaseController
                 //nomination details upload
                 $nomination_deatils = array();
                 $nomination_deatils['nominee_id'] = $lastInsertID;
-                $nomination_deatils['registration_no'] = $filedata[1]."/".$filedata[0];
+                $nomination_deatils['registration_no'] = $filedata[1]."/".$mainCat.'-'.$filedata[0];
                 $nomination_deatils['nomination_year'] = $filedata[1];
                 $nomination_deatils['category_id'] = $getCategoryName['id'];
                 $nomination_deatils['citizenship'] = (!empty($filedata[5]) && ($filedata[5] == 'INDIAN'))?1:2;
@@ -429,8 +431,7 @@ class Import extends BaseController
            
            // Skip first row & check number of fields
            if($i > 0 && $num == $numberOfFields){ 
-               // print_r($filedata[$i]); 
-               // echo $filedata[$i][21];
+
                 //insert user table, create user
                 $ins_data = array();
                 $ins_data['firstname'] = $filedata[3];
@@ -456,6 +457,8 @@ class Import extends BaseController
 
                 //get category id
                 $getCategoryName = $this->categoryModel->getCategoriesByIdMain(trim($filedata[2]),2)->getRowArray();
+                //get main category
+                $mainCat = (isset($getCategoryName) && !empty($getCategoryName['main_category_id']) && ($getCategoryName['main_category_id']==2))?'SSA':'RA';
                 $ins_data['category'] = $getCategoryName['id'];
                 $ins_data['review_status'] = 'Reviewed';
                 $ins_data['created_id'] = 1;
@@ -473,7 +476,7 @@ class Import extends BaseController
                 //nomination details upload
                 $nomination_deatils = array();
                 $nomination_deatils['nominee_id'] = $lastInsertID;
-                $nomination_deatils['registration_no'] = $filedata[1]."/".$filedata[0];
+                $nomination_deatils['registration_no'] = $filedata[1]."/".$mainCat.'-'.$filedata[0];
                 $nomination_deatils['nomination_year'] = 2021;
                 $nomination_deatils['category_id'] = $getCategoryName['id'];
                 $nomination_deatils['citizenship'] = (!empty($filedata[5]) && ($filedata[5] == 'INDIAN'))?1:2;

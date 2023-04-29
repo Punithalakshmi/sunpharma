@@ -67,92 +67,102 @@ class Awards extends BaseController
     public function export()
     {
 
-        if (strtolower($this->request->getMethod()) == "post") {  
+        $path =  $_SERVER['DOCUMENT_ROOT'];
+        $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+        $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
 
-          //  if($this->validation->withRequest($this->request)->run()) {
-   
-                    $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-                    $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):1;
+        $fileName = 'Evaluation Sheet '.date('d-m-Y').'.xlsx';  
+
+        $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
+
+        //get Active Jury Lists
+        $activeJuries = $this->userModel->getAllActiveJuryLists()->getResultArray();
+        
+        $juryData = array();
+        $awardsDataArr = array();
+        $nomineeData = array();
+        $i = 0;
+        foreach($awardsLists as $akey => $avalue) {
+            if($avalue['main_category_id']){
+                $awardsDataArr[$avalue['category_name']][$i]['nomination_no'] = $avalue['registration_no'];
+                $awardsDataArr[$avalue['category_name']][$i]['firstname']     = $avalue['firstname'];
+                $awardsDataArr[$avalue['category_name']][$i]['juries'] = [];
+
+                foreach($activeJuries as $jkey=>$jvalue){
+                    $getJuryRateData = $this->userModel->getJuryRateData($jvalue['id'],$avalue['id'])->getRowArray();
+                    $juryData['firstname'] = $jvalue['firstname'];
+                    $juryData['username']  = $jvalue['username'];
+                    $juryData['rating']    = (isset($getJuryRateData['rating']))?$getJuryRateData['rating']:0;
+                        $awardsDataArr[$avalue['category_name']][$i]['juries'][] = $juryData;
+                }
+                $i++;
+            }                       
+        }
+
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        
+        $typeOfAward = ($main_category_id == 1)?'Research Award':'Science Scholar Award';
+
+        $title = $typeOfAward.' Evaluation Sheet '.date('Y');
+        
+        $sheet->setTitle('Report - '.$typeOfAward.' '.date('Y'));
+
+        $sheet->setCellValue('A1',$title);
+        $sheet->getStyle("A1:I1")->getFont()->setBold(true);
+        $sheet->getStyle("A1:I1")->getFont()->setSize(12);
+        $sheet->mergeCells("A1:I1");
+        
+        $sheet->setCellValue('A2', 'Award Category');
+        $sheet->setCellValue('B2', 'Nomination No');
+        $sheet->setCellValue('C2', 'Applicant Name');
+        $juriesName = array();
+        for($j=0;$j<count($activeJuries);$j++){
+            $juriesName[] = $activeJuries[$j]['firstname'].''.$activeJuries[$j]['lastname'].'['.$activeJuries[$j]['username'].']';
+        }
+        $juriesName[] = 'Total Amount'; 
+        $sheet->fromArray($juriesName,null,'D2');
+        
+        $sheet->getStyle(2)->getFont()->setBold(true);
+        $sheet->getStyle(2)->getFont()->setSize(11);
+        
+        $rows = 3;
+        
+        ksort($awardsDataArr);
+        foreach ($awardsDataArr as $val => $dt){
+            // echo $val;
+            foreach($dt as $v => $ard){
             
-                    
-                    $fileName = 'AwardResult_'.date('d-m-Y').'.xlsx';  
-
-                    $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
-
-                    $awardsLists = getAwardsArr($awardsLists);
-
-                    
-                    foreach($awardsLists as $akey => $avalue) {
-                        //get jury lists 
-                        $splitJuryIds = explode(',',$avalue.['jury']);
-                        
-                        for($i=0;$i<count($splitJuryIds);$i++) {
-                            $getJuryRateData = $this->userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
-                            $awardsLists[$akey]['juries'][$i] =$getJuryRateData;
-                        }
-                    }
-
-                    $spreadsheet = new Spreadsheet();
-            
-                    $sheet = $spreadsheet->getActiveSheet();
-                    $sheet->setCellValue('A1', 'Award Category');
-                    $sheet->setCellValue('B1', 'Nomination No');
-                    $sheet->setCellValue('C1', 'Applicant Name');
-                    $sheet->setCellValue('D1', 'Date of Birth');
-                    $sheet->setCellValue('E1', 'Rating');
-
-                    $sheet->getStyle('A1:E1')->getFont()->setBold(true);
-                    $sheet->getStyle('A1:E1')->getFont()->setSize(16);
-
-                    $rows = 2;
-            
-                    foreach ($awardsLists as $val){
-                        $sheet->setCellValue('A' . $rows, $val['category_name']);
-                        $sheet->setCellValue('B' . $rows, $val['firstname']);
-                        $sheet->setCellValue('C' . $rows, date("Y")."/".$val['id']);
-                        $sheet->setCellValue('D' . $rows, $val['dob']);
-                        $sheet->setCellValue('E' . $rows, $val['average_rating']);
-                        $rows++;
-                        if(is_array($val['juries']) && count($val['juries']) > 0){
-                                $start = 'A'.$rows;
-                                $end   = 'E'.$rows;
-                                $sheet->setCellValue($start,'Jury Info');
-                                $sheet->getStyle($start.":".$end)->getFont()->setBold(true);
-                                $sheet->getStyle($start.":".$end)->getFont()->setSize(16);
-                                $sheet->mergeCells($start.":".$end);
-                                $rows++;
-                                $sheet->setCellValue('A'.$rows, 'Jury Name');
-                                $sheet->mergeCells('A'.$rows.":".'B'.$rows);
-                                $sheet->setCellValue('C'.$rows, 'Rating');
-                                $sheet->mergeCells('C'.$rows.":".'E'.$rows);
-                                $sheet->getStyle('A'.$rows,'B'.$rows)->getFont()->setBold(true);
-                                $sheet->getStyle('A'.$rows,'B'.$rows)->getFont()->setSize(14);
-                                $sheet->getStyle('C'.$rows,'E'.$rows)->getFont()->setBold(true);
-                                $sheet->getStyle('C'.$rows,'E'.$rows)->getFont()->setSize(14);
-                                $rows++;
-                                foreach($val['juries'] as $ukey => $uvalue){
-                                    $sheet->setCellValue('A'.$rows, $uvalue['firstname'].' '.$uvalue['lastname']);
-                                    $sheet->mergeCells('A'.$rows.":".'B'.$rows);
-                                    $sheet->setCellValue('C'.$rows, $uvalue['rating']);
-                                    $sheet->mergeCells('C'.$rows.":".'E'.$rows);
-                                    $rows++;
-                                }
-                        }
-                    } 
-                    $writer = new Xlsx($spreadsheet);
-                    $writer->save("uploads/".$fileName);
-                    $fileDownload = base_url().'/uploads/'.$fileName;
-                    header("Content-Type: application/vnd.ms-excel");
-
-                    if($this->request->isAJAX()) {
-                        return $this->response->setJSON([
-                            'status'            => 'success',
-                            'filename'              => $fileDownload
-                        ]); 
-                        exit;
-                    }
-              //  }   
+                $sheet->setCellValue('A' . $rows, $val);
+                $sheet->setCellValue('B' . $rows, $ard['nomination_no']);
+                $sheet->setCellValue('C' . $rows, $ard['firstname']);
+                $totalRating = 0;
+                $juryRatings = [];
+                foreach($ard['juries'] as $ukey => $uvalue){
+                    $totalRating += $uvalue['rating'];
+                    $juryRatings[] = $uvalue['rating'];
+                }
+                $juryRatings[] = $totalRating;
+                $column = 'D'.$rows;
+                $sheet->fromArray($juryRatings,null,$column);
+                $rows++;   
             }
+        } 
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('uploads/'.$fileName);
+        $fileDownload = base_url().'/uploads/'.$fileName;
+        header('Cache-Control: max-age=0');
+
+        if($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'status'   => 'success',
+                'filename' => $fileDownload
+            ]); 
+            exit;
+        }
         
     }
 
@@ -194,7 +204,6 @@ class Awards extends BaseController
                 $category      = $this->request->getPost('category');
                 $yeat          = $this->request->getPost('year');
     
-    
                 $ins_data = array();
                 $ins_data['rating']     = $rating;
                 $ins_data['comments']   = $comments;
@@ -224,11 +233,8 @@ class Awards extends BaseController
                 $editdata['nominee_id'] = $edit_data['nominee_id'];
             }
 
-            
             $this->data['editdata'] = $editdata;
-            
-            return render('admin/rating/add',$this->data);
-                    
+            return render('admin/rating/add',$this->data);      
         }       
         
     }
@@ -245,10 +251,8 @@ class Awards extends BaseController
 
     public function delete($id='',$nominee_id='')
     {
-    
-          $this->ratingModel->delete(array("id" => $id));
-          return redirect()->to('admin/nominee/view/'.$nominee_id);
-       
+        $this->ratingModel->delete(array("id" => $id));
+        return redirect()->to('admin/nominee/view/'.$nominee_id);    
     }
 
 }

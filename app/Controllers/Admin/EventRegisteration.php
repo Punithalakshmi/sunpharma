@@ -329,7 +329,7 @@ class EventRegisteration extends BaseController
                         $rows++;  
                     } 
                     $writer = new Xlsx($spreadsheet);
-                    $writer->save("uploads/".$fileName);
+                    $writer->save("/uploads/".$fileName);
                     $fileDownload = base_url().'/uploads/'.$fileName;
                     header("Content-Type: application/vnd.ms-excel");
 

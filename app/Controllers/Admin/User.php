@@ -42,11 +42,13 @@ class User extends BaseController
                 $category = $dtpostData['category'];
                 $firstname = $dtpostData['firstname'];
                 $email = $dtpostData['email'];
+                $year = $dtpostData['year'];
                 
                 $filter['role']       = $role;
                 $filter['category']   = $category;
                 $filter['firstname']  = $firstname;
                 $filter['email']      = $email;
+                $filter['year']      = $year;
                 $filter['start']      = $start;
                 $filter['limit']      = $rowperpage;
                 $filter['orderField'] = $columnName;

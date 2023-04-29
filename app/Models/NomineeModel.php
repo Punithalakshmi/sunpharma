@@ -94,6 +94,9 @@ class NomineeModel extends Model{
          
         if(!empty($filter['firstname']))
          $builder->like('users.firstname',$filter['firstname']);
+
+        if(!empty($filter['year']))
+         $builder->like('nominee_details.nomination_year',$filter['year']);
          
         $builder->orderBy('id', 'DESC');
         
@@ -105,7 +108,21 @@ class NomineeModel extends Model{
         else 
             return $query = $builder->get();
 
+    }
+     
+    public function getNominationsLists($filter = array())
+    {
+        $builder = $this->table('users');
+        $builder->select('users.*,nominee_details.*,users.id as user_id,category.name as category_name');
+        $builder->join('nominee_details', 'nominee_details.nominee_id = users.id AND users.role="2"');
+        $builder->join('category','category.id=nominee_details.category_id');
+        if(!empty($filter['year']))
+            $builder->where("nominee_details.nomination_year",$filter['year']);
 
+        if(!empty($filter['main_category_id']))
+            $builder->where("category.main_category_id",$filter['main_category_id']);    
+            
+        return $query = $builder->get();
     }
 
     
