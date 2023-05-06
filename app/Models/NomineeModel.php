@@ -96,7 +96,10 @@ class NomineeModel extends Model{
          $builder->like('users.firstname',$filter['firstname']);
 
         if(!empty($filter['year']))
-         $builder->like('nominee_details.nomination_year',$filter['year']);
+          $builder->like('nominee_details.nomination_year',$filter['year']);
+
+        if(!empty($filter['award']))
+          $builder->like('category.main_category_id',$filter['award']);  
          
         $builder->orderBy('id', 'DESC');
         

@@ -184,10 +184,10 @@ function nominee_approve(type = '',id='',remarks)
     var category = $("#category").val();
     var main_category_id = $("#main_category_id").val();
     
-    if(category == ''){
-      errorMessageAlert('Please select category');
-      return false;
-   }
+  //   if(category == ''){
+  //     errorMessageAlert('Please select category');
+  //     return false;
+  //  }
 
     var csrfHash = $("input[name='app_csrf']").val();
 
@@ -231,17 +231,17 @@ function nominee_approve(type = '',id='',remarks)
  function exportResult()
  {
 
-    var category = $("#category").val();
+    var category = $("#award_title").val();
     var main_category_id = $("#main_category_id").val();
+    var year = $("#year").val(); 
 
     $("#loader").removeClass('hidden');
 
     $('#loader').removeClass('block');
     var msg = 'Are you sure you want to export nomination lists?';
 
-    var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
+    var csrfHash = $("input[name='app_csrf']").val();   
 
-   
     $.confirmModal('<h2>'+msg+'</h2>', {
       messageHeader: '',
       backgroundBlur: ['.container'],
@@ -259,11 +259,11 @@ function nominee_approve(type = '',id='',remarks)
               $.ajax({
                 url : base_url+'/admin/awards/export',
                 type: "POST",
-                data : {category:category,'app_csrf':form_res.token,'main_category_id':main_category_id},
+                data : {category:category,'app_csrf':form_res.token,'main_category_id':main_category_id,'year':year},
                 dataType:'json',
                 success: function(data, textStatus, jqXHR)
                 {
-                  $('#loader').addClass('hidden');
+                    $('#loader').addClass('hidden');
                     window.location.href = data.filename;
                 },
                 error: function (jqXHR, textStatus, errorThrown)
@@ -678,11 +678,13 @@ function nomineeDatatable()
                             var year = $('#year').val();
                             var firstname = $('#firstname').val();
                             var email = $('#email').val();
+                            var main_category_id = $("#main_category_id").val();
 
                             data.award_title = award_title;
                             data.year  = year;
                             data.firstname = firstname;
                             data.email = email;
+                            data.main_category_id = main_category_id;
 
                           console.log('datatables',data);
                             return {
@@ -739,7 +741,11 @@ function nomineeDatatable()
 
       $('#year').keyup(function(){
         empTable.draw();
-    });
+      });
+      
+      $('#main_category_id').change(function(){
+        empTable.draw();
+      });
 
 }
 
@@ -1344,4 +1350,58 @@ function assignedJuries(award_id ='')
           }
       }
   });
+ }
+
+
+ function exportNominationLists()
+ {
+    var category = $("#category").val();
+    var main_category_id = $("#main_category_id").val();
+
+    $("#loader").removeClass('hidden');
+
+    $('#loader').removeClass('block');
+    var msg = 'Are you sure you want to export nomination lists?';
+
+    var csrfHash = $("input[name='app_csrf']").val();   
+
+    $.confirmModal('<h2>'+msg+'</h2>', {
+      messageHeader: '',
+      backgroundBlur: ['.container'],
+      modalVerticalCenter: true
+    },function(el) {
+      if(el){
+          $.ajax({
+            url: base_url+'/csrf_token',
+            type: 'GET',
+            data: {},
+            dataType: 'json',
+            success: function (form_res) 
+            {
+                $.ajax({
+                  url : base_url+'/admin/nominee/export',
+                  type: "POST",
+                  data : {category:category,'app_csrf':form_res.token,'main_category_id':main_category_id},
+                  dataType:'json',
+                  success: function(data, textStatus, jqXHR)
+                  {
+                      $('#loader').addClass('hidden');
+                      window.location.href = data.filename;
+                  },
+                  error: function (jqXHR, textStatus, errorThrown)
+                  {
+                    $('#loader').addClass('hidden');
+                    if(textStatus && textStatus == 'error'){
+                      if(jqXHR.responseJSON.message){
+                          errorMessageAlert(jqXHR.responseJSON.message); 
+                          location.reload();
+                      }
+                    }   
+                  }
+                }); 
+              }
+          });   
+        }
+      } 
+    ); 
  }

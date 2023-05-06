@@ -45,7 +45,7 @@
                 <a href="#" onclick="exportResult();" class="btn btn-primary mb-2 downloadbtnres">
                    <i class="fa fa-download"></i> Download Result
                 </a>
-           </div>
+            </div>
         </div>
             
             <div class="clearfix"></div>

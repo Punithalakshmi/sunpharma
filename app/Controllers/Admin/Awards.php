@@ -69,8 +69,8 @@ class Awards extends BaseController
 
         $path =  $_SERVER['DOCUMENT_ROOT'];
         $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
-        $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
-
+        $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
+       // die;
         $fileName = 'Evaluation Sheet '.date('d-m-Y').'.xlsx';  
 
         $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
@@ -104,7 +104,7 @@ class Awards extends BaseController
         $sheet = $spreadsheet->getActiveSheet();
 
         
-        $typeOfAward = ($main_category_id == 1)?'Research Award':'Science Scholar Award';
+        $typeOfAward = ($main_category_id == 1)?'Research Awards':'Science Scholar Awards';
 
         $title = $typeOfAward.' Evaluation Sheet '.date('Y');
         
@@ -132,7 +132,7 @@ class Awards extends BaseController
         
         ksort($awardsDataArr);
         foreach ($awardsDataArr as $val => $dt){
-            // echo $val;
+            //echo $val;
             foreach($dt as $v => $ard){
             
                 $sheet->setCellValue('A' . $rows, $val);

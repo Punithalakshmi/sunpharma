@@ -45,14 +45,12 @@ class EventRegistration extends BaseController
                 $ins_data['mode']       = $mode;
                 $ins_data['event_id']       = $event_id;
                 
-            
                 $this->session->setFlashdata('msg', 'Registeration Submitted Successfully!');
                 $ins_data['created_date']  =  date("Y-m-d H:i:s");
                 $ins_data['created_id']    =  1;
                 $this->registerationModel->save($ins_data);
                 $lastInsertID = $this->registerationModel->insertID();
 
-              
                 $this->sendMail($email,$registerationNo,$firstname);
 
                 return redirect()->to('/');
@@ -159,10 +157,14 @@ class EventRegistration extends BaseController
 
     public function getRegisterationNo($event_id='')
     {
-        $count = $this->registerationModel->CountAll(); 
-        $ct = $count + 1;  
+       // $count = $this->registerationModel->CountAll(); 
+        $getLists = $this->registerationModel->getWhere(array('event_id' => $event_id));
+        $count    = $getLists->getResultArray();
+        $ct = count($count) + 1;  
+
         return 'SPSFN-'.$event_id.'-REG-'.$ct;
     }
+
 
     function close()
     {

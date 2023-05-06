@@ -144,7 +144,6 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('update_password/(:any)','Login::reset_password/$1');
     $routes->get('update_password/(:any)','Login::reset_password/$1');
 
-
     $routes->get("user", "User::index",['filter' =>'auth']);
     $routes->post("user", "User::index",['filter' =>'auth']);
     $routes->get("reset_password/(:any)", "User::resetpassword/$1",['filter' =>'auth']);
@@ -177,6 +176,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('nominee/update/(:any)','Nominee::update/$1',['filter' =>'auth']);
     $routes->post('nominee/removeFile','Nominee::removeFile',['filter' => 'auth']);
     $routes->get('nominee/export','Nominee::export',['filter' => 'auth']);
+    $routes->post('nominee/export','Nominee::export',['filter' => 'auth']);
 
     $routes->get('category','Category::index',['filter' =>'auth']);
     $routes->post('category','Category::index',['filter' =>'auth']);
@@ -197,7 +197,6 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nomination/assigned_jury_lists/(:any)','Nomination::assigned_jury_lists/$1',['filter' => 'auth']);
     $routes->get('nomination/remove_jury_from_award/(:any)','Nomination::remove_jury_from_award/$1',['filter' => 'auth']);
     
-
     $routes->get('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
     $routes->post('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
     $routes->post('rating/add','Rating::add',['filter' =>'auth']);
@@ -235,7 +234,6 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('nominee/extend','Nominee::extend',['filter' =>'auth']);
 
     $routes->post('eventregisteration/export','EventRegisteration::export',['filter' =>'auth']);
-
 
     $routes->post('mappedjuries','JuryMapping::index',['filter' =>'auth']);
     $routes->get('mappedjuries','JuryMapping::index',['filter' =>'auth']);

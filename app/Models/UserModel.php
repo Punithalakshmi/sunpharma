@@ -193,7 +193,7 @@ class UserModel extends Model {
         $builder = $this->table('users');
         $builder->select('users.*,users.id as user_id,roles.name as role_name');
         $builder->join('roles','roles.id = users.role');
-        $builder->join('nominee_details', 'nominee_details.nominee_id = users.id');
+        $builder->join('nominee_details', 'nominee_details.nominee_id = users.id','left');
 
         if(!empty($filter['role']))
          $builder->where('users.role',$filter['role']);

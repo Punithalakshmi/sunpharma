@@ -23,11 +23,14 @@ class Nominee extends BaseController
             $filter['limit']      = '10';
             $filter['orderField'] = 'id';
             $filter['orderBy']    = 'desc';
+            $filter['award']      = '';
 
             $totalRecords  = $this->nomineeModel->getNomineeLists();
 
             $nominationTypeLists = $this->nominationTypesModel->getListsOfNominations()->getResultArray();
             $this->data['awardsLists'] = $nominationTypeLists;
+
+            $this->data['main_categories'] = $this->awardsCategoryModel->getListsOfCategories();
         
         if (strtolower($this->request->getMethod()) == "post") { 
 
@@ -50,8 +53,10 @@ class Nominee extends BaseController
                 $firstname  = $dtpostData['firstname'];
                 $email      = $dtpostData['email'];
                 $year       = $dtpostData['year'];
+                $award      = $dtpostData['main_category_id'];
                 
                 $filter['title']      = $award_title;
+                $filter['award']      = $award;
                 $filter['firstname']  = $firstname;
                 $filter['email']      = $email;
                 $filter['year']       = $year;
@@ -262,7 +267,7 @@ class Nominee extends BaseController
 
         //get nominee category
         if(isset($data['user']['category_id'])) {
-    //    $getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
+          //$getNomineeCategory = $categoryModel->getListsOfCategories($data['user']['category_id'])->getRowArray();
           $data['user']['category_name'] =  $this->data['user']['category_name'];
         }
     
@@ -302,10 +307,10 @@ class Nominee extends BaseController
                     $comment    = $this->request->getPost('comment');
                  
                     $ins_data = array();
-                    $ins_data['rating']       = $rating;
-                    $ins_data['comments']     = $comment;
-                    $ins_data['jury_id']      = $this->data['userdata']['id'];
-                    $ins_data['nominee_id']   = $nominee_id;
+                    $ins_data['rating']            = $rating;
+                    $ins_data['comments']          = $comment;
+                    $ins_data['jury_id']           = $this->data['userdata']['id'];
+                    $ins_data['nominee_id']        = $nominee_id;
                     $ins_data['is_rate_submitted'] = ($this->request->getPost('submit') && ($this->request->getPost('submit') == 'Save Draft'))?0:1; 
                     
                     $this->session->setFlashdata('msg', 'Rated Successfully!');
@@ -323,6 +328,7 @@ class Nominee extends BaseController
                     $message = 'Rated Successfully';
 
                     if($this->request->isAJAX()){
+                        
                         $editdata['rating']    = (isset($edit_data['rating']) && !empty($edit_data['rating']))?$edit_data['rating']:'';
                         $editdata['comment']   = (isset($edit_data['comments']) && !empty($edit_data['comments']))?$edit_data['comments']:'';
                         $editdata['id']        =  (isset($edit_data['id']) && !empty($edit_data['id']))?$edit_data['id']:'';
@@ -332,10 +338,10 @@ class Nominee extends BaseController
                         
                         $html = view('admin/nominee/view',$this->data,array('debug' => false));
                         return $this->response->setJSON([
-                            'status'            => $status,
-                            'html'              => $html,
-                            'message' => $message
-                        ]); 
+                                  'status' => $status,
+                                  'html'   => $html,
+                                  'message'=> $message
+                               ]); 
                         die;
                     }
                     else
@@ -364,7 +370,7 @@ class Nominee extends BaseController
             $this->data['editdata'] = $editdata;
             
             if($this->request->isAJAX()){
-               // echo "testing";die;
+               
                 $html = view('admin/nominee/view',$this->data,array('debug' => false));
                 return $this->response->setJSON([
                     'status'            => $status,
@@ -1025,7 +1031,7 @@ class Nominee extends BaseController
   {
 
         $path =  $_SERVER['DOCUMENT_ROOT'];
-        $year          = ($this->request->getPost('year'))?$this->request->getPost('year'):'2021';
+        $year              = ($this->request->getPost('year'))?$this->request->getPost('year'):'2021';
         $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
 
         $typeOfAward = ($main_category_id == 1)?'RA':'SSA';
@@ -1063,8 +1069,7 @@ class Nominee extends BaseController
         $sheet->setCellValue('I2', 'Nominator Name');
         $sheet->setCellValue('J2', 'Mobile No.');
         $sheet->setCellValue('K2', 'Email ID');
-        
-        
+           
         $sheet->getStyle("A2:K2")->getFont()->setBold(true);
         $sheet->getStyle("A2:K2")->getFont()->setSize(12);
         $sheet->getStyle('A2:K2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('EEEEEE');

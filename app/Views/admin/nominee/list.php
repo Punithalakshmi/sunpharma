@@ -17,17 +17,25 @@
 
             <div class="row topformsec">  
 
-              <!-- <div class="col-md-3">
+            <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label class="fw-bold">Award Title</label>
-                    <input type="text" class="mt-2 form-control" name="award_title" id="award_title" />
-                </div>
-              </div> -->
+                    <label for="" class="fw-bold">Award </label>
+                        <select class="selectpicker mt-2 form-control"
+                            aria-label="Default select example" name="main_category_id" id="main_category_id" onchange="getCategories(this);" >
+                            <option></option>
+                            <?php if(is_array($main_categories)):
+                                    foreach($main_categories as $ckey=>$cvalue):?>
+                            <option value="<?=$cvalue['id'];?>" ><?=$cvalue['name'];?></option>
+                            <?php endforeach; endif; ?> 
+                        </select>
+                       
+                    </div>
+              </div>
 
               <div class="col-md-3">
             <div class="get-sunpharma__input-box mt-2 form-inline">
             
-                    <label class="fw-bold">Award Title</label>
+                    <label class="fw-bold">Award Type</label>
                     <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="award_title" id="award_title"  >
                             <option></option>
@@ -63,7 +71,11 @@
                  <input type="text" class="mt-2 form-control" name="year" id="year" />
                 </div>
             </div>
-
+            <div class="col-md-3 actionbtns">
+                <a href="#" onclick="exportNominationLists();" class="btn btn-primary mb-2 downloadbtnres">
+                   <i class="fa fa-download"></i> Download Nominations
+                </a>
+            </div>                     
             </div> 
 
             <div class="row">
