@@ -13,6 +13,7 @@ class Dashboard extends BaseController
 
     public function access()
     {
+       // $this->session->remove('userdata');
         return render('admin/access_denied',$this->data);  
     }
 }

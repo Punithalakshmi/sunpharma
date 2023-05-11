@@ -30,6 +30,7 @@ class Auth implements FilterInterface
             else
             {
                 if(!empty($segment) && ($segment == 'admin')){
+                    $session->remove('userdata');
                     return redirect()->to('/admin/access');
                 }
             }

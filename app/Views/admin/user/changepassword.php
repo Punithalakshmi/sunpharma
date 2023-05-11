@@ -6,7 +6,7 @@
               </div>
               <div class="title_right">
               <div class="actionbtns">
-  <a class="btn btn-primary" href="<?=base_url();?>/admin/user"><i class="fa fa-arrow-left"></i> BACK</a>                 
+  <a class="btn btn-primary" href="<?=base_url();?>/<?=$logoUrl;?>"><i class="fa fa-arrow-left"></i> BACK</a>                 
            </div>
 
               </div>

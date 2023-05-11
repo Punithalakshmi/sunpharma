@@ -5,7 +5,7 @@
                 <h3>Profile Info</h3>
               </div>
               <div class="title_right">
-                <a class="btn btn-primary" href="<?=base_url();?>/admin/user">
+                <a class="btn btn-primary" href="<?=base_url();?>/<?=$logoUrl;?>">
                    <i class="fa fa-arrow-left"></i> BACK
                 </a>
               </div>
@@ -22,7 +22,7 @@
                 
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" action="<?php echo base_url();?>/admin/profile" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" action="<?php echo base_url();?>/<?=$uri;?>/profile" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <input type="hidden" name="user_role" value="<?=$editdata['role'];?>"  >
 
@@ -121,7 +121,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="cancel" class="btn btn-primary" onclick="window.location=base_url+'/admin/dashboard';return false;">CANCEL</button>
+                          <button type="cancel" class="btn btn-primary" onclick="window.location=base_url+'<?=$logoUrl;?>';return false;">CANCEL</button>
 						              
                           <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                         </div>

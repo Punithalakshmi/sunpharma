@@ -7,14 +7,14 @@
     <!-- /top tiles -->
     <div id="dashboardsec">
     <?php //print_r($userdata); 
-    if(($userdata['role'] !=='') && ($userdata['role'] == 3)){ ?>
+    if(isset($userdata['role']) && ($userdata['role'] !=='') && ($userdata['role'] == 3)){ ?>
     <h1>Welcome to Sun Pharma Science Foundation Admin Panel</h1>
     <?php } ?>
 
     <div class="menu_section">
                
                 <ul class="nav side-menu">
-                <?php  if(($userdata['role'] !=='') && ($userdata['role'] == 3)){?>
+                <?php  if(isset($userdata['role']) && ($userdata['role'] !=='') && ($userdata['role'] == 3)){?>
                   <li><a href="<?php echo base_url();?>/admin/user">
                     <i class="fa fa-user"></i> Users </a>
                   </li>
@@ -46,7 +46,7 @@
                     </a>
                   </li>
                   <?php } ?>
-                   <?php  if(($userdata['role'] !=='') && ($userdata['role'] == 1)){ ?>
+                   <?php  if(isset($userdata['role']) && ($userdata['role'] !=='') && ($userdata['role'] == 1)){ ?>
                     <li><a href="<?php echo base_url();?>/jury/nominations">
                       <i class="fa fa-solid fa-users"></i> Nominations </a>
                     </li>

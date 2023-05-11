@@ -485,36 +485,29 @@ class User extends BaseController
     public function resetpassword($id = '')
     {
 
-                if (strtolower($this->request->getMethod()) == "post") {  
+        $this->validation = $this->validate($this->validation_rules('change_password',$id));
+        
+        if($this->validation) {
+
+            if (strtolower($this->request->getMethod()) == "post") {  
+                
+                    $newPassword     = $this->request->getPost('new_password');
+                    $id              = $this->request->getPost('id');
                     
-                    $this->validation->setRules($this->validation_rules('change_password',$id));
+                    $ins_data = array();
+                    $ins_data['password']  = md5($newPassword);
 
-                    if(!$this->validation->withRequest($this->request)->run()) {
-                        $this->data['validation'] = $this->validator;
+                    $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
+                    
+                    if(!empty($id)){
+                        $this->session->setFlashdata('msg', 'Password Updated Successfully!');
+                        $ins_data['updated_date']  =  date("Y-m-d H:i:s");
+                        $ins_data['updated_id']    = $this->data['userdata']['login_id'];
+                        $this->userModel->update(array("id" => $id),$ins_data);
                     }
-                    else
-                    {     
+                    return redirect()->route('admin/user');
+                }
 
-                        $newPassword     = $this->request->getPost('new_password');
-                        $id              = $this->request->getPost('id');
-
-                        $ins_data = array();
-                        $ins_data['password']  = md5($newPassword);
-
-                        $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
-                        
-                        if(!empty($id)){
-                            $this->session->setFlashdata('msg', 'Password Updated Successfully!');
-                            $ins_data['updated_date']  =  date("Y-m-d H:i:s");
-                            $ins_data['updated_id']    = $this->data['userdata']['login_id'];
-                            $this->userModel->update(array("id" => $id),$ins_data);
-                        }
-                        
-                  //  if(isset($userData['email']) && !empty($userData['email'])) 
-                      //  $this->sendMail($userData['email'],$newPassword);
-
-                        return redirect()->route('admin/user');
-                   }
             }
             else
             {  
@@ -522,8 +515,10 @@ class User extends BaseController
                 $editdata['confirm_password']   = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):'';
                 $editdata['id']                 = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;   
             } 
-
-     
+    
+            if($this->request->getPost())
+             $this->data['validation'] = $this->validator;
+    
             $this->data['editdata'] = $editdata;
 
             return  render('admin/user/resetpassword',$this->data);

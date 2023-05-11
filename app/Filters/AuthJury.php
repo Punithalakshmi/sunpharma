@@ -31,6 +31,7 @@ class AuthJury implements FilterInterface
             else
             {
                 if(!empty($segment) && ($segment == 'jury')){
+                    $session->remove('userdata');
                     return redirect()->to('/jury/access');
                 }
             }

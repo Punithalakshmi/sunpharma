@@ -4,11 +4,8 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 
-
-
 class Login extends BaseController
 {
-    
     
     public function index()
     {
@@ -124,15 +121,15 @@ class Login extends BaseController
 
                     if(is_array($userData)){
                             //check update the time while sending email
-                            $updatedTime = $this->userModel->update($userData['id'],array("updated_time" => date("Y-m-d H:i:s")));
+                          //  $updatedTime = $this->userModel->update($userData['id'],array("updated_time" => date("Y-m-d H:i:s")));
 
-                            if($updatedTime){
+                           // if($updatedTime){
                                 $to = $email;
                                 $subject  = "Reset Password Link - Sunpharma Science Foundation";
                                 $token    = $userData['id'];
                                 $message  = "Hi  ".ucfirst($userData['firstname']).",<br/></br>";
                                 $message .= 'Your reset password request has been received. Please click the below link to reset your password. <br/><br/>';
-                                $message .= '<a href="'.base_url().'/'.$uri.'/update_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
+                                $message .= '<a href="'.base_url().'/'.$this->data['uri'].'/update_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
                                 $message .= 'Thanks,<br/>';
 
                                $isMailSent =  sendMail($email,$subject,$message);
@@ -144,11 +141,11 @@ class Login extends BaseController
                                {
                                 $this->session->setFlashdata('msg', 'Unable to send mail');
                                }
-                            }  
-                            else
-                            {
-                                $this->session->setFlashdata('msg', 'User not found for this mail id!');
-                            }
+                            // }  
+                            // else
+                            // {
+                            //     $this->session->setFlashdata('msg', 'User not found for this mail id!');
+                            // }
                     }
                     else
                     {
@@ -176,55 +173,47 @@ class Login extends BaseController
         $editdata['password'] = ($this->request->getPost('password'))?$this->request->getPost('password'):"";
         $editdata['confirm_password'] = ($this->request->getPost('confirm_password'))?$this->request->getPost('confirm_password'):"";
        
-      //  $token = urldecode(base64_decode($token));
-        $editdata['token']  = $id;
+     
+          $editdata['token']  = $id;
 
             $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
             $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
 
-            if(is_array($userData)){
-                //check if expired the link
-                $checkExpiredTime = $userData['updated_time'];
+             if(is_array($userData)  && count($userData) > 0){
+           
+                $this->validation->setRules($this->reset_password_validation_rules(),$this->resetPasswordValidationMessages());
+                  
+                if(strtolower($this->request->getMethod()) == 'post'){
 
-                if(checkExpireTime($checkExpiredTime)){
-            
-                 if(strtolower($this->request->getMethod()) == 'post'){
-
-                    $this->validation->setRules($this->reset_password_validation_rules(),$this->resetPasswordValidationMessages());
-                    
                     if(!$this->validation->withRequest($this->request)->run()) {
                         $this->data['validation'] = $this->validation;
                     }
                     else
                     {
-                        $password = $this->request->getPost('password');
-                        $update_data = array();
-                        $update_data['password'] = md5($password);
-                        $upd = $this->userModel->update(array("id" => $userData['id']),$update_data);
-                        if($upd){
-                            $this->session->setFlashdata('success','Password updated Sccessfully');
-                            return redirect()->to($this->redirectUrl);
-                        }
-                        else
-                        {
-                            $this->session->setFlashdata('error','Unable to reset the password Please try again!');
-                            return redirect()->to($this->redirectUrl);
-                        }
-                    }    
+
+                            $password = $this->request->getPost('password');
+                            $update_data = array();
+                            $update_data['password'] = md5($password);
+                            $upd = $this->userModel->update(array("id" => $userData['id']),$update_data);
+                            if($upd){
+                                $this->session->setFlashdata('success','Password updated Sccessfully');
+                                return redirect()->to($this->redirectUrl);
+                            }
+                            else
+                            {
+                                $this->session->setFlashdata('error','Unable to reset the password Please try again!');
+                                return redirect()->to($this->redirectUrl);
+                            }
+                     } 
+                   }    
                 }
-
-             }
-             else
-             {
-                $this->session->setFlashdata('msg','Reset password link was expired!');   
-             }
-
-            }
-            else
-            {
-                $this->session->setFlashdata('msg','Unable to find the user account');
-            } 
+                else
+                {
+                    $this->session->setFlashdata('msg','Unable to find the user account');
+                } 
         
+        // if($this->request->getPost())
+        //   $this->data['validation'] = $this->validator;
 
         $this->data['editdata'] = $editdata;
         return render('admin/reset_password',$this->data);

@@ -1103,7 +1103,8 @@ class Nomination extends BaseController
 
             $table->addRow(900);
             $table->addCell(2000, $fancyTableCellStyle)->addText('Applicant Photo', $fancyTableFontStyle);
-            $table->addCell(2000)->addImage($uploadDir.$nomineeData['nominator_photo'],array(
+            $source = file_get_contents($uploadDir.$nomineeData['nominator_photo']);
+            $table->addCell(2000)->addImage($source,array(
                 'positioning' => 'relative',
                 'marginTop' => -1,
                 'marginLeft' => 1,

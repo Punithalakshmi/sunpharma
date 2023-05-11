@@ -95,6 +95,7 @@ abstract class BaseController extends Controller
         $this->data['userdata']    = getSessionData();
         $this->role                = getUserRole();
         $this->redirectUrl         = $this->data['uri'].'/login';
+        $this->data['logoUrl']     = (isset($this->data['userdata']['role']) && ($this->data['userdata']['role'] == 3))?'/admin':'/jury/nominations';
 
     }
 }

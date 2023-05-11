@@ -1,5 +1,5 @@
 <?php if(is_array($userdata)):  
-          $logoUrl = ($userdata['role'] == 3)?'/admin':'/admin/nominee/lists';
+         
      ?>
     <div class="container body">
 
@@ -24,7 +24,7 @@
                
                 <ul class="nav side-menu">
                   
-                  <?php if($userdata['role'] == 3){ ?>
+                  <?php if(isset($userdata['role']) && $userdata['role'] == 3){ ?>
                     <li><a href="<?php echo base_url();?>/admin/user">
                     <i class="fa fa-user"></i> Users </a>
                   </li>
@@ -60,7 +60,7 @@
                       <i class="fa fa-solid fa-trophy"></i> Posting Winners 
                     </a>
                   </li>
-                  <?php } else if($userdata['role'] == 1){ ?>
+                  <?php } else if(isset($userdata['role']) && $userdata['role'] == 1){ ?>
                     <li><a href="<?php echo base_url();?>/jury/nominations">
                       <i class="fa fa-solid fa-users"></i> Nominations </a>
                     </li>
@@ -94,9 +94,9 @@
                     
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo base_url();?>/admin/profile"><i class="fa fa-user pull-right"></i> Profile</a></li>
-                    <li><a href="<?php echo base_url();?>/admin/reset_password/<?=$userdata['id'];?>"><i class="fa fa-user pull-right"></i> Reset Password</a></li>
-                    <li><a href="<?php echo base_url();?>/admin/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo base_url();?>/<?=$uri;?>/profile"><i class="fa fa-user pull-right"></i> Profile</a></li>
+                    <li><a href="<?php echo base_url();?>/<?=$uri;?>/reset_password/<?=$userdata['id'];?>"><i class="fa fa-user pull-right"></i> Reset Password</a></li>
+                    <li><a href="<?php echo base_url();?>/<?=$uri;?>/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

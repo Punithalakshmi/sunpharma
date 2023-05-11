@@ -278,7 +278,7 @@ class Nominee extends BaseController
         
         $average_rating   = $this->ratingModel->getNomineeAverageRating($nominee_id,$userID,$role)->getRowArray();
 
-        $this->data['average_rating'] = $average_rating['avg_rating'];
+        $this->data['average_rating'] = (isset($average_rating['avg_rating']) && !empty($average_rating['avg_rating']))?$average_rating['avg_rating']:0;
 
         $jury_id = '';
         if($this->data['userdata']['role'] == 1){

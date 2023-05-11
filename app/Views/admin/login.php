@@ -46,7 +46,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                    <a href="<?=base_url();?>/<?=$uri;?>/forgot_password"><u>Forgot Password</u></a>         
+                    <a href="<?=base_url();?>/<?=$uri;?>/forgot_password">Forgot Password</a>         
                  </div>
             </div>
          </div>

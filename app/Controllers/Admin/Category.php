@@ -187,17 +187,14 @@ class Category extends BaseController
     public function delete($id='')
     {
         if (strtolower($this->request->getMethod()) == "post") {  
-
-          
-                    $this->categoryModel->delete(array("id" => $id));
-                    if($this->request->isAJAX()){
-                            
-                        return $this->response->setJSON([
-                            'status'            => 'success',
-                            'message'              => 'Award Type deleted Successfully'
-                        ]); 
-                    }
-            
+            $this->categoryModel->delete(array("id" => $id));
+            if($this->request->isAJAX()){
+                    
+                return $this->response->setJSON([
+                    'status'            => 'success',
+                    'message'              => 'Award Type deleted Successfully'
+                ]); 
+            }
         }    
     }
 }

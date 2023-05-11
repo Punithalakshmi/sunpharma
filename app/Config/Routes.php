@@ -257,7 +257,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
 
 
 $routes->group("jury", ["namespace" => "App\Controllers\Admin"] , function($routes){
-	 
+    $routes->get("/", "Dashboard::index",['filter' =>'auth_jury']);
     // URL - /jury
     $routes->post("login/loginAuth", "Login::loginAuth");
 
@@ -269,6 +269,12 @@ $routes->group("jury", ["namespace" => "App\Controllers\Admin"] , function($rout
 
     $routes->post('update_password/(:any)','Login::reset_password/$1');
     $routes->get('update_password/(:any)','Login::reset_password/$1');
+
+    $routes->get("profile", "User::profile",['filter' =>'auth_jury']);
+    $routes->post("profile", "User::profile",['filter' =>'auth_jury']);
+
+    $routes->get("reset_password/(:any)", "User::resetpassword/$1",['filter' =>'auth_jury']);
+    $routes->post("reset_password", "User::resetpassword",['filter' =>'auth_jury']);
 
     $routes->get('nominations','Nominee::nominee_lists_of_jury',['filter' =>'auth_jury']);
 
