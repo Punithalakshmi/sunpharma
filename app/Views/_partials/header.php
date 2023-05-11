@@ -61,7 +61,7 @@
                     </a>
                   </li>
                   <?php } else if($userdata['role'] == 1){ ?>
-                    <li><a href="<?php echo base_url();?>/admin/nominee/lists">
+                    <li><a href="<?php echo base_url();?>/jury/nominations">
                       <i class="fa fa-solid fa-users"></i> Nominations </a>
                     </li>
                       <!-- <li><a href="<?php //echo base_url();?>/admin/nominee/ratings">
@@ -75,7 +75,7 @@
             </div>
             <!-- /sidebar menu -->
 
-            <p class="copyrightadmin" style="color: var(--bs-gray-400);font-size: 13px;">Copyright © 2022 Sun Pharma Science Foundation.</p>
+            <p class="copyrightadmin" style="color: var(--bs-gray-400);font-size: 13px;">Copyright © <?=date('Y');?> Sun Pharma Science Foundation.</p>
           </div>
         </div>
 

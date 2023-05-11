@@ -11,4 +11,8 @@ class Dashboard extends BaseController
         return render('admin/home',$this->data);  
     }
 
+    public function access()
+    {
+        return render('admin/access_denied',$this->data);  
+    }
 }

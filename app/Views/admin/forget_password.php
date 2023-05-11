@@ -10,7 +10,7 @@
               
                 <div class="col-md-6 col-xl-4">
                     <div>
-                        <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/admin/forgot_password">
+                        <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/<?=$uri;?>/forgot_password">
                         <?=csrf_field(); ?>
                             <div class="clearfix"></div>
                             <div class="mb-3">

@@ -22,7 +22,7 @@ if ( ! function_exists('getSessionData'))
         {
             $uri  = current_url(true);
             $segment =  $uri->getSegment(1);
-            return $sessData = ($segment=='admin')?$session->get('userdata'):$session->get('fuserdata');
+            return $sessData = ($segment=='admin' || $segment=='jury')?$session->get('userdata'):$session->get('fuserdata');
         }  
     }
 }

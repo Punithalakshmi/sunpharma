@@ -48,19 +48,13 @@ if ( ! function_exists('finalNominationSubmit'))
    {
         function finalNominationSubmit($name='',$file='')
         {
-
             $email    =  \Config\Services::email();
-
             $login_url = base_url().'/admin';
 
             $subject  = 'Final Submission of Nomination';
             $message   = 'Hi,';
             $message  .= '<br/><br/>';
-            $message  .= 'The user <b>'.ucfirst($name).'</b> has completed the nomination process. ';
-            //$message  .= 'Please <a href="'.$login_url.'">Click Here</a> to login and check the nomination.';
-           // $message  .= '<br/><br/>';
-          //  $message  .= '<b>Please check the attachment.<b/>';
-
+            $message  .= 'The user <b>'.ucfirst($name).'</b> has completed the nomination process. ';  
             $message .= "<br/><br/><br/>";
             $message .= "Thanks & Regards,";
             $message .= "<br/>";

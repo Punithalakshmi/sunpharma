@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 
 
+
 class Login extends BaseController
 {
     
@@ -18,12 +19,10 @@ class Login extends BaseController
     public function loginAuth()
     {
 
-
             if (strtolower($this->request->getMethod()) == "post") {  
                 
                  $this->validation->setRules($this->validation_rules());
                  
-
                     if(!$this->validation->withRequest($this->request)->run()) {
                         $this->data['validation'] = $this->validation;
                     }
@@ -34,7 +33,6 @@ class Login extends BaseController
                
                         $data      = $this->userModel->where('username', $username)->first();
 
-                       
                         if($data)
                         {
                             $pass = $data['password'];
@@ -56,7 +54,7 @@ class Login extends BaseController
                                 setSessionData('userdata',$ses_data);
 
                                 if( $data['role'] == 1 )
-                                  return redirect()->to('admin/nominee/lists');
+                                  return redirect()->to('jury/nominations');
                                 else
                                   return redirect()->to('admin/dashboard');
                             }
@@ -94,7 +92,7 @@ class Login extends BaseController
     public function logout()
     {
         $this->session->remove('userdata');
-        return redirect()->to('admin/login');
+        return redirect()->to($this->redirectUrl);
     }
 
     public function forget_password()
@@ -134,7 +132,7 @@ class Login extends BaseController
                                 $token    = $userData['id'];
                                 $message  = "Hi  ".ucfirst($userData['firstname']).",<br/></br>";
                                 $message .= 'Your reset password request has been received. Please click the below link to reset your password. <br/><br/>';
-                                $message .= '<a href="'.base_url().'/admin/update_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
+                                $message .= '<a href="'.base_url().'/'.$uri.'/update_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
                                 $message .= 'Thanks,<br/>';
 
                                $isMailSent =  sendMail($email,$subject,$message);
@@ -168,12 +166,11 @@ class Login extends BaseController
        
         $this->data['editdata'] = $editdata;
         
-        return  render('frontend/forget_password',$this->data);
+        return  render('admin/forget_password',$this->data);
     }
 
     public function reset_password($id='')
     {
-
         $userData = array();
         $this->session->setFlashdata('msg','');
         $editdata['password'] = ($this->request->getPost('password'))?$this->request->getPost('password'):"";
@@ -181,8 +178,6 @@ class Login extends BaseController
        
       //  $token = urldecode(base64_decode($token));
         $editdata['token']  = $id;
-
-        
 
             $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
             $userData = $this->userModel->getListsOfUsers($id)->getRowArray();
@@ -202,23 +197,19 @@ class Login extends BaseController
                     }
                     else
                     {
-
                         $password = $this->request->getPost('password');
-
                         $update_data = array();
                         $update_data['password'] = md5($password);
                         $upd = $this->userModel->update(array("id" => $userData['id']),$update_data);
-
                         if($upd){
                             $this->session->setFlashdata('success','Password updated Sccessfully');
-                            return redirect()->to('login');
+                            return redirect()->to($this->redirectUrl);
                         }
                         else
                         {
                             $this->session->setFlashdata('error','Unable to reset the password Please try again!');
-                            return redirect()->to('login');
+                            return redirect()->to($this->redirectUrl);
                         }
-
                     }    
                 }
 
@@ -236,7 +227,7 @@ class Login extends BaseController
         
 
         $this->data['editdata'] = $editdata;
-        return render('frontend/reset_password',$this->data);
+        return render('admin/reset_password',$this->data);
              
     }
 
@@ -267,7 +258,6 @@ class Login extends BaseController
 
     public function forgotPasswordValidationMessages()
     {
-
         $validationMessages = array("email" => array("required" => "Please enter email","valid_email" => "Email should be valid!"),
                                     
                               );
@@ -278,11 +268,8 @@ class Login extends BaseController
 
     public function resetPasswordValidationMessages()
     {
-
         $validationMessages = array("password" => array("required" => "Please enter new password"),
-                                     "confirm_password" => array("confirm_password" => "Please enter confirm new password","matches" => "Please enter correct password")
-                                    
-                              );
+                                     "confirm_password" => array("confirm_password" => "Please enter confirm new password","matches" => "Please enter correct password") );
 
          return $validationMessages;
     }

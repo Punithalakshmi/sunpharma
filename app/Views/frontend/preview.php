@@ -696,7 +696,7 @@
                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) <span class="required" style="color:red;">*</span></label>
+                                        <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-<?=date('Y');?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['statement_of_duly_signed_by_nominee'])): ?>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['statement_of_duly_signed_by_nominee'];?>" target="_blank">
@@ -712,7 +712,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </label> -->
+                                      
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="statement_of_duly_signed_by_nominee" type="file" id="statement_of_duly_signed_by_nominee" value="<?=$editdata['statement_of_duly_signed_by_nominee'];?>">   
@@ -800,7 +800,7 @@
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Year of Passing <span class="required" style="color:red;">*</span></label>
                                             <div>
-                                              <?=$user['year_of_passing'];?>
+                                              <?=(isset($user['year_of_passing']) && !empty($user['year_of_passing']))?$user['year_of_passing']:'';?>
                                             </div>
                                     </div>
                                     <?php if($user['is_submitted'] == 0): ?> 
@@ -808,11 +808,8 @@
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Year of Passing </label> -->
                                             <div>
-                                                  <label class="form-check-label question__label noLabel">
-                                                    <input class="form-control mb-3 required" name="year_of_passing" type="text" id="year_of_passing" value="<?=$editdata['year_of_passing'];?>">   
-                                                    <br>
-                                                </label>
-                                                
+                                                 <input class="form-control mb-3 required" name="year_of_passing" type="text" id="year_of_passing" value="<?=$editdata['year_of_passing'];?>">   
+                                                    
                                             </div>
                                             <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('year_of_passing')) {?>
@@ -826,7 +823,7 @@
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Number of Attempts <span class="required" style="color:red;">*</span></label>
                                             <div>
-                                              <?=$user['number_of_attempts'];?>
+                                              <?=(isset($user['number_of_attempts']) && !empty($user['number_of_attempts']))?$user['number_of_attempts']:'';?>
                                             </div>
                                     </div>
                                     <?php if($user['is_submitted'] == 0): ?>
@@ -834,12 +831,8 @@
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Number of Attempts </label> -->
                                                 <div>
-                                                  <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" name="number_of_attempts" type="text" id="number_of_attempts" value="<?=$editdata['number_of_attempts'];?>">   
-                                                    <br>
-                                                </label>
-                                                
-                                            </div>
+                                                </div>
                                             <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('number_of_attempts')) {?>
                                                 <?= $error = $validation->getError('number_of_attempts'); ?>

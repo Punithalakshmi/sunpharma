@@ -26,6 +26,7 @@ class Filters extends BaseConfig
         'auth'          => \App\Filters\Auth::class,
         'check_event'  => \App\Filters\checkEventStatus::class,
         'check_date'   => \App\Filters\checkNominationDate::class,
+        'auth_jury'    => \App\Filters\AuthJury::class,
     ];
 
     /**

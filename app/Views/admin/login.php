@@ -4,7 +4,7 @@
     <section class="login_content">
     <img class="loginlogo" width="260" src="<?=base_url();?>/images/logo.jpg" alt=""> 
                   
-    <form name="adminLogin" action="<?php echo base_url(); ?>/admin/login/loginAuth" method="post">
+    <form name="adminLogin" action="<?php echo base_url(); ?>/<?=$uri;?>/login/loginAuth" method="post">
     <?=csrf_field(); ?>
         <h1>Login</h1>
         <div>
@@ -36,9 +36,9 @@
                 <?=session()->getFlashdata('msg') ?>
                 </h6>  
         <?php endif;?>
-        <div>
+        <div class="form-group mb-3">
         
-            <input type="submit" name="submit" value="LOGIN" class="btn btn-default submit" >
+        <button class="btn btn-primary btn-sm d-block create-account w-100" name="submit" type="submit">Login</button>
         </div>
 
         <div class="clearfix"></div>
@@ -46,13 +46,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                   <a  href="<?=base_url();?>/admin/forgot_password"><u>Forgot Password</u></a>
-                          
+                    <a href="<?=base_url();?>/<?=$uri;?>/forgot_password"><u>Forgot Password</u></a>         
                  </div>
             </div>
-        </div>
- 
-    </form>
+         </div>
+      </form>
     </section>
 </div>
-</div></div>
+</div>
+</div>

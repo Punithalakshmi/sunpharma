@@ -89,12 +89,12 @@ abstract class BaseController extends Controller
         $this->validation  = \Config\Services::validation();
       //  $this->security    = \Config\Services::security();
 
-        $this->uri  = current_url(true);
+        $this->uri                 = current_url(true);
         $this->data['current_url'] = $this->uri;
-        $this->data['uri'] = $this->uri->getSegment(1); 
-        $this->data['userdata'] = getSessionData();
-        $this->role     = getUserRole();
-       
+        $this->data['uri']         = $this->uri->getSegment(1); 
+        $this->data['userdata']    = getSessionData();
+        $this->role                = getUserRole();
+        $this->redirectUrl         = $this->data['uri'].'/login';
 
     }
 }

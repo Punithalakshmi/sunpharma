@@ -129,6 +129,7 @@ $routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
     $routes->get("/", "Dashboard::index",['filter' =>'auth']);
+    $routes->get("access", "Dashboard::access");
 
     // URL - /admin/about
     $routes->get("dashboard", "Dashboard::index",['filter' =>'auth']);
@@ -168,7 +169,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post("nominee", "Nominee::index",['filter' =>'auth']);
     $routes->get('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
     $routes->post('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
-    $routes->get('nominee/lists','Nominee::nominee_lists_of_jury',['filter' =>'auth']);
+    
     $routes->post('nominee/assignJury','Nominee::assignJury',['filter' =>'auth']);
     $routes->post('nominee/view','Nominee::view',['filter' =>'auth']);
     $routes->get('nominee/ratings','Nominee::ratings',['filter' =>'auth']);
@@ -253,6 +254,28 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('winners/delete/(:any)','Winners::delete/$1',['filter' =>'auth']);
 
 });
+
+
+$routes->group("jury", ["namespace" => "App\Controllers\Admin"] , function($routes){
+	 
+    // URL - /jury
+    $routes->post("login/loginAuth", "Login::loginAuth");
+
+    $routes->get("login", "Login::index");
+    $routes->get("logout", "Login::logout");
+
+    $routes->post('forgot_password','Login::forget_password');
+    $routes->get('forgot_password','Login::forget_password');
+
+    $routes->post('update_password/(:any)','Login::reset_password/$1');
+    $routes->get('update_password/(:any)','Login::reset_password/$1');
+
+    $routes->get('nominations','Nominee::nominee_lists_of_jury',['filter' =>'auth_jury']);
+
+    $routes->get("access", "Dashboard::access");
+
+});
+
 
 /*
  * --------------------------------------------------------------------

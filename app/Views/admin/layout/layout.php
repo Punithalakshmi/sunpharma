@@ -38,7 +38,7 @@
     <?=link_tag('/build/css/custom.min.css');?>
     <?=link_tag('/css/admin/custom-admin-iz.css');?>
 
-    
+      
       <script>
        var base_url = '<?=base_url();?>';
 

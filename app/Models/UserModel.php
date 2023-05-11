@@ -137,16 +137,17 @@ class UserModel extends Model {
         return $query = $builder->get();
     }
 
-    public function getListsNominations()
+    public function getListsNominations($jury_id='')
     {
         $builder = $this->table('users');
         $builder->select('users.*,nominations.end_date,category.name as category_name,nominee_details.registration_no,nominations.title,awards_creation_category.name as main_category_name');
         $builder->join('nominee_details','nominee_details.nominee_id = users.id');
         $builder->join('category','category.id=nominee_details.category_id');
         $builder->join('nominations','nominations.id = users.award_id AND nominations.status=1');
-        $builder->join('jury_mapping','jury_mapping.jury_id=users.id');
+        $builder->join('jury_mapping','jury_mapping.award_id=nominations.id');
         $builder->join('awards_creation_category','awards_creation_category.id=nominations.main_category_id');
         $builder->where("users.role",'2');
+        $builder->where("jury_mapping.jury_id",$jury_id);
         $builder->where("users.status",'Approved');
         $builder->where("nominee_details.is_submitted",1);
         return $query = $builder->get();

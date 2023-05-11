@@ -4,7 +4,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
  
-class Auth implements FilterInterface
+class AuthJury implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
@@ -17,24 +17,23 @@ class Auth implements FilterInterface
         }
 
         if((is_array($sessionData) && count($sessionData) == 0 && !isset($sessionData['isLoggedIn'])) || empty($sessionData)){
-            return redirect()->to('/admin/login'); 
+            return redirect()->to('/jury/login'); 
         }
         else
         {
-            $this->uri  = current_url(true);
-            $segment    =  $this->uri->getSegment(1);
-
-            if(isset($sessionData['role']) && ($sessionData['role'] == 3)){
+             $this->uri  = current_url(true);
+             $segment    =  $this->uri->getSegment(1);
+            
+            if(isset($sessionData['role']) && ($sessionData['role'] == 1)){
+                
                 return true;
             }
             else
             {
-                if(!empty($segment) && ($segment == 'admin')){
-                    return redirect()->to('/admin/access');
+                if(!empty($segment) && ($segment == 'jury')){
+                    return redirect()->to('/jury/access');
                 }
             }
-            
-           
         }
     }
  

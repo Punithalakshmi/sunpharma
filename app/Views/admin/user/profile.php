@@ -24,6 +24,8 @@
                     <br />
                     <form id="demo-form2" action="<?php echo base_url();?>/admin/profile" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
+                      <input type="hidden" name="user_role" value="<?=$editdata['role'];?>"  >
+
                       <?= csrf_field(); ?>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>

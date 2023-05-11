@@ -47,7 +47,7 @@
                   </li>
                   <?php } ?>
                    <?php  if(($userdata['role'] !=='') && ($userdata['role'] == 1)){ ?>
-                    <li><a href="<?php echo base_url();?>/admin/nominee/lists">
+                    <li><a href="<?php echo base_url();?>/jury/nominations">
                       <i class="fa fa-solid fa-users"></i> Nominations </a>
                     </li>
                   <?php  } ?>
