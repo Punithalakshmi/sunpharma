@@ -193,7 +193,8 @@ class UserModel extends Model {
         $builder = $this->table('users');
         $builder->select('users.*,users.id as user_id,roles.name as role_name');
         $builder->join('roles','roles.id = users.role');
-        $builder->join('nominee_details', 'nominee_details.nominee_id = users.id','left');
+        if(!empty($filter['year']))
+           $builder->join('nominee_details', 'nominee_details.nominee_id = users.id','left');
 
         if(!empty($filter['role']))
          $builder->where('users.role',$filter['role']);
@@ -205,7 +206,7 @@ class UserModel extends Model {
          $builder->where('users.email',$filter['email']);
          
         if(!empty($filter['firstname']))
-         $builder->where('users.firstname',$filter['firstname']);
+          $builder->where('users.firstname',$filter['firstname']);
 
          if(!empty($filter['year']))
           $builder->where('nominee_details.nomination_year',$filter['year']); 

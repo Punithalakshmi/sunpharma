@@ -193,9 +193,9 @@
                           <select class="select2_single form-control" name="user_role" tabindex="-1" >
                             <option value=""></option>
                             <?php if(is_array($roles)):
-                                    foreach($roles as $rvalue): ?>
+                                    foreach($roles as $rvalue): if($rvalue['id']!=2): ?>
                             <option value="<?=$rvalue['id'];?>" <?=set_select('user_role',$rvalue['id'],(isset($editdata['role']) && ($editdata['role']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
-                            <?php endforeach;
+                            <?php endif; endforeach;
                                   endif;
                                   ?>
                           </select>

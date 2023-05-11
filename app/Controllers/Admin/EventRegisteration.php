@@ -235,49 +235,56 @@ class EventRegisteration extends BaseController
 
     public function delete($id='')
     {
-        if (strtolower($this->request->getMethod()) == "post") {  
           
-          $registeredUser = $this->registerationModel->getRegisteredUsers($id)->getRowArray(); 
+          if($this->request->isAJAX()){     
+            
+            $registeredUser = $this->registerationModel->getRegisteredUsers($id)->getRowArray(); 
 
-          if(is_array($registeredUser) && count($registeredUser) > 0) { 
+            if(is_array($registeredUser) && count($registeredUser) > 0) { 
 
-             $event  =  $this->workshopModel->getLists($registeredUser['event_id'])->getRowArray();
-
-             if(!isNominationExpired($event['end_date'])){
-                $status  = 'error';
-                $message = ucfirst($registeredUser['firstname']).' registered this event '.$event['title'].'. The event is not yet complete. you can delete this user after finish the event.';
-             }
-             else
-             {
                 $this->registerationModel->delete(array("id" => $id));
                 $status  = 'success';
                 $message = 'Registration deleted Successfully';
-             }
-          }
-          else
-          {
-
-          }
-
-          if($this->request->isAJAX()){         
+            }
+            
             return $this->response->setJSON([
                 'status'            => $status,
                 'message'           => $message
             ]); 
           }
-       }
        
     }
 
-    public function bulkEmails()
+    public function checkIfEventIsCompleted($id = '')
     {
-        
-    }
+        $registeredUser = $this->registerationModel->getRegisteredUsers($id)->getRowArray(); 
 
+        if(is_array($registeredUser) && count($registeredUser) > 0) { 
+
+           $event  =  $this->workshopModel->getLists($registeredUser['event_id'])->getRowArray();
+          //  print_r($event); die;
+           if(!isNominationExpired($event['end_date'])){
+                $status  = 'error';
+                $message = ucfirst($registeredUser['firstname']).' registered this event '.$event['title'].'. The event is not yet complete. Do you want to delete this user?';
+           }
+           else
+           {
+                $this->registerationModel->delete(array("id" => $id));
+                $status  = 'success';
+                $message = 'Registration deleted Successfully'; 
+           }
+        }
+
+
+        return $this->response->setJSON([
+            'status'            => $status,
+            'message'           => $message
+        ]);
+           
+    }
+   
     public function export()
     {
-
-
 
         if (strtolower($this->request->getMethod()) == "post") {  
 

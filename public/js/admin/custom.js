@@ -221,7 +221,6 @@ function nominee_approve(type = '',id='',remarks)
               }
             }
           }
-
         });
      }
   });
@@ -325,14 +324,12 @@ function nominee_approve(type = '',id='',remarks)
  }
 
 function userDelete(type = '',id='',url = '',e)
-{
-   
+{ 
   $('#loader').removeClass('block');
-    var msg = 'Are you sure you want to delete this '+type+'?';
+  var msg = 'Are you sure you want to delete this '+type+'?';
 
    // CSRF Hash  
-   var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
-
+  var csrfHash = $("input[name='app_csrf']").val(); // CSRF hash  
   $.confirmModal('<h2>'+msg+'</h2>', {
     messageHeader: '',
     backgroundBlur: ['.container'],
@@ -340,42 +337,151 @@ function userDelete(type = '',id='',url = '',e)
   },function(el) {
         if(el){
                 $('#loader').removeClass('hidden');
-                  $.ajax({
-                      url : base_url+url+'/'+id,
-                      type: "POST",
-                      data : {'app_csrf':csrfHash},
-                      dataType:'json',
-                      success: function(data, textStatus, jqXHR)
-                      {
-                        $('#loader').addClass('hidden');
-                            if(data.status && data.status == 'success'){
-                              if(data.message)
-                                successMessageAlert(data.message);
-                            } 
-                            else
-                            {
-                               errorMessageAlert(data.message);
-                            }  
-                      },
-                      error: function (jqXHR, textStatus, errorThrown)
-                      {
-                        $('#loader').addClass('hidden');
-                        if(textStatus && textStatus == 'error'){
-                          if(jqXHR.responseJSON.message){
-                            errorMessageAlert(jqXHR.responseJSON.message);
-                            
-                           
-                          }
-                        }
-                      }
-                  });
-                }  
-                else
-                {
-                  return false;
-                }
-             }
-          );    
+                  if(type == 'user')
+                    checkIfNominationClosed(url,id);
+                  else if(type == 'registration')  
+                    checkIfEventClosed(url,id);
+                  else
+                    deleteData(csrfHash,url,id);
+            }  
+            else
+            {
+              return false;
+            }
+        }
+    );    
+}
+
+function checkIfNominationClosed(url,id)
+{
+  $.ajax({
+    url : base_url+'/admin/user/checkIfNominationClosed/'+id,
+    type: "GET",
+    dataType:'json',
+    success: function(data, textStatus, jqXHR)
+    {
+      $('#loader').addClass('hidden');
+          if(data.status && data.status == 'success'){
+            if(data.message)
+              successMessageAlert(data.message);
+          } 
+          else
+          {
+              if(confirm(data.message)) {
+                userDeleteMt(url,id);
+              } 
+              else 
+              {
+                successMessageAlert('You have cancelled to delete the user!');
+              }   
+          }  
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+      $('#loader').addClass('hidden');
+      if(textStatus && textStatus == 'error'){
+        if(jqXHR.responseJSON.message){
+          errorMessageAlert(jqXHR.responseJSON.message);
+        }
+      }
+    }
+   });
+
+}
+
+
+function checkIfEventClosed(url,id)
+{
+  $.ajax({
+    url : base_url+'/admin/eventregisteration/checkIfEventIsCompleted/'+id,
+    type: "GET",
+    dataType:'json',
+    success: function(data, textStatus, jqXHR)
+    {
+      $('#loader').addClass('hidden');
+          if(data.status && data.status == 'success'){
+            if(data.message)
+              successMessageAlert(data.message);
+          } 
+          else
+          {
+              if(confirm(data.message)) {
+                userDeleteMt(url,id);
+              } 
+              else 
+              {
+                successMessageAlert('You have cancelled to delete the user!');
+              }    
+          }  
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+      $('#loader').addClass('hidden');
+      if(textStatus && textStatus == 'error'){
+        if(jqXHR.responseJSON.message){
+          errorMessageAlert(jqXHR.responseJSON.message);
+        }
+      }
+    }
+   });
+
+}
+
+function userDeleteMt(url = '',id='')
+{
+  $.ajax({
+    url : base_url+url+'/'+id,
+    type: "GET",
+    dataType:'json',
+    success: function(data, textStatus, jqXHR)
+    {
+      $('#loader').addClass('hidden');
+          if(data.status && data.status == 'success'){
+            if(data.message)
+              successMessageAlert(data.message);
+          } 
+          else
+          {
+             errorMessageAlert(data.message);
+          }  
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+      $('#loader').addClass('hidden');
+      if(textStatus && textStatus == 'error'){
+        if(jqXHR.responseJSON.message){
+          errorMessageAlert(jqXHR.responseJSON.message);
+        }
+      }
+    }
+  });
+}
+
+function deleteData(csrfHash,url,id)
+{
+  
+  $.ajax({
+    url : base_url+url+'/'+id,
+    type: "POST",
+    data : {app_csrf:csrfHash},
+    dataType:'json',
+    success: function(data, textStatus, jqXHR)
+    {
+      $('#loader').addClass('hidden');
+      if(data.message)
+        successMessageAlert(data.message);
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+      $('#loader').addClass('hidden');
+      if(textStatus && textStatus == 'error'){
+        if(jqXHR.responseJSON.message){
+          errorMessageAlert(jqXHR.responseJSON.message);     
+        }
+      }
+    }
+  });
+
 }
 
 

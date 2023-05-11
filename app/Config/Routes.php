@@ -158,6 +158,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post("user/delete/(:any)", "User::delete/$1",['filter' =>'auth']);
     $routes->get("user/changepassword/(:any)", "User::changepassword/$1",['filter' =>'auth']);
     $routes->post("user/changepassword", "User::changepassword",['filter' =>'auth']);
+    $routes->get("user/checkIfNominationClosed/(:any)", "User::checkIfNominationClosed/$1",['filter' =>'auth']);
+    
     
     $routes->get("profile", "User::profile",['filter' =>'auth']);
     $routes->post("profile", "User::profile",['filter' =>'auth']);
@@ -229,7 +231,9 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('eventregisteration/add/(:any)','EventRegisteration::add/$1',['filter' =>'auth']);
     $routes->get('eventregisteration/delete/(:any)','EventRegisteration::delete/$1',['filter' =>'auth']);
     $routes->post('eventregisteration/delete/(:any)','EventRegisteration::delete/$1',['filter' =>'auth']);
+    $routes->get('eventregisteration/checkIfEventIsCompleted/(:any)','EventRegisteration::checkIfEventIsCompleted/$1',['filter' =>'auth']);
 
+    
     $routes->get('nominee/extend/(:any)','Nominee::extend/$1',['filter' =>'auth']);
     $routes->post('nominee/extend','Nominee::extend',['filter' =>'auth']);
 

@@ -160,8 +160,7 @@ class EventRegistration extends BaseController
        // $count = $this->registerationModel->CountAll(); 
         $getLists = $this->registerationModel->getWhere(array('event_id' => $event_id));
         $count    = $getLists->getResultArray();
-        $ct = count($count) + 1;  
-
+        $ct       = count($count) + 1;  
         return 'SPSFN-'.$event_id.'-REG-'.$ct;
     }
 

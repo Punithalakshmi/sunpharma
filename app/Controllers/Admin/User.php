@@ -332,40 +332,55 @@ class User extends BaseController
 
 
     public function delete($id='')
-    {
-        
-        if (strtolower($this->request->getMethod()) == "post") {  
+    {  
+      //  if (strtolower($this->request->getMethod()) == "post") {  
 
            if($this->request->isAJAX()){
+ 
+                $this->userModel->delete(array("id" => $id));
+                $status  = "success";
+                $message = 'User deleted Successfully'; 
+                
+                return $this->response->setJSON([
+                    'status'    => $status,
+                    'message'   => $message
+                ]); 
+             }  
+        // }
+    }
 
-                    $userData = $this->userModel->getAwardData($id)->getRowArray();
+    public function checkIfNominationClosed($id)
+    {
+        $userData = $this->userModel->getAwardData($id)->getRowArray();
 
-                    if(is_array($userData) && count($userData) > 0) {
+        if(is_array($userData) && ($userData['role'] == 2)) {
 
-                        if(!isNominationExpired($userData['extend_date'])){
-                            $status  = 'error';
-                            $message = ucfirst($userData['firstname']).' registered this award '.$userData['title'].'. The award is not yet complete. you can delete this user after finish the nomination.';
-                         }
-                         else
-                         {
-                            $this->userModel->delete(array("id" => $id));
-                            $status  = "success";
-                            $message = 'User deleted Successfully'; 
-                         } 
-                        
-                        return $this->response->setJSON([
-                            'status'    => $status,
-                            'message'   => $message
-                        ]); 
-                 }
+             if(!isNominationExpired($userData['extend_date'])){
+                $status  = 'error';
+                $message = ucfirst($userData['firstname']).' registered this award '.$userData['title'].'. Nomination not yet close Do you want to delete this user?.';
              }
-         }
+             else
+             {
+                $this->userModel->delete(array("id" => $id));
+                $status  = "success";
+                $message = 'User deleted Successfully'; 
+             }
+        }
+        else
+        {
+            $this->userModel->delete(array("id" => $id));
+            $status  = "success";
+            $message = 'User deleted Successfully'; 
+        }  
 
+        return $this->response->setJSON([
+            'status'    => $status,
+            'message'   => $message
+        ]);  
     }
 
     public function changepassword($id='')
     {
-       
         $this->validation = $this->validate($this->validation_rules('change_password',$id));
         
         if($this->validation) {
@@ -420,20 +435,20 @@ class User extends BaseController
             $validation_rules = array(
                                             "firstname" => array("label" => "Firstname",'rules' => 'required'),
                                             "lastname" => array("label" => "Lastname",'rules' => 'required'),
-                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|checkUniqueEmailForExceptNominee['.$id.']'),
+                                            "email" => array("label" => "Email",'rules' => 'required|valid_email|checkUniqueEmailForRole['.$id.']'),
                                             "phonenumber" => array("label" => "Phonenumber",'rules' => 'required|numeric|max_length[10]'),
                                             
             );
         
             if($type == 'user'){
                 $validation_rules["user_role"] = array("label" => "Role",'rules' => 'required');
-                $validation_rules["username"] = array("label" => "Username",'rules' => 'required');
+                $validation_rules["username"] = array("label" => "Username",'rules' => 'required|checkUniqueUsernameForRole['.$id.']');
                
                 $validation_rules['status']  = array("label" => "Status",'rules' => 'required');
-                // if($id==''){
-                //     $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
-                //     $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
-                // }
+                if($id==''){
+                    $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
+                    $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
+                }
             }      
         }
         else
@@ -540,12 +555,13 @@ class User extends BaseController
 
         $validationMessages = array("firstname" => array("required" => "Please enter Firstname"),
                                     "lastname" => array("required" => "Please enter Lastname"),
-                                    "email" => array("required" => "Please enter Email","valid_email" => "Please enter valid email","checkUniqueEmailForExceptNominee"=>"Email already exists!"),
+                                    "email" => array("required" => "Please enter Email","valid_email" => "Please enter valid email","checkUniqueEmailForRole"=>"Email already exists!"),
                                     "phonenumber" => array("required" => "Please enter phonenumber","numeric"=>"Please enter number only!","max_length"=>"Enter 10 digits only"),
                                     "user_role" => array("required" => "Please select user role"),
-                                    "username" => array("required" => "Please enter username"),
+                                    "username" => array("required" => "Please enter username","checkUniqueUsernameForRole"=>"Username already exists!"),
                                     "status" => array("required" => "Please select status"),
-                                    //"password" =>
+                                    "password" => array("required" => "Please enter password"),
+                                    "confirm_password" => array("required" => "Please enter confirm password"),
                               );             
          return $validationMessages;
     }

@@ -83,6 +83,35 @@ class CustomValidation{
          }	
   
     } 
+
+    public function checkUniqueUsernameForRole($str, string $passValue, array $postData): bool
+    {
+     
+        $userModel = model('App\Models\UserModel');
+
+        $getUniqueData = $userModel->getWhere(array("username" => $str, "id!=" => $passValue, "role" => $postData['user_role']))->getRowArray();
+
+         if(is_array($getUniqueData) && count($getUniqueData) > 0){
+            return false;
+         }
+         return true;
+
+    }
+
+
+    public function checkUniqueEmailForRole($str, string $passValue, array $postData): bool
+    {
+     
+        $userModel = model('App\Models\UserModel');
+
+        $getUniqueData = $userModel->getWhere(array("email" => $str,"id!=" => $passValue, "role" => $postData['user_role']))->getRowArray();
+
+         if(is_array($getUniqueData) && count($getUniqueData) > 0){
+            return false;
+         }
+         return true;
+
+    }
   
 
 }

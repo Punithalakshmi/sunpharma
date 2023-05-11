@@ -172,6 +172,7 @@ class Nominee extends BaseController
             $login_url = base_url().'/login';
             $message = 'Hi,';
             $pass = $this->generatePassword(8);
+            $randUser = $this->generatePassword(3);
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
                 $message .= '<br/><br/>';
@@ -183,7 +184,7 @@ class Nominee extends BaseController
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
                 $up_data['password'] = md5($pass);
-                $up_data['username'] = strtolower($getUserData['firstname']);
+                $up_data['username'] = strtolower($getUserData['firstname']).$randUser;
                 $up_data['original_password'] = $pass;
                 
                // $this->userModel->update(array("id" => $getUserData['id']),$up_data);
@@ -237,7 +238,6 @@ class Nominee extends BaseController
         $nomineeLists  = $this->userModel->getListsNominations($jury_id);
         $lists         = $nomineeLists->getResultArray();
 
-       
         foreach($lists as $lkey => $lvalue){
             $reviewStatus = $this->ratingModel->getRatingData($jury_id,$lvalue['id'])->getRowArray();
              
