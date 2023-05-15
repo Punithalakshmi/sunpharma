@@ -17,7 +17,7 @@
                   <?php endif; ?>
 
                  <?php if(isset($userdata['role']) && ( $userdata['role'] == 1)): ?>
-                <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/lists">
+                <a class="btn btn-primary" href="<?=base_url();?>/jury/nominations">
                  <i class="fa fa-arrow-left"></i>BACK
                 </a>
                <?php else: ?>
@@ -552,7 +552,7 @@
                     </div>
                       
                       <div class="clearfix"></div>
-                      <form id="ratingForm" action="<?php echo base_url();?>/admin/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
+                      <form id="ratingForm" action="<?php echo base_url();?>/<?=$uri;?>/nominee/view" method="POST" data-parsley-validate class="form-horizontal form-label-left giverating">
                       <?=csrf_field(); ?>           
                       <input type="hidden" name="nominee_id" value="<?=(isset($user['user_id']))?$user['user_id']:"";?>"  >
 

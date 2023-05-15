@@ -302,8 +302,8 @@ class User extends BaseController
                         $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->userModel->update(array("id" => $id),$ins_data);
                     }
-                    
-                    return redirect()->route('admin/profile');
+                    $redirectUrl = $this->data['uri'].'/profile';
+                    return redirect()->route($redirectUrl);
                 }
             }
             else

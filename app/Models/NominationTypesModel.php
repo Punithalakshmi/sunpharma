@@ -105,7 +105,8 @@ class NominationTypesModel extends Model {
         if((!empty($filter['limit']) || !empty($filter['start'])))
           $builder->limit($filter['limit'],$filter['start']);
 
-          $builder->orderBy('nominations.title', 'ASC'); 
+          $builder->orderBy('nominations.title', 'ASC');
+          $builder->orderBy('nominations.id', 'DESC'); 
 
         if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
             return $builder->countAllResults();

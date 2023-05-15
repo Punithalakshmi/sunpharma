@@ -71,11 +71,13 @@
                  <input type="text" class="mt-2 form-control" name="year" id="year" />
                 </div>
             </div>
+            <?php if(isset($lists) && count($lists) > 0): ?>
             <div class="col-md-3 actionbtns">
                 <a href="#" onclick="exportNominationLists();" class="btn btn-primary mb-2 downloadbtnres">
                    <i class="fa fa-download"></i> Download Nominations
                 </a>
-            </div>                     
+            </div>  
+            <?php endif; ?>                   
             </div> 
 
             <div class="row">

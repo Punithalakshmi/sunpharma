@@ -169,9 +169,10 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post("nominee", "Nominee::index",['filter' =>'auth']);
     $routes->get('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
     $routes->post('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth']);
+    $routes->post('nominee/view','Nominee::view',['filter' =>'auth']);
     
     $routes->post('nominee/assignJury','Nominee::assignJury',['filter' =>'auth']);
-    $routes->post('nominee/view','Nominee::view',['filter' =>'auth']);
+  
     $routes->get('nominee/ratings','Nominee::ratings',['filter' =>'auth']);
     $routes->get('nominee/getApproval/(:any)','Nominee::getApproval/$1',['filter' =>'auth']);
     $routes->post('nominee/approve','Nominee::approve',['filter' =>'auth']);
@@ -279,6 +280,15 @@ $routes->group("jury", ["namespace" => "App\Controllers\Admin"] , function($rout
     $routes->get('nominations','Nominee::nominee_lists_of_jury',['filter' =>'auth_jury']);
 
     $routes->get("access", "Dashboard::access");
+
+    $routes->get('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth_jury']);
+
+    $routes->get('rating/add/(:any)','Rating::add/$1',['filter' =>'auth_jury']);
+    $routes->post('rating/add/(:any)','Rating::add/$1',['filter' =>'auth_jury']);
+    $routes->post('rating/add','Rating::add',['filter' =>'auth_jury']);
+    $routes->post('nominee/view/(:any)','Nominee::view/$1',['filter' =>'auth_jury']);
+    $routes->post('nominee/view','Nominee::view',['filter' =>'auth_jury']);
+
 
 });
 

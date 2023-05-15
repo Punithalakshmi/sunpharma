@@ -91,6 +91,17 @@ class Nominee extends BaseController
             $isExpiredNomination =  isNominationExpired($user['extend_date']);
 
             $lists[$k]['is_expired_nomination'] = ($isExpiredNomination)?'yes':'no';
+            
+            if($user['status']=='Approved'){
+                $status = "Approved";
+              }
+              else if($user['is_rejected'] == 1){
+                $status = "Rejected";
+              }
+              else
+              {
+                $status = "Pending";
+              }
 
              $data[] = array('registration_no' => $user['registration_no'],
                             'main_category_name' => $user['main_category_name'],
@@ -104,7 +115,7 @@ class Nominee extends BaseController
                             'created_date' => $user['created_date'],
                             'is_expired' => ($isExpiredNomination)?'yes':'no',
                             'active' => $user['active'],
-                            'status' => $user['status'],
+                            'status' => $status,
                             'is_rejected' => $user['is_rejected'],
                             'id' => $user['id'],
                             'action' => ''
@@ -172,13 +183,15 @@ class Nominee extends BaseController
             $login_url = base_url().'/login';
             $message = 'Hi,';
             $pass = $this->generatePassword(8);
-            $randUser = $this->generatePassword(3);
+            $randUser = str_replace("."," ",$getUserData['firstname']);
+            $randUser = str_replace(" ","",$randUser);
+            $randUser = substr($randUser,0,6);
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
                 $message .= '<br/><br/>';
                 $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
                 $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
-                $message .= '<b>Username: </b>'.strtolower($getUserData['firstname']).'<br />';
+                $message .= '<b>Username: </b>'.strtolower($randUser).'<br />';
                 $message .= '<b>Password: </b>'.$pass.'<br /><br />';
                
                 $up_data['status']  = 'Approved';
@@ -346,7 +359,8 @@ class Nominee extends BaseController
                     }
                     else
                     {
-                        return redirect()->to('admin/nominee/view/'.$nominee_id)->withInput();
+                        
+                        return redirect()->to($this->data['uri'].'/nominee/view/'.$nominee_id)->withInput();
                     }
                 }
             
@@ -1031,7 +1045,7 @@ class Nominee extends BaseController
   {
 
         $path =  $_SERVER['DOCUMENT_ROOT'];
-        $year              = ($this->request->getPost('year'))?$this->request->getPost('year'):'2021';
+        $year              = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
         $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
 
         $typeOfAward = ($main_category_id == 1)?'RA':'SSA';

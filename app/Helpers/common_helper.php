@@ -210,3 +210,21 @@ if ( ! function_exists('getAwardsTypes'))
         return $awardData;
     }
 } 
+
+
+if ( ! function_exists('updateAwardEndDate'))
+{
+    function updateAwardEndDate($award_id='',$extend_date = ''){
+        $userModel = model('App\Models\UserModel');
+        $awardData = $userModel->getWhere(array("award_id" => $award_id));
+        $awardData = $awardData->getResultArray();
+        if(is_array($awardData)){
+            foreach($awardData as $akey=>$avalue){
+                $update_array = array();
+                $update_array['extend_date'] = $extend_date;
+                $userModel->update(array("id" => $avalue['id']),$update_array);
+            }
+        }
+        
+    }
+} 

@@ -808,7 +808,7 @@ class Nomination extends BaseController
     public function sendMail($nominee_name,$nomination_no,$nominee_email)
     {
 
-        $admin_url = base_url()."/admin";
+        $admin_url = base_url()."/admin/nominee";
         $header  = '';
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
@@ -849,7 +849,6 @@ class Nomination extends BaseController
     }
 
    
-
     public function success()
     {
         return render('frontend/success', $this->data);

@@ -56,7 +56,7 @@
                           <td><?=$user['review_status'];?></td>
                           <td>
                            
-                            <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">
+                            <a href="<?=base_url().'/'.$uri.'/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">
                                <i class="fa fa-eye"></i><?=(isset($user['review_status']) && ($user['review_status'] == 'Pending'))?' Review':' View';?> 
                             </a>
                           </td>

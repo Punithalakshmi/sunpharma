@@ -537,7 +537,7 @@ function juryFinalSubmit(nominee_id = '')
                             var rating  = $("#rating").val();
                                                                                                                                                                                                                
                               $.ajax({
-                                url: base_url+'/admin/nominee/view/'+nominee_id,
+                                url: base_url+'/'+uri+'/nominee/view/'+nominee_id,
                                 type: "POST",
                                 data: {app_csrf:token_res.token,comment:comment,rating:rating},
                                 dataType:'json',
@@ -692,7 +692,8 @@ function userDatatable()
                   'processing': true,
                   'serverSide': true,
                   'serverMethod': 'post',
-                  'searching': false, // Remove default Search Control
+                  'searching': true, // Remove default Search Control
+                  "aaSorting": [],
                   'ajax': {
                        'url': base_url+'/admin/user',
                        'data': function(data){
@@ -773,7 +774,8 @@ function nomineeDatatable()
               'processing': true,
               'serverSide': true,
               'serverMethod': 'post',
-              'searching': false, // Remove default Search Control
+              'searching': true, // Remove default Search Control
+              "aaSorting": [],
               'ajax': {
                     'url': base_url+'/admin/nominee',
                     'data': function(data){

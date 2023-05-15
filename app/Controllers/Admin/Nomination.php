@@ -224,6 +224,8 @@ class Nomination extends BaseController
                         $ins_data['updated_date']  =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->nominationTypesModel->update(array("id" => $id),$ins_data);
+                        //update the nomination to end date to all users
+                        updateAwardEndDate($id,$ins_data['end_date']);
                     }
                     else
                     {
@@ -233,7 +235,7 @@ class Nomination extends BaseController
                         $this->nominationTypesModel->save($ins_data);
                     } 
 
-                    return redirect()->route('admin/nomination');
+                     return redirect()->route('admin/nomination');
                 }
             }
             else

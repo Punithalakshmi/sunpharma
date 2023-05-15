@@ -42,7 +42,7 @@
       <script>
        var base_url = '<?=base_url();?>';
 
-       
+       var uri = '<?=$uri;?>';
   </script>
   </head>
 
