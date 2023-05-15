@@ -768,7 +768,7 @@ class Nomination extends BaseController
            }
             $this->data['editdata']  = $editdata;
 
-            $filename          = ($formtype == 'ssan')?'frontend/ssan_preview':'frontend/spsfn_preview';
+            $filename      = ($formtype == 'ssan')?'frontend/ssan_preview':'frontend/spsfn_preview';
 
             return   $html = view($filename,$this->data,array('debug' => false)); 
     }
@@ -826,7 +826,7 @@ class Nomination extends BaseController
        
         $this->data['content'] = $message;
        
-        sendMail('rafi@izaaptech.com',$subject,$message);
+        sendMail('sunpharma.sciencefoundation@sunpharma.com',$subject,$message);
 
 
         $header  = '';

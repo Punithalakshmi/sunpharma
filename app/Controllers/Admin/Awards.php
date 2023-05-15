@@ -17,22 +17,19 @@ class Awards extends BaseController
     {
     
         $view = \Config\Services::renderer();
-
-
         $category = '';
         $main_category_id = '';
         if (strtolower($this->request->getMethod()) == "post") {  
-            
-            $category      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+          //  $category      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
             $main_category_id    = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'';
         }
 
             //get categories lists
-            $this->data['categories']   = $this->categoryModel->getListsOfCategories()->getResultArray();
+          //  $this->data['categories']   = $this->categoryModel->getListsOfCategories()->getResultArray();
               
             $this->data['main_categories'] = $this->awardsCategoryModel->getListsOfCategories();
 
-            $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
+            $awardsLists = $this->awardsModel->getLists($main_category_id)->getResultArray();
            
             $awardsLists = getAwardsArr($awardsLists);
             foreach($awardsLists as $akey => $avalue) {
@@ -40,7 +37,6 @@ class Awards extends BaseController
                 $splitJuryIds = explode(',',$avalue['jury']);
                
                 for($i=0;$i<count($splitJuryIds);$i++) {
-                    
                     $getJuryRateData = $this->userModel->getJuryRateData($splitJuryIds[$i],$avalue['id'])->getRowArray();
                     $awardsLists[$akey]['juries'][$i]=$getJuryRateData;
                 }
@@ -68,12 +64,12 @@ class Awards extends BaseController
     {
 
         $path =  $_SERVER['DOCUMENT_ROOT'];
-        $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+       // $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
         $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
        // die;
-        $fileName = 'Evaluation Sheet '.date('d-m-Y').'.xlsx';  
+        $fileName = 'Evaluation Sheet '.date('d-m-Y H:i:s').'.xlsx';  
 
-        $awardsLists = $this->awardsModel->getLists($category,$main_category_id)->getResultArray();
+        $awardsLists = $this->awardsModel->getLists($main_category_id)->getResultArray();
 
         //get Active Jury Lists
         $activeJuries = $this->userModel->getAllActiveJuryLists()->getResultArray();
@@ -103,13 +99,10 @@ class Awards extends BaseController
 
         $sheet = $spreadsheet->getActiveSheet();
 
-        
         $typeOfAward = ($main_category_id == 1)?'Research Awards':'Science Scholar Awards';
 
         $title = $typeOfAward.' Evaluation Sheet '.date('Y');
-        
         $sheet->setTitle('Report - '.$typeOfAward.' '.date('Y'));
-
         $sheet->setCellValue('A1',$title);
         $sheet->getStyle("A1:I1")->getFont()->setBold(true);
         $sheet->getStyle("A1:I1")->getFont()->setSize(12);
@@ -122,7 +115,7 @@ class Awards extends BaseController
         for($j=0;$j<count($activeJuries);$j++){
             $juriesName[] = $activeJuries[$j]['firstname'].''.$activeJuries[$j]['lastname'].'['.$activeJuries[$j]['username'].']';
         }
-        $juriesName[] = 'Total Amount'; 
+        $juriesName[] = 'Total Score'; 
         $sheet->fromArray($juriesName,null,'D2');
         
         $sheet->getStyle(2)->getFont()->setBold(true);

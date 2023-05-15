@@ -14,7 +14,7 @@
                 <div class="get-sunpharma__input-box mt-2 form-inline">
                     <label for="" class="fw-bold">Award </label>
                         <select class="selectpicker mt-2 form-control"
-                            aria-label="Default select example" name="main_category_id" id="main_category_id" onchange="getCategories(this);" >
+                            aria-label="Default select example" name="main_category_id" id="main_category_id" >
                             <option></option>
                             <?php if(is_array($main_categories)):
                                     foreach($main_categories as $ckey=>$cvalue):?>
@@ -25,18 +25,7 @@
                     </div>
               </div>
 
-              <div class="col-md-3">
-                <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Award Types</label>
-                    <div class="col-md-12" id="awardTypeList">
-                        <select class="selectpicker mt-2 form-control"
-                            aria-label="Default select example" name="category" id="category">
-                            <option></option>
-                          
-                        </select>
-                    </div>    
-                    </div>
-              </div>
+            
           
             <div class="col-md-3 searchbtn">
                 <button class="btn btn-primary mb-2" name="search" id="search" onclick="getAwardLists()">Search</button>

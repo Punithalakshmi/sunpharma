@@ -63,7 +63,7 @@ if ( ! function_exists('finalNominationSubmit'))
             $data['content'] = $message;
             $html = view('email/mail',$data,array('debug' => false));
             
-            $email->setTo('rafi@izaaptech.com');
+            $email->setTo('sunpharma.sciencefoundation@sunpharma.com');
 
             $email->setSubject($subject);
 

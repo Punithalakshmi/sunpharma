@@ -101,7 +101,7 @@
                                         <label class="form-label " for="">Residence Address with Tel/ Cell No.
                                             E-mail</label>
                                             <div>
-                                            <?=$editdata['residence_address'];?>
+                                                 <?=$editdata['residence_address'];?>
                                             </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant </label>
+                                        <label class="form-label" for=""> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant </label>
                                             <div>
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                     <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">

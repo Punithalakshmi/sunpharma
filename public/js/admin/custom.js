@@ -181,14 +181,8 @@ function nominee_approve(type = '',id='',remarks)
  function getAwardLists()
  {
    
-    var category = $("#category").val();
+   // var category = $("#category").val();
     var main_category_id = $("#main_category_id").val();
-    
-  //   if(category == ''){
-  //     errorMessageAlert('Please select category');
-  //     return false;
-  //  }
-
     var csrfHash = $("input[name='app_csrf']").val();
 
     $('#loader').removeClass('hidden');
@@ -200,11 +194,10 @@ function nominee_approve(type = '',id='',remarks)
       dataType: 'json',
       success: function (form_res) 
       {
-
         $.ajax({
           url : base_url+'/admin/awards/index',
           type: "POST",
-          data : {category:category,main_category_id:main_category_id,'app_csrf':form_res.token},
+          data : {main_category_id:main_category_id,'app_csrf':form_res.token},
           dataType:'json',
           success: function(data, textStatus, jqXHR)
           {
@@ -230,7 +223,7 @@ function nominee_approve(type = '',id='',remarks)
  function exportResult()
  {
 
-    var category = $("#award_title").val();
+   // var category = $("#award_title").val();
     var main_category_id = $("#main_category_id").val();
     var year = $("#year").val(); 
 
@@ -238,8 +231,6 @@ function nominee_approve(type = '',id='',remarks)
 
     $('#loader').removeClass('block');
     var msg = 'Are you sure you want to export nomination lists?';
-
-    var csrfHash = $("input[name='app_csrf']").val();   
 
     $.confirmModal('<h2>'+msg+'</h2>', {
       messageHeader: '',
@@ -258,7 +249,7 @@ function nominee_approve(type = '',id='',remarks)
               $.ajax({
                 url : base_url+'/admin/awards/export',
                 type: "POST",
-                data : {category:category,'app_csrf':form_res.token,'main_category_id':main_category_id,'year':year},
+                data : {'app_csrf':form_res.token,'main_category_id':main_category_id},
                 dataType:'json',
                 success: function(data, textStatus, jqXHR)
                 {
@@ -267,7 +258,6 @@ function nominee_approve(type = '',id='',remarks)
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
-                  
                   $('#loader').addClass('hidden');
                   if(textStatus && textStatus == 'error'){
                     if(jqXHR.responseJSON.message){
@@ -275,16 +265,12 @@ function nominee_approve(type = '',id='',remarks)
                         location.reload();
                     }
                   }
-                    
                 }
-
               }); 
-
             }
           });   
         }
-      } 
-    ); 
+      }); 
  }
 
  function geJuryLists(nominee_id = '')
@@ -314,13 +300,10 @@ function nominee_approve(type = '',id='',remarks)
               if(textStatus && textStatus == 'error'){
                 if(jqXHR.responseJSON.message){
                   errorMessageAlert(jqXHR.responseJSON.message);
-                 
-                
                 }
               }
           }
       });
-
  }
 
 function userDelete(type = '',id='',url = '',e)
@@ -498,10 +481,8 @@ function successMessageAlert(msg)
 
 function errorMessageAlert(msg)
 {
-
     Msg.icon = Msg.ICONS.FONTAWESOME;
     Msg['danger'](msg);
-
 }
 
 function juryFinalSubmit(nominee_id = '')
