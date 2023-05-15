@@ -472,6 +472,21 @@ div#dashboardsec {
 .fname {
     font-size: 15px;font-weight: bold;
 }
+.product_gallery .fname{min-height: 40px;}
+#getLists [data-toggle="modal"] {
+    box-shadow: 0px 2px 0px 3px #f1f1f1;
+}
+#getLists [data-toggle="modal"]:hover {
+    box-shadow: 0px 0px 9px 0px #4237374f;
+    background: #fafafa;
+}
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    border: 1px solid #ced4da;
+}
+#getLists [data-toggle="modal"]:hover .avatarimg img{filter: brightness(1.2);}
+#getLists .product_gallery {
+    padding-bottom: 10px;
+}
 .catname {
     font-size: 14px;
 }
@@ -582,7 +597,7 @@ p.copyrightadmin {
       }
 
       .title_right a.btn.btn-primary {
-        border-radius: 50px;
+        border-radius: 3px;
         margin-left: 10px;
     }
     

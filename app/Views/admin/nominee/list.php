@@ -212,8 +212,8 @@
            <textarea class="form-control" name="remarks" id="remarks"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-secondary" id="remarksSubmit">Submit</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm" id="remarksSubmit">Submit</button>
       </div>
     </div>
   </div>

@@ -903,7 +903,7 @@ function eventDatatable()
                     { data: 'end_date' },
                     { data: 'created_date'},
                     { data: 'action',render:function(data,type,row) {
-                      btn = '<button type="button" onclick="setLimit(\'Event\','+row.id+',\'/admin/workshops/onsite_user_limit/\')" class="btn btn-info btn-xs"><i class="fas fa-ban"></i>Set Limit</button><a href="'+base_url+'/admin/workshops/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'Event\','+row.id+',\'/admin/workshops/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
+                      btn = '<button type="button" onclick="setLimit(\'Event\','+row.id+',\'/admin/workshops/onsite_user_limit/\')" class="btn btn-info btn-xs"><i class="fa fa-ban"></i> Set Limit</button><a href="'+base_url+'/admin/workshops/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'Event\','+row.id+',\'/admin/workshops/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>';
                       return btn;
                     }},
               ]

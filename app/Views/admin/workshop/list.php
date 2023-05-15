@@ -115,7 +115,7 @@
                             
                             <a href="<?=base_url().'/admin/workshops/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
                             <a onclick="userDelete('Event','<?=$user['id'];?>','/admin/workshops/delete/')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a>
-                            <a onclick="setUserLimit('<?=$user['title'];?>','<?=$user['id'];?>','/admin/workshops/set_limit/')" class="btn btn-danger btn-xs"><i class="fa fa-edit"></i> Set Limit</a>
+                            <a onclick="setUserLimit('<?=$user['title'];?>','<?=$user['id'];?>','/admin/workshops/set_limit/')" class="btn btn-danger btn-xs"><i class="fa fa-ban"></i> Set Limit</a>
                             
                           </td>
                         </tr>
@@ -139,11 +139,11 @@
         </button>
       </div>
       <div class="modal-body">
-           <input type="number" name="limit" id="limit"  />
+           <input class="form-control" type="number" name="limit" id="limit"  />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-        <button type="button" class="btn btn-secondary" id="setLimitSubmit">SAVE</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">CANCEL</button>
+        <button type="button" class="btn btn-primary btn-sm" id="setLimitSubmit">SAVE</button>
       </div>
     </div>
   </div>
