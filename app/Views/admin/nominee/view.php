@@ -1,3 +1,8 @@
+<style>.product-image.border.avatarimg {
+    min-height: 150px;
+    background: rgb(250 250 250 / 28%);
+}</style>
+
 <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -55,9 +60,9 @@
 
           <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
-            <h3 class="prod_title"><?=$user['firstname'].' '.$user['lastname'];?>
+            <h3 class="prod_title d-flex" style="justify-content: space-between;"><?=$user['firstname'].' '.$user['lastname'];?>
             <?php if($userdata['role'] == 3): ?>
-                <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/update/<?=$user['user_id'];?>">
+                <a class="btn btn-primary btn-sm" href="<?=base_url();?>/admin/nominee/update/<?=$user['user_id'];?>">
                    EDIT
                 </a>
             <?php endif;?>    

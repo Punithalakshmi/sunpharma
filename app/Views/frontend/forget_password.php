@@ -1,4 +1,4 @@
-<section class="py-5">
+<section class="py-5 registration-form">
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -14,7 +14,7 @@
                         <?=csrf_field(); ?>
                             <div class="clearfix"></div>
                             <div class="mb-3">
-                                <input class="form-control" type="email" id="email-1" name="email" placeholder="Email" value="<?php echo set_value('email',$editdata['email']);?>"></div>
+                                <input class="form-control item" type="email" id="email-1" name="email" placeholder="Email" value="<?php echo set_value('email',$editdata['email']);?>"></div>
                                 <div class="clearfix"></div>
                             <div class="form-group md-3">
                             <?php if(isset($validation) && $validation->getError('email')) {?>
@@ -36,7 +36,7 @@
                             <div class="clearfix"></div>
                           
                             <div>
-                                <button class="btn btn-primary shadow d-block w-100" name="submit" type="submit">Send</button>
+                                <button class="btn btn-primary shadow d-block w-100 mt-3" name="submit" type="submit">Send</button>
                               </div>
                         </form>
                     </div>

@@ -61,8 +61,8 @@
                             ?>
 
                               <div data-toggle="modal" data-target="#juryListsModal" class="col-md-3 col-xs-12 mt-30" onclick="geJuryLists(<?=$user['id'];?>);">
-                                  <div class="product-image border avatarimg">
-                                    <img class="border" src="<?=base_url();?>/uploads/<?=$user['id'];?>/<?=$user['nominator_photo'];?>" alt="" style="border: 1px solid #959595;padding: 5px;"> 
+                                  <div class="product-image border avatarimg" style="background: #fafafa;border:0!important; margin-top:10px;">
+                                    <img class="border" src="<?=base_url();?>/uploads/<?=$user['id'];?>/<?=$user['nominator_photo'];?>" alt="" style="border:0!important;padding: 5px;"> 
                                   </div>
                                   <div class="product_gallery">
                                      <h2 class="fname" align="center"><?=$user['firstname'];?></h2>

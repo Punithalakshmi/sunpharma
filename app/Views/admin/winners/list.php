@@ -9,7 +9,7 @@
            
             <div class="actionbtns">
               <a href="<?php echo base_url();?>/admin/winners/add" class="btn btn-primary btn-xs">
-                  <i class="fa fa-plus"></i>Add/Modify Winners
+                  <i class="fa fa-plus"></i> Add/Modify Winners
               </a>
            </div>
            

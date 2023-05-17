@@ -121,7 +121,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="cancel" class="btn btn-primary" onclick="window.location=base_url+'<?=$logoUrl;?>';return false;">CANCEL</button>
+                          <button type="cancel" class="btn btn-secondary" onclick="window.location=base_url+'<?=$logoUrl;?>';return false;">CANCEL</button>
 						              
                           <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                         </div>

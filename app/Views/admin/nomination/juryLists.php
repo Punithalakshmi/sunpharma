@@ -10,7 +10,7 @@
         foreach($juries as $ukey => $uvalue): ?>
           <tr>
               <td><?=$uvalue['firstname'].' '.$uvalue['lastname'];?></td>
-              <td><button type="button" name="unassign_jury" onclick="removeJuryFromAward('<?=$uvalue['map_id'];?>');">UnAssign</button></td>
+              <td><button class="btn btn-danger btn-xs" type="button" name="unassign_jury" onclick="removeJuryFromAward('<?=$uvalue['map_id'];?>');">UnAssign</button></td>
           </tr>
         <?php endforeach;
         else: ?>

@@ -1,16 +1,18 @@
-<section class="py-5">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="heading" style="color: #F7941E;">Forgot Password</h3>
-                </div>
-            </div>
+<div class="loginsection">
+<div class="login_wrapper">
+<div class="animate form login_form">
+
+<section class="py-5 login_content">
+<img class="loginlogo" width="260" src="<?=base_url();?>/images/logo.jpg" alt=""> 
+
+        <div class="container">
+        
            
             <div class="row d-flex justify-content-center">
               
-                <div class="col-md-6 col-xl-4">
-                    <div>
+              
                         <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/<?=$uri;?>/forgot_password">
+                        <h1 style="margin-top: -25px;">Forgot Password</h1>
                         <?=csrf_field(); ?>
                             <div class="clearfix"></div>
                             <div class="mb-3">
@@ -36,9 +38,10 @@
                             <div class="clearfix"></div>
                           
                             <div>
-                                <button class="btn btn-primary shadow d-block w-100" name="submit" type="submit">Send</button>
+                                <button class="btn btn-primary shadow d-block w-100 mt-3" name="submit" type="submit">Send</button>
                               </div>
                         </form>
-                    </div>
-                </div>
+                  
 </section>
+
+</div></div></div>
