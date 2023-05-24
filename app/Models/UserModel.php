@@ -236,8 +236,10 @@ class UserModel extends Model {
     {
         $builder = $this->table('users');
         $builder->select('users.*');
+        $builder->join('ratings','ratings.jury_id = users.id');
         $builder->where("users.role",'1');
         $builder->where("users.active",'1');
+        $builder->where("ratings.is_rate_submitted",1);
         return $query = $builder->get();
     }
 

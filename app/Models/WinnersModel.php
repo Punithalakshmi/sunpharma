@@ -80,7 +80,8 @@ class WinnersModel extends Model{
         if((!empty($filter['limit']) || !empty($filter['start'])))
           $builder->limit($filter['limit'],$filter['start']);
 
-          $builder->orderBy('posting_winners.name', 'ASC'); 
+          $builder->orderBy('posting_winners.name', 'ASC');
+          $builder->orderBy('posting_winners.id', 'DESC'); 
 
         if(isset($filter['totalRows']) && ($filter['totalRows'] == 'yes'))
             return $builder->countAllResults();

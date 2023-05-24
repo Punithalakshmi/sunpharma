@@ -164,7 +164,7 @@ form.children("div").steps({
                     console.log('Nominator Photo',files);
                     
                     var fd = new FormData();
-                    // Append data 
+                    //Append data 
                     fd.append('nominator_photo',files[0]);
                     fd.append('justification_letter',justification_letter[0]);
                     fd.append('supervisor_certifying',supervisor_certifying[0]);
@@ -183,7 +183,7 @@ form.children("div").steps({
                     var nominator_email      = $("#nominator_email").val();
                     var ongoing_course       = $("#ongoing_course").val();
                     var research_project     = $("#research_project").val();
-                    var award_id            = $("#award_id").val();
+                    var award_id             = $("#award_id").val();
 
                     fd.append('category',category);
                     fd.append('nominee_name',nominee_name);
