@@ -137,8 +137,8 @@ form.children("div").steps({
                {
                   isValid = true;
                   
-                  if(inputName == 'justification_letter')
-                    $('.wizard .actions ul li a[href="#next"]').trigger('click');
+                  //if(inputName == 'justification_letter')
+                    //$('.wizard .actions ul li a[href="#next"]').trigger('click');
                } 
            
             });
