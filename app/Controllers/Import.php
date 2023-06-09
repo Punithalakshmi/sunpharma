@@ -65,10 +65,9 @@ class Import extends BaseController
 
         $ins_data = array();
        
-      //  echo "<pre>";
         // Initialize $importData_arr Array
         while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
-         //  print_r($filedata); 
+       
            $num = count($filedata);
            
            // Skip first row & check number of fields

@@ -1494,3 +1494,33 @@ function assignedJuries(award_id ='')
       } 
     ); 
  }
+
+ function extendNomination(award_id ='')
+{
+ 
+      $('#loader').removeClass('hidden');
+      $.ajax({
+          url : base_url+'/admin/nomination/extendNomination/'+award_id,
+          type: "GET",
+          dataType:'json',
+          success: function(data, textStatus, jqXHR)
+          {
+              $('#loader').addClass('hidden');
+              if(data.status && data.status == 'success'){
+                
+              }
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+            
+              $('#loader').addClass('hidden');
+              if(textStatus && textStatus == 'error'){
+                if(jqXHR.responseJSON.message){
+                  errorMessageAlert(jqXHR.responseJSON.message);
+                }
+              }
+          }
+      });
+
+ }

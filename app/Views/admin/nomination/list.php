@@ -127,6 +127,7 @@
                             <a href="<?=base_url().'/admin/nomination/add/'.$user['id'];?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                             <a onclick="userDelete('award','<?=$user['id'];?>','/admin/nomination/delete')"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                             <a onclick="assignedJuries('<?=$user['id'];?>')"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>View Mapped Juries </a>
+                            <a onclick="extendNomination('<?=$user['id'];?>')"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>Extend Nomination</a>
                           </td>
                         </tr>
                         <?php endforeach;
