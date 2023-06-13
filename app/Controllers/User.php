@@ -40,7 +40,11 @@ class User extends BaseController
                        if(($pass == md5($password)) && ($data['active'] == 1)){
                         
                          $redirect_route = 'view/'.$data['id'];
-        
+
+                         //get nomination data
+                         $getNomineeData = $this->nominationModel->getNominationData($data['id'])->getRowArray();
+                        
+                         // print_r($getNomineeData); die;
                             $ses_data = array(
                                 'id' => $data['id'],
                                 'name' => $data['firstname'],
@@ -54,7 +58,10 @@ class User extends BaseController
                           
                             setSessionData('fuserdata',$ses_data);
 
-                            $redirect = 'view/'.$data['id'].'/'.$data['award_id'];
+                            if(isset($getNomineeData['nomination_type']) && ($getNomineeData['nomination_type'] != 'fellowship'))
+                                 $redirect = 'view/'.$data['id'].'/'.$data['award_id'];
+                            else
+                                 $redirect = 'fellowship/view/'.$data['id'].'/'.$data['award_id'];       
                             
                             return redirect()->to($redirect);
                         

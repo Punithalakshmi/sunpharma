@@ -70,6 +70,9 @@ Online Submission Of Nominations">
     <?php if(isset($uri) && $uri == 'spsfn'): ?>
         <?= script_tag('frontend/assets/js/spsfn.js'); ?>
     <?php endif; ?>
+    <?php if(isset($uri) && $uri == 'fellowship'): ?>
+        <?= script_tag('frontend/assets/js/fellowship.js'); ?>
+    <?php endif; ?>
     <?= script_tag('frontend/assets/js/multi-item-carousel.js'); ?>
     <?= script_tag('frontend/assets/js/Simple-Slider.js'); ?>
     <?= script_tag('frontend/assets/js/sortTable.js'); ?>

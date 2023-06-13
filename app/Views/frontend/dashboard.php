@@ -25,6 +25,17 @@
                                             <p class="my-3"><?=(isset($nvalue['subject']))?$nvalue['subject']:"";?></p>
                                             <?php if(isset($nvalue['category_type']) && ($nvalue['category_type'] == 'awards' || $nvalue['category_type'] == 'awards') ):
                                                    $ntype = ($nvalue['main_category_id'] == 2)?'spsfn':'ssan';
+                                                   switch ($nvalue['main_category_id']) {
+                                                    case 1:
+                                                        $ntype = 'ssan';
+                                                        break;
+                                                    case 2:
+                                                        $ntype = 'spsfn';
+                                                        break;
+                                                    case 3:
+                                                        $ntype = 'fellowship';
+                                                        break;
+                                                  }
                                                    if($end_date > $current_date):
                                                 ?>
                                              <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>/<?=$nvalue['award_id']?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>

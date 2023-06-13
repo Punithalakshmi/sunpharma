@@ -66,8 +66,7 @@ $routes->post('spsfn/(:any)','Nomination::index/$1',['filter' =>'check_date']);
 $routes->get('preview/(:any)','Nomination::preview/$1');
 $routes->post('getPostedData','Nomination::getPostedData');
 
-$routes->get('fellowship','Fellowship::index');
-
+//$routes->get('fellowship','Fellowship::index');
 $routes->post('login','User::login');
 $routes->get('login','User::login');
 
@@ -81,12 +80,16 @@ $routes->post('reset_password/(:any)','User::reset_password/$1');
 $routes->get('view/(:any)/(:any)','Nomination::view/$1/$1');
 $routes->post('view','Nomination::view');
 
+$routes->get('fellowship/view/(:any)/(:any)','Fellowship::view/$1/$1');
+$routes->post('fellowship/view/','Fellowship::view');
+$routes->get('fellowship/(:any)','Fellowship::index/$1',['filter' =>'check_date']);
+$routes->post('fellowship/(:any)','Fellowship::index/$1',['filter' =>'check_date']);
+
 $routes->get('logout','User::logout');
 $routes->get('form','User::validForm');
 $routes->get('sendMail','User::sendMail');
 
 $routes->post('uniqueValidation','User::uniqueValidation');
-
 $routes->get('success','Nomination::Success');
 
 $routes->get('event','EventRegistration::index');
