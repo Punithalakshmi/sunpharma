@@ -118,7 +118,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""><b>Email ID</</b>label>
+                                        <label class="form-label " for=""><b>Email ID</b></label>
                                         <div><?=$user['email'];?>
                                         </div>
                                     </div>
@@ -234,6 +234,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label"><b>First employment</b> <span class="required" style="color:red;">*</span> </label>
+                                        <br>
                                             <?php if(!empty($user['first_employment_name_of_institution_location'])): ?>
                                             <label class="form-label " for=""><b> Name of institution and location</b>  </label>
                                                 <div>
@@ -261,7 +262,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Name of institution and location </b><span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required"  name="first_employment_name_of_institution_location" type="text" id="first_employment_name_of_institution_location" value="<?=$editdata['first_employment_name_of_institution_location'];?>">    
+                                                <input class="form-control mb-3 required"  name="first_employment_name_of_institution_location" type="text" id="first_employment_name_of_institution_location" value="<?php echo set_value('first_employment_name_of_institution_location',$editdata['first_employment_name_of_institution_location']);?>">    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_employment_name_of_institution_location')) {?>
@@ -273,7 +274,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Designation</b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_employment_designation" type="text" id="first_employment_designation" value="<?=$editdata['first_employment_designation'];?>">    
+                                                <input class="form-control mb-3 required" name="first_employment_designation" type="text" id="first_employment_designation" value="<?php echo set_value('first_employment_designation',$editdata['first_employment_designation']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_employment_designation')) {?>
@@ -285,7 +286,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Year of joining </b><span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_employment_year_of_joining" type="text" id="first_employment_year_of_joining" value="<?=$editdata['first_employment_year_of_joining'];?>">    
+                                                <input class="form-control mb-3 required" name="first_employment_year_of_joining" type="text" id="first_employment_year_of_joining" value="<?php echo set_value('first_employment_year_of_joining',$editdata['first_employment_year_of_joining']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_employment_year_of_joining')) {?>
@@ -300,6 +301,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""><b>First medical degree obtained </b></label>
+                                        <br>
                                         <?php if(!empty($user['first_medical_degree_name_of_degree'])): ?>
                                             <label class="form-label " for=""> <b> Name of degree </b>  </label>
                                                 <div>
@@ -327,7 +329,7 @@
                                   <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Name of degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_medical_degree_name_of_degree" type="text" id="first_medical_degree_name_of_degree" value="<?=$editdata['first_medical_degree_name_of_degree'];?>">    
+                                                <input class="form-control mb-3 required" name="first_medical_degree_name_of_degree" type="text" id="first_medical_degree_name_of_degree" value="<?php echo set_value('first_medical_degree_name_of_degree',$editdata['first_medical_degree_name_of_degree']);?>">    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_medical_degree_name_of_degree')) {?>
@@ -339,7 +341,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Year of award of degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_medical_degree_year_of_award" type="text" id="first_medical_degree_year_of_award" value="<?=$editdata['first_medical_degree_year_of_award'];?>">    
+                                                <input class="form-control mb-3 required" name="first_medical_degree_year_of_award" type="text" id="first_medical_degree_year_of_award" value="<?php echo set_value('first_medical_degree_year_of_award',$editdata['first_medical_degree_year_of_award']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_medical_degree_year_of_award')) {?>
@@ -351,7 +353,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b>Institution awarding the degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_medical_degree_institution" type="text" id="first_medical_degree_institution" value="<?=$editdata['first_medical_degree_institution'];?>">    
+                                                <input class="form-control mb-3 required" name="first_medical_degree_institution" type="text" id="first_medical_degree_institution" value="<?php echo set_value('first_medical_degree_institution',$editdata['first_medical_degree_institution']);?>" value="<?=$editdata['first_medical_degree_institution'];?>">    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_medical_degree_institution')) {?>
@@ -366,6 +368,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for="">  <b>Highest medical degree obtained: </b> </label>
+                                        <br>
                                         <?php if(!empty($user['highest_medical_degree_name'])): ?>
                                             <label class="form-label " for=""> <b> Name of degree </b>  </label>
                                                 <div>
@@ -393,7 +396,7 @@
                                   <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b> Name of degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required"  name="highest_medical_degree_name" type="text" id="highest_medical_degree_name" value="<?=$editdata['highest_medical_degree_name'];?>">    
+                                                <input class="form-control mb-3 required"  name="highest_medical_degree_name" type="text" id="highest_medical_degree_name" value="<?php echo set_value('highest_medical_degree_name',$editdata['highest_medical_degree_name']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_medical_degree_name')) {?>
@@ -405,7 +408,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b> Year of award of degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="highest_medical_degree_year" type="text" id="highest_medical_degree_year" value="<?=$editdata['highest_medical_degree_year'];?>">    
+                                                <input class="form-control mb-3 required" name="highest_medical_degree_year" type="text" id="highest_medical_degree_year" value="<?php echo set_value('highest_medical_degree_year',$editdata['highest_medical_degree_year']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_medical_degree_year')) {?>
@@ -417,7 +420,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b> Institution awarding the degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="highest_medical_degree_institution" type="text" id="highest_medical_degree_institution" value="<?=$editdata['highest_medical_degree_institution'];?>">    
+                                                <input class="form-control mb-3 required" name="highest_medical_degree_institution" type="text" id="highest_medical_degree_institution" value="<?php echo set_value('highest_medical_degree_institution',$editdata['highest_medical_degree_institution']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_medical_degree_institution')) {?>
@@ -587,7 +590,7 @@
                                   <div class="col-lg-12">
                                   <div class="mb-3 form-items">
                                         <div>
-                                            <input class="form-control mb-3 required" name="fellowship_name_of_institution_research_work" type="text" id="fellowship_name_of_institution_research_work" value="<?=$editdata['fellowship_name_of_institution_research_work'];?>">    
+                                            <input class="form-control mb-3 required" name="fellowship_name_of_institution_research_work" type="text" id="fellowship_name_of_institution_research_work" value="<?php echo set_value('fellowship_name_of_institution_research_work',$editdata['fellowship_name_of_institution_research_work']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('fellowship_name_of_institution_research_work')) {?>
@@ -630,7 +633,7 @@
                                   <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b> Name of supervisor </b><span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="fellowship_name_of_the_supervisor" type="text" id="fellowship_name_of_the_supervisor" value="<?=$editdata['fellowship_name_of_the_supervisor'];?>">    
+                                                <input class="form-control mb-3 required" name="fellowship_name_of_the_supervisor" type="text" id="fellowship_name_of_the_supervisor" value="<?php echo set_value('fellowship_name_of_the_supervisor',$editdata['fellowship_name_of_the_supervisor']);?>">    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('fellowship_name_of_the_supervisor')) {?>
@@ -642,7 +645,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b>Institution </b><span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="fellowship_name_of_institution" type="text" id="fellowship_name_of_institution" value="<?=$editdata['fellowship_name_of_institution'];?>">    
+                                                <input class="form-control mb-3 required" name="fellowship_name_of_institution" type="text" id="fellowship_name_of_institution" value="<?php echo set_value('fellowship_name_of_institution',$editdata['fellowship_name_of_institution']);?>">    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('fellowship_name_of_institution')) {?>
@@ -654,7 +657,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b> Department </b><span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="fellowship_supervisor_department" type="text" id="fellowship_supervisor_department" value="<?=$editdata['fellowship_supervisor_department'];?>">    
+                                                <input class="form-control mb-3 required" name="fellowship_supervisor_department" type="text" id="fellowship_supervisor_department" value="<?php echo set_value('fellowship_supervisor_department',$editdata['fellowship_supervisor_department']);?>">    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('fellowship_supervisor_department')) {?>
@@ -715,7 +718,7 @@
                         <?php else:?>
                             <div id="q-box__buttons">
                             
-                              <a  href="<?=base_url();?>/print/<?=$editdata['id'];?>" id="submit-btn" class="btn btn-success ms-2" >Print</a>
+                              <a  href="<?=base_url();?>/fellowship/print/<?=$editdata['id'];?>" id="submit-btn" class="btn btn-success ms-2" >Print</a>
                         </div>  
                     <?php endif;?>
                 </form>

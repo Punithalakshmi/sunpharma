@@ -550,7 +550,7 @@ class Nominee extends BaseController
     public function update($id = '')
     {
 
-                $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
+               $id = ($this->request->getPost('id'))?$this->request->getPost('id'):$id; 
 
                 //get nominee data
                 $nomineeData = $this->userModel->getUserData($id)->getRowArray();
@@ -987,6 +987,10 @@ class Nominee extends BaseController
         if(isset($nomineeData['nomination_type']) && ($nomineeData['nomination_type'] == 'spsfn')){
             return render('admin/nominee/spsfn_update',$this->data);
         }  
+
+        if(isset($nomineeData['nomination_type']) && ($nomineeData['nomination_type'] == 'fellowship')){
+            return render('admin/nominee/fellowship_update',$this->data);
+        }
 
    }  
 

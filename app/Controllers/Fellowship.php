@@ -233,36 +233,37 @@ class Fellowship extends BaseController
 
                     if($this->validation->withRequest($this->request)->run()) {
 
+                    
                         $nominee_details_data = array();
                         $fileUploadDir = 'uploads/'.$edit_data['user_id'];
 
-                        $name_of_institution_location       = $this->request->getPost('first_employment_name_of_institution_location');
-                        $employment_designation             = $this->request->getPost('first_employment_designation');
-                        $employment_year_of_joning          = $this->request->getPost('first_employment_year_of_joining');
-                        $medical_degree_name_of_degree      = $this->request->getPost('first_medical_degree_name_of_degree');
-                        $medical_degree_year_of_award       = $this->request->getPost('first_medical_degree_year_of_award');
-                        $medical_degree_institution         = $this->request->getPost('first_medical_degree_institution');
-                        $medical_degree_name                = $this->request->getPost('highest_medical_degree_name');
-                        $medical_degree_year                = $this->request->getPost('highest_medical_degree_year');
-                        $highest_medical_degree_institution = $this->request->getPost('highest_medical_degree_institution');
+                        $name_of_institution_location                 = $this->request->getPost('first_employment_name_of_institution_location');
+                        $employment_designation                       = $this->request->getPost('first_employment_designation');
+                        $employment_year_of_joning                    = $this->request->getPost('first_employment_year_of_joining');
+                        $medical_degree_name_of_degree                = $this->request->getPost('first_medical_degree_name_of_degree');
+                        $medical_degree_year_of_award                 = $this->request->getPost('first_medical_degree_year_of_award');
+                        $medical_degree_institution                   = $this->request->getPost('first_medical_degree_institution');
+                        $medical_degree_name                          = $this->request->getPost('highest_medical_degree_name');
+                        $medical_degree_year                          = $this->request->getPost('highest_medical_degree_year');
+                        $highest_medical_degree_institution           = $this->request->getPost('highest_medical_degree_institution');
                         $fellowship_name_of_institution_research_work = $this->request->getPost('fellowship_name_of_institution_research_work');
                         $fellowship_name_of_the_supervisor            = $this->request->getPost('fellowship_name_of_the_supervisor');
                         $fellowship_name_of_institution               = $this->request->getPost('fellowship_name_of_institution');
                         $fellowship_supervisor_department             = $this->request->getPost('fellowship_supervisor_department');
                         
-                        $nominee_details_data['first_employment_name_of_institution_location']        = $name_of_institution_location;
-                        $nominee_details_data['first_employment_designation']        = $employment_designation;
-                        $nominee_details_data['first_employment_year_of_joining']    = $employment_year_of_joning;
-                        $nominee_details_data['first_medical_degree_name_of_degree']  = $medical_degree_name_of_degree;
-                        $nominee_details_data['first_medical_degree_year_of_award']     = $medical_degree_year_of_award;
-                        $nominee_details_data['first_medical_degree_institution']    = $medical_degree_institution;
-                        $nominee_details_data['highest_medical_degree_name']    = $medical_degree_name;
-                        $nominee_details_data['highest_medical_degree_year']  = $medical_degree_year;
-                        $nominee_details_data['highest_medical_degree_institution'] = $highest_medical_degree_institution;
-                        $nominee_details_data['fellowship_name_of_institution_research_work'] = $fellowship_name_of_institution_research_work;
-                        $nominee_details_data['fellowship_name_of_the_supervisor'] = $fellowship_name_of_the_supervisor;
-                        $nominee_details_data['fellowship_name_of_institution'] = $fellowship_name_of_institution;
-                        $nominee_details_data['fellowship_supervisor_department'] = $fellowship_supervisor_department;
+                        $nominee_details_data['first_employment_name_of_institution_location'] = $name_of_institution_location;
+                        $nominee_details_data['first_employment_designation']                  = $employment_designation;
+                        $nominee_details_data['first_employment_year_of_joining']              = $employment_year_of_joning;
+                        $nominee_details_data['first_medical_degree_name_of_degree']           = $medical_degree_name_of_degree;
+                        $nominee_details_data['first_medical_degree_year_of_award']            = $medical_degree_year_of_award;
+                        $nominee_details_data['first_medical_degree_institution']              = $medical_degree_institution;
+                        $nominee_details_data['highest_medical_degree_name']                   = $medical_degree_name;
+                        $nominee_details_data['highest_medical_degree_year']                   = $medical_degree_year;
+                        $nominee_details_data['highest_medical_degree_institution']            = $highest_medical_degree_institution;
+                        $nominee_details_data['fellowship_name_of_institution_research_work']  = $fellowship_name_of_institution_research_work;
+                        $nominee_details_data['fellowship_name_of_the_supervisor']             = $fellowship_name_of_the_supervisor;
+                        $nominee_details_data['fellowship_name_of_institution']                = $fellowship_name_of_institution;
+                        $nominee_details_data['fellowship_supervisor_department']              = $fellowship_supervisor_department;
 
                         if($this->request->getFile('complete_bio_data')) {
                             $complete_bio_data = $this->request->getFile('complete_bio_data');
@@ -300,11 +301,6 @@ class Fellowship extends BaseController
                             $nominee_details_data['fellowship_description_of_research']  = $fellowship_description_of_research->getClientName();
                         }
                         
-                        if($this->request->getFile('citation')){
-                            $citation = $this->request->getFile('citation');
-                            $citation->move($fileUploadDir);
-                            $nominee_details_data['citation']     = $citation->getClientName();
-                        }
                         
                         $nominee_details_data['is_submitted'] = 1;
 
@@ -327,7 +323,7 @@ class Fellowship extends BaseController
                         $redirectUrl = 'view/'.$edit_data['user_id'].'/'.$award_id;
 
                         if($isMailSent)
-                        return redirect()->to($redirectUrl)->withInput();
+                             return redirect()->to($redirectUrl)->withInput();
 
                     }
                     else
@@ -343,23 +339,23 @@ class Fellowship extends BaseController
             $editdata['id']                                                        = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
             $editdata['complete_bio_data']                                         = ($this->request->getFile('complete_bio_data'))?$this->request->getFile('complete_bio_data'):'';
             $editdata['first_employment_name_of_institution_location']             = ($this->request->getFile('first_employment_name_of_institution_location'))?$this->request->getFile('first_employment_name_of_institution_location'):'';
-            $editdata['first_employment_designation']                = ($this->request->getFile('first_employment_designation'))?$this->request->getFile('first_employment_designation'):'';
-            $editdata['first_employment_year_of_joining']               = ($this->request->getFile('first_employment_year_of_joining'))?$this->request->getFile('first_employment_year_of_joining'):'';
-            $editdata['first_medical_degree_name_of_degree']                    = ($this->request->getFile('first_medical_degree_name_of_degree'))?$this->request->getFile('first_medical_degree_name_of_degree'):'';
-            $editdata['first_medical_degree_year_of_award']  = ($this->request->getFile('first_medical_degree_year_of_award'))?$this->request->getFile('first_medical_degree_year_of_award'):'';
-            $editdata['first_medical_degree_institution']                             = ($this->request->getFile('first_medical_degree_institution'))?$this->request->getFile('first_medical_degree_institution'):'';
-            $editdata['highest_medical_degree_name']                      = ($this->request->getFile('highest_medical_degree_name'))?$this->request->getFile('highest_medical_degree_name'):'';
-            $editdata['highest_medical_degree_year']                            = ($this->request->getFile('highest_medical_degree_year'))?$this->request->getFile('highest_medical_degree_year'):'';
-            $editdata['highest_medical_degree_institution']                = ($this->request->getFile('highest_medical_degree_institution'))?$this->request->getFile('highest_medical_degree_institution'):'';
-            $editdata['fellowship_research_experience']                      = ($this->request->getPost('fellowship_research_experience'))?$this->request->getPost('fellowship_research_experience'):'';
-            $editdata['fellowship_research_publications']                   = ($this->request->getPost('fellowship_research_publications'))?$this->request->getPost('fellowship_research_publications'):'';
-            $editdata['fellowship_research_awards_and_recognitions']                       = ($this->request->getPost('fellowship_research_awards_and_recognitions'))?$this->request->getPost('fellowship_research_awards_and_recognitions'):'';
-            $editdata['fellowship_scientific_research_projects']                     = ($this->request->getPost('fellowship_scientific_research_projects'))?$this->request->getPost('fellowship_scientific_research_projects'):'';
-            $editdata['fellowship_name_of_institution_research_work']                       = ($this->request->getPost('fellowship_name_of_institution_research_work'))?$this->request->getPost('fellowship_name_of_institution_research_work'):'';
-            $editdata['fellowship_name_of_the_supervisor']                     = ($this->request->getPost('fellowship_name_of_the_supervisor'))?$this->request->getPost('fellowship_name_of_the_supervisor'):'';
-            $editdata['fellowship_name_of_institution']                       = ($this->request->getPost('fellowship_name_of_institution'))?$this->request->getPost('fellowship_name_of_institution'):'';
-            $editdata['fellowship_supervisor_department']                     = ($this->request->getPost('fellowship_supervisor_department'))?$this->request->getPost('fellowship_supervisor_department'):'';
-            $editdata['fellowship_description_of_research']                     = ($this->request->getPost('fellowship_description_of_research'))?$this->request->getPost('fellowship_description_of_research'):'';
+            $editdata['first_employment_designation']                              = ($this->request->getFile('first_employment_designation'))?$this->request->getFile('first_employment_designation'):'';
+            $editdata['first_employment_year_of_joining']                          = ($this->request->getFile('first_employment_year_of_joining'))?$this->request->getFile('first_employment_year_of_joining'):'';
+            $editdata['first_medical_degree_name_of_degree']                       = ($this->request->getFile('first_medical_degree_name_of_degree'))?$this->request->getFile('first_medical_degree_name_of_degree'):'';
+            $editdata['first_medical_degree_year_of_award']                        = ($this->request->getFile('first_medical_degree_year_of_award'))?$this->request->getFile('first_medical_degree_year_of_award'):'';
+            $editdata['first_medical_degree_institution']                          = ($this->request->getFile('first_medical_degree_institution'))?$this->request->getFile('first_medical_degree_institution'):'';
+            $editdata['highest_medical_degree_name']                               = ($this->request->getFile('highest_medical_degree_name'))?$this->request->getFile('highest_medical_degree_name'):'';
+            $editdata['highest_medical_degree_year']                               = ($this->request->getFile('highest_medical_degree_year'))?$this->request->getFile('highest_medical_degree_year'):'';
+            $editdata['highest_medical_degree_institution']                        = ($this->request->getFile('highest_medical_degree_institution'))?$this->request->getFile('highest_medical_degree_institution'):'';
+            $editdata['fellowship_research_experience']                            = ($this->request->getPost('fellowship_research_experience'))?$this->request->getPost('fellowship_research_experience'):'';
+            $editdata['fellowship_research_publications']                          = ($this->request->getPost('fellowship_research_publications'))?$this->request->getPost('fellowship_research_publications'):'';
+            $editdata['fellowship_research_awards_and_recognitions']               = ($this->request->getPost('fellowship_research_awards_and_recognitions'))?$this->request->getPost('fellowship_research_awards_and_recognitions'):'';
+            $editdata['fellowship_scientific_research_projects']                   = ($this->request->getPost('fellowship_scientific_research_projects'))?$this->request->getPost('fellowship_scientific_research_projects'):'';
+            $editdata['fellowship_name_of_institution_research_work']              = ($this->request->getPost('fellowship_name_of_institution_research_work'))?$this->request->getPost('fellowship_name_of_institution_research_work'):'';
+            $editdata['fellowship_name_of_the_supervisor']                         = ($this->request->getPost('fellowship_name_of_the_supervisor'))?$this->request->getPost('fellowship_name_of_the_supervisor'):'';
+            $editdata['fellowship_name_of_institution']                            = ($this->request->getPost('fellowship_name_of_institution'))?$this->request->getPost('fellowship_name_of_institution'):'';
+            $editdata['fellowship_supervisor_department']                          = ($this->request->getPost('fellowship_supervisor_department'))?$this->request->getPost('fellowship_supervisor_department'):'';
+            $editdata['fellowship_description_of_research']                        = ($this->request->getPost('fellowship_description_of_research'))?$this->request->getPost('fellowship_description_of_research'):'';
             $this->data['editdata'] = $editdata;
             $this->data['user']     = $edit_data;
             return  render('frontend/fellowship_new_documents',$this->data);  
@@ -423,31 +419,26 @@ class Fellowship extends BaseController
     public function awards_validation_rules($type = '')
     {
         $validation_rules = array();
-      
-        if($type == 'ssan') {
-                $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,1500]|ext_in[complete_bio_data,pdf]');
-                $validation_rules['best_papers']                        = array("label" => "Best Papers",'rules' => 'uploaded[best_papers]|max_size[best_papers,1000]|ext_in[best_papers,pdf]');
-                $validation_rules['statement_of_research_achievements'] = array("label" => "Statement of Research Achievements",'rules' => 'uploaded[statement_of_research_achievements]|max_size[statement_of_research_achievements,1000]|ext_in[statement_of_research_achievements,pdf]');
-                $validation_rules['signed_details']                     = array("label" => "Signed Details",'rules' => 'uploaded[signed_details]|max_size[signed_details,2500]|ext_in[signed_details,pdf]');
-                $validation_rules['specific_publications']              = array("label" => "Specific Publications",'rules' => 'uploaded[specific_publications]|max_size[specific_publications,2500]|ext_in[specific_publications,pdf]');
-                $validation_rules['signed_statement']                   = array("label" => "Signed Statement",'rules' => 'uploaded[signed_statement]|max_size[signed_statement,500]|ext_in[signed_statement,pdf]');
-                $validation_rules['citation']                           = array("label" => "Citation",'rules' => 'uploaded[citation]|max_size[citation,300]|ext_in[citation,pdf]');
-        }
-        else
-        {
-                $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,1000]|ext_in[complete_bio_data,pdf]');
-                $validation_rules['excellence_research_work']           = array("label" => "Excellence Research Work",'rules' => 'uploaded[excellence_research_work]|max_size[excellence_research_work,2000]|ext_in[excellence_research_work,pdf]');
-                $validation_rules['lists_of_publications']              = array("label" => "Lists of Publications",'rules' => 'uploaded[lists_of_publications]|max_size[lists_of_publications,2000]|ext_in[lists_of_publications,pdf]');
-                $validation_rules['statement_of_applicant']             = array("label" => "Statement Of Applicant",'rules' => 'uploaded[statement_of_applicant]|max_size[statement_of_applicant,1000]|ext_in[statement_of_applicant,pdf]');
-                $validation_rules['ethical_clearance']                  = array("label" => "Ethical Clearance",'rules' => 'uploaded[ethical_clearance]|max_size[ethical_clearance,250]|ext_in[ethical_clearance,pdf]');
-                $validation_rules['statement_of_duly_signed_by_nominee']= array("label" => "Statement of duly signed",'rules' => 'uploaded[statement_of_duly_signed_by_nominee]|max_size[statement_of_duly_signed_by_nominee,250]|ext_in[statement_of_duly_signed_by_nominee,pdf]');
-                $validation_rules['citation']                           = array("label" => "Citation",'rules' => 'uploaded[citation]|max_size[citation,300]|ext_in[citation,pdf]');
-                $validation_rules['aggregate_marks']                    = array("label" => "Aggregate Marks",'rules' => 'uploaded[aggregate_marks]|max_size[aggregate_marks,250]|ext_in[aggregate_marks,pdf]');
-                $validation_rules['year_of_passing']                    = array("label" => "Year of Passing",'rules' => 'required');
-                $validation_rules['number_of_attempts']                 = array("label" => "Number of attempts",'rules' => 'required');
-                $validation_rules['age_proof']                          = array("label" => "Age Proof",'rules' => 'uploaded[age_proof]|max_size[age_proof,250]|ext_in[age_proof,pdf]');
-                $validation_rules['declaration_candidate']              = array("label" => "Declaration Candidate",'rules' => 'uploaded[declaration_candidate]|max_size[declaration_candidate,250]|ext_in[declaration_candidate,pdf]');
-        }
+        $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,1000]|ext_in[complete_bio_data,pdf]');
+        $validation_rules['first_employment_name_of_institution_location'] = array("label" => "First employment name of institution",'rules' => 'required');
+        $validation_rules['first_employment_designation']              = array("label" => "Employment designation",'rules' => 'required');
+        $validation_rules['first_employment_year_of_joining']             = array("label" => "Year of Joining",'rules' => 'required');
+        $validation_rules['first_medical_degree_name_of_degree']                  = array("label" => "Name of First Degree",'rules' => 'required');
+        $validation_rules['first_medical_degree_year_of_award']    = array("label" => "First Degree Year of Award",'rules' => 'required');
+        $validation_rules['first_medical_degree_institution']                           = array("label" => "First Degree Institution",'rules' => 'required');
+        $validation_rules['highest_medical_degree_name']                  = array("label" => "Highest Medical degree name",'rules' => 'required');
+        $validation_rules['highest_medical_degree_year']                  = array("label" => "Highest Medical degree year",'rules' => 'required');
+        $validation_rules['highest_medical_degree_institution']                           = array("label" => "Highest Medical degree institution",'rules' => 'required');
+        $validation_rules['fellowship_research_experience']                    = array("label" => "Research Experience",'rules' => 'uploaded[fellowship_research_experience]|max_size[fellowship_research_experience,500]|ext_in[fellowship_research_experience,pdf]');
+        $validation_rules['fellowship_research_publications']                    = array("label" => "Research Publications",'rules' => 'uploaded[fellowship_research_publications]|max_size[fellowship_research_publications,1000]|ext_in[fellowship_research_publications,pdf]');
+        $validation_rules['fellowship_research_awards_and_recognitions']                 = array("label" => "Research Awards & Recognitions ",'rules' => 'uploaded[fellowship_research_awards_and_recognitions]|max_size[fellowship_research_awards_and_recognitions,500]|ext_in[fellowship_research_awards_and_recognitions,pdf]');
+        $validation_rules['fellowship_scientific_research_projects']                          = array("label" => "Scientific Research Projects",'rules' => 'uploaded[fellowship_scientific_research_projects]|max_size[fellowship_scientific_research_projects,500]|ext_in[fellowship_scientific_research_projects,pdf]');
+        $validation_rules['fellowship_name_of_institution_research_work']              = array("label" => "Name of Institution Research Work",'rules' => 'required');
+        $validation_rules['fellowship_name_of_the_supervisor']                          = array("label" => "Name of Supervisor",'rules' => 'required');
+        $validation_rules['fellowship_name_of_institution']              = array("label" => "Institution",'rules' => 'required');
+        $validation_rules['fellowship_supervisor_department']                          = array("label" => "Department",'rules' => 'required');
+        $validation_rules['fellowship_description_of_research']              = array("label" => "Description of research work",'rules' => 'uploaded[fellowship_description_of_research]|max_size[fellowship_description_of_research,1000]|ext_in[fellowship_description_of_research,pdf]');
+        
         return $validation_rules;
     }
 
@@ -636,8 +627,6 @@ class Fellowship extends BaseController
 
     public function print($nominee_id = '')
     {
-
-       // $this->sendMailToJury($award_id);
         //get nominee data
         if(!empty($nominee_id)){
 
@@ -665,8 +654,8 @@ class Fellowship extends BaseController
             }
 
             //Nomination type
-            $nominationType = ($awardDt['main_category_id']=='1')?'Research Awards':'Science Scholar Awards';
-            $nominationType = 'Nomination of '.$nominationType.' - 2022'; 
+            $nominationType = 'Clinical Research Fellowship';
+            $nominationType = 'Nomination of '.$nominationType.' -'.date('Y'); 
             $section->addTextBreak(1);
             $section->addText($nominationType, $header);
 
@@ -683,18 +672,7 @@ class Fellowship extends BaseController
 
             $wrappingStyles = ['inline', 'behind', 'infront', 'square', 'tight'];
 
-            $table->addRow(900);
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Applicant Photo', $fancyTableFontStyle);
-            $source = file_get_contents($uploadDir.$nomineeData['nominator_photo']);
-            $table->addCell(2000)->addImage($source,array(
-                'positioning' => 'relative',
-                'marginTop' => -1,
-                'marginLeft' => 1,
-                'marginBottom' => 1,
-                'width' => 80,
-                'height' => 45 
-            ));
-
+            
             $table->addRow(900);
             $table->addCell(2000, $fancyTableCellStyle)->addText('Award', $fancyTableFontStyle);
             $table->addCell(2000)->addText($nomineeData['award']);
@@ -761,90 +739,85 @@ class Fellowship extends BaseController
             $table->addCell(2000)->addText($nomineeData['nominator_address']);
 
             $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Justification Letter', $fancyTableFontStyle);
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Justification for Sponsoring the Nomination duly signed by the Nominator (not to exceed 400 words)', $fancyTableFontStyle);
             $table->addCell(2000)->addText($nomineeData['justification_letter_filename']);
 
             $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Bio-Data', $fancyTableFontStyle);
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Complete Bio-data of the Applicant (Max: 1.5 MB)', $fancyTableFontStyle);
             $table->addCell(2000)->addText($nomineeData['complete_bio_data']);
+     
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Name of institution and location', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['passport_filename']);
 
-            if($nomineeData['nomination_type'] == 'spsfn'){
-    
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Supervisor Certifying Research Work', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['supervisor_certifying']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Designation', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['signed_details']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Excellence Research Work', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['excellence_research_work']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Year of joining', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['citation']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Lists of Publications', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['lists_of_publications']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Name of degree', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['signed_statement']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Statement of Applicant', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['statement_of_applicant']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Year of award of degree', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['specific_publications']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Ethical Clearance', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['ethical_clearance']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['best_papers']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Statement of duly signed by Nominee', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['statement_of_duly_signed_by_nominee']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Name of degree', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['signed_statement']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Citation', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['citation']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Year of award of degree', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['specific_publications']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Aggregate Marks', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['aggregate_marks']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['best_papers']);
 
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Research Experience (including, summer research, hands-on research workshop, etc.)', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_research_experience']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Age Proof', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['age_proof']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information)', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_research_publications']);
 
-                    $table->addRow();
-                    $table->addCell(2000, $fancyTableCellStyle)->addText('Declaration Candidate', $fancyTableFontStyle);
-                    $table->addCell(2000)->addText($nomineeData['declaration_candidate']);
-                
-            }
-            else
-            {
-                
-                $table->addRow();
-                $table->addCell(2000, $fancyTableCellStyle)->addText('Passport', $fancyTableFontStyle);
-                $table->addCell(2000)->addText($nomineeData['passport_filename']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_research_awards_and_recognitions']);
 
-                $table->addRow();
-                $table->addCell(2000, $fancyTableCellStyle)->addText('Research Work', $fancyTableFontStyle);
-                $table->addCell(2000)->addText($nomineeData['signed_details']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Description of past scientific research projects completed and research experience (1 page)', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_scientific_research_projects']);
 
-                $table->addRow();
-                $table->addCell(2000, $fancyTableCellStyle)->addText('Citation', $fancyTableFontStyle);
-                $table->addCell(2000)->addText($nomineeData['citation']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded:', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_name_of_institution_research_work']);
 
-                $table->addRow();
-                $table->addCell(2000, $fancyTableCellStyle)->addText('Signed Statement', $fancyTableFontStyle);
-                $table->addCell(2000)->addText($nomineeData['signed_statement']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out:  Name of supervisor', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_name_of_the_supervisor']);
 
-                $table->addRow();
-                $table->addCell(2000, $fancyTableCellStyle)->addText('Publications', $fancyTableFontStyle);
-                $table->addCell(2000)->addText($nomineeData['specific_publications']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Institution', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_name_of_institution']);
 
-                $table->addRow();
-                $table->addCell(2000, $fancyTableCellStyle)->addText('Best Papers', $fancyTableFontStyle);
-                $table->addCell(2000)->addText($nomineeData['best_papers']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Department', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_supervisor_department']);
 
-                $table->addRow();
-                $table->addCell(2000, $fancyTableCellStyle)->addText('Award Received', $fancyTableFontStyle);
-                $table->addCell(2000)->addText($nomineeData['statement_of_research_achievements']);
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['fellowship_description_of_research']);
 
-            }     
-            
             $firstname = $nomineeData['firstname'];
 
             if ( preg_match('/\s/',$firstname) ){

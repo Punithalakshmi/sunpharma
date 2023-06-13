@@ -80,6 +80,7 @@ $routes->post('reset_password/(:any)','User::reset_password/$1');
 $routes->get('view/(:any)/(:any)','Nomination::view/$1/$1');
 $routes->post('view','Nomination::view');
 
+$routes->get('fellowship/print/(:any)','Fellowship::print/$1');
 $routes->get('fellowship/view/(:any)/(:any)','Fellowship::view/$1/$1');
 $routes->post('fellowship/view/','Fellowship::view');
 $routes->get('fellowship/(:any)','Fellowship::index/$1',['filter' =>'check_date']);

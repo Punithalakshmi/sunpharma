@@ -32,11 +32,11 @@ class User extends BaseController
             
                     $data       = $this->userModel->where('username', $username)->first();
                  
-
+                       
                     if($data){
 
                         $pass = trim($data['password']);
-                    
+                        //echo md5($password); die;
                        if(($pass == md5($password)) && ($data['active'] == 1)){
                         
                          $redirect_route = 'view/'.$data['id'];
