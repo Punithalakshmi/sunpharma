@@ -321,6 +321,12 @@
                                                 <div>
                                                      <?=(isset($user['first_medical_degree_institution']) && !empty($user['first_medical_degree_institution']))?$user['first_medical_degree_institution']:'';?>
                                                </div>
+                                            <?php endif;?>
+                                            <?php if(!empty($user['first_degree_marksheet'])): ?>
+                                            <label class="form-label " for=""> <b> Marksheet </b> </label>
+                                                <div>
+                                                     <?=(isset($user['first_degree_marksheet']) && !empty($user['first_degree_marksheet']))?$user['first_degree_marksheet']:'';?>
+                                               </div>
                                             <?php endif;?>   
                                     </div>
                                 </div>
@@ -353,11 +359,22 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b>Institution awarding the degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_medical_degree_institution" type="text" id="first_medical_degree_institution" value="<?php echo set_value('first_medical_degree_institution',$editdata['first_medical_degree_institution']);?>" value="<?=$editdata['first_medical_degree_institution'];?>">    
+                                                <input class="form-control mb-3 required" name="first_medical_degree_institution" type="text" id="first_medical_degree_institution" value="<?php echo set_value('first_medical_degree_institution',$editdata['first_medical_degree_institution']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_medical_degree_institution')) {?>
                                                 <?= $error = $validation->getError('first_medical_degree_institution'); ?>
+                                            <?php }?>
+                                        </small>
+                                    </div>
+                                    <div class="mb-3 form-items">
+                                        <div>
+                                                <label class="form-check-label question__label noLabel"> <b>Marksheet </b> <span class="required" style="color:red;">*</span> </label>
+                                                <input class="form-control mb-3 required" name="first_degree_marksheet" type="text" id="first_degree_marksheet" value="<?php echo set_value('first_degree_marksheet',$editdata['first_degree_marksheet']);?>">    
+                                        </div>
+                                        <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('first_degree_marksheet')) {?>
+                                                <?= $error = $validation->getError('first_degree_marksheet'); ?>
                                             <?php }?>
                                         </small>
                                     </div>
@@ -389,6 +406,12 @@
                                                      <?=(isset($user['highest_medical_degree_institution']) && !empty($user['highest_medical_degree_institution']))?$user['highest_medical_degree_institution']:'';?>
                                                </div>
                                             <?php endif;?>   
+                                            <?php if(!empty($user['highest_degree_marksheet'])): ?>
+                                            <label class="form-label " for=""> <b> Marksheet </b> </label>
+                                                <div>
+                                                     <?=(isset($user['highest_degree_marksheet']) && !empty($user['highest_degree_marksheet']))?$user['highest_degree_marksheet']:'';?>
+                                               </div>
+                                            <?php endif;?>
                                     </div>
                                 </div>
                                 <?php if($user['is_submitted'] == 0): ?> 
@@ -425,6 +448,17 @@
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_medical_degree_institution')) {?>
                                                 <?= $error = $validation->getError('highest_medical_degree_institution'); ?>
+                                            <?php }?>
+                                        </small>
+                                    </div>
+                                    <div class="mb-3 form-items">
+                                        <div>
+                                                <label class="form-check-label question__label noLabel"> <b>Marksheet</b> <span class="required" style="color:red;">*</span> </label>
+                                                <input class="form-control mb-3 required" name="highest_degree_marksheet" type="text" id="highest_degree_marksheet" value="<?php echo set_value('highest_degree_marksheet',$editdata['highest_degree_marksheet']);?>" >    
+                                        </div>
+                                        <small class="text-danger">
+                                            <?php if(isset($validation) && $validation->getError('highest_degree_marksheet')) {?>
+                                                <?= $error = $validation->getError('highest_degree_marksheet'); ?>
                                             <?php }?>
                                         </small>
                                     </div>

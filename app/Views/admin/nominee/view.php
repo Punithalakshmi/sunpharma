@@ -119,7 +119,87 @@
                 <div class="col-sm-9">
                 <?=$user['nominator_address'];?> </div>
               </div>
-            <?php if(isset($user['nomination_type']) && ($user['nomination_type'] == 'ssan')): 
+            <?php if(isset($user['nomination_type']) && ($user['nomination_type'] == 'fellowship')){ ?>
+              <div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">First Employment:</label>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Name of institution and location:</label> 
+                  <?=$user['first_employment_name_of_institution_location'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Designation/post:</label> 
+                  <?=$user['first_employment_designation'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Year of joining:</label> 
+                  <?=$user['first_employment_year_of_joining'];?> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">First medical degree obtained: </label>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Name of degree</label> 
+                  <?=$user['first_medical_degree_name_of_degree'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Year of award of degree:</label> 
+                  <?=$user['first_medical_degree_year_of_award'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Institution awarding the degree</label> 
+                  <?=$user['first_medical_degree_institution'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Marksheet</label> 
+                  <?=$user['first_degree_marksheet'];?> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">Highest medical degree obtained: </label>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Name of degree</label> 
+                  <?=$user['highest_medical_degree_name'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Year of award of degree:</label> 
+                  <?=$user['highest_medical_degree_year'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Institution awarding the degree</label> 
+                  <?=$user['highest_medical_degree_institution'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Marksheet</label> 
+                  <?=$user['highest_degree_marksheet'];?> 
+                </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded:</label>
+                <div class="col-sm-9">
+                <?=$user['fellowship_name_of_institution_research_work'];?> </div>
+              </div>
+
+              <div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out: </label>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Name of supervisor</label> 
+                  <?=$user['fellowship_name_of_the_supervisor'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Institution:</label> 
+                  <?=$user['fellowship_name_of_institution'];?> 
+                </div>
+                <div class="col-sm-3">
+                  <label class="col-sm-3 col-form-label">Department</label> 
+                  <?=$user['fellowship_supervisor_department'];?> 
+                </div>
+              </div>
+
+            <?php }?>
+            <?php if(isset($user['nomination_type']) && ($user['nomination_type'] == 'ssan')){
               //$files split section
               if(strpos($user['justification_letter_filename'],','))
                 $justificationLetter = explode(',',$user['justification_letter_filename']);
@@ -287,68 +367,214 @@
                       <?php endif;?>
                 </div>
               </div>
-              <?php endif;?>
-              <?php else: 
+              <?php endif;
+                   }
+                    else if(isset($user['nomination_type']) && ($user['nomination_type'] == 'fellowship')){
+                      if(strpos($user['justification_letter_filename'],','))
+                        $justificationLetter = explode(',',$user['justification_letter_filename']);
+                      else
+                        $justificationLetter = $user['justification_letter_filename'];
+      
+                      if(strpos($user['fellowship_research_experience'],','))
+                          $researchExperience = explode(',',$user['fellowship_research_experience']);
+                      else
+                          $researchExperience = $user['fellowship_research_experience'];  
+      
+                      if(strpos($user['complete_bio_data'],','))
+                          $completeBiodata = explode(',',$user['complete_bio_data']);
+                      else
+                          $completeBiodata = $user['complete_bio_data'];  
+      
+                      if(strpos($user['fellowship_research_publications'],','))
+                        $researchPublications = explode(',',$user['fellowship_research_publications']);
+                      else
+                        $researchPublications = $user['fellowship_research_publications']; 
+      
+                      if(strpos($user['fellowship_research_awards_and_recognitions'],','))
+                        $awardsRecognitions = explode(',',$user['fellowship_research_awards_and_recognitions']);
+                      else
+                        $awardsRecognitions = $user['fellowship_research_awards_and_recognitions']; 
+      
+                      if(strpos($user['fellowship_scientific_research_projects'],','))
+                        $scientificResearchProjects = explode(',',$user['fellowship_scientific_research_projects']);
+                      else
+                        $scientificResearchProjects = $user['fellowship_scientific_research_projects']; 
 
-                if(strpos($user['justification_letter_filename'],','))
-                  $justificationLetter = explode(',',$user['justification_letter_filename']);
-                else
-                  $justificationLetter = $user['justification_letter_filename'];
+                      if(strpos($user['fellowship_description_of_research'],','))
+                        $descriptionOfResearch = explode(',',$user['fellowship_description_of_research']);
+                      else
+                        $descriptionOfResearch = $user['fellowship_description_of_research'];   
 
-                if(strpos($user['supervisor_certifying'],','))
-                    $supervisorCertifying = explode(',',$user['supervisor_certifying']);
-                else
-                    $supervisorCertifying = $user['supervisor_certifying'];  
+                     
+                        
+                   ?>
 
-                if(strpos($user['complete_bio_data'],','))
-                    $completeBiodata = explode(',',$user['complete_bio_data']);
-                else
-                    $completeBiodata = $user['complete_bio_data'];  
+                <?php if(!empty($user['justification_letter_filename'])):?>
+                    <div class="form-group row formitem graybox">
+                    <label class="col col-form-label nonecolan"> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)</label>
+                    <div class="col-sm-9">
+                    <?php if(is_array($justificationLetter)): 
+                            for($i=0; $i<count($justificationLetter); $i++): ?>
+                          <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
+                          <?php endfor; 
+                              else:?>
+                            <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
+                          <?php endif;?>
+                  </div>
+                  </div>
+                  <?php endif; ?>
 
-                if(strpos($user['excellence_research_work'],','))
-                  $excellenceResearchWork = explode(',',$user['excellence_research_work']);
-                else
-                  $excellenceResearchWork = $user['excellence_research_work']; 
+                  <?php if(!empty($user['complete_bio_data'])):?>
+                  <div class="form-group row formitem graybox">
+                    <label class="col col-form-label nonecolan">Complete Bio-data of the applicant(Max: 1MB) pdf format</label>
+                    <div class="col-sm-9">
+                    <?php if(is_array($completeBiodata)): 
+                            for($i=0; $i<count($completeBiodata); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
+                      <?php endfor; 
+                              else:?>
+                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
+                        <?php endif;?> 
+                    </div>
+                  </div>
+                  <?php endif; ?>
 
-                if(strpos($user['lists_of_publications'],','))
-                  $listsOfPublications = explode(',',$user['lists_of_publications']);
-                else
-                  $listsOfPublications = $user['lists_of_publications']; 
+                  <?php if(!empty($user['fellowship_research_experience'])):?>
+                  <div class="form-group row formitem graybox">
+                    <label class="col col-form-label nonecolan">Research Experience (including, summer research, hands-on research workshop, etc.)</label>
+                    <div class="col-sm-9">
+                    <?php if(is_array($researchExperience)): 
+                            for($i=0; $i<count($researchExperience); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchExperience[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience[$i];?></a> 
+                      <?php endfor; 
+                              else:?>
+                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchExperience;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience;?></a>
+                        <?php endif;?> 
+                    </div>
+                  </div>
+                  <?php endif; ?>
 
-                if(strpos($user['statement_of_applicant'],','))
-                   $statementOfApplicant = explode(',',$user['statement_of_applicant']);
-                else
-                   $statementOfApplicant = $user['statement_of_applicant']; 
+                  <?php if(!empty($user['fellowship_research_publications'])):?>
+                  <div class="form-group row formitem graybox">
+                    <label class="col col-form-label nonecolan">Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information)</label>
+                    <div class="col-sm-9">
+                    <?php if(is_array($researchPublications)): 
+                            for($i=0; $i<count($researchPublications); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications[$i];?></a> 
+                      <?php endfor; 
+                              else:?>
+                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications;?></a>
+                        <?php endif;?> 
+                    </div>
+                  </div>
+                  <?php endif; ?>
 
-                if(strpos($user['ethical_clearance'],','))
-                   $ethicalClearance = explode(',',$user['ethical_clearance']);
-                else
-                  $ethicalClearance  = $user['ethical_clearance']; 
-                  
-                if(strpos($user['statement_of_duly_signed_by_nominee'],','))
-                    $statementOfDulySigned = explode(',',$user['statement_of_duly_signed_by_nominee']);
-                else
-                   $statementOfDulySigned  = $user['statement_of_duly_signed_by_nominee']; 
+                  <?php if(!empty($user['fellowship_research_awards_and_recognitions'])):?>
+                  <div class="form-group row formitem graybox">
+                    <label class="col col-form-label nonecolan">Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)</label>
+                    <div class="col-sm-9">
+                    <?php if(is_array($awardsRecognitions)): 
+                            for($i=0; $i<count($awardsRecognitions); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$awardsRecognitions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions[$i];?></a> 
+                      <?php endfor; 
+                              else:?>
+                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$awardsRecognitions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions;?></a>
+                        <?php endif;?> 
+                    </div>
+                  </div>
+                  <?php endif; ?>
 
-               if(strpos($user['aggregate_marks'],','))
-                   $aggregateMarks = explode(',',$user['aggregate_marks']);
-               else
-                   $aggregateMarks  = $user['aggregate_marks'];  
-                  
-                if(strpos($user['age_proof'],','))
-                    $ageProof = explode(',',$user['age_proof']);
-                else
-                    $ageProof  = $user['age_proof'];    
+                  <?php if(!empty($user['fellowship_scientific_research_projects'])):?>
+                  <div class="form-group row formitem graybox">
+                    <label class="col col-form-label nonecolan">Description of past scientific research projects completed and research experience (1 page)</label>
+                    <div class="col-sm-9">
+                    <?php if(is_array($scientificResearchProjects)): 
+                            for($i=0; $i<count($scientificResearchProjects); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$scientificResearchProjects[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects[$i];?></a> 
+                      <?php endfor; 
+                              else:?>
+                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$scientificResearchProjects;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects;?></a>
+                        <?php endif;?> 
+                    </div>
+                  </div>
+                  <?php endif; ?>
 
-                if(strpos($user['declaration_candidate'],','))
-                  $declarationCandidate = explode(',',$user['declaration_candidate']);
-                else
-                  $declarationCandidate = $user['declaration_candidate']; 
+                  <?php if(!empty($user['fellowship_description_of_research'])):?>
+                  <div class="form-group row formitem graybox">
+                    <label class="col col-form-label nonecolan">Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines</label>
+                    <div class="col-sm-9">
+                    <?php if(is_array($descriptionOfResearch)): 
+                            for($i=0; $i<count($descriptionOfResearch); $i++): ?>
+                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$descriptionOfResearch[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch[$i];?></a> 
+                      <?php endfor; 
+                              else:?>
+                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$descriptionOfResearch;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch;?></a>
+                        <?php endif;?> 
+                    </div>
+                  </div>
+                  <?php endif; ?>
 
-                if(strpos($user['citation'],','))
-                  $citation = explode(',',$user['citation']);
+                   <?php } else{
+ 
+                  if(strpos($user['justification_letter_filename'],','))
+                    $justificationLetter = explode(',',$user['justification_letter_filename']);
+                  else
+                    $justificationLetter = $user['justification_letter_filename'];
+
+                  if(strpos($user['supervisor_certifying'],','))
+                      $supervisorCertifying = explode(',',$user['supervisor_certifying']);
+                  else
+                      $supervisorCertifying = $user['supervisor_certifying'];  
+
+                  if(strpos($user['complete_bio_data'],','))
+                      $completeBiodata = explode(',',$user['complete_bio_data']);
+                  else
+                      $completeBiodata = $user['complete_bio_data'];  
+
+                  if(strpos($user['excellence_research_work'],','))
+                    $excellenceResearchWork = explode(',',$user['excellence_research_work']);
+                  else
+                    $excellenceResearchWork = $user['excellence_research_work']; 
+
+                  if(strpos($user['lists_of_publications'],','))
+                    $listsOfPublications = explode(',',$user['lists_of_publications']);
+                  else
+                    $listsOfPublications = $user['lists_of_publications']; 
+
+                  if(strpos($user['statement_of_applicant'],','))
+                    $statementOfApplicant = explode(',',$user['statement_of_applicant']);
+                  else
+                    $statementOfApplicant = $user['statement_of_applicant']; 
+
+                  if(strpos($user['ethical_clearance'],','))
+                    $ethicalClearance = explode(',',$user['ethical_clearance']);
+                  else
+                    $ethicalClearance  = $user['ethical_clearance']; 
+                    
+                  if(strpos($user['statement_of_duly_signed_by_nominee'],','))
+                      $statementOfDulySigned = explode(',',$user['statement_of_duly_signed_by_nominee']);
+                  else
+                    $statementOfDulySigned  = $user['statement_of_duly_signed_by_nominee']; 
+
+                if(strpos($user['aggregate_marks'],','))
+                    $aggregateMarks = explode(',',$user['aggregate_marks']);
                 else
-                  $citation = $user['citation']; 
+                    $aggregateMarks  = $user['aggregate_marks'];  
+                    
+                  if(strpos($user['age_proof'],','))
+                      $ageProof = explode(',',$user['age_proof']);
+                  else
+                      $ageProof  = $user['age_proof'];    
+
+                  if(strpos($user['declaration_candidate'],','))
+                    $declarationCandidate = explode(',',$user['declaration_candidate']);
+                  else
+                    $declarationCandidate = $user['declaration_candidate']; 
+
+                  if(strpos($user['citation'],','))
+                    $citation = explode(',',$user['citation']);
+                  else
+                    $citation = $user['citation']; 
                 
                 ?>
                 <?php if(!empty($user['justification_letter_filename'])):?>
@@ -525,7 +751,7 @@
                 </div>
               </div>
               <?php endif;?>
-             <?php endif; ?> 
+             <?php } ?> 
 
               <?php if(isset($userdata['role']) && ($userdata['role'] == '3') && (($user['status'] == 'Disapproved' && $user['is_rejected'] == '0') || ($user['status'] == 'Disapproved' && $user['active'] == '0'))): ?>
                 <div class="">

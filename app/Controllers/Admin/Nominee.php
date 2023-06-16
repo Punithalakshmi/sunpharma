@@ -566,7 +566,6 @@ class Nominee extends BaseController
 
                         $ltr = $this->request->getFile('justification_letter');
                         
-                        
                         $category                    = $this->request->getPost('category');
                         $firstname                   = $this->request->getPost('firstname');
                         $dob                         = $this->request->getPost('date_of_birth');
@@ -772,7 +771,8 @@ class Nominee extends BaseController
                             }
                            
                     }
-                    else
+                    else if(isset($nomineeData['nomination_type'])
+                    && ($nomineeData['nomination_type'] == 'spsfn'))
                     {
 
                         if($this->request->getFileMultiple('supervisor_certifying')){
@@ -782,15 +782,15 @@ class Nominee extends BaseController
                              $filenames = fileNameUpdate($id,$filenames,'supervisor_certifying'); 
                              $nominee_details_data['supervisor_certifying'] = $filenames;
                            }  
-                       }   
-                       else
-                       {
-                            if($this->request->getFile('supervisor_certifying')!=''){
-                                $supervisor_certifying = $this->request->getFile('supervisor_certifying');
-                                $supervisor_certifying->move($fileUploadDir);
-                                $nominee_details_data['supervisor_certifying'] = $supervisor_certifying->getClientName();
-                            } 
-                       }  
+                        }   
+                        else
+                        {
+                                if($this->request->getFile('supervisor_certifying')!=''){
+                                    $supervisor_certifying = $this->request->getFile('supervisor_certifying');
+                                    $supervisor_certifying->move($fileUploadDir);
+                                    $nominee_details_data['supervisor_certifying'] = $supervisor_certifying->getClientName();
+                                } 
+                        }  
 
                         if($this->request->getPost('year_of_passing'))
                           $nominee_details_data['year_of_passing'] = $this->request->getPost('year_of_passing');
@@ -972,14 +972,140 @@ class Nominee extends BaseController
         
                               }
                     
-                    }
+                      }
+                      else
+                      {
+
+                            if($this->request->getPost('first_employment_name_of_institution_location'))
+                                $nominee_details_data['first_employment_name_of_institution_location'] = $this->request->getPost('first_employment_name_of_institution_location');
+                        
+                            if($this->request->getPost('first_employment_designation'))  
+                                $nominee_details_data['first_employment_designation'] = $this->request->getPost('first_employment_designation');
+                    
+                            if($this->request->getPost('first_employment_year_of_joining'))
+                                $nominee_details_data['first_employment_year_of_joining'] = $this->request->getPost('first_employment_year_of_joining');
+                              
+                            if($this->request->getPost('first_medical_degree_name_of_degree'))  
+                                 $nominee_details_data['first_medical_degree_name_of_degree'] = $this->request->getPost('first_medical_degree_name_of_degree');
+                          
+                            if($this->request->getPost('first_medical_degree_year_of_award'))
+                                 $nominee_details_data['first_medical_degree_year_of_award'] = $this->request->getPost('first_medical_degree_year_of_award');
+                               
+                            if($this->request->getPost('first_medical_degree_institution'))  
+                                $nominee_details_data['first_medical_degree_institution'] = $this->request->getPost('first_medical_degree_institution');
+                    
+                            if($this->request->getPost('highest_medical_degree_name'))
+                                $nominee_details_data['highest_medical_degree_name'] = $this->request->getPost('highest_medical_degree_name');
+                                
+                            if($this->request->getPost('highest_medical_degree_year'))  
+                               $nominee_details_data['highest_medical_degree_year'] = $this->request->getPost('highest_medical_degree_year');
+                             
+                            if($this->request->getPost('highest_medical_degree_institution'))  
+                               $nominee_details_data['highest_medical_degree_institution'] = $this->request->getPost('highest_medical_degree_institution');
+                             
+                            if($this->request->getPost('fellowship_name_of_institution_research_work'))  
+                               $nominee_details_data['fellowship_name_of_institution_research_work'] = $this->request->getPost('fellowship_name_of_institution_research_work');
+                             
+                            if($this->request->getPost('fellowship_name_of_the_supervisor'))  
+                               $nominee_details_data['fellowship_name_of_the_supervisor'] = $this->request->getPost('fellowship_name_of_the_supervisor');
+                             
+                            if($this->request->getPost('fellowship_name_of_institution'))  
+                               $nominee_details_data['fellowship_name_of_institution'] = $this->request->getPost('fellowship_name_of_institution');
+                             
+                            if($this->request->getPost('fellowship_supervisor_department'))  
+                               $nominee_details_data['fellowship_supervisor_department'] = $this->request->getPost('fellowship_supervisor_department');
+                             
+          
+                              if($this->request->getFileMultiple('fellowship_research_experience')){
+                                  $filenames = multipleFileUpload('fellowship_research_experience',$id);   
+                                  if($filenames!='') {
+                                      $filenames = fileNameUpdate($id,$filenames,'fellowship_research_experience');
+                                      $nominee_details_data['fellowship_research_experience'] = $filenames;
+                                  }        
+                              }   
+                              else
+                              {
+                                  if($this->request->getFile('fellowship_research_experience')) {
+                                      $research_experience = $this->request->getFile('fellowship_research_experience');
+                                      $research_experience->move($fileUploadDir);
+                                      $nominee_details_data['fellowship_research_experience']   = $research_experience->getClientName();
+                                  }
+                              }
+          
+                              if($this->request->getFileMultiple('fellowship_research_publications')){
+                                  $filenames = multipleFileUpload('fellowship_research_publications',$id);   
+                                  if($filenames!='') {
+                                      $filenames = fileNameUpdate($id,$filenames,'fellowship_research_publications');
+                                      $nominee_details_data['fellowship_research_publications'] = $filenames;
+                                  }        
+                              }   
+                              else
+                              {
+                                  if($this->request->getFile('fellowship_research_publications')) {
+                                      $research_publications = $this->request->getFile('fellowship_research_publications');
+                                      $research_publications->move($fileUploadDir);
+                                      $nominee_details_data['fellowship_research_publications']   = $research_publications->getClientName();
+                                  }
+                              }
+          
+                              if($this->request->getFileMultiple('fellowship_research_awards_and_recognitions')){
+                                  $filenames = multipleFileUpload('fellowship_research_awards_and_recognitions',$id);   
+                                  if($filenames!='') {
+                                      $filenames = fileNameUpdate($id,$filenames,'fellowship_research_awards_and_recognitions');
+                                      $nominee_details_data['fellowship_research_awards_and_recognitions'] = $filenames;
+                                  }        
+                              }   
+                              else
+                              {
+                                  if($this->request->getFile('fellowship_research_awards_and_recognitions')) {
+                                      $awards_and_recognitions = $this->request->getFile('fellowship_research_awards_and_recognitions');
+                                      $awards_and_recognitions->move($fileUploadDir);
+                                      $nominee_details_data['fellowship_research_awards_and_recognitions']   = $awards_and_recognitions->getClientName();
+                                  }
+                              }
+          
+                              if($this->request->getFileMultiple('fellowship_scientific_research_projects')){
+                                  $filenames = multipleFileUpload('fellowship_scientific_research_projects',$id);   
+                                  if($filenames!='') {
+                                      $filenames = fileNameUpdate($id,$filenames,'fellowship_scientific_research_projects');
+                                      $nominee_details_data['fellowship_scientific_research_projects'] = $filenames;
+                                  }        
+                              }   
+                              else
+                              {
+                                  if($this->request->getFile('fellowship_scientific_research_projects')) {
+                                      $research_projects = $this->request->getFile('fellowship_scientific_research_projects');
+                                      $research_projects->move($fileUploadDir);
+                                      $nominee_details_data['fellowship_scientific_research_projects']   = $research_projects->getClientName();
+                                  }
+                              }
+          
+                              if($this->request->getFileMultiple('fellowship_description_of_research')){
+                                  $filenames = multipleFileUpload('fellowship_description_of_research',$id);   
+                                  if($filenames!='') {
+                                      $filenames = fileNameUpdate($id,$filenames,'fellowship_description_of_research');
+                                      $nominee_details_data['fellowship_description_of_research'] = $filenames;
+                                  }        
+                              }   
+                              else
+                              {
+                                  if($this->request->getFile('fellowship_description_of_research')) {
+                                      $description_of_research = $this->request->getFile('fellowship_description_of_research');
+                                      $description_of_research->move($fileUploadDir);
+                                      $nominee_details_data['fellowship_description_of_research']   = $description_of_research->getClientName();
+                                  }
+                              }
+          
+                              
+          
+                       }
 
                     $this->nominationModel->update(array("id" => $nomineeData['nominee_detail_id']),$nominee_details_data);
                     $this->session->setFlashdata('msg', 'Nomination Info Updated Successfully!');
                     return redirect()->to('admin/nominee/view/'.$id);
-                //}    
+                  
             }
-
+           
         if(isset($nomineeData['nomination_type']) && ($nomineeData['nomination_type'] == 'ssan')){
             return render('admin/nominee/ssan_update',$this->data);
         }
@@ -992,8 +1118,7 @@ class Nominee extends BaseController
             return render('admin/nominee/fellowship_update',$this->data);
         }
 
-   }  
-
+  }
 
   public function removeFile()
   {
