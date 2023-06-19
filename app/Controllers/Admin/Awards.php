@@ -64,55 +64,64 @@ class Awards extends BaseController
     {
 
         $path =  $_SERVER['DOCUMENT_ROOT'];
-       // $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
+       // $category        = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
         $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
        
         $fileName    = 'Evaluation Sheet '.date('d-m-Y H:i:s').'.xlsx';  
         $awardsLists = $this->awardsModel->getLists($main_category_id)->getResultArray();
-
-        //get Active Jury Lists
+	//echo $this->awardsModel->getLastQuery(); 
+	
+	//print_r($awardsLists);die;
+	 //get Active Jury Lists
         $activeJuries = $this->userModel->getAllActiveJuryLists()->getResultArray();
-        
+
         $juryData = array();
         $awardsDataArr = array();
         $nomineeData = array();
-        $i = 0;
+	 $juriesName = array();
+
+        $i = 0; 
         foreach($awardsLists as $akey => $avalue) {
             if($avalue['main_category_id']){
                 $awardsDataArr[$avalue['category_name']][$i]['nomination_no'] = $avalue['registration_no'];
                 $awardsDataArr[$avalue['category_name']][$i]['firstname']     = $avalue['firstname'];
                 $awardsDataArr[$avalue['category_name']][$i]['juries'] = [];
-                foreach($activeJuries as $jkey=>$jvalue){
-                    $getJuryRateData = $this->userModel->getJuryRateData($jvalue['id'],$avalue['id'])->getRowArray();
-                    $juryData['firstname'] = $jvalue['firstname'];
-                    $juryData['username']  = $jvalue['username'];
-                    $juryData['rating']    = (isset($getJuryRateData['rating']))?$getJuryRateData['rating']:0;
-                        $awardsDataArr[$avalue['category_name']][$i]['juries'][] = $juryData;
+               foreach($activeJuries as $jkey=>$jvalue){
+			//print_r();
+                    $getJuryRateData = $this->userModel->getJuryRateData($jvalue['id'],$avalue['id']);
+                    $getJuryRateData = $getJuryRateData->getRowArray();
+		  
+		    if(is_array($getJuryRateData) && count($getJuryRateData) && ($getJuryRateData['rating'] > 0)){
+                    	 $juryData['firstname'] = $jvalue['firstname'];
+                   	 $juryData['username']  = $jvalue['username'];
+                   	 $juryData['rating']    = (isset($getJuryRateData['rating']))?$getJuryRateData['rating']:0;
+                         $awardsDataArr[$avalue['category_name']][$i]['juries'][] = $juryData;
+		         $juriesName[] = $jvalue['firstname'].''.$jvalue['lastname'].'['.$jvalue['username'].']';
+		      
+		   }
                 }
                 $i++;
-            }                       
+            }  
+                            
         }
-
+         
         $spreadsheet = new Spreadsheet();
 
         $sheet = $spreadsheet->getActiveSheet();
 
         $typeOfAward = '';
-
         switch ($main_category_id) {
-            case 1:
+            case '1':
                 $typeOfAward .= 'Research Awards';
                 break;
-            case 2:
+            case '2':
                 $typeOfAward .= 'Science Scholar Awards';
                 break;
-            case 3:
+            case '3':
                 $typeOfAward .= 'Clinical Research Fellowship';
                 break;
           }
-
-        $title = $typeOfAward.' Evaluation Sheet '.date('Y');
-        $sheet->setTitle('Report - '.$typeOfAward.' '.date('Y'));
+        $title = $typeOfAward.' Evaluation Sheet '.date('Y'); 
         $sheet->setCellValue('A1',$title);
         $sheet->getStyle("A1:I1")->getFont()->setBold(true);
         $sheet->getStyle("A1:I1")->getFont()->setSize(12);
@@ -120,18 +129,15 @@ class Awards extends BaseController
         $sheet->setCellValue('A2', 'Award Category');
         $sheet->setCellValue('B2', 'Nomination No');
         $sheet->setCellValue('C2', 'Applicant Name');
-
-        $juriesName = array();
-        for($j=0;$j<count($activeJuries);$j++){
-            $juriesName[] = $activeJuries[$j]['firstname'].''.$activeJuries[$j]['lastname'].'['.$activeJuries[$j]['username'].']';
-        }
+   
         $juriesName[] = 'Total Score'; 
+	
         $sheet->fromArray($juriesName,null,'D2');
+
         $sheet->getStyle(2)->getFont()->setBold(true);
         $sheet->getStyle(2)->getFont()->setSize(11);
-        
+   
         $rows = 3;
-        
         ksort($awardsDataArr);
         foreach ($awardsDataArr as $val => $dt){
             foreach($dt as $v => $ard){
