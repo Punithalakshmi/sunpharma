@@ -49,6 +49,8 @@ class Fellowship extends BaseController
                             $nominator_mobile            = $this->request->getPost('nominator_mobile');
                             $nominator_email             = $this->request->getPost('nominator_email');
                             $nominator_office_address    = $this->request->getPost('nominator_office_address');
+                            $nominator_designation       = $this->request->getPost('nominator_designation');
+                            $age                         = $this->request->getPost('age');
                          
                             //get award data
                             $awardData = getAwardData($award_id);
@@ -59,6 +61,7 @@ class Fellowship extends BaseController
                             $ins_data['phone']      = $phonenumber;
                             $ins_data['address']    = $address;
                             $ins_data['dob']        = date("Y/m/d",strtotime($dob));
+                            $ins_data['age']        = $age;
                             $ins_data['status']     = 'Disapproved';
                             $ins_data['role']       = 2;
                             $ins_data['category']   = $category;
@@ -76,8 +79,8 @@ class Fellowship extends BaseController
                             $nominee_details_data['nominator_email']    = $nominator_email;
                             $nominee_details_data['nominator_phone']    = $nominator_mobile;
                             $nominee_details_data['nominator_address']  = $nominator_office_address;
-                          //  $nominee_details_data['ongoing_course']    = $ongoing_course;
-                          //  $nominee_details_data['is_completed_a_research_project']  = $research_project;
+                            $nominee_details_data['nominator_designation']  = $nominator_designation;
+                          
                             $nominee_details_data['is_submitted'] = 0;
                             $nominee_details_data['nomination_year'] = date('Y');
 
@@ -111,7 +114,7 @@ class Fellowship extends BaseController
                            
                             $this->nominationModel->save($nominee_details_data);
 
-                            $registrationID = $this->nominationModel->insertID();
+                            $registrationID = getNominationNo($award_id);
 
                             $registrationNo = date('Y')."/CRF-".$registrationID;
 
@@ -300,6 +303,18 @@ class Fellowship extends BaseController
                             $fellowship_description_of_research->move($fileUploadDir);
                             $nominee_details_data['fellowship_description_of_research']  = $fellowship_description_of_research->getClientName();
                         }
+
+                        if($this->request->getFile('first_degree_marksheet')) {
+                            $fellowship_description_of_research = $this->request->getFile('first_degree_marksheet');
+                            $fellowship_description_of_research->move($fileUploadDir);
+                            $nominee_details_data['first_degree_marksheet']  = $fellowship_description_of_research->getClientName();
+                        }
+
+                        if($this->request->getFile('highest_degree_marksheet')) {
+                            $fellowship_description_of_research = $this->request->getFile('highest_degree_marksheet');
+                            $fellowship_description_of_research->move($fileUploadDir);
+                            $nominee_details_data['highest_degree_marksheet']  = $fellowship_description_of_research->getClientName();
+                        }
                         
                         
                         $nominee_details_data['is_submitted'] = 1;
@@ -320,7 +335,7 @@ class Fellowship extends BaseController
                         $attachmentFilePath =  'uploads/'.$id.'/'.$filename;
                         $isMailSent = finalNominationSubmit($edit_data['firstname'],$attachmentFilePath);
 
-                        $redirectUrl = 'view/'.$edit_data['user_id'].'/'.$award_id;
+                        $redirectUrl = 'fellowship/view/'.$edit_data['user_id'].'/'.$award_id;
 
                         if($isMailSent)
                              return redirect()->to($redirectUrl)->withInput();
@@ -356,6 +371,9 @@ class Fellowship extends BaseController
             $editdata['fellowship_name_of_institution']                            = ($this->request->getPost('fellowship_name_of_institution'))?$this->request->getPost('fellowship_name_of_institution'):'';
             $editdata['fellowship_supervisor_department']                          = ($this->request->getPost('fellowship_supervisor_department'))?$this->request->getPost('fellowship_supervisor_department'):'';
             $editdata['fellowship_description_of_research']                        = ($this->request->getPost('fellowship_description_of_research'))?$this->request->getPost('fellowship_description_of_research'):'';
+            $editdata['first_degree_marksheet']                                    = ($this->request->getFile('first_degree_marksheet'))?$this->request->getFile('first_degree_marksheet'):'';
+            $editdata['highest_degree_marksheet']                                  = ($this->request->getFile('highest_degree_marksheet'))?$this->request->getFile('highest_degree_marksheet'):'';
+
             $this->data['editdata'] = $editdata;
             $this->data['user']     = $edit_data;
             return  render('frontend/fellowship_new_documents',$this->data);  
@@ -438,6 +456,10 @@ class Fellowship extends BaseController
         $validation_rules['fellowship_name_of_institution']              = array("label" => "Institution",'rules' => 'required');
         $validation_rules['fellowship_supervisor_department']                          = array("label" => "Department",'rules' => 'required');
         $validation_rules['fellowship_description_of_research']              = array("label" => "Description of research work",'rules' => 'uploaded[fellowship_description_of_research]|max_size[fellowship_description_of_research,1000]|ext_in[fellowship_description_of_research,pdf]');
+        $validation_rules['highest_degree_marksheet']              = array("label" => "Highest Medical Degree",'rules' => 'uploaded[highest_degree_marksheet]|max_size[highest_degree_marksheet,1000]|ext_in[highest_degree_marksheet,pdf]');
+        $validation_rules['first_degree_marksheet']                = array("label" => "First Medical Degree",'rules' => 'uploaded[first_degree_marksheet]|max_size[first_degree_marksheet,1000]|ext_in[first_degree_marksheet,pdf]');
+        
+
         
         return $validation_rules;
     }
@@ -463,7 +485,7 @@ class Fellowship extends BaseController
        
         $this->data['content'] = $message;
        
-        sendMail('sunpharma.sciencefoundation@sunpharma.com',$subject,$message);
+        sendMail('punitha@izaaptech.in',$subject,$message);
 
 
         $header  = '';
@@ -495,7 +517,6 @@ class Fellowship extends BaseController
     public function getRequestedData($type='',$requestType='')
     {
 
-        
         $editdata['category']                      = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
         $editdata['nominee_name']                  = ($this->request->getPost('nominee_name'))?$this->request->getPost('nominee_name'):'';
         $editdata['citizenship']                   = ($this->request->getPost('citizenship'))?$this->request->getPost('citizenship'):'';
@@ -701,9 +722,9 @@ class Fellowship extends BaseController
             $table->addCell(2000, $fancyTableCellStyle)->addText('Mobile No', $fancyTableFontStyle);
             $table->addCell(2000)->addText($nomineeData['phone']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Gender', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['gender']);
+            // $table->addRow();
+            // $table->addCell(2000, $fancyTableCellStyle)->addText('Gender', $fancyTableFontStyle);
+            // $table->addCell(2000)->addText($nomineeData['gender']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Address', $fancyTableFontStyle);
@@ -879,5 +900,19 @@ class Fellowship extends BaseController
         
           return $awardValidationMessages;
     }
+
+    public function getNominationNo($award_id='')
+    {
+        $getLists = $this->registerationModel->getWhere(array('award_id' => $award_id));
+        $count    = $getLists->getResultArray();
+        $ct       = count($count) + 1;  
+        return  $ct;
+    }
     
+    public function ageCalculation($date='')
+    {
+        $age = ageCalculation($date);
+        echo json_encode(array('status' => 'success','age'=>$age));
+        exit;
+    }
 }

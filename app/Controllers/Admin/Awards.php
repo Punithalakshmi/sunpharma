@@ -66,9 +66,8 @@ class Awards extends BaseController
         $path =  $_SERVER['DOCUMENT_ROOT'];
        // $category          = ($this->request->getPost('category'))?$this->request->getPost('category'):'';
         $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
-       // die;
-        $fileName = 'Evaluation Sheet '.date('d-m-Y H:i:s').'.xlsx';  
-
+       
+        $fileName    = 'Evaluation Sheet '.date('d-m-Y H:i:s').'.xlsx';  
         $awardsLists = $this->awardsModel->getLists($main_category_id)->getResultArray();
 
         //get Active Jury Lists
@@ -83,7 +82,6 @@ class Awards extends BaseController
                 $awardsDataArr[$avalue['category_name']][$i]['nomination_no'] = $avalue['registration_no'];
                 $awardsDataArr[$avalue['category_name']][$i]['firstname']     = $avalue['firstname'];
                 $awardsDataArr[$avalue['category_name']][$i]['juries'] = [];
-
                 foreach($activeJuries as $jkey=>$jvalue){
                     $getJuryRateData = $this->userModel->getJuryRateData($jvalue['id'],$avalue['id'])->getRowArray();
                     $juryData['firstname'] = $jvalue['firstname'];
@@ -99,7 +97,19 @@ class Awards extends BaseController
 
         $sheet = $spreadsheet->getActiveSheet();
 
-        $typeOfAward = ($main_category_id == 1)?'Research Awards':'Science Scholar Awards';
+        $typeOfAward = '';
+
+        switch ($main_category_id) {
+            case 1:
+                $typeOfAward .= 'Research Awards';
+                break;
+            case 2:
+                $typeOfAward .= 'Science Scholar Awards';
+                break;
+            case 3:
+                $typeOfAward .= 'Clinical Research Fellowship';
+                break;
+          }
 
         $title = $typeOfAward.' Evaluation Sheet '.date('Y');
         $sheet->setTitle('Report - '.$typeOfAward.' '.date('Y'));
@@ -107,17 +117,16 @@ class Awards extends BaseController
         $sheet->getStyle("A1:I1")->getFont()->setBold(true);
         $sheet->getStyle("A1:I1")->getFont()->setSize(12);
         $sheet->mergeCells("A1:I1");
-        
         $sheet->setCellValue('A2', 'Award Category');
         $sheet->setCellValue('B2', 'Nomination No');
         $sheet->setCellValue('C2', 'Applicant Name');
+
         $juriesName = array();
         for($j=0;$j<count($activeJuries);$j++){
             $juriesName[] = $activeJuries[$j]['firstname'].''.$activeJuries[$j]['lastname'].'['.$activeJuries[$j]['username'].']';
         }
         $juriesName[] = 'Total Score'; 
         $sheet->fromArray($juriesName,null,'D2');
-        
         $sheet->getStyle(2)->getFont()->setBold(true);
         $sheet->getStyle(2)->getFont()->setSize(11);
         
@@ -125,9 +134,7 @@ class Awards extends BaseController
         
         ksort($awardsDataArr);
         foreach ($awardsDataArr as $val => $dt){
-            //echo $val;
             foreach($dt as $v => $ard){
-            
                 $sheet->setCellValue('A' . $rows, $val);
                 $sheet->setCellValue('B' . $rows, $ard['nomination_no']);
                 $sheet->setCellValue('C' . $rows, $ard['firstname']);
@@ -215,7 +222,6 @@ class Awards extends BaseController
         }
         else
         {  
-
             $edit_data = $this->ratingModel->getLists($id);   
             $edit_data = $edit_data->getRowArray(); 
         

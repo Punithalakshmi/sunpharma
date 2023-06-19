@@ -2,9 +2,12 @@
 const progress = (value) => {
     document.getElementsByClassName('progress-bar')[0].style.width = `${value}%`;
 }
- 
+
+
 $(document).ready(function(){   
 var form = $("#formsection");
+
+
 
 additionalMethods();
 
@@ -177,7 +180,29 @@ form.validate({
         }
 
     });
+    $('#date_of_birth').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('#date_of_birth').datepicker("setDate", new Date());
 
+    $("#date_of_birth").keyup(function(){
+        
+        var dt = $(this).val();
+
+        $.ajax({
+            url: base_url+'/ageCalculation/'+dt,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) 
+            {
+                if(data.age)
+                  $("#age").val(data.age);
+            }
+        });        
+    })
 });
 
 function triggerSteps(csrf)
@@ -517,3 +542,4 @@ function removeRules()
     }  
 
 }
+

@@ -13,8 +13,9 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/additional-methods.js"></script>
-         
-
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    
+      
     <?php  endif;?>
   
     <form name="clinical_research_fellowship" id="formsection" method="POST" action="<?=base_url();?>/fellowship" enctype="multipart/form-data">
@@ -29,30 +30,7 @@
                 <div class="step">
                  
                     <div class="row">
-                        <!-- <div class="col-lg-6">
-                            <div class="mb-3 form-items form-items">
-
-                                <div class="form-check ps-0 q-box">
-                                    <div class="q-box__question col me-2"> -->
-                                        <!-- <label class="form-check-label question__label noLabel">
-                                            <div class="form-label mb-2 " for=""> Photograph of the Applicant <span class="required" style="color:red;">*</span>
-                                            </div>
-                                            <img class="uploadPreview" src="<?//base_url();?>/frontend/assets/img/user--default-Image.png" width="200"
-                                                height="200" />
-
-                                               <input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?//set_value('nominator_photo',$editdata['nominator_photo']);?>" />
-                                               <?php// if(isset($editdata['nominator_photo_name']) && !empty($editdata['nominator_photo_name'])): ?>
-                                                    <span id="nominator_pt_name"><?//$editdata['nominator_photo_name'];?></span>
-                                                <?php// endif;?>
-                                               <input type="hidden" name="nominator_photo_uploaded_file" id="nominator_photo_uploaded_file" value="<?//(isset($editdata['nominator_photo']) && !empty($editdata['nominator_photo']))?$editdata['nominator_photo']:'';?>" />
-                                        </label> -->
-                                        <!-- <div class="hintcont">
-                                            <small>Not more than 500 KB</small>
-                                        </div> -->
-                                    <!-- </div>
-                                </div>
-                            </div>
-                        </div> -->
+                       
 
                         <div class="col-lg-6">
                             <div class="col-lg-12">
@@ -126,11 +104,10 @@
                            <div class="col-lg-12">
                                 <div class="mb-3 form-items">
                                     <label class="form-label" >Date of Birth <span class="required" style="color:red;">*</span></label>
-                                    <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
-                                        placeholder="Date of Birth">
+                                    <input class="form-control required"  id="date_of_birth" name="date_of_birth" type="text" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>" data-date-format="dd-mm-yyyy" placeholder="Date of Birth">
                                 </div>
                                 <div class="mb-3 form-items">Age <span class="required" style="color:red;">*</span></label>
-                                    <input class="form-control" id="age" name="age" type="text" readonly value="" placeholder="Age">
+                                    <input class="form-control" id="age" name="age" type="number" readonly value="" placeholder="Age">
                                 </div>
                             </div>                       
                             <div class="col-lg-12">
@@ -182,7 +159,19 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                            <label class="form-label">Designation & Office Address  <span class="required" style="color:red;">*</span></label>
+                            <label class="form-label">Office Address  <span class="required" style="color:red;">*</span></label>
+                                <textarea class="form-control required" name="nominator_office_address" id="nominator_office_address" placeholder="Write a Address" style="height:auto;"><?=$editdata['nominator_office_address'];?></textarea>
+                                <small class="text-danger">
+                                <?php if(isset($validation) && $validation->getError('nominator_office_address')) {?>
+                                    <?= $error = $validation->getError('nominator_office_address'); ?>
+                                <?php }?>
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="mb-3 form-items">
+                            <label class="form-label">Designation  <span class="required" style="color:red;">*</span></label>
                                 <textarea class="form-control required" name="nominator_office_address" id="nominator_office_address" placeholder="Write a Address" style="height:auto;"><?=$editdata['nominator_office_address'];?></textarea>
                                 <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('nominator_office_address')) {?>

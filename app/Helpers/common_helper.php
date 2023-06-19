@@ -225,6 +225,38 @@ if ( ! function_exists('updateAwardEndDate'))
                 $userModel->update(array("id" => $avalue['id']),$update_array);
             }
         }
-        
+    }
+} 
+
+if ( ! function_exists('getNominationNo'))
+{
+    function getNominationNo($award_id=''){
+        $userModel = model('App\Models\UserModel');
+        $awardData = $userModel->getWhere(array("award_id" => $award_id));
+        $awardData = $awardData->getResultArray();
+        if(is_array($awardData)){
+            $ct       = count($awardData) + 1;  
+            return  $ct;
+        }
+    }
+} 
+
+if ( ! function_exists('ageCalculation'))
+{
+    function ageCalculation($date=''){
+
+           // Define the date of birth
+            $dateOfBirth = $date;
+            
+            // Get today's date
+            $now = date("d-m-Y");
+            
+            // Calculate the time difference between the two dates
+            $diff = date_diff(date_create($dateOfBirth), date_create($now));
+            
+            // Get the age in years, months and days
+           // echo "your current age is ".$diff->format('%y')." Years ".$diff->format('%m')." months ".$diff->format('%d')." days";
+                    
+            return $diff->format('%y');
     }
 } 

@@ -57,7 +57,15 @@
                          $descriptionOfResearch = $editdata['fellowship_description_of_research']; 
 
                      
+                      if(strpos($editdata['first_degree_marksheet'],','))
+                         $firstDegreeMarksheet = explode(',',$editdata['first_degree_marksheet']);
+                      else
+                         $firstDegreeMarksheet = $editdata['first_degree_marksheet']; 
 
+                      if(strpos($editdata['highest_degree_marksheet'],','))
+                         $highestDegreeMarksheet = explode(',',$editdata['highest_degree_marksheet']);
+                      else
+                         $highestDegreeMarksheet = $editdata['highest_degree_marksheet'];    
                       
 
                     ?>
@@ -112,9 +120,20 @@
                               <span class="required" style="color:red;">*</span> 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="single_cal3" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',$editdata['dob']);?>">
+                          <input id="single_cal3" name="date_of_birth" class="date-picker form-control col-md-7 col-xs-12" type="text" value="<?php echo set_value('date_of_birth',date('m/d/Y',strtotime($editdata['dob'])));?>">
                         </div>
                       </div>
+                      <div class="clearfix"></div>
+                      <?php if(isset($editdata['age']) && !empty($editdata['age'])): ?>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Age
+                              
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="single_cal3" name="age" class="form-control col-md-7 col-xs-12" type="text" readonly >
+                        </div>
+                      </div>
+                      <?php endif;?>
                       <div class="clearfix"></div>
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Phone Number <span class="required" style="color:red;">*</span> </label>
@@ -192,7 +211,7 @@
                         <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Email<span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="nominator_email" class="form-control col-md-7 col-xs-12" type="number" name="nominator_email" value="<?php echo set_value('nominator_email',$editdata['nominator_email']);?>">
+                         <input id="nominator_email" class="form-control col-md-7 col-xs-12" type="text" name="nominator_email" value="<?php echo set_value('nominator_email',$editdata['nominator_email']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
@@ -204,7 +223,7 @@
                         <div class="form-group">
                           <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Designation <span class="required" style="color:red;">*</span> </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input id="nominator_designation" class="form-control col-md-7 col-xs-12" type="number" name="nominator_designation" value="<?php echo set_value('nominator_designation',$editdata['nominator_designation']);?>">
+                              <input id="nominator_designation" class="form-control col-md-7 col-xs-12" type="text" name="nominator_designation" value="<?php echo set_value('nominator_designation',$editdata['nominator_designation']);?>">
                           </div>
                         </div>  
 
@@ -220,7 +239,7 @@
                         </div>
                       </div>
                       <div class="clearfix"></div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group uploadseciz">
                         <div class="mb-3 form-items">
                             <label class="form-label"> Justification for Sponsoring the
                                 Nomination duly signed by the Nominator (not to exceed 400 words) </label>
@@ -367,31 +386,55 @@
                                     </div>
                                     <div class="col-md-3 col-sm-4 col-xs-12">
                                       <label class="form-label">Marksheet:</label>
-                                      <?php if(!empty($editdata['first_degree_marksheet'])): ?>
-                                        <div class="mb-3 form-items" id="first_degree_marksheet">
+                                        <button type="button" name="first_degree_marksheet_add" id="add_more_first_degree_marksheet" onclick="addMoreRows('firstDegreeMarksheetWrapper','first_degree_marksheet','first_degree_marksheet');" class="btn btn-primary btn-sm">
+                                        <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                          <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                        </svg> ADD
+                                      </button>
+                                      <?php if(is_array($firstDegreeMarksheet)): 
+                                      for($i=0; $i<count($firstDegreeMarksheet); $i++): if(!empty($firstDegreeMarksheet[$i])): ?>
+                                       <div class="mb-3 form-items" id="firstDegreeMarksheet<?=$i;?>">
+                                          <input class="form-control mb-3 required first_degree_marksheet" accept=".pdf" name="first_degree_marksheet[<?=$firstDegreeMarksheet[$i];?>]" type="file">
+                                        
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$firstDegreeMarksheet[$i];?>" target="_blank" title="<?=$firstDegreeMarksheet[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$firstDegreeMarksheet[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$firstDegreeMarksheet[$i];?>','<?=$editdata['user_id'];?>','firstDegreeMarksheet<?=$i;?>','first_degree_marksheet',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($firstDegreeMarksheet)): ?>
+                                        <div class="mb-3 form-items" id="firstDegreeMarksheet-1">
                                           
-                                          <input class="form-control mb-3 required first_degree_marksheet" accept=".pdf" name="first_degree_marksheet[<?=$editdata['first_degree_marksheet'];?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['first_degree_marksheet'];?>" target="_blank" title="<?=$editdata['first_degree_marksheet'];?>">
+                                          <input class="form-control mb-3 required first_degree_marksheet" accept=".pdf" name="first_degree_marksheet[<?=$firstDegreeMarksheet;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$firstDegreeMarksheet;?>" target="_blank" title="<?=$firstDegreeMarksheet;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                                   </svg>
-                                                  <?=$editdata['first_degree_marksheet'];?>
+                                                <?=$firstDegreeMarksheet;?>
                                                 </button>
                                                 </a>
-                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$editdata['first_degree_marksheet'];?>','<?=$editdata['user_id'];?>','first_degree_marksheet-1','first_degree_marksheet',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$firstDegreeMarksheet;?>','<?=$editdata['user_id'];?>','firstDegreeMarksheet-1','first_degree_marksheet',<?=$editdata['nominee_detail_id']?>);">X</button>
                                         </div>  
-                                    <?php endif; ?>
-                                    </div>
-                                  </div>                    
-                              </div>  
+                                        <?php endif; endif;?> 
+
+                                        <div class="firstDegreeMarksheetWrapper" id="firstDegreeMarksheetWrapper">
+                                          
+                                        </div> 
+                                  </div>                      
+                              </div>
+                          </div>     
 
                               <div class="clearfix"></div>
                               <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                    <label class="form-label">Highest medical degree obtained:   
-                                      
-                                    </label>
+                                    <label class="form-label">Highest medical degree obtained:</label>
                                     
                                       <div class="col-md-3 col-sm-4 col-xs-12">
                                            <label class="form-label">Name of degree:</label>
@@ -406,25 +449,50 @@
                                           <input id="highest_medical_degree_institution" class="form-control col-md-7 col-xs-12" type="text" name="highest_medical_degree_institution" value="<?php echo set_value('highest_medical_degree_institution',$editdata['highest_medical_degree_institution']);?>">
                                       </div>
                                       <div class="col-md-3 col-sm-4 col-xs-12">
-                                      <label class="form-label">Marksheet:</label>
-                                      <?php if(!empty($editdata['highest_degree_marksheet'])): ?>
+                                          <label class="form-label">Marksheet:</label>
+                                          <button type="button" name="highest_degree_marksheet_add" id="add_more_highest_degree_marksheet" onclick="addMoreRows('highestDegreeMarksheetWrapper','highest_degree_marksheet','highest_degree_marksheet');" class="btn btn-primary btn-sm">
+                                          <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                            <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                          </svg> ADD
+                                        </button>
+                                      <?php if(is_array($highestDegreeMarksheet)): 
+                                      for($i=0; $i<count($highestDegreeMarksheet); $i++): if(!empty($highestDegreeMarksheet[$i])): ?>
+                                      <div class="mb-3 form-items" id="highestDegreeMarksheet<?=$i;?>">
+                                          <input class="form-control mb-3 required highest_degree_marksheet" accept=".pdf" name="highest_degree_marksheet[<?=$highestDegreeMarksheet[$i];?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$highestDegreeMarksheet[$i];?>" target="_blank" title="<?=$highestDegreeMarksheet[$i];?>">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                  <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                      <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                  </svg>
+                                                  <?=$highestDegreeMarksheet[$i];?>
+                                              </button>
+                                          </a>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$highestDegreeMarksheet[$i];?>','<?=$editdata['user_id'];?>','highestDegreeMarksheet<?=$i;?>','highest_degree_marksheet',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                      </div>   
+                                    <?php endif; endfor; 
+                                        else: 
+                                          if(!empty($highestDegreeMarksheet)): ?>
                                         <div class="mb-3 form-items" id="highestDegreeMarksheet-1">
                                           
-                                          <input class="form-control mb-3 required highest_degree_marksheet" accept=".pdf" name="highest_degree_marksheet[<?=$editdata['highest_degree_marksheet'];?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$editdata['highest_degree_marksheet'];?>" target="_blank" title="<?=$editdata['highest_degree_marksheet'];?>">
+                                          <input class="form-control mb-3 required highest_degree_marksheet" accept=".pdf" name="highest_degree_marksheet[<?=$highestDegreeMarksheet;?>]" type="file">
+                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$highestDegreeMarksheet;?>" target="_blank" title="<?=$highestDegreeMarksheet;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                                   </svg>
-                                                  <?=$editdata['highest_degree_marksheet'];?>
+                                                <?=$highestDegreeMarksheet;?>
                                                 </button>
                                                 </a>
-                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$editdata['highest_degree_marksheet'];?>','<?=$editdata['user_id'];?>','highestDegreeMarksheet-1','highest_degree_marksheet',<?=$editdata['nominee_detail_id']?>);">X</button>
+                                          <button type="button" name="remove"  class="btn btn-danger btn_remove" onclick="removeFile('<?=$highestDegreeMarksheet;?>','<?=$editdata['user_id'];?>','highestDegreeMarksheet-1','highest_degree_marksheet',<?=$editdata['nominee_detail_id']?>);">X</button>
                                         </div>  
-                                    <?php endif; ?>
-                                      </div>
+                                    <?php endif; endif;?> 
+
+                                    <div class="highestDegreeMarksheetWrapper" id="highestDegreeMarksheetWrapper">
+                                      
+                                    </div> 
                                   </div>                    
-                              </div> 
+                              </div>  
+                  </div>       
 
                               <div class="clearfix"></div>
                               <div class="form-group uploadseciz">

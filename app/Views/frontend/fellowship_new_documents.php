@@ -13,14 +13,7 @@
             font-size: 1.6rem;
             font-weight: bold!important;">
                  <?php
-                   if(isset($user['nomination_type']) && ($user['nomination_type'] == 'spsfn')) {
-                     $type = 'Science Scholar'; 
-                   } 
-                  else
-                  {
-                     $type = 'Research';
-                  }
-                  
+                    $type = 'Clinical Research Fellowship';
                  ?>
                <?php if(isset($userdata['nominationEndDays']) && $userdata['nominationEndDays'] > 0): ?>
                  Clinical Research Fellowship - <?=date('Y');?>
@@ -54,7 +47,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""><b>Category of the Award</b></label>
+                                        <label class="form-label " for=""><b>Category</b></label>
                                         <div><?=$user['category_name'];?>
                                         </div>
                                     </div>
@@ -194,11 +187,13 @@
 
                             <div class="row">
                             <?php if($userdata['nominationEndDays'] > 0): ?>
+                                <?php if(!empty($user['complete_bio_data'])): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b>Complete Bio-data of the Applicant
-                                            (Max 1.5 MB) </b><span class="required" style="color:red;">*</span></label>
-                                            <?php if(!empty($user['complete_bio_data'])): ?>
+                                        
+                                            
+                                                <label class="form-label " for=""> <b>Complete Bio-data of the Applicant
+                                            (Max 1.5 MB) </b></label>
                                             <div>
                                               <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -207,12 +202,15 @@
                                             </button>
                                             </a>
                                             </div>
-                                            <?php endif;?>
+                                            
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
+                                      <label class="form-label " for=""> <b>Complete Bio-data of the Applicant
+                                            (Max 1.5 MB) </b><span class="required" style="color:red;">*</span></label>
                                             <div>
                                                 <input class="form-control mb-3 required" accept=".pdf" name="complete_bio_data" type="file" id="complete_bio_data" value="<?=$editdata['complete_bio_data'];?>">   
                                                 <div class="">
@@ -231,10 +229,14 @@
                                    if(isset($user) && ($user['nomination_type'] == 'fellowship') ):
                                     
                                 ?>
+                                <?php if(!empty($user['first_employment_name_of_institution_location']) || !empty($user['first_employment_designation']) || !empty($user['first_employment_year_of_joining'])): ?> 
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label"><b>First employment</b> <span class="required" style="color:red;">*</span> </label>
-                                        <br>
+                                       
+                                            <label class="form-label"><b>First employment</b> </label>
+                                            <br>
+                                        
+                                       
                                             <?php if(!empty($user['first_employment_name_of_institution_location'])): ?>
                                             <label class="form-label " for=""><b> Name of institution and location</b>  </label>
                                                 <div>
@@ -257,9 +259,12 @@
                                             <?php endif;?>
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
+                                        <label class="form-label"><b>First employment</b> </label>
+                                            <br>
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Name of institution and location </b><span class="required" style="color:red;">*</span> </label>
                                                 <input class="form-control mb-3 required"  name="first_employment_name_of_institution_location" type="text" id="first_employment_name_of_institution_location" value="<?php echo set_value('first_employment_name_of_institution_location',$editdata['first_employment_name_of_institution_location']);?>">    
@@ -297,11 +302,14 @@
                                     </div>
                                 </div>
                                <?php endif;?>
-
+                               <?php if(!empty($user['first_medical_degree_name_of_degree']) || !empty($user['first_medical_degree_year_of_award']) || !empty($user['first_medical_degree_institution'])): ?>                     
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""><b>First medical degree obtained </b></label>
-                                        <br>
+                                        
+                                            <label class="form-label"><b>First medical degree obtained: </b> </label>
+                                            <br>
+                                       
+                                     
                                         <?php if(!empty($user['first_medical_degree_name_of_degree'])): ?>
                                             <label class="form-label " for=""> <b> Name of degree </b>  </label>
                                                 <div>
@@ -324,15 +332,22 @@
                                             <?php endif;?>
                                             <?php if(!empty($user['first_degree_marksheet'])): ?>
                                             <label class="form-label " for=""> <b> Marksheet </b> </label>
-                                                <div>
-                                                     <?=(isset($user['first_degree_marksheet']) && !empty($user['first_degree_marksheet']))?$user['first_degree_marksheet']:'';?>
-                                               </div>
+                                                 <div>
+                                                    <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['first_degree_marksheet'];?>" target="_blank">
+                                                        <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                            <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                        </svg> View</button>
+                                                    </a>
+                                                </div>
                                             <?php endif;?>   
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                   <div class="mb-3 form-items">
+                                  <label class="form-label"><b>First medical degree obtained: </b> </label>
+                                            <br>
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Name of degree </b> <span class="required" style="color:red;">*</span> </label>
                                                 <input class="form-control mb-3 required" name="first_medical_degree_name_of_degree" type="text" id="first_medical_degree_name_of_degree" value="<?php echo set_value('first_medical_degree_name_of_degree',$editdata['first_medical_degree_name_of_degree']);?>">    
@@ -370,7 +385,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b>Marksheet </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_degree_marksheet" type="text" id="first_degree_marksheet" value="<?php echo set_value('first_degree_marksheet',$editdata['first_degree_marksheet']);?>">    
+                                                <input class="form-control mb-3 required" accept=".pdf" name="first_degree_marksheet" type="file" id="first_degree_marksheet" value="<?php echo set_value('first_degree_marksheet',$editdata['first_degree_marksheet']);?>">    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_degree_marksheet')) {?>
@@ -381,11 +396,13 @@
                                 </div>
                                 <?php endif;?>
 
-                                
+                                <?php if(!empty($user['highest_medical_degree_name']) || !empty($user['highest_medical_degree_year']) || !empty($user['highest_medical_degree_institution']) || !empty($user['highest_degree_marksheet'])): ?> 
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for="">  <b>Highest medical degree obtained: </b> </label>
-                                        <br>
+                                        
+                                            <label class="form-label " for="">  <b>Highest medical degree obtained: </b> </label>
+                                            <br>
+                                       
                                         <?php if(!empty($user['highest_medical_degree_name'])): ?>
                                             <label class="form-label " for=""> <b> Name of degree </b>  </label>
                                                 <div>
@@ -408,24 +425,35 @@
                                             <?php endif;?>   
                                             <?php if(!empty($user['highest_degree_marksheet'])): ?>
                                             <label class="form-label " for=""> <b> Marksheet </b> </label>
+
                                                 <div>
-                                                     <?=(isset($user['highest_degree_marksheet']) && !empty($user['highest_degree_marksheet']))?$user['highest_degree_marksheet']:'';?>
-                                               </div>
+                                                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['highest_degree_marksheet'];?>" target="_blank">
+                                                        <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                            <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                        </svg> View</button>
+                                                    </a>
+                                                </div>
                                             <?php endif;?>
+                                               
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                   <div class="mb-3 form-items">
+                                 
+                                            <label class="form-label " for="">  <b>Highest medical degree obtained: </b> </label>
+                                            <br>
+                                     
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b> Name of degree </b> <span class="required" style="color:red;">*</span> </label>
                                                 <input class="form-control mb-3 required"  name="highest_medical_degree_name" type="text" id="highest_medical_degree_name" value="<?php echo set_value('highest_medical_degree_name',$editdata['highest_medical_degree_name']);?>" >    
                                         </div>
-                                        <small class="text-danger">
+                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_medical_degree_name')) {?>
                                                 <?= $error = $validation->getError('highest_medical_degree_name'); ?>
                                             <?php }?>
-                                        </small>
+                                         </small>
 
                                     </div>
                                     <div class="mb-3 form-items">
@@ -454,7 +482,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b>Marksheet</b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="highest_degree_marksheet" type="text" id="highest_degree_marksheet" value="<?php echo set_value('highest_degree_marksheet',$editdata['highest_degree_marksheet']);?>" >    
+                                                <input class="form-control mb-3 required" accept=".pdf" name="highest_degree_marksheet" type="file" id="highest_degree_marksheet" value="<?php echo set_value('highest_degree_marksheet',$editdata['highest_degree_marksheet']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_degree_marksheet')) {?>
@@ -464,11 +492,12 @@
                                     </div>
                                 </div>
                                 <?php endif;?>
-
+                                <?php if(!empty($user['fellowship_research_experience'])): ?>                    
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b>Research Experience (including, summer research, hands-on research workshop, etc.) </b><span class="required" style="color:red;">*</span></label>
-                                            <?php if(!empty($user['fellowship_research_experience'])): ?>
+                                        
+                                            
+                                                <label class="form-label " for=""> <b>Research Experience (including, summer research, hands-on research workshop, etc.) </b></label>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_research_experience'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -476,13 +505,14 @@
                                             </svg> View</button>
 </a>
                                             </div>
-                                            <?php endif;?>
+                                           
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                       
+                                    <label class="form-label " for=""> <b>Research Experience (including, summer research, hands-on research workshop, etc.) </b><span class="required" style="color:red;">*</span></label>
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_research_experience" type="file" id="fellowship_research_experience" value="<?=$editdata['fellowship_research_experience'];?>">    
@@ -500,10 +530,12 @@
                                     </div>
                                 </div>
                                <?php endif;?>
+                               <?php if(!empty($user['fellowship_research_publications'])): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b> Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information) </b> <span class="required" style="color:red;">*</span></label>
-                                            <?php if(!empty($user['fellowship_research_publications'])): ?>
+                                       
+                                            
+                                                <label class="form-label " for=""> <b> Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information) </b></label>  
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_research_publications'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -511,12 +543,14 @@
                                             </svg> View</button>
 </a>
                                             </div>
-                                            <?php endif;?>
+                                            
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
+                                    <label class="form-label " for=""> <b> Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information) </b> <span class="required" style="color:red;">*</span></label>
                                             <div>
                                                 <label class="form-check-label question__label noLabel">
                                                   <input class="form-control mb-3 required" accept=".pdf" name="fellowship_research_publications" type="file" id="fellowship_research_publications" value="<?=$editdata['fellowship_research_publications'];?>">  
@@ -533,10 +567,12 @@
                                     </div>
                                 </div>
                                <?php endif;?>
+                               <?php if(!empty($user['fellowship_research_awards_and_recognitions'])): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty) </b> <span class="required" style="color:red;">*</span></label>
-                                            <?php if(!empty($user['fellowship_research_awards_and_recognitions'])): ?>
+                                        
+                                            
+                                                <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty) </b></label>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_research_awards_and_recognitions'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -545,13 +581,14 @@
                                              </button>
 </a>
                                             </div>
-                                            <?php endif;?>
+                                            
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                       
+                                    <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty) </b> <span class="required" style="color:red;">*</span></label>
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_research_awards_and_recognitions" type="file" id="fellowship_research_awards_and_recognitions" value="<?=$editdata['fellowship_research_awards_and_recognitions'];?>">   
@@ -570,10 +607,12 @@
                                     </div>
                                 </div>
                                 <?php endif;?>
+                                <?php if(!empty($user['fellowship_scientific_research_projects'])): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                         <label class="form-label " for=""> <b> Description of past scientific research projects completed and research experience (1 page) </b> <span class="required" style="color:red;">*</span></label> 
-                                            <?php if(!empty($user['fellowship_scientific_research_projects'])): ?>
+                                          
+                                            
+                                                <label class="form-label " for=""> <b> Description of past scientific research projects completed and research experience (1 page) </b></label>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_scientific_research_projects'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -582,12 +621,13 @@
                                           </button>
 </a>
                                             </div>
-                                            <?php endif;?>
+                                           
                                     </div>
+                                    <?php endif;?>
                                     <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        
+                                    <label class="form-label " for=""> <b> Description of past scientific research projects completed and research experience (1 page) </b> <span class="required" style="color:red;">*</span></label>
                                             <div>
                                                   <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_scientific_research_projects" type="file" id="fellowship_scientific_research_projects" value="<?=$editdata['fellowship_scientific_research_projects'];?>">   
@@ -608,21 +648,24 @@
                                     <?php
                                        endif;
                                         ?>
-                                <div class="col-lg-12">
-                                    <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b> Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded: </b></label>
-                                              <?php if(!empty($user['fellowship_name_of_institution_research_work'])): ?>
-                                            
+                                        <?php if(!empty($user['fellowship_name_of_institution_research_work'])): ?>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3 form-items">
+                                         
+                                              
+                                                <label class="form-label " for=""> <b> Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded: </b></label>
                                                 <div>
                                                      <?=(isset($user['fellowship_name_of_institution_research_work']) && !empty($user['fellowship_name_of_institution_research_work']))?$user['fellowship_name_of_institution_research_work']:'';?>
                                                </div>
-                                            <?php endif;?>
+                                         
                                             <br/>
                                     </div>
                                 </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                   <div class="mb-3 form-items">
+                                  <label class="form-label " for=""> <b> Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded: </b><span class="required" style="color:red;">*</span></label>
                                         <div>
                                             <input class="form-control mb-3 required" name="fellowship_name_of_institution_research_work" type="text" id="fellowship_name_of_institution_research_work" value="<?php echo set_value('fellowship_name_of_institution_research_work',$editdata['fellowship_name_of_institution_research_work']);?>" >    
                                         </div>
@@ -636,11 +679,12 @@
                                     
                                 </div>
                                 <?php endif;?>
-
+                                <?php if(!empty($user['fellowship_name_of_the_supervisor'])): ?>                    
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b> If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out: </b> </label>
-                                        <?php if(!empty($user['fellowship_name_of_the_supervisor'])): ?>
+                                        
+                                        
+                                            <label class="form-label " for=""> <b> If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out: </b> </label>
                                             <label class="form-label " for=""> <b> Name of supervisor </b>  </label>
                                                 <div>
                                                      <?=(isset($user['fellowship_name_of_the_supervisor']) && !empty($user['fellowship_name_of_the_supervisor']))?$user['fellowship_name_of_the_supervisor']:'';?>
@@ -659,12 +703,14 @@
                                                 <div>
                                                      <?=(isset($user['fellowship_supervisor_department']) && !empty($user['fellowship_supervisor_department']))?$user['fellowship_supervisor_department']:'';?>
                                                </div>
-                                            <?php endif;?>   
+                                           
                                     </div>
                                 </div>
+                                <?php endif;?>   
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                   <div class="mb-3 form-items">
+                                  <label class="form-label " for=""> <b> If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out: </b> </label>
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b> Name of supervisor </b><span class="required" style="color:red;">*</span> </label>
                                                 <input class="form-control mb-3 required" name="fellowship_name_of_the_supervisor" type="text" id="fellowship_name_of_the_supervisor" value="<?php echo set_value('fellowship_name_of_the_supervisor',$editdata['fellowship_name_of_the_supervisor']);?>">    
@@ -701,25 +747,25 @@
                                     </div>
                                 </div>
                                 <?php endif; ?>
-
-                                <div class="col-lg-12">
-                                    <div class="mb-3 form-items">
-                                        <label class="form-label " for=""><b>Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b><span class="required" style="color:red;">*</span></label> 
-                                        <?php if(!empty($user['fellowship_description_of_research'])): ?>
-                                            <div>
-                                            <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_description_of_research'];?>" target="_blank">
-                                              <button class="btn btn-primary btn-sm" type="button">
-                                                <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                                                <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
-                                            </svg>View</button>
-                                              </a>
-                                            </div>
-                                            <?php endif;?>
+                                <?php if(!empty($user['fellowship_description_of_research'])): ?>               
+                                    <div class="col-lg-12">
+                                        <div class="mb-3 form-items">
+                                                <label class="form-label " for=""><b>Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b></label> 
+                                                <div>
+                                                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_description_of_research'];?>" target="_blank">
+                                                <button class="btn btn-primary btn-sm" type="button">
+                                                    <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                    <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
+                                                </svg>View</button>
+                                                </a>
+                                                </div>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php endif;?>
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
+                                    <label class="form-label " for=""><b>Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b><span class="required" style="color:red;">*</span></label> 
                                             <div>
                                                  <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_description_of_research" type="file" id="fellowship_description_of_research" value="<?=$editdata['fellowship_description_of_research'];?>">  

@@ -25,6 +25,7 @@ Online Submission Of Nominations">
         <?=link_tag('frontend/assets/css/responsive.compiled.css')?>
         <?=link_tag('frontend/assets/css/Simple-Slider-Simple-Slider.css')?>
         <?=link_tag('frontend/assets/css/slidingform.css')?>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
        
     <script>
         var base_url = '<?=base_url();?>';
@@ -55,8 +56,6 @@ Online Submission Of Nominations">
     <?= view('frontend/_partials/footer'); ?>
 
     <?= script_tag('frontend/assets/bootstrap/js/bootstrap.min.js'); ?>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
     
     <?= script_tag('frontend/assets/js/bootstrap-msg.js');?>
     <?= script_tag('frontend/assets/js/jquery.confirmModal.min.js');?>

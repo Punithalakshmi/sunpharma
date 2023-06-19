@@ -808,7 +808,7 @@ function nomineeDatatable()
                       if(row.is_expired == 'yes'){
                         btn += '<a href="'+base_url+'/admin/nominee/extend/'+row.id+'" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Extend Nomination</a>';
                       }
-                      if(row.active == 0 && row.status == 'Disapproved' && row.is_rejected == 0){
+                      if(row.active == 0 && row.status_from_db == 'Disapproved' && row.is_rejected == 0){
                         btn +='<button type="button" onclick="getRemarks(this,\'approve\','+row.id+')" class="btn btn-success greenbg btn-xs">Approve</button><button type="button" class="btn btn-danger btn-xs" onclick="getRemarks(this,\'disapprove\','+row.id+')"><i class="fa fa-ban"></i> Reject</button>'
                       }
                       return btn;

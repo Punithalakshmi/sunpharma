@@ -43,9 +43,9 @@ class Nominee extends BaseController
                 $draw            = $dtpostData['draw'];
                 $start           = $dtpostData['start'];
                 $rowperpage      = $dtpostData['length']; // Rows display per page
-                $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                $columnIndex     = (isset($dtpostData['order'][0]['column']) && !empty($dtpostData['order'][0]['column']))?$dtpostData['order'][0]['column']:0; // Column index
                 $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
-                $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                $columnSortOrder = (isset($dtpostData['order'][0]['dir']) && !empty($dtpostData['order'][0]['dir']))?$dtpostData['order'][0]['dir']:'asc'; // asc or desc
                 $searchValue     = $dtpostData['search']['value']; // Search value
 
                  //Custom filter
@@ -118,6 +118,7 @@ class Nominee extends BaseController
                             'status' => $status,
                             'is_rejected' => $user['is_rejected'],
                             'id' => $user['id'],
+                            'status_from_db' => $user['status'],
                             'action' => ''
                         );
          }
@@ -580,6 +581,8 @@ class Nominee extends BaseController
                         $nominator_office_address    = $this->request->getPost('nominator_office_address');
                         $ongoing_course              = $this->request->getPost('ongoing_course');
                         $research_project            = $this->request->getPost('research_project');
+                        
+                        $nominator_designation             = $this->request->getPost('nominator_designation');
 
                         $user_data = array();
                         $user_data['firstname']     = (!empty($firstname))?$firstname:$nomineeData['firstname'];
@@ -598,6 +601,7 @@ class Nominee extends BaseController
                         $nominee_details_data['is_completed_a_research_project'] = (!empty($research_project))?$research_project:$nomineeData['is_completed_a_research_project'];
                         $nominee_details_data['nominator_address']               = (!empty($nominator_office_address))?$nominator_office_address:$nomineeData['nominator_address'];
                         $nominee_details_data['ongoing_course']                  = (!empty($ongoing_course))?$ongoing_course:$nomineeData['ongoing_course'];
+                        $nominee_details_data['nominator_designation']           = (!empty($nominator_designation))?$nominator_designation:$nomineeData['nominator_designation'];
                         
                         if($this->request->getPost('course_name')) {
                             $course_name  = $this->request->getPost('course_name');
@@ -1096,6 +1100,38 @@ class Nominee extends BaseController
                                   }
                               }
           
+                              if($this->request->getFileMultiple('first_degree_marksheet')){
+                                $filenames = multipleFileUpload('first_degree_marksheet',$id);   
+                                if($filenames!='') {
+                                    $filenames = fileNameUpdate($id,$filenames,'first_degree_marksheet');
+                                    $nominee_details_data['first_degree_marksheet'] = $filenames;
+                                }        
+                            }   
+                            else
+                            {
+                                if($this->request->getFile('first_degree_marksheet')) {
+                                    $description_of_research = $this->request->getFile('first_degree_marksheet');
+                                    $description_of_research->move($fileUploadDir);
+                                    $nominee_details_data['first_degree_marksheet']   = $description_of_research->getClientName();
+                                }
+                            }
+
+
+                            if($this->request->getFileMultiple('highest_degree_marksheet')){
+                                $filenames = multipleFileUpload('highest_degree_marksheet',$id);   
+                                if($filenames!='') {
+                                    $filenames = fileNameUpdate($id,$filenames,'highest_degree_marksheet');
+                                    $nominee_details_data['highest_degree_marksheet'] = $filenames;
+                                }        
+                            }   
+                            else
+                            {
+                                if($this->request->getFile('highest_degree_marksheet')) {
+                                    $description_of_research = $this->request->getFile('highest_degree_marksheet');
+                                    $description_of_research->move($fileUploadDir);
+                                    $nominee_details_data['highest_degree_marksheet']   = $description_of_research->getClientName();
+                                }
+                            }
                               
           
                        }
@@ -1190,8 +1226,19 @@ class Nominee extends BaseController
         $sheet = $spreadsheet->getActiveSheet();
         
         $typeOfTitle  = 'List of Applicants : Sun Pharma Science Foundation ';
-        $typeOfTitle .= ($main_category_id == 1)?' Research Awards ':' Science Scholar Awards ';
 
+        switch ($main_category_id) {
+            case 1:
+                $typeOfTitle .= 'Research Awards';
+                break;
+            case 2:
+                $typeOfTitle .= 'Science Scholar Awards';
+                break;
+            case 3:
+                $typeOfTitle .= 'Clinical Research Fellowship';
+                break;
+          }
+        
         $title = $typeOfTitle.date('Y');
 
         $sheet->setCellValue('A1',$title);
@@ -1252,7 +1299,7 @@ class Nominee extends BaseController
                 if($vl == 'Pharmaceutical Sciences')
                   $nominationsCategoryArr['Pharmaceutical Sciences'] = count($dt);  
             }
-            else
+            else if($main_category_id == 2)
             {
                 if($vl == 'Pharmaceutical Sciences')
                   $nominationsCategoryArr['Pharmaceutical Sciences'] = count($dt);  
@@ -1260,6 +1307,12 @@ class Nominee extends BaseController
                 if($vl == 'Bio-Medical Sciences')
                   $nominationsCategoryArr['Bio-Medical Sciences'] = count($dt);  
             }
+            else
+            {
+                if($vl == 'Clinical Research Fellowship')
+                  $nominationsCategoryArr['Clinical Research Fellowship'] = count($dt);  
+            }
+
             $k = 1;
             foreach($dt as $v => $val){
 
@@ -1287,7 +1340,18 @@ class Nominee extends BaseController
       
        // Display total awards count
         $header = ' Sun Pharma Science Foundation';
-        $header.=  ($main_category_id == 1)?' Research Awards ':' Science Scholar Awards ';
+       // $header.=  ($main_category_id == 1)?' Research Awards ':' Science Scholar Awards ';
+        switch ($main_category_id) {
+            case 1:
+                $header .= 'Research Awards';
+                break;
+            case 2:
+                $header .= 'Science Scholar Awards';
+                break;
+            case 3:
+                $header .= 'Clinical Research Fellowship';
+                break;
+        }
         $header.= $year.' Nominations Received';
         $rw = $rows + 2;
         $startCell = 'C'.$rw;
