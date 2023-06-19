@@ -227,6 +227,11 @@ function nominee_approve(type = '',id='',remarks)
     var main_category_id = $("#main_category_id").val();
     var year = $("#year").val(); 
 
+    if(main_category_id == ''){
+      errorMessageAlert('Please select award!'); 
+      return false
+    }   
+
     $("#loader").removeClass('hidden');
 
     $('#loader').removeClass('block');
@@ -1446,6 +1451,11 @@ function assignedJuries(award_id ='')
  {
     var category = $("#category").val();
     var main_category_id = $("#main_category_id").val();
+
+    if(main_category_id == ''){
+       errorMessageAlert('Please select award!'); 
+       return false
+    }   
 
     $("#loader").removeClass('hidden');
 

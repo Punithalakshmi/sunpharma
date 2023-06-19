@@ -1211,7 +1211,24 @@ class Nominee extends BaseController
         $year              = ($this->request->getPost('year'))?$this->request->getPost('year'):date('Y');
         $main_category_id  = ($this->request->getPost('main_category_id'))?$this->request->getPost('main_category_id'):'1';
 
-        $typeOfAward = ($main_category_id == 1)?'RA':'SSA';
+        $typeOfAward = '';
+
+        $typeOfTitle  = 'List of Applicants : Sun Pharma Science Foundation ';
+
+        switch ($main_category_id) {
+            case 1:
+                $typeOfTitle .= 'Research Awards ';
+                $typeOfAward = 'RA';
+                break;
+            case 2:
+                $typeOfTitle .= 'Science Scholar Awards ';
+                $typeOfAward = 'SSA';
+                break;
+            case 3:
+                $typeOfTitle .= 'Clinical Research Fellowship ';
+                $typeOfAward = 'CRF';
+                break;
+          }
 
         $fileName    = $typeOfAward.' Nomination List (Template) '.date('d-m-Y').'.xlsx';  
 
@@ -1225,19 +1242,7 @@ class Nominee extends BaseController
 
         $sheet = $spreadsheet->getActiveSheet();
         
-        $typeOfTitle  = 'List of Applicants : Sun Pharma Science Foundation ';
-
-        switch ($main_category_id) {
-            case 1:
-                $typeOfTitle .= 'Research Awards';
-                break;
-            case 2:
-                $typeOfTitle .= 'Science Scholar Awards';
-                break;
-            case 3:
-                $typeOfTitle .= 'Clinical Research Fellowship';
-                break;
-          }
+       
         
         $title = $typeOfTitle.date('Y');
 
@@ -1343,13 +1348,13 @@ class Nominee extends BaseController
        // $header.=  ($main_category_id == 1)?' Research Awards ':' Science Scholar Awards ';
         switch ($main_category_id) {
             case 1:
-                $header .= 'Research Awards';
+                $header .= 'Research Awards ';
                 break;
             case 2:
-                $header .= 'Science Scholar Awards';
+                $header .= 'Science Scholar Awards ';
                 break;
             case 3:
-                $header .= 'Clinical Research Fellowship';
+                $header .= 'Clinical Research Fellowship ';
                 break;
         }
         $header.= $year.' Nominations Received';

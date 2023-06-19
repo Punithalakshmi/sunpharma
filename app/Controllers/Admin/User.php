@@ -32,9 +32,9 @@ class User extends BaseController
                 $draw            = $dtpostData['draw'];
                 $start           = $dtpostData['start'];
                 $rowperpage      = $dtpostData['length']; // Rows display per page
-                $columnIndex     = $dtpostData['order'][0]['column']; // Column index
+                $columnIndex     = (isset($dtpostData['order'][0]['column']) && !empty($dtpostData['order'][0]['column']))?$dtpostData['order'][0]['column']:0; // Column index
                 $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
-                $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
+                $columnSortOrder = (isset($dtpostData['order'][0]['dir']) && !empty($dtpostData['order'][0]['dir']))?$dtpostData['order'][0]['dir']:'asc'; // asc or desc
                 $searchValue     = $dtpostData['search']['value']; // Search value
 
                  // Custom filter
