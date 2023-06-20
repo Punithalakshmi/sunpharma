@@ -94,7 +94,6 @@ class UserModel extends Model {
           return $this->getWhere(array('id' => $id)); 
     }
 
-
     public function getUserLists($id='')
     {
         $builder = $this->table('users');
@@ -108,7 +107,6 @@ class UserModel extends Model {
         $builder->limit($limit,$start);
         return $query = $builder->get();
     }
-
 
     public function getUserData($id='')
     {
@@ -130,9 +128,9 @@ class UserModel extends Model {
     {
         $builder = $this->table('users');
         $builder->select('users.*,ratings.rating');
-        $builder->join('ratings','ratings.jury_id = users.id AND ratings.nominee_id='.$nominee_id);
+        $builder->join('ratings','ratings.jury_id = users.id AND ratings.jury_id='.$jury_id);
         $builder->where("users.role",'1');
-        $builder->where("users.id",$jury_id);
+        $builder->where("ratings.nominee_id",$nominee_id);
         $builder->where('ratings.is_rate_submitted',1);
         return $query = $builder->get();
     }
@@ -236,10 +234,8 @@ class UserModel extends Model {
     {
         $builder = $this->table('users');
         $builder->select('users.*');
-       // $builder->join('ratings','ratings.jury_id = users.id');
         $builder->where("users.role",'1');
         $builder->where("users.active",'1');
-       // $builder->where("ratings.is_rate_submitted",1);
         return $query = $builder->get();
     }
 

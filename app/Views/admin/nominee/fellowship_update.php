@@ -794,7 +794,9 @@
     display: flex;
 }
 
-.form-horizontal.addformsec .form-group.uploadseciz .form-control {margin-top: 15px;width: 60%;min-width: 200px;padding-bottom: 36px!important;}
+.form-horizontal.addformsec .form-group.uploadseciz .form-control[type="file"] {
+  margin-top: 15px;width: 60%;min-width: 200px;padding-bottom: 36px!important;
+}
 
 .form-horizontal.addformsec .form-group.uploadseciz .form-items > div {
 }
@@ -841,5 +843,7 @@
 .form-horizontal.addformsec .form-group.uploadseciz .form-items > div > div:last-child {
     border: 0;
 }
-
+.mt20 {
+    margin-top: 20px;
+}
 </style>

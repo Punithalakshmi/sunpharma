@@ -123,15 +123,15 @@
               <div class="form-group row formitem">
                 <label class="col-sm-3 col-form-label">First Employment:</label>
                 <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Name of institution and location:</label> 
+                  <label class="col-form-label">Name of institution and location:</label> 
                   <?=$user['first_employment_name_of_institution_location'];?> 
                 </div>
                 <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Designation/post:</label> 
+                  <label class="col-form-label">Designation/post:</label> 
                   <?=$user['first_employment_designation'];?> 
                 </div>
                 <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Year of joining:</label> 
+                  <label class="col-form-label">Year of joining:</label> 
                   <?=$user['first_employment_year_of_joining'];?> 
                 </div>
               </div>
@@ -139,19 +139,19 @@
               <div class="form-group row formitem">
                 <label class="col-sm-3 col-form-label">First medical degree obtained: </label>
                 <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Name of degree</label> 
+                  <label class="col-form-label">Name of degree</label> 
                   <?=$user['first_medical_degree_name_of_degree'];?> 
                 </div>
                 <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Year of award of degree:</label> 
+                  <label class="col-form-label">Year of award of degree:</label> 
                   <?=$user['first_medical_degree_year_of_award'];?> 
                 </div>
                 <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Institution awarding the degree</label> 
+                  <label class="col-form-label">Institution awarding the degree</label> 
                   <?=$user['first_medical_degree_institution'];?> 
                 </div>
                 <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Marksheet</label> 
+                  <label class="col-form-label">Marksheet</label> 
                   <?=$user['first_degree_marksheet'];?> 
                 </div>
               </div>
