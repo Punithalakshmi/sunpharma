@@ -234,9 +234,13 @@ if ( ! function_exists('getNominationNo'))
         $userModel = model('App\Models\UserModel');
         $awardData = $userModel->getWhere(array("award_id" => $award_id));
         $awardData = $awardData->getResultArray();
-        if(is_array($awardData)){
+        if(is_array($awardData) && count($awardData)){
             $ct       = count($awardData) + 1;  
             return  $ct;
+        }
+        else
+        {
+            return 1;
         }
     }
 } 

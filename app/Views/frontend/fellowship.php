@@ -172,10 +172,10 @@
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
                             <label class="form-label">Designation  <span class="required" style="color:red;">*</span></label>
-                                <textarea class="form-control required" name="nominator_office_address" id="nominator_office_address" placeholder="Write a Address" style="height:auto;"><?=$editdata['nominator_office_address'];?></textarea>
+                                <textarea class="form-control required" name="nominator_designation" id="nominator_designation" placeholder="Write a Address" style="height:auto;"><?=$editdata['nominator_designation'];?></textarea>
                                 <small class="text-danger">
-                                <?php if(isset($validation) && $validation->getError('nominator_office_address')) {?>
-                                    <?= $error = $validation->getError('nominator_office_address'); ?>
+                                <?php if(isset($validation) && $validation->getError('nominator_designation')) {?>
+                                    <?= $error = $validation->getError('nominator_designation'); ?>
                                 <?php }?>
                                 </small>
                             </div>

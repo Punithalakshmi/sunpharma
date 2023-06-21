@@ -133,26 +133,33 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for="">
-                                                 <b>Designation & Office Address of the Nominator</b>
+                                                 <b>Office Address</b>
                                           </label>
                                             <div >
                                             <?=$user['nominator_address'];?>
                                             </div>
                                     </div>
                                 </div>
-
+                                <div class="col-lg-12">
+                                    <div class="mb-3 form-items">
+                                        <label class="form-label " for="">
+                                                 <b>Designation</b>
+                                          </label>
+                                            <div >
+                                            <?=$user['nominator_designation'];?></div>
+                                    </div>
+                                </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""><b>Mobile No of the Nominator</b></label>
-                                        <div ><?=$user['nominator_phone'];?>
-                                        </div>
+                                        <label class="form-label " for=""><b>Mobile No</b></label>
+                                        <div><?=$user['nominator_phone'];?></div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""><b>Email ID of the Nominator</b></label>
-                                        <div >
+                                        <label class="form-label " for=""><b>Email ID</b></label>
+                                        <div>
                                            <?=$user['nominator_email'];?>
                                         </div>
                                     </div>
@@ -192,7 +199,7 @@
                                     <div class="mb-3 form-items">
                                         
                                             
-                                                <label class="form-label " for=""> <b>Complete Bio-data of the Applicant
+                                            <label class="form-label" for=""><b>Complete Bio-data of the Applicant
                                             (Max 1.5 MB) </b></label>
                                             <div>
                                               <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank">
@@ -400,8 +407,8 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         
-                                            <label class="form-label " for="">  <b>Highest medical degree obtained: </b> </label>
-                                            <br>
+                                        <label class="form-label" for="">  <b>Highest medical degree obtained: </b> </label>
+                                        <br>
                                        
                                         <?php if(!empty($user['highest_medical_degree_name'])): ?>
                                             <label class="form-label " for=""> <b> Name of degree </b>  </label>
@@ -572,7 +579,7 @@
                                     <div class="mb-3 form-items">
                                         
                                             
-                                                <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty) </b></label>
+                                                <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant's specialty) </b></label>
                                             <div>
                                             <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_research_awards_and_recognitions'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -588,7 +595,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                    <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty) </b> <span class="required" style="color:red;">*</span></label>
+                                    <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant's specialty) </b> <span class="required" style="color:red;">*</span></label>
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_research_awards_and_recognitions" type="file" id="fellowship_research_awards_and_recognitions" value="<?=$editdata['fellowship_research_awards_and_recognitions'];?>">   
@@ -653,7 +660,7 @@
                                             <div class="mb-3 form-items">
                                          
                                               
-                                                <label class="form-label " for=""> <b> Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded: </b></label>
+                                                <label class="form-label " for=""> <b> Name of the institution in which research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out, if awarded: </b></label>
                                                 <div>
                                                      <?=(isset($user['fellowship_name_of_institution_research_work']) && !empty($user['fellowship_name_of_institution_research_work']))?$user['fellowship_name_of_institution_research_work']:'';?>
                                                </div>
@@ -665,7 +672,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                   <div class="mb-3 form-items">
-                                  <label class="form-label " for=""> <b> Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded: </b><span class="required" style="color:red;">*</span></label>
+                                  <label class="form-label " for=""> <b> Name of the institution in which research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out, if awarded: </b><span class="required" style="color:red;">*</span></label>
                                         <div>
                                             <input class="form-control mb-3 required" name="fellowship_name_of_institution_research_work" type="text" id="fellowship_name_of_institution_research_work" value="<?php echo set_value('fellowship_name_of_institution_research_work',$editdata['fellowship_name_of_institution_research_work']);?>" >    
                                         </div>
@@ -684,7 +691,7 @@
                                     <div class="mb-3 form-items">
                                         
                                         
-                                            <label class="form-label " for=""> <b> If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out: </b> </label>
+                                            <label class="form-label " for=""> <b> If awarded, supervisor under whom research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out: </b> </label>
                                             <label class="form-label " for=""> <b> Name of supervisor </b>  </label>
                                                 <div>
                                                      <?=(isset($user['fellowship_name_of_the_supervisor']) && !empty($user['fellowship_name_of_the_supervisor']))?$user['fellowship_name_of_the_supervisor']:'';?>
@@ -710,7 +717,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                   <div class="mb-3 form-items">
-                                  <label class="form-label " for=""> <b> If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out: </b> </label>
+                                  <label class="form-label " for=""> <b> If awarded, supervisor under whom research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out: </b> </label>
                                         <div>
                                                 <label class="form-check-label question__label noLabel"> <b> Name of supervisor </b><span class="required" style="color:red;">*</span> </label>
                                                 <input class="form-control mb-3 required" name="fellowship_name_of_the_supervisor" type="text" id="fellowship_name_of_the_supervisor" value="<?php echo set_value('fellowship_name_of_the_supervisor',$editdata['fellowship_name_of_the_supervisor']);?>">    
@@ -750,7 +757,7 @@
                                 <?php if(!empty($user['fellowship_description_of_research'])): ?>               
                                     <div class="col-lg-12">
                                         <div class="mb-3 form-items">
-                                                <label class="form-label " for=""><b>Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b></label> 
+                                                <label class="form-label " for=""><b>Description of research to be carried out if the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b></label> 
                                                 <div>
                                                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_description_of_research'];?>" target="_blank">
                                                 <button class="btn btn-primary btn-sm" type="button">
@@ -765,7 +772,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                    <label class="form-label " for=""><b>Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b><span class="required" style="color:red;">*</span></label> 
+                                    <label class="form-label " for=""><b>Description of research to be carried out if the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b><span class="required" style="color:red;">*</span></label> 
                                             <div>
                                                  <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_description_of_research" type="file" id="fellowship_description_of_research" value="<?=$editdata['fellowship_description_of_research'];?>">  
@@ -788,6 +795,8 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="text-danger">Consent from the Supervisor under whom the research will be carried out [as per details provided in (15)], including facilitation of research in the supervisor's institution. [If awarded, the applicant must produce an undertaking from the head of the institution in which the research will be carried out stating that the applicant will be allowed to carry out the proposed research in the institution under the administrative terms and conditions specified by the <i>Sun Pharma Science Foundation</i>.]</p>
+                        <p class="text-danger">All relevant documents in support of the statements made in the application (e.g., Mark sheets, academic award certificates, publications, etc.)</p>
                      <?php 
                    
                           if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && ($userdata['nominationEndDays'] > 0)):   ?>           
@@ -798,7 +807,7 @@
                         <?php else:?>
                             <div id="q-box__buttons">
                             
-                              <a  href="<?=base_url();?>/fellowship/print/<?=$editdata['id'];?>" id="submit-btn" class="btn btn-success ms-2" >Print</a>
+                              <a href="<?=base_url();?>/fellowship/print/<?=$editdata['id'];?>" id="submit-btn" class="btn btn-success ms-2" >Print</a>
                         </div>  
                     <?php endif;?>
                 </form>

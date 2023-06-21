@@ -48,7 +48,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel xpanelform">
               <div class="x_content">
-
+              <?php if(isset($user['nomination_type']) && ($user['nomination_type'] != 'fellowship')){ ?>
                 <div class="col-md-3 col-xs-12 mt-30">
                   <div class="product-image border avatarimg">
                     <img class="border" src="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['nominator_photo'];?>" alt="" style="border: 1px solid #959595;padding: 5px;"> 
@@ -57,7 +57,7 @@
                   
                   </div>
                 </div>
-
+                <?php } ?>
           <div class="col-md-8 col-xs-12" style="border:0px solid #e5e5e5;">
 
             <h3 class="prod_title d-flex" style="justify-content: space-between;"><?=$user['firstname'].' '.$user['lastname'];?>
@@ -120,80 +120,80 @@
                 <?=$user['nominator_address'];?> </div>
               </div>
             <?php if(isset($user['nomination_type']) && ($user['nomination_type'] == 'fellowship')){ ?>
-              <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">First Employment:</label>
-                <div class="col-sm-3">
+              <div class="form-group row formitem employmentsec">
+                <label class="col-sm-12 col-form-label">First Employment:</label>
+                <div class="col-md-6">
                   <label class="col-form-label">Name of institution and location:</label> 
                   <?=$user['first_employment_name_of_institution_location'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-form-label">Designation/post:</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label d-flex">Designation/post:</label> 
                   <?=$user['first_employment_designation'];?> 
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-6">
                   <label class="col-form-label">Year of joining:</label> 
                   <?=$user['first_employment_year_of_joining'];?> 
                 </div>
               </div>
 
-              <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">First medical degree obtained: </label>
-                <div class="col-sm-3">
+              <div class="form-group row formitem employmentsec">
+                <label class="col-sm-12 col-form-label">First medical degree obtained: </label>
+                <div class="col-md-6">
                   <label class="col-form-label">Name of degree</label> 
                   <?=$user['first_medical_degree_name_of_degree'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-form-label">Year of award of degree:</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label d-flex">Year of award of degree:</label> 
                   <?=$user['first_medical_degree_year_of_award'];?> 
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-6">
                   <label class="col-form-label">Institution awarding the degree</label> 
                   <?=$user['first_medical_degree_institution'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-form-label">Marksheet</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label d-flex">Marksheet</label> 
                   <?=$user['first_degree_marksheet'];?> 
                 </div>
               </div>
 
-              <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Highest medical degree obtained: </label>
-                <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Name of degree</label> 
-                  <?=$user['highest_medical_degree_name'];?> 
+              <div class="form-group row formitem employmentsec">
+                <label class="col-sm-12 col-form-label">Highest medical degree obtained: </label>
+                <div class="col-md-6">
+                  <label class="col-form-label">Name of degree</label> 
+                    <?=$user['highest_medical_degree_name'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Year of award of degree:</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label d-flex">Year of award of degree:</label> 
                   <?=$user['highest_medical_degree_year'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Institution awarding the degree</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label">Institution awarding the degree</label> 
                   <?=$user['highest_medical_degree_institution'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Marksheet</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label d-flex">Marksheet</label> 
                   <?=$user['highest_degree_marksheet'];?> 
                 </div>
               </div>
 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded:</label>
+                <label class="col-sm-12 col-form-label">Name of the institution in which research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out, if awarded:</label>
                 <div class="col-sm-9">
                 <?=$user['fellowship_name_of_institution_research_work'];?> </div>
               </div>
 
-              <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out: </label>
-                <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Name of supervisor</label> 
+              <div class="form-group row formitem employmentsec">
+                <label class="col-sm-12 col-form-label">If awarded, supervisor under whom research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out: </label>
+                <div class="col-md-6">
+                  <label class="col-form-label">Name of supervisor</label> 
                   <?=$user['fellowship_name_of_the_supervisor'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Institution:</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label d-flex">Institution:</label> 
                   <?=$user['fellowship_name_of_institution'];?> 
                 </div>
-                <div class="col-sm-3">
-                  <label class="col-sm-3 col-form-label">Department</label> 
+                <div class="col-md-6">
+                  <label class="col-form-label">Department</label> 
                   <?=$user['fellowship_supervisor_department'];?> 
                 </div>
               </div>
@@ -289,7 +289,7 @@
              <?php endif;
               if(!empty($user['best_papers'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">In Order of Importance list of 10 best papers of the applicant highlighting the important discoveries/contribution described in them briefly.(Max 1 MB)</label>
+                <label class="col-form-label nonecolan">In Order of Importance list of 10 best papers of the applicant highlighting the important discoveries/contribution described in them briefly.(Max 1 MB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($bestPapers)): 
                         for($i=0; $i<count($bestPapers); $i++): ?>
@@ -303,7 +303,7 @@
 
               <?php endif; if(!empty($user['statement_of_research_achievements'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the awards</label>
+                <label class="col-form-label nonecolan">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the awards</label>
                 <div class="col-sm-9">
                 <?php if(is_array($researchAchievements)): 
                         for($i=0; $i<count($researchAchievements); $i++): ?>
@@ -317,7 +317,7 @@
              
               <?php endif; if(!empty($user['signed_details'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references and illustrations. The candidate should duly sign on the details.</label>
+                <label class="col-form-label nonecolan">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references and illustrations. The candidate should duly sign on the details.</label>
                 <div class="col-sm-9">
                 <?php if(is_array($signedDetails)): 
                         for($i=0; $i<count($signedDetails ); $i++): ?>
@@ -330,7 +330,7 @@
               </div>
               <?php endif; if(!empty($user['specific_publications'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Two specific publications/research papers of the applicant relevent to the research work mentioned above.(Max: 2.5MB)</label>
+                <label class="col-form-label nonecolan">Two specific publications/research papers of the applicant relevent to the research work mentioned above.(Max: 2.5MB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($specificPublicaions)): 
                         for($i=0; $i<count($specificPublicaions ); $i++): ?>
@@ -343,7 +343,7 @@
               </div>
               <?php endif; if(!empty($user['signed_statement'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">A signed statement by the applicant that the research work under reference has not been given any award. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB)</label>
+                <label class="col-form-label nonecolan">A signed statement by the applicant that the research work under reference has not been given any award. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($signedStatement)): 
                         for($i=0; $i<count($signedStatement); $i++): ?>
@@ -356,7 +356,7 @@
               </div>
               <?php endif;  if(!empty($user['citation'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Citation on the Research Work of the Applicant duly signed by the Naminator(Max: 300 KB)</label>
+                <label class="col-form-label nonecolan">Citation on the Research Work of the Applicant duly signed by the Naminator(Max: 300 KB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($citation)): 
                         for($i=0; $i<count($citation); $i++): ?>
@@ -411,7 +411,7 @@
 
                 <?php if(!empty($user['justification_letter_filename'])):?>
                     <div class="form-group row formitem graybox">
-                    <label class="col col-form-label nonecolan"> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)</label>
+                    <label class="col-form-label nonecolan"> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)</label>
                     <div class="col-sm-9">
                     <?php if(is_array($justificationLetter)): 
                             for($i=0; $i<count($justificationLetter); $i++): ?>
@@ -426,7 +426,7 @@
 
                   <?php if(!empty($user['complete_bio_data'])):?>
                   <div class="form-group row formitem graybox">
-                    <label class="col col-form-label nonecolan">Complete Bio-data of the applicant(Max: 1MB) pdf format</label>
+                    <label class="col-form-label nonecolan">Complete Bio-data of the applicant(Max: 1MB) pdf format</label>
                     <div class="col-sm-9">
                     <?php if(is_array($completeBiodata)): 
                             for($i=0; $i<count($completeBiodata); $i++): ?>
@@ -441,7 +441,7 @@
 
                   <?php if(!empty($user['fellowship_research_experience'])):?>
                   <div class="form-group row formitem graybox">
-                    <label class="col col-form-label nonecolan">Research Experience (including, summer research, hands-on research workshop, etc.)</label>
+                    <label class="col-form-label nonecolan">Research Experience (including, summer research, hands-on research workshop, etc.)</label>
                     <div class="col-sm-9">
                     <?php if(is_array($researchExperience)): 
                             for($i=0; $i<count($researchExperience); $i++): ?>
@@ -456,7 +456,7 @@
 
                   <?php if(!empty($user['fellowship_research_publications'])):?>
                   <div class="form-group row formitem graybox">
-                    <label class="col col-form-label nonecolan">Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information)</label>
+                    <label class="col-form-label nonecolan">Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information)</label>
                     <div class="col-sm-9">
                     <?php if(is_array($researchPublications)): 
                             for($i=0; $i<count($researchPublications); $i++): ?>
@@ -471,7 +471,7 @@
 
                   <?php if(!empty($user['fellowship_research_awards_and_recognitions'])):?>
                   <div class="form-group row formitem graybox">
-                    <label class="col col-form-label nonecolan">Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)</label>
+                    <label class="col-form-label nonecolan">Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)</label>
                     <div class="col-sm-9">
                     <?php if(is_array($awardsRecognitions)): 
                             for($i=0; $i<count($awardsRecognitions); $i++): ?>
@@ -486,7 +486,7 @@
 
                   <?php if(!empty($user['fellowship_scientific_research_projects'])):?>
                   <div class="form-group row formitem graybox">
-                    <label class="col col-form-label nonecolan">Description of past scientific research projects completed and research experience (1 page)</label>
+                    <label class="col-form-label nonecolan">Description of past scientific research projects completed and research experience (1 page)</label>
                     <div class="col-sm-9">
                     <?php if(is_array($scientificResearchProjects)): 
                             for($i=0; $i<count($scientificResearchProjects); $i++): ?>
@@ -501,7 +501,7 @@
 
                   <?php if(!empty($user['fellowship_description_of_research'])):?>
                   <div class="form-group row formitem graybox">
-                    <label class="col col-form-label nonecolan">Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines</label>
+                    <label class="col-form-label nonecolan">Description of research to be carried out if the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines</label>
                     <div class="col-sm-9">
                     <?php if(is_array($descriptionOfResearch)): 
                             for($i=0; $i<count($descriptionOfResearch); $i++): ?>
@@ -579,7 +579,7 @@
                 ?>
                 <?php if(!empty($user['justification_letter_filename'])):?>
                 <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan"> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)</label>
+                <label class="col-form-label nonecolan"> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($justificationLetter)): 
                         for($i=0; $i<count($justificationLetter); $i++): ?>
@@ -592,7 +592,7 @@
               </div>
               <?php endif; if(!empty($user['supervisor_certifying'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB)</label>
+                <label class="col-form-label nonecolan">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB)</label>
                 <div class="col-sm-9">
                     <?php if(is_array($supervisorCertifying)): 
                         for($i=0; $i<count($supervisorCertifying); $i++): ?>
@@ -605,7 +605,7 @@
               </div>
               <?php endif; if(!empty($user['complete_bio_data'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Complete Bio-data of the applicant(Max: 1MB) pdf format</label>
+                <label class="col-form-label nonecolan">Complete Bio-data of the applicant(Max: 1MB) pdf format</label>
                 <div class="col-sm-9">
                 <?php if(is_array($completeBiodata)): 
                         for($i=0; $i<count($completeBiodata); $i++): ?>
@@ -618,7 +618,7 @@
               </div>
               <?php endif; if(!empty($user['excellence_research_work'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label>
+                <label class="col-form-label nonecolan">Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label>
                 <div class="col-sm-9">
                   
                    <?php if(is_array($excellenceResearchWork)): 
@@ -632,7 +632,7 @@
               </div>
               <?php endif; if(!empty($user['lists_of_publications'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)</label>
+                <label class="col-form-label nonecolan">List of Publications, if any. If yes, Upload copies of any two publications (Max: 2 MB)</label>
                 <div class="col-sm-9">
                 
                   <?php if(is_array($listsOfPublications)): 
@@ -648,7 +648,7 @@
 
               <?php endif; if(!empty($user['statement_of_applicant'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)</label>
+                <label class="col-form-label nonecolan">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)</label>
                 <div class="col-sm-9">
                
                 <?php if(is_array($statementOfApplicant)): 
@@ -663,7 +663,7 @@
               </div>
               <?php endif; if(!empty($user['ethical_clearance'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)</label>
+                <label class="col-form-label nonecolan">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)</label>
                 <div class="col-sm-9">
                
                 <?php if(is_array($ethicalClearance)): 
@@ -678,7 +678,7 @@
               </div>
               <?php endif; if(!empty($user['statement_of_duly_signed_by_nominee'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)</label>
+                <label class="col-form-label nonecolan">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)</label>
                 <div class="col-sm-9">
               
                 <?php if(is_array($statementOfDulySigned)): 
@@ -693,7 +693,7 @@
               </div>
               <?php endif;  if(!empty($user['citation'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB)</label>
+                <label class="col-form-label nonecolan">Citation (brief summary) on the Research Work of the Applicant duly signed by the Nominator (Max: 300 KB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($citation)): 
                         for($i=0; $i<count($citation); $i++): ?>
@@ -706,7 +706,7 @@
               </div>
               <?php endif; if(!empty($user['aggregate_marks'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB)</label>
+                <label class="col-form-label nonecolan">Aggregate marks obtained in PCB/PCM in Class XII or any other course (Max: 250 KB)</label>
                 <div class="col-sm-9">
                
                 <?php if(is_array($aggregateMarks)): 
@@ -722,7 +722,7 @@
               <?php endif; if(!empty($user['age_proof'])):?>
               <br />
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">Age proof (Max: 250KB)</label>
+                <label class="col-form-label nonecolan">Age proof (Max: 250KB)</label>
                 <div class="col-sm-9">
              
                 <?php if(is_array($ageProof)): 
@@ -738,7 +738,7 @@
               <?php endif; if(!empty($user['declaration_candidate'])):?>
               <br />
               <div class="form-group row formitem graybox">
-                <label class="col col-form-label nonecolan">A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)</label>
+                <label class="col-form-label nonecolan">A voluntary declaration from the candidate that they would work in the public or private funded academic/research based organizations for a minimum period of two years after completion of his/her studies. (Max: 250KB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($declarationCandidate)): 
                         for($i=0; $i<count($declarationCandidate); $i++): ?>

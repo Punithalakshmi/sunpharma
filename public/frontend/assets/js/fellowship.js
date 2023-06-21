@@ -86,6 +86,7 @@ form.validate({
                             var nominator_office_address       = $("#nominator_office_address").val();
                             var nominator_mobile               = $("#nominator_mobile").val();
                             var nominator_email                = $("#nominator_email").val();
+                            var nominator_designation          = $("#nominator_designation").val();
                             var award_id                       = $("#award_id").val();
         
                             fd.append('category',category);
@@ -104,6 +105,7 @@ form.validate({
                             fd.append('app_csrf',token_res.token);
                             fd.append('formTypeStatus','preview');
                             fd.append('award_id',award_id);
+                            fd.append('nominator_designation',nominator_designation);
 
                                     $.ajax({
                                             url: base_url+'/fellowship/'+uri2,
@@ -263,7 +265,8 @@ function triggerSteps(csrf)
                                 var nominator_office_address       = $("#nominator_office_address").val();
                                 var nominator_mobile               = $("#nominator_mobile").val();
                                 var nominator_email                = $("#nominator_email").val();
-        
+                                var nominator_designation          = $("#nominator_designation").val();
+
                                 fd.append('category',category);
                                 fd.append('nominee_name',nominee_name);
                                 fd.append('date_of_birth',date_of_birth);
@@ -277,6 +280,7 @@ function triggerSteps(csrf)
                                 fd.append('nominator_mobile',nominator_mobile);
                                 fd.append('nominator_email',nominator_email);
                                 fd.append('formType','fellowship');
+                                fd.append('nominator_designation',nominator_designation);
                                
                                 fd.append('formTypeStatus','preview');
                                 fd.append('app_csrf',token_res.token);
@@ -428,6 +432,7 @@ function formSubmit()
             var nominator_office_address       = $("#nominator_office_address").val();
             var nominator_mobile               = $("#nominator_mobile").val();
             var nominator_email                = $("#nominator_email").val();
+            var nominator_designation          = $("#nominator_designation").val();
 
             fd.append('category',category);
             fd.append('nominee_name',nominee_name);
@@ -444,6 +449,7 @@ function formSubmit()
             fd.append('formType','fellowship');
             fd.append('app_csrf',token_res.token);
             fd.append('formTypeStatus','submit');
+            fd.append('nominator_designation',nominator_designation);
 
             $.ajax({
                 url: base_url+'/fellowship/'+uri2,

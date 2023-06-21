@@ -23,7 +23,7 @@ class Fellowship extends BaseController
 
                         if($formTypeStatus && $formTypeStatus == 'preview') {
                                
-                                $html = $this->getPostedData('fellowship');
+                                $html = $this->getPostedData();
 
                                 if($this->request->isAJAX()){
                                     return $this->response->setJSON([
@@ -84,6 +84,10 @@ class Fellowship extends BaseController
                             $nominee_details_data['is_submitted'] = 0;
                             $nominee_details_data['nomination_year'] = date('Y');
 
+                            $registrationID = getNominationNo($award_id);
+                            $registrationNo = date('Y')."/CRF-".$registrationID;
+                            $nominee_details_data['registration_no'] = $registrationNo;
+
                             $this->session->setFlashdata('msg', 'Submitted Successfully!');
                             $ins_data['created_date']  =  date("Y-m-d H:i:s");
                             $ins_data['created_id']    =  '';
@@ -114,13 +118,8 @@ class Fellowship extends BaseController
                            
                             $this->nominationModel->save($nominee_details_data);
 
-                            $registrationID = getNominationNo($award_id);
-
-                            $registrationNo = date('Y')."/CRF-".$registrationID;
-
-                            $update_regisno_arr = array();
-                            $update_regisno_arr['registration_no'] = $registrationNo;
-                            $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
+                           
+                          //  $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
 
                             $this->sendMail($firstname,$registrationNo,$email);
 
@@ -178,7 +177,8 @@ class Fellowship extends BaseController
                                         "nominator_name" => array("label" => "Naminator Name",'rules' => 'required'),
                                         "nominator_mobile" => array("label" => "Naminator Mobile",'rules' => 'required|numeric|max_length[10]'),
                                         "nominator_email" => array("label" => "Naminator Email",'rules' => 'required|valid_email'),
-                                        "nominator_office_address" => array("label" => "Naminator Office Address",'rules' => 'required')
+                                        "nominator_office_address" => array("label" => "Naminator Office Address",'rules' => 'required'),
+                                        "nominator_designation" => array("label" => "Naminator Designation",'rules' => 'required')
             ); 
 
             if(!isset($session['justification_letter']))
@@ -204,7 +204,7 @@ class Fellowship extends BaseController
                                     "nominator_email" => array("required" => "Please enter nominator email"),
                                     "nominator_office_address" => array("required" => "Please enter nominator office address"),
                                     "justification_letter" => array("uploaded" => "Please upload justification letter","max_size" => "File size should be below 500KB", "ext_in" => "File type should be pdf"),
-                                   // "nominator_photo" => array("uploaded" => "Please upload the photo","max_size" => "File size should be below 500KB")
+                                    "nominator_designation" => array("required" => "Please enter nominator designation")
                               );
 
                                 
@@ -402,6 +402,7 @@ class Fellowship extends BaseController
             $editdata['nominator_office_address']       = $this->request->getPost('nominator_office_address');
             $editdata['nominator_mobile']               = $this->request->getPost('nominator_mobile');
             $editdata['nominator_email']                = $this->request->getPost('nominator_email');
+            $editdata['nominator_designation']          = $this->request->getPost('nominator_designation');
 
             $formtype                                   = $this->request->getPost('formType');
         
@@ -456,11 +457,8 @@ class Fellowship extends BaseController
         $validation_rules['fellowship_name_of_institution']              = array("label" => "Institution",'rules' => 'required');
         $validation_rules['fellowship_supervisor_department']                          = array("label" => "Department",'rules' => 'required');
         $validation_rules['fellowship_description_of_research']              = array("label" => "Description of research work",'rules' => 'uploaded[fellowship_description_of_research]|max_size[fellowship_description_of_research,1000]|ext_in[fellowship_description_of_research,pdf]');
-        $validation_rules['highest_degree_marksheet']              = array("label" => "Highest Medical Degree",'rules' => 'uploaded[highest_degree_marksheet]|max_size[highest_degree_marksheet,1000]|ext_in[highest_degree_marksheet,pdf]');
-        $validation_rules['first_degree_marksheet']                = array("label" => "First Medical Degree",'rules' => 'uploaded[first_degree_marksheet]|max_size[first_degree_marksheet,1000]|ext_in[first_degree_marksheet,pdf]');
-        
-
-        
+        $validation_rules['highest_degree_marksheet']              = array("label" => "Highest Medical Degree Marksheet",'rules' => 'uploaded[highest_degree_marksheet]|max_size[highest_degree_marksheet,1000]|ext_in[highest_degree_marksheet,pdf]');
+        $validation_rules['first_degree_marksheet']                = array("label" => "First Medical Degree Marksheet",'rules' => 'uploaded[first_degree_marksheet]|max_size[first_degree_marksheet,1000]|ext_in[first_degree_marksheet,pdf]');
         return $validation_rules;
     }
 
@@ -529,6 +527,7 @@ class Fellowship extends BaseController
         $editdata['nominator_mobile']              = ($this->request->getPost('nominator_mobile'))?$this->request->getPost('nominator_mobile'):'';
         $editdata['nominator_email']               = ($this->request->getPost('nominator_email'))?$this->request->getPost('nominator_email'):'';
         $editdata['nominator_office_address']      = ($this->request->getPost('nominator_office_address'))?$this->request->getPost('nominator_office_address'):'';
+        $editdata['nominator_designation']         = ($this->request->getPost('nominator_designation'))?$this->request->getPost('nominator_designation'):'';
         $editdata['id']                            = ($this->request->getPost('id'))?$request->getPost('id'):'';
       
         $documentRoot =  $_SERVER['DOCUMENT_ROOT'];
@@ -769,40 +768,49 @@ class Fellowship extends BaseController
      
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Name of institution and location', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['passport_filename']);
+            $table->addCell(2000)->addText($nomineeData['first_employment_name_of_institution_location']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Designation', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['signed_details']);
+            $table->addCell(2000)->addText($nomineeData['first_employment_designation']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Year of joining', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['citation']);
+            $table->addCell(2000)->addText($nomineeData['first_employment_year_of_joining']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Name of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['signed_statement']);
+            $table->addCell(2000)->addText($nomineeData['first_medical_degree_name_of_degree']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Year of award of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['specific_publications']);
+            $table->addCell(2000)->addText($nomineeData['first_medical_degree_year_of_award']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['best_papers']);
+            $table->addCell(2000)->addText($nomineeData['first_medical_degree_institution']);
+
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('First Medical Degree Marksheet', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['first_degree_marksheet']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Name of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['signed_statement']);
+            $table->addCell(2000)->addText($nomineeData['highest_medical_degree_name']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Year of award of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['specific_publications']);
+            $table->addCell(2000)->addText($nomineeData['highest_medical_degree_year']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['best_papers']);
+            $table->addCell(2000)->addText($nomineeData['highest_medical_degree_institution']);
 
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest Medical Degree Marksheet', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['highest_degree_marksheet']);
+
+            
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Research Experience (including, summer research, hands-on research workshop, etc.)', $fancyTableFontStyle);
             $table->addCell(2000)->addText($nomineeData['fellowship_research_experience']);

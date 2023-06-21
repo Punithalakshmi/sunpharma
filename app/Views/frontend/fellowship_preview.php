@@ -100,11 +100,16 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for="">Designation & Office Address of the
-                                            Nominator</label>
+                                        <label class="form-label " for="">Designation </label>
+                                            <div><?=$editdata['nominator_designation'];?>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3 form-items">
+                                        <label class="form-label " for="">Office Address</label>
                                             <div><?=$editdata['nominator_office_address'];?>
                                             </div>
                                     </div>

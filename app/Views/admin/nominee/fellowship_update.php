@@ -372,19 +372,19 @@
                                       <!-- <span class="required" style="color:red;">*</span> -->
                                     </label>
                                     
-                                      <div class="col-md-3 col-sm-4 col-xs-12">
+                                      <div class="col-md-4 col-sm-4 col-xs-12">
                                            <label class="form-label">Name of degree:</label>
                                           <input id="first_medical_degree_name_of_degree" class="form-control col-md-7 col-xs-12" type="text" name="first_medical_degree_name_of_degree" value="<?php echo set_value('first_medical_degree_name_of_degree',$editdata['first_medical_degree_name_of_degree']);?>">
                                       </div>
-                                      <div class="col-md-3 col-sm-4 col-xs-12">
+                                      <div class="col-md-4 col-sm-4 col-xs-12">
                                            <label class="form-label"> Year of award of degree:</label>
                                             <input id="first_medical_degree_year_of_award" class="form-control col-md-7 col-xs-12" type="text" name="first_medical_degree_year_of_award" value="<?php echo set_value('first_medical_degree_year_of_award',$editdata['first_medical_degree_year_of_award']);?>">
                                     </div>
-                                    <div class="col-md-3 col-sm-4 col-xs-12">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
                                     <label class="form-label">Institution awarding the degree:</label>
                                         <input id="first_medical_degree_institution" class="form-control col-md-7 col-xs-12" type="text" name="first_medical_degree_institution" value="<?php echo set_value('first_medical_degree_institution',$editdata['first_medical_degree_institution']);?>">
                                     </div>
-                                    <div class="col-md-3 col-sm-4 col-xs-12">
+                                    <div class="col-md-12 m20 col-sm-4 col-xs-12">
                                       <label class="form-label">Marksheet:</label>
                                         <button type="button" name="first_degree_marksheet_add" id="add_more_first_degree_marksheet" onclick="addMoreRows('firstDegreeMarksheetWrapper','first_degree_marksheet','first_degree_marksheet');" class="btn btn-primary btn-sm">
                                         <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -436,19 +436,19 @@
                                  <div class="mb-3 form-items">
                                     <label class="form-label">Highest medical degree obtained:</label>
                                     
-                                      <div class="col-md-3 col-sm-4 col-xs-12">
+                                      <div class="col-md-4 col-sm-4 col-xs-12">
                                            <label class="form-label">Name of degree:</label>
                                            <input id="highest_medical_degree_name" class="form-control col-md-7 col-xs-12" type="text" name="highest_medical_degree_name" value="<?php echo set_value('highest_medical_degree_name',$editdata['highest_medical_degree_name']);?>">
                                       </div>
-                                      <div class="col-md-3 col-sm-4 col-xs-12">
+                                      <div class="col-md-4 col-sm-4 col-xs-12">
                                             <label class="form-label"> Year of award of degree:</label>
                                             <input id="highest_medical_degree_year" class="form-control col-md-7 col-xs-12" type="text" name="highest_medical_degree_year" value="<?php echo set_value('highest_medical_degree_year',$editdata['highest_medical_degree_year']);?>">
                                       </div>
-                                      <div class="col-md-3 col-sm-4 col-xs-12">
+                                      <div class="col-md-4 col-sm-4 col-xs-12">
                                           <label class="form-label">Institution awarding the degree:</label>
                                           <input id="highest_medical_degree_institution" class="form-control col-md-7 col-xs-12" type="text" name="highest_medical_degree_institution" value="<?php echo set_value('highest_medical_degree_institution',$editdata['highest_medical_degree_institution']);?>">
                                       </div>
-                                      <div class="col-md-3 col-sm-4 col-xs-12">
+                                      <div class="col-md-12 mt20 col-sm-4 col-xs-12">
                                           <label class="form-label">Marksheet:</label>
                                           <button type="button" name="highest_degree_marksheet_add" id="add_more_highest_degree_marksheet" onclick="addMoreRows('highestDegreeMarksheetWrapper','highest_degree_marksheet','highest_degree_marksheet');" class="btn btn-primary btn-sm">
                                           <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -697,7 +697,7 @@
                               <div class="clearfix"></div>
                               <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                    <label class="form-label">Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded:   
+                                    <label class="form-label">Name of the institution in which research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out, if awarded:   
                                       <!-- <span class="required" style="color:red;">*</span> -->
                                     </label>
                                       <div class="col-md-4 col-sm-4 col-xs-12">
@@ -708,7 +708,7 @@
                               <div class="clearfix"></div>
                               <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                    <label class="form-label">If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out:   
+                                    <label class="form-label">If awarded, supervisor under whom research work on the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> will be carried out:   
                                       <!-- <span class="required" style="color:red;">*</span> -->
                                     </label>
                                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -728,7 +728,7 @@
                               <div class="clearfix"></div>
                                <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for="">Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines
+                                    <label class="form-label">Description of research to be carried out if the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines
                                      </label>
                                     <button type="button" name="fellowship_description_of_research_add" id="add_more_fellowship_description_of_research" onclick="addMoreRows('descriptionOfResearchWrapper','fellowship_description_of_research','fellowship_description_of_research');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
