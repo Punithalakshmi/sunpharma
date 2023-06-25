@@ -90,6 +90,7 @@ $routes->post('fellowship/(:any)','Fellowship::index/$1',['filter' =>'check_date
 $routes->get('logout','User::logout');
 $routes->get('form','User::validForm');
 $routes->get('sendMail','User::sendMail');
+$routes->get('user_check','User::user_check');
 
 $routes->post('uniqueValidation','User::uniqueValidation');
 $routes->get('success','Nomination::Success');
@@ -132,6 +133,10 @@ $routes->get('import/ratingImport','Import::ratingImport');
 $routes->get('import/nominationsImportSS','Import::nominationsImportSS');
 
 $routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
+
+$routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
+
+$routes->get('fellowship/pdf/(:num)','Fellowship::pdfGeneration/$1');
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 
@@ -207,6 +212,9 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->get('nomination/getCategoryById/(:any)','Nomination::getCategoryById/$1',['filter' => 'auth']);
     $routes->get('nomination/assigned_jury_lists/(:any)','Nomination::assigned_jury_lists/$1',['filter' => 'auth']);
     $routes->get('nomination/remove_jury_from_award/(:any)','Nomination::remove_jury_from_award/$1',['filter' => 'auth']);
+    $routes->get('nomination/extendNomination/(:any)','Nomination::extendNomination/$1',['filter' => 'auth']);
+    $routes->post('nomination/extendNomination','Nomination::extendNomination',['filter' => 'auth']);
+    
     
     $routes->get('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);
     $routes->post('rating/add/(:any)','Rating::add/$1',['filter' =>'auth']);

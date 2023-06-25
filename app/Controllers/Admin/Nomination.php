@@ -218,6 +218,19 @@ class Nomination extends BaseController
 
                         $ins_data['document']  = $event_document->getClientName();
                     }
+
+                    if($this->request->getFile('procedure_document') != ''){
+                        $fileUploadDir = 'uploads/events/';
+                            
+                        if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
+                        mkdir($fileUploadDir, 0777, true);
+                        
+                        //upload documents to respestive nominee folder
+                        $procedure_document = $this->request->getFile('procedure_document');
+                        $procedure_document->move($fileUploadDir);
+
+                        $ins_data['procedure_document']  = $procedure_document->getClientName();
+                    }
                
                     if(!empty($id)){
                         $this->session->setFlashdata('msg', 'Award Updated Successfully!');
@@ -357,14 +370,14 @@ class Nomination extends BaseController
 
             $id  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id; 
                 
-            $validation = $this->validate($this->extend_validation_rules());
+            //$validation = $this->validate($this->extend_validation_rules());
 
-            $getExtend  = $this->userModel->getUserData($id);
+            $getExtend  = $this->nominationTypesModel->getListsOfNominations($id);
 
             $editdata = array();
 
             if($getExtend->getRowArray() > 0)
-            $editdata = $getExtend->getRowArray(); 
+              $editdata = $getExtend->getRowArray(); 
 
             if($this->validation) {
 
@@ -373,21 +386,22 @@ class Nomination extends BaseController
                     $extend_date    = $this->request->getPost('extend_date');
                     
                     $ins_data = array();
-                    $ins_data['extend_date']   = date("Y-m-d",strtotime($extend_date));
                     
                     //get user data
-                    $getExtendUserData  = $this->userModel->getListsOfUsers($id)->getRowArray();
+                    $getExtendUserData  = $this->nominationTypesModel->getListsOfNominations($id)->getRowArray();
                     
                     if(!empty($id) && $getExtend->getRowArray() > 0){
                         $this->session->setFlashdata('msg', 'Nomination Extend Date Updated Successfully!');
                         $ins_data['updated_date']   =  date("Y-m-d H:i:s");
                         $ins_data['updated_id']     =  $this->data['userdata']['id'];
-                        $this->userModel->update(array("id" => $id),$ins_data);
+                        $ins_data['end_date']       = date("Y-m-d",strtotime($extend_date));
+                    
+                        $this->nominationTypesModel->update(array("id" => $id),$ins_data);
                     }
                 
-                    $this->extendMailNotification($getExtendUserData['email'],$extend_date);
+                    extendNominationMailSend($id,$extend_date);
 
-                    return redirect()->route('admin/nominee');
+                    return redirect()->route('admin/nomination');
                 }
             }
 
@@ -401,13 +415,11 @@ class Nomination extends BaseController
                 $editdata['id']          = '';
             }
         
-        $this->data['editdata'] = $editdata; 
+            $this->data['editdata'] = $editdata; 
 
-        if($this->request->getPost())
-          $this->data['validation'] = $this->validator;
+            if($this->request->getPost())
+            $this->data['validation'] = $this->validator;
 
-        return render('admin/nomination/extend',$this->data);  
-    
-    }
-    
+            return render('admin/nomination/extend_nomination_date',$this->data);  
+      } 
 }

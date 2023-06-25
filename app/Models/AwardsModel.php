@@ -17,7 +17,7 @@ class AwardsModel extends Model{
         'name'
     ];
 
-    public function getLists($category='',$main_category_id='')
+    public function getLists($main_category_id='')
     {
         
         $builder = $this->table('category');
@@ -26,8 +26,8 @@ class AwardsModel extends Model{
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');
 
-        if(!empty($category))
-          $builder->where("nominee_details.category_id",$category);
+        //if(!empty($category))
+        //  $builder->where("nominee_details.category_id",$category);
 
         if(!empty($main_category_id))
           $builder->where("category.main_category_id",$main_category_id);

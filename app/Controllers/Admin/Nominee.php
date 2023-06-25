@@ -190,7 +190,7 @@ class Nominee extends BaseController
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
                 $message .= '<br/><br/>';
-                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please use below credentials to login and submit the other application details. <br /> <br />';
+                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please sign-in with the following credentials to complete the application submission. <br /> <br />';
                 $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
                 $message .= '<b>Username: </b>'.strtolower($randUser).'<br />';
                 $message .= '<b>Password: </b>'.$pass.'<br /><br />';
@@ -214,6 +214,8 @@ class Nominee extends BaseController
 
             $message .= '<b>Remarks:</b> '.$remarks.'<br/><br/>';
 
+            $message .= '<b>A quick guide with instructions to complete the application is attached in this email for your reference.</b>';
+
           
             $up_data['remarks'] = $remarks;
 
@@ -222,7 +224,9 @@ class Nominee extends BaseController
             $message .= 'Thanks & Regards,<br/>';
             $message .= 'Sunpharma Science Foundation Team';
 
-            $isMailSent = sendMail($getUserData['email'],$subject,$message);
+            $attachmentFile = 'uploads/Steps to fill the personalized application.pdf';
+            
+            $isMailSent = sendMail($getUserData['email'],$subject,$message,$attachmentFile);
            
             $status = '';
             if($isMailSent){
@@ -465,7 +469,7 @@ class Nominee extends BaseController
             $editdata = array();
 
             if($getExtend->getRowArray() > 0)
-            $editdata = $getExtend->getRowArray(); 
+               $editdata = $getExtend->getRowArray(); 
 
             if($this->validation) {
 
@@ -534,7 +538,7 @@ class Nominee extends BaseController
         $header .= "MIME-Version: 1.0\r\n";
         $header .= "Content-type: text/html\r\n";
 
-        $subject = " Extend Nomination Date - Sunpharma Science Foundation ";
+        $subject = " Nomination Date extended - Sunpharma Science Foundation ";
         $message  = "Hi, ";
         $message .= '<br/><br/>';
         $message .= "Nomination date has been changed up to ".$extend_date." Please login and upload your documents.";

@@ -95,7 +95,7 @@ class Awards extends BaseController
                     	 $juryData['firstname'] = $jvalue['firstname'];
                    	 $juryData['username']  = $jvalue['username'];
                    	 $juryData['rating']    = (isset($getJuryRateData['rating']))?$getJuryRateData['rating']:0;
-                         $awardsDataArr[$avalue['category_name']][$i]['juries'][] = $juryData;
+                     $awardsDataArr[$avalue['category_name']][$i]['juries'][] = $juryData;
 		         $juriesName[] = $jvalue['firstname'].''.$jvalue['lastname'].'['.$jvalue['username'].']';
 		      
 		   }
@@ -131,7 +131,7 @@ class Awards extends BaseController
         $sheet->setCellValue('C2', 'Applicant Name');
    
         $juriesName[] = 'Total Score'; 
-	
+	    $juriesName  = array_unique($juriesName);
         $sheet->fromArray($juriesName,null,'D2');
 
         $sheet->getStyle(2)->getFont()->setBold(true);

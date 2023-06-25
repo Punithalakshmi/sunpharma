@@ -163,6 +163,21 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Procedure Document</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="btn-group">
+                            <p>
+                                <input class="form-control" name="procedure_document" type="file" >
+                           </p>
+                           <?php if(isset($editdata['procedure_document']) && !empty($editdata['procedure_document'])): ?>
+                              <a target="_blank" href="<?=base_url();?>/uploads/events/<?=$editdata['procedure_document'];?>"><?=$editdata['procedure_document'];?></a>
+                           <?php endif; ?>
+                          </div>
+                        </div>
+                      </div>
                      
                       <div class="clearfix"></div>
                       <div class="form-group">

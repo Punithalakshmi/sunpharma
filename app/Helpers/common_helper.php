@@ -25,7 +25,7 @@ if ( ! function_exists('captchaVerification'))
 
     if(!function_exists('sendMail')) {
         
-        function sendMail($to='',$subject = '',$message = '')
+        function sendMail($to='',$subject = '',$message = '',$attach = '')
         {
             $email  =  \Config\Services::email();
             $data['content'] = $message;
@@ -33,6 +33,10 @@ if ( ! function_exists('captchaVerification'))
             $email->setTo($to);
             $email->setSubject($subject);
             $email->setMessage($html);
+            
+            if(!empty($attach))
+              $email->attach($attach);
+
             if ($email->send()){
                 return true;
             }
@@ -63,7 +67,7 @@ if ( ! function_exists('finalNominationSubmit'))
             $data['content'] = $message;
             $html = view('email/mail',$data,array('debug' => false));
             
-            $email->setTo('sunpharma.sciencefoundation@sunpharma.com');
+            $email->setTo('punitha@izaaptech.in');
 
             $email->setSubject($subject);
 
@@ -262,5 +266,52 @@ if ( ! function_exists('ageCalculation'))
            // echo "your current age is ".$diff->format('%y')." Years ".$diff->format('%m')." months ".$diff->format('%d')." days";
                     
             return $diff->format('%y');
+    }
+} 
+
+if ( ! function_exists('extendNominationMailSend'))
+{
+    function extendNominationMailSend($award_id='',$extend_date = ''){
+        $userModel = model('App\Models\UserModel');
+        $awardData = $userModel->getWhere(array("award_id" => $award_id));
+        $awardData = $awardData->getResultArray();
+
+        $email    =  \Config\Services::email();
+             
+        $extend_date = date("d-m-Y",strtotime($extend_date));
+
+        $header  = "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+        $subject = " Nomination Date extended  - Sunpharma Science Foundation ";
+        $message  = "Hi, ";
+        $message .= '<br/><br/>';
+        $message .= "Nomination date has been changed up to <b>".$extend_date."</b> Please login and upload your documents.";
+        $message .= "<br/>";
+    
+        $message .= "<br/>";
+     
+        $data['content'] = $message;
+
+        $html = view('email/mail',$data,array('debug' => false));
+        $email->setSubject($subject);
+        $email->setMessage($html);
+
+        if(is_array($awardData)){
+            foreach($awardData as $akey=>$avalue){
+                $update_array = array();
+                $update_array['extend_date'] = $extend_date;
+                $userModel->update(array("id" => $avalue['id']),$update_array);
+
+                $email->setTo(trim($avalue['email']));
+                if ($email->send()){
+                    return true;
+                }
+                else
+                {
+                    return $email->printDebugger(['headers']);
+                }
+
+            }
+        }
     }
 } 

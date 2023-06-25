@@ -23,6 +23,7 @@ class NominationTypesModel extends Model {
         'title',
         'subject',
         'description',
+        'procedure_document'
     ];
 
 

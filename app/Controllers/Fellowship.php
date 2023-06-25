@@ -10,7 +10,6 @@ class Fellowship extends BaseController
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Clinical Research Fellowship');
             
             $this->data['categories'] = $getCategoryLists->getResultArray();
-
             $getSessionFiles = getSessionData('uploadedFile');
             
             if (strtolower($this->request->getMethod()) == "post") {
@@ -83,16 +82,17 @@ class Fellowship extends BaseController
                           
                             $nominee_details_data['is_submitted'] = 0;
                             $nominee_details_data['nomination_year'] = date('Y');
-
-                            $registrationID = getNominationNo($award_id);
+			    $registrationID = getNominationNo($award_id);
                             $registrationNo = date('Y')."/CRF-".$registrationID;
-                            $nominee_details_data['registration_no'] = $registrationNo;
+				setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
+                           // $nominee_details_data['registration_no'] = $registrationNo;
 
                             $this->session->setFlashdata('msg', 'Submitted Successfully!');
                             $ins_data['created_date']  =  date("Y-m-d H:i:s");
                             $ins_data['created_id']    =  '';
                             $this->userModel->save($ins_data);
                             $lastInsertID = $this->userModel->insertID();
+
 
                             $fileUploadDir = 'uploads/'.$lastInsertID;
                             
@@ -113,13 +113,20 @@ class Fellowship extends BaseController
                                  $justification_letter->move($fileUploadDir);  
                                  $nominee_details_data['justification_letter_filename'] = $justification_letter->getBasename();    
                             }
-                            
+                            $nomination_no = getSessionData('nominationNo');
+                            $nominee_details_data['registration_no'] = (isset($nomination_no['nomination_no']) && ($nomination_no['nomination_no']))?$nomination_no['nomination_no']:'';
+
                             $nominee_details_data['nominee_id'] = $lastInsertID;
                            
                             $this->nominationModel->save($nominee_details_data);
 
-                           
-                          //  $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
+                            $registrationID = getNominationNo($award_id);
+
+                            $registrationNo = date('Y')."/CRF-".$registrationID;
+
+                            $update_regisno_arr = array();
+                            $update_regisno_arr['registration_no'] = $registrationNo;
+                            $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
 
                             $this->sendMail($firstname,$registrationNo,$email);
 
@@ -217,13 +224,30 @@ class Fellowship extends BaseController
     {
 
             $id       = (!empty($id))?$id:$this->request->getPost('id');
-        
+
+            $documentRoot =  $_SERVER['DOCUMENT_ROOT'];
+            //folder path
+            $uploadedFolderPath = 'uploads/nominations/';
+
+            $files = array( 'complete_bio_data' =>'',
+            'fellowship_research_experience' =>'',
+            'fellowship_research_publications'=>'',
+            'fellowship_research_awards_and_recognitions'=>'',
+            'fellowship_scientific_research_projects'=>'',
+            'fellowship_description_of_research'=>'',
+            'first_degree_marksheet' => '',
+            'highest_degree_marksheet'=>''
+        );
+
             if(!empty($id)){
                 $getUserData = $this->userModel->getUserData($id);
                 $edit_data   = $getUserData->getRowArray();
                 
+                if(!count($edit_data))
+                  return redirect()->to('login');
+
                 $edit_data['category_name'] = '';
-                if(isset($edit_data['category_id'])) {
+                if( isset($edit_data['category_id'])) {
                     $category   = $this->categoryModel->getCategoriesById($edit_data['category_id']);
                     $categoryDt = $category->getRowArray();
                     $edit_data['category_name'] = $categoryDt['name'];
@@ -329,7 +353,7 @@ class Fellowship extends BaseController
                         //sendmail to jury
                        // $this->sendMailToJury($award_id);
 
-                        $this->print($id);
+                        $this->pdfGeneration($id);
                         //send mail to admin
                         $filename  = $edit_data['firstname'].'.docx';
                         $attachmentFilePath =  'uploads/'.$id.'/'.$filename;
@@ -350,9 +374,9 @@ class Fellowship extends BaseController
                     }
 
             } 
-            
+           
             $editdata['id']                                                        = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
-            $editdata['complete_bio_data']                                         = ($this->request->getFile('complete_bio_data'))?$this->request->getFile('complete_bio_data'):'';
+         //   $editdata['complete_bio_data']                                         = ($this->request->getFile('complete_bio_data'))?$this->request->getFile('complete_bio_data'):'';
             $editdata['first_employment_name_of_institution_location']             = ($this->request->getFile('first_employment_name_of_institution_location'))?$this->request->getFile('first_employment_name_of_institution_location'):'';
             $editdata['first_employment_designation']                              = ($this->request->getFile('first_employment_designation'))?$this->request->getFile('first_employment_designation'):'';
             $editdata['first_employment_year_of_joining']                          = ($this->request->getFile('first_employment_year_of_joining'))?$this->request->getFile('first_employment_year_of_joining'):'';
@@ -362,17 +386,88 @@ class Fellowship extends BaseController
             $editdata['highest_medical_degree_name']                               = ($this->request->getFile('highest_medical_degree_name'))?$this->request->getFile('highest_medical_degree_name'):'';
             $editdata['highest_medical_degree_year']                               = ($this->request->getFile('highest_medical_degree_year'))?$this->request->getFile('highest_medical_degree_year'):'';
             $editdata['highest_medical_degree_institution']                        = ($this->request->getFile('highest_medical_degree_institution'))?$this->request->getFile('highest_medical_degree_institution'):'';
-            $editdata['fellowship_research_experience']                            = ($this->request->getPost('fellowship_research_experience'))?$this->request->getPost('fellowship_research_experience'):'';
-            $editdata['fellowship_research_publications']                          = ($this->request->getPost('fellowship_research_publications'))?$this->request->getPost('fellowship_research_publications'):'';
-            $editdata['fellowship_research_awards_and_recognitions']               = ($this->request->getPost('fellowship_research_awards_and_recognitions'))?$this->request->getPost('fellowship_research_awards_and_recognitions'):'';
-            $editdata['fellowship_scientific_research_projects']                   = ($this->request->getPost('fellowship_scientific_research_projects'))?$this->request->getPost('fellowship_scientific_research_projects'):'';
+         //   $editdata['fellowship_research_experience']                            = ($this->request->getPost('fellowship_research_experience'))?$this->request->getPost('fellowship_research_experience'):'';
+         //   $editdata['fellowship_research_publications']                          = ($this->request->getPost('fellowship_research_publications'))?$this->request->getPost('fellowship_research_publications'):'';
+         //   $editdata['fellowship_research_awards_and_recognitions']               = ($this->request->getPost('fellowship_research_awards_and_recognitions'))?$this->request->getPost('fellowship_research_awards_and_recognitions'):'';
+         //   $editdata['fellowship_scientific_research_projects']                   = ($this->request->getPost('fellowship_scientific_research_projects'))?$this->request->getPost('fellowship_scientific_research_projects'):'';
             $editdata['fellowship_name_of_institution_research_work']              = ($this->request->getPost('fellowship_name_of_institution_research_work'))?$this->request->getPost('fellowship_name_of_institution_research_work'):'';
             $editdata['fellowship_name_of_the_supervisor']                         = ($this->request->getPost('fellowship_name_of_the_supervisor'))?$this->request->getPost('fellowship_name_of_the_supervisor'):'';
             $editdata['fellowship_name_of_institution']                            = ($this->request->getPost('fellowship_name_of_institution'))?$this->request->getPost('fellowship_name_of_institution'):'';
             $editdata['fellowship_supervisor_department']                          = ($this->request->getPost('fellowship_supervisor_department'))?$this->request->getPost('fellowship_supervisor_department'):'';
-            $editdata['fellowship_description_of_research']                        = ($this->request->getPost('fellowship_description_of_research'))?$this->request->getPost('fellowship_description_of_research'):'';
-            $editdata['first_degree_marksheet']                                    = ($this->request->getFile('first_degree_marksheet'))?$this->request->getFile('first_degree_marksheet'):'';
-            $editdata['highest_degree_marksheet']                                  = ($this->request->getFile('highest_degree_marksheet'))?$this->request->getFile('highest_degree_marksheet'):'';
+          //  $editdata['fellowship_description_of_research']                        = ($this->request->getPost('fellowship_description_of_research'))?$this->request->getPost('fellowship_description_of_research'):'';
+          //  $editdata['first_degree_marksheet']                                    = ($this->request->getFile('first_degree_marksheet'))?$this->request->getFile('first_degree_marksheet'):'';
+         //   $editdata['highest_degree_marksheet']                                  = ($this->request->getFile('highest_degree_marksheet'))?$this->request->getFile('highest_degree_marksheet'):'';
+
+            if($this->request->getFile('complete_bio_data')!='') {
+                $editdata['complete_letter_name'] = $this->request->getFile('complete_bio_data')->getName();
+                $letter_name =  $this->request->getFile('complete_bio_data');
+                $letter_name->move($uploadedFolderPath);
+                $files['complete_bio_data'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['complete_letter_name'] = $editdata['complete_letter_name'];
+            } 
+
+            if($this->request->getFile('fellowship_research_experience')!='') {
+                $editdata['fellowship_research_experience_name'] = $this->request->getFile('fellowship_research_experience')->getName();
+                $letter_name =  $this->request->getFile('fellowship_research_experience');
+                $letter_name->move($uploadedFolderPath);
+                $files['fellowship_research_experience'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['fellowship_research_experience_name'] = $editdata['fellowship_research_experience_name'];
+            } 
+
+            if($this->request->getFile('fellowship_research_publications')!='') {
+                $editdata['fellowship_research_publications_name'] = $this->request->getFile('fellowship_research_publications')->getName();
+                $letter_name =  $this->request->getFile('fellowship_research_publications');
+                $letter_name->move($uploadedFolderPath);
+                $files['fellowship_research_publications'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['fellowship_research_publications_name'] = $editdata['fellowship_research_publications_name'];
+            } 
+
+            if($this->request->getFile('fellowship_research_awards_and_recognitions')!='') {
+                $editdata['fellowship_research_awards_and_recognitions_name'] = $this->request->getFile('fellowship_research_awards_and_recognitions')->getName();
+                $letter_name =  $this->request->getFile('fellowship_research_awards_and_recognitions');
+                $letter_name->move($uploadedFolderPath);
+                $files['fellowship_research_awards_and_recognitions'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['fellowship_research_awards_and_recognitions_name'] = $editdata['fellowship_research_awards_and_recognitions_name'];
+            } 
+
+            if($this->request->getFile('fellowship_scientific_research_projects')!='') {
+                $editdata['fellowship_scientific_research_projects_name'] = $this->request->getFile('fellowship_scientific_research_projects')->getName();
+                $letter_name =  $this->request->getFile('fellowship_scientific_research_projects');
+                $letter_name->move($uploadedFolderPath);
+                $files['fellowship_scientific_research_projects'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['fellowship_scientific_research_projects_name'] = $editdata['fellowship_scientific_research_projects_name'];
+            } 
+
+            if($this->request->getFile('fellowship_description_of_research')!='') {
+                $editdata['fellowship_description_of_research_name'] = $this->request->getFile('fellowship_description_of_research')->getName();
+                $letter_name =  $this->request->getFile('fellowship_description_of_research');
+                $letter_name->move($uploadedFolderPath);
+                $files['fellowship_description_of_research'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['fellowship_description_of_research_name'] = $editdata['fellowship_description_of_research_name'];
+            } 
+
+            if($this->request->getFile('first_degree_marksheet')!='') {
+                $editdata['first_degree_marksheet_name'] = $this->request->getFile('first_degree_marksheet')->getName();
+                $letter_name =  $this->request->getFile('first_degree_marksheet');
+                $letter_name->move($uploadedFolderPath);
+                $files['first_degree_marksheet'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['first_degree_marksheet_name'] = $editdata['first_degree_marksheet_name'];
+            } 
+
+            if($this->request->getFile('highest_degree_marksheet')!='') {
+                $editdata['highest_degree_marksheet_name'] = $this->request->getFile('highest_degree_marksheet')->getName();
+                $letter_name =  $this->request->getFile('highest_degree_marksheet');
+                $letter_name->move($uploadedFolderPath);
+                $files['highest_degree_marksheet'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['highest_degree_marksheet_name'] = $editdata['highest_degree_marksheet_name'];
+            } 
+
+            
+            if(count($files) > 0 && ((isset($files['complete_bio_data']) && ($files['complete_bio_data'] != ''))))
+              setSessionData('uploadedFile',$files);
+
+            //already uploaded files get
+            $getSessionFiles = getSessionData('uploadedFile');
 
             $this->data['editdata'] = $editdata;
             $this->data['user']     = $edit_data;
@@ -462,6 +557,7 @@ class Fellowship extends BaseController
         return $validation_rules;
     }
 
+
     public function sendMail($nominee_name,$nomination_no,$nominee_email)
     {
 
@@ -483,7 +579,7 @@ class Fellowship extends BaseController
        
         $this->data['content'] = $message;
        
-        sendMail('punitha@izaaptech.in',$subject,$message);
+        sendMail('thangachan.anthappan@sunpharma.com',$subject,$message);
 
 
         $header  = '';
@@ -540,8 +636,6 @@ class Fellowship extends BaseController
         
         if($type == 'fellowship'){
 
-          
-
             if($this->request->getFile('justification_letter')!='') {
                 $editdata['justification_letter_name'] = $this->request->getFile('justification_letter')->getName();
                 $letter_name =  $this->request->getFile('justification_letter');
@@ -559,33 +653,20 @@ class Fellowship extends BaseController
             //already uploaded files get
             $getSessionFiles = getSessionData('uploadedFile');
 
-         //   print_r($getSessionFiles); 
-
             if(is_array($getSessionFiles) && count($getSessionFiles) > 0 && $requestType == 'ajax') {
-                $nominatorSessionDt = (isset($getSessionFiles['nominator_photo']) && $getSessionFiles['nominator_photo']!='')?getFileInfo($getSessionFiles['nominator_photo']):'';
                 $letterSessionDt = (isset($getSessionFiles['justification_letter']) && $getSessionFiles['justification_letter']!='')?getFileInfo($getSessionFiles['justification_letter']):'';
-                $supervisorSessionDt = (isset($getSessionFiles['supervisor_certifying']) && $getSessionFiles['supervisor_certifying']!='')?getFileInfo($getSessionFiles['supervisor_certifying']):'';
-                $passportDt = (isset($getSessionFiles['passport']) && $getSessionFiles['passport']!='')?getFileInfo($getSessionFiles['passport']):'';
-               
-                $editdata['justification_letter_name'] =  $getSessionFiles['justification_letter_name'];
-              
+                $editdata['justification_letter_name'] =  $getSessionFiles['justification_letter_name']; 
             }
             else
             {
-               $letterSessionDt= ''; 
-        
+                $letterSessionDt= ''; 
                 $editdata['justification_letter_name']  = '';
-              
-
             }
             
             $justificationLt  = ($this->request->getFile('justification_letter')!='')?$this->request->getFile('justification_letter'):$letterSessionDt;
-           
-       
             $editdata['justification_letter']        = $justificationLt;
-           
-
-        return $editdata;
+        
+            return $editdata;
     }
 
 
@@ -645,233 +726,232 @@ class Fellowship extends BaseController
 
   
 
-    public function print($nominee_id = '')
-    {
-        //get nominee data
-        if(!empty($nominee_id)){
+    // public function print($nominee_id = '')
+    // {
+    //     //get nominee data
+    //     if(!empty($nominee_id)){
 
-             // Creating the new document...
-            $phpWord = new \PhpOffice\PhpWord\PhpWord();
+    //          // Creating the new document...
+    //         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-            $header = ['size' => 16, 'bold' => true];
-            $section = $phpWord->addSection();
+    //         $header = ['size' => 16, 'bold' => true];
+    //         $section = $phpWord->addSection();
             
-            $getUserData = $this->userModel->getUserData($nominee_id);
-            $nomineeData = $getUserData->getRowArray();
+    //         $getUserData = $this->userModel->getUserData($nominee_id);
+    //         $nomineeData = $getUserData->getRowArray();
  
-            $nomineeData['category_name'] = '';
-            if(isset($nomineeData['category_id'])) {
-                $category   = $this->categoryModel->getCategoriesById($nomineeData['category_id']);
-                $categoryDt = $category->getRowArray();
-                $nomineeData['category_name'] = $categoryDt['name'];
-            }
+    //         $nomineeData['category_name'] = '';
+    //         if(isset($nomineeData['category_id'])) {
+    //             $category   = $this->categoryModel->getCategoriesById($nomineeData['category_id']);
+    //             $categoryDt = $category->getRowArray();
+    //             $nomineeData['category_name'] = $categoryDt['name'];
+    //         }
 
-            $nomineeData['award'] = '';
-            if(isset($nomineeData['award_id'])) {
-                $awardDt   = $this->nominationTypesModel->getListsOfNominations($nomineeData['award_id']);
-                $awardDt   = $awardDt->getRowArray();
-                $nomineeData['award'] = $awardDt['title'];
-            }
+    //         $nomineeData['award'] = '';
+    //         if(isset($nomineeData['award_id'])) {
+    //             $awardDt   = $this->nominationTypesModel->getListsOfNominations($nomineeData['award_id']);
+    //             $awardDt   = $awardDt->getRowArray();
+    //             $nomineeData['award'] = $awardDt['title'];
+    //         }
 
-            //Nomination type
-            $nominationType = 'Clinical Research Fellowship';
-            $nominationType = 'Nomination of '.$nominationType.' -'.date('Y'); 
-            $section->addTextBreak(1);
-            $section->addText($nominationType, $header);
+    //         //Nomination type
+    //         $nominationType = 'Clinical Research Fellowship';
+    //         $nominationType = 'Nomination of '.$nominationType.' -'.date('Y'); 
+    //         $section->addTextBreak(1);
+    //         $section->addText($nominationType, $header);
 
-            $fancyTableStyleName = 'Fancy Table';
-            $fancyTableStyle = ['borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50];
-            $fancyTableFirstRowStyle = ['borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF'];
-            $fancyTableCellStyle = ['valign' => 'center'];
-            $fancyTableCellBtlrStyle = ['valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR];
-            $fancyTableFontStyle = ['bold' => true];
-            $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
-            $table = $section->addTable($fancyTableStyleName);
+    //         $fancyTableStyleName = 'Fancy Table';
+    //         $fancyTableStyle = ['borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50];
+    //         $fancyTableFirstRowStyle = ['borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF'];
+    //         $fancyTableCellStyle = ['valign' => 'center'];
+    //         $fancyTableCellBtlrStyle = ['valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR];
+    //         $fancyTableFontStyle = ['bold' => true];
+    //         $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
+    //         $table = $section->addTable($fancyTableStyleName);
 
-            $uploadDir = base_url().'/uploads/'.$nominee_id.'/';
+    //         $uploadDir = base_url().'/uploads/'.$nominee_id.'/';
 
-            $wrappingStyles = ['inline', 'behind', 'infront', 'square', 'tight'];
+    //         $wrappingStyles = ['inline', 'behind', 'infront', 'square', 'tight'];
 
             
-            $table->addRow(900);
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Award', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['award']);
+    //         $table->addRow(900);
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Award', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['award']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Award Type', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['category_name']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Award Type', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['category_name']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Nomination No', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['registration_no']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Nomination No', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['registration_no']);
    
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Name', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['firstname'].' '.$nomineeData['lastname']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Name', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['firstname'].' '.$nomineeData['lastname']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Date of Birth', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['dob']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Date of Birth', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['dob']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Email', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['email']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Email', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['email']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Mobile No', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['phone']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Mobile No', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['phone']);
 
-            // $table->addRow();
-            // $table->addCell(2000, $fancyTableCellStyle)->addText('Gender', $fancyTableFontStyle);
-            // $table->addCell(2000)->addText($nomineeData['gender']);
+    //         // $table->addRow();
+    //         // $table->addCell(2000, $fancyTableCellStyle)->addText('Gender', $fancyTableFontStyle);
+    //         // $table->addCell(2000)->addText($nomineeData['gender']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Address', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['address']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Address', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['address']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Residence Address', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['residence_address']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Residence Address', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['residence_address']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Designation', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['designation']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Designation', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['designation']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Name', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['nominator_name']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Name', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['nominator_name']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Email', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['nominator_email']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Email', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['nominator_email']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Mobile', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['nominator_phone']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Mobile', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['nominator_phone']);
 
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Designation', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['nominator_designation']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Designation', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['nominator_designation']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Address', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['nominator_address']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Address', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['nominator_address']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Justification for Sponsoring the Nomination duly signed by the Nominator (not to exceed 400 words)', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['justification_letter_filename']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Justification for Sponsoring the Nomination duly signed by the Nominator (not to exceed 400 words)', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['justification_letter_filename']);
-
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Complete Bio-data of the Applicant (Max: 1.5 MB)', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['complete_bio_data']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Complete Bio-data of the Applicant (Max: 1.5 MB)', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['complete_bio_data']);
      
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Name of institution and location', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['first_employment_name_of_institution_location']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Name of institution and location', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['first_employment_name_of_institution_location']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Designation', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['first_employment_designation']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Designation', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['first_employment_designation']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Year of joining', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['first_employment_year_of_joining']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('First Employment - Year of joining', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['first_employment_year_of_joining']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Name of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['first_medical_degree_name_of_degree']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Name of degree', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['first_medical_degree_name_of_degree']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Year of award of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['first_medical_degree_year_of_award']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Year of award of degree', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['first_medical_degree_year_of_award']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['first_medical_degree_institution']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('First medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['first_medical_degree_institution']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('First Medical Degree Marksheet', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['first_degree_marksheet']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('First Medical Degree Marksheet', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['first_degree_marksheet']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Name of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['highest_medical_degree_name']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Name of degree', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['highest_medical_degree_name']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Year of award of degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['highest_medical_degree_year']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Year of award of degree', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['highest_medical_degree_year']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['highest_medical_degree_institution']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Highest medical degree obtained - Institution awarding the degree', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['highest_medical_degree_institution']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Highest Medical Degree Marksheet', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['highest_degree_marksheet']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Highest Medical Degree Marksheet', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['highest_degree_marksheet']);
 
             
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Research Experience (including, summer research, hands-on research workshop, etc.)', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_research_experience']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Research Experience (including, summer research, hands-on research workshop, etc.)', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_research_experience']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information)', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_research_publications']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information)', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_research_publications']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_research_awards_and_recognitions']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_research_awards_and_recognitions']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Description of past scientific research projects completed and research experience (1 page)', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_scientific_research_projects']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Description of past scientific research projects completed and research experience (1 page)', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_scientific_research_projects']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded:', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_name_of_institution_research_work']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Name of the institution in which research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out, if awarded:', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_name_of_institution_research_work']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out:  Name of supervisor', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_name_of_the_supervisor']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('If awarded, supervisor under whom research work on the Sun Pharma Science Foundation Clinical Research Fellowship will be carried out:  Name of supervisor', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_name_of_the_supervisor']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Institution', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_name_of_institution']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Institution', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_name_of_institution']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Department', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_supervisor_department']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Department', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_supervisor_department']);
 
-            $table->addRow();
-            $table->addCell(2000, $fancyTableCellStyle)->addText('Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines', $fancyTableFontStyle);
-            $table->addCell(2000)->addText($nomineeData['fellowship_description_of_research']);
+    //         $table->addRow();
+    //         $table->addCell(2000, $fancyTableCellStyle)->addText('Description of research to be carried out if the Sun Pharma Science Foundation Clinical Research Fellowship is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines', $fancyTableFontStyle);
+    //         $table->addCell(2000)->addText($nomineeData['fellowship_description_of_research']);
 
-            $firstname = $nomineeData['firstname'];
+    //         $firstname = $nomineeData['firstname'];
 
-            if ( preg_match('/\s/',$firstname) ){
-              $firstname = str_replace(' ', '_', $firstname);
-            }
+    //         if ( preg_match('/\s/',$firstname) ){
+    //           $firstname = str_replace(' ', '_', $firstname);
+    //         }
 
-             $filename = $firstname.'.docx';
-             $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-             //save to file to nominee folder
-             $fileUploadDir = 'uploads/'.$nominee_id.'/'.$filename;
+    //          $filename = $firstname.'.docx';
+    //          $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+    //          //save to file to nominee folder
+    //          $fileUploadDir = 'uploads/'.$nominee_id.'/'.$filename;
                             
-             if(!file_exists($fileUploadDir))
-               $xmlWriter->save($fileUploadDir);
+    //          if(!file_exists($fileUploadDir))
+    //            $xmlWriter->save($fileUploadDir);
 
-             $filepath = $_SERVER['DOCUMENT_ROOT'].'/'.$fileUploadDir;   
-             header("Content-Description: File Transfer");
-             header('Content-Disposition: attachment; filename='.basename($filepath));
-             header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-             header('Content-Transfer-Encoding: binary');
-             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-             header('Expires: 0');
-             readfile($filepath);
-        }
+    //          $filepath = $_SERVER['DOCUMENT_ROOT'].'/'.$fileUploadDir;   
+    //          header("Content-Description: File Transfer");
+    //          header('Content-Disposition: attachment; filename='.basename($filepath));
+    //          header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    //          header('Content-Transfer-Encoding: binary');
+    //          header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    //          header('Expires: 0');
+    //          readfile($filepath);
+    //     }
        
-    }
+    // }
 
 
     public function awardValidationMessages($type='')
@@ -923,4 +1003,44 @@ class Fellowship extends BaseController
         echo json_encode(array('status' => 'success','age'=>$age));
         exit;
     }
+
+    public function pdfGeneration($nominee_id = '')
+    {
+       
+       //get nominee data
+       if(!empty($nominee_id)){
+
+        $dompdf = new \Dompdf\Dompdf();
+       
+        $getUserData = $this->userModel->getUserData($nominee_id);
+        $nomineeData = $getUserData->getRowArray();
+
+        $nomineeData['category_name'] = '';
+        if(isset($nomineeData['category_id'])) {
+            $category   = $this->categoryModel->getCategoriesById($nomineeData['category_id']);
+            $categoryDt = $category->getRowArray();
+            $nomineeData['category_name'] = $categoryDt['name'];
+        }
+
+        $nomineeData['award'] = '';
+        if(isset($nomineeData['award_id'])) {
+            $awardDt   = $this->nominationTypesModel->getListsOfNominations($nomineeData['award_id']);
+            $awardDt   = $awardDt->getRowArray();
+            $nomineeData['award'] = $awardDt['title'];
+        }
+
+        //Nomination type
+        $nominationType = 'Clinical Research Fellowship';
+        $nominationType = 'Nomination of '.$nominationType.' -'.date('Y'); 
+
+        $this->data['nomineeData'] = $nomineeData;
+        $this->data['title'] = $nominationType;
+
+        $html = view('/frontend/fellowship_pdf', $this->data);
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+       $dompdf->stream($nomineeData['firstname'], [ 'Attachment' => false ]);
+      } 
+
+    }	
 }

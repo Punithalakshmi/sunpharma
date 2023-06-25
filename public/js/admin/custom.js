@@ -1085,7 +1085,7 @@ function manageAwardsDatatable()
                     { data: 'end_date' },
                     { data: 'status' },
                     { data: 'action', render:function(data,type,row) {
-                      btn = '<a href="'+base_url+'/admin/nomination/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'award\','+row.id+',\'/admin/nomination/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a><a onclick="assignedJuries('+row.id+')"  class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View Mapped Juries </a>';
+                      btn = '<a href="'+base_url+'/admin/nomination/add/'+row.id+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a><a onclick="userDelete(\'award\','+row.id+',\'/admin/nomination/delete/\')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a><a onclick="assignedJuries('+row.id+')"  class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View Mapped Juries </a> <a href="'+base_url+'/admin/nomination/extendNomination/'+row.id+'"  class="btn btn-info btn-xs"><i class="fa fa-edit"></i>Extend Nomination</a>';
                       return btn;
                     }},
               ]

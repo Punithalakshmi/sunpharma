@@ -49,9 +49,11 @@
 
                                             <?php endif;?>  
                                             <?php if(!empty($nvalue['document'])):?>
-                                            <a class="btn btn-outline-primary btn-lg" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
+                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
                                             <?php endif;?>
-                                            
+                                            <?php if(isset($nvalue['procedure_document']) && !empty($nvalue['procedure_document'])):?>
+                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['procedure_document'];?>" target="blank" >Nomination Procedure</a>
+                                            <?php endif;?>
                                         </div>
                                     </div>
                                 </div>

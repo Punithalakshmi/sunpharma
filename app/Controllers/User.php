@@ -30,14 +30,16 @@ class User extends BaseController
                
                     if(isset($captchaVerify['success']) && $captchaVerify['success']){ 
             
-                    $data       = $this->userModel->where('username', $username)->first();
+                    $data  = $this->userModel->where('username', $username)->first();
                  
                        
                     if($data){
 
                         $pass = trim($data['password']);
-                        //echo md5($password); die;
-                       if(($pass == md5($password)) && ($data['active'] == 1)){
+
+                        if($pass == md5($password)){
+
+                       if($data['active'] == 1){
                         
                          $redirect_route = 'view/'.$data['id'];
 
@@ -68,9 +70,16 @@ class User extends BaseController
                         }
                         else
                         {
-                            $this->session->setFlashdata('msg', "Password is incorrect!");
+                            $this->session->setFlashdata('msg', " Your application is already submitted, please send your queries to sunpharma.sciencefoundation@sunpharma.com ");
                             return render('frontend/login',$this->data);
                         }
+
+                      } 
+                      else
+                      {
+                            $this->session->setFlashdata('msg', "Password is incorrect!");
+                            return render('frontend/login',$this->data);
+                      }
                     }
                     else
                     {
@@ -133,14 +142,17 @@ class User extends BaseController
                                 $subject  = "Reset Password Link - Sunpharma Science Foundation";
                                 $token    = $userData['id'];
                                 $message  = "Hi  ".ucfirst($userData['firstname']).",<br/></br>";
-                                $message .= 'Your reset password request has been received. Please click the below link to reset your password. <br/><br/>';
+                                $message .= 'Please use the following link to reset your password: <br/><br/>';
                                 $message .= '<a href="'.base_url().'/reset_password/'.$token.'">Click Here to Reset Password</a><br /> <br/>';
+                                $message .= 'If you did not request a password change, please feel free to ignore this message.<br /><br /><br />';
+                                $message .= "If you have any comments or questions don't hesitate to reach us at <br />";
+                                $message .= "sunpharma.sciencefoundation@sunpharma.com";
                                 $message .= 'Thanks,<br/>';
 
                                $isMailSent =  sendMail($email,$subject,$message);
 
                                if($isMailSent){
-                                 $this->session->setFlashdata('msg', 'Reset Password link sent to your registered email.');
+                                 $this->session->setFlashdata('msg', 'Link to reset your password has been sent!');
                                }
                                else
                                {
@@ -283,7 +295,7 @@ class User extends BaseController
 
     public function user_check()
     {
-        echo "testing"; die;
+        echo phpinfo(); die;
     }
 
     public function bulkEmails()
