@@ -82,9 +82,9 @@ class Fellowship extends BaseController
                           
                             $nominee_details_data['is_submitted'] = 0;
                             $nominee_details_data['nomination_year'] = date('Y');
-			    $registrationID = getNominationNo($award_id);
+			                $registrationID = getNominationNo($award_id);
                             $registrationNo = date('Y')."/CRF-".$registrationID;
-				setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
+				            setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
                            // $nominee_details_data['registration_no'] = $registrationNo;
 
                             $this->session->setFlashdata('msg', 'Submitted Successfully!');
@@ -97,7 +97,7 @@ class Fellowship extends BaseController
                             $fileUploadDir = 'uploads/'.$lastInsertID;
                             
                             if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                            mkdir($fileUploadDir, 0777, true);
+                                mkdir($fileUploadDir, 0777, true);
                             
                             $getSessionFiles = getSessionData('uploadedFile');
 
@@ -228,16 +228,20 @@ class Fellowship extends BaseController
             $documentRoot =  $_SERVER['DOCUMENT_ROOT'];
             //folder path
             $uploadedFolderPath = 'uploads/nominations/';
+            
 
             $files = array( 'complete_bio_data' =>'',
-            'fellowship_research_experience' =>'',
-            'fellowship_research_publications'=>'',
-            'fellowship_research_awards_and_recognitions'=>'',
-            'fellowship_scientific_research_projects'=>'',
-            'fellowship_description_of_research'=>'',
-            'first_degree_marksheet' => '',
-            'highest_degree_marksheet'=>''
-        );
+                            'fellowship_research_experience' =>'',
+                            'fellowship_research_publications'=>'',
+                            'fellowship_research_awards_and_recognitions'=>'',
+                            'fellowship_scientific_research_projects'=>'',
+                            'fellowship_description_of_research'=>'',
+                            'first_degree_marksheet' => '',
+                            'highest_degree_marksheet'=>'','complete_letter_name' => '', 'fellowship_research_experience_name' => '','fellowship_research_publications_name' => '',
+                            'fellowship_research_awards_and_recognitions_name' => '','fellowship_scientific_research_projects_name' => '','fellowship_description_of_research_name' => '','first_degree_marksheet_name'=>'','highest_degree_marksheet_name' => ''
+            );
+
+            $getSessionFiles = array();
 
             if(!empty($id)){
                 $getUserData = $this->userModel->getUserData($id);
@@ -255,12 +259,11 @@ class Fellowship extends BaseController
             }
   
             if (strtolower($this->request->getMethod()) == "post") {
-
-                    $this->validation->setRules($this->awards_validation_rules($edit_data['nomination_type']),$this->awardValidationMessages($edit_data['nomination_type']));
+                     $getSessionFiles = getSessionData('uploadedFile');
+                    $this->validation->setRules($this->awards_validation_rules($getSessionFiles),$this->awardValidationMessages($edit_data['nomination_type']));
 
                     if($this->validation->withRequest($this->request)->run()) {
 
-                    
                         $nominee_details_data = array();
                         $fileUploadDir = 'uploads/'.$edit_data['user_id'];
 
@@ -355,14 +358,14 @@ class Fellowship extends BaseController
 
                         $this->pdfGeneration($id);
                         //send mail to admin
-                        $filename  = $edit_data['firstname'].'.docx';
+                        $filename  = $edit_data['firstname'].'.pdf';
                         $attachmentFilePath =  'uploads/'.$id.'/'.$filename;
                         $isMailSent = finalNominationSubmit($edit_data['firstname'],$attachmentFilePath);
 
                         $redirectUrl = 'fellowship/view/'.$edit_data['user_id'].'/'.$award_id;
 
                         if($isMailSent)
-                             return redirect()->to($redirectUrl)->withInput();
+                           return redirect()->to($redirectUrl)->withInput();
 
                     }
                     else
@@ -372,7 +375,6 @@ class Fellowship extends BaseController
                             $status = 'error';
                         }
                     }
-
             } 
            
             $editdata['id']                                                        = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
@@ -461,14 +463,74 @@ class Fellowship extends BaseController
                 $files['highest_degree_marksheet'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
                 $files['highest_degree_marksheet_name'] = $editdata['highest_degree_marksheet_name'];
             } 
-
-            
-            if(count($files) > 0 && ((isset($files['complete_bio_data']) && ($files['complete_bio_data'] != ''))))
-              setSessionData('uploadedFile',$files);
+         
+            if($files['highest_degree_marksheet_name'] != '' || $files['first_degree_marksheet_name'] != '' || $files['fellowship_scientific_research_projects_name'] != '' || $files['fellowship_description_of_research'] != ''|| $files['fellowship_research_publications_name'] != '' || $files['fellowship_research_awards_and_recognitions_name'] != '' || $files['complete_letter_name'] != '' || $files['fellowship_research_experience_name'] != '' || $files['complete_bio_data']!= '' || $files['fellowship_research_experience'] != '' || $files['fellowship_research_publications'] != '' || $files['fellowship_research_awards_and_recognitions'] != '' || $files['fellowship_scientific_research_projects'] != '' || $files['fellowship_description_of_research'] != '' || $files['first_degree_marksheet'] != ''|| $files['highest_degree_marksheet'] != ''){
+               setSessionData('uploadedFile',$files);
+            }   
 
             //already uploaded files get
-            $getSessionFiles = getSessionData('uploadedFile');
+           if($this->request->getPost()) 
+              $getSessionFiles = getSessionData('uploadedFile');
+       
+            if(is_array($getSessionFiles) && count($getSessionFiles) > 0 ) {
 
+                $letterSessionDt = (isset($getSessionFiles['complete_bio_data']) && $getSessionFiles['complete_bio_data']!='')?getFileInfo($getSessionFiles['complete_bio_data']):'';
+                $fellowship_research_experienceDt = (isset($getSessionFiles['fellowship_research_experience']) && $getSessionFiles['fellowship_research_experience']!='')?getFileInfo($getSessionFiles['fellowship_research_experience']):'';
+                $fellowship_research_publicationsDt = (isset($getSessionFiles['fellowship_research_publications']) && $getSessionFiles['fellowship_research_publications']!='')?getFileInfo($getSessionFiles['fellowship_research_publications']):'';
+                $fellowship_research_awards_and_recognitionsDt = (isset($getSessionFiles['fellowship_research_awards_and_recognitions']) && $getSessionFiles['fellowship_research_awards_and_recognitions']!='')?getFileInfo($getSessionFiles['fellowship_research_awards_and_recognitions']):'';
+                $fellowship_scientific_research_projectsDt = (isset($getSessionFiles['fellowship_scientific_research_projects']) && $getSessionFiles['fellowship_scientific_research_projects']!='')?getFileInfo($getSessionFiles['fellowship_scientific_research_projects']):'';
+                $fellowship_description_of_researchDt = (isset($getSessionFiles['fellowship_description_of_research']) && $getSessionFiles['fellowship_description_of_research']!='')?getFileInfo($getSessionFiles['fellowship_description_of_research']):'';
+                $first_degree_marksheetDt = (isset($getSessionFiles['first_degree_marksheet']) && $getSessionFiles['first_degree_marksheet']!='')?getFileInfo($getSessionFiles['first_degree_marksheet']):'';
+                $highest_degree_marksheetDt = (isset($getSessionFiles['highest_degree_marksheet']) && $getSessionFiles['highest_degree_marksheet']!='')?getFileInfo($getSessionFiles['highest_degree_marksheet']):'';
+             
+                $editdata['complete_letter_name']                             =  (isset($getSessionFiles['complete_letter_name']))?$getSessionFiles['complete_letter_name']:''; 
+                $editdata['fellowship_research_experience_name']              =  (isset($getSessionFiles['fellowship_research_experience_name']))?$getSessionFiles['fellowship_research_experience_name']:''; 
+                $editdata['fellowship_research_publications_name']            =  (isset($getSessionFiles['fellowship_research_publications_name']))?$getSessionFiles['fellowship_research_publications_name']:''; 
+                $editdata['fellowship_research_awards_and_recognitions_name'] =  (isset($getSessionFiles['fellowship_research_awards_and_recognitions_name']))?$getSessionFiles['fellowship_research_awards_and_recognitions_name']:''; 
+                $editdata['fellowship_scientific_research_projects_name']     =  (isset($getSessionFiles['fellowship_scientific_research_projects_name']))?$getSessionFiles['fellowship_scientific_research_projects_name']:''; 
+                $editdata['fellowship_description_of_research_name']          =  (isset($getSessionFiles['fellowship_description_of_research']))?$getSessionFiles['fellowship_description_of_research']:''; 
+                $editdata['highest_degree_marksheet_name']                    =  (isset($getSessionFiles['highest_degree_marksheet_name']))?$getSessionFiles['highest_degree_marksheet_name']:''; 
+                $editdata['first_degree_marksheet_name']                      =  (isset($getSessionFiles['first_degree_marksheet_name']))?$getSessionFiles['first_degree_marksheet_name']:''; 
+            }
+            else
+            {
+                $letterSessionDt= ''; 
+                $fellowship_research_experienceDt='';
+                $fellowship_research_publicationsDt='';
+                $fellowship_research_awards_and_recognitionsDt='';
+                $fellowship_scientific_research_projectsDt='';
+                $fellowship_description_of_researchDt='';
+                $first_degree_marksheetDt ='';
+                $highest_degree_marksheetDt = '';
+
+                $editdata['complete_letter_name']                             =  ''; 
+                $editdata['fellowship_research_experience_name']              =  ''; 
+                $editdata['fellowship_research_publications_name']            =  ''; 
+                $editdata['fellowship_research_awards_and_recognitions_name'] =  ''; 
+                $editdata['fellowship_scientific_research_projects_name']     =  ''; 
+                $editdata['fellowship_description_of_research_name']          =  ''; 
+                $editdata['highest_degree_marksheet_name']                    =  ''; 
+                $editdata['first_degree_marksheet_name']                      =  ''; 
+            }
+            
+            $complete_bio_dataLt  = ($this->request->getFile('complete_bio_data')!='')?$this->request->getFile('complete_bio_data'):$letterSessionDt;
+            $fellowship_research_experienceDt  = ($this->request->getFile('fellowship_research_experience')!='')?$this->request->getFile('fellowship_research_experience'):$fellowship_research_experienceDt;
+            $fellowship_research_publicationsDt  = ($this->request->getFile('fellowship_research_publications')!='')?$this->request->getFile('fellowship_research_publications'):$fellowship_research_publicationsDt;
+            $fellowship_research_awards_and_recognitionsDt  = ($this->request->getFile('fellowship_research_awards_and_recognitions')!='')?$this->request->getFile('fellowship_research_awards_and_recognitions'):$fellowship_research_awards_and_recognitionsDt;
+            $fellowship_scientific_research_projectsDt  = ($this->request->getFile('fellowship_scientific_research_projects')!='')?$this->request->getFile('fellowship_scientific_research_projects'):$fellowship_scientific_research_projectsDt;
+            $fellowship_description_of_researchDt  = ($this->request->getFile('fellowship_description_of_research')!='')?$this->request->getFile('fellowship_description_of_research'):$fellowship_description_of_researchDt;
+            $first_degree_marksheetDt  = ($this->request->getFile('first_degree_marksheet')!='')?$this->request->getFile('first_degree_marksheet'):$first_degree_marksheetDt;
+            $highest_degree_marksheetDt  = ($this->request->getFile('highest_degree_marksheet')!='')?$this->request->getFile('highest_degree_marksheet'):$highest_degree_marksheetDt;
+           
+            $editdata['complete_bio_data']        = $complete_bio_dataLt;
+            $editdata['fellowship_research_experience']        = $fellowship_research_experienceDt;
+            $editdata['fellowship_research_publications']        = $fellowship_research_publicationsDt;
+            $editdata['fellowship_research_awards_and_recognitions']        = $fellowship_research_awards_and_recognitionsDt;
+            $editdata['fellowship_scientific_research_projects']        = $fellowship_scientific_research_projectsDt;
+            $editdata['fellowship_description_of_research']        = $fellowship_description_of_researchDt;
+            $editdata['first_degree_marksheet']        = $first_degree_marksheetDt;
+            $editdata['highest_degree_marksheet']        = $highest_degree_marksheetDt;
+            
             $this->data['editdata'] = $editdata;
             $this->data['user']     = $edit_data;
             return  render('frontend/fellowship_new_documents',$this->data);  
@@ -526,34 +588,53 @@ class Fellowship extends BaseController
 
             $filename      = 'frontend/fellowship_preview';
 
-            return   $html = view($filename,$this->data,array('debug' => false)); 
+            return  $html = view($filename,$this->data,array('debug' => false)); 
     }
 
 
-    public function awards_validation_rules($type = '')
+    public function awards_validation_rules($session = '')
     {
         $validation_rules = array();
-        $validation_rules['complete_bio_data']                  = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,1000]|ext_in[complete_bio_data,pdf]');
+        
         $validation_rules['first_employment_name_of_institution_location'] = array("label" => "First employment name of institution",'rules' => 'required');
-        $validation_rules['first_employment_designation']              = array("label" => "Employment designation",'rules' => 'required');
-        $validation_rules['first_employment_year_of_joining']             = array("label" => "Year of Joining",'rules' => 'required');
-        $validation_rules['first_medical_degree_name_of_degree']                  = array("label" => "Name of First Degree",'rules' => 'required');
-        $validation_rules['first_medical_degree_year_of_award']    = array("label" => "First Degree Year of Award",'rules' => 'required');
-        $validation_rules['first_medical_degree_institution']                           = array("label" => "First Degree Institution",'rules' => 'required');
-        $validation_rules['highest_medical_degree_name']                  = array("label" => "Highest Medical degree name",'rules' => 'required');
-        $validation_rules['highest_medical_degree_year']                  = array("label" => "Highest Medical degree year",'rules' => 'required');
-        $validation_rules['highest_medical_degree_institution']                           = array("label" => "Highest Medical degree institution",'rules' => 'required');
-        $validation_rules['fellowship_research_experience']                    = array("label" => "Research Experience",'rules' => 'uploaded[fellowship_research_experience]|max_size[fellowship_research_experience,500]|ext_in[fellowship_research_experience,pdf]');
-        $validation_rules['fellowship_research_publications']                    = array("label" => "Research Publications",'rules' => 'uploaded[fellowship_research_publications]|max_size[fellowship_research_publications,1000]|ext_in[fellowship_research_publications,pdf]');
-        $validation_rules['fellowship_research_awards_and_recognitions']                 = array("label" => "Research Awards & Recognitions ",'rules' => 'uploaded[fellowship_research_awards_and_recognitions]|max_size[fellowship_research_awards_and_recognitions,500]|ext_in[fellowship_research_awards_and_recognitions,pdf]');
-        $validation_rules['fellowship_scientific_research_projects']                          = array("label" => "Scientific Research Projects",'rules' => 'uploaded[fellowship_scientific_research_projects]|max_size[fellowship_scientific_research_projects,500]|ext_in[fellowship_scientific_research_projects,pdf]');
-        $validation_rules['fellowship_name_of_institution_research_work']              = array("label" => "Name of Institution Research Work",'rules' => 'required');
-        $validation_rules['fellowship_name_of_the_supervisor']                          = array("label" => "Name of Supervisor",'rules' => 'required');
-        $validation_rules['fellowship_name_of_institution']              = array("label" => "Institution",'rules' => 'required');
-        $validation_rules['fellowship_supervisor_department']                          = array("label" => "Department",'rules' => 'required');
-        $validation_rules['fellowship_description_of_research']              = array("label" => "Description of research work",'rules' => 'uploaded[fellowship_description_of_research]|max_size[fellowship_description_of_research,1000]|ext_in[fellowship_description_of_research,pdf]');
-        $validation_rules['highest_degree_marksheet']              = array("label" => "Highest Medical Degree Marksheet",'rules' => 'uploaded[highest_degree_marksheet]|max_size[highest_degree_marksheet,1000]|ext_in[highest_degree_marksheet,pdf]');
-        $validation_rules['first_degree_marksheet']                = array("label" => "First Medical Degree Marksheet",'rules' => 'uploaded[first_degree_marksheet]|max_size[first_degree_marksheet,1000]|ext_in[first_degree_marksheet,pdf]');
+        $validation_rules['first_employment_designation']                  = array("label" => "Employment designation",'rules' => 'required');
+        $validation_rules['first_employment_year_of_joining']              = array("label" => "Year of Joining",'rules' => 'required');
+        $validation_rules['first_medical_degree_name_of_degree']           = array("label" => "Name of First Degree",'rules' => 'required');
+        $validation_rules['first_medical_degree_year_of_award']            = array("label" => "First Degree Year of Award",'rules' => 'required');
+        $validation_rules['first_medical_degree_institution']              = array("label" => "First Degree Institution",'rules' => 'required');
+        $validation_rules['highest_medical_degree_name']                   = array("label" => "Highest Medical degree name",'rules' => 'required');
+        $validation_rules['highest_medical_degree_year']                   = array("label" => "Highest Medical degree year",'rules' => 'required');
+        $validation_rules['highest_medical_degree_institution']            = array("label" => "Highest Medical degree institution",'rules' => 'required');
+        $validation_rules['fellowship_name_of_institution_research_work']  = array("label" => "Name of Institution Research Work",'rules' => 'required');
+        $validation_rules['fellowship_name_of_the_supervisor']             = array("label" => "Name of Supervisor",'rules' => 'required');
+        $validation_rules['fellowship_name_of_institution']               = array("label" => "Institution",'rules' => 'required');
+        $validation_rules['fellowship_supervisor_department']            = array("label" => "Department",'rules' => 'required');
+       
+        if(!isset($session['complete_bio_data']))
+            $validation_rules['complete_bio_data'] = array("label" => "Complete Bio Data",'rules' => 'uploaded[complete_bio_data]|max_size[complete_bio_data,1000]|ext_in[complete_bio_data,pdf]');
+
+        if(!isset($session['fellowship_research_experience']))
+            $validation_rules['fellowship_research_experience']  = array("label" => "Research Experience",'rules' => 'uploaded[fellowship_research_experience]|max_size[fellowship_research_experience,500]|ext_in[fellowship_research_experience,pdf]');
+
+        if(!isset($session['fellowship_research_publications']))
+            $validation_rules['fellowship_research_publications']  = array("label" => "Research Publications",'rules' => 'uploaded[fellowship_research_publications]|max_size[fellowship_research_publications,1000]|ext_in[fellowship_research_publications,pdf]');
+        
+        if(!isset($session['fellowship_research_awards_and_recognitions']))
+            $validation_rules['fellowship_research_awards_and_recognitions']  = array("label" => "Research Awards & Recognitions ",'rules' => 'uploaded[fellowship_research_awards_and_recognitions]|max_size[fellowship_research_awards_and_recognitions,500]|ext_in[fellowship_research_awards_and_recognitions,pdf]');
+
+        if(!isset($session['fellowship_scientific_research_projects']))
+          $validation_rules['fellowship_scientific_research_projects']  = array("label" => "Scientific Research Projects",'rules' => 'uploaded[fellowship_scientific_research_projects]|max_size[fellowship_scientific_research_projects,500]|ext_in[fellowship_scientific_research_projects,pdf]');
+
+        if(!isset($session['fellowship_description_of_research']))
+           $validation_rules['fellowship_description_of_research'] = array("label" => "Description of research work",'rules' => 'uploaded[fellowship_description_of_research]|max_size[fellowship_description_of_research,1000]|ext_in[fellowship_description_of_research,pdf]');
+           
+        if(!isset($session['highest_degree_marksheet']))
+           $validation_rules['highest_degree_marksheet']  = array("label" => "Highest Medical Degree Marksheet",'rules' => 'uploaded[highest_degree_marksheet]|max_size[highest_degree_marksheet,1000]|ext_in[highest_degree_marksheet,pdf]');
+
+        if(!isset($session['first_degree_marksheet']))
+            $validation_rules['first_degree_marksheet']  = array("label" => "First Medical Degree Marksheet",'rules' => 'uploaded[first_degree_marksheet]|max_size[first_degree_marksheet,1000]|ext_in[first_degree_marksheet,pdf]');
+
+
         return $validation_rules;
     }
 
@@ -634,17 +715,17 @@ class Fellowship extends BaseController
         $files = array('justification_letter_name' =>'');
        
         
-        if($type == 'fellowship'){
+            if($type == 'fellowship'){
 
-            if($this->request->getFile('justification_letter')!='') {
-                $editdata['justification_letter_name'] = $this->request->getFile('justification_letter')->getName();
-                $letter_name =  $this->request->getFile('justification_letter');
-                $letter_name->move($uploadedFolderPath);
-                $files['justification_letter'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
-                $files['justification_letter_name'] = $editdata['justification_letter_name'];
-            }   
-             
-        }
+                if($this->request->getFile('justification_letter')!='') {
+                    $editdata['justification_letter_name'] = $this->request->getFile('justification_letter')->getName();
+                    $letter_name =  $this->request->getFile('justification_letter');
+                    $letter_name->move($uploadedFolderPath);
+                    $files['justification_letter'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                    $files['justification_letter_name'] = $editdata['justification_letter_name'];
+                }   
+                
+            }
       
 
             if(count($files) > 0 && (isset($files['justification_letter']) && ($files['justification_letter'] != '')))
@@ -692,9 +773,7 @@ class Fellowship extends BaseController
     public function checkUniqueEmailForAward(){
 
         if (strtolower($this->request->getMethod()) == "post") {
-           // echo $this->request->getMethod(); die;
-          //  if($this->validation->withRequest($this->request)->run()) {
-
+          
                 $email    = $this->request->getPost('email');
                 $award_id = $this->request->getPost('award_id');
 
@@ -1010,37 +1089,37 @@ class Fellowship extends BaseController
        //get nominee data
        if(!empty($nominee_id)){
 
-        $dompdf = new \Dompdf\Dompdf();
-       
-        $getUserData = $this->userModel->getUserData($nominee_id);
-        $nomineeData = $getUserData->getRowArray();
+            $dompdf = new \Dompdf\Dompdf();
+        
+            $getUserData = $this->userModel->getUserData($nominee_id);
+            $nomineeData = $getUserData->getRowArray();
 
-        $nomineeData['category_name'] = '';
-        if(isset($nomineeData['category_id'])) {
-            $category   = $this->categoryModel->getCategoriesById($nomineeData['category_id']);
-            $categoryDt = $category->getRowArray();
-            $nomineeData['category_name'] = $categoryDt['name'];
-        }
+            $nomineeData['category_name'] = '';
+            if(isset($nomineeData['category_id'])) {
+                $category   = $this->categoryModel->getCategoriesById($nomineeData['category_id']);
+                $categoryDt = $category->getRowArray();
+                $nomineeData['category_name'] = $categoryDt['name'];
+            }
 
-        $nomineeData['award'] = '';
-        if(isset($nomineeData['award_id'])) {
-            $awardDt   = $this->nominationTypesModel->getListsOfNominations($nomineeData['award_id']);
-            $awardDt   = $awardDt->getRowArray();
-            $nomineeData['award'] = $awardDt['title'];
-        }
+            $nomineeData['award'] = '';
+            if(isset($nomineeData['award_id'])) {
+                $awardDt   = $this->nominationTypesModel->getListsOfNominations($nomineeData['award_id']);
+                $awardDt   = $awardDt->getRowArray();
+                $nomineeData['award'] = $awardDt['title'];
+            }
 
-        //Nomination type
-        $nominationType = 'Clinical Research Fellowship';
-        $nominationType = 'Nomination of '.$nominationType.' -'.date('Y'); 
+            //Nomination type
+            $nominationType = 'Clinical Research Fellowship';
+            $nominationType = 'Nomination of '.$nominationType.' -'.date('Y'); 
 
-        $this->data['nomineeData'] = $nomineeData;
-        $this->data['title'] = $nominationType;
+            $this->data['nomineeData'] = $nomineeData;
+            $this->data['title'] = $nominationType;
 
-        $html = view('/frontend/fellowship_pdf', $this->data);
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-       $dompdf->stream($nomineeData['firstname'], [ 'Attachment' => false ]);
-      } 
+            $html = view('/frontend/fellowship_pdf', $this->data);
+            $dompdf->loadHtml($html);
+            $dompdf->render();
+            $dompdf->stream($nomineeData['firstname'], [ 'Attachment' => false ]);
+       } 
 
     }	
 }

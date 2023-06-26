@@ -38,7 +38,7 @@
                                                   }
                                                    if($end_date > $current_date):
                                                 ?>
-                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>/<?=$nvalue['award_id']?>" style="background: #F7941E;border-color: #F7941E;">Submit Nomination</a>
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$ntype;?>/<?=$nvalue['award_id']?>" style="background: #F7941E;border-color: #F7941E;">Register</a>
                                             <?php endif; endif;?>  
                                                 <?php if(isset($nvalue['type']) && ($nvalue['type'] == 'event') ):
                                                      if($end_date > $current_date):

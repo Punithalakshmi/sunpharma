@@ -37,7 +37,8 @@ class UserModel extends Model {
         'nomination_upload_by',
         'old_user_id',
         'remarks',
-        'updated_time'
+        'updated_time',
+        'age'
     ];
 
     public function Login($username, $password) {

@@ -949,7 +949,6 @@ class Nomination extends BaseController
 
            } 
 
-
             if(count($files) > 0 && ($files['nominator_photo']!='' || $files['justification_letter'] != '' || $files['supervisor_certifying']!='' || $files['passport']!=''))
               setSessionData('uploadedFile',$files);
 
@@ -1024,7 +1023,7 @@ class Nomination extends BaseController
                 $award_id = $this->request->getPost('award_id');
 
                 $checkUserData = $this->userModel->checkUniqueEmail(array("email"=> $email,"award_id" => $award_id,"role" => 2));
-              //print_r($checkUserData); die;
+             
                 if(is_array($checkUserData) && count($checkUserData) > 0){
                     if($this->request->isAJAX()){
                         return $this->response->setJSON([

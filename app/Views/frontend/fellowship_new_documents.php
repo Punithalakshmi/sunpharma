@@ -220,6 +220,11 @@
                                             (Max 1.5 MB) </b><span class="required" style="color:red;">*</span></label>
                                             <div>
                                                 <input class="form-control mb-3 required" accept=".pdf" name="complete_bio_data" type="file" id="complete_bio_data" value="<?=$editdata['complete_bio_data'];?>">   
+                                                <?php if(isset($editdata['complete_letter_name']) && !empty($editdata['complete_letter_name'])): ?>
+                                                    <span id="complete_letter_nm"><?=$editdata['complete_letter_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                                
                                                 <div class="">
                                                     <small>Upload the Bio-data (Not more than 1.5 MB)</small>
                                                 </div>
@@ -394,6 +399,11 @@
                                                 <label class="form-check-label question__label noLabel"> <b>Marksheet </b> <span class="required" style="color:red;">*</span> </label>
                                                 <input class="form-control mb-3 required" accept=".pdf" name="first_degree_marksheet" type="file" id="first_degree_marksheet" value="<?php echo set_value('first_degree_marksheet',$editdata['first_degree_marksheet']);?>">    
                                         </div>
+                                        <?php if(isset($editdata['first_degree_marksheet_name']) && !empty($editdata['first_degree_marksheet_name'])): ?>
+                                            <span id="first_degree_marksheet_nm"><?=$editdata['first_degree_marksheet_name'];?></span>
+                                        <?php endif;?>
+                                        <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                        
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_degree_marksheet')) {?>
                                                 <?= $error = $validation->getError('first_degree_marksheet'); ?>
@@ -491,6 +501,11 @@
                                                 <label class="form-check-label question__label noLabel"> <b>Marksheet</b> <span class="required" style="color:red;">*</span> </label>
                                                 <input class="form-control mb-3 required" accept=".pdf" name="highest_degree_marksheet" type="file" id="highest_degree_marksheet" value="<?php echo set_value('highest_degree_marksheet',$editdata['highest_degree_marksheet']);?>" >    
                                         </div>
+                                        <?php if(isset($editdata['highest_degree_marksheet_name']) && !empty($editdata['highest_degree_marksheet_name'])): ?>
+                                                    <span id="highest_degree_marksheet_nm"><?=$editdata['highest_degree_marksheet_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                                
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_degree_marksheet')) {?>
                                                 <?= $error = $validation->getError('highest_degree_marksheet'); ?>
@@ -525,6 +540,11 @@
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_research_experience" type="file" id="fellowship_research_experience" value="<?=$editdata['fellowship_research_experience'];?>">    
                                                     
                                                 </label>
+                                                <?php if(isset($editdata['fellowship_research_experience_name']) && !empty($editdata['fellowship_research_experience_name'])): ?>
+                                                    <span id="fellowship_research_experience_nm"><?=$editdata['fellowship_research_experience_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                                
                                                 <div class="">
                                                     <small>Upload document maximum 500KB</small>
                                                 </div>
@@ -562,6 +582,11 @@
                                                 <label class="form-check-label question__label noLabel">
                                                   <input class="form-control mb-3 required" accept=".pdf" name="fellowship_research_publications" type="file" id="fellowship_research_publications" value="<?=$editdata['fellowship_research_publications'];?>">  
                                                 </label>
+                                                <?php if(isset($editdata['fellowship_research_publications_name']) && !empty($editdata['fellowship_research_publications_name'])): ?>
+                                                    <span id="fellowship_research_publications_nm"><?=$editdata['fellowship_research_publications_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                                
                                                 <div class="">
                                                     <small>Upload the document (Not more than 1MB)</small>
                                                 </div>
@@ -602,6 +627,11 @@
                                                     <br />
                                                    
                                                 </label>
+                                                <?php if(isset($editdata['fellowship_research_awards_and_recognitions_name']) && !empty($editdata['fellowship_research_awards_and_recognitions_name'])): ?>
+                                                    <span id="fellowship_research_awards_and_recognitions_nm"><?=$editdata['fellowship_research_awards_and_recognitions_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                                
                                                 <div class="">
                                                     <small>Upload the document (Not more than 500 KB) </small>
                                                 </div>
@@ -641,9 +671,15 @@
                                                     <br>
                                                     
                                                 </label>
+                                                <?php if(isset($editdata['fellowship_scientific_research_projects_name']) && !empty($editdata['fellowship_scientific_research_projects_name'])): ?>
+                                                    <span id="fellowship_scientific_research_projects_nm"><?=$editdata['fellowship_scientific_research_projects_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                                
                                                 <div class="">
                                                     <small>Upload the document (Not more than 500KB) </small>
                                                 </div>
+                                                
                                             </div>
                                             <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('fellowship_scientific_research_projects')) {?>
@@ -777,6 +813,11 @@
                                                  <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="fellowship_description_of_research" type="file" id="fellowship_description_of_research" value="<?=$editdata['fellowship_description_of_research'];?>">  
                                                 </label>
+                                                <?php if(isset($editdata['fellowship_description_of_research_name']) && !empty($editdata['fellowship_description_of_research_name'])): ?>
+                                                    <span id="fellowship_description_of_research_nm"><?=$editdata['fellowship_description_of_research_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="justification_letter_uploaded_file" id="justification_letter_uploaded_file" value="<?=(isset($editdata['justification_letter']) && !empty($editdata['justification_letter']))?$editdata['justification_letter']:'';?>" />
+                                                
                                                 <div class="">
                                                     <small> </small>
                                                 </div>
@@ -788,8 +829,8 @@
                                             </small>
                                     </div>
                                 </div>
-                               <?php endif;
-                                    endif;
+                               <?php        endif;
+                                        endif;
                                      endif;
                                      ?>
                                 </div>
