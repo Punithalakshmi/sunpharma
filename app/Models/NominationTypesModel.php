@@ -105,6 +105,9 @@ class NominationTypesModel extends Model {
 
         if((!empty($filter['limit']) || !empty($filter['start'])))
           $builder->limit($filter['limit'],$filter['start']);
+	
+	/*if(!empty($filter['year']))
+          $builder->like(YEAR('nominations.start_date'),$filter['year']);*/
 
           $builder->orderBy('nominations.title', 'ASC');
           $builder->orderBy('nominations.id', 'DESC'); 

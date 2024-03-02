@@ -31,6 +31,7 @@
                                 <a class="dropdown-item" href="<?=base_url();?>/roundtable">National Seminar</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/annualforeign_scientist">Inviting Foreign Scientists</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/special_awards">Special Award In Public Health</a>
+				<a class="dropdown-item" href="<?=base_url();?>/crf_read_more">Clinical Research Fellowship</a>
                             </div>
                         </div>
                     </li>

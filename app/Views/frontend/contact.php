@@ -14,46 +14,46 @@
                     </div>
                     <?php endif;?>
                 </div>
-                <div class="col-md-6 col-xl-4">
-                    <div>
+                <!-- <div class="col-md-6 col-xl-4">
+                   <div>
 					
-                        <form class="p-3 p-xl-4" name="contact" method="post" action="<?=base_url();?>/contact">
-						<?= csrf_field(); ?>
+                        <form class="p-3 p-xl-4" name="contact" method="post" action="<?//base_url();?>/contact">
+						<?//csrf_field(); ?>
                             <div class="mb-3">
-                                <input class="form-control" type="text" id="name-1" name="contact_name" placeholder="Name" value="<?php echo set_value('contact_name',$editdata['contact_name']);?>">
+                                <input class="form-control" type="text" id="name-1" name="contact_name" placeholder="Name" value="<?php //echo set_value('contact_name',(isset($editdata['contact_name']) && !empty($editdata['contact_name']))?$editdata['contact_name']:"");?>">
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-group md-3">
-                            <?php if(isset($validation) && $validation->getError('contact_name')) {?>
+                            <?php //if(isset($validation) && $validation->getError('contact_name')) {?>
                                 <div class='alert alert-danger mt-2'>
-                                <?= $error = $validation->getError('contact_name'); ?>
+                                <?php //echo $error = $validation->getError('contact_name'); ?>
                                     </div>
-                                <?php }?>
+                                <?php //}?>
                             </div>
                             <div class="clearfix"></div>
                             <div class="mb-3">
-                                <input class="form-control" type="email" id="email-1" name="email" placeholder="Email" value="<?php echo set_value('email',$editdata['email']);?>"></div>
+                                <input class="form-control" type="email" id="email-1" name="email" placeholder="Email" value="<?php //echo set_value('email',(isset($editdata['email']) && !empty($editdata['email']))?$editdata['email']:"");?>"></div>
                                 <div class="clearfix"></div>
                             <div class="form-group md-3">
-                            <?php if(isset($validation) && $validation->getError('email')) {?>
+                            <?php //if(isset($validation) && $validation->getError('email')) {?>
                                 <div class='alert alert-danger mt-2'>
-                                <?= $error = $validation->getError('email'); ?>
+                                <?php // echo $error = $validation->getError('email'); ?>
                                     </div>
-                                <?php }?>
+                                <?php //}?>
                             </div>
                             <div class="clearfix"></div>
                             <div class="mb-3">
                                 <textarea class="form-control" id="message-1" name="message" rows="3"  oninput="auto_grow(this)" placeholder="Message">
-                                    <?=$editdata['message'];?>
+                                    <?php //(isset($editdata['message']) && !empty($editdata['message']))?$editdata['message']:"";?>
                                 </textarea>
                                 </div>
                             <div class="clearfix"></div>
                             <div class="form-group md-3">
-                            <?php if(isset($validation) && $validation->getError('message')) {?>
+                            <?php //if(isset($validation) && $validation->getError('message')) {?>
                                 <div class='alert alert-danger mt-2'>
-                                <?= $error = $validation->getError('message'); ?>
+                                <?php //echo $error = $validation->getError('message'); ?>
                                     </div>
-                                <?php }?>
+                                <?php  //}?>
                             </div>
                             <div class="clearfix"></div>
                             <div class="g-recaptcha" data-sitekey="6Ldh61ojAAAAAAamaHiBZ5mAv702yCK9qbqUQQu3"></div>
@@ -61,10 +61,9 @@
                             <div>
                                 <button class="btn btn-primary shadow d-block w-100" type="submit">Send</button>
                               </div>
-                        </form>
+                        </form> 
                     </div>
-                </div>
-                <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
+                </div> -->                <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
                     <div class="d-flex flex-wrap flex-md-column justify-content-md-start align-items-md-start h-100 contactinfo">
                         <div class="d-flex align-items-start p-3">
                             <div class="bs-icon-md bs-icon-circle bs-icon-primary shadow d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon bs-icon-md"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-telephone">

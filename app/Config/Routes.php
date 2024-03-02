@@ -49,15 +49,16 @@ $routes->get('directory_research_awardees','DirectoryResearchAwardees::index');
 $routes->get('special_awards','SpecialAwards::index');
 $routes->get('latest_winners_of_science_scholars_awards','LatestWinnersOfScienceScholarsAwards::index');
 $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
-$routes->get('spsfn','Nomination::index');
-$routes->post('spsfn','Nomination::index');
-$routes->get('ssan','Nomination::ssan');
-$routes->post('ssan','Nomination::ssan');
+$routes->get('spsfn','Nomination::index',['filter' => 'redirect_home']);
+$routes->post('spsfn','Nomination::index',['filter' => 'redirect_home']);
+$routes->get('ssan','Nomination::ssan',['filter' => 'redirect_home']);
+$routes->post('ssan','Nomination::ssan',['filter' => 'redirect_home']);
 $routes->get('nomination_preview', 'Home::nominationPreview');
 $routes->get('latest_winners_of_research_awards','LatestWinnersOfResearchAwards::index');
 $routes->get('latest_winners_of_science_scholar_awards','LatestWinnersOfScienceScholarsAwards::index');
 //$routes->get('research_awards','Home::research_awards');
 $routes->get('science_scholar_awards','Home::science_scholar_awards');
+
 
 $routes->get('ssan/(:any)','Nomination::ssan/$1',['filter' =>'check_date']);
 $routes->get('spsfn/(:any)','Nomination::index/$1',['filter' =>'check_date']);
@@ -80,12 +81,15 @@ $routes->post('reset_password/(:any)','User::reset_password/$1');
 $routes->get('view/(:any)/(:any)','Nomination::view/$1/$1');
 $routes->post('view','Nomination::view');
 
+$routes->get('crf_read_more','Fellowship::read_more');
 $routes->get('ageCalculation/(:any)','Fellowship::ageCalculation/$1');
+$routes->get('fellowship/pdf/(:num)','Fellowship::pdfGeneration/$1');
 $routes->get('fellowship/print/(:any)','Fellowship::print/$1');
 $routes->get('fellowship/view/(:any)/(:any)','Fellowship::view/$1/$1');
 $routes->post('fellowship/view/','Fellowship::view');
 $routes->get('fellowship/(:any)','Fellowship::index/$1',['filter' =>'check_date']);
 $routes->post('fellowship/(:any)','Fellowship::index/$1',['filter' =>'check_date']);
+
 
 $routes->get('logout','User::logout');
 $routes->get('form','User::validForm');
@@ -136,7 +140,7 @@ $routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
 
 $routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
 
-$routes->get('fellowship/pdf/(:num)','Fellowship::pdfGeneration/$1');
+
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
 	 

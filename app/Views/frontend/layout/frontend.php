@@ -20,12 +20,13 @@ Online Submission Of Nominations">
         <?=link_tag('frontend/assets/css/custom.css')?>
         <?=link_tag('frontend/assets/css/form.compiled.css')?>
         <?=link_tag('frontend/assets/css/Hero-Carousel-images.css')?>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
+        <?=link_tag('frontend/assets/css/swiperBundle.css')?>
+        
         <?=link_tag('frontend/assets/css/innerPages.compiled.css')?>
         <?=link_tag('frontend/assets/css/responsive.compiled.css')?>
         <?=link_tag('frontend/assets/css/Simple-Slider-Simple-Slider.css')?>
         <?=link_tag('frontend/assets/css/slidingform.css')?>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+        <?=link_tag('frontend/assets/css/datepickerMin.css')?>
        
     <script>
         var base_url = '<?=base_url();?>';
@@ -37,10 +38,11 @@ Online Submission Of Nominations">
         </script>
     <?php endif;?>
     <script src="<?=base_url();?>/frontend/assets/js/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+   
+    <?= script_tag('frontend/assets/js/es6-shim.js'); ?>
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js" integrity="sha512-DlXWqMPKer3hZZMFub5hMTfj9aMQTNDrf0P21WESBefJSwvJguz97HB007VuOEecCApSMf5SY7A7LkQwfGyVfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/framework/bootstrap.min.js" integrity="sha512-CwWsnPwntKMVNsVVCKIxPd4Ievk/YyAxt/yFNOLbs4JH3W6djpxYf2G50DtxLxFGHIbZxXeVDyjmTT8RCNp8DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js" integrity="sha512-DlXWqMPKer3hZZMFub5hMTfj9aMQTNDrf0P21WESBefJSwvJguz97HB007VuOEecCApSMf5SY7A7LkQwfGyVfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/framework/bootstrap.min.js" integrity="sha512-CwWsnPwntKMVNsVVCKIxPd4Ievk/YyAxt/yFNOLbs4JH3W6djpxYf2G50DtxLxFGHIbZxXeVDyjmTT8RCNp8DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
@@ -61,7 +63,7 @@ Online Submission Of Nominations">
     <?= script_tag('frontend/assets/js/jquery.confirmModal.min.js');?>
     <!-- FastClick -->
     <?= script_tag('frontend/assets/js/custom-app.js'); ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
+    <?= script_tag('frontend/assets/js/swiperBundle.js'); ?>
 
     <?php if(isset($uri) && $uri == 'ssan'): ?>
     <?= script_tag('frontend/assets/js/ssan.js'); ?>

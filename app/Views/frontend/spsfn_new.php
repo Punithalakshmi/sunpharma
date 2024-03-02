@@ -11,9 +11,11 @@
     </div>
   
     <?php if(isset($uri) && ($uri == 'ssan' || $uri == 'spsfn')): ?>
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/additional-methods.js"></script>
+        <?= script_tag('frontend/assets/js/jqueryValidate.js'); ?>
+        <?= script_tag('frontend/assets/js/jQuerySteps.js'); ?>
+        <?= script_tag('frontend/assets/js/additionalMethods.js'); ?>
+        <?= script_tag('frontend/assets/js/jQuerydatepicker.js'); ?>
+
 
     <?php  endif;?>
     
@@ -31,7 +33,10 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3 form-items form-items">
-
+						<?php 
+							//if(isset($validation))
+                       					//   print_r($validation->getErrors());
+ 							?>
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
                                         <label class="form-check-label question__label noLabel">
@@ -79,10 +84,13 @@
                             <div class="col-lg-12">
                                 <div class=" mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth<span class="required" style="color:red;">*</span></label>
-                                    <input min="01/01/1992" max="08/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth_spsfn" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>" placeholder="Date of Birth">
+                                    <input min="01/01/1992" max="07/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>" placeholder="MM/DD/YYYY">
                                     <div class="hintcont">
-                                        <small>(Age should be less than 30 years as on August 01, 2022)</small>
+                                        <small>Date Format: MM/DD/YYYY (Age should be less than 30 years as on July 01, 2022)</small>
                                     </div>
+					<!--<div class="mb-3 form-items">Age</label>
+                                    <input class="form-control" id="age" name="age" type="number" readonly value="" placeholder="Age">
+                                </div>-->
                                 </div>
                             </div>
                         </div>
@@ -94,7 +102,7 @@
                                     aria-label="Default select example" id="citizenship" name="citizenship" value="<?=set_value('citizenship',$editdata['citizenship']);?>">
                                     <option value="">-- Select --</option>
                                     <option value="1" <?=set_select('citizenship', 1, ((isset($editdata['citizenship']) && ($editdata['citizenship']==1))?TRUE:FALSE));?>>Indian</option>
-                                    <option value="2" <?=set_select('citizenship', 2, ((isset($editdata['citizenship']) && ($editdata['citizenship']==2))?TRUE:FALSE));?>>Other</option>
+                                    <!--<option value="2" <?//set_select('citizenship', 2, ((isset($editdata['citizenship']) && ($editdata['citizenship']==2))?TRUE:FALSE));?>>Other</option>-->
                                 </select>
                                 <small class="text-danger">
                                     <?php if(isset($validation) && $validation->getError('citizenship')) {?>

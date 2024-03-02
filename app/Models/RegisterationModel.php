@@ -37,6 +37,12 @@ class RegisterationModel extends Model{
                 return $this->getWhere(array('id' => $id));
         } 
     }
+
+    public function getEventRegisteredUsers($id='')
+    {
+        return $this->getWhere(array('event_id' => $id)); 
+    }
+
     
     public function CountAll()
     {
@@ -59,7 +65,7 @@ class RegisterationModel extends Model{
        
 
         if(!empty($filter['title']))
-         $builder->like('events.id',$filter['title']);
+          $builder->like('events.id',$filter['title']);
 
         if(!empty($filter['email']))
          $builder->like('event_registerations.email',$filter['email']); 
@@ -69,6 +75,10 @@ class RegisterationModel extends Model{
 
         if(!empty($filter['mode']))
           $builder->like('event_registerations.mode',$filter['mode']);  
+
+       // if(!empty($filter['year']))
+        //  $builder->like("YEAR('event_registerations.start_date')",$filter['year']);  
+
          
         $builder->orderBy('id', 'DESC');
       

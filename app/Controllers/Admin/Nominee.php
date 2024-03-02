@@ -167,6 +167,7 @@ class Nominee extends BaseController
     public function approve()
     {
 
+
             $id        = $this->request->getPost('id');
             $type      = $this->request->getPost('type');
             $remarks   = $this->request->getPost('remarks');
@@ -187,6 +188,7 @@ class Nominee extends BaseController
             $randUser = str_replace("."," ",$getUserData['firstname']);
             $randUser = str_replace(" ","",$randUser);
             $randUser = substr($randUser,0,6);
+		$attachmentFile = '';
             if($type == 'approve') {
                 $msg = 'Approved Successfully';
                 $message .= '<br/><br/>';
@@ -194,14 +196,23 @@ class Nominee extends BaseController
                 $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
                 $message .= '<b>Username: </b>'.strtolower($randUser).'<br />';
                 $message .= '<b>Password: </b>'.$pass.'<br /><br />';
+
+		 $message .= '<b>Remarks:</b> '.$remarks.'<br/><br/>';
+		if(isset($getUserData['nomination_type']) && ($getUserData['nomination_type'] == 'fellowship'))
+		   $message .= '<b>A quick guide with instructions to complete the application is attached in this email for your reference.</b><br/><br />';
+
                
                 $up_data['status']  = 'Approved';
                 $up_data['active']  = 1;
                 $up_data['password'] = md5($pass);
-                $up_data['username'] = $randUser;
+                $up_data['username'] = strtolower($randUser);
                 $up_data['original_password'] = $pass;
                 
                // $this->userModel->update(array("id" => $getUserData['id']),$up_data);
+		// $attachmentFile = '';
+		if(isset($getUserData['nomination_type']) && ($getUserData['nomination_type'] == 'fellowship'))
+		  $attachmentFile = 'uploads/Steps to fill the personalized application form.pdf';
+
             }
             else
             {
@@ -209,14 +220,16 @@ class Nominee extends BaseController
                 $up_data['active']  = 0;
                 $up_data['is_rejected'] = 1;
                 $msg = 'Rejected Successfully';
-                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been rejected. Please resubmit the application. <br/><br/>';
+		 $message .= '<br/><br/>';
+
+                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'<br/><br/>';
+		$message .='Your application for has been rejected. Thanks for your time in submitting the application.<br/><br/>';
+
+		 $message .= '<b>Reason for Rejection:</b> '.$remarks.'<br/><br/>';
+		$attachmentFile = '';
             }
 
-            $message .= '<b>Remarks:</b> '.$remarks.'<br/><br/>';
-
-            $message .= '<b>A quick guide with instructions to complete the application is attached in this email for your reference.</b>';
-
-          
+           
             $up_data['remarks'] = $remarks;
 
             $this->userModel->update(array("id" => $id),$up_data);
@@ -224,8 +237,7 @@ class Nominee extends BaseController
             $message .= 'Thanks & Regards,<br/>';
             $message .= 'Sunpharma Science Foundation Team';
 
-            $attachmentFile = 'uploads/Steps to fill the personalized application.pdf';
-            
+           
             $isMailSent = sendMail($getUserData['email'],$subject,$message,$attachmentFile);
            
             $status = '';
@@ -607,6 +619,11 @@ class Nominee extends BaseController
                         $nominee_details_data['ongoing_course']                  = (!empty($ongoing_course))?$ongoing_course:$nomineeData['ongoing_course'];
                         $nominee_details_data['nominator_designation']           = (!empty($nominator_designation))?$nominator_designation:$nomineeData['nominator_designation'];
                         
+
+                        $currentYear = date('Y');
+
+                        $fileUploadDir = 'uploads/'.$currentYear.'/CRF/'.$id;
+
                         if($this->request->getPost('course_name')) {
                             $course_name  = $this->request->getPost('course_name');
                             $nominee_details_data['course_name']   = $course_name;
@@ -620,7 +637,7 @@ class Nominee extends BaseController
                         
                         if($this->request->getFileMultiple('justification_letter')){
                           
-                            $filenames = multipleFileUpload('justification_letter',$id);
+                            $filenames = multipleFileUpload('justification_letter',$id,'CRF');
                             
                             if($filenames!=''){
                                 $filenames = fileNameUpdate($id,$filenames,'justification_letter_filename');
@@ -642,7 +659,7 @@ class Nominee extends BaseController
                         && ($nomineeData['nomination_type'] == 'ssan')){
                            
                             if($this->request->getFileMultiple('passport')){
-                                  $filenames = multipleFileUpload('passport',$id);
+                                  $filenames = multipleFileUpload('passport',$id,'RA');
                                   
                                   if($filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'passport_filename');
@@ -660,7 +677,7 @@ class Nominee extends BaseController
 
                         
                             if(is_array($this->request->getFileMultiple('complete_bio_data'))){
-                                   $filenames = multipleFileUpload('complete_bio_data',$id);
+                                   $filenames = multipleFileUpload('complete_bio_data',$id,'RA');
                                   
                                   if($filenames!="") {
                                     $filenames = fileNameUpdate($id,$filenames,'complete_bio_data');
@@ -677,7 +694,7 @@ class Nominee extends BaseController
                             }
 
                             if($this->request->getFileMultiple('best_papers')){
-                                   $filenames = multipleFileUpload('best_papers',$id);
+                                   $filenames = multipleFileUpload('best_papers',$id,'RA');
                                    
                                   if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'best_papers');
@@ -694,7 +711,7 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('statement_of_research_achievements')){
-                                   $filenames = multipleFileUpload('statement_of_research_achievements',$id);
+                                   $filenames = multipleFileUpload('statement_of_research_achievements',$id,'RA');
                                    
                                  if($filenames!='')  {
                                     $filenames = fileNameUpdate($id,$filenames,'statement_of_research_achievements');
@@ -711,7 +728,7 @@ class Nominee extends BaseController
                             }
 
                             if($this->request->getFileMultiple('signed_details')){
-                                $filenames = multipleFileUpload('signed_details',$id);
+                                $filenames = multipleFileUpload('signed_details',$id,'RA');
                                
                                if($filenames!='') {
                                   $filenames = fileNameUpdate($id,$filenames,'signed_details');
@@ -728,7 +745,7 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('specific_publications')){
-                                $filenames = multipleFileUpload('specific_publications',$id);
+                                $filenames = multipleFileUpload('specific_publications',$id,'RA');
                                
                                 if($filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'specific_publications');
@@ -745,7 +762,7 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('signed_statement')){
-                                $filenames = multipleFileUpload('signed_statement',$id);
+                                $filenames = multipleFileUpload('signed_statement',$id,'RA');
                                   
                                 if($filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'signed_statement');  
@@ -762,7 +779,7 @@ class Nominee extends BaseController
                             }
                             
                             if($this->request->getFileMultiple('citation')){
-                                $filenames = multipleFileUpload('citation',$id);
+                                $filenames = multipleFileUpload('citation',$id,'RA');
                                
                                 if($filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'citation');
@@ -784,7 +801,7 @@ class Nominee extends BaseController
                     {
 
                         if($this->request->getFileMultiple('supervisor_certifying')){
-                            $filenames = multipleFileUpload('supervisor_certifying',$id);
+                            $filenames = multipleFileUpload('supervisor_certifying',$id,'SSA');
                            
                            if($filenames!='') {
                              $filenames = fileNameUpdate($id,$filenames,'supervisor_certifying'); 
@@ -807,7 +824,7 @@ class Nominee extends BaseController
                            $nominee_details_data['number_of_attempts'] = $this->request->getPost('number_of_attempts');
                     
                            if($this->request->getFileMultiple('complete_bio_data')){
-                                 $filenames = multipleFileUpload('complete_bio_data',$id);
+                                 $filenames = multipleFileUpload('complete_bio_data',$id,'SSA');
                                  
                                 if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'complete_bio_data'); 
@@ -824,7 +841,7 @@ class Nominee extends BaseController
                             }
 
                             if($this->request->getFileMultiple('excellence_research_work')){
-                                 $filenames = multipleFileUpload('excellence_research_work',$id);
+                                 $filenames = multipleFileUpload('excellence_research_work',$id,'SSA');
                                  if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'excellence_research_work');
                                     $nominee_details_data['excellence_research_work'] = $filenames;
@@ -841,7 +858,7 @@ class Nominee extends BaseController
 
                            
                            if($this->request->getFileMultiple('lists_of_publications')){
-                                $filenames = multipleFileUpload('lists_of_publications',$id);   
+                                $filenames = multipleFileUpload('lists_of_publications',$id,'SSA');   
                                 if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'lists_of_publications');
                                     $nominee_details_data['lists_of_publications'] = $filenames;
@@ -858,7 +875,7 @@ class Nominee extends BaseController
                         
                         
                             if($this->request->getFileMultiple('statement_of_applicant')){
-                                $filenames = multipleFileUpload('statement_of_applicant',$id);
+                                $filenames = multipleFileUpload('statement_of_applicant',$id,'SSA');
                                 if($filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'statement_of_applicant');
                                   $nominee_details_data['statement_of_applicant'] = $filenames;
@@ -875,7 +892,7 @@ class Nominee extends BaseController
                           
                        
                               if($this->request->getFileMultiple('ethical_clearance')){
-                                $filenames = multipleFileUpload('ethical_clearance',$id);
+                                $filenames = multipleFileUpload('ethical_clearance',$id,'SSA');
                                 
                                 if($filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'ethical_clearance');
@@ -892,7 +909,7 @@ class Nominee extends BaseController
                               }
                         
                               if($this->request->getFileMultiple('statement_of_duly_signed_by_nominee')){
-                                $filenames = multipleFileUpload('statement_of_duly_signed_by_nominee',$id);
+                                $filenames = multipleFileUpload('statement_of_duly_signed_by_nominee',$id,'SSA');
                                 
                                 if( $filenames!=''){
                                     $filenames = fileNameUpdate($id,$filenames,'statement_of_duly_signed_by_nominee');
@@ -909,7 +926,7 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('citation')){
-                                $filenames = multipleFileUpload('citation',$id);
+                                $filenames = multipleFileUpload('citation',$id,'SSA');
                                
                                 if($filenames != ''){
                                     $filenames = fileNameUpdate($id,$filenames,'citation');
@@ -926,7 +943,7 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('aggregate_marks')){
-                                $filenames = multipleFileUpload('aggregate_marks',$id);
+                                $filenames = multipleFileUpload('aggregate_marks',$id,'SSA');
                                 
                                 if($filenames!=""){
                                     $filenames = fileNameUpdate($id,$filenames,'aggregate_marks');
@@ -944,7 +961,7 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('age_proof')){
-                                $filenames = multipleFileUpload('age_proof',$id);
+                                $filenames = multipleFileUpload('age_proof',$id,'SSA');
                                 
                                 if($filenames!=""){
                                     $filenames = fileNameUpdate($id,$filenames,'age_proof');
@@ -962,7 +979,7 @@ class Nominee extends BaseController
                               }
 
                               if($this->request->getFileMultiple('declaration_candidate')){
-                                  $filenames = multipleFileUpload('declaration_candidate',$id);
+                                  $filenames = multipleFileUpload('declaration_candidate',$id,'SSA');
                                  
                                  if($filenames!=""){   
                                     $filenames = fileNameUpdate($id,$filenames,'declaration_candidate');
@@ -1023,9 +1040,26 @@ class Nominee extends BaseController
                             if($this->request->getPost('fellowship_supervisor_department'))  
                                $nominee_details_data['fellowship_supervisor_department'] = $this->request->getPost('fellowship_supervisor_department');
                              
+                            
+                               if($this->request->getFileMultiple('complete_bio_data')){
+                                $filenames = multipleFileUpload('complete_bio_data',$id,'SSA');
+                                
+                               if($filenames!='') {
+                                   $filenames = fileNameUpdate($id,$filenames,'complete_bio_data'); 
+                                    $nominee_details_data['complete_bio_data'] = $filenames;
+                               }  
+                                }   
+                                else
+                                {
+                                    if($this->request->getFile('complete_bio_data')!=''){
+                                        $complete_bio_data = $this->request->getFile('complete_bio_data');
+                                        $complete_bio_data->move($fileUploadDir);
+                                        $nominee_details_data['complete_bio_data'] = $complete_bio_data->getClientName();
+                                    }
+                                }   
           
                               if($this->request->getFileMultiple('fellowship_research_experience')){
-                                  $filenames = multipleFileUpload('fellowship_research_experience',$id);   
+                                  $filenames = multipleFileUpload('fellowship_research_experience',$id,'CRF');   
                                   if($filenames!='') {
                                       $filenames = fileNameUpdate($id,$filenames,'fellowship_research_experience');
                                       $nominee_details_data['fellowship_research_experience'] = $filenames;
@@ -1041,7 +1075,7 @@ class Nominee extends BaseController
                               }
           
                               if($this->request->getFileMultiple('fellowship_research_publications')){
-                                  $filenames = multipleFileUpload('fellowship_research_publications',$id);   
+                                  $filenames = multipleFileUpload('fellowship_research_publications',$id,'CRF');   
                                   if($filenames!='') {
                                       $filenames = fileNameUpdate($id,$filenames,'fellowship_research_publications');
                                       $nominee_details_data['fellowship_research_publications'] = $filenames;
@@ -1057,7 +1091,7 @@ class Nominee extends BaseController
                               }
           
                               if($this->request->getFileMultiple('fellowship_research_awards_and_recognitions')){
-                                  $filenames = multipleFileUpload('fellowship_research_awards_and_recognitions',$id);   
+                                  $filenames = multipleFileUpload('fellowship_research_awards_and_recognitions',$id,'CRF');   
                                   if($filenames!='') {
                                       $filenames = fileNameUpdate($id,$filenames,'fellowship_research_awards_and_recognitions');
                                       $nominee_details_data['fellowship_research_awards_and_recognitions'] = $filenames;
@@ -1073,7 +1107,7 @@ class Nominee extends BaseController
                               }
           
                               if($this->request->getFileMultiple('fellowship_scientific_research_projects')){
-                                  $filenames = multipleFileUpload('fellowship_scientific_research_projects',$id);   
+                                  $filenames = multipleFileUpload('fellowship_scientific_research_projects',$id,'CRF');   
                                   if($filenames!='') {
                                       $filenames = fileNameUpdate($id,$filenames,'fellowship_scientific_research_projects');
                                       $nominee_details_data['fellowship_scientific_research_projects'] = $filenames;
@@ -1089,7 +1123,7 @@ class Nominee extends BaseController
                               }
           
                               if($this->request->getFileMultiple('fellowship_description_of_research')){
-                                  $filenames = multipleFileUpload('fellowship_description_of_research',$id);   
+                                  $filenames = multipleFileUpload('fellowship_description_of_research',$id,'CRF');   
                                   if($filenames!='') {
                                       $filenames = fileNameUpdate($id,$filenames,'fellowship_description_of_research');
                                       $nominee_details_data['fellowship_description_of_research'] = $filenames;
@@ -1105,7 +1139,7 @@ class Nominee extends BaseController
                               }
           
                               if($this->request->getFileMultiple('first_degree_marksheet')){
-                                $filenames = multipleFileUpload('first_degree_marksheet',$id);   
+                                $filenames = multipleFileUpload('first_degree_marksheet',$id,'CRF');   
                                 if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'first_degree_marksheet');
                                     $nominee_details_data['first_degree_marksheet'] = $filenames;
@@ -1122,7 +1156,7 @@ class Nominee extends BaseController
 
 
                             if($this->request->getFileMultiple('highest_degree_marksheet')){
-                                $filenames = multipleFileUpload('highest_degree_marksheet',$id);   
+                                $filenames = multipleFileUpload('highest_degree_marksheet',$id,'CRF');   
                                 if($filenames!='') {
                                     $filenames = fileNameUpdate($id,$filenames,'highest_degree_marksheet');
                                     $nominee_details_data['highest_degree_marksheet'] = $filenames;
@@ -1221,20 +1255,20 @@ class Nominee extends BaseController
 
         switch ($main_category_id) {
             case 1:
-                $typeOfTitle .= 'Research Awards ';
+                $typeOfTitle .= ' esearch Awards ';
                 $typeOfAward = 'RA';
                 break;
             case 2:
-                $typeOfTitle .= 'Science Scholar Awards ';
+                $typeOfTitle .= ' cience Scholar Awards ';
                 $typeOfAward = 'SSA';
                 break;
             case 3:
-                $typeOfTitle .= 'Clinical Research Fellowship ';
+                $typeOfTitle .= ' linical Research Fellowship ';
                 $typeOfAward = 'CRF';
                 break;
           }
 
-        $fileName    = $typeOfAward.' Nomination List (Template) '.date('d-m-Y').'.xlsx';  
+        $fileName    = $typeOfAward.' Nomination List (Template) '.date('d-m-Y H:i:s').'.xlsx';  
 
         $filter = array();
         $filter['year'] = $year;
@@ -1310,7 +1344,8 @@ class Nominee extends BaseController
             }
             else if($main_category_id == 2)
             {
-                if($vl == 'Pharmaceutical Sciences')
+                 //cho $vl; die;
+                if($vl == 'Pharmaceutical Sciences - SS')
                   $nominationsCategoryArr['Pharmaceutical Sciences'] = count($dt);  
                 
                 if($vl == 'Bio-Medical Sciences')
@@ -1348,7 +1383,7 @@ class Nominee extends BaseController
         } 
       
        // Display total awards count
-        $header = ' Sun Pharma Science Foundation';
+        $header = ' Sun Pharma Science Foundation ';
        // $header.=  ($main_category_id == 1)?' Research Awards ':' Science Scholar Awards ';
         switch ($main_category_id) {
             case 1:
@@ -1361,7 +1396,7 @@ class Nominee extends BaseController
                 $header .= 'Clinical Research Fellowship ';
                 break;
         }
-        $header.= $year.' Nominations Received';
+        $header .= $year.' Nominations Received';
         $rw = $rows + 2;
         $startCell = 'C'.$rw;
         $endCell   = 'D'.$rw;

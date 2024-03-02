@@ -19,6 +19,7 @@ class Workshops extends BaseController
         $filter['limit']      = '10';
         $filter['orderField'] = 'id';
         $filter['orderBy']    = 'desc';
+			 $filter['year']      = '';
         $totalRecords  = $this->workshopModel->getEventLists();
 
         $this->data['evts'] = $this->workshopModel->getLists();
@@ -44,6 +45,8 @@ class Workshops extends BaseController
                 $subject    = $dtpostData['subject'];
              //   $start_date = $dtpostData['start_date'];
                 $status     = $dtpostData['status'];
+		$year =  (isset($dtpostData['year']))?$dtpostData['year']:date('Y');
+	
                 
                 $filter['title']       = $title;
                 $filter['subject']     = $subject;
@@ -53,6 +56,7 @@ class Workshops extends BaseController
                 $filter['orderField']  = $columnName;
                 $filter['orderBy']     = $columnSortOrder;
                 $filter['start']      =  $start;
+		 $filter['year']      =  $year;
 
                 $workshopLists = $this->workshopModel->getEventsByFilter($filter)->getResultArray();
                
@@ -290,10 +294,9 @@ class Workshops extends BaseController
        
     }
 
-
     public function onsite_user_limit($limit='',$eventID='')
     {
-        $eventID = $this->uri->getSegment(5);
+          $eventID = $this->uri->getSegment(5);
         $upd_data = array();
         $upd_data['onsite_user_limit'] = trim($limit);
 

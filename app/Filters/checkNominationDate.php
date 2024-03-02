@@ -12,20 +12,28 @@ class checkNominationDate implements FilterInterface
 
         $uri     = current_url(true);
 
-        $awardID = $uri->getSegment(2);  
-
+         $awardID = $uri->getSegment(2); 
+ 
         $nominationModel    = model('App\Models\NominationTypesModel');
-
-        $awardData     = $nominationModel->getListsOfNominations($awardID)->getRowArray();
-       
-        if(is_array($awardData)) {
-         $nominationEndDate  = strtotime(date("Y-m-d 23:59:59",strtotime($awardData['end_date'])));
-      
-        if($nominationEndDate < $current_date || $awardData['status'] == 0){
-            // then redirct to login page
-            return redirect()->to('nomination/close'); 
-        }
-      }
+	//$awardData = array();
+        $awardData = $nominationModel->getListsOfNominations($awardID)->getRowArray();
+	
+        if(is_array($awardData) && !empty($awardData['end_date'])) {
+	
+            $nominationEndDate  = strtotime(date("Y-m-d 23:59:59",strtotime($awardData['end_date'])));
+            if($nominationEndDate < $current_date || $awardData['status'] == 0){
+                // then redirct to login page
+                return redirect()->to('nomination/close'); 
+            }
+	    else
+	    {
+		return true;
+	    }	 	
+       }
+       else
+       {
+             return redirect()->to('/'); 
+       }
     }
  
     //--------------------------------------------------------------------

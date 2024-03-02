@@ -23,6 +23,8 @@ class EventRegisteration extends BaseController
             $filter['limit']      = '10';
             $filter['orderField'] = 'id';
             $filter['orderBy']    = 'desc';
+		 $filter['year']      = '';
+
             $totalRecords  = $this->registerationModel->CountAll();
 
             $this->data['events']  = $this->workshopModel->getLists();
@@ -42,6 +44,8 @@ class EventRegisteration extends BaseController
                     $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
                     $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
                     $searchValue     = $dtpostData['search']['value']; // Search value
+			$year =  (isset($dtpostData['year']))?$dtpostData['year']:date('Y');
+
     
                      // Custom filter
                     $title      = $dtpostData['title'];
@@ -57,6 +61,8 @@ class EventRegisteration extends BaseController
                     $filter['orderField']  = $columnName;
                     $filter['orderBy']     = $columnSortOrder;
                     $filter['start']      =  $start;
+			$filter['year']      =  $year;
+		
     
                     $workshopLists = $this->registerationModel->getRegisterationByFilter($filter)->getResultArray();
                    
@@ -291,10 +297,10 @@ class EventRegisteration extends BaseController
                $dtpostData = $this->request->getPost();
     
                 // Custom filter
-                $title      = $dtpostData['title'];
+                  $title      = $dtpostData['title'];
               //  $email      = $dtpostData['email'];
               //  $phone      = $dtpostData['phone'];
-                $mode       = $dtpostData['mode'];
+                  $mode       = $dtpostData['mode'];
 
                     $filter = array();
                     $filter['title']      = $title;
@@ -336,7 +342,7 @@ class EventRegisteration extends BaseController
                         $rows++;  
                     } 
                     $writer = new Xlsx($spreadsheet);
-                    $writer->save("/uploads/".$fileName);
+                    $writer->save("uploads/".$fileName);
                     $fileDownload = base_url().'/uploads/'.$fileName;
                     header("Content-Type: application/vnd.ms-excel");
 

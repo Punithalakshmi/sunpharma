@@ -8,7 +8,7 @@
               </div>
 
               <div class="actionbtns">
-                <a class="btn btn-primary" href="<?=base_url();?>/admin/editdata">
+                <a class="btn btn-primary" href="<?=base_url();?>/admin/nominee/view/<?=$editdata['user_id'];?>">
                   <i class="fa fa-arrow-left"></i> BACK
                 </a>           
               </div>
@@ -80,10 +80,13 @@
                       else
                          $citation = $editdata['citation']; 
 
-                    ?>
+			                
+			$currentYear = date('Y');
+	                $fileUploadDir = base_url().'/uploads/'.$currentYear.'/SSA/'.$editdata['user_id'];
+
+                                ?>
                   <div class="x_content">
                     <br />
-                   
                     <form id="nomineeUpdate" enctype="multipart/form-data" action="<?php echo base_url();?>/admin/nominee/update/<?=$editdata['user_id'];?>" method="POST" data-parsley-validate class="form-horizontal form-label-left addformsec">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
@@ -95,7 +98,7 @@
                                 </div>
                               </label>
                               <input type="file" class="form-control col-md-6 required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
-                              <img  src="<?=base_url();?>/frontend/assets/img/editdata--default-Image.png" width="50"
+                              <img  src="<?=$fileUploadDir;?>/<?=$editdata['nominator_photo'];?>" width="50"
                               height="50" />
                               <br />
                       </div>
@@ -177,8 +180,7 @@
                                 aria-label="Default select example" id="citizenship" name="citizenship" value="<?=set_value('citizenship',$editdata['citizenship']);?>">
                                 <option value="">-- Select --</option>
                                 <option value="1" <?=set_select('citizenship', 1, ((isset($editdata['citizenship']) && ($editdata['citizenship']==1))?TRUE:FALSE));?>>Indian</option>
-                                <option value="2" <?=set_select('citizenship', 2, ((isset($editdata['citizenship']) && ($editdata['citizenship']==2))?TRUE:FALSE));?>>Other</option>
-                            </select>
+                                                         </select>
                            
                         </div>      
                         <div class="clearfix"></div>
@@ -269,7 +271,7 @@
                                      <div class="mb-3 form-items" id="supervisorCertifying<?=$i;?>">
                                         <input class="form-control mb-3 required supervisor_certifying" accept=".pdf" name="supervisor_certifying[<?=$supervisorCertifying[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$supervisorCertifying[$i];?>" target="_blank" title="<?=$supervisorCertifying[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$supervisorCertifying[$i];?>" target="_blank" title="<?=$supervisorCertifying[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -285,7 +287,7 @@
                                       <div class="mb-3 form-items" id="supervisorCertifying-1">
                                          
                                         <input class="form-control mb-3 required supervisor_certifying" accept=".pdf" name="supervisor_certifying[<?=$supervisorCertifying;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$supervisorCertifying;?>" target="_blank" title="<?=$supervisorCertifying;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$supervisorCertifying;?>" target="_blank" title="<?=$supervisorCertifying;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -324,7 +326,7 @@
                                      <div class="mb-3 form-items" id="complete_bio_data<?=$i;?>">
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" title="<?=$completeBiodata[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$completeBiodata[$i];?>" target="_blank" title="<?=$completeBiodata[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -340,7 +342,7 @@
                                       <div class="mb-3 form-items" id="complete_bio_data-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$completeBiodata;?>" target="_blank" title="<?=$completeBiodata;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$completeBiodata;?>" target="_blank" title="<?=$completeBiodata;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -372,7 +374,7 @@
                                      <div class="mb-3 form-items" id="excellence_research_work<?=$i;?>">
                                         <input class="form-control mb-3 required excellence_research_work" accept=".pdf" name="excellence_research_work[<?=$excellenceResearchWork[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$excellenceResearchWork[$i];?>" target="_blank" title="<?=$excellenceResearchWork[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$excellenceResearchWork[$i];?>" target="_blank" title="<?=$excellenceResearchWork[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -388,7 +390,7 @@
                                       <div class="mb-3 form-items" id="excellence_research_work-1">
                                          
                                         <input class="form-control mb-3 required excellence_research_work" accept=".pdf" name="excellence_research_work[<?=$excellenceResearchWork;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$excellenceResearchWork;?>" target="_blank" title="<?=$excellenceResearchWork;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$excellenceResearchWork;?>" target="_blank" title="<?=$excellenceResearchWork;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -424,7 +426,7 @@
                                       <div class="mb-3 form-items" id="lists_of_publications<?=$i;?>">
                                           <input class="form-control mb-3 required lists_of_publications" accept=".pdf" name="lists_of_publications[<?=$listsOfPublications[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$listsOfPublications[$i];?>" target="_blank" title="<?=$listsOfPublications[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$listsOfPublications[$i];?>" target="_blank" title="<?=$listsOfPublications[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -440,7 +442,7 @@
                                         <div class="mb-3 form-items" id="lists_of_publications-1">
                                           
                                           <input class="form-control mb-3 required lists_of_publications" accept=".pdf" name="lists_of_publications[<?=$listsOfPublications;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$listsOfPublications;?>" target="_blank" title="<?=$listsOfPublications;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$listsOfPublications;?>" target="_blank" title="<?=$listsOfPublications;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -475,7 +477,7 @@
                                       <div class="mb-3 form-items" id="statementOfApplicant<?=$i;?>">
                                           <input class="form-control mb-3 required statement_of_applicant" accept=".pdf" name="statement_of_applicant[<?=$statementOfApplicant[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfApplicant[$i];?>" target="_blank" title="<?=$statementOfApplicant[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$statementOfApplicant[$i];?>" target="_blank" title="<?=$statementOfApplicant[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -491,7 +493,7 @@
                                         <div class="mb-3 form-items" id="statementOfApplicant-1">
                                           
                                           <input class="form-control mb-3 required statement_of_applicant" accept=".pdf" name="statement_of_applicant[<?=$statementOfApplicant;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfApplicant;?>" target="_blank" title="<?=$statementOfApplicant;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$statementOfApplicant;?>" target="_blank" title="<?=$statementOfApplicant;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -526,7 +528,7 @@
                                       <div class="mb-3 form-items" id="ethical_clearance<?=$i;?>">
                                           <input class="form-control mb-3 required ethical_clearance" accept=".pdf" name="ethical_clearance[<?=$ethicalClearance[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ethicalClearance[$i];?>" target="_blank" title="<?=$ethicalClearance[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$ethicalClearance[$i];?>" target="_blank" title="<?=$ethicalClearance[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -542,7 +544,7 @@
                                         <div class="mb-3 form-items" id="ethical_clearance-1">
                                           
                                           <input class="form-control mb-3 required ethical_clearance" accept=".pdf" name="ethical_clearance[<?=$ethicalClearance;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ethicalClearance;?>" target="_blank" title="<?=$ethicalClearance;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$ethicalClearance;?>" target="_blank" title="<?=$ethicalClearance;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -563,7 +565,7 @@
                               <div class="clearfix"></div>
                               <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-<?=date('Y');?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)
+                                      <label class="form-label" for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-<?=date("Y");?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)
                                      </label>
                                     <button type="button" name="statement_of_duly_signed_by_nominee_add" id="add_more_statement_of_duly_signed_by_nominee" onclick="addMoreRows('statementOfDulySignedWrapper','statement_of_duly_signed_by_nominee','statement_of_duly_signed_by_nominee');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -575,7 +577,7 @@
                                       <div class="mb-3 form-items" id="statement_of_duly_signed_by_nominee<?=$i;?>">
                                           <input class="form-control mb-3 required statement_of_duly_signed_by_nominee" accept=".pdf" name="statement_of_duly_signed_by_nominee[<?=$statementOfDulySigned[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfDulySigned[$i];?>" target="_blank" title="<?=$statementOfDulySigned[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$statementOfDulySigned[$i];?>" target="_blank" title="<?=$statementOfDulySigned[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -591,7 +593,7 @@
                                         <div class="mb-3 form-items" id="statement_of_duly_signed_by_nominee-1">
                                           
                                           <input class="form-control mb-3 required statement_of_duly_signed_by_nominee" accept=".pdf" name="statement_of_duly_signed_by_nominee[<?=$statementOfDulySigned;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$statementOfDulySigned;?>" target="_blank" title="<?=$statementOfDulySigned;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$statementOfDulySigned;?>" target="_blank" title="<?=$statementOfDulySigned;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -623,7 +625,7 @@
                                       <div class="mb-3 form-items" id="citation<?=$i;?>">
                                           <input class="form-control mb-3 required citation" accept=".pdf" name="complete_bio_data[<?=$citation[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$citation[$i];?>" target="_blank" title="<?=$citation[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$citation[$i];?>" target="_blank" title="<?=$citation[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -639,7 +641,7 @@
                                         <div class="mb-3 form-items" id="citation-1">
                                           
                                           <input class="form-control mb-3 required citation" accept=".pdf" name="citation[<?=$citation;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$citation;?>" target="_blank" title="<?=$citation;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$citation;?>" target="_blank" title="<?=$citation;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -672,7 +674,7 @@
                                       <div class="mb-3 form-items" id="aggregate_marks<?=$i;?>">
                                           <input class="form-control mb-3 required aggregate_marks" accept=".pdf" name="aggregate_marks[<?=$aggregateMarks[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$aggregateMarks[$i];?>" target="_blank" title="<?=$aggregateMarks[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$aggregateMarks[$i];?>" target="_blank" title="<?=$aggregateMarks[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -688,7 +690,7 @@
                                         <div class="mb-3 form-items" id="aggregate_marks-1">
                                           
                                           <input class="form-control mb-3 required aggregate_marks" accept=".pdf" name="aggregate_marks[<?=$aggregateMarks;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$aggregateMarks;?>" target="_blank" title="<?=$aggregateMarks;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$aggregateMarks;?>" target="_blank" title="<?=$aggregateMarks;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -707,7 +709,7 @@
                               </div>  
 
                               <div class="clearfix"></div>
-                        <div class="form-group  uploadseciz">
+                        <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for=""> Age proof (Max: 250KB)
                                      </label>
@@ -721,7 +723,7 @@
                                       <div class="mb-3 form-items" id="ageProof<?=$i;?>">
                                           <input class="form-control mb-3 required age_proof" accept=".pdf" name="age_proof[<?=$ageProof[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ageProof[$i];?>" target="_blank" title="<?=$ageProof[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$ageProof[$i];?>" target="_blank" title="<?=$ageProof[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -737,7 +739,7 @@
                                         <div class="mb-3 form-items" id="ageProof-1">
                                           
                                           <input class="form-control mb-3 required age_proof" accept=".pdf" name="age_proof[<?=$ageProof;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$ageProof;?>" target="_blank" title="<?=$ageProof;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$ageProof;?>" target="_blank" title="<?=$ageProof;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -770,7 +772,7 @@
                                       <div class="mb-3 form-items" id="declaration_candidate<?=$i;?>">
                                           <input class="form-control mb-3 required declaration_candidate" accept=".pdf" name="declaration_candidate[<?=$declarationCandidate[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$declarationCandidate[$i];?>" target="_blank" title="<?=$declarationCandidate[$i];?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$declarationCandidate[$i];?>" target="_blank" title="<?=$declarationCandidate[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -786,7 +788,7 @@
                                         <div class="mb-3 form-items" id="declarationCandidate-1">
                                           
                                           <input class="form-control mb-3 required declaration_candidate" accept=".pdf" name="declaration_candidate[<?=$declarationCandidate;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$declarationCandidate;?>" target="_blank" title="<?=$declarationCandidate;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$declarationCandidate;?>" target="_blank" title="<?=$declarationCandidate;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -809,7 +811,7 @@
                           <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                               
-                              <a href="<?=base_url();?>/admin/editdata" class="btn btn-primary">CANCEL</a>
+                              <a href="<?=base_url();?>/admin/nominee/view/<?=$editdata['user_id'];?>" class="btn btn-primary">CANCEL</a>
                                 <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                             </div>
                           </div>
@@ -819,6 +821,7 @@
               </div>
             </div>
 
+
             <style>
 
 .form-horizontal.addformsec .form-group.uploadseciz{background:#fdfdfd;border:1px solid #d9d9d9;padding:8px 15px;display:flex;width: 100%;}
@@ -827,7 +830,9 @@
     display: flex;
 }
 
-.form-horizontal.addformsec .form-group.uploadseciz .form-control {margin-top: 15px;width: 60%;min-width: 200px;padding-bottom: 36px!important;}
+.form-horizontal.addformsec .form-group.uploadseciz .form-control[type="file"] {
+  margin-top: 15px;width: 60%;min-width: 200px;padding-bottom: 36px!important;
+}
 
 .form-horizontal.addformsec .form-group.uploadseciz .form-items > div {
 }
@@ -874,4 +879,7 @@
 .form-horizontal.addformsec .form-group.uploadseciz .form-items > div > div:last-child {
     border: 0;
 }
-            </style>
+.mt20 {
+    margin-top: 20px;
+}
+</style>

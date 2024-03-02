@@ -132,7 +132,7 @@ class Nomination extends BaseController
             
             if (strtolower($this->request->getMethod()) == "post") {  
 
-                $id  = $this->request->getPost('id');
+               $id  = $this->request->getPost('id');
 
                 $this->validation->setRules($this->validation_rules());
     
@@ -178,13 +178,13 @@ class Nomination extends BaseController
                     $ins_data['description']       = $description;
                     $ins_data['title']             = $title;
 
-                   // print_r($ins_data); die;
+                 //   print_r($ins_data); 
 
                     if($this->request->getFile('banner_image') != ''){
                         $fileUploadDir = 'uploads/events/';
                             
                         if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                        mkdir($fileUploadDir, 0777, true);
+                       		 mkdir($fileUploadDir, 0777, true);
                         
                         //upload documents to respestive nominee folder
                         $banner_image = $this->request->getFile('banner_image');
@@ -219,15 +219,21 @@ class Nomination extends BaseController
                         $ins_data['document']  = $event_document->getClientName();
                     }
 
+
                     if($this->request->getFile('procedure_document') != ''){
                         $fileUploadDir = 'uploads/events/';
                             
                         if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                        mkdir($fileUploadDir, 0777, true);
-                        
+                      	  mkdir($fileUploadDir, 0777, true);
+
+                     //  echo $fileUploadDir; die;
                         //upload documents to respestive nominee folder
                         $procedure_document = $this->request->getFile('procedure_document');
                         $procedure_document->move($fileUploadDir);
+
+			//echo "<pre>";
+
+			//print_r($procedure_document); die;
 
                         $ins_data['procedure_document']  = $procedure_document->getClientName();
                     }
@@ -266,6 +272,9 @@ class Nomination extends BaseController
                     $editdata['title']                 = $edit_data['title'];
                     $editdata['subject']               = $edit_data['subject'];
                     $editdata['description']           = $edit_data['description'];
+		    $editdata['procedure_document']   =  $edit_data['procedure_document'];
+			$editdata['event_document']   =  $edit_data['document'];
+
                     $editdata['id']                    = $edit_data['id'];
                 }
                 else
@@ -280,6 +289,9 @@ class Nomination extends BaseController
                     $editdata['end_date']       = ($this->request->getPost('end_date'))?$this->request->getPost('end_date'):date("m/d/Y");
                     $editdata['banner_image']         = ($this->request->getFile('banner_image'))?$this->request->getFile('banner_image'):'';
                     $editdata['thumb_image']          = ($this->request->getFile('thumb_image'))?$this->request->getFile('thumb_image'):'';
+		      $editdata['procedure_document']          = ($this->request->getFile('procedure_document'))?$this->request->getFile('procedure_document'):'';
+			$editdata['event_document']          = ($this->request->getFile('event_document'))?$this->request->getFile('event_document'):'';
+
                     $editdata['status']               = ($this->request->getPost('status'))?$this->request->getPost('status'):'0';
                     $editdata['id']             = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
                 }

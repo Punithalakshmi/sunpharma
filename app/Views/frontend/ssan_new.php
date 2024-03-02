@@ -10,10 +10,10 @@
     </div>
     
     <?php if(isset($uri) && ($uri == 'ssan' || $uri == 'spsfn')): ?>
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/additional-methods.js"></script>
-         
+        <?= script_tag('frontend/assets/js/jqueryValidate.js'); ?>
+        <?= script_tag('frontend/assets/js/jQuerySteps.js'); ?>
+        <?= script_tag('frontend/assets/js/additionalMethods.js'); ?>
+        <?= script_tag('frontend/assets/js/jQuerydatepicker.js'); ?>
 
     <?php  endif;?>
   
@@ -80,11 +80,11 @@
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
                                     <label class="form-label " for="">Date of Birth <span class="required" style="color:red;">*</span></label>
-                                    <input class="form-control required" id="date_of_birth" name="date_of_birth" type="date" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
-                                        placeholder="Date of Birth">
+                                    <input class="form-control required" id="date_of_birth" name="date_of_birth" type="text" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>"
+                                        placeholder="MM/DD/YYYY">
 
                                     <div class="hintcont">
-                                        <small></small>
+                                        <small>Date Format: MM/DD/YYYY</small>
                                     </div>
                                 </div>
                             </div>

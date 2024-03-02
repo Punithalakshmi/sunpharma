@@ -35,7 +35,7 @@
                         }    
                         else
                         {
-                            $url = base_url().'/spsfn'; 
+                            $url = base_url().'/spsfn/12'; 
                             $view = (!isset($userdata['isLoggedIn']) && (isset($currentNominations['science_scholars_awards']) && $currentNominations['science_scholars_awards'] == 'yes'))?true:false;
                         }    
                         if($view)

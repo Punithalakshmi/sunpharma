@@ -3,6 +3,11 @@
     background: rgb(250 250 250 / 28%);
 }</style>
 
+<?php $currentYear = date('Y');
+
+	//print_r($editdata); die;
+
+ ?>
 <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -48,10 +53,16 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel xpanelform">
               <div class="x_content">
-              <?php if(isset($user['nomination_type']) && ($user['nomination_type'] != 'fellowship')){ ?>
+              <?php if(isset($user['nominator_photo']) && !empty($user['nominator_photo'])){ 
+			$folderPath = ($user['nomination_type'] == 'ssan')?'RA':'SSA';
+			if($user['nomination_type'] == 'fellowship')
+			  $folderPath = 'CRF';
+			
+			$fileUploadDir = base_url().'/uploads/'.$currentYear.'/'.$folderPath.'/'.$user['user_id'];
+			?>
                 <div class="col-md-3 col-xs-12 mt-30">
                   <div class="product-image border avatarimg">
-                    <img class="border" src="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['nominator_photo'];?>" alt="" style="border: 1px solid #959595;padding: 5px;"> 
+                    <img class="border" src="<?=$fileUploadDir;?>/<?=$user['nominator_photo'];?>" alt="" style="border: 1px solid #959595;padding: 5px;"> 
                   </div>
                   <div class="product_gallery">
                   
@@ -73,9 +84,13 @@
                   <?=$user['registration_no'];?>
               </div>
           </div> 
-            <div class="form-group row formitem">
+              <div class="form-group row formitem">
                 <label class="col-sm-3 col-form-label">Award Type</label>
                 <div class="col-sm-9"><?=$user['category_name'];?></div>
+              </div>
+		 <div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">Date Of Birth</label>
+                <div class="col-sm-9"><?=$user['dob'];?></div>
               </div>
 
               <div class="form-group row formitem">
@@ -95,6 +110,12 @@
                 <div class="col-sm-9">
                 <?=$user['address'];?>  </div>
               </div>
+	       <div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">Citizenship</label>
+                <div class="col-sm-9">
+                <?=(isset($user['citizenship']) && !empty($user['citizenship']) && ($user['citizenship'] == 1))?'Indian':'Other';?>  </div>
+              </div>
+		
 
               <div class="form-group row formitem">
                 <label class="col-sm-3 col-form-label">Nominator Name</label>
@@ -200,6 +221,8 @@
 
             <?php }?>
             <?php if(isset($user['nomination_type']) && ($user['nomination_type'] == 'ssan')){
+		$fileUploadDir = base_url().'/uploads/'.$currentYear.'/RA/'.$user['user_id'];
+
               //$files split section
               if(strpos($user['justification_letter_filename'],','))
                 $justificationLetter = explode(',',$user['justification_letter_filename']);
@@ -252,10 +275,10 @@
                 <div class="col-sm-9">
                       <?php if(is_array($justificationLetter)): 
                         for($i=0; $i<count($justificationLetter); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
                       <?php endif;?> 
                    </div>
               </div>
@@ -265,10 +288,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($passport)): 
                         for($i=0; $i<count($passport); $i++): ?>
-                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$passport[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$passport[$i];?></a> 
+                  <a href="<?=$fileUploadDir;?>/<?=$passport[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$passport[$i];?></a> 
                   <?php endfor; 
                           else:?>
-                           <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$passport;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$passport;?></a> 
+                           <a href="<?=$fileUploadDir;?>/<?=$passport;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$passport;?></a> 
                      <?php endif;?>      
                 </div>
               </div>
@@ -279,10 +302,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($completeBiodata)): 
                         for($i=0; $i<count($completeBiodata); $i++): ?>
-                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
+                  <a href="<?=$fileUploadDir;?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
                   <?php endfor; 
                           else:?>
-                           <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
+                           <a href="<?=$fileUploadDir;?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
                      <?php endif;?>       
                 </div>
               </div>
@@ -293,10 +316,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($bestPapers)): 
                         for($i=0; $i<count($bestPapers); $i++): ?>
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$bestPapers[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$bestPapers[$i];?></a> 
+                <a href="<?=$fileUploadDir;?>/<?=$bestPapers[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$bestPapers[$i];?></a> 
                 <?php endfor; 
                           else:?>
-                    <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$bestPapers;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$bestPapers;?></a> 
+                    <a href="<?=$fileUploadDir;?>/<?=$bestPapers;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$bestPapers;?></a> 
                  <?php endif;?>
                 </div>
               </div>
@@ -307,10 +330,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($researchAchievements)): 
                         for($i=0; $i<count($researchAchievements); $i++): ?>
-                 <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchAchievements[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchAchievements[$i];?></a> 
+                 <a href="<?=$fileUploadDir;?>/<?=$researchAchievements[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchAchievements[$i];?></a> 
                  <?php endfor; 
                       else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchAchievements;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchAchievements;?></a> 
+                        <a href="<?=$fileUploadDir;?>/<?=$researchAchievements;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchAchievements;?></a> 
                         <?php endif;?>
                 </div>
               </div>
@@ -321,10 +344,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($signedDetails)): 
                         for($i=0; $i<count($signedDetails ); $i++): ?>
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedDetails[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedDetails[$i];?></a> 
+                <a href="<?=$fileUploadDir;?>/<?=$signedDetails[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedDetails[$i];?></a> 
                 <?php endfor; 
                       else:?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedDetails;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedDetails;?></a> 
+                      <a href="<?=$fileUploadDir;?>/<?=$signedDetails;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedDetails;?></a> 
                       <?php endif;?>
                 </div>
               </div>
@@ -334,10 +357,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($specificPublicaions)): 
                         for($i=0; $i<count($specificPublicaions ); $i++): ?>
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$specificPublicaions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$specificPublicaions[$i];?></a> 
+                <a href="<?=$fileUploadDir;?>/<?=$specificPublicaions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$specificPublicaions[$i];?></a> 
                 <?php endfor; 
                       else:?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$specificPublicaions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$specificPublicaions;?></a> 
+                      <a href="<?=$fileUploadDir;?>/<?=$specificPublicaions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$specificPublicaions;?></a> 
                       <?php endif;?>
                 </div>
               </div>
@@ -347,10 +370,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($signedStatement)): 
                         for($i=0; $i<count($signedStatement); $i++): ?>
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedStatement[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedStatement[$i];?></a> 
+                <a href="<?=$fileUploadDir;?>/<?=$signedStatement[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedStatement[$i];?></a> 
                 <?php endfor; 
                       else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$signedStatement;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedStatement;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$signedStatement;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$signedStatement;?></a>
                       <?php endif;?>
                 </div>
               </div>
@@ -360,10 +383,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($citation)): 
                         for($i=0; $i<count($citation); $i++): ?>
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation[$i];?></a> 
+                <a href="<?=$fileUploadDir;?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation[$i];?></a> 
                 <?php endfor; 
                       else:?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation;?></a> 
+                      <a href="<?=$fileUploadDir;?>/<?=$citation;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation;?></a> 
                       <?php endif;?>
                 </div>
               </div>
@@ -415,10 +438,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($justificationLetter)): 
                             for($i=0; $i<count($justificationLetter); $i++): ?>
-                          <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
+                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
                           <?php endfor; 
                               else:?>
-                            <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
+                            <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
                           <?php endif;?>
                   </div>
                   </div>
@@ -430,10 +453,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($completeBiodata)): 
                             for($i=0; $i<count($completeBiodata); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -445,10 +468,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($researchExperience)): 
                             for($i=0; $i<count($researchExperience); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchExperience[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchExperience[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchExperience;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchExperience;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -460,10 +483,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($researchPublications)): 
                             for($i=0; $i<count($researchPublications); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$researchPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -475,10 +498,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($awardsRecognitions)): 
                             for($i=0; $i<count($awardsRecognitions); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$awardsRecognitions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$awardsRecognitions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$awardsRecognitions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$awardsRecognitions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -490,10 +513,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($scientificResearchProjects)): 
                             for($i=0; $i<count($scientificResearchProjects); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$scientificResearchProjects[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$scientificResearchProjects[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$scientificResearchProjects;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$scientificResearchProjects;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -505,10 +528,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($descriptionOfResearch)): 
                             for($i=0; $i<count($descriptionOfResearch); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$descriptionOfResearch[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$descriptionOfResearch[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$descriptionOfResearch;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$descriptionOfResearch;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -575,7 +598,10 @@
                     $citation = explode(',',$user['citation']);
                   else
                     $citation = $user['citation']; 
-                
+
+
+                $fileUploadDir = base_url().'/uploads/'.$currentYear.'/SSA/'.$user['user_id'];
+
                 ?>
                 <?php if(!empty($user['justification_letter_filename'])):?>
                 <div class="form-group row formitem graybox">
@@ -583,10 +609,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($justificationLetter)): 
                         for($i=0; $i<count($justificationLetter); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
                       <?php endif;?>
                </div>
               </div>
@@ -596,10 +622,10 @@
                 <div class="col-sm-9">
                     <?php if(is_array($supervisorCertifying)): 
                         for($i=0; $i<count($supervisorCertifying); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$supervisorCertifying[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$supervisorCertifying[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$supervisorCertifying[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$supervisorCertifying[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$supervisorCertifying;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$supervisorCertifying;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$supervisorCertifying;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$supervisorCertifying;?></a>
                       <?php endif;?>
                 </div>
               </div>
@@ -609,10 +635,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($completeBiodata)): 
                         for($i=0; $i<count($completeBiodata); $i++): ?>
-                  <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
+                  <a href="<?=$fileUploadDir;?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
                   <?php endfor; 
                           else:?>
-                           <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
+                           <a href="<?=$fileUploadDir;?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
                      <?php endif;?> 
                 </div>
               </div>
@@ -623,10 +649,10 @@
                   
                    <?php if(is_array($excellenceResearchWork)): 
                         for($i=0; $i<count($excellenceResearchWork); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$excellenceResearchWork[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$excellenceResearchWork[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$excellenceResearchWork[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$excellenceResearchWork[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$excellenceResearchWork;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$excellenceResearchWork;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$excellenceResearchWork;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$excellenceResearchWork;?></a>
                       <?php endif;?>
                 </div>
               </div>
@@ -637,10 +663,10 @@
                 
                   <?php if(is_array($listsOfPublications)): 
                         for($i=0; $i<count($listsOfPublications); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$listsOfPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$listsOfPublications[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$listsOfPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$listsOfPublications[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$listsOfPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$listsOfPublications;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$listsOfPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$listsOfPublications;?></a>
                       <?php endif;?>
                 </div>
               </div>
@@ -653,10 +679,10 @@
                
                 <?php if(is_array($statementOfApplicant)): 
                         for($i=0; $i<count($statementOfApplicant); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfApplicant[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfApplicant[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$statementOfApplicant[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfApplicant[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfApplicant;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfApplicant;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$statementOfApplicant;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfApplicant;?></a>
                       <?php endif;?>
 
                 </div>
@@ -668,10 +694,10 @@
                
                 <?php if(is_array($ethicalClearance)): 
                         for($i=0; $i<count($ethicalClearance); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ethicalClearance[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ethicalClearance[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$ethicalClearance[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ethicalClearance[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ethicalClearance;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ethicalClearance;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$ethicalClearance;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ethicalClearance;?></a>
                       <?php endif;?>
 
                 </div>
@@ -683,10 +709,10 @@
               
                 <?php if(is_array($statementOfDulySigned)): 
                         for($i=0; $i<count($statementOfDulySigned); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfDulySigned[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfDulySigned[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$statementOfDulySigned[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfDulySigned[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$statementOfDulySigned;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfDulySigned;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$statementOfDulySigned;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$statementOfDulySigned;?></a>
                       <?php endif;?>
 
                 </div>
@@ -697,10 +723,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($citation)): 
                         for($i=0; $i<count($citation); $i++): ?>
-                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation[$i];?></a> 
+                <a href="<?=$fileUploadDir;?>/<?=$citation[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation[$i];?></a> 
                 <?php endfor; 
                       else:?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$citation;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation;?></a> 
+                      <a href="<?=$fileUploadDir;?>/<?=$citation;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$citation;?></a> 
                       <?php endif;?>
                 </div>
               </div>
@@ -711,10 +737,10 @@
                
                 <?php if(is_array($aggregateMarks)): 
                         for($i=0; $i<count($aggregateMarks); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$aggregateMarks[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$aggregateMarks[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$aggregateMarks[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$aggregateMarks[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$aggregateMarks;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$aggregateMarks;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$aggregateMarks;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$aggregateMarks;?></a>
                       <?php endif;?>
 
                 </div>
@@ -727,10 +753,10 @@
              
                 <?php if(is_array($ageProof)): 
                         for($i=0; $i<count($ageProof); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ageProof[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ageProof[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$ageProof[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ageProof[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$ageProof;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ageProof;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$ageProof;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$ageProof;?></a>
                       <?php endif;?>
 
                 </div>
@@ -742,10 +768,10 @@
                 <div class="col-sm-9">
                 <?php if(is_array($declarationCandidate)): 
                         for($i=0; $i<count($declarationCandidate); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$declarationCandidate[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$declarationCandidate[$i];?></a>
+                      <a href="<?=$fileUploadDir;?>/<?=$declarationCandidate[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$declarationCandidate[$i];?></a>
                       <?php endfor; 
                           else:?>
-                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$declarationCandidate;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$declarationCandidate;?></a>
+                        <a href="<?=$fileUploadDir;?>/<?=$declarationCandidate;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$declarationCandidate;?></a>
                       <?php endif;?>
 
                 </div>

@@ -65,6 +65,10 @@ abstract class BaseController extends Controller
      */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
+
+      header("Access-Control-Allow-Origin: *");
+      header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
+      header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
@@ -84,6 +88,7 @@ abstract class BaseController extends Controller
         $this->awardsCategoryModel  = model('App\Models\AwardsCategoryModel');
         $this->contactModel         = model('App\Models\ContactModel');
         $this->winnersModel         = model('App\Models\WinnersModel');
+        $this->actionModel          = model('App\Models\ActionModel');
 
         $this->session     = \Config\Services::session();
         $this->validation  = \Config\Services::validation();

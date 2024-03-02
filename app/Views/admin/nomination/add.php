@@ -148,10 +148,10 @@
                           </div>
                         </div>
                       </div>
-
+			<?php //print_r($editdata); ?>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Invitation Document</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Poster Invitation </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group">
                             <p>
@@ -166,7 +166,7 @@
 
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Procedure Document</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Circular Invitation</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group">
                             <p>
@@ -195,19 +195,19 @@
                       </div>
 
                       <div class="clearfix"></div>
-                      <div class="form-group">
+                     <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Thumb Image</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group">
                             <p>
                                 <input class="form-control" name="thumb_image" type="file" >
                            </p>
-                           <?php if(isset($editdata['thumb_image']) && !empty($editdata['thumb_image'])): ?>
-                              <a target="_blank" href="<?=base_url();?>/uploads/events/<?=$editdata['thumb_image'];?>"><?=$editdata['thumb_image'];?></a>
-                           <?php endif; ?>
+                           <?php //if(isset($editdata['thumb_image']) && !empty($editdata['thumb_image'])): ?>
+                              <a target="_blank" href="<?//base_url();?>/uploads/events/<?//$editdata['thumb_image'];?>"><?//$editdata['thumb_image'];?></a> 
+                           <?php //endif; ?>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="clearfix"></div>
                       

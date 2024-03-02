@@ -32,9 +32,11 @@ if ( ! function_exists('captchaVerification'))
             $html = view('email/mail',$data,array('debug' => false));
             $email->setTo($to);
             $email->setSubject($subject);
+
             $email->setMessage($html);
-            
-            if(!empty($attach))
+		
+	    $email->attach('');
+	    if(!empty($attach))
               $email->attach($attach);
 
             if ($email->send()){
@@ -53,10 +55,10 @@ if ( ! function_exists('finalNominationSubmit'))
         function finalNominationSubmit($name='',$file='')
         {
             $email    =  \Config\Services::email();
-            $login_url = base_url().'/admin';
+            //$login_url = base_url().'/admin';
 
             $subject  = 'Final Submission of Nomination';
-            $message   = 'Hi,';
+            $message   = 'Dear Admin,';
             $message  .= '<br/><br/>';
             $message  .= 'The user <b>'.ucfirst($name).'</b> has completed the nomination process. ';  
             $message .= "<br/><br/><br/>";
@@ -65,11 +67,15 @@ if ( ! function_exists('finalNominationSubmit'))
             $message .= "Sunpharma Science Foundation Team";
             
             $data['content'] = $message;
+	        $data['title'] = '';
+	
             $html = view('email/mail',$data,array('debug' => false));
             
-            $email->setTo('punitha@izaaptech.in');
+            $email->setTo('sunpharma.sciencefoundation@sunpharma.com');
+	 
 
             $email->setSubject($subject);
+		$email->attach('');
 
             // file attach here //
             $email->attach($file);
@@ -315,3 +321,90 @@ if ( ! function_exists('extendNominationMailSend'))
         }
     }
 } 
+
+
+if ( ! function_exists('generateAwardsFolderPath'))
+{
+    function generateAwardsFolderPath($main_category_id = '',$user_id=''){
+
+        $typeOfAward = '';
+        switch ($main_category_id) {
+            case '1':
+                $typeOfAward .= 'RA';
+                break;
+            case '2':
+                $typeOfAward .= 'SSA';
+                break;
+            case '3':
+                $typeOfAward .= 'CRF';
+                break;
+         }
+
+         $currentYear = date('Y');
+
+         $fileUploadDir = 'uploads/'.$currentYear.'/'.$typeOfAward.'/'.$user_id;
+                            
+        if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
+          mkdir($fileUploadDir, 0777, true);
+
+        return  $fileUploadDir;  
+
+    }
+}        
+
+if ( ! function_exists('finalNominationSubmitEmailToCandidate'))
+   {
+        function finalNominationSubmitEmailToCandidate($name='',$file='',$nominationNo='',$sendemail = '')
+        {
+            $email    =  \Config\Services::email();
+           
+            $subject  = 'Application Submission is Successful | Action Required';
+            $message   = 'Dear '.$name.',';
+            $message  .= '<br/><br/>';
+            $message  .= '<b>Nomination No:</b> '.$nominationNo;  
+            $message .= "<br/><br/><br/>";
+            $message .= "Please find attached the copy of your submitted application. ";
+            $message .= "<br /><br/>";
+            $message .= "<b>Note: A printed copy of application with all relevant documents to be sent to The Office of the Sun Pharma Science Foundation New Delhi within 10 days of submission.</b><br /><br/>";	
+            $message .= "Thanks & Regards,";
+            $message .= "<br/>";
+            $message .= "Sunpharma Science Foundation Team";
+            
+            $data['content'] = $message;
+	        $data['title'] = '';
+            $html = view('email/mail',$data,array('debug' => false));
+            
+            // $email->setTo('rafi@izaaptech.com');
+	        $email->setTo($sendemail);
+
+            $email->setSubject($subject);
+		
+             $email->attach('');
+
+            // file attach here //
+            $email->attach($file);
+
+            $email->setMessage($html);
+            if ($email->send()){
+                return true;
+            }
+            else
+            {
+                return $email->printDebugger(['headers']);
+            }
+        }     
+   }
+
+
+if(!function_exists('actionLog')) {
+    function actionLog($actionID,$actionName,$actionMessage,$createdID)
+    {
+        $actionData = array();
+        $actionData['action_id']   = $actionID;
+        $actionData['action_name'] = $actionName;
+        $actionData['message']     = $actionMessage;
+        $actionData['created_id']  = $createdID;
+        $actionModel = model('App\Models\ActionModel');
+        $actionModel->save($actionData);
+    }
+}

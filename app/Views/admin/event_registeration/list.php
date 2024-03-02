@@ -67,13 +67,19 @@
                     <label for="" class="fw-bold">Participation Mode </label>
                         <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="mode" id="mode" >
+			     <option value=""></option>
                             <option value="Online">Online</option>
                             <option value="Onsite">Onsite</option>
                         </select>
                        
                     </div>
               </div>
-
+		<div class="col-md-3">
+                <div class="get-sunpharma__input-box mt-2 form-inline">
+                  <label for="" class="fw-bold">Year</label> 
+                  <input type="text" class="mt-2 form-control" name="year" id="year" value="<?=date("Y");?>" />
+                </div>
+              </div>
             </div> 
 
             <div class="row">

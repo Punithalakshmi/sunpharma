@@ -43,8 +43,19 @@
                         <div class="step">
 
                             <div class="row">
-                                
-
+                                <?php if(isset($user['nominator_photo']) && !empty($user['nominator_photo'])): ?>
+				<div class="col-lg-6">
+                                    <div class="mb-3 form-items">
+                                    <div class="form-check ps-0 q-box">
+                                      <div class="q-box__question col me-2 d-flex">     
+                                        <label class="form-check-label question__label noLabel">
+                                            <div class="form-label mb-2"> <b>Photograph of the Applicant </b></div>
+                                              <img class="uploadPreview" src="<?= $fileUploadDir;?>/<?=$user['nominator_photo'];?>" width="200" height="200" />                                                    </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+				<?php endif;?>
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""><b>Category</b></label>
@@ -167,13 +178,13 @@
                                
                                 <?php 
                                 
-                                  if(isset($user['justification_letter_filename']) && !empty($user['justification_letter_filename'])): ?>
+                                 if(isset($user['justification_letter_filename']) && !empty($user['justification_letter_filename'])): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> <b>Justification for Sponsoring the
                                             Nomination duly signed by the Nominator (not to exceed 400 words) </b> </label>
                                             <div >
-                                                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['justification_letter_filename'];?>" target="_blank">
+                                                <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['justification_letter_filename'];?>" target="_blank">
                                                   <button class="btn btn-primary btn-sm" type="button">
                                                     <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -186,9 +197,29 @@
                                <?php
                                  endif;
                               ?>
+
+		                <?php 
+                                
+                                 if(empty($user['nominator_photo'])): ?>
+                                <div class="col-lg-12">
+                                    <div class="mb-3 form-items">
+                                        <label class="form-label " for=""> <b>Applicant Photo:</b> </label>
+                                            <div>
+						<input type="file" class="form-control required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
+						<?php if(isset($editdata['nominator_photo_name']) && !empty($editdata['nominator_photo_name'])): ?>
+                                                    <span id="nominator_photo_nm"><?=$editdata['nominator_photo_name'];?></span>
+                                                <?php endif;?>
+                                                <input type="hidden" name="nominator_photo_file" id="nominator_photo_file" value="<?=(isset($editdata['nominator_photo']) && !empty($editdata['nominator_photo']))?$editdata['nominator_photo']:'';?>" />
+                                          </div>
+                                    </div>
+                                </div>
+                               <?php endif;
+                              ?>
+
+				
                             </div>
                         </div>
-                  
+                  	
                         
                         <div class="step">
 
@@ -202,7 +233,7 @@
                                             <label class="form-label" for=""><b>Complete Bio-data of the Applicant
                                             (Max 1.5 MB) </b></label>
                                             <div>
-                                              <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank">
+                                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['complete_bio_data'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                 <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                               </svg> View
@@ -236,6 +267,8 @@
                                             </small>
                                     </div>
                                 </div>
+				
+
                                 <?php  
                                     endif;
                                    if(isset($user) && ($user['nomination_type'] == 'fellowship') ):
@@ -345,7 +378,7 @@
                                             <?php if(!empty($user['first_degree_marksheet'])): ?>
                                             <label class="form-label " for=""> <b> Marksheet </b> </label>
                                                  <div>
-                                                    <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['first_degree_marksheet'];?>" target="_blank">
+                                                    <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['first_degree_marksheet'];?>" target="_blank">
                                                         <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                             <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                                         </svg> View</button>
@@ -374,7 +407,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b>Year of award of degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="first_medical_degree_year_of_award" type="text" id="first_medical_degree_year_of_award" value="<?php echo set_value('first_medical_degree_year_of_award',$editdata['first_medical_degree_year_of_award']);?>" >    
+                                                <input type="number" class="form-control mb-3 required" name="first_medical_degree_year_of_award" type="text" id="first_medical_degree_year_of_award" value="<?php echo set_value('first_medical_degree_year_of_award',$editdata['first_medical_degree_year_of_award']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('first_medical_degree_year_of_award')) {?>
@@ -444,7 +477,7 @@
                                             <label class="form-label " for=""> <b> Marksheet </b> </label>
 
                                                 <div>
-                                                        <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['highest_degree_marksheet'];?>" target="_blank">
+                                                        <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['highest_degree_marksheet'];?>" target="_blank">
                                                         <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                             <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                                         </svg> View</button>
@@ -476,7 +509,7 @@
                                     <div class="mb-3 form-items">
                                         <div>
                                                 <label class="form-check-label question__label noLabel"><b> Year of award of degree </b> <span class="required" style="color:red;">*</span> </label>
-                                                <input class="form-control mb-3 required" name="highest_medical_degree_year" type="text" id="highest_medical_degree_year" value="<?php echo set_value('highest_medical_degree_year',$editdata['highest_medical_degree_year']);?>" >    
+                                                <input type="number" class="form-control mb-3 required" name="highest_medical_degree_year" type="text" id="highest_medical_degree_year" value="<?php echo set_value('highest_medical_degree_year',$editdata['highest_medical_degree_year']);?>" >    
                                         </div>
                                         <small class="text-danger">
                                             <?php if(isset($validation) && $validation->getError('highest_medical_degree_year')) {?>
@@ -521,7 +554,7 @@
                                             
                                                 <label class="form-label " for=""> <b>Research Experience (including, summer research, hands-on research workshop, etc.) </b></label>
                                             <div>
-                                            <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_research_experience'];?>" target="_blank">
+                                            <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['fellowship_research_experience'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                 <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                             </svg> View</button>
@@ -564,7 +597,7 @@
                                             
                                                 <label class="form-label " for=""> <b> Research publications, if any, with complete details (title, journal name, volume number, pages, year, and/or other relevant information) </b></label>  
                                             <div>
-                                            <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_research_publications'];?>" target="_blank">
+                                            <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['fellowship_research_publications'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                 <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                             </svg> View</button>
@@ -606,7 +639,7 @@
                                             
                                                 <label class="form-label " for=""> <b>Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant's specialty) </b></label>
                                             <div>
-                                            <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_research_awards_and_recognitions'];?>" target="_blank">
+                                            <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['fellowship_research_awards_and_recognitions'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                 <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                             </svg> View
@@ -651,7 +684,7 @@
                                             
                                                 <label class="form-label " for=""> <b> Description of past scientific research projects completed and research experience (1 page) </b></label>
                                             <div>
-                                            <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_scientific_research_projects'];?>" target="_blank">
+                                            <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['fellowship_scientific_research_projects'];?>" target="_blank">
                                               <button class="btn btn-primary btn-sm" type="button"><svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                 <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
                                             </svg> View
@@ -795,7 +828,7 @@
                                         <div class="mb-3 form-items">
                                                 <label class="form-label " for=""><b>Description of research to be carried out if the <i>Sun Pharma Science Foundation Clinical Research Fellowship</i> is awarded (2 pages), comprising the following sections: (a) Introduction, (b) Objectives, (c) Brief description of pilot data, if available, (d) Methodology, (e) Anticipated outcomes, (f) Timelines </b></label> 
                                                 <div>
-                                                <a href="<?=base_url();?>/uploads/<?=$user['user_id'];?>/<?=$user['fellowship_description_of_research'];?>" target="_blank">
+                                                <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['fellowship_description_of_research'];?>" target="_blank">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                     <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -836,6 +869,8 @@
                                 </div>
                             </div>
                         </div>
+			<p><b>Note: A printed copy of application with all relevant documents to be sent to The Office of the Sun
+Pharma Science Foundation New Delhi within 10 days of submission.</b></p>
                         <p class="text-danger">Consent from the Supervisor under whom the research will be carried out [as per details provided in (15)], including facilitation of research in the supervisor's institution. [If awarded, the applicant must produce an undertaking from the head of the institution in which the research will be carried out stating that the applicant will be allowed to carry out the proposed research in the institution under the administrative terms and conditions specified by the <i>Sun Pharma Science Foundation</i>.]</p>
                         <p class="text-danger">All relevant documents in support of the statements made in the application (e.g., Mark sheets, academic award certificates, publications, etc.)</p>
                      <?php 
@@ -848,7 +883,7 @@
                         <?php else:?>
                             <div id="q-box__buttons">
                             
-                              <a href="<?=base_url();?>/fellowship/print/<?=$editdata['id'];?>" id="submit-btn" class="btn btn-success ms-2" >Print</a>
+                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['id'];?>/<?=$user['firstname'].".pdf";?>" id="submit-btn" class="btn btn-success ms-2" >Print</a>
                         </div>  
                     <?php endif;?>
                 </form>

@@ -10,10 +10,14 @@
     </div>
     
     <?php if(isset($uri) && ($uri == 'fellowship')): ?>
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+        <?= script_tag('frontend/assets/js/jqueryValidate.js'); ?>
+        <?= script_tag('frontend/assets/js/jQuerySteps.js'); ?>
+        <?= script_tag('frontend/assets/js/additionalMethods.js'); ?>
+        <?= script_tag('frontend/assets/js/jQuerydatepicker.js'); ?>
+        <!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/additional-methods.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/additional-methods.js"></script> 
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> -->
     
       
     <?php  endif;?>
@@ -31,6 +35,31 @@
                  
                     <div class="row">
                        
+			<div class="col-lg-12">
+                                        <div class="mb-3 form-items">
+                                             <div class="form-check ps-0 q-box">
+                                                 <div class="q-box__question col me-2 d-flex">
+                                                    <img class="uploadPreview" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="200" height="200" />
+                                                    <div class="uploadsec">
+                                                        <label class="form-check-label question__label noLabel">
+                                                            <div class="form-label " for=""> Photograph of the Applicant</div>
+                                                                <input name="nominator_photo" class="required" type="file" id="nominator_photo">
+                                                                <small class="text-danger">
+                                                                    <?php if(isset($validation) && $validation->getError('nominator_photo')) {?>
+                                                                        <?= $error = $validation->getError('nominator_photo'); ?>
+                                                                    <?php }?>
+                                                                </small>
+                                                        </label>
+                                                        <div class="hintcont">
+                                                            <small>Not more than 500 KB</small>
+                                                            <br/>
+                                                            <small id="nominatorPhotoErrMsg" style="color:red;font-family:bold;"></small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                         <div class="col-lg-6">
                             <div class="col-lg-12">

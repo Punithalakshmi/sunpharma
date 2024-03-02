@@ -66,10 +66,14 @@
                           else
                               $citation = $editdata['citation']; 
 
+			$currentYear = date('Y');
+
+	                $fileUploadDir = base_url().'/uploads/'.$currentYear.'/RA/'.$editdata['user_id'];
+
                   ?>
                   <div class="x_content">
                     <br />
-                    <form id="nomineeUpdate" action="<?php echo base_url();?>/admin/nominee/update/<?=$editdata['user_id'];?>" method="POST" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
+                    <form id="nomineeUpdate" action="<?php echo base_url();?>/admin/nominee/update/<?=$editdata['user_id'];?>" method="POST" data-parsley-validate class="form-horizontal form-label-left addformsec" enctype="multipart/form-data">
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
@@ -80,7 +84,7 @@
                                 </div>
                               </label>
                               <input type="file" class="form-control col-md-6 required" accept="image/*" name="nominator_photo" id="nominator_photo" value="<?=set_value('nominator_photo',$editdata['nominator_photo']);?>" />
-                              <img  src="<?=base_url();?>/frontend/assets/img/editdata--default-Image.png" width="50"
+                              <img src="<?=$fileUploadDir;?>/<?=$editdata['nominator_photo'];?>" width="50"
                               height="50" />
                               <br />
                       </div>
@@ -287,7 +291,7 @@
                           $justificationLtr = base_url()."/uploads/".$editdata['user_id']."/".$editdata['justification_letter_filename'];
 
                         ?>
-                        <div class="form-group col-md-6">
+                        <div class="form-group uploadseciz">
                         <div class="mb-3 form-items">
                             <label class="form-label"> Justification for Sponsoring the
                                 Nomination duly signed by the Nominator (not to exceed 400 words) </label>
@@ -303,7 +307,7 @@
                                      <div class="mb-3 form-items" id="justificationLtr<?=$i;?>">
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="justification_letter[<?=$justificationLetter[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" title="<?=$justificationLetter[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$justificationLetter[$i];?>" target="_blank" title="<?=$justificationLetter[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -319,7 +323,7 @@
                                       <div class="mb-3 form-items" id="justificationLtr-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="justification_letter[<?=$justificationLetter;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$justificationLetter;?>" target="_blank" title="<?=$justificationLetter;?>">
+                                          <a href="<?=$fileUploadDir;?>/<?=$justificationLetter;?>" target="_blank" title="<?=$justificationLetter;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -338,7 +342,7 @@
 
                         <div class="clearfix"></div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group uploadseciz">
                         <div class="mb-3 form-items">
                             <label class="form-label " for=""> Passport </label>
 
@@ -353,7 +357,7 @@
                                      <div class="mb-3 form-items" id="passport<?=$i;?>">
                                         <input class="form-control mb-3 required passport" accept=".pdf" name="passport[]"  type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$passport[$i];?>" target="_blank" title="<?=$passport[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$passport[$i];?>" target="_blank" title="<?=$passport[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -369,7 +373,7 @@
                                       <div class="mb-3 form-items" id="passport-1">
                                          
                                         <input class="form-control mb-3 required passport" accept=".pdf" name="passport[]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$passport;?>" target="_blank" title="<?=$passport;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$passport;?>" target="_blank" title="<?=$passport;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -389,7 +393,7 @@
                         </div>
                       </div>
                         <div class="clearfix"></div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group uploadseciz">
                         <div class="mb-3 form-items">
                             <label class="form-label " for=""> Complete Bio-data of the Applicant
                                 (Max 1.5 MB) <span class="required" style="color:red;">*</span>
@@ -409,7 +413,7 @@
                                      <div class="mb-3 form-items" id="complete_bio_data<?=$i;?>">
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" title="<?=$completeBiodata[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$completeBiodata[$i];?>" target="_blank" title="<?=$completeBiodata[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -425,7 +429,7 @@
                                       <div class="mb-3 form-items" id="complete_bio_data-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$completeBiodata;?>" target="_blank" title="<?=$completeBiodata;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$completeBiodata;?>" target="_blank" title="<?=$completeBiodata;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -446,7 +450,7 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group uploadseciz">
                         <div class="mb-3 form-items">
                             <label class="form-label"> In order of Importance, list of 10
                                 best papers of the applicant highlighting the important
@@ -467,7 +471,7 @@
                                      <div class="mb-3 form-items" id="best_papers_<?=$i;?>">
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="best_papers[<?=$bestPapers[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$bestPapers[$i];?>" target="_blank" title="<?=$bestPapers[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$bestPapers[$i];?>" target="_blank" title="<?=$bestPapers[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -483,7 +487,7 @@
                                       <div class="mb-3 form-items" id="best_papers-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="best_papers[<?=$bestPapers;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$bestPapers;?>" target="_blank" title="<?=$bestPapers;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$bestPapers;?>" target="_blank" title="<?=$bestPapers;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -505,7 +509,7 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group uploadseciz">
                                     <div class="mb-3 form-items">
                                         <label class="form-label"> Statement of Research Achievements, if
                                             any, on which any Award has already been Received by the Applicant. Please
@@ -531,7 +535,7 @@
                                               <div class="mb-3 form-items" id="researchAchievements<?=$i;?>">
                                                   <input class="form-control mb-3 required statement_of_research_achievements" accept=".pdf" name="statement_of_research_achievements[<?=$researchAchievements[$i];?>]" type="file">
                                                 
-                                                  <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$researchAchievements[$i];?>" target="_blank" title="<?=$researchAchievements[$i];?>">
+                                                  <a href="<?=$fileUploadDir;?>/<?=$researchAchievements[$i];?>" target="_blank" title="<?=$researchAchievements[$i];?>">
                                                         <button class="btn btn-primary btn-sm" type="button">
                                                           <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                               <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -547,7 +551,7 @@
                                                 <div class="mb-3 form-items" id="researchAchievements-1">
                                                   
                                                   <input class="form-control mb-3 required statement_of_research_achievements" accept=".pdf" name="statement_of_research_achievements[<?=$researchAchievements;?>]" type="file">
-                                                  <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$researchAchievements;?>" target="_blank" title="<?=$researchAchievements;?>">
+                                                  <a href="<?=$fileUploadDir;?>/<?=$researchAchievements;?>" target="_blank" title="<?=$researchAchievements;?>">
                                                     <button class="btn btn-primary btn-sm" type="button">
                                                           <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                               <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -565,7 +569,7 @@
                                     </div>
                                 </div>
                         <div class="clearfix"></div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group uploadseciz">
                             <div class="mb-3 form-items">
                                     <label class="form-label " for=""> Signed details of the excellence in
                                         research work for which the Sun Pharma Research Award is claimed, including
@@ -588,7 +592,7 @@
                                      <div class="mb-3 form-items" id="signedDetails<?=$i;?>">
                                         <input class="form-control mb-3 required signed_details" accept=".pdf" name="signed_details[<?=$signedDetails[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$signedDetails[$i];?>" target="_blank" title="<?=$signedDetails[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$signedDetails[$i];?>" target="_blank" title="<?=$signedDetails[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -604,7 +608,7 @@
                                       <div class="mb-3 form-items" id="signedDetails-1">
                                          
                                         <input class="form-control mb-3 required signed_details" accept=".pdf" name="signed_details[<?=$signedDetails;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$signedDetails;?>" target="_blank" title="<?=$signedDetails;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$signedDetails;?>" target="_blank" title="<?=$signedDetails;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -621,7 +625,7 @@
                               </div>
                        </div>
                         <div class="clearfix"></div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group uploadseciz">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> Two specific publications/research
                                             papers of the applicant relevant to the research work mentioned above (Max.
@@ -642,7 +646,7 @@
                                      <div class="mb-3 form-items" id="specificPublicaions<?=$i;?>">
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="specific_publications[<?=$specificPublicaions[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$specificPublicaions[$i];?>" target="_blank" title="<?=$specificPublicaions[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$specificPublicaions[$i];?>" target="_blank" title="<?=$specificPublicaions[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -658,7 +662,7 @@
                                       <div class="mb-3 form-items" id="specificPublicaions-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="specific_publications[<?=$specificPublicaions;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$specificPublicaions;?>" target="_blank" title="<?=$specificPublicaions;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$specificPublicaions;?>" target="_blank" title="<?=$specificPublicaions;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -676,7 +680,7 @@
                                       </div>
                                       </div>
                                   <div class="clearfix"></div>
-                                  <div class="form-group col-md-6">
+                                  <div class="form-group uploadseciz">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A signed statement by the applicant
                                             that the research work under reference has not been given any award. The
@@ -699,7 +703,7 @@
                                      <div class="mb-3 form-items" id="signedStatement<?=$i;?>">
                                         <input class="form-control mb-3 required signed_statement" accept=".pdf" name="signed_statement[<?=$signedStatement[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$signedStatement[$i];?>" target="_blank" title="<?=$signedStatement[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$signedStatement[$i];?>" target="_blank" title="<?=$signedStatement[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -715,7 +719,7 @@
                                       <div class="mb-3 form-items" id="signedStatement-1">
                                          
                                         <input class="form-control mb-3 required signed_statement" accept=".pdf" name="signed_statement[<?=$signedStatement;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$signedStatement;?>" target="_blank" title="<?=$signedStatement;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$signedStatement;?>" target="_blank" title="<?=$signedStatement;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -732,7 +736,7 @@
                                     </div>
                                 </div>                       
                               <div class="clearfix"></div>
-                              <div class="form-group col-md-6">
+                              <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                       <label class="form-label" for=""> Citation on the Research Work of the
                                            Applicant duly signed by the Nominator (Max. 300 KB) <span class="required" style="color:red;">*</span>
@@ -751,7 +755,7 @@
                                      <div class="mb-3 form-items" id="citation<?=$i;?>">
                                         <input class="form-control mb-3 required citation" accept=".pdf" name="citation[<?=$citation[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$citation[$i];?>" target="_blank" title="<?=$citation[$i];?>">
+                                         <a href="<?=$fileUploadDir;?>/<?=$citation[$i];?>" target="_blank" title="<?=$citation[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -767,7 +771,7 @@
                                       <div class="mb-3 form-items" id="citation-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="citation[<?=$citation;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=$editdata['user_id'];?>/<?=$citation;?>" target="_blank" title="<?=$citation;?>">
+                                        <a href="<?=$fileUploadDir;?>/<?=$citation;?>" target="_blank" title="<?=$citation;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -794,3 +798,64 @@
                 </div>
               </div>
             </div>
+            <style>
+
+.form-horizontal.addformsec .form-group.uploadseciz{background:#fdfdfd;border:1px solid #d9d9d9;padding:8px 15px;display:flex;width: 100%;}
+
+.form-horizontal.addformsec .form-group.uploadseciz label.form-label {
+    display: flex;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-control[type="file"] {
+  margin-top: 15px;width: 60%;min-width: 200px;padding-bottom: 36px!important;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div {
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items {
+    width: 100%;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div a button {
+    display: inline-block;
+    min-width: 200px;
+    background: #047cb2;
+    border: 0px solid #047cb2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    margin-right: 0;
+    color: #fff;
+    text-align: left;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div button[name="remove"] {
+    padding: 2px 10px;
+    opacity: .5;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items .form-items {border-bottom: 1px solid #ddd;padding: 0px 10px 20px 0px;margin: 0;}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div button[name="remove"]:hover {
+    opacity: 1;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div a button:hover {
+    background: #015379;
+    color: white;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div > div {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 23px;
+}
+
+.form-horizontal.addformsec .form-group.uploadseciz .form-items > div > div:last-child {
+    border: 0;
+}
+.mt20 {
+    margin-top: 20px;
+}
+</style>

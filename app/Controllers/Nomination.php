@@ -84,6 +84,11 @@ class Nomination extends BaseController
                             $nominee_details_data['is_submitted'] = 0;
                             $nominee_details_data['nomination_year'] = date('Y');
 
+                            $registrationID = getNominationNo($award_id);
+                            $registrationNo = date('Y')."/SSA-".$registrationID;
+			            	setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
+                          
+
                             if($this->request->getPost('course_name')) {
                                 $course_name  = $this->request->getPost('course_name');
                                 $nominee_details_data['course_name']   = $course_name;
@@ -93,12 +98,10 @@ class Nomination extends BaseController
                             $ins_data['created_date']  =  date("Y-m-d H:i:s");
                             $ins_data['created_id']    =  '';
                             $this->userModel->save($ins_data);
+
                             $lastInsertID = $this->userModel->insertID();
 
-                            $fileUploadDir = 'uploads/'.$lastInsertID;
-                            
-                            if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                            mkdir($fileUploadDir, 0777, true);
+                            $fileUploadDir = generateAwardsFolderPath(2,$lastInsertID);
                             
                             $getSessionFiles = getSessionData('uploadedFile');
 
@@ -141,18 +144,16 @@ class Nomination extends BaseController
                                 $nominee_details_data['nominator_photo']  = $nominator_photo->getBasename();
                             }    
                            
-                            
+                            $nomination_no = getSessionData('nominationNo');
+                            $nominee_details_data['registration_no'] = (isset($nomination_no['nomination_no']) && ($nomination_no['nomination_no']))?$nomination_no['nomination_no']:'';
+
                             $nominee_details_data['nominee_id'] = $lastInsertID;
                            
                             $this->nominationModel->save($nominee_details_data);
 
-                            $registrationID = $this->nominationModel->insertID();
+                            //$registrationID = getNominationNo($award_id);
 
-                            $registrationNo = date('Y')."/SSA-".$registrationID;
-
-                            $update_regisno_arr = array();
-                            $update_regisno_arr['registration_no'] = $registrationNo;
-                            $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
+                         
 
                             $this->sendMail($firstname,$registrationNo,$email);
 
@@ -200,7 +201,7 @@ class Nomination extends BaseController
             //get categories lists
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Research Awards');
             $categories         = $getCategoryLists->getResultArray();
-          //  sessionDestroy();
+         
             $this->data['categories'] = $categories;
 
             $getSessionFiles = getSessionData('uploadedFile');
@@ -273,6 +274,9 @@ class Nomination extends BaseController
                                 $nominee_details_data['is_submitted'] = 0;
                                 $nominee_details_data['nomination_year'] = date('Y');
 
+                                $registrationID = getNominationNo($award_id);
+                                $registrationNo = date('Y')."/RA-".$registrationID;
+                                setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
                                 
                                 $this->session->setFlashdata('msg', 'Submitted Successfully!');
                                 $ins_data['created_date']  =  date("Y-m-d H:i:s");
@@ -280,11 +284,8 @@ class Nomination extends BaseController
                                 $this->userModel->save($ins_data);
                                 $lastInsertID = $this->userModel->insertID();
 
-                                $fileUploadDir = 'uploads/'.$lastInsertID;
+                                $fileUploadDir = generateAwardsFolderPath(1,$lastInsertID);
                             
-                                if(!file_exists($fileUploadDir) && !is_dir($fileUploadDir))
-                                  mkdir($fileUploadDir, 0777, true);
-
                                 //upload documents to respestive nominee folder
                                 if($this->request->getFile('justification_letter')!=''){
                                     $justification_letter = $this->request->getFile('justification_letter');
@@ -329,16 +330,13 @@ class Nomination extends BaseController
                                 }    
                                 
                                 $nominee_details_data['nominee_id'] = $lastInsertID;
+
+                                $nomination_no = getSessionData('nominationNo');
+                                $nominee_details_data['registration_no'] = (isset($nomination_no['nomination_no']) && ($nomination_no['nomination_no']))?$nomination_no['nomination_no']:'';
+    
+                                $nominee_details_data['nominee_id'] = $lastInsertID;
                                  
                                 $this->nominationModel->save($nominee_details_data);
-
-                                $registrationID = $this->nominationModel->insertID();
-
-                                $registrationNo = date('Y')."/RA-".$registrationID;
-
-                                $update_regisno_arr = array();
-                                $update_regisno_arr['registration_no'] = $registrationNo;
-                                $this->nominationModel->update(array("id" => $registrationID),$update_regisno_arr);
 
                                 $this->sendMail($firstname,$registrationNo,$email);
 
@@ -469,7 +467,44 @@ class Nomination extends BaseController
     {
 
         $id       = (!empty($id))?$id:$this->request->getPost('id');
-       // $award_id = (!empty($award_id))?$award_id:$this->request->getPost('award_id');
+     
+        $documentRoot =  $_SERVER['DOCUMENT_ROOT'];
+        //folder path
+        $uploadedFolderPath = 'uploads/nominations/';
+
+        $files = array(     'complete_bio_data' =>'',
+                            'best_papers' =>'',
+                            'statement_of_research_achievements'=>'',
+                            'signed_details'=>'',
+                            'specific_publications'=>'',
+                            'signed_statement'=>'',
+                            'citation' => '',
+                            'excellence_research_work' => '',
+                            'lists_of_publications' => '',
+                            'statement_of_applicant' => '',
+                            'ethical_clearance' => '',
+                            'statement_of_duly_signed_by_nominee' => '',
+                            'aggregate_marks'=>'',
+                            'age_proof' => '',
+                            'declaration_candidate' => '',
+                            'complete_bio_data_name' => '',
+                            'best_papers_name' => '',
+                            'statement_of_research_achievements_name' => '',
+                            'signed_details_name' => '',
+                            'specific_publications_name' => '',
+                            'signed_statement_name' => '',
+                            'citation_name' => '',
+                            'excellence_research_work_name' => '',
+                            'lists_of_publications_name' => '',
+                            'statement_of_applicant_name' => '',
+                            'ethical_clearance_name' => '',
+                            'statement_of_duly_signed_by_nominee_name' => '',
+                            'aggregate_marks_name' => '',
+                            'age_proof_name' => '',
+                            'declaration_candidate_name' => ''
+        );
+
+        $getSessionFiles = array();
 
         if(!empty($id)){
             $getUserData = $this->userModel->getUserData($id);
@@ -490,53 +525,101 @@ class Nomination extends BaseController
 
           if($this->validation->withRequest($this->request)->run()) {
     
-
             $nominee_details_data = array();
-            $fileUploadDir = 'uploads/'.$edit_data['user_id'];
+
+            $currentYear = date('Y');
+                 
 
             if(isset($edit_data['nomination_type'])
                 && ($edit_data['nomination_type'] == 'ssan')){
 
-                    if($this->request->getFile('complete_bio_data')) {
-                        $complete_bio_data = $this->request->getFile('complete_bio_data');
-                        $complete_bio_data->move($fileUploadDir);
-                        $nominee_details_data['complete_bio_data'] = $complete_bio_data->getClientName();
-                    }
-                    
-                    if($this->request->getFile('best_papers')) {
-                        $best_papers = $this->request->getFile('best_papers');
-                        $best_papers->move($fileUploadDir);
-                        $nominee_details_data['best_papers'] = $best_papers->getClientName();
-                    }    
+                    $fileUploadDir = 'uploads/'.$currentYear.'/RA/'.$id;
 
-                    if($this->request->getFile('statement_of_research_achievements')) {
-                        $statement_of_research_achievements = $this->request->getFile('statement_of_research_achievements');
-                        $statement_of_research_achievements->move($fileUploadDir);
-                        $nominee_details_data['statement_of_research_achievements'] = $statement_of_research_achievements->getClientName();
+                    $getSessionFiles = getSessionData('uploadedFile');
+                       
+                    //upload documents to respestive nominee folder
+                    if($this->request->getFile('complete_bio_data')!=''){
+                        $justification_letter = $this->request->getFile('complete_bio_data');
+                        $justification_letter->move($fileUploadDir);
+                        $nominee_details_data['complete_bio_data'] = $justification_letter->getClientName();
+                    }     
+                    else
+                    {
+                        $justification_letter = getFileInfo($getSessionFiles['complete_bio_data']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['complete_bio_data'] = $justification_letter->getBasename();    
                     }
                     
-                    if($this->request->getFile('signed_details')) {
-                        $signed_details = $this->request->getFile('signed_details');
-                        $signed_details->move($fileUploadDir);
-                        $nominee_details_data['signed_details']  = $signed_details->getClientName();
+                    if($this->request->getFile('best_papers')!=''){
+                        $justification_letter = $this->request->getFile('best_papers');
+                        $justification_letter->move($fileUploadDir);
+                        $nominee_details_data['best_papers'] = $justification_letter->getClientName();
+                    }     
+                    else
+                    {
+                        $justification_letter = getFileInfo($getSessionFiles['best_papers']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['best_papers'] = $justification_letter->getBasename();    
+                    }
+
+                    if($this->request->getFile('statement_of_research_achievements')!=''){
+                        $justification_letter = $this->request->getFile('statement_of_research_achievements');
+                        $justification_letter->move($fileUploadDir);
+                        $nominee_details_data['statement_of_research_achievements'] = $justification_letter->getClientName();
+                    }     
+                    else
+                    {
+                        $justification_letter = getFileInfo($getSessionFiles['statement_of_research_achievements']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['statement_of_research_achievements'] = $justification_letter->getBasename();    
+                    }
+
+                    if($this->request->getFile('signed_details')!=''){
+                        $justification_letter = $this->request->getFile('signed_details');
+                        $justification_letter->move($fileUploadDir);
+                        $nominee_details_data['signed_details'] = $justification_letter->getClientName();
+                    }     
+                    else
+                    {
+                        $justification_letter = getFileInfo($getSessionFiles['signed_details']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['signed_details'] = $justification_letter->getBasename();    
                     }
                     
-                    if($this->request->getFile('specific_publications')) {
-                        $specific_publications = $this->request->getFile('specific_publications');
-                        $specific_publications->move($fileUploadDir);
-                        $nominee_details_data['specific_publications'] = $specific_publications->getClientName();
-                    }   
-                    
-                    if($this->request->getFile('signed_statement')) {
-                        $signed_statement = $this->request->getFile('signed_statement');
-                        $signed_statement->move($fileUploadDir);
-                        $nominee_details_data['signed_statement']  = $signed_statement->getClientName();
+                    if($this->request->getFile('specific_publications')!=''){
+                        $justification_letter = $this->request->getFile('specific_publications');
+                        $justification_letter->move($fileUploadDir);
+                        $nominee_details_data['specific_publications'] = $justification_letter->getClientName();
+                    }     
+                    else
+                    {
+                        $justification_letter = getFileInfo($getSessionFiles['specific_publications']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['specific_publications'] = $justification_letter->getBasename();    
                     }
                      
-                    if($this->request->getFile('citation')){
-                        $citation = $this->request->getFile('citation');
-                        $citation->move($fileUploadDir);
-                        $nominee_details_data['citation']     = $citation->getClientName();
+                    if($this->request->getFile('signed_statement')!=''){
+                        $justification_letter = $this->request->getFile('signed_statement');
+                        $justification_letter->move($fileUploadDir);
+                        $nominee_details_data['signed_statement'] = $justification_letter->getClientName();
+                    }     
+                    else
+                    {
+                        $justification_letter = getFileInfo($getSessionFiles['signed_statement']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['signed_statement'] = $justification_letter->getBasename();    
+                    }  
+
+                    if($this->request->getFile('citation')!=''){
+                        $justification_letter = $this->request->getFile('citation');
+                        $justification_letter->move($fileUploadDir);
+                        $nominee_details_data['citation'] = $justification_letter->getClientName();
+                    }     
+                    else
+                    {
+                        $justification_letter = getFileInfo($getSessionFiles['citation']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['citation'] = $justification_letter->getBasename();    
                     }
             }
             else
@@ -548,65 +631,134 @@ class Nomination extends BaseController
                 if($this->request->getPost('number_of_attempts'))  
                   $nominee_details_data['number_of_attempts'] = $this->request->getPost('number_of_attempts');
                
-                if($this->request->getFile('complete_bio_data')) {
-                    $complete_bio_data = $this->request->getFile('complete_bio_data');
-                    $complete_bio_data->move($fileUploadDir);
-                    $nominee_details_data['complete_bio_data'] = $complete_bio_data->getClientName();
+                  $fileUploadDir = 'uploads/'.$currentYear.'/SSA/'.$id;
+
+                  $getSessionFiles = getSessionData('uploadedFile');
+                     
+                  //upload documents to respestive nominee folder
+                  if($this->request->getFile('complete_bio_data')!=''){
+                    $justification_letter = $this->request->getFile('complete_bio_data');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['complete_bio_data'] = $justification_letter->getClientName();
+                  }     
+                  else
+                  {
+                    $justification_letter = getFileInfo($getSessionFiles['complete_bio_data']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['complete_bio_data'] = $justification_letter->getBasename();    
+                  }
+
+
+                if($this->request->getFile('excellence_research_work')!=''){
+                    $justification_letter = $this->request->getFile('excellence_research_work');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['excellence_research_work'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['excellence_research_work']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['excellence_research_work'] = $justification_letter->getBasename();    
+                }
+                    
+                if($this->request->getFile('lists_of_publications')!=''){
+                    $justification_letter = $this->request->getFile('lists_of_publications');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['lists_of_publications'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['lists_of_publications']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['lists_of_publications'] = $justification_letter->getBasename();    
+                }      
+
+                if($this->request->getFile('statement_of_applicant')!=''){
+                    $justification_letter = $this->request->getFile('statement_of_applicant');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['statement_of_applicant'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['statement_of_applicant']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['statement_of_applicant'] = $justification_letter->getBasename();    
                 }
 
-                if($this->request->getFile('excellence_research_work')) {
-                    $excellence_research_work = $this->request->getFile('excellence_research_work');
-                    $excellence_research_work->move($fileUploadDir);
-                    $nominee_details_data['excellence_research_work']  = $excellence_research_work->getClientName();
+                if($this->request->getFile('ethical_clearance')!=''){
+                    $justification_letter = $this->request->getFile('ethical_clearance');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['ethical_clearance'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                        $justification_letter = getFileInfo($getSessionFiles['ethical_clearance']); 
+                        $justification_letter->move($fileUploadDir);  
+                        $nominee_details_data['ethical_clearance'] = $justification_letter->getBasename();    
                 }
 
-                if($this->request->getFile('lists_of_publications')) {
-                    $lists_of_publications = $this->request->getFile('lists_of_publications');
-                    $lists_of_publications->move($fileUploadDir);
-                    $nominee_details_data['lists_of_publications']   = $lists_of_publications->getClientName();
+                if($this->request->getFile('statement_of_duly_signed_by_nominee')!=''){
+                    $justification_letter = $this->request->getFile('statement_of_duly_signed_by_nominee');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['statement_of_duly_signed_by_nominee'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['statement_of_duly_signed_by_nominee']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['statement_of_duly_signed_by_nominee'] = $justification_letter->getBasename();    
                 }
 
-                if($this->request->getFile('statement_of_applicant')) {
-                    $statement_of_applicant = $this->request->getFile('statement_of_applicant');
-                    $statement_of_applicant->move($fileUploadDir);
-                    $nominee_details_data['statement_of_applicant'] = $statement_of_applicant->getClientName();
+                if($this->request->getFile('citation')!=''){
+                    $justification_letter = $this->request->getFile('citation');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['citation'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['citation']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['citation'] = $justification_letter->getBasename();    
                 }
 
-                if($this->request->getFile('ethical_clearance')) {
-                    $ethical_clearance = $this->request->getFile('ethical_clearance');
-                    $ethical_clearance->move($fileUploadDir);
-                    $nominee_details_data['ethical_clearance'] = $ethical_clearance->getClientName();
+                if($this->request->getFile('aggregate_marks')!=''){
+                    $justification_letter = $this->request->getFile('aggregate_marks');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['aggregate_marks'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['aggregate_marks']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['aggregate_marks'] = $justification_letter->getBasename();    
                 }
 
-                if($this->request->getFile('statement_of_duly_signed_by_nominee')) {
-                    $statement_of_duly_signed_by_nominee = $this->request->getFile('statement_of_duly_signed_by_nominee');
-                    $statement_of_duly_signed_by_nominee->move($fileUploadDir);
-                    $nominee_details_data['statement_of_duly_signed_by_nominee']= $statement_of_duly_signed_by_nominee->getClientName();
+                if($this->request->getFile('age_proof')!=''){
+                    $justification_letter = $this->request->getFile('age_proof');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['age_proof'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['age_proof']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['age_proof'] = $justification_letter->getBasename();    
                 }
-
-                if($this->request->getFile('citation')) {
-                    $citation = $this->request->getFile('citation');
-                    $citation->move($fileUploadDir);
-                    $nominee_details_data['citation'] = $citation->getClientName();
+               
+                if($this->request->getFile('declaration_candidate')!=''){
+                    $justification_letter = $this->request->getFile('declaration_candidate');
+                    $justification_letter->move($fileUploadDir);
+                    $nominee_details_data['declaration_candidate'] = $justification_letter->getClientName();
+                }     
+                else
+                {
+                    $justification_letter = getFileInfo($getSessionFiles['declaration_candidate']); 
+                    $justification_letter->move($fileUploadDir);  
+                    $nominee_details_data['declaration_candidate'] = $justification_letter->getBasename();    
                 }
+                
 
-                if($this->request->getFile('aggregate_marks')) {
-                    $aggregate_marks = $this->request->getFile('aggregate_marks');
-                    $aggregate_marks->move($fileUploadDir);
-                    $nominee_details_data['aggregate_marks']  = $aggregate_marks->getClientName();
-                }
-
-                if($this->request->getFile('age_proof')) {
-                    $age_proof = $this->request->getFile('age_proof');
-                    $age_proof->move($fileUploadDir);
-                    $nominee_details_data['age_proof']  = $age_proof->getClientName();
-                }
-
-                if($this->request->getFile('declaration_candidate')) {
-                    $declaration_candidate = $this->request->getFile('declaration_candidate');
-                    $declaration_candidate->move($fileUploadDir);
-                    $nominee_details_data['declaration_candidate']   = $declaration_candidate->getClientName();
-                } 
+                
 
             }
 
@@ -622,11 +774,17 @@ class Nomination extends BaseController
             //sendmail to jury
            // $this->sendMailToJury($award_id);
 
-            $this->print($id);
+            $this->pdfGeneration($id);
             //send mail to admin
-            $filename  = $edit_data['firstname'].'.docx';
-            $attachmentFilePath =  'uploads/'.$id.'/'.$filename;
+        
+            $filename  = $edit_data['firstname'].'.pdf';
+            
+            $attachmentFilePath =  $fileUploadDir.'/'.$filename;
+    
+
             $isMailSent = finalNominationSubmit($edit_data['firstname'],$attachmentFilePath);
+
+            finalNominationSubmitEmailToCandidate($edit_data['firstname'],$attachmentFilePath,$edit_data['registration_no'],$edit_data['email']);
 
             $redirectUrl = 'view/'.$edit_data['user_id'].'/'.$award_id;
 
@@ -644,39 +802,346 @@ class Nomination extends BaseController
           }
 
         } 
-            $editdata['id']                                  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
-            if(isset($edit_data['nomination_type']) && ($edit_data['nomination_type'] == 'ssan')){
-                $editdata['complete_bio_data']                   = ($this->request->getFile('complete_bio_data'))?$this->request->getFile('complete_bio_data'):'';
-                $editdata['statement_of_research_achievements']  = ($this->request->getFile('statement_of_research_achievements'))?$this->request->getFile('statement_of_research_achievements'):'';
-                $editdata['signed_details']                      = ($this->request->getFile('signed_details'))?$this->request->getFile('signed_details'):'';
-                $editdata['best_papers']                         = ($this->request->getFile('best_papers'))?$this->request->getFile('best_papers'):'';
-                $editdata['specific_publications']               = ($this->request->getFile('specific_publications'))?$this->request->getFile('specific_publications'):'';
-                $editdata['signed_statement']                    = ($this->request->getFile('signed_statement'))?$this->request->getFile('signed_statement'):'';
-                $editdata['citation']                            = ($this->request->getFile('citation'))?$this->request->getFile('citation'):'';
-            }    
+
+        $editdata['id']                                  = ($this->request->getPost('id'))?$this->request->getPost('id'):$id;
+        if(isset($edit_data['nomination_type']) && ($edit_data['nomination_type'] == 'ssan')){
+            
+            if($this->request->getFile('complete_bio_data')!='') {
+                $editdata['complete_bio_data_name'] = $this->request->getFile('complete_bio_data')->getName();
+                $letter_name =  $this->request->getFile('complete_bio_data');
+                $letter_name->move($uploadedFolderPath);
+                $files['complete_bio_data'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['complete_bio_data_name'] = $editdata['complete_bio_data_name'];
+            } 
+
+            if($this->request->getFile('statement_of_research_achievements')!='') {
+                $editdata['statement_of_research_achievements_name'] = $this->request->getFile('statement_of_research_achievements')->getName();
+                $letter_name =  $this->request->getFile('statement_of_research_achievements');
+                $letter_name->move($uploadedFolderPath);
+                $files['statement_of_research_achievements'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['statement_of_research_achievements_name'] = $editdata['statement_of_research_achievements_name'];
+            } 
+
+            if($this->request->getFile('signed_details')!='') {
+                $editdata['signed_details_name'] = $this->request->getFile('signed_details')->getName();
+                $letter_name =  $this->request->getFile('signed_details');
+                $letter_name->move($uploadedFolderPath);
+                $files['signed_details'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['signed_details_name'] = $editdata['signed_details_name'];
+            } 
+
+            if($this->request->getFile('best_papers')!='') {
+                $editdata['best_papers_name'] = $this->request->getFile('best_papers')->getName();
+                $letter_name =  $this->request->getFile('best_papers');
+                $letter_name->move($uploadedFolderPath);
+                $files['best_papers'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['best_papers_name'] = $editdata['best_papers_name'];
+            } 
+
+            if($this->request->getFile('specific_publications')!='') {
+                $editdata['specific_publications_name'] = $this->request->getFile('specific_publications')->getName();
+                $letter_name =  $this->request->getFile('specific_publications');
+                $letter_name->move($uploadedFolderPath);
+                $files['specific_publications'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['specific_publications_name'] = $editdata['specific_publications_name'];
+            } 
+
+            if($this->request->getFile('signed_statement')!='') {
+                $editdata['signed_statement_name'] = $this->request->getFile('signed_statement')->getName();
+                $letter_name =  $this->request->getFile('signed_statement');
+                $letter_name->move($uploadedFolderPath);
+                $files['signed_statement'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['signed_statement_name'] = $editdata['signed_statement_name'];
+            } 
+
+            if($this->request->getFile('citation')!='') {
+                $editdata['citation_name'] = $this->request->getFile('citation')->getName();
+                $letter_name =  $this->request->getFile('citation');
+                $letter_name->move($uploadedFolderPath);
+                $files['citation'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['citation_name'] = $editdata['citation_name'];
+            } 
+
+             if($files['best_papers_name'] != '' || 
+                 $files['specific_publications_name'] != '' || 
+                 $files['signed_statement_name'] != '' || 
+                 $files['citation_name'] != ''|| 
+                 $files['signed_details_name'] != '' || 
+                 $files['statement_of_research_achievements_name'] != '' || 
+                 $files['complete_bio_data_name'] != '' || 
+                 $files['complete_bio_data'] != '' || 
+                 $files['statement_of_research_achievements'] != '' || 
+                 $files['signed_details'] != '' || 
+                 $files['best_papers'] != '' || 
+                 $files['specific_publications'] != ''||
+                 $files['signed_statement'] != '' || 
+                 $files['citation'] != ''
+              )
+              {
+                  setSessionData('uploadedFile',$files);
+               }   
+ 
+             //already uploaded files get
+            if($this->request->getPost()) 
+                $getSessionFiles = getSessionData('uploadedFile');
+
+
+               if(is_array($getSessionFiles) && count($getSessionFiles) > 0 ) {
+
+                $complete_bio_dataDt = (isset($getSessionFiles['complete_bio_data']) && $getSessionFiles['complete_bio_data']!='')?getFileInfo($getSessionFiles['complete_bio_data']):'';
+                $statement_of_research_achievementsDt = (isset($getSessionFiles['statement_of_research_achievements']) && $getSessionFiles['statement_of_research_achievements']!='')?getFileInfo($getSessionFiles['statement_of_research_achievements']):'';
+                $signed_detailsDt = (isset($getSessionFiles['signed_details']) && $getSessionFiles['signed_details']!='')?getFileInfo($getSessionFiles['signed_details']):'';
+                $best_papersDt = (isset($getSessionFiles['best_papers']) && $getSessionFiles['best_papers']!='')?getFileInfo($getSessionFiles['best_papers']):'';
+                $specific_publicationsDt = (isset($getSessionFiles['specific_publications']) && $getSessionFiles['specific_publications']!='')?getFileInfo($getSessionFiles['specific_publications']):'';
+                $signed_statementDt = (isset($getSessionFiles['signed_statement']) && $getSessionFiles['signed_statement']!='')?getFileInfo($getSessionFiles['signed_statement']):'';
+                $citationDt = (isset($getSessionFiles['citation']) && $getSessionFiles['citation']!='')?getFileInfo($getSessionFiles['citation']):'';
+                
+             
+                $editdata['complete_bio_data_name']                     =  (isset($getSessionFiles['complete_bio_data_name']))?$getSessionFiles['complete_bio_data_name']:''; 
+                $editdata['statement_of_research_achievements_name']              =  (isset($getSessionFiles['statement_of_research_achievements_name']))?$getSessionFiles['statement_of_research_achievements_name']:''; 
+                $editdata['signed_details_name']                 =  (isset($getSessionFiles['signed_details_name']))?$getSessionFiles['signed_details_name']:''; 
+                $editdata['signed_statement_name']                =  (isset($getSessionFiles['signed_statement_name']))?$getSessionFiles['signed_statement_name']:''; 
+                $editdata['specific_publications_name']                     =  (isset($getSessionFiles['specific_publications_name']))?$getSessionFiles['specific_publications_name']:''; 
+                $editdata['best_papers_name']   =  (isset($getSessionFiles['best_papers_name']))?$getSessionFiles['best_papers_name']:''; 
+                $editdata['citation_name']                              =  (isset($getSessionFiles['citation_name']))?$getSessionFiles['citation_name']:''; 
+                
+            }
             else
             {
+                $complete_bio_dataDt= ''; 
+                $statement_of_research_achievementsDt='';
+                $signed_detailsDt='';
+                $best_papersDt='';
+                $specific_publicationsDt='';
+                $signed_statementDt='';
+                $citationDt ='';
+                
 
-                $editdata['complete_bio_data']                    = ($this->request->getFile('complete_bio_data'))?$this->request->getFile('complete_bio_data'):'';
-                $editdata['excellence_research_work']             = ($this->request->getFile('excellence_research_work'))?$this->request->getFile('excellence_research_work'):'';
-                $editdata['lists_of_publications']                = ($this->request->getFile('lists_of_publications'))?$this->request->getFile('lists_of_publications'):'';
-                $editdata['statement_of_applicant']               = ($this->request->getFile('statement_of_applicant'))?$this->request->getFile('statement_of_applicant'):'';
-                $editdata['ethical_clearance']                    = ($this->request->getFile('ethical_clearance'))?$this->request->getFile('ethical_clearance'):'';
-                $editdata['statement_of_duly_signed_by_nominee']  = ($this->request->getFile('statement_of_duly_signed_by_nominee'))?$this->request->getFile('statement_of_duly_signed_by_nominee'):'';
-                $editdata['citation']                             = ($this->request->getFile('citation'))?$this->request->getFile('citation'):'';
-                $editdata['aggregate_marks']                      = ($this->request->getFile('aggregate_marks'))?$this->request->getFile('aggregate_marks'):'';
-                $editdata['age_proof']                            = ($this->request->getFile('age_proof'))?$this->request->getFile('age_proof'):'';
-                $editdata['declaration_candidate']                = ($this->request->getFile('declaration_candidate'))?$this->request->getFile('declaration_candidate'):'';
-                $editdata['year_of_passing']                      = ($this->request->getPost('year_of_passing'))?$this->request->getPost('year_of_passing'):'';
-                $editdata['number_of_attempts']                   = ($this->request->getPost('number_of_attempts'))?$this->request->getPost('number_of_attempts'):'';
-                $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
-                $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
+                $editdata['complete_bio_data_name']                     =  ''; 
+                $editdata['statement_of_research_achievements_name']              =  ''; 
+                $editdata['signed_details_name']                 =  ''; 
+                $editdata['signed_statement_name']                =  ''; 
+                $editdata['specific_publications_name']                     =  ''; 
+                $editdata['best_papers_name']   =  ''; 
+                $editdata['citation_name']                              =  ''; 
+               
+                
+            }
+            
+            $complete_bio_dataDt  = ($this->request->getFile('complete_bio_data')!='')?$this->request->getFile('complete_bio_data'):$complete_bio_dataDt;
+            $statement_of_research_achievementsDt  = ($this->request->getFile('statement_of_research_achievements')!='')?$this->request->getFile('statement_of_research_achievements'):$statement_of_research_achievementsDt;
+            $signed_detailsDt  = ($this->request->getFile('signed_details')!='')?$this->request->getFile('signed_details'):$signed_detailsDt;
+            $best_papersDt  = ($this->request->getFile('best_papers')!='')?$this->request->getFile('best_papers'):$best_papersDt;
+            $specific_publicationsDt  = ($this->request->getFile('specific_publications')!='')?$this->request->getFile('specific_publications'):$specific_publicationsDt;
+            $signed_statementDt  = ($this->request->getFile('signed_statement')!='')?$this->request->getFile('signed_statement'):$signed_statementDt;
+            $citationDt  = ($this->request->getFile('citation')!='')?$this->request->getFile('citation'):$citationDt;
+            
+            $editdata['complete_bio_data']                  = $complete_bio_dataDt;
+            $editdata['statement_of_research_achievements'] = $statement_of_research_achievementsDt;
+            $editdata['signed_details']                     = $signed_detailsDt;
+            $editdata['best_papers']                        = $best_papersDt;
+            $editdata['specific_publications']              = $specific_publicationsDt;
+            $editdata['signed_statement']                   = $signed_statementDt;
+            $editdata['citation']                           = $citationDt;
+           
 
+        }    
+        else
+        {
+
+            if($this->request->getFile('complete_bio_data')!='') {
+                $editdata['complete_bio_data_name'] = $this->request->getFile('complete_bio_data')->getName();
+                $letter_name =  $this->request->getFile('complete_bio_data');
+                $letter_name->move($uploadedFolderPath);
+                $files['complete_bio_data'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['complete_bio_data_name'] = $editdata['complete_bio_data_name'];
             } 
+
+            if($this->request->getFile('excellence_research_work')!='') {
+                $editdata['excellence_research_work_name'] = $this->request->getFile('excellence_research_work')->getName();
+                $letter_name =  $this->request->getFile('excellence_research_work');
+                $letter_name->move($uploadedFolderPath);
+                $files['excellence_research_work'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['excellence_research_work_name'] = $editdata['excellence_research_work_name'];
+            } 
+
+            if($this->request->getFile('lists_of_publications')!='') {
+                $editdata['lists_of_publications_name'] = $this->request->getFile('lists_of_publications')->getName();
+                $letter_name =  $this->request->getFile('lists_of_publications');
+                $letter_name->move($uploadedFolderPath);
+                $files['lists_of_publications'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['lists_of_publications_name'] = $editdata['lists_of_publications_name'];
+            } 
+
+            if($this->request->getFile('statement_of_applicant')!='') {
+                $editdata['statement_of_applicant_name'] = $this->request->getFile('statement_of_applicant')->getName();
+                $letter_name =  $this->request->getFile('statement_of_applicant');
+                $letter_name->move($uploadedFolderPath);
+                $files['statement_of_applicant'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['statement_of_applicant_name'] = $editdata['statement_of_applicant_name'];
+            } 
+
+            if($this->request->getFile('ethical_clearance')!='') {
+                $editdata['ethical_clearance_name'] = $this->request->getFile('ethical_clearance')->getName();
+                $letter_name =  $this->request->getFile('ethical_clearance');
+                $letter_name->move($uploadedFolderPath);
+                $files['ethical_clearance'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['ethical_clearance_name'] = $editdata['ethical_clearance_name'];
+            } 
+
+            if($this->request->getFile('statement_of_duly_signed_by_nominee')!='') {
+                $editdata['statement_of_duly_signed_by_nominee_name'] = $this->request->getFile('statement_of_duly_signed_by_nominee')->getName();
+                $letter_name =  $this->request->getFile('statement_of_duly_signed_by_nominee');
+                $letter_name->move($uploadedFolderPath);
+                $files['statement_of_duly_signed_by_nominee'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['statement_of_duly_signed_by_nominee_name'] = $editdata['statement_of_duly_signed_by_nominee_name'];
+            } 
+
+            if($this->request->getFile('citation')!='') {
+                $editdata['citation_name'] = $this->request->getFile('citation')->getName();
+                $letter_name =  $this->request->getFile('citation');
+                $letter_name->move($uploadedFolderPath);
+                $files['citation'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['citation_name'] = $editdata['citation_name'];
+            } 
+
+            if($this->request->getFile('aggregate_marks')!='') {
+                $editdata['aggregate_marks_name'] = $this->request->getFile('aggregate_marks')->getName();
+                $letter_name =  $this->request->getFile('aggregate_marks');
+                $letter_name->move($uploadedFolderPath);
+                $files['aggregate_marks'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['aggregate_marks_name'] = $editdata['aggregate_marks_name'];
+            } 
+
+            if($this->request->getFile('age_proof')!='') {
+                $editdata['age_proof_name'] = $this->request->getFile('age_proof')->getName();
+                $letter_name =  $this->request->getFile('age_proof');
+                $letter_name->move($uploadedFolderPath);
+                $files['age_proof'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['age_proof_name'] = $editdata['age_proof_name'];
+            } 
+
+            if($this->request->getFile('declaration_candidate')!='') {
+                $editdata['declaration_candidate_name'] = $this->request->getFile('declaration_candidate')->getName();
+                $letter_name =  $this->request->getFile('declaration_candidate');
+                $letter_name->move($uploadedFolderPath);
+                $files['declaration_candidate'] = $documentRoot.'/'.$uploadedFolderPath.$letter_name->getClientName();
+                $files['declaration_candidate_name'] = $editdata['declaration_candidate_name'];
+            } 
+
+            if(  $files['declaration_candidate_name'] != '' || 
+                 $files['age_proof_name'] != '' || 
+                 $files['aggregate_marks_name'] != '' || 
+                 $files['citation_name'] != ''|| 
+                 $files['statement_of_duly_signed_by_nominee_name'] != '' || 
+                 $files['ethical_clearance_name'] != '' || 
+                 $files['statement_of_applicant_name'] != '' || 
+                 $files['lists_of_publications_name'] != '' || 
+                 $files['excellence_research_work_name']!= '' || 
+                 $files['complete_bio_data_name'] != '' || 
+                 $files['complete_bio_data'] != '' || 
+                 $files['excellence_research_work'] != '' || 
+                 $files['lists_of_publications'] != '' || 
+                 $files['statement_of_applicant'] != '' || 
+                 $files['ethical_clearance'] != ''||
+                 $files['statement_of_duly_signed_by_nominee'] != '' || 
+                 $files['citation'] != '' || 
+                 $files['aggregate_marks'] != '' ||
+                 $files['age_proof'] != '' || 
+                 $files['declaration_candidate'] != ''
+              ){
+                setSessionData('uploadedFile',$files);
+               }   
+ 
+             //already uploaded files get
+            if($this->request->getPost()) 
+               $getSessionFiles = getSessionData('uploadedFile');
+        
+            $editdata['year_of_passing']                      = ($this->request->getPost('year_of_passing'))?$this->request->getPost('year_of_passing'):'';
+            $editdata['number_of_attempts']                   = ($this->request->getPost('number_of_attempts'))?$this->request->getPost('number_of_attempts'):'';
+            $editdata['ongoing_course']                       = ($this->request->getPost('ongoing_course'))?$this->request->getPost('ongoing_course'):'';
+            $editdata['research_project']                     = ($this->request->getPost('research_project'))?$this->request->getPost('research_project'):'';
+
+
+            if(is_array($getSessionFiles) && count($getSessionFiles) > 0 ) {
+
+                $complete_bio_dataDt = (isset($getSessionFiles['complete_bio_data']) && $getSessionFiles['complete_bio_data']!='')?getFileInfo($getSessionFiles['complete_bio_data']):'';
+                $excellence_research_workDt = (isset($getSessionFiles['excellence_research_work']) && $getSessionFiles['excellence_research_work']!='')?getFileInfo($getSessionFiles['excellence_research_work']):'';
+                $lists_of_publicationsDt = (isset($getSessionFiles['lists_of_publications']) && $getSessionFiles['lists_of_publications']!='')?getFileInfo($getSessionFiles['lists_of_publications']):'';
+                $statement_of_applicantDt = (isset($getSessionFiles['statement_of_applicant']) && $getSessionFiles['statement_of_applicant']!='')?getFileInfo($getSessionFiles['statement_of_applicant']):'';
+                $ethical_clearanceDt = (isset($getSessionFiles['ethical_clearance']) && $getSessionFiles['ethical_clearance']!='')?getFileInfo($getSessionFiles['ethical_clearance']):'';
+                $statement_of_duly_signed_by_nomineeDt = (isset($getSessionFiles['statement_of_duly_signed_by_nominee']) && $getSessionFiles['statement_of_duly_signed_by_nominee']!='')?getFileInfo($getSessionFiles['statement_of_duly_signed_by_nominee']):'';
+                $citationDt = (isset($getSessionFiles['citation']) && $getSessionFiles['citation']!='')?getFileInfo($getSessionFiles['citation']):'';
+                $aggregate_marksDt = (isset($getSessionFiles['aggregate_marks']) && $getSessionFiles['aggregate_marks']!='')?getFileInfo($getSessionFiles['aggregate_marks']):'';
+                $age_proofDt = (isset($getSessionFiles['age_proof']) && $getSessionFiles['age_proof']!='')?getFileInfo($getSessionFiles['age_proof']):'';
+                $declaration_candidateDt = (isset($getSessionFiles['declaration_candidate']) && $getSessionFiles['declaration_candidate']!='')?getFileInfo($getSessionFiles['declaration_candidate']):'';
+             
+             
+                $editdata['complete_bio_data_name']                     =  (isset($getSessionFiles['complete_letter_name']))?$getSessionFiles['complete_letter_name']:''; 
+                $editdata['excellence_research_work_name']              =  (isset($getSessionFiles['excellence_research_work_name']))?$getSessionFiles['excellence_research_work_name']:''; 
+                $editdata['lists_of_publications_name']                 =  (isset($getSessionFiles['lists_of_publications_name']))?$getSessionFiles['lists_of_publications_name']:''; 
+                $editdata['statement_of_applicant_name']                =  (isset($getSessionFiles['statement_of_applicant_name']))?$getSessionFiles['statement_of_applicant_name']:''; 
+                $editdata['ethical_clearance_name']                     =  (isset($getSessionFiles['ethical_clearance_name']))?$getSessionFiles['ethical_clearance_name']:''; 
+                $editdata['statement_of_duly_signed_by_nominee_name']   =  (isset($getSessionFiles['statement_of_duly_signed_by_nominee_name']))?$getSessionFiles['statement_of_duly_signed_by_nominee_name']:''; 
+                $editdata['citation_name']                              =  (isset($getSessionFiles['citation_name']))?$getSessionFiles['citation_name']:''; 
+                $editdata['aggregate_marks_name']                       =  (isset($getSessionFiles['aggregate_marks_name']))?$getSessionFiles['aggregate_marks_name']:''; 
+                $editdata['age_proof_name']                             =  (isset($getSessionFiles['age_proof_name']))?$getSessionFiles['age_proof_name']:''; 
+                $editdata['declaration_candidate_name']                 =  (isset($getSessionFiles['declaration_candidate_name']))?$getSessionFiles['declaration_candidate_name']:''; 
+            }
+            else
+            {
+                $complete_bio_dataDt= ''; 
+                $excellence_research_workDt='';
+                $lists_of_publicationsDt='';
+                $statement_of_applicantDt='';
+                $ethical_clearanceDt='';
+                $statement_of_duly_signed_by_nomineeDt='';
+                $citationDt ='';
+                $aggregate_marksDt = '';
+                $age_proofDt = '';
+                $declaration_candidateDt = '';
+
+                $editdata['complete_bio_data_name']                     =  ''; 
+                $editdata['excellence_research_work_name']              =  ''; 
+                $editdata['lists_of_publications_name']                 =  ''; 
+                $editdata['statement_of_applicant_name']                =  ''; 
+                $editdata['ethical_clearance_name']                     =  ''; 
+                $editdata['statement_of_duly_signed_by_nominee_name']   =  ''; 
+                $editdata['citation_name']                              =  ''; 
+                $editdata['aggregate_marks_name']                       =  ''; 
+                $editdata['age_proof_name']                             =  ''; 
+                $editdata['declaration_candidate_name']                 =  ''; 
+                
+            }
+            
+            $complete_bio_dataDt  = ($this->request->getFile('complete_bio_data')!='')?$this->request->getFile('complete_bio_data'):$complete_bio_dataDt;
+            $excellence_research_workDt  = ($this->request->getFile('excellence_research_work')!='')?$this->request->getFile('excellence_research_work'):$excellence_research_workDt;
+            $lists_of_publicationsDt  = ($this->request->getFile('lists_of_publications')!='')?$this->request->getFile('lists_of_publications'):$lists_of_publicationsDt;
+            $statement_of_applicantDt  = ($this->request->getFile('statement_of_applicant')!='')?$this->request->getFile('statement_of_applicant'):$statement_of_applicantDt;
+            $ethical_clearanceDt  = ($this->request->getFile('ethical_clearance')!='')?$this->request->getFile('ethical_clearance'):$ethical_clearanceDt;
+            $statement_of_duly_signed_by_nomineeDt  = ($this->request->getFile('statement_of_duly_signed_by_nominee')!='')?$this->request->getFile('statement_of_duly_signed_by_nominee'):$statement_of_duly_signed_by_nomineeDt;
+            $citationDt  = ($this->request->getFile('citation')!='')?$this->request->getFile('citation'):$citationDt;
+            $aggregate_marksDt  = ($this->request->getFile('aggregate_marks')!='')?$this->request->getFile('aggregate_marks'):$aggregate_marksDt;
+            $age_proofDt  = ($this->request->getFile('age_proof')!='')?$this->request->getFile('age_proof'):$age_proofDt;
+            $declaration_candidateDt  = ($this->request->getFile('declaration_candidate')!='')?$this->request->getFile('declaration_candidate'):$declaration_candidateDt;
+
+            $editdata['complete_bio_data']                  =  $complete_bio_dataDt;
+            $editdata['excellence_research_work']           = $excellence_research_workDt;
+            $editdata['lists_of_publications']              = $lists_of_publicationsDt;
+            $editdata['statement_of_applicant']             = $statement_of_applicantDt;
+            $editdata['ethical_clearance']                  = $ethical_clearanceDt;
+            $editdata['statement_of_duly_signed_by_nominee']= $statement_of_duly_signed_by_nomineeDt;
+            $editdata['citation']                           = $citationDt;
+            $editdata['aggregate_marks']                    = $aggregate_marksDt;
+            $editdata['age_proof']                          = $age_proofDt;
+            $editdata['declaration_candidate']              = $declaration_candidateDt;
+
+        } 
         
         $this->data['editdata'] = $editdata;
         $this->data['user']     = $edit_data;
-        return  render('frontend/preview',$this->data);                           
+        return  render('frontend/preview',$this->data);   
+
     }
 
     public function check_if_loggedin($id='')
@@ -949,13 +1414,12 @@ class Nomination extends BaseController
 
            } 
 
+
             if(count($files) > 0 && ($files['nominator_photo']!='' || $files['justification_letter'] != '' || $files['supervisor_certifying']!='' || $files['passport']!=''))
               setSessionData('uploadedFile',$files);
 
             //already uploaded files get
             $getSessionFiles = getSessionData('uploadedFile');
-
-         //   print_r($getSessionFiles); 
 
             if(is_array($getSessionFiles) && count($getSessionFiles) > 0 && $requestType == 'ajax') {
                 $nominatorSessionDt = (isset($getSessionFiles['nominator_photo']) && $getSessionFiles['nominator_photo']!='')?getFileInfo($getSessionFiles['nominator_photo']):'';
@@ -1016,14 +1480,12 @@ class Nomination extends BaseController
     public function checkUniqueEmailForAward(){
 
         if (strtolower($this->request->getMethod()) == "post") {
-           // echo $this->request->getMethod(); die;
-          //  if($this->validation->withRequest($this->request)->run()) {
-
+         
                 $email    = $this->request->getPost('email');
                 $award_id = $this->request->getPost('award_id');
 
                 $checkUserData = $this->userModel->checkUniqueEmail(array("email"=> $email,"award_id" => $award_id,"role" => 2));
-             
+
                 if(is_array($checkUserData) && count($checkUserData) > 0){
                     if($this->request->isAJAX()){
                         return $this->response->setJSON([
@@ -1321,6 +1783,69 @@ class Nomination extends BaseController
             }
         
           return $awardValidationMessages;
+    }
+
+    public function pdfGeneration($nominee_id = '')
+    {
+       
+       //get nominee data
+       if(!empty($nominee_id)){
+
+            $dompdf = new \Dompdf\Dompdf();
+        
+            $getUserData = $this->userModel->getUserData($nominee_id);
+            $nomineeData = $getUserData->getRowArray();
+            $filename = '';
+            $nominationType = '';
+            $folderName = '';
+            switch ($nomineeData['nomination_type']) {
+                case 'ssan':
+                    $filename  = '/frontend/ssan_pdf';
+                    $nominationType = 'Research Awards';
+                    $folderName = 'RA';
+                    break;
+                case 'spsfn':
+                    $filename = '/frontend/spsfn_pdf';
+                    $nominationType = 'Science Scholar Awards';
+                    $folderName = 'SSA';
+                    break;
+               
+             }
+
+            $nomineeData['category_name'] = '';
+            if(isset($nomineeData['category_id'])) {
+                $category   = $this->categoryModel->getCategoriesById($nomineeData['category_id']);
+                $categoryDt = $category->getRowArray();
+                $nomineeData['category_name'] = $categoryDt['name'];
+            }
+
+            $nomineeData['award'] = '';
+            if(isset($nomineeData['award_id'])) {
+                $awardDt   = $this->nominationTypesModel->getListsOfNominations($nomineeData['award_id']);
+                $awardDt   = $awardDt->getRowArray();
+                $nomineeData['award'] = $awardDt['title'];
+            }
+
+            //Nomination type
+            $nominationType = 'Nomination of '.$nominationType.' -'.date('Y'); 
+
+            $this->data['nomineeData'] = $nomineeData;
+            $this->data['title'] = $nominationType;
+
+            $html = view($filename, $this->data);
+            $dompdf->loadHtml($html);
+            $dompdf->render();
+        
+            $output = $dompdf->output();
+            $current_year = date('Y');
+            
+            $filepath = 'uploads/'.$current_year.'/'.$folderName.'/'.$nominee_id.'/'.$nomineeData['firstname'].'.pdf';
+            file_put_contents($filepath, $output);
+        
+            return true;
+            
+       } 
+
     }
     
 }

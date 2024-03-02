@@ -1,8 +1,6 @@
 <div class="container-fluid" style="padding: 0;">
         <div class="row gx-0 gy-0">
             <div class="col">
-
-           
                 <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
                     <div class="carousel-inner h-100">
                     <?php  //echo "<pre>";
@@ -24,16 +22,20 @@
                                             <h1 class="text-uppercase fw-bold" style="border-style: none;"><?=(isset($nvalue['title']))?$nvalue['title']:"";?></h1>
                                             <p class="my-3"><?=(isset($nvalue['subject']))?$nvalue['subject']:"";?></p>
                                             <?php if(isset($nvalue['category_type']) && ($nvalue['category_type'] == 'awards' || $nvalue['category_type'] == 'awards') ):
+							$readMore = '';
                                                    $ntype = ($nvalue['main_category_id'] == 2)?'spsfn':'ssan';
                                                    switch ($nvalue['main_category_id']) {
                                                     case 1:
                                                         $ntype = 'ssan';
+							$readMore = 'research_awards';
                                                         break;
                                                     case 2:
                                                         $ntype = 'spsfn';
+							$readMore = 'science_scholar_awards';
                                                         break;
                                                     case 3:
                                                         $ntype = 'fellowship';
+							$readMore = 'crf_read_more';
                                                         break;
                                                   }
                                                    if($end_date > $current_date):
@@ -49,11 +51,14 @@
 
                                             <?php endif;?>  
                                             <?php if(!empty($nvalue['document'])):?>
-                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="blank">Poster Invitation</a>
+                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="_blank">Poster Invitation</a>
                                             <?php endif;?>
                                             <?php if(isset($nvalue['procedure_document']) && !empty($nvalue['procedure_document'])):?>
-                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['procedure_document'];?>" target="blank" >Nomination Procedure</a>
+                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['procedure_document'];?>" target="_blank" >Circular Invitation</a>
                                             <?php endif;?>
+					     <?php if(isset($nvalue['category_type']) && ($nvalue['category_type'] == 'awards' || $nvalue['category_type'] == 'awards') ):?>
+						<a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$readMore;?>" style="border-color: #F7941E;" target="_blank">Read More</a>
+					    <?php endif;?>	
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +194,19 @@
                         </div>
                     </div>
                 </div>
-               
+               <!-- slide 6 -->
+                <div class="item">
+                    <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
+                        <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/fellowship.jpg" style="height: 200px;" alt="">
+                        <div class="card-body p-4 pb-0">
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Clinical Research Fellowship</h4>
+                            <p class="card-text" style="font-size: 14px;">
+                                We invite Young Clinician Scientists to avail the "Sun Pharma Science Foundation Clinical Research Fellowship 2023". This Fellowship is meant to support the brilliant and upcoming early career clinicians working in India.</p>
+                            <a href="<?=base_url();?>/crf_read_more" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <button class="border-0 leftLst">
 <!--                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill fs-3" style="color:var(--bs-gray-500);">
