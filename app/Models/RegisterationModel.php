@@ -76,8 +76,8 @@ class RegisterationModel extends Model{
         if(!empty($filter['mode']))
           $builder->like('event_registerations.mode',$filter['mode']);  
 
-       // if(!empty($filter['year']))
-        //  $builder->like("YEAR('event_registerations.start_date')",$filter['year']);  
+        if(!empty($filter['year']))
+          $builder->where("YEAR(event_registerations.created_date)",$filter['year']);  
 
          
         $builder->orderBy('id', 'DESC');

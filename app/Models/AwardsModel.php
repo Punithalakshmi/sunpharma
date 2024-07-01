@@ -21,7 +21,7 @@ class AwardsModel extends Model{
     {
         
         $builder = $this->table('category');
-        $builder->select('SUM(ratings.rating) as average_rating,category.name as category_name,category.main_category_id,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,ratings.nominee_id,users.category,nominee_details.registration_no');
+        $builder->select('SUM(ratings.rating) as average_rating,nominee_details.nomination_type,nominee_details.nomination_year,category.name as category_name,category.main_category_id,users.firstname,users.dob,users.id,GROUP_CONCAT(ratings.jury_id SEPARATOR ", ") as jury,ratings.nominee_id,users.category,nominee_details.registration_no,users.award_id');
         $builder->join('nominee_details', 'nominee_details.category_id = category.id');
         $builder->join('users', 'users.id = nominee_details.nominee_id AND users.role="2" AND users.status="Approved"');
         $builder->join('ratings', 'ratings.nominee_id = users.id');

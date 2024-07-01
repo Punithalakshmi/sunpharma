@@ -25,7 +25,7 @@
                           
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Award<span class="required" style="color:red;">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Fellowship<span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6">
                         <!--onchange="getCategories(this);" -->
                           <select class="select2_single form-control col-md-7 col-xs-12" name="main_category_id" tabindex="-1" onchange="getCategories(this);" >
@@ -52,7 +52,7 @@
 
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Award Type<span class="required" style="color:red;">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Fellowship Type<span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6"  id="awardTypeList">
                           <select class="select2_single form-control col-md-7 col-xs-12" name="category" tabindex="-1" >
                             <option value=""></option>

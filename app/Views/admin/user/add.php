@@ -95,7 +95,8 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Password <?php if($editdata['id'] =='') {?><span class="required" style="color:red;">*</span><?php } ?></label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Password 
+<?php //if($editdata['id'] =='') {?><!--<span class="required" style="color:red;">*</span>--><?php //} ?></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="password" class="form-control col-md-7 col-xs-12" type="password" name="password" value="<?php echo set_value('password',$editdata['password']);?>">
                         </div>
@@ -114,7 +115,7 @@
                       <div class="clearfix"></div>
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password 
-                        <?php if($editdata['id'] =='') {?><span class="required" style="color:red;">*</span><?php } ?>
+                        <?php //if($editdata['id'] =='') {?><!--<span class="required" style="color:red;">*</span>--><?php //} ?>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="confirm_password" class="form-control col-md-7 col-xs-12" type="password" name="confirm_password" value="<?php echo set_value('confirm_password',$editdata['confirm_password']);?>">
@@ -232,20 +233,22 @@
                         <?php }?>
                       </div>
                       <div class="clearfix"></div>
-                        <div id="categorySelection" class="form-group" style="display:<?=(isset($editdata['role']) && ($editdata['role'] == 1))?'block':'none';?>">
+
+	<!--
+                        <div id="categorySelection" class="form-group" style="display:<?//(isset($editdata['role']) && ($editdata['role'] == 1))?'block':'none';?>">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <select class="select2_single form-control" name="category" tabindex="-1">
                               <option value=""></option>
-                              <?php if(is_array($categories)):
-                                      foreach($categories as $rvalue): ?>
-                              <option value="<?=$rvalue['id'];?>" <?=set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?=$rvalue['name'];?></option>
-                              <?php endforeach;
-                                    endif;
+                              <?php //if(is_array($categories)):
+                                      //foreach($categories as $rvalue): ?>
+                              <option value="<?//$rvalue['id'];?>" <?//set_select('category',$rvalue['id'],(isset($editdata['category']) && ($editdata['category']==$rvalue['id']))?true:false);?>><?//$rvalue['name'];?></option>
+                              <?php //endforeach;
+                                    //endif;
                                     ?>
                             </select>
                           </div>
-                      </div>
+                      </div> -->
 
                       <div class="ln_solid"></div>
                         <div class="form-group">

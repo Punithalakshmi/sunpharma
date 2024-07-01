@@ -68,7 +68,8 @@ class NominationModel extends Model{
         'fellowship_name_of_the_supervisor',
         'fellowship_name_of_institution',
         'fellowship_supervisor_department',
-        'fellowship_description_of_research'
+        'fellowship_description_of_research',
+	'minimum_qualification'
     ];
 
 

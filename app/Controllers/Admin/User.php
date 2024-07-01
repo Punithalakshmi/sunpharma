@@ -63,7 +63,7 @@ class User extends BaseController
                
                 $totalRecordsWithFilterCt = $this->userModel->getUsersByFilter($filter);
                
-                $totalRecordsWithFilter = (!empty($role) || !empty($category) || !empty($firstname) || !empty($email))?$totalRecordsWithFilterCt:$totalRecords;
+                $totalRecordsWithFilter = (!empty($role) || !empty($category) || !empty($firstname) || !empty($email) || !empty($year))?$totalRecordsWithFilterCt:$totalRecords;
           }
 
         }
@@ -194,11 +194,16 @@ class User extends BaseController
                 }
                 else
                 {
+
+		    $password= (!empty($password))?$password:$this->generatePassword(8);
                     $this->session->setFlashdata('msg', 'User Added Successfully!');
                     $ins_data['created_date']  =  date("Y-m-d H:i:s");
                     $ins_data['created_id']    =  $this->data['userdata']['login_id'];
-                    $ins_data['password']   =  md5($password);
+                    	$ins_data['password']   =  md5($password);
+		     $ins_data['original_password']   =  $password;
                     $this->userModel->save($ins_data);
+			
+		     
 
                       //Send mail to jury
                     if(!empty($password)) 
@@ -333,6 +338,18 @@ class User extends BaseController
          
        
     }
+	
+public function generatePassword($n) {
+        $characters = 'abcdefghijklmnopqrstuvwxyz';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
 
 
     public function delete($id='')
@@ -449,7 +466,7 @@ class User extends BaseController
                 $validation_rules["username"] = array("label" => "Username",'rules' => 'required|checkUniqueUsernameForRole['.$id.']');
                
                 $validation_rules['status']  = array("label" => "Status",'rules' => 'required');
-                if($id==''){
+                if($id=='' && ($_POST['user_role'] != 1)){
                     $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
                     $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
                 }
@@ -457,10 +474,12 @@ class User extends BaseController
         }
         else
         {
+	 	  	
             $validation_rules = array(
                 "new_password" => array("label" => "Password",'rules' => 'required'),
                 "confirm_password" => array("label" => "Confirm New Passwod",'rules' => 'required|matches[new_password]')
             );
+	 	
         }  
 
         return $validation_rules;
@@ -547,6 +566,8 @@ class User extends BaseController
         $message .= "<br/>";
         $message .= "Sunpharma Science Foundation Team";
         sendMail($mail,$subject,$message);        
+	sendMail('sunpharma.sciencefoundation@sunpharma.com',$subject,$message);
+	sendMail('punitha@izaaptech.in',$subject,$message);  
     }
 
     public function validationMessages()
@@ -560,8 +581,9 @@ class User extends BaseController
                                     "username" => array("required" => "Please enter username","checkUniqueUsernameForRole"=>"Username already exists!"),
                                     "status" => array("required" => "Please select status"),
                                     "password" => array("required" => "Please enter password"),
-                                    "confirm_password" => array("required" => "Please enter confirm password"),
+                                    "confirm_password" => array("required" => "Please enter confirm password")
                               );             
          return $validationMessages;
     }
+   		
 }

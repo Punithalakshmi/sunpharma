@@ -13,7 +13,20 @@
                         <div class="step">
 
                             <div class="row">
-                                
+                                <div class="col-lg-6">
+                                    <div class="mb-3 form-items">
+                                    <div class="form-check ps-0 q-box">
+                                      <div class="q-box__question col me-2 d-flex">     
+                                        <label class="form-check-label question__label noLabel">
+                                            <div class="form-label mb-2"> <b>Photograph of the Applicant </b></div>
+                                                <img class="uploadPreview" src="<?=$editdata['nominator_photo'];?>" width="200"
+                                                            height="200" />
+                                                    </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for="">Category of the Award</label>

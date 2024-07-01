@@ -3,7 +3,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Award Results<small></small></h3>
+                <h3>Fellowship Results<small></small></h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -12,7 +12,7 @@
               
               <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Award </label>
+                    <label for="" class="fw-bold">Fellowships</label>
                         <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="main_category_id" id="main_category_id" >
                             <option></option>
@@ -56,15 +56,30 @@
                     
                       <div id="getLists">
                           <?php 
+			    $currentYear = date("Y");
                             if(is_array($lists)):
-                              foreach($lists as $user):
-                            ?>
+                              foreach($lists as $user): //print_r($user); die;
+				switch ($user['nomination_type']) {
+            			case 'ssan':
+              			     $fileUploadDir = base_url().'/uploads/'.$user['nomination_year'].'/RA/'.$user['id'].'/'.$user['nominator_photo'];
+				      $atype ='RA';	
+               			    break;
+           			 case 'spsfn':
+               			     $fileUploadDir = base_url().'/uploads/'.$user['nomination_year'].'/SSA/'.$user['id'].'/'.$user['nominator_photo'];
+				    $atype = 'SSA';
+                		    break; 
+          			 case 'fellowship':
+			             $fileUploadDir = base_url().'/uploads/'.$user['nomination_year'].'/CRF/'.$user['id'].'/'.$user['nominator_photo'];
+				     $atype = 'CRF';	
+                                     break;
+                           }
 
+                            ?>
                               <div data-toggle="modal" data-target="#juryListsModal" class="col-md-3 col-xs-12 mt-30" onclick="geJuryLists(<?=$user['id'];?>);">
                                   <div class="product-image border avatarimg" style="background: #fafafa;border:0!important; margin-top:10px;">
-                                    <!-- <img class="border" src="<?//base_url();?>/uploads/<?//$user['id'];?>/<?//$user['nominator_photo'];?>" alt="" style="border:0!important;padding: 5px;">  -->
-                                    <img class="uploadPreview" src="<?=base_url();?>/frontend/assets/img/user--default-Image.png" width="200"
-                                                height="200" />
+                                    <img class="border" src="<?=$fileUploadDir;?>" alt="" style="border:0!important;padding: 5px;">
+                                    <!--<img class="uploadPreview" src="<?//base_url();?>/frontend/assets/img/user--default-Image.png" width="200"
+                                                height="200" />-->
                                   </div>
                                   <div class="product_gallery">
                                      <h2 class="fname" align="center"><?=$user['firstname'];?></h2>

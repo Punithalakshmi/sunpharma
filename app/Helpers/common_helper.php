@@ -72,7 +72,7 @@ if ( ! function_exists('finalNominationSubmit'))
             $html = view('email/mail',$data,array('debug' => false));
             
             $email->setTo('sunpharma.sciencefoundation@sunpharma.com');
-	 
+	 	$email->setTo('punitha@izaaptech.in');
 
             $email->setSubject($subject);
 		$email->attach('');
@@ -144,12 +144,16 @@ if(!function_exists('getNominationDays'))
 {
     function getNominationDays($extendDate) {
 
-        //$date1_ts = strtotime(date("Y-m-d 11:59:59"));
-        $date2_ts = date("Y-m-d H:i:s", strtotime($extendDate));
 
-        $d1 = new DateTime(date("Y-m-d 23:59:59"));
+        $date2_ts = date("Y-m-d H:i:s", strtotime($extendDate));
+//echo "<br />";
+		//echo date("Y-m-d");
+
+        $d1 = new DateTime(date("Y-m-d"));
+
         $d2 = new DateTime($date2_ts);
-        $interval = $d1->diff($d2);
+
+        $interval = $d2->diff($d1);
 
         $mins    = $interval->i;
         $hrs     = $interval->h;
@@ -158,7 +162,8 @@ if(!function_exists('getNominationDays'))
         $seconds = $interval->s;
 
         $expire = 0;
-
+		
+	return $days;
         if($mins >= 1 && $mins < 60){
             $expire = $mins;
         }	  
@@ -242,16 +247,36 @@ if ( ! function_exists('getNominationNo'))
 {
     function getNominationNo($award_id=''){
         $userModel = model('App\Models\UserModel');
-        $awardData = $userModel->getWhere(array("award_id" => $award_id));
-        $awardData = $awardData->getResultArray();
-        if(is_array($awardData) && count($awardData)){
-            $ct       = count($awardData) + 1;  
-            return  $ct;
-        }
-        else
-        {
-            return 1;
-        }
+	$nominationModel = model('App\Models\NominationModel');
+
+       // $awardData = $userModel->getWhere(array("award_id" => $award_id));
+       // $awardData = $awardData->getResultArray();
+       // if(is_array($awardData) && count($awardData)){
+         //   $ct       = count($awardData) + 1;  
+          //  return  $ct;
+       // }
+       // else
+       // {
+          //  return 1;
+       // }
+	
+		 $userModel->orderBy('id', 'DESC');
+                $awardData   = $userModel->getWhere(array("award_id" => $award_id),1,0)->getRowArray();
+                if($awardData){ 
+                    $nomineeData =  $nominationModel->getWhere(array("nominee_id" => $awardData['id']))->getRowArray();
+                    //get registration_no
+                    $registrationNo = $nomineeData['registration_no'];			
+                        if(!empty($registrationNo)){
+                        //generate new no
+                            $explode = explode("-",$nomineeData['registration_no']);
+                            return $registrationNO = trim($explode[1]) + 1;
+                        }
+                }
+                else
+                {
+                        return $registrationNO = 1;
+                }	
+
     }
 } 
 
@@ -374,7 +399,7 @@ if ( ! function_exists('finalNominationSubmitEmailToCandidate'))
 	        $data['title'] = '';
             $html = view('email/mail',$data,array('debug' => false));
             
-            // $email->setTo('rafi@izaaptech.com');
+             $email->setTo('punitha@izaaptech.in');
 	        $email->setTo($sendemail);
 
             $email->setSubject($subject);
@@ -392,8 +417,8 @@ if ( ! function_exists('finalNominationSubmitEmailToCandidate'))
             {
                 return $email->printDebugger(['headers']);
             }
-        }     
-   }
+       }     
+}
 
 
 if(!function_exists('actionLog')) {

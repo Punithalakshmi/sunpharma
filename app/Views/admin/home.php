@@ -15,6 +15,13 @@
                
                 <ul class="nav side-menu">
                 <?php  if(isset($userdata['role']) && ($userdata['role'] !=='') && ($userdata['role'] == 3)){?>
+		<!--<li>
+				<a href="<?php echo base_url();?>/admin/nominee">
+		<i class="fa fa-user"><?//count($total_approved_nominee_lists_count);?></i>Submitted Nominations Total  </a>
+		</li>
+		<li><a href="<?php echo base_url();?>/admin/nominee">
+		<i class="fa fa-user"><?//count($total_rejected_nominee_lists_count);?></i> Unsubmitted Nominations Total </a>
+		  </li>-->
                   <li><a href="<?php echo base_url();?>/admin/user">
                     <i class="fa fa-user"></i> Users </a>
                   </li>
@@ -25,10 +32,10 @@
                     <i class="fa fa-solid fa-users"></i> Jury Mapping </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/category">
-                    <i class="fa fa-solid fa-list"></i> Award Types </a>
+                    <i class="fa fa-solid fa-list"></i> Fellowship Types </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/nomination">
-                    <i class="fa fa-solid fa-flag-checkered"></i> Manage Awards</a>
+                    <i class="fa fa-solid fa-flag-checkered"></i> Manage Fellowships</a>
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/workshops">
@@ -42,7 +49,7 @@
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/awards">
-                      <i class="fa fa-solid fa-trophy"></i> Award Results  
+                      <i class="fa fa-solid fa-trophy"></i> Fellowship Results  
                     </a>
                   </li>
                   <?php } ?>

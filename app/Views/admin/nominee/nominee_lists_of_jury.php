@@ -20,13 +20,13 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="datatable" data-order="[]" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Nomination No</th>
-                          <th>Award</th>
-                           <th>Award Type</th>
-                           <th>Award Title</th>
+                          <th>Fellowship</th>
+                           <th>Fellowship Type</th>
+                           <th>Fellowship Title</th>
                           <th>Nominee Name</th>
                           <th>Email</th>
                           <th>Phone</th>

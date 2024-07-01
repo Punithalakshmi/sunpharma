@@ -1,12 +1,25 @@
-         
+         	   <?= csrf_field(); ?>  
          <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
                 <h3>Nominees <small></small></h3>
               </div>
+	     <div class="title_right">
+                <h3>Submitted Nominations Total: <span class="badge badge-warning" id="submittedTotal">
+                  <?=count($total_approved_nominee_lists_count)>0?count($total_approved_nominee_lists_count):0;?></span> 
+<?php if(count($total_approved_nominee_lists_count) > 0){ ?><a onclick="exportNominationStatusLists('submitted');" class="btn btn-primary mb-2 downloadbtnres">
+                   <i class="fa fa-download"></i>                 </a><?php } ?>
+</h3> 
+		<h3>Unsubmitted Nominations Total: <span class="badge badge-warning" id="unsubmittedTotal">
+                   <?=count($total_rejected_nominee_lists_count)>0?count($total_rejected_nominee_lists_count):0;?></span>
+<?php if(count($total_rejected_nominee_lists_count) > 0){ ?><a onclick="exportNominationStatusLists('notsubmitted');" class="btn btn-primary mb-2 downloadbtnres">
+                   <i class="fa fa-download"></i></a> <?php } ?>
+</h3>  
+           </div>
+	
             </div>
-            <?= csrf_field(); ?>   
+          
            </div>
             <div class="clearfix"></div>
             <?php if(session()->getFlashdata('msg')):?>
@@ -17,9 +30,9 @@
 
             <div class="row topformsec">  
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Award </label>
+                    <label for="" class="fw-bold">Fellowship </label>
                         <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="main_category_id" id="main_category_id" onchange="getCategories(this);" >
                             <option></option>
@@ -32,10 +45,10 @@
                     </div>
               </div>
 
-              <div class="col-md-3">
+              <div class="col-md-2">
             <div class="get-sunpharma__input-box mt-2 form-inline">
             
-                    <label class="fw-bold">Award Type</label>
+                    <label class="fw-bold">Fellowship Type</label>
                     <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="award_title" id="award_title"  >
                             <option></option>
@@ -47,7 +60,7 @@
             </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="get-sunpharma__input-box mt-2 form-inline">
                   <label class="fw-bold">Firstname</label>
                   <input type="text" class="mt-2 form-control" name="firstname" id="firstname" />
@@ -56,7 +69,7 @@
 
            
               
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="get-sunpharma__input-box mt-2 form-inline">
                   <label class="fw-bold">Email</label>
                   <input type="text" class="mt-2 form-control" name="email" id="email" />
@@ -65,14 +78,14 @@
 
            
             
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="get-sunpharma__input-box mt-2 form-inline">
                  <label for="" class="fw-bold">Nomination Year</label>   
                  <input type="text" class="mt-2 form-control" name="year" id="year" />
                 </div>
             </div>
             <?php if(isset($lists) && count($lists) > 0): ?>
-            <div class="col-md-3 actionbtns">
+            <div class="col-md-12 actionbtns">
                 <a href="#" onclick="exportNominationLists();" class="btn btn-primary mb-2 downloadbtnres">
                    <i class="fa fa-download"></i> Download Nominations
                 </a>
@@ -89,9 +102,9 @@
                       <thead>
                         <tr>
                             <th>Nomination No</th>
-                            <th>Award</th>
-                            <th>Award Type</th>
-                            <th>Award Title</th>
+                            <th>Fellowship</th>
+                            <th>Fellowship Type</th>
+                            <th>Fellowship Title</th>
                             <th>Firstname</th>
                             <th>Username</th>
                             <th>Email</th>
@@ -131,7 +144,7 @@
                             <a href="<?=base_url().'/admin/nominee/view/'.$user['id'];?>" class="btn btn-primary btn-xs">
                                <i class="fa fa-eye"></i> View 
                             </a>
-                            <?php if($user['is_expired_nomination'] == 'yes'): ?>
+                            <?php if($user['is_expired_nomination'] == 'yes' && $user['is_submitted']==0): ?>
                             <a href="<?=base_url().'/admin/nominee/extend/'.$user['id'];?>" class="btn btn-primary btn-xs">
                                <i class="fa fa-edit"></i> Extend Nomination 
                             </a> 

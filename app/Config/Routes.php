@@ -78,8 +78,8 @@ $routes->post('reset_password','User::reset_password');
 $routes->get('reset_password/(:any)','User::reset_password/$1');
 $routes->get('reset_password','User::reset_password');
 $routes->post('reset_password/(:any)','User::reset_password/$1');
-$routes->get('view/(:any)/(:any)','Nomination::view/$1/$1');
 $routes->post('view','Nomination::view');
+$routes->get('view/(:any)/(:any)','Nomination::view/$1/$1');
 
 $routes->get('crf_read_more','Fellowship::read_more');
 $routes->get('ageCalculation/(:any)','Fellowship::ageCalculation/$1');
@@ -107,6 +107,8 @@ $routes->post('event/registration','EventRegistration::event');
 $routes->get('event/close','EventRegistration::close');
 
 $routes->get('event/read_more','EventRegistration::read_more');
+
+$routes->get('event/read_more_images','EventRegistration::read_more_images');
 
 $routes->get('event/read_more/(:any)','EventRegistration::read_more/$1');
 
@@ -140,6 +142,12 @@ $routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
 
 $routes->get('import/uploadAttachmentSS','Import::uploadAttachmentSS');
 
+$routes->get('testform','User::testForm');
+
+$routes->post('testform','User::testForm');
+$routes->get('getPdf/(:any)','Nomination::pdfGeneration/$1');
+
+$routes->get('getAuth/(:any)','User::approve/$1');
 
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){
@@ -197,6 +205,10 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('nominee/removeFile','Nominee::removeFile',['filter' => 'auth']);
     $routes->get('nominee/export','Nominee::export',['filter' => 'auth']);
     $routes->post('nominee/export','Nominee::export',['filter' => 'auth']);
+     $routes->post('nominee/statuslists','Nominee::nominationStatusExport',['filter' => 'auth']);
+	   //  $routes->get('nominee/statuslists/(:any)','Nominee::nominationStatusExport/$1',['filter' => 'auth']);
+	
+    $routes->post('nominee/nomination_status_export','Nominee::nominationStatusExport',['filter' => 'auth']);
 
     $routes->get('category','Category::index',['filter' =>'auth']);
     $routes->post('category','Category::index',['filter' =>'auth']);
@@ -272,6 +284,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
     $routes->post('winners/add','Winners::add',['filter' =>'auth']);
     $routes->get('winners/add/(:any)','Winners::add/$1',['filter' =>'auth']);
     $routes->post('winners/delete/(:any)','Winners::delete/$1',['filter' =>'auth']);
+	
 
 });
 

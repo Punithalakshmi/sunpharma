@@ -14,12 +14,12 @@
                     <li class="nav-item"><a class="nav-link" href="<?=base_url();?>/aboutus">About Us</a></li>
                     <li class="nav-item">
                         <div class="nav-item dropdown nav-link">
-                            <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="<?=base_url();?>/research_awards">Awards</a>
+                            <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="<?=base_url();?>/research_awards">Fellowships</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=base_url();?>/research_awards">Research Awards</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_research_awards">Latest Winners Of Research Awards<br></a>
-                                <a class="dropdown-item" href="<?=base_url();?>/science_scholar_awards">Scholar Awards</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Latest Winners Of Scholar Awards</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/research_awards">Research Fellowships</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_research_awards">Latest Winners Of Research Fellowships<br></a>
+                                <a class="dropdown-item" href="<?=base_url();?>/science_scholar_awards">Scholar Fellowships</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/latest_winners_of_science_scholar_awards">Latest Winners Of Scholar Fellowships</a>
                             </div>
                         </div>
                     </li>
@@ -30,7 +30,7 @@
                                 <a class="dropdown-item" href="<?=base_url();?>/symposium">Scientific Symposium</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/roundtable">National Seminar</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/annualforeign_scientist">Inviting Foreign Scientists</a>
-                                <a class="dropdown-item" href="<?=base_url();?>/special_awards">Special Award In Public Health</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/special_awards">Special Fellowship In Public Health</a>
 				<a class="dropdown-item" href="<?=base_url();?>/crf_read_more">Clinical Research Fellowship</a>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="nav-item dropdown nav-link">
                             <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="<?=base_url();?>/directory_research_awardees">Directory</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=base_url();?>/directory_research_awardees">Directory - Research Award Winners</a>
+                                <a class="dropdown-item" href="<?=base_url();?>/directory_research_awardees">Directory - Research Fellowship Winners</a>
                                 <a class="dropdown-item" href="<?=base_url();?>/directory_of_science_scholars">Directory - Science Scholars</a>
                             </div>
                         </div>

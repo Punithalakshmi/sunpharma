@@ -30,14 +30,17 @@ class User extends BaseController
                
                     if(isset($captchaVerify['success']) && $captchaVerify['success']){ 
             
-                    $data  = $this->userModel->where(array('username'=>$username,"role"=>2))->first();
-                 
+                    $data  = $this->userModel->where(array('username'=>$username,"role"=>2,"password" => md5(trim($password))))->first();
+                    // print_r($data); die;
                        
                     if($data){
 
                         $pass = trim($data['password']);
+                        // echo $pass;
+			//echo "<br />";
+			//echo md5(trim($password)); die;
 
-                        if($pass == md5($password)){
+                        if($pass == md5(trim($password))){
 
                        if($data['active'] == 1){
                         
@@ -46,7 +49,7 @@ class User extends BaseController
                          //get nomination data
                          $getNomineeData = $this->nominationModel->getNominationData($data['id'])->getRowArray();
                         
-                         // print_r($getNomineeData); die;
+                       //  print_r($getNomineeData); die;
                             $ses_data = array(
                                 'id' => $data['id'],
                                 'name' => $data['firstname'],
@@ -55,9 +58,15 @@ class User extends BaseController
                                 'role' => $data['role'],
                                 'isNominee' => 'yes'
                             );
+				//echo $data['extend_date'];
+			     if($data['extend_date'] == date('Y-m-d'))
+				 $ses_data['nominationEndDays'] = 1;
+			     else
+				 $ses_data['nominationEndDays'] =  getNominationDays($data['extend_date']); 	
+	//echo date("H:i:s");
+				//echo getNominationDays($data['extend_date']); die;
+                            
 
-                            $ses_data['nominationEndDays'] =  getNominationDays($data['extend_date']);  
-                          
                             setSessionData('fuserdata',$ses_data);
 
                             if(isset($getNomineeData['nomination_type']) && ($getNomineeData['nomination_type'] != 'fellowship'))
@@ -295,7 +304,26 @@ class User extends BaseController
 
     public function user_check()
     {
+     //  ini_set('post_max_size', '1000M');  
         echo phpinfo(); die;
+	/*$this->userModel->orderBy('id', 'DESC');
+        $awardData   = $this->userModel->getWhere(array("award_id" => 12),1,0)->getRowArray();
+	if($awardData){ 
+		$nomineeData =  $this->nominationModel->getWhere(array("nominee_id" => $awardData['id']))->getRowArray();
+		//get registration_no
+		$registrationNo = $nomineeData['registration_no'];			
+	        if(!empty($registrationNo)){
+			//generate new no
+                     $explode = explode("-",$nomineeData['registration_no']);
+		     $registrationNO = trim($explode[1]) + 1;
+		}
+	}
+	else
+	{
+		$registrationNO = 1;
+	}
+              echo $registrationNO; die;*/
+
     }
 
     public function bulkEmails()
@@ -351,5 +379,99 @@ class User extends BaseController
          return $validationMessages;
     }
    
+    public function testForm(){
 
+	
+	  
+        if($this->request->getPost()){
+           $id  = $this->request->getPost('id');
+		 print_r($_POST); die;
+            }
+       
+            if (strtolower($this->request->getMethod()) == "post") {  
+               
+               // $this->validation->setRules($this->validation_rules('user',$id),$this->validationMessages());
+               
+                if($this->validation->withRequest($this->request)->run()) {   
+                 
+
+                $firstname     = $this->request->getPost('firstname');
+               
+                $ins_data = array();
+                $ins_data['firstname']  = $firstname;
+             }
+           
+
+        }
+         
+        
+            if(!empty($edit_data) && count($edit_data)){
+                $editdata['firstname']  = $edit_data['firstname'];
+                              $editdata['id']         =  $edit_data['id'];
+            }
+            else
+            {
+                $editdata['firstname']  = ($this->request->getPost('firstname'))?$this->request->getPost('firstname'):'';
+                $editdata['id']         = ($this->request->getPost('id'))?$this->request->getPost('id'):'';
+            }
+            if(is_array($this->validation->getErrors()) && count($this->validation->getErrors()) > 0){
+                $this->data['validation'] = $this->validation;
+               
+            }  
+            
+                
+           
+         
+         $this->data['editdata'] = $editdata;
+
+        return render('frontend/testform',$this->data);
+       
+    }
+
+
+	 public function approve($id='')
+    {
+
+
+            $id        = $id;
+          //  $type      = $this->request->getPost('type');
+          //  $remarks   = $this->request->getPost('remarks');
+
+          
+            $getUserData  = $this->userModel->getListsOfUsers($id);
+            $getUserData  = $getUserData->getRowArray();
+
+            $getUserNominationNo = $this->nominationModel->getNominationData($id)->getRowArray();
+
+            $subject = 'Nomination Application Status - Sunpharma Science Foundation';
+            $login_url = base_url().'/login';
+            $message = 'Hi,';
+           
+
+                $message .= '<br/><br/>';
+                $message .= 'Nomination No:'.$getUserNominationNo['registration_no'].'. Your Application has been approved. Please sign-in with the following credentials to complete the application submission. <br /> <br />';
+                $message .= 'Please <a href="'.$login_url.'" target="_blank">Click Here</a> to Sign-In <br />';
+                $message .= '<b>Username: </b>'.strtolower($getUserData['username']).'<br />';
+                $message .= '<b>Password: </b>'.$getUserData['original_password'].'<br /><br />';
+
+		//$message .= '<b>Remarks:</b> '.$remarks.'<br/><br/>';
+	    
+           
+           
+            
+            $message .= 'Thanks & Regards,<br/>';
+            $message .= 'Sunpharma Science Foundation Team';
+
+           
+	    sendMail($getUserData['email'],$subject,$message);
+			sendMail("Thangachan.Anthappan@sunpharma.com",$subject,$message);
+	    // sendMail('punitha@izaaptech.in',$subject,$message);
+
+           
+                    
+            
+        
+    }
+
+	
 }    

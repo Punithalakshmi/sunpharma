@@ -227,5 +227,9 @@ class EventRegistration extends BaseController
         return  render('frontend/event_close',$this->data);
     }  
      
+    function read_more_images()
+     {
+	return  render('frontend/read_more_images',$this->data);	
+     }
     
 }

@@ -81,7 +81,7 @@
                          $citation = $editdata['citation']; 
 
 			                
-			$currentYear = date('Y');
+			$currentYear = $editdata['nomination_year'];
 	                $fileUploadDir = base_url().'/uploads/'.$currentYear.'/SSA/'.$editdata['user_id'];
 
                                 ?>
@@ -103,7 +103,7 @@
                               <br />
                       </div>
                       <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Award <span class="required" style="color:red;">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Fellowship<span class="required" style="color:red;">*</span></label>
                                     <select class="form-control col-md-6 selectpicker mt-2 required" name="category" id="category">
                                     <option value="">-- Select --</option>
                                         <?php if(is_array($categories)):
@@ -225,7 +225,7 @@
                         <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Email<span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="nominator_email" class="form-control col-md-7 col-xs-12" type="number" name="nominator_email" value="<?php echo set_value('nominator_email',$editdata['nominator_email']);?>">
+                         <input id="nominator_email" class="form-control col-md-7 col-xs-12" type="text" name="nominator_email" value="<?php echo set_value('nominator_email',$editdata['nominator_email']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
@@ -237,7 +237,7 @@
                         <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Designation <span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="nominator_designation" class="form-control col-md-7 col-xs-12" type="number" name="nominator_designation" value="<?php echo set_value('nominator_designation',$editdata['nominator_designation']);?>">
+                         <input id="nominator_designation" class="form-control col-md-7 col-xs-12" type="text" name="nominator_designation" value="<?php echo set_value('nominator_designation',$editdata['nominator_designation']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
@@ -257,7 +257,7 @@
                         <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
                                   <label class="form-label">
-                                      Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant
+                                      Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Fellowship has actually been done by the applicant
                                   </label>
                                     <button type="button" name="supervisor_certifying_add" id="add_more_supervisor_certifying" onclick="addMoreRows('supervisorWrapper','supervisor_certifying','supervisor_certifying');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -362,7 +362,7 @@
 
                               <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                    <label class="form-label"> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB) <span class="required" style="color:red;">*</span></label>
+                                    <label class="form-label"> Details of the excellence in research work for which the Sun Pharma Science Scholar Fellowship is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB) <span class="required" style="color:red;">*</span></label>
                                     <button type="button" name="excellence_research_work_add" id="add_more_excellence_research_work" onclick="addMoreRows('excellenceResearchWrapper','excellence_research_work','excellence_research_work');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                         <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -464,7 +464,7 @@
                         <div class="clearfix"></div>
                         <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for="">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)
+                                      <label class="form-label" for="">Statement of Merits/Fellowships/Scholarships already received by the Applicant (Max: 1 MB)
                                      </label>
                                     <button type="button" name="statement_of_applicant_add" id="add_more_statement_of_applicant" onclick="addMoreRows('statementOfApplicantWrapper','statement_of_applicant','statement_of_applicant');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -515,7 +515,7 @@
                             <div class="clearfix"></div>
                         <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for="">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)
+                                      <label class="form-label" for="">A letter stating that the project submitted for the fellowship has received “ethical clearance” (Max: 250KB)
                                      </label>
                                     <button type="button" name="ethical_clearance_add" id="add_more_ethical_clearance" onclick="addMoreRows('ethicalClearanceWrapper','ethical_clearance','ethical_clearance');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -565,7 +565,7 @@
                               <div class="clearfix"></div>
                               <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-<?=date("Y");?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)
+                                      <label class="form-label" for=""> A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Fellowship-<?=date("Y");?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)
                                      </label>
                                     <button type="button" name="statement_of_duly_signed_by_nominee_add" id="add_more_statement_of_duly_signed_by_nominee" onclick="addMoreRows('statementOfDulySignedWrapper','statement_of_duly_signed_by_nominee','statement_of_duly_signed_by_nominee');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -605,8 +605,7 @@
                                         </div>  
                                     <?php endif; endif;?> 
                                       <div class="statementOfDulySignedWrapper" id="statementOfDulySignedWrapper">
-                                      </div> 
-                                    
+                                      </div>
                                   </div>                    
                               </div>  
 

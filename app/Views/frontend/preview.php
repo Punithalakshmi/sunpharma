@@ -23,7 +23,7 @@
                   
                  ?>
                <?php if(isset($userdata['nominationEndDays']) && $userdata['nominationEndDays'] > 0): ?>
-                 Sun Pharma Science Foundation <?=$type;?> Awards <?=date('Y');?>
+                 Sun Pharma Science Foundation <?=$type;?> Fellowships <?=date('Y');?>
                 <br>Online Submission Of Nominations
                 <?php endif;?>
             </h2>
@@ -46,7 +46,7 @@
             <form method="post" name="nomination_data" action="<?=base_url();?>/view" enctype="multipart/form-data">
             <?= csrf_field(); ?>   
             <?php 
-
+		//print_r($user); 	die;	
             $typeOfAward = '';
             switch ($user['nomination_type']) {
                 case 'ssan':
@@ -84,7 +84,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""><b>Category of the Award</b></label>
+                                        <label class="form-label " for=""><b>Category of the Fellowship</b></label>
                                         <div><?=$user['category_name'];?>
                                         </div>
                                     </div>
@@ -255,7 +255,7 @@
                                 if(isset($user['supervisor_certifying']) && !empty($user['supervisor_certifying'])): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant </b> </label>
+                                        <label class="form-label " for=""> <b> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Fellowship has actually been done by the applicant </b> </label>
                                             <div >
                                                 <a href="<?=$fileUploadDir;?>/<?=$user['supervisor_certifying'];?>" target="_blank">
                                                   <button class="btn btn-primary btn-sm" type="button">
@@ -287,12 +287,12 @@
                                endif;?>
                             </div>
                         </div>
-                  
+                  <?php ///echo "<pre>"; print_r($user); die; ?>
                         
                         <div class="step">
 
                             <div class="row">
-                            <?php if($userdata['nominationEndDays'] > 0): ?>
+                            <?php if(isset($userdata['nominationEndDays']) && ($userdata['nominationEndDays'] > 0)): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> <b>Complete Bio-data of the Applicant
@@ -334,8 +334,7 @@
                                 </div>
                                 <?php  
                                     endif;
-                                   if(isset($user) && ($user['nomination_type'] == 'ssan') ):
-                                    
+                                   if(isset($user['nomination_type']) && ($user['nomination_type'] == 'ssan') ):
                                 ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -382,9 +381,9 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> <b>Statement of Research Achievements, if
-                                            any, on which any Award has already been Received by the Applicant. Please
+                                            any, on which any Fellowship has already been Received by the Applicant. Please
                                             also upload brief citations on the research works for which the applicant
-                                            has already received the awards (Max. 1 MB) </b><span class="required" style="color:red;">*</span></label>
+                                            has already received the fellowships (Max. 1 MB) </b><span class="required" style="color:red;">*</span></label>
                                             <?php if(!empty($user['statement_of_research_achievements'])): ?>
                                             <div >
                                             <a href="<?=$fileUploadDir;?>/<?=$user['statement_of_research_achievements'];?>" target="_blank">
@@ -402,9 +401,9 @@
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <!-- <label class="form-label " for=""> Statement of Research Achievements, if
-                                            any, on which any Award has already been Received by the Applicant. Please
+                                            any, on which any Fellowship has already been Received by the Applicant. Please
                                             also upload brief citations on the research works for which the applicant
-                                            has already received the awards (Max. 1 MB) </label> -->
+                                            has already received the fellowships (Max. 1 MB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                   <input class="form-control mb-3 required" accept=".pdf" name="statement_of_research_achievements" type="file" id="statement_of_research_achievements" value="<?=$editdata['statement_of_research_achievements'];?>"> 
@@ -432,7 +431,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> <b>Signed details of the excellence in
-                                            research work for which the Sun Pharma Research Award is claimed, including
+                                            research work for which the Sun Pharma Research Fellowship is claimed, including
                                             references & illustra- tions (Max. 2.5 MB). The candidate should duly sign
                                             on the details </b><span class="required" style="color:red;">*</span></label>
                                             <?php if(!empty($user['signed_details'])): ?>
@@ -519,7 +518,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""><b> A signed statement by the applicant
-                                            that the research work under reference has not been given any award. The
+                                            that the research work under reference has not been given any fellowship. The
                                             applicant should also indicate the extent of the contribution of others
                                             associated with the research and he/she should clearly acknowledge his/her
                                             achievements. (Max. 500 KB)</b> <span class="required" style="color:red;">*</span></label>
@@ -605,14 +604,15 @@
                                         </div>
                                     </div>
                                     <?php
-                                       endif;
-                                       else: 
+                                       endif; endif;
+
+                                       if(isset($user['nomination_type']) && ($user['nomination_type'] == 'spsfn') ): 
 
                                         ?>
                              
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b>Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details(Max 2 MB) </b><span class="required" style="color:red;">*</span></label> 
+                                        <label class="form-label " for=""> <b>Details of the excellence in research work for which the Sun Pharma Science Scholar Fellowship is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details(Max 2 MB) </b><span class="required" style="color:red;">*</span></label> 
                                         <?php if(!empty($user['excellence_research_work'])): ?>
                                             <div>
                                             <a href="<?=$fileUploadDir;?>/<?=$user['excellence_research_work'];?>" target="_blank">
@@ -628,7 +628,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> -->
+                                        <!-- <label class="form-label " for=""> Details of the excellence in research work for which the Sun Pharma Science Scholar Fellowship is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="excellence_research_work" type="file" id="excellence_research_work" value="<?=$editdata['excellence_research_work'];?>">  
@@ -695,7 +695,7 @@
                               <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b>Statement of Merits/Awards/Scholarships already received by the Applicant </b> <span class="required" style="color:red;">*</span></label>
+                                        <label class="form-label " for=""> <b>Statement of Merits/Fellowships/Scholarships already received by the Applicant </b> <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['statement_of_applicant'])): ?>
                                             <div>
                                             <a href="<?=$fileUploadDir;?>/<?=$user['statement_of_applicant'];?>" target="_blank">
@@ -710,7 +710,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB) </label> -->
+                                        <!-- <label class="form-label " for=""> Statement of Merits/Fellowships/Scholarships already received by the Applicant (Max: 1 MB) </label> -->
                                             <div>
                                             <label class="form-check-label question__label noLabel">
                                                     <input class="form-control mb-3 required" accept=".pdf" name="statement_of_applicant" type="file" id="statement_of_applicant" value="<?=$editdata['statement_of_applicant'];?>">    
@@ -735,7 +735,7 @@
                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b>A letter stating that the project submitted for the award has received “ethical clearance”  (Max: 250KB) </b><span class="required" style="color:red;">*</span></label>
+                                        <label class="form-label " for=""> <b>A letter stating that the project submitted for the fellowship has received “ethical clearance”  (Max: 250KB) </b><span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['ethical_clearance'])): ?>
                                             <div>
                                             <a href="<?=$fileUploadDir;?>/<?=$user['ethical_clearance'];?>" target="_blank">
@@ -750,7 +750,7 @@
                                 <?php if($user['is_submitted'] == 0): ?> 
                                   <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <!-- <label class="form-label " for=""> A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB) </label> -->
+                                        <!-- <label class="form-label " for=""> A letter stating that the project submitted for the fellowship has received “ethical clearance” (Max: 250KB) </label> -->
                                             <div>
                                                 <label class="form-check-label question__label noLabel">
                                                   <input class="form-control mb-3 required" accept=".pdf" name="ethical_clearance" type="file" id="ethical_clearance" value="<?=$editdata['ethical_clearance'];?>">  
@@ -771,7 +771,7 @@
                                <?php endif;?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> <b>A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-<?=date("Y")?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </b> <span class="required" style="color:red;">*</span></label>
+                                        <label class="form-label " for=""> <b>A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Fellowship-<?=date("Y")?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB) </b> <span class="required" style="color:red;">*</span></label>
                                         <?php if(!empty($user['statement_of_duly_signed_by_nominee'])): ?>
                                             <div>
                                             <a href="<?=$fileUploadDir;?>/<?=$user['statement_of_duly_signed_by_nominee'];?>" target="_blank">
@@ -1011,7 +1011,7 @@
                         </div>
                      <?php 
                    
-                          if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && ($userdata['nominationEndDays'] > 0)):   ?>           
+                          if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && (isset($userdata['nominationEndDays']) && ($userdata['nominationEndDays'] > 0))):   ?>           
                         <div id="q-box__buttons">
                             <button id="next-btn" class="btn btn-primary" type="reset">Reset</button>
                             <button id="submit-btn" class="btn btn-success ms-2" type="submit">Submit</button>

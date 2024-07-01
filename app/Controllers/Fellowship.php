@@ -7,17 +7,20 @@ class Fellowship extends BaseController
     public function index($award_id = '')
     {
 
+		//echo "coming";;die;
             $getCategoryLists   = $this->categoryModel->getCategoriesByType('Clinical Research Fellowship');
             
             $this->data['categories'] = $getCategoryLists->getResultArray();
             $getSessionFiles = getSessionData('uploadedFile');
-            
+
+	   
             if (strtolower($this->request->getMethod()) == "post") {
-
+		//echo "<pre>";
+		//print_r($_POST); die;
                 $this->validation->setRules($this->validation_rules('fellowship',$award_id,$getSessionFiles),$this->validationMessages('fellowship'));
-
+	
                 if($this->validation->withRequest($this->request)->run()) {
-
+				
                         $formTypeStatus = $this->request->getPost('formTypeStatus');
 
                         if($formTypeStatus && $formTypeStatus == 'preview') {
@@ -50,6 +53,7 @@ class Fellowship extends BaseController
                             $nominator_office_address    = $this->request->getPost('nominator_office_address');
                             $nominator_designation       = $this->request->getPost('nominator_designation');
                             $age                         = $this->request->getPost('age');
+			    $qualification               = $this->request->getPost('minimum_qualification');
                          
                             //get award data
                             $awardData = getAwardData($award_id);
@@ -79,19 +83,21 @@ class Fellowship extends BaseController
                             $nominee_details_data['nominator_phone']    = $nominator_mobile;
                             $nominee_details_data['nominator_address']  = $nominator_office_address;
                             $nominee_details_data['nominator_designation']  = $nominator_designation;
+			    $nominee_details_data['minimum_qualification']  = $qualification;	
                           
                             $nominee_details_data['is_submitted'] = 0;
                             $nominee_details_data['nomination_year'] = date('Y');
                             $registrationID = getNominationNo($award_id);
                             $registrationNo = date('Y')."/CRF-".$registrationID;
                             setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
-                                    // $nominee_details_data['registration_no'] = $registrationNo;
+                             //$nominee_details_data['registration_no'] = $registrationNo;
 
                             $this->session->setFlashdata('msg', 'Submitted Successfully!');
                             $ins_data['created_date']  =  date("Y-m-d H:i:s");
                             $ins_data['created_id']    =  '';
                             $this->userModel->save($ins_data);
                             $lastInsertID = $this->userModel->insertID();
+				actionLog($lastInsertID,'user_save_crf','User table Nominee added successfully',$lastInsertID);
 
                             $fileUploadDir = generateAwardsFolderPath(3,$lastInsertID);
                             
@@ -131,6 +137,8 @@ class Fellowship extends BaseController
                             $nominee_details_data['nominee_id'] = $lastInsertID;
                            
                             $this->nominationModel->save($nominee_details_data);
+				 $lastInsertID = $this->nominationModel->insertID();
+                              actionLog($lastInsertID,'nomination_data_crf','Nomination nominee_details added successfully',$lastInsertID);
 
                             $this->sendMail($firstname,$registrationNo,$email);
 
@@ -145,6 +153,8 @@ class Fellowship extends BaseController
                     }
                     else
                     {  
+			//print_r($this->validation->getErrors());
+
                         if(is_array($this->validation->getErrors()) && count($this->validation->getErrors()) > 0){
                             $this->data['validation'] = $this->validation;
                             $status = 'error';
@@ -156,6 +166,7 @@ class Fellowship extends BaseController
         $this->data['award_id'] = $this->uri->getSegment(2);
 
         if($this->request->isAJAX()){
+		//echo "zxzzz";
             $this->data['editdata'] = $this->getRequestedData('fellowship','ajax');
             $html = view('frontend/fellowship',$this->data,array('debug' => false));
             return $this->response->setJSON([
@@ -236,7 +247,6 @@ class Fellowship extends BaseController
             //folder path
             $uploadedFolderPath = 'uploads/nominations/';
             
-
             $files = array( 'complete_bio_data' =>'',
                             'fellowship_research_experience' =>'',
                             'fellowship_research_publications'=>'',
@@ -244,6 +254,7 @@ class Fellowship extends BaseController
                             'fellowship_scientific_research_projects'=>'',
                             'fellowship_description_of_research'=>'',
                             'first_degree_marksheet' => '',
+				'nominator_photo' => '','nominator_photo_name' => '',
                             'highest_degree_marksheet'=>'','complete_letter_name' => '', 'fellowship_research_experience_name' => '','fellowship_research_publications_name' => '',
                             'fellowship_research_awards_and_recognitions_name' => '','fellowship_scientific_research_projects_name' => '','fellowship_description_of_research_name' => '','first_degree_marksheet_name'=>'','highest_degree_marksheet_name' => ''
             );
@@ -312,9 +323,11 @@ class Fellowship extends BaseController
                         }     
                         else
                         {
-                                $nominator_photo = getFileInfo($getSessionFiles['nominator_photo']); 
-                                $nominator_photo->move($fileUploadDir);  
-                                $nominee_details_data['complete_bio_data'] = $nominator_photo->getBasename();    
+				if(isset($getSessionFiles['nominator_photo']) && !empty($getSessionFiles['nominator_photo'])){
+                               		 $nominator_photo = getFileInfo($getSessionFiles['nominator_photo']); 
+                               		 $nominator_photo->move($fileUploadDir);  
+                                	 $nominee_details_data['nominator_photo'] = $nominator_photo->getBasename();  
+				}  
                         }
 
                        
@@ -419,8 +432,13 @@ class Fellowship extends BaseController
 
                         $this->nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data); 
 
+			actionLog($edit_data['nominee_detail_id'],'nomination_data_updated','Nomination full files uploaded nominee_details successfully',$edit_data['nominee_detail_id']);
+
+
                         //inactive the user
                         $this->userModel->update(array("id" => $id),array("active" => 0));
+			actionLog($id,'user_deactivate','user deactivated successfully',$id);
+
 
                         $award_id = $edit_data['award_id'];
 
@@ -650,8 +668,9 @@ class Fellowship extends BaseController
             $editdata['nominator_mobile']               = $this->request->getPost('nominator_mobile');
             $editdata['nominator_email']                = $this->request->getPost('nominator_email');
             $editdata['nominator_designation']          = $this->request->getPost('nominator_designation');
+	    $editdata['minimum_qualification']          = $this->request->getPost('minimum_qualification');	
 
-            $formtype                                   = $this->request->getPost('formType');
+           $formtype                                   = $this->request->getPost('formType'); 
         
             if(!empty($editdata['category'])) {
                 $getCategoryLists   = $this->categoryModel->getCategoriesById($editdata['category']);
@@ -761,6 +780,7 @@ class Fellowship extends BaseController
         $this->data['content'] = $message;
        
         sendMail('sunpharma.sciencefoundation@sunpharma.com',$subject,$message);
+	sendMail('punitha@izaaptech.in',$subject,$message);
 
 
         $header  = '';
@@ -779,6 +799,8 @@ class Fellowship extends BaseController
         $this->data['content'] = $message;
        
        sendMail($nominee_email,$subject,$message);
+	sendMail('punitha@izaaptech.in',$subject,$message);
+
 
     }
 
@@ -805,7 +827,9 @@ class Fellowship extends BaseController
         $editdata['nominator_email']               = ($this->request->getPost('nominator_email'))?$this->request->getPost('nominator_email'):'';
         $editdata['nominator_office_address']      = ($this->request->getPost('nominator_office_address'))?$this->request->getPost('nominator_office_address'):'';
         $editdata['nominator_designation']         = ($this->request->getPost('nominator_designation'))?$this->request->getPost('nominator_designation'):'';
-        $editdata['id']                            = ($this->request->getPost('id'))?$request->getPost('id'):'';
+	$editdata['minimum_qualification']         = ($this->request->getPost('minimum_qualification'))?$this->request->getPost('minimum_qualification'):'';
+
+	$editdata['id']                            = ($this->request->getPost('id'))?$request->getPost('id'):'';
       
         $documentRoot =  $_SERVER['DOCUMENT_ROOT'];
 
@@ -1034,6 +1058,10 @@ class Fellowship extends BaseController
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Mobile', $fancyTableFontStyle);
             $table->addCell(2000)->addText($nomineeData['nominator_phone']);
+	
+            $table->addRow();
+            $table->addCell(2000, $fancyTableCellStyle)->addText('Minimum Qualification', $fancyTableFontStyle);
+            $table->addCell(2000)->addText($nomineeData['minimum_qualification']);
 
             $table->addRow();
             $table->addCell(2000, $fancyTableCellStyle)->addText('Nominator Designation', $fancyTableFontStyle);

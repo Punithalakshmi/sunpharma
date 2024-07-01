@@ -9,7 +9,7 @@
            
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/category/add" class="btn btn-primary btn-xs">
-                <i class="fa fa-plus"></i> Add/Modify Award Type</a>
+                <i class="fa fa-plus"></i> Add/Modify Fellowship Type</a>
            </div>
            <?= csrf_field(); ?>
             <div class="clearfix"></div>
@@ -23,12 +23,12 @@
             
             <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Select Award </label>
+                    <label for="" class="fw-bold">Select Fellowship </label>
                         <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="main_category_id" id="main_category_id" >
                             <option ></option>
-                            <option value="1">Research Awards</option>
-                            <option value="2">Science Scholar Awards</option>
+                            <option value="1">Research Fellowships</option>
+                            <option value="2">Science Scholar Fellowships</option>
                         </select>
                        
                     </div>
@@ -45,8 +45,8 @@
                     <table id="awardTypeDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Award Type</th>
-                          <th>Award</th>
+                          <th>Fellowship Type</th>
+                          <th>Fellowship</th>
                           <th>Status</th>
                           <th>Created Date</th>
                           <th>Action</th>

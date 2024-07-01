@@ -13,7 +13,6 @@ class EventRegisteration extends BaseController
     public function index()
     {
             
-             
             $filter = array();
             $filter['title']      = '';
            // $filter['email']      = '';
@@ -44,7 +43,7 @@ class EventRegisteration extends BaseController
                     $columnName      = $dtpostData['columns'][$columnIndex]['data']; // Column name
                     $columnSortOrder = $dtpostData['order'][0]['dir']; // asc or desc
                     $searchValue     = $dtpostData['search']['value']; // Search value
-			$year =  (isset($dtpostData['year']))?$dtpostData['year']:date('Y');
+			$year =  (isset($dtpostData['year']))?$dtpostData['year']:'';
 
     
                      // Custom filter
@@ -69,7 +68,7 @@ class EventRegisteration extends BaseController
                     $filter['totalRows'] = 'yes';
                    
                     $totalRecordsWithFilterCt = $this->registerationModel->getRegisterationByFilter($filter);                
-                    $totalRecordsWithFilter = (!empty($title) || !empty($email) || !empty($phone) || !empty($mode))?$totalRecordsWithFilterCt:$totalRecords;
+                    $totalRecordsWithFilter = (!empty($title) || !empty($mode))?$totalRecordsWithFilterCt:$totalRecords;
               }
     
             }

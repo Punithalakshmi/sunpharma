@@ -74,7 +74,7 @@ class NominationTypesModel extends Model {
     {
         $builder = $this->table('nominations');
         $builder->select('nominations.*');
-        $builder->where('nominations.status',1);
+      //  $builder->where('nominations.status',1);
         return $query = $builder->get();
     }
     

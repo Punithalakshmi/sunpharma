@@ -66,7 +66,7 @@
                           else
                               $citation = $editdata['citation']; 
 
-			$currentYear = date('Y');
+			$currentYear = $editdata['nomination_year'];
 
 	                $fileUploadDir = base_url().'/uploads/'.$currentYear.'/RA/'.$editdata['user_id'];
 
@@ -89,7 +89,7 @@
                               <br />
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Award <span class="required" style="color:red;">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Fellowship <span class="required" style="color:red;">*</span></label>
                         <select class="form-control col-md-6 selectpicker mt-2 required" name="category" id="category">
                         <option value="">-- Select --</option>
                             <?php if(is_array($categories)):
@@ -117,7 +117,7 @@
                       </div>
                       <div class="clearfix"></div>
                     
-                      
+                     
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required" style="color:red;">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -243,7 +243,7 @@
                         <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Email<span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="nominator_email" class="form-control col-md-7 col-xs-12" type="number" name="nominator_email" value="<?php echo set_value('nominator_email',$editdata['nominator_email']);?>">
+                         <input id="nominator_email" class="form-control col-md-7 col-xs-12" type="text" name="nominator_email" value="<?php echo set_value('nominator_email',$editdata['nominator_email']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
@@ -259,7 +259,7 @@
                         <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Nominator Designation <span class="required" style="color:red;">*</span> </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="nominator_designation" class="form-control col-md-7 col-xs-12" type="number" name="nominator_designation" value="<?php echo set_value('nominator_designation',$editdata['nominator_designation']);?>">
+                         <input id="nominator_designation" class="form-control col-md-7 col-xs-12" type="text" name="nominator_designation" value="<?php echo set_value('nominator_designation',$editdata['nominator_designation']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>
@@ -512,12 +512,12 @@
                     <div class="form-group uploadseciz">
                                     <div class="mb-3 form-items">
                                         <label class="form-label"> Statement of Research Achievements, if
-                                            any, on which any Award has already been Received by the Applicant. Please
+                                            any, on which any Fellowship has already been Received by the Applicant. Please
                                             also upload brief citations on the research works for which the applicant
-                                            has already received the awards (Max. 1 MB) 
+                                            has already received the fellowships (Max. 1 MB) 
                                             <span class="required" style="color:red;">*</span>
                                             <div>
-                                                <small>Upload the list of awards already received by the applicant
+                                                <small>Upload the list of fellowships already received by the applicant
                                                     (Not more than 1MB)
                                                 </small>
                                             </div>
@@ -572,7 +572,7 @@
                         <div class="form-group uploadseciz">
                             <div class="mb-3 form-items">
                                     <label class="form-label " for=""> Signed details of the excellence in
-                                        research work for which the Sun Pharma Research Award is claimed, including
+                                        research work for which the Sun Pharma Research Fellowship is claimed, including
                                         references & illustra- tions (Max. 2.5 MB). The candidate should duly sign
                                         on the details <span class="required" style="color:red;">*</span>
                                         <div class="">
@@ -683,7 +683,7 @@
                                   <div class="form-group uploadseciz">
                                     <div class="mb-3 form-items">
                                         <label class="form-label " for=""> A signed statement by the applicant
-                                            that the research work under reference has not been given any award. The
+                                            that the research work under reference has not been given any fellowship. The
                                             applicant should also indicate the extent of the contribution of others
                                             associated with the research and he/she should clearly acknowledge his/her
                                             achievements. (Max. 500 KB) <span class="required" style="color:red;">*</span></label>

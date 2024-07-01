@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 class Nomination extends BaseController
 {
     public function index($award_id = '')
@@ -13,14 +14,17 @@ class Nomination extends BaseController
             $this->data['categories'] = $getCategoryLists->getResultArray();
 
             $getSessionFiles = getSessionData('uploadedFile');
-            
-            if (strtolower($this->request->getMethod()) == "post") {
+
+            if (strtolower($this->request->getMethod()) == "post") {  
+
+		////echo $size = (int)$_SERVER['CONTENT_LENGTH']; die;
 
                 $this->validation->setRules($this->validation_rules('spsfn',$award_id,$getSessionFiles),$this->validationMessages('spsfn'));
 
                 if($this->validation->withRequest($this->request)->run()) {
 
                         $formTypeStatus = $this->request->getPost('formTypeStatus');
+			
 
                         if($formTypeStatus && $formTypeStatus == 'preview') {
                                
@@ -86,7 +90,7 @@ class Nomination extends BaseController
 
                             $registrationID = getNominationNo($award_id);
                             $registrationNo = date('Y')."/SSA-".$registrationID;
-			            	setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
+			    setSessionData('nominationNo',array('nomination_no'=>$registrationNo));
                           
 
                             if($this->request->getPost('course_name')) {
@@ -100,6 +104,7 @@ class Nomination extends BaseController
                             $this->userModel->save($ins_data);
 
                             $lastInsertID = $this->userModel->insertID();
+			   actionLog($lastInsertID,'user_save_ssa','User table Nominee added successfully',$lastInsertID);
 
                             $fileUploadDir = generateAwardsFolderPath(2,$lastInsertID);
                             
@@ -150,6 +155,9 @@ class Nomination extends BaseController
                             $nominee_details_data['nominee_id'] = $lastInsertID;
                            
                             $this->nominationModel->save($nominee_details_data);
+				$lastInsertID = $this->nominationModel->insertID();
+                              actionLog($lastInsertID,'nomination_data_ssa','Nomination nominee_details added successfully',$lastInsertID);
+
 
                             //$registrationID = getNominationNo($award_id);
 
@@ -283,6 +291,7 @@ class Nomination extends BaseController
                                 $ins_data['created_id']    =  1;
                                 $this->userModel->save($ins_data);
                                 $lastInsertID = $this->userModel->insertID();
+				actionLog($lastInsertID,'user_save_ra','User table Nominee added successfully',$lastInsertID);
 
                                 $fileUploadDir = generateAwardsFolderPath(1,$lastInsertID);
                             
@@ -337,7 +346,10 @@ class Nomination extends BaseController
                                 $nominee_details_data['nominee_id'] = $lastInsertID;
                                  
                                 $this->nominationModel->save($nominee_details_data);
+					$lastInsertID = $this->nominationModel->insertID();
+                              actionLog($lastInsertID,'nomination_data_ra','Nomination nominee_details added successfully',$lastInsertID);
 
+                              
                                 $this->sendMail($firstname,$registrationNo,$email);
 
                                 if($this->request->isAJAX()){
@@ -765,6 +777,9 @@ class Nomination extends BaseController
             $nominee_details_data['is_submitted'] = 1;
 
             $this->nominationModel->update(array("id" => $edit_data['nominee_detail_id']),$nominee_details_data); 
+
+	   actionLog($edit_data['nominee_detail_id'],'nomination_data_updated','Nomination full files uploaded nominee_details successfully',$edit_data['nominee_detail_id']);
+
 
             //inactive the user
             $this->userModel->update(array("id" => $id),array("active" => 0));
@@ -1292,6 +1307,7 @@ class Nomination extends BaseController
         $this->data['content'] = $message;
        
         sendMail('sunpharma.sciencefoundation@sunpharma.com',$subject,$message);
+		sendMail('punitha@izaaptech.in',$subject,$message);
 
 
         $header  = '';
@@ -1310,6 +1326,7 @@ class Nomination extends BaseController
         $this->data['content'] = $message;
        
        sendMail($nominee_email,$subject,$message);
+	sendMail('punitha@izaaptech.in',$subject,$message);
 
     }
 
@@ -1842,8 +1859,7 @@ class Nomination extends BaseController
             $filepath = 'uploads/'.$current_year.'/'.$folderName.'/'.$nominee_id.'/'.$nomineeData['firstname'].'.pdf';
             file_put_contents($filepath, $output);
         
-            return true;
-            
+            return true;  
        } 
 
     }

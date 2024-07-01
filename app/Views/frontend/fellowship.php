@@ -13,13 +13,7 @@
         <?= script_tag('frontend/assets/js/jqueryValidate.js'); ?>
         <?= script_tag('frontend/assets/js/jQuerySteps.js'); ?>
         <?= script_tag('frontend/assets/js/additionalMethods.js'); ?>
-        <?= script_tag('frontend/assets/js/jQuerydatepicker.js'); ?>
-        <!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/additional-methods.js"></script> 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> -->
-    
-      
+        <?= script_tag('frontend/assets/js/jQuerydatepicker.js'); ?>      
     <?php  endif;?>
   
     <form name="clinical_research_fellowship" id="formsection" method="POST" action="<?=base_url();?>/fellowship" enctype="multipart/form-data">
@@ -43,7 +37,7 @@
                                                     <div class="uploadsec">
                                                         <label class="form-check-label question__label noLabel">
                                                             <div class="form-label " for=""> Photograph of the Applicant</div>
-                                                                <input name="nominator_photo" class="required" type="file" id="nominator_photo">
+                                                                <input name="nominator_photo"  accept="image/*" class="required" type="file" id="nominator_photo">
                                                                 <small class="text-danger">
                                                                     <?php if(isset($validation) && $validation->getError('nominator_photo')) {?>
                                                                         <?= $error = $validation->getError('nominator_photo'); ?>
@@ -138,7 +132,14 @@
                                 <div class="mb-3 form-items">Age <span class="required" style="color:red;">*</span></label>
                                     <input class="form-control" id="age" name="age" type="number" readonly value="" placeholder="Age">
                                 </div>
-                            </div>                       
+                            </div> 
+			<div class="col-lg-12">
+                                <div class="mb-3 form-items minqual">
+                                    <label class="form-label" >Minimum Qualification<span class="required" style="color:red;">*</span></label>
+                                          <input type="radio" name="minimum_qualification" class="flat" value="MBBS" <?php echo set_radio('minimum_qualification','MBBS',(isset($editdata['minimum_qualification']) && ($editdata['minimum_qualification']=='MBBS'))?'checked':'');?> > MBBS
+                         &nbsp;&nbsp;<input type="radio" name="minimum_qualification" class="flat" value="Other" <?php echo set_radio('minimum_qualification','Other',(isset($editdata['minimum_qualification']) && ($editdata['minimum_qualification']=='Other'))?'checked':'');?> > Other
+                           </div>
+                              </div>                      
                             <div class="col-lg-12">
                             <div class="mb-3 form-items">
                                 <label class="form-label" >Residence Address <span class="required" style="color:red;">*</span></label>
@@ -148,9 +149,8 @@
                                         <?= $error = $validation->getError('residence_address'); ?>
                                     <?php }?>
                                 </small>
-
                             </div>
-                        </div>
+                        </div> 
 
                         <div class="col-lg-12">
                             <div class="mb-3 form-items">

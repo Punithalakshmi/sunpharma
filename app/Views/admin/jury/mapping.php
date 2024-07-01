@@ -2,7 +2,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left ml-3" style="width:100%;">
-        <h3>Jury mapping with Awards</h3>
+        <h3>Jury mapping with Fellowships</h3>
       </div>
     </div>
 
@@ -26,7 +26,7 @@
             </div>
 
             <div class="jurymaplist">
-              <label>Award Type* :</label>
+              <label>Fellowship Type* :</label>
               <select class="selectpicker" multiple name="award[]">
                 <?php if (count($awardLists)) :
                   foreach ($awardLists as $akey => $avalue) : ?>

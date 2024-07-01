@@ -3,13 +3,13 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Manage Awards <small></small></h3>
+                <h3>Manage Fellowships <small></small></h3>
               </div>
             </div>
            
             <div class="actionbtns">
                 <a href="<?php echo base_url();?>/admin/nomination/add" class="btn btn-primary btn-xs">
-                <i class="fa fa-plus"></i> Add/Modify Award</a>
+                <i class="fa fa-plus"></i> Add/Modify Fellowship</a>
            </div>
            <?= csrf_field(); ?>
             <div class="clearfix"></div>
@@ -27,7 +27,7 @@
                     <!-- <label class="fw-bold">Award</label> -->
               
                     <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Award </label>
+                    <label for="" class="fw-bold">Fellowship</label>
                         <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="award" id="award"  >
                             <option></option>
@@ -46,7 +46,7 @@
                    
               <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Award Types</label>
+                    <label for="" class="fw-bold">Fellowship Types</label>
                     <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="type" id="type"  >
                             <option></option>
@@ -99,17 +99,16 @@
                     <table id="manageAwardsDatatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Award</th>
-                          <th>Award Type</th>
+                          <th>Fellowship</th>
+                          <th>Fellowship Type</th>
                           <th>Title</th>
                           <th>Subject</th>
                           <th>Start Date</th>
                           <th>End Date</th>
-                          <th>Award Status</th>
+                          <th>Fellowship Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
-
 
                       <tbody>
                         <?php if(is_array($lists)):

@@ -50,7 +50,7 @@
                                       <div class="q-box__question col me-2 d-flex">     
                                         <label class="form-check-label question__label noLabel">
                                             <div class="form-label mb-2"> <b>Photograph of the Applicant </b></div>
-                                              <img class="uploadPreview" src="<?= $fileUploadDir;?>/<?=$user['nominator_photo'];?>" width="200" height="200" />                                                    </label>
+                                              <img class="uploadPreview" src="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$user['nominator_photo'];?>" width="200" height="200" />                                                    </label>
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +224,7 @@
                         <div class="step">
 
                             <div class="row">
-                            <?php if($userdata['nominationEndDays'] > 0): ?>
+                            <?php if(isset($userdata['nominationEndDays']) && $userdata['nominationEndDays'] > 0): ?>
                                 <?php if(!empty($user['complete_bio_data'])): ?>
                                 <div class="col-lg-12">
                                     <div class="mb-3 form-items">
@@ -875,7 +875,7 @@ Pharma Science Foundation New Delhi within 10 days of submission.</b></p>
                         <p class="text-danger">All relevant documents in support of the statements made in the application (e.g., Mark sheets, academic award certificates, publications, etc.)</p>
                      <?php 
                    
-                          if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && ($userdata['nominationEndDays'] > 0)):   ?>           
+                          if(isset($user['is_submitted']) && ($user['is_submitted'] == 0) && (isset($userdata['nominationEndDays']) && ($userdata['nominationEndDays'] > 0))):   ?>           
                         <div id="q-box__buttons">
                             <button id="next-btn" class="btn btn-primary" type="reset">Reset</button>
                             <button id="submit-btn" class="btn btn-success ms-2" type="submit">Submit</button>

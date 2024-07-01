@@ -3,10 +3,9 @@
     background: rgb(250 250 250 / 28%);
 }</style>
 
-<?php $currentYear = date('Y');
+<?php $currentYear = $user['nomination_year'];
 
 	//print_r($editdata); die;
-
  ?>
 <div class="right_col" role="main">
           <div class="">
@@ -18,13 +17,16 @@
                
                 <h3>Total Score: <span class="badge badge-warning">
                   <i class="fa fa-star"></i> <?=($average_rating>0)?round($average_rating):0;?></span></h3>
-                <?php if(isset($user['status']) && $user['status'] == 'Approved' ): ?>
+                <?php //echo "<pre>"; print_r($user); 
+				if(isset($user['status']) && ($user['status'] == 'Approved') && ($user['is_rejected'] == 0) ){ ?>
                   <h3 class="approvedtxt"><span class="badge badge-success">
                     <i class="fa fa-check-circle"></i> Approved</span>
                 </h3>
-                <?php else: ?>
+                <?php  } else if(isset($user['status']) && ($user['status'] == 'Disapproved') && ($user['is_rejected'] == 1)){ ?>
+			<h3 class="disapprovedtxt"><span class="btn btn-danger"> <i class="fa fa-ban"></i> Rejected </span></h3>
+		<?php } else{ ?>
                   <h3 class="disapprovedtxt"><span class="badge badge-info"><i class="fa fa-times-circle"></i> Pending </span></h3>
-                  <?php endif; ?>
+                  <?php } ?>
 
                  <?php if(isset($userdata['role']) && ( $userdata['role'] == 1)): ?>
                 <a class="btn btn-primary" href="<?=base_url();?>/jury/nominations">
@@ -85,7 +87,7 @@
               </div>
           </div> 
               <div class="form-group row formitem">
-                <label class="col-sm-3 col-form-label">Award Type</label>
+                <label class="col-sm-3 col-form-label">Fellowship Type</label>
                 <div class="col-sm-9"><?=$user['category_name'];?></div>
               </div>
 		 <div class="form-group row formitem">
@@ -104,7 +106,14 @@
                 <div class="col-sm-9">
                 <?=$user['phone'];?>  </div>
               </div>
-                    
+              <?php if(isset($user['minimum_qualification']) && !empty($user['minimum_qualification'])) {  ?>
+		<div class="form-group row formitem">
+                <label class="col-sm-3 col-form-label">Minimum Qualification</label>
+                <div class="col-sm-9">
+                <?=$user['minimum_qualification'];?>  </div>
+              </div>
+
+	  <?php } ?>		    
               <div class="form-group row formitem">
                 <label class="col-sm-3 col-form-label">Address</label>
                 <div class="col-sm-9">
@@ -164,7 +173,7 @@
                   <?=$user['first_medical_degree_name_of_degree'];?> 
                 </div>
                 <div class="col-md-6">
-                  <label class="col-form-label d-flex">Year of award of degree:</label> 
+                  <label class="col-form-label d-flex">Year of fellowship of degree:</label> 
                   <?=$user['first_medical_degree_year_of_award'];?> 
                 </div>
                 <div class="col-md-6">
@@ -184,7 +193,7 @@
                     <?=$user['highest_medical_degree_name'];?> 
                 </div>
                 <div class="col-md-6">
-                  <label class="col-form-label d-flex">Year of award of degree:</label> 
+                  <label class="col-form-label d-flex">Year of fellowship of degree:</label> 
                   <?=$user['highest_medical_degree_year'];?> 
                 </div>
                 <div class="col-md-6">
@@ -224,7 +233,7 @@
 		$fileUploadDir = base_url().'/uploads/'.$currentYear.'/RA/'.$user['user_id'];
 
               //$files split section
-              if(strpos($user['justification_letter_filename'],','))
+              if(strpos($user['justification_letter_filename'],',') && ($user['user_id']!=114))
                 $justificationLetter = explode(',',$user['justification_letter_filename']);
               else
                 $justificationLetter = $user['justification_letter_filename'];
@@ -326,7 +335,7 @@
 
               <?php endif; if(!empty($user['statement_of_research_achievements'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the awards</label>
+                <label class="col-form-label nonecolan">Statement of Research Achievements, if any, on which any Fellowship has already been Received by the Applicant. Please also upload brief citations on the research works for which the applicant has already received the fellowships</label>
                 <div class="col-sm-9">
                 <?php if(is_array($researchAchievements)): 
                         for($i=0; $i<count($researchAchievements); $i++): ?>
@@ -340,7 +349,7 @@
              
               <?php endif; if(!empty($user['signed_details'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references and illustrations. The candidate should duly sign on the details.</label>
+                <label class="col-form-label nonecolan">Signed details of the excellence in research work for which the Sun Pharma Research Fellowship is claimed, including references and illustrations. The candidate should duly sign on the details.</label>
                 <div class="col-sm-9">
                 <?php if(is_array($signedDetails)): 
                         for($i=0; $i<count($signedDetails ); $i++): ?>
@@ -366,7 +375,7 @@
               </div>
               <?php endif; if(!empty($user['signed_statement'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">A signed statement by the applicant that the research work under reference has not been given any award. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB)</label>
+                <label class="col-form-label nonecolan">A signed statement by the applicant that the research work under reference has not been given any fellowship. The applicant should also indicate the extent of the contribution of the others associated with the research and he/she should clearly acknowledge his/her achievements (Max: 500KB)</label>
                 <div class="col-sm-9">
                 <?php if(is_array($signedStatement)): 
                         for($i=0; $i<count($signedStatement); $i++): ?>
@@ -393,6 +402,7 @@
               <?php endif;
                    }
                     else if(isset($user['nomination_type']) && ($user['nomination_type'] == 'fellowship')){
+				//print_r($user);die;
                       if(strpos($user['justification_letter_filename'],','))
                         $justificationLetter = explode(',',$user['justification_letter_filename']);
                       else
@@ -438,10 +448,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($justificationLetter)): 
                             for($i=0; $i<count($justificationLetter); $i++): ?>
-                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
+                          <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter[$i];?></a>
                           <?php endfor; 
                               else:?>
-                            <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
+                            <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$justificationLetter;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$justificationLetter;?></a>
                           <?php endif;?>
                   </div>
                   </div>
@@ -453,10 +463,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($completeBiodata)): 
                             for($i=0; $i<count($completeBiodata); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$completeBiodata;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$completeBiodata;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -468,10 +478,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($researchExperience)): 
                             for($i=0; $i<count($researchExperience); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchExperience[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$researchExperience[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchExperience;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$researchExperience;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchExperience;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -483,10 +493,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($researchPublications)): 
                             for($i=0; $i<count($researchPublications); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$researchPublications[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$researchPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$researchPublications;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$researchPublications;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -494,14 +504,14 @@
 
                   <?php if(!empty($user['fellowship_research_awards_and_recognitions'])):?>
                   <div class="form-group row formitem graybox">
-                    <label class="col-form-label nonecolan">Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)</label>
+                    <label class="col-form-label nonecolan">Fellowships and Recognitions (such as, Young Scientist Fellowship of a science or a medical academy or a national association of the applicant’s specialty)</label>
                     <div class="col-sm-9">
                     <?php if(is_array($awardsRecognitions)): 
                             for($i=0; $i<count($awardsRecognitions); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$awardsRecognitions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$awardsRecognitions[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$awardsRecognitions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$awardsRecognitions;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$awardsRecognitions;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -513,10 +523,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($scientificResearchProjects)): 
                             for($i=0; $i<count($scientificResearchProjects); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$scientificResearchProjects[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$scientificResearchProjects[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$scientificResearchProjects;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$scientificResearchProjects;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$scientificResearchProjects;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -528,10 +538,10 @@
                     <div class="col-sm-9">
                     <?php if(is_array($descriptionOfResearch)): 
                             for($i=0; $i<count($descriptionOfResearch); $i++): ?>
-                      <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$descriptionOfResearch[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch[$i];?></a> 
+                      <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$descriptionOfResearch[$i];?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch[$i];?></a> 
                       <?php endfor; 
                               else:?>
-                              <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$user['user_id'];?>/<?=$descriptionOfResearch;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch;?></a>
+                              <a href="<?=base_url();?>/uploads/<?=$user['nomination_year'];?>/CRF/<?=$user['user_id'];?>/<?=$descriptionOfResearch;?>" target="_blank" class="documents"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> <?=$descriptionOfResearch;?></a>
                         <?php endif;?> 
                     </div>
                   </div>
@@ -618,7 +628,7 @@
               </div>
               <?php endif; if(!empty($user['supervisor_certifying'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB)</label>
+                <label class="col-form-label nonecolan">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Fellowship has actually been done by the applicant(500 KB)</label>
                 <div class="col-sm-9">
                     <?php if(is_array($supervisorCertifying)): 
                         for($i=0; $i<count($supervisorCertifying); $i++): ?>
@@ -644,7 +654,7 @@
               </div>
               <?php endif; if(!empty($user['excellence_research_work'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label>
+                <label class="col-form-label nonecolan">Details of the excellence in research work for which the Sun Pharma Science Scholar Fellowship is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details.(Max 2 MB)</label>
                 <div class="col-sm-9">
                   
                    <?php if(is_array($excellenceResearchWork)): 
@@ -674,7 +684,7 @@
 
               <?php endif; if(!empty($user['statement_of_applicant'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">Statement of Merits/Awards/Scholarships already received by the Applicant (Max: 1 MB)</label>
+                <label class="col-form-label nonecolan">Statement of Merits/Fellowships/Scholarships already received by the Applicant (Max: 1 MB)</label>
                 <div class="col-sm-9">
                
                 <?php if(is_array($statementOfApplicant)): 
@@ -689,7 +699,7 @@
               </div>
               <?php endif; if(!empty($user['ethical_clearance'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">A letter stating that the project submitted for the award has received “ethical clearance” (Max: 250KB)</label>
+                <label class="col-form-label nonecolan">A letter stating that the project submitted for the fellowship has received “ethical clearance” (Max: 250KB)</label>
                 <div class="col-sm-9">
                
                 <?php if(is_array($ethicalClearance)): 
@@ -704,7 +714,7 @@
               </div>
               <?php endif; if(!empty($user['statement_of_duly_signed_by_nominee'])):?>
               <div class="form-group row formitem graybox">
-                <label class="col-form-label nonecolan">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-2021 has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)</label>
+                <label class="col-form-label nonecolan">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Fellowship-<?=date("Y");?> has “non-conflict of interest” with the supervisor or co-authors (Max: 250KB)</label>
                 <div class="col-sm-9">
               
                 <?php if(is_array($statementOfDulySigned)): 
@@ -779,7 +789,7 @@
               <?php endif;?>
              <?php } ?> 
 
-              <?php if(isset($userdata['role']) && ($userdata['role'] == '3') && (($user['status'] == 'Disapproved' && $user['is_rejected'] == '0') || ($user['status'] == 'Disapproved' && $user['active'] == '0'))): ?>
+              <?php if(isset($userdata['role']) && ($userdata['role'] == '3') && (($user['status'] == 'Disapproved' && $user['is_rejected'] == '0' && $user['active'] == '0') )): ?>
                 <div class="">
                   <button type="button" onclick="getRemarks(this,'approve','<?=$user['user_id'];?>');" class="btn btn-success greenbg btn-lg">Approve</button>
                   <button type="button" class="btn btn-danger btn-lg" onclick="getRemarks(this,'disapprove','<?=$user['user_id'];?>');">

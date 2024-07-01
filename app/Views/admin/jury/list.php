@@ -24,7 +24,7 @@
             <div class="row topformsec">
             <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label class="fw-bold">Award</label>
+                    <label class="fw-bold">Fellowship</label>
                     <!-- <input type="text" class="mt-2 form-control" name="title" id="title" /> -->
                     <select class="selectpicker mt-2 form-control"
                       aria-label="Default select example" name="award" id="award">
@@ -68,7 +68,7 @@
                          
                           
                            <th>Mapped Juries</th>
-                           <th>Award</th>
+                           <th>Fellowship</th>
                         </tr>
                       </thead>
                       <tbody>

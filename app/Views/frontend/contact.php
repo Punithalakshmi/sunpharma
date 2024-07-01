@@ -15,8 +15,7 @@
                     <?php endif;?>
                 </div>
                 <!-- <div class="col-md-6 col-xl-4">
-                   <div>
-					
+                   <div>		
                         <form class="p-3 p-xl-4" name="contact" method="post" action="<?//base_url();?>/contact">
 						<?//csrf_field(); ?>
                             <div class="mb-3">

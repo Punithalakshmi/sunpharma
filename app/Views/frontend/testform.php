@@ -14,11 +14,9 @@
         <div class="container">
             <div class="row">
 <div class="registration-form">
-           <form id="eventRegistration" action="<?php echo base_url();?>/user/registration" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+           <form id="eventRegistration" method="POST" onSubmit="return testFormSubmit();"  enctype="multipart/form-data" class="form-horizontal form-label-left">
            <?= csrf_field(); ?>   
-		    <input type="hidden" id="event_id" name="event_id" class="form-control col-md-7 col-xs-12" value="<?php echo $editdata['event_id'];?>">
-
-		   <div class="clearfix"></div>
+		 <div class="clearfix"></div>
                      
                      
                       <div class="clearfix"></div>   
@@ -26,7 +24,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Firstname <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="firstname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('firstname',$editdata['firstname']);?>">
+                          <input type="file" id="first-name" name="firstname" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('firstname',$editdata['firstname']);?>">
                         </div>
                       </div>
                       <div class="clearfix"></div>

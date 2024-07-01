@@ -1,4 +1,4 @@
-<h1 style="text-align:center;">Research Awards - <?=date("Y");?></h1>
+<h1 style="text-align:center;">Research Fellowships - <?=date("Y");?></h1>
 <table class="nominee-section"  style="width:100%; margin-right:auto; margin-left: auto; border: 0; color: #000; font-size: 16px; font-family: Arial, Helvetica, sans-serif; ">
          <tr>
             <td>
@@ -8,11 +8,11 @@
                      <td border="1" style="color: #047CB2"><?=(isset($nomineeData['registration_no']) && ($nomineeData['registration_no']))?$nomineeData['registration_no']:'';?></td>
                   </tr>
                   <tr>
-                     <td width="200" border="1">Award</td>
+                     <td width="200" border="1">Fellowship</td>
                      <td border="1" style="color: #047CB2"><?=(isset($nomineeData['award']) && ($nomineeData['award']))?$nomineeData['award']:'';?></td>
                   </tr>
                   <tr>
-                     <td width="200" border="1">Award Type</td>
+                     <td width="200" border="1">Fellowship Type</td>
                      <td border="1" style="color: #047CB2"><?=(isset($nomineeData['category_name']) && ($nomineeData['category_name']))?$nomineeData['category_name']:'';?></td>
                   </tr>
                   <tr>
@@ -122,7 +122,7 @@
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">
                   <tr>
-                     <td colspan="1"  border="1"  style="padding:10px;">Statement of Research Achievements, if any, on which any Award has already been Received by the Applicant. Please also upload  brief citations on the research works for which the applicant has already received the awards </td>
+                     <td colspan="1"  border="1"  style="padding:10px;">Statement of Research Achievements, if any, on which any Fellowship has already been Received by the Applicant. Please also upload  brief citations on the research works for which the applicant has already received the fellowships </td>
                   </tr>
                   <tr>
                      <td style="padding:10px;"  border="1" >
@@ -137,7 +137,7 @@
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">
                   <tr>
-                     <td colspan="1"  border="1"  style="padding:10px;">Signed details of the excellence in research work for which the Sun Pharma Research Award is claimed, including references & illustra- tions (Max. 2.5 MB). The candidate should duly sign on the details</td>
+                     <td colspan="1"  border="1"  style="padding:10px;">Signed details of the excellence in research work for which the Sun Pharma Research Fellowship is claimed, including references & illustra- tions (Max. 2.5 MB). The candidate should duly sign on the details</td>
                   </tr>
                   <tr>
                      <td style="padding:10px;"  border="1" >
@@ -196,6 +196,5 @@
                 </td>
          </tr>
 
-         
-         
+       
       </table>

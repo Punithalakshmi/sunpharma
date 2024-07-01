@@ -65,5 +65,5 @@ class RatingModel extends Model{
            $builder->where('ratings.jury_id',$userID);
            
         return $query = $builder->get();
-    }
+    }		
 }

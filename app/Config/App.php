@@ -152,9 +152,9 @@ class App extends BaseConfig
      *
      * @var string
      */
-   // public $sessionDriver = FileHandler::class;
+    public $sessionDriver = FileHandler::class;
 
-     public $sessionDriver = 'CodeIgniter\Session\Handlers\DatabaseHandler';
+    // public $sessionDriver = 'CodeIgniter\Session\Handlers\DatabaseHandler';
 
     /**
      * --------------------------------------------------------------------------
@@ -177,7 +177,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $sessionExpiration = 7200;
+    public $sessionExpiration = 0;
 
     /**
      * --------------------------------------------------------------------------
@@ -196,8 +196,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-   // public $sessionSavePath = WRITEPATH . 'session';
-      public $sessionSavePath = 'ci_sessions';
+      public $sessionSavePath = WRITEPATH . 'session';
+    //  public $sessionSavePath = 'ci_sessions';
 
     /**
      * --------------------------------------------------------------------------
@@ -211,7 +211,7 @@ class App extends BaseConfig
      *
      * @var bool
      */
-    public $sessionMatchIP = true;
+    public $sessionMatchIP = false;
 
     /**
      * --------------------------------------------------------------------------
@@ -222,7 +222,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $sessionTimeToUpdate = 300;
+    public $sessionTimeToUpdate = 1500;
 
     /**
      * --------------------------------------------------------------------------

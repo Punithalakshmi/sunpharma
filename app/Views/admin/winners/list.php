@@ -26,7 +26,7 @@
             
                 <div class="col-md-3">
                     <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Award </label>
+                    <label for="" class="fw-bold">Fellowship </label>
                         <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="award" id="award"  >
                             <option></option>
@@ -42,7 +42,7 @@
                    
               <div class="col-md-3">
                 <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label for="" class="fw-bold">Award Types</label>
+                    <label for="" class="fw-bold">Fellowship Types</label>
                     <select class="selectpicker mt-2 form-control"
                             aria-label="Default select example" name="type" id="type"  >
                             <option></option>
@@ -72,8 +72,8 @@
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Awards</th>
-                          <th>Award Type</th>
+                          <th>Fellowships</th>
+                          <th>Fellowship Type</th>
                           <th>Photo</th>
                           <th>Designation</th>
                           <th>Year</th>

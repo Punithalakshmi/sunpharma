@@ -67,7 +67,7 @@
                       else
                          $highestDegreeMarksheet = $editdata['highest_degree_marksheet'];    
                       
-
+                         $currentYear = $editdata['nomination_year'];
                     ?>
                   <div class="x_content">
                     <br />
@@ -77,7 +77,7 @@
                       <?= csrf_field(); ?>
                      
                       <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Award <span class="required" style="color:red;">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Category of the Fellowship <span class="required" style="color:red;">*</span></label>
                                     <select class="form-control col-md-6 selectpicker mt-2 required" name="category" id="category">
                                     <option value="">-- Select --</option>
                                         <?php if(is_array($categories)):
@@ -255,7 +255,7 @@
                                      <div class="mb-3 form-items" id="justificationLtr<?=$i;?>">
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="justification_letter[<?=$justificationLetter[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" title="<?=$justificationLetter[$i];?>">
+                                         <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$justificationLetter[$i];?>" target="_blank" title="<?=$justificationLetter[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -271,7 +271,7 @@
                                       <div class="mb-3 form-items" id="justificationLtr-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="justification_letter[<?=$justificationLetter;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$justificationLetter;?>" target="_blank" title="<?=$justificationLetter;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$justificationLetter;?>" target="_blank" title="<?=$justificationLetter;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -309,7 +309,7 @@
                                      <div class="mb-3 form-items" id="complete_bio_data<?=$i;?>">
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata[$i];?>]" type="file">
                                        
-                                         <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" title="<?=$completeBiodata[$i];?>">
+                                         <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$completeBiodata[$i];?>" target="_blank" title="<?=$completeBiodata[$i];?>">
                                               <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -325,7 +325,7 @@
                                       <div class="mb-3 form-items" id="complete_bio_data-1">
                                          
                                         <input class="form-control mb-3 required complete_bio_data" accept=".pdf" name="complete_bio_data[<?=$completeBiodata;?>]" type="file">
-                                        <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$completeBiodata;?>" target="_blank" title="<?=$completeBiodata;?>">
+                                        <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$completeBiodata;?>" target="_blank" title="<?=$completeBiodata;?>">
                                           <button class="btn btn-primary btn-sm" type="button">
                                                 <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                     <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -377,7 +377,7 @@
                                           <input id="first_medical_degree_name_of_degree" class="form-control col-md-7 col-xs-12" type="text" name="first_medical_degree_name_of_degree" value="<?php echo set_value('first_medical_degree_name_of_degree',$editdata['first_medical_degree_name_of_degree']);?>">
                                       </div>
                                       <div class="col-md-4 col-sm-4 col-xs-12">
-                                           <label class="form-label"> Year of award of degree:</label>
+                                           <label class="form-label"> Year of fellowship of degree:</label>
                                             <input id="first_medical_degree_year_of_award" class="form-control col-md-7 col-xs-12" type="text" name="first_medical_degree_year_of_award" value="<?php echo set_value('first_medical_degree_year_of_award',$editdata['first_medical_degree_year_of_award']);?>">
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-12">
@@ -396,7 +396,7 @@
                                        <div class="mb-3 form-items" id="firstDegreeMarksheet<?=$i;?>">
                                           <input class="form-control mb-3 required first_degree_marksheet" accept=".pdf" name="first_degree_marksheet[<?=$firstDegreeMarksheet[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$firstDegreeMarksheet[$i];?>" target="_blank" title="<?=$firstDegreeMarksheet[$i];?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$firstDegreeMarksheet[$i];?>" target="_blank" title="<?=$firstDegreeMarksheet[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -412,7 +412,7 @@
                                         <div class="mb-3 form-items" id="firstDegreeMarksheet-1">
                                           
                                           <input class="form-control mb-3 required first_degree_marksheet" accept=".pdf" name="first_degree_marksheet[<?=$firstDegreeMarksheet;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$firstDegreeMarksheet;?>" target="_blank" title="<?=$firstDegreeMarksheet;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$firstDegreeMarksheet;?>" target="_blank" title="<?=$firstDegreeMarksheet;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -441,7 +441,7 @@
                                            <input id="highest_medical_degree_name" class="form-control col-md-7 col-xs-12" type="text" name="highest_medical_degree_name" value="<?php echo set_value('highest_medical_degree_name',$editdata['highest_medical_degree_name']);?>">
                                       </div>
                                       <div class="col-md-4 col-sm-4 col-xs-12">
-                                            <label class="form-label"> Year of award of degree:</label>
+                                            <label class="form-label"> Year of felloship of degree:</label>
                                             <input id="highest_medical_degree_year" class="form-control col-md-7 col-xs-12" type="text" name="highest_medical_degree_year" value="<?php echo set_value('highest_medical_degree_year',$editdata['highest_medical_degree_year']);?>">
                                       </div>
                                       <div class="col-md-4 col-sm-4 col-xs-12">
@@ -459,7 +459,7 @@
                                       for($i=0; $i<count($highestDegreeMarksheet); $i++): if(!empty($highestDegreeMarksheet[$i])): ?>
                                       <div class="mb-3 form-items" id="highestDegreeMarksheet<?=$i;?>">
                                           <input class="form-control mb-3 required highest_degree_marksheet" accept=".pdf" name="highest_degree_marksheet[<?=$highestDegreeMarksheet[$i];?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$highestDegreeMarksheet[$i];?>" target="_blank" title="<?=$highestDegreeMarksheet[$i];?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$highestDegreeMarksheet[$i];?>" target="_blank" title="<?=$highestDegreeMarksheet[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -475,7 +475,7 @@
                                         <div class="mb-3 form-items" id="highestDegreeMarksheet-1">
                                           
                                           <input class="form-control mb-3 required highest_degree_marksheet" accept=".pdf" name="highest_degree_marksheet[<?=$highestDegreeMarksheet;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$highestDegreeMarksheet;?>" target="_blank" title="<?=$highestDegreeMarksheet;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$highestDegreeMarksheet;?>" target="_blank" title="<?=$highestDegreeMarksheet;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -511,7 +511,7 @@
                                       <div class="mb-3 form-items" id="fellowship_research_experience<?=$i;?>">
                                           <input class="form-control mb-3 required fellowship_research_experience" accept=".pdf" name="fellowship_research_experience[<?=$researchExperience[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$researchExperience[$i];?>" target="_blank" title="<?=$researchExperience[$i];?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$researchExperience[$i];?>" target="_blank" title="<?=$researchExperience[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -527,7 +527,7 @@
                                         <div class="mb-3 form-items" id="fellowship_research_experience-1">
                                           
                                           <input class="form-control mb-3 required fellowship_research_experience" accept=".pdf" name="fellowship_research_experience[<?=$researchExperience;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$researchExperience;?>" target="_blank" title="<?=$researchExperience;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$researchExperience;?>" target="_blank" title="<?=$researchExperience;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -562,7 +562,7 @@
                                       <div class="mb-3 form-items" id="researchPublications<?=$i;?>">
                                           <input class="form-control mb-3 required fellowship_research_publications" accept=".pdf" name="fellowship_research_publications[<?=$researchPublications[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$researchPublications[$i];?>" target="_blank" title="<?=$researchPublications[$i];?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$researchPublications[$i];?>" target="_blank" title="<?=$researchPublications[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -578,7 +578,7 @@
                                         <div class="mb-3 form-items" id="researchPublications-1">
                                           
                                           <input class="form-control mb-3 required fellowship_research_publications" accept=".pdf" name="fellowship_research_publications[<?=$researchPublications;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$researchPublications;?>" target="_blank" title="<?=$researchPublications;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$researchPublications;?>" target="_blank" title="<?=$researchPublications;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -600,7 +600,7 @@
                             <div class="clearfix"></div>
                         <div class="form-group uploadseciz">
                                  <div class="mb-3 form-items">
-                                      <label class="form-label" for="">Awards and Recognitions (such as, Young Scientist Award of a science or a medical academy or a national association of the applicant’s specialty)
+                                      <label class="form-label" for="">Fellowships and Recognitions (such as, Young Scientist Fellowship of a science or a medical academy or a national association of the applicant’s specialty)
                                      </label>
                                     <button type="button" name="fellowship_research_awards_and_recognitions_add" id="add_more_fellowship_research_awards_and_recognitions" onclick="addMoreRows('awardsRecognitionsWrapper','fellowship_research_awards_and_recognitions','fellowship_research_awards_and_recognitions');" class="btn btn-primary btn-sm">
                                       <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
@@ -613,7 +613,7 @@
                                       <div class="mb-3 form-items" id="fellowship_research_awards_and_recognitions<?=$i;?>">
                                           <input class="form-control mb-3 required fellowship_research_awards_and_recognitions" accept=".pdf" name="fellowship_research_awards_and_recognitions[<?=$awardsRecognitions[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$awardsRecognitions[$i];?>" target="_blank" title="<?=$awardsRecognitions[$i];?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$awardsRecognitions[$i];?>" target="_blank" title="<?=$awardsRecognitions[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -629,7 +629,7 @@
                                         <div class="mb-3 form-items" id="fellowship_research_awards_and_recognitions-1">
                                           
                                           <input class="form-control mb-3 required fellowship_research_awards_and_recognitions" accept=".pdf" name="fellowship_research_awards_and_recognitions[<?=$awardsRecognitions;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$awardsRecognitions;?>" target="_blank" title="<?=$awardsRecognitions;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$awardsRecognitions;?>" target="_blank" title="<?=$awardsRecognitions;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -662,7 +662,7 @@
                                       <div class="mb-3 form-items" id="fellowship_scientific_research_projects<?=$i;?>">
                                           <input class="form-control mb-3 required fellowship_scientific_research_projects" accept=".pdf" name="fellowship_scientific_research_projects[<?=$scientificResearchProjects[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$scientificResearchProjects[$i];?>" target="_blank" title="<?=$scientificResearchProjects[$i];?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$scientificResearchProjects[$i];?>" target="_blank" title="<?=$scientificResearchProjects[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -678,7 +678,7 @@
                                         <div class="mb-3 form-items" id="fellowship_scientific_research_projects-1">
                                           
                                           <input class="form-control mb-3 required fellowship_scientific_research_projects" accept=".pdf" name="fellowship_scientific_research_projects[<?=$scientificResearchProjects;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$scientificResearchProjects;?>" target="_blank" title="<?=$scientificResearchProjects;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$scientificResearchProjects;?>" target="_blank" title="<?=$scientificResearchProjects;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -740,7 +740,7 @@
                                       <div class="mb-3 form-items" id="fellowship_description_of_research<?=$i;?>">
                                           <input class="form-control mb-3 required fellowship_description_of_research" accept=".pdf" name="fellowship_description_of_research[<?=$descriptionOfResearch[$i];?>]" type="file">
                                         
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$descriptionOfResearch[$i];?>" target="_blank" title="<?=$descriptionOfResearch[$i];?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$descriptionOfResearch[$i];?>" target="_blank" title="<?=$descriptionOfResearch[$i];?>">
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>
@@ -756,7 +756,7 @@
                                         <div class="mb-3 form-items" id="fellowship_description_of_research-1">
                                           
                                           <input class="form-control mb-3 required fellowship_description_of_research" accept=".pdf" name="fellowship_description_of_research[<?=$descriptionOfResearch;?>]" type="file">
-                                          <a href="<?=base_url();?>/uploads/<?=date('Y');?>/CRF/<?=$editdata['user_id'];?>/<?=$descriptionOfResearch;?>" target="_blank" title="<?=$descriptionOfResearch;?>">
+                                          <a href="<?=base_url();?>/uploads/<?=$currentYear;?>/CRF/<?=$editdata['user_id'];?>/<?=$descriptionOfResearch;?>" target="_blank" title="<?=$descriptionOfResearch;?>">
                                             <button class="btn btn-primary btn-sm" type="button">
                                                   <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
                                                       <path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"></path>

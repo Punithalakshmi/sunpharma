@@ -1,5 +1,5 @@
 <?php if(is_array($userdata)):  
-         
+       
      ?>
     <div class="container body">
 
@@ -35,10 +35,10 @@
                     <i class="fa fa-solid fa-users"></i> Jury Mapping </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/category">
-                    <i class="fa fa-solid fa-list"></i> Award Types </a>
+                    <i class="fa fa-solid fa-list"></i> Fellowship Types </a>
                   </li>
                   <li><a href="<?php echo base_url();?>/admin/nomination">
-                    <i class="fa fa-solid fa-flag-checkered"></i> Manage Awards </a>
+                    <i class="fa fa-solid fa-flag-checkered"></i> Manage Fellowships </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/workshops">
@@ -52,7 +52,7 @@
                   </li>
                   <li>
                     <a href="<?php echo base_url();?>/admin/awards">
-                      <i class="fa fa-solid fa-trophy"></i> Award Results 
+                      <i class="fa fa-solid fa-trophy"></i> Fellowship Results 
                     </a>
                   </li>
                   <li>

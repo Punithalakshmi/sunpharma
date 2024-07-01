@@ -32,12 +32,12 @@
                                         <img src="<?=base_url();?>/frontend/assets/images/shapes/section-title-shape-2.png" alt="">
                                     </div>
                                 </div>
-                                <h2 class="section-title__title">Nomination - Sun Pharma Science Foundation Research Awards 2022
+                                <h2 class="section-title__title">Nomination - Sun Pharma Science Foundation Research Fellowships 2022
                                 </h2>
                             </div>
                             <p class="why-choose-two__text">
                                 <a>
-                                    Research awards for outstanding research work by Indian scientists in India & abroad
+                                    Research fellowships for outstanding research work by Indian scientists in India & abroad
                                 </a>
                             </p> 
 

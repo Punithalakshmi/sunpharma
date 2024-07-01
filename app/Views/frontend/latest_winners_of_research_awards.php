@@ -1,6 +1,7 @@
 <section class="heroInner" style="background: url(&quot;<?=base_url();?>/frontend/assets/img/research-awards.jpg&quot;) center left no-repeat, #fff;">
         <div class="container">
             <h1 class="fs-1 fw-bold fw-normal p-3 m-0 d-inline-block" style="color: var(--theme-orange);">Latest Winners Of Research Awards<br></h1>
+
         </div>
     </section>
     <section class="py-5">

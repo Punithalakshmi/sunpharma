@@ -1,4 +1,4 @@
-<h1 style="text-align:center;">Science Scholar Awards - <?=date("Y");?></h1>
+<h1 style="text-align:center;">Science Scholar Fellowships - <?=date("Y");?></h1>
 <table class="nominee-section"  style="width:100%; margin-right:auto; margin-left: auto; border: 0; color: #000; font-size: 16px; font-family: Arial, Helvetica, sans-serif; ">
          <tr>
             <td>
@@ -96,7 +96,7 @@
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">
                   <tr>
-                     <td colspan="1"  border="1"  style="padding:10px;">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant </td>
+                     <td colspan="1"  border="1"  style="padding:10px;">Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Fellowship has actually been done by the applicant </td>
                   </tr>
                   <tr>
                      <td style="padding:10px;"  border="1" >
@@ -143,7 +143,7 @@
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">
                   <tr>
-                     <td colspan="1"  border="1"  style="padding:10px;">Details of the excellence in research work for which the Sun Pharma Science Scholar Award is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details</td>
+                     <td colspan="1"  border="1"  style="padding:10px;">Details of the excellence in research work for which the Sun Pharma Science Scholar Fellowship is claimed, including references and illustrations with following headings- Title, Introduction, Objectives, Materials and Methods, Results, Statistical Analysis, Discussion, Impact of the research in the advancement of knowledge or benefit to mankind, Literature reference. The candidate should duly sign on the details</td>
                   </tr>
                   <tr>
                      <td style="padding:10px;"  border="1" >
@@ -173,7 +173,7 @@
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">
                   <tr>
-                     <td colspan="1"  border="1"  style="padding:10px;">Statement of Merits/Awards/Scholarships already received by the Applicant</td>
+                     <td colspan="1"  border="1"  style="padding:10px;">Statement of Merits/Fellowships/Scholarships already received by the Applicant</td>
                   </tr>
                   <tr>
                      <td style="padding:10px;"  border="1" >
@@ -188,7 +188,7 @@
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">
                   <tr>
-                     <td colspan="1"  border="1"  style="padding:10px;">A letter stating that the project submitted for the award has received “ethical clearance” </td>
+                     <td colspan="1"  border="1"  style="padding:10px;">A letter stating that the project submitted for the fellowship has received “ethical clearance” </td>
                   </tr>
                   <tr>
                      <td style="padding:10px;"  border="1" >
@@ -204,7 +204,7 @@
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">
                   <tr>
-                     <td colspan="1"  border="1"  style="padding:10px;">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Award-<?=date("Y");?> has “non-conflict of interest” with the supervisor or co-authors </td>
+                     <td colspan="1"  border="1"  style="padding:10px;">A statement duly signed by the nominee and the supervisor/co-author that academically or financially the thesis submitted for Sun Pharma Science Scholar Fellowship-<?=date("Y");?> has “non-conflict of interest” with the supervisor or co-authors </td>
                   </tr>
                   <tr>
                      <td style="padding:10px;"  border="1" >
@@ -264,7 +264,6 @@
                 </td>
          </tr>
          
-
          <tr>
             <td>
                <table width="100%" style="border: 1px solid #ddd; background: #fdfdfd; ">

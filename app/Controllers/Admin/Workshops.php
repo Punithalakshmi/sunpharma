@@ -45,7 +45,7 @@ class Workshops extends BaseController
                 $subject    = $dtpostData['subject'];
              //   $start_date = $dtpostData['start_date'];
                 $status     = $dtpostData['status'];
-		$year =  (isset($dtpostData['year']))?$dtpostData['year']:date('Y');
+		$year =  (isset($dtpostData['year']))?$dtpostData['year']:'';
 	
                 
                 $filter['title']       = $title;

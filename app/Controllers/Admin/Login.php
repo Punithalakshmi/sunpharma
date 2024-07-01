@@ -29,7 +29,9 @@ class Login extends BaseController
                         $password  = $this->request->getVar('password');
                
                         $data      = $this->userModel->where('username', $username)->first();
-
+			//echo "<pre>";
+	/////echo md5($password);
+	 // print_r($data); die;
                         if($data)
                         {
                             $pass = $data['password'];

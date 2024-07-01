@@ -75,7 +75,7 @@
                             <?php if(!isset($userdata['isLoggedIn']) || (isset($nominations) && count($nominations) > 0)):?>
                               <div class="main-header-two__top-menu-box">
                                     <ul class="list-unstyled main-header-two__top-menu">
-                                      <li><a href="<?=base_url();?>/login"><u>Login</u></a></li>
+                                      <li><!--<a href="<?//base_url();?>/login"><u>Login</u></a>--></li>
                                     </ul>
                                 </div>
                                 <?php endif;?>

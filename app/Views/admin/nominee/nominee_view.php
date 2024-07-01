@@ -81,7 +81,7 @@
             <div class="">
               <div class="product_price">
                 <h2><?=$user['category_name'];?></h2>
-                <span>Award Category</span>
+                <span>Fellowship Category</span>
                 <br>
               </div>
             </div>

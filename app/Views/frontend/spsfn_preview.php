@@ -28,7 +28,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for="">Category of the Award</label>
+                                        <label class="form-label " for="">Category of the Fellowship</label>
                                         <div ><?=$editdata['category'];?>
                                         </div>
                                     </div>
@@ -174,7 +174,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                     <div class="mb-3 form-items">
-                                        <label class="form-label " for=""> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant </label>
+                                        <label class="form-label " for=""> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Fellowship has actually been done by the applicant </label>
                                             <div>
                                                 <button class="btn btn-primary btn-sm" type="button">
                                                     <svg class="fs-6" xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">

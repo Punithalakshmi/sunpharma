@@ -1,4 +1,5 @@
 <?php
+ 
 
 namespace App\Controllers;
 
@@ -55,6 +56,7 @@ abstract class BaseController extends Controller
     public $workshopModel;
     public $extendModel;
     public $awardsCategoryModel;
+    public $actionModel;
     
     public $data;
     public $uri;
@@ -65,10 +67,10 @@ abstract class BaseController extends Controller
      */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
+	header("Access-Control-Allow-Origin: *");
+	header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
+	header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
 
-      header("Access-Control-Allow-Origin: *");
-      header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
-      header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
@@ -88,19 +90,24 @@ abstract class BaseController extends Controller
         $this->awardsCategoryModel  = model('App\Models\AwardsCategoryModel');
         $this->contactModel         = model('App\Models\ContactModel');
         $this->winnersModel         = model('App\Models\WinnersModel');
-        $this->actionModel          = model('App\Models\ActionModel');
+	 $this->actionModel         = model('App\Models\ActionModel');
 
         $this->session     = \Config\Services::session();
         $this->validation  = \Config\Services::validation();
-      //  $this->security    = \Config\Services::security();
+        $this->security    = \Config\Services::security();
 
         $this->uri                 = current_url(true);
         $this->data['current_url'] = $this->uri;
         $this->data['uri']         = $this->uri->getSegment(1); 
+
+	if($this->uri->getSegment(1) && $this->uri->getSegment(2) && $this->uri->getSegment(3)!='')
+          $this->data['uri_value']   = $this->uri->getSegment(3); 
+
         $this->data['userdata']    = getSessionData();
         $this->role                = getUserRole();
         $this->redirectUrl         = $this->data['uri'].'/login';
         $this->data['logoUrl']     = (isset($this->data['userdata']['role']) && ($this->data['userdata']['role'] == 3))?'/admin':'/jury/nominations';
-
+	$tz = 'Asia/Kolkata';   
+   date_default_timezone_set($tz);
     }
 }

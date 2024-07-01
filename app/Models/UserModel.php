@@ -150,6 +150,12 @@ class UserModel extends Model {
         $builder->where("jury_mapping.jury_id",$jury_id);
         $builder->where("users.status",'Approved');
         $builder->where("nominee_details.is_submitted",1);
+	//$builder->orderBy("users.id",'ASC');
+	$builder->orderBy("CASE users.award_id
+                                    WHEN '12' THEN 0
+                                    WHEN '18' THEN 1
+                                    ELSE 2
+                                END, users.id ASC",FALSE);
         return $query = $builder->get();
     }
 
@@ -232,12 +238,18 @@ class UserModel extends Model {
         return $query = $builder->get();
     }
 
-    public function getAllActiveJuryLists()
+    public function getAllActiveJuryLists($main_category_id='')
     {
         $builder = $this->table('users');
-        $builder->select('users.*');
+        $builder->select('users.*,jury_mapping.award_id as jury_mapped_award_id');
+	$builder->join('jury_mapping','jury_mapping.jury_id = users.id');
         $builder->where("users.role",'1');
         $builder->where("users.active",'1');
+
+	if(!empty($main_category_id))
+	  $builder->where('jury_mapping.award_id',$main_category_id);
+
+	//$builder->groupBy('jury_mapping.jury_id');
         return $query = $builder->get();
     }
 

@@ -244,7 +244,7 @@ class Nomination extends BaseController
                         $ins_data['updated_id']    =  $this->data['userdata']['login_id'];
                         $this->nominationTypesModel->update(array("id" => $id),$ins_data);
                         //update the nomination to end date to all users
-                        updateAwardEndDate($id,$ins_data['end_date']);
+                       // updateAwardEndDate($id,$ins_data['end_date']);
                     }
                     else
                     {
@@ -340,10 +340,19 @@ class Nomination extends BaseController
         $categories = $this->categoryModel->getCategoryByMainCategoryID($id);
         $this->data['categories'] = $categories->getResultArray();
         $html = view('admin/nomination/award_type_list',$this->data,array('debug' => false));
+
+	$mainCategoryID = $id;
+	$submittedTotal = $this->nomineeModel->getTotalApprovedNomineesCount($mainCategoryID)->getResultArray();
+
+	$unSubmittedTotal = $this->nomineeModel->getTotalRejectedNomineesCount($mainCategoryID)->getResultArray();
+//echo count($submittedTotal); die;
+	
             
         if($this->request->isAJAX()){
                 return $this->response->setJSON([
                     'status' => 'success',
+		    'submittedTotal' => count($submittedTotal),
+		    'unSubmittedTotal' => count($unSubmittedTotal ),
                     'html'   => $html
                 ]); 
         }     

@@ -63,8 +63,8 @@ class WorkshopModel extends Model{
         if(!empty($filter['status']))
          $builder->like('events.status',$filter['status']);
 	
-	//if(!empty($filter['year']))
-        //  $builder->like("YEAR('events.start_date')",$filter['year']);
+	if(!empty($filter['year']))
+          $builder->where("YEAR(events.created_date)",$filter['year']);
 
          
         $builder->orderBy('id','DESC');

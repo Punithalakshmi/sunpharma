@@ -5,13 +5,13 @@
         <div class="col-lg-12">
             <h2 class="text-capitalize fw-normal text-start text-center" style="color: #f7941e;
             font-size: 1.6rem;
-            font-weight: bold!important;">Sun Pharma Science Scholars Awards-<?=date('Y');?><br>Online Submission of Nominations
+            font-weight: bold!important;">Sun Pharma Science Scholars Fellowships-<?=date('Y');?><br>Online Submission of Nominations
             </h2>
         </div>
     </div>
   
     <?php if(isset($uri) && ($uri == 'ssan' || $uri == 'spsfn')): ?>
-        <?= script_tag('frontend/assets/js/jqueryValidate.js'); ?>
+         <?= script_tag('frontend/assets/js/jqueryValidate.js'); ?>
         <?= script_tag('frontend/assets/js/jQuerySteps.js'); ?>
         <?= script_tag('frontend/assets/js/additionalMethods.js'); ?>
         <?= script_tag('frontend/assets/js/jQuerydatepicker.js'); ?>
@@ -52,7 +52,7 @@
                                             <input type="hidden" name="nominator_photo_uploaded_file" id="nominator_photo_uploaded_file" value="<?=(isset($editdata['nominator_photo']) && !empty($editdata['nominator_photo']))?$editdata['nominator_photo']:'';?>" />
                                            </label>
                                         <div class="hintcont">
-                                            <small>Not more than 500 KB</small>
+                                            <small>Not more than 500 KB,Upload file format .png, For example: sample.png</small>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                         <div class="col-lg-6">
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
-                                    <label class="form-label " for="">Category of the Award<span class="required" style="color:red;">*</span></label>
+                                    <label class="form-label ">Category of the Fellowship<span class="required" style="color:red;">*</span></label>
                                     <select class="form-control required" name="category" id="category">
                                     <option value="">-- Select --</option>
                                        <?php if(is_array($categories)):
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3 form-items">
-                                    <label class="form-label " for="">Name of the Applicant<span class="required" style="color:red;">*</span></label>
+                                    <label class="form-label ">Name of the Applicant<span class="required" style="color:red;">*</span></label>
                                     <input class="form-control required" id="nominee_name" name="nominee_name" type="text" placeholder="" value="<?=set_value('nominee_name',$editdata['nominee_name']);?>">
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                   
                             <div class="col-lg-12">
                                 <div class=" mb-3 form-items">
-                                    <label class="form-label " for="">Date of Birth<span class="required" style="color:red;">*</span></label>
+                                    <label class="form-label ">Date of Birth<span class="required" style="color:red;">*</span></label>
                                     <input min="01/01/1992" max="07/31/2022" class="form-control required" data-provide="datepicker" id="date_of_birth" name="date_of_birth" value="<?=set_value('date_of_birth',$editdata['date_of_birth']);?>" placeholder="MM/DD/YYYY">
                                     <div class="hintcont">
                                         <small>Date Format: MM/DD/YYYY (Age should be less than 30 years as on July 01, 2022)</small>
@@ -97,7 +97,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Citizenship<span class="required" style="color:red;">*</span></label>
+                                <label class="form-label ">Citizenship<span class="required" style="color:red;">*</span></label>
                                 <select class="form-control selectpicker mt-2 required"
                                     aria-label="Default select example" id="citizenship" name="citizenship" value="<?=set_value('citizenship',$editdata['citizenship']);?>">
                                     <option value="">-- Select --</option>
@@ -137,7 +137,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                            <label class="form-label " for="">Designation & Office Address<span class="required" style="color:red;">*</span></label>
+                            <label class="form-label ">Designation & Office Address<span class="required" style="color:red;">*</span></label>
                                 <textarea class="form-control required" name="designation_and_office_address" id="designation_and_office_address" placeholder="Write a message"><?=$editdata['designation_and_office_address'];?></textarea>
                                 <small class="text-danger">
                                     <?php if(isset($validation) && $validation->getError('designation_and_office_address')) {?>
@@ -148,7 +148,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Residence Address<span class="required" style="color:red;">*</span></label>
+                                <label class="form-label ">Residence Address<span class="required" style="color:red;">*</span></label>
                                 <textarea name="residence_address" class="form-control required" id="residence_address" placeholder="Write a message"><?=$editdata['residence_address'];?></textarea>
                                 <small class="text-danger">
                                     <?php if(isset($validation) && $validation->getError('residence_address')) {?>
@@ -161,7 +161,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label for="" class="fw-bold">Whether the applicant has completed a Research Project<span class="required" style="color:red;">*</span></label>
+                                <label class="fw-bold">Whether the applicant has completed a Research Project<span class="required" style="color:red;">*</span></label>
                                 <select class="form-control selectpicker mt-2 required" aria-label="Default select example" name="research_project" id="research_project">
                                     <option value="">-- select --</option>
                                     <option value="Yes" <?=set_select('research_project', 'Yes', ((isset($editdata['research_project']) && ($editdata['research_project']=='Yes'))?TRUE:FALSE));?>>Yes</option>
@@ -172,7 +172,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                 <label class="form-label " for="">Mobile No.<span class="required" style="color:red;">*</span></label>
+                                 <label class="form-label ">Mobile No.<span class="required" style="color:red;">*</span></label>
                                         
                                 <input type="number" class="form-control required" placeholder="Please Enter Mobile No" id="mobile_no" name="mobile_no" value="<?=set_value('mobile_no',$editdata['mobile_no']);?>">
                                 <small class="text-danger">
@@ -184,7 +184,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Email ID<span class="required" style="color:red;">*</span></label>
+                                <label class="form-label ">Email ID<span class="required" style="color:red;">*</span></label>
                                 
                                 <input type="email" class="form-control required" placeholder="Please Enter Email" id="nominee_email" name="email" value="<?=set_value('email',$editdata['email']);?>">
                                 <small class="text-danger">
@@ -205,7 +205,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                            <label class="form-label " for="">Name of the Nominator<span class="required" style="color:red;">*</span></label>
+                            <label class="form-label " >Name of the Nominator<span class="required" style="color:red;">*</span></label>
                             <input type="text" placeholder="" class="form-control required" name="nominator_name" id="nominator_name" value="<?=set_value('nominator_name',$editdata['nominator_name']);?>">
                             <small class="text-danger">
                                 <?php if(isset($validation) && $validation->getError('nominator_name')) {?>
@@ -216,7 +216,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                            <label class="form-label " for="">Designation & Office Address of the
+                            <label class="form-label ">Designation & Office Address of the
                                 Nominator<span class="required" style="color:red;">*</span></label>
                                 <textarea class="form-control required" name="nominator_office_address" id="nominator_office_address" placeholder="Write a Address" style="height:auto;"><?=$editdata['nominator_office_address'];?></textarea>
                                 <small class="text-danger">
@@ -229,7 +229,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Mobile No of the Nominator<span class="required" style="color:red;">*</span></label>
+                                <label class="form-label ">Mobile No of the Nominator<span class="required" style="color:red;">*</span></label>
                                 
                                 <input  class="form-control required" type="number" placeholder="" id="nominator_mobile" name="nominator_mobile" value="<?=set_value('nominator_mobile',$editdata['nominator_mobile']);?>">
                                 <small class="text-danger">
@@ -242,7 +242,7 @@
 
                         <div class="col-lg-6">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for="">Email ID of the Nominator<span class="required" style="color:red;">*</span></label>
+                                <label class="form-label ">Email ID of the Nominator<span class="required" style="color:red;">*</span></label>
                             
                                 <input type="email" class="form-control required" placeholder="" id="nominator_email" name="nominator_email" value="<?=set_value('nominator_email',$editdata['nominator_email']);?>">
                                 <small class="text-danger">
@@ -256,7 +256,7 @@
                          
                         <div class="col-lg-12">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for=""> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Award has actually been done by the applicant(500 KB) <span class="required" style="color:red;">*</span></label>
+                                <label class="form-label "> Letter from the supervisor certifying that the research work submitted for Sun Pharma Science Scholar Fellowship has actually been done by the applicant(500 KB) <span class="required" style="color:red;">*</span></label>
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
                                         <input class="form-control required" name="supervisor_certifying" accept=".pdf" type="file" id="supervisor_certifying" value="<?=$editdata['supervisor_certifying'];?>">
@@ -280,7 +280,7 @@
 
                         <div class="col-lg-12">
                             <div class="mb-3 form-items">
-                                <label class="form-label " for=""> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB) <span class="required" style="color:red;">*</span></label>
+                                <label class="form-label "> Attach Justification Letter in pdf format (for Sponsoring the Nomination duly signed by the Nominator, Max : 500 KB) <span class="required" style="color:red;">*</span></label>
                                 <div class="form-check ps-0 q-box">
                                     <div class="q-box__question col me-2">
                                         <input class="form-control required" name="justification_letter" accept=".pdf" type="file" id="justification_letter" value="<?=$editdata['justification_letter'];?>">

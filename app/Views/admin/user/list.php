@@ -34,7 +34,7 @@
           
             <div class="col-md-3">
               <div class="get-sunpharma__input-box mt-2 form-inline">
-                    <label class="fw-bold">Award Types</label>
+                    <label class="fw-bold">Fellowship Types</label>
                     <select class="selectpicker mt-2 form-control"
                         aria-label="Default select example" name="category" id="category">
                         <option></option>

@@ -75,10 +75,14 @@ class Awards extends BaseController
 	 //get Active Jury Lists
         $activeJuries = $this->userModel->getAllActiveJuryLists()->getResultArray();
 
+	//echo "<pre>";
+	//print_r($activeJuries);
+	//die;
         $juryData = array();
         $awardsDataArr = array();
         $nomineeData = array();
-	 $juriesName = array();
+	$juriesName = array();
+
 
         $i = 0; 
         foreach($awardsLists as $akey => $avalue) {
@@ -87,11 +91,14 @@ class Awards extends BaseController
                 $awardsDataArr[$avalue['category_name']][$i]['firstname']     = $avalue['firstname'];
                 $awardsDataArr[$avalue['category_name']][$i]['juries'] = [];
                foreach($activeJuries as $jkey=>$jvalue){
-			//print_r();
+		if($jvalue['jury_mapped_award_id'] == $avalue['award_id']){
+			//print_r($avalue);
+			//print_r($jvalue);
                     $getJuryRateData = $this->userModel->getJuryRateData($jvalue['id'],$avalue['id']);
                     $getJuryRateData = $getJuryRateData->getRowArray();
 		  
-		    if(is_array($getJuryRateData) && count($getJuryRateData) && ($getJuryRateData['rating'] > 0)){
+		    //if(is_array($getJuryRateData) && count($getJuryRateData) && ($getJuryRateData['rating'] > 0)){
+			
                     	 $juryData['firstname'] = $jvalue['firstname'];
                    	 $juryData['username']  = $jvalue['username'];
                    	 $juryData['rating']    = (isset($getJuryRateData['rating']))?$getJuryRateData['rating']:0;
@@ -101,11 +108,10 @@ class Awards extends BaseController
 		   }
                 }
                 $i++;
-            }  
-                            
+            }                    
         }
 
-	//print_r($awardsDataArr); die;
+//print_r($awardsDataArr); die;
          
         $spreadsheet = new Spreadsheet();
 

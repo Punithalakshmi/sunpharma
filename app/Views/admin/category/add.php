@@ -2,7 +2,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add/Modify Award Type</h3>
+                <h3>Add/Modify Fellowship Type</h3>
               </div>
             </div>
 
@@ -26,7 +26,7 @@
                       <input type="hidden" name="id" value="<?=$editdata['id'];?>"  >
                       <?= csrf_field(); ?>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10" for="first-name">Award Type <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10" for="first-name">Fellowship Type <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="name" class="form-control col-md-7 col-xs-12" value="<?php echo set_value('name',$editdata['name']);?>">
@@ -43,6 +43,7 @@
                       
                       <div class="clearfix"></div>
                       
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10">Status</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
@@ -58,12 +59,12 @@
                       <div class="clearfix"></div>
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10">Award</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 pt10">Fellowship</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 mt-10">
                           <div id="gender" class="btn-group" data-toggle="buttons">
                             <p>
-                            <input type="radio" class="flat" name="type" id="typeResearchAwards" value="Research Awards" <?php echo set_radio('type','Research Awards',(isset($editdata['type']) && ($editdata['type']=='Research Awards'))?'checked':'');?> /> Research Awards &nbsp;&nbsp;
-                            <input type="radio" class="flat" name="type" id="typeScienceScholarAwards" value="Science Scholar Awards" <?php echo set_radio('type','Science Scholar Awards',(isset($editdata['type']) && ($editdata['type']=='Science Scholar Awards'))?'checked':'');?> /> Science Scholar Awards
+                            <input type="radio" class="flat" name="type" id="typeResearchAwards" value="Research Fellowships" <?php echo set_radio('type','Research Fellowships',(isset($editdata['type']) && ($editdata['type']=='Research Fellowships'))?'checked':'');?> /> Research Fellowships &nbsp;&nbsp;
+                            <input type="radio" class="flat" name="type" id="typeScienceScholarAwards" value="Science Scholar Fellowships" <?php echo set_radio('type','Science Scholar Fellowships',(isset($editdata['type']) && ($editdata['type']=='Science Scholar Fellowships'))?'checked':'');?> /> Science Scholar Fellowships
                            </p>
                           </div>
                         </div>
@@ -77,7 +78,6 @@
                             <input type="submit" class="btn btn-success" name="submit" value="SAVE">
                           </div>
                         </div>
-
                     </form>
                   </div>
                 </div>

@@ -9,7 +9,7 @@
                 <div class="col-md-12 text-center successseccont">
                     
                    <div class="successsec badge badge-success"> <p>
-                         Nominations are closed for this award !
+                         Nominations are closed for this fellowship!
                     </p></div>
                     
                 </div>

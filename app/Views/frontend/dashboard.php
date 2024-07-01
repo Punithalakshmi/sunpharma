@@ -3,12 +3,12 @@
             <div class="col">
                 <div class="carousel slide carousel-dark" data-bs-ride="carousel" id="carousel-1" style="height: 600px;">
                     <div class="carousel-inner h-100">
-                    <?php  //echo "<pre>";
-                            $current_date = strtotime(date("Y-m-d H:i:s"));
+                    <?php  //echo date("Y-m-d H:i:s"); //echo "<pre>";
+                             $current_date = strtotime(date("Y-m-d H:i:s"));
                             if(is_array($nominations) && count($nominations) > 0): 
                                 foreach($nominations as $nkey => $nvalue): 
                          
-                                 $end_date = strtotime(date('Y-m-d 23:59:59',strtotime($nvalue['end_date'])));
+                                $end_date = strtotime(date('Y-m-d 23:59:59',strtotime($nvalue['end_date'])));
 
                                  //event image 
                                  $event_image = (isset($nvalue['banner_image']) && !empty($nvalue['banner_image']))?$nvalue['banner_image']:'default.jpg';
@@ -22,20 +22,23 @@
                                             <h1 class="text-uppercase fw-bold" style="border-style: none;"><?=(isset($nvalue['title']))?$nvalue['title']:"";?></h1>
                                             <p class="my-3"><?=(isset($nvalue['subject']))?$nvalue['subject']:"";?></p>
                                             <?php if(isset($nvalue['category_type']) && ($nvalue['category_type'] == 'awards' || $nvalue['category_type'] == 'awards') ):
-							$readMore = '';
+							$readMore = ''; $labelName = '';
                                                    $ntype = ($nvalue['main_category_id'] == 2)?'spsfn':'ssan';
                                                    switch ($nvalue['main_category_id']) {
                                                     case 1:
                                                         $ntype = 'ssan';
 							$readMore = 'research_awards';
+							$labelName = 'Circular Invitation';	
                                                         break;
                                                     case 2:
                                                         $ntype = 'spsfn';
 							$readMore = 'science_scholar_awards';
+							$labelName = 'Circular Invitation';	
                                                         break;
                                                     case 3:
                                                         $ntype = 'fellowship';
 							$readMore = 'crf_read_more';
+							$labelName = 'Nomination Procedure ';	
                                                         break;
                                                   }
                                                    if($end_date > $current_date):
@@ -45,16 +48,21 @@
                                                 <?php if(isset($nvalue['type']) && ($nvalue['type'] == 'event') ):
                                                      if($end_date > $current_date):
                                                 ?>
-                                                     <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/registration/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Register</a>
-                                                <?php endif;?>   
-                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/read_more/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Read More</a>
-
-                                            <?php endif;?>  
-                                            <?php if(!empty($nvalue['document'])):?>
-                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="_blank">Poster Invitation</a>
+                                                   <!--  <a class="btn btn-primary btn-lg me-2" role="button" href="<?//base_url();?>/event/registration/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Register</a>
+						<a class="btn btn-primary btn-lg me-2" role="button" href="https://www.ils.res.in/pathogen-discovery/" target="_blank" style="background: #F7941E;border-color: #F7941E;">Register</a>-->
+                                                <?php endif;?>  
+ 						 <?php if(!empty($nvalue['document'])):?>
+                                        	    <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['document'];?>" target="_blank">Poster Invitation</a>
                                             <?php endif;?>
+                                             <a class="btn btn-primary btn-lg me-2" role="button" href="<?=base_url();?>/event/read_more/<?=$nvalue['id'];?>" style="background: #F7941E;border-color: #F7941E;">Read More</a>
+					<?php if(isset($nvalue['id']) && ($nvalue['id'] ==13)): ?>	
+					 <a class="btn btn-primary btn-lg me-2" target="_blank" role="button" href="https://www.youtube.com/live/9lAv9ylJRlg?si=Z9qWF7tDzzam__zu" style="background: #F7941E;border-color: #F7941E;">Attend Online</a>
+
+					<?php endif;?>
+                                            <?php endif;?>  
+                                           
                                             <?php if(isset($nvalue['procedure_document']) && !empty($nvalue['procedure_document'])):?>
-                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['procedure_document'];?>" target="_blank" >Circular Invitation</a>
+                                            <a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/uploads/events/<?=$nvalue['procedure_document'];?>" target="_blank" ><?=$labelName;?></a>
                                             <?php endif;?>
 					     <?php if(isset($nvalue['category_type']) && ($nvalue['category_type'] == 'awards' || $nvalue['category_type'] == 'awards') ):?>
 						<a class="btn btn-outline-primary btn-lg me-2" role="button" href="<?=base_url();?>/<?=$readMore;?>" style="border-color: #F7941E;" target="_blank">Read More</a>
@@ -114,8 +122,8 @@
                 </div>
                 <div class="col-md-6 d-md-flex align-items-md-center">
                     <div>
-                        <h2 class="text-capitalize fw-normal" style="color: #F7941E;"><strong>About Us</strong></h2>
-                        <p class="my-3" style="margin-bottom: 15px;">Sun Pharma Science Foundation is an independent non-profit organisation registered under the Societies Registration Act. The aim of the Foundation is to promote scientific endeavours in India by encouraging and rewarding excellence in medical and pharmaceutical sciences and to give impetus to research activity in India.</p><a class="btn btn-primary" role="button" href="<?=base_url();?>/aboutus">Read More</a>
+                        <h2 class="text-capitalize fw-normal" style="color: #F7941E; text-align:justify;" ><strong>About Us</strong></h2>
+                        <p class="my-3" style="margin-bottom: 15px; text-align:justify;" >Sun Pharma Science Foundation is an independent non-profit organisation registered under the Societies Registration Act. The aim of the Foundation is to promote scientific endeavours in India by encouraging and rewarding excellence in medical and pharmaceutical sciences and to give impetus to research activity in India.</p><a class="btn btn-primary" role="button" href="<?=base_url();?>/aboutus">Read More</a>
                     </div>
                 </div>
             </div>
@@ -138,8 +146,8 @@
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
                         <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/ResearchAwards-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
-                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Research Awards</h4>
-                            <p class="card-text" style="font-size: 14px;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges, to send in their nominations for the Sun Pharma Science Foundation Research Awards 2022.</p>
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue); text-align:justify;">Research Fellowships</h4>
+                            <p class="card-text" style="font-size: 14px; text-align:justify;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges, to send in their nominations for the Sun Pharma Science Foundation Research Fellowships.</p>
                             <a href="<?=base_url();?>/research_awards" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -150,8 +158,8 @@
                     <div class="card h-100 p-0" style="border: 1px solid #eaeaeb;">
                         <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/science-scholar-award-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
-                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Science Scholar Awards</h4>
-                            <p class="card-text" style="font-size: 14px;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges of India to nominate Young Scientists for the “Sun Pharma Science Foundation...</p>
+                            <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Science Scholar Fellowships</h4>
+                            <p class="card-text" style="font-size: 14px; text-align:justify;">We invite Heads of Research Institutions, Universities, Medical and Pharmaceutical Colleges of India to nominate Young Scientists for the “Sun Pharma Science Foundation...</p>
                             <a href="<?=base_url();?>/science_scholar_awards" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -163,7 +171,7 @@
                         <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/round-table-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">National Seminars</h4>
-                            <p class="card-text" style="font-size: 14px;">The Foundation organizes two Round Table Conferences in a year on topics of contemporary concern to human health which pose challenges.</p>
+                            <p class="card-text" style="font-size: 14px; text-align:justify;">The Foundation organizes two Round Table Conferences in a year on topics of contemporary concern to human health which pose challenges.</p>
                             <a href="<?=base_url();?>/roundtable" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -175,7 +183,7 @@
                         <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/symposia-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">International Symposia</h4>
-                            <p class="card-text" style="font-size: 14px;">The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research...</p>
+                            <p class="card-text" style="font-size: 14px; text-align:justify;">The Foundation organizes one Annual Symposium on topics at the cutting edge of research in Medical Sciences to explore the latest research...</p>
                             <a href="<?=base_url();?>/symposium" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -187,7 +195,7 @@
                         <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/WorkshopYoungResearchers28Nov-Dec03-2022-thumb.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Workshop for the young researchers</h4>
-                            <p class="card-text" style="font-size: 14px;">
+                            <p class="card-text" style="font-size: 14px; text-align:justify;">
                                 This Winter School is being organized for clinical researchers and basic scientists engaged in research on biomedical sciences involving humans. 
                             </p>
                             <a href="<?=base_url();?>/event" class="btn btn-primary">Read More</a>
@@ -200,8 +208,8 @@
                         <img class="card-img-top w-100 d-block fit-cover" src="<?=base_url();?>/frontend/assets/img/fellowship.jpg" style="height: 200px;" alt="">
                         <div class="card-body p-4 pb-0">
                             <h4 class="card-title text-capitalize" style="color: var(--bs-blue);">Clinical Research Fellowship</h4>
-                            <p class="card-text" style="font-size: 14px;">
-                                We invite Young Clinician Scientists to avail the "Sun Pharma Science Foundation Clinical Research Fellowship 2023". This Fellowship is meant to support the brilliant and upcoming early career clinicians working in India.</p>
+                            <p class="card-text" style="font-size: 14px; text-align:justify;">
+                                We invite Young Clinician Scientists to avail the "Sun Pharma Science Foundation Clinical Research Fellowship". This Fellowship is meant to support the brilliant and upcoming early career clinicians working in India.</p>
                             <a href="<?=base_url();?>/crf_read_more" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -242,7 +250,7 @@
         <div class="container-fluid bg-primary-gradient py-5" style="padding: 48px 12px 0;">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners Of Research Awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners Of Research Fellowships</h3>
                 </div>
             </div>
             <section class="pt-4 pt-xl-4">
@@ -274,7 +282,7 @@
                                     </div>
                                 </div>
                                 <?php endforeach;?>
-                                
+                               
                             </div>
                             <div class="swiper-pagination bottom-0"></div>
                             <div class="text-light swiper-button-prev" style="margin: -25px 0px 0px;"></div>
@@ -295,7 +303,7 @@
         <div class="container-fluid">
             <div class="row" style="padding-bottom: 20px;">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners Of Scholar Awards</h3>
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners Of Scholar Fellowships</h3>
                 </div>
             </div>
         </div>
