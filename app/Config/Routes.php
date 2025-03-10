@@ -70,8 +70,6 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($rou
 
     $routes->get("user/delete/(:any)", "User::delete/$1");
     $routes->get("profile", "User::profile");
-
-    $routes->post("profile", "User::profile");
 });
 
 /*
