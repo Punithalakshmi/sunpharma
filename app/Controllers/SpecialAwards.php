@@ -7,7 +7,9 @@ class SpecialAwards extends BaseController
 {
     public function index()
     {
-        return view('frontend/special_award');
+
+        return render('frontend/special_award',$this->data);
+               
     }
 
    

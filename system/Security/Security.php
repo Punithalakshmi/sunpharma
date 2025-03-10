@@ -175,14 +175,14 @@ class Security implements SecurityInterface
             $this->tokenRandomize = $security->tokenRandomize ?? $this->tokenRandomize;
         } else {
             // `Config/Security.php` is absence
-            $this->tokenName     = $config->CSRFTokenName ?? $this->tokenName;
+           $this->tokenName     = $config->CSRFTokenName ?? $this->tokenName;
             $this->headerName    = $config->CSRFHeaderName ?? $this->headerName;
             $this->regenerate    = $config->CSRFRegenerate ?? $this->regenerate;
             $this->rawCookieName = $config->CSRFCookieName ?? $this->rawCookieName;
             $this->expires       = $config->CSRFExpire ?? $this->expires;
             $this->redirect      = $config->CSRFRedirect ?? $this->redirect;
         }
-
+//die;
         if ($this->isCSRFCookie()) {
             $this->configureCookie($config);
         } else {
@@ -278,9 +278,11 @@ class Security implements SecurityInterface
         }
 
         $postedToken = $this->getPostedToken($request);
+	
         $token       = ($postedToken !== null && $this->tokenRandomize)
             ? $this->derandomize($postedToken) : $postedToken;
-
+//		echo "<br/>";
+//echo $this->hash; die;
         // Do the tokens match?
         if (! isset($token, $this->hash) || ! hash_equals($this->hash, $token)) {
             throw SecurityException::forDisallowedAction();

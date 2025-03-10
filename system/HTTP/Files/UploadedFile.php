@@ -128,7 +128,7 @@ class UploadedFile extends File implements UploadedFileInterface
     {
         $targetPath = rtrim($targetPath, '/') . '/';
         $targetPath = $this->setPath($targetPath); // set the target path
-
+	
         if ($this->hasMoved) {
             throw HTTPException::forAlreadyMoved();
         }
@@ -141,11 +141,12 @@ class UploadedFile extends File implements UploadedFileInterface
         $destination = $overwrite ? $targetPath . $name : $this->getDestination($targetPath . $name);
 
         try {
+        	
             $this->hasMoved = move_uploaded_file($this->path, $destination);
         } catch (Exception $e) {
             $error   = error_get_last();
             $message = strip_tags($error['message'] ?? '');
-
+	
             throw HTTPException::forMoveFailed(basename($this->path), $targetPath, $message);
         }
 

@@ -44,6 +44,11 @@ Options All -Indexes
 	ErrorDocument 404 index.php
 </IfModule>
 
+# Apache config
+<FilesMatch ".(eot|ttf|otf|woff)">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
 # Disable server signature start
 	ServerSignature Off
 # Disable server signature end

@@ -461,6 +461,7 @@ jQuery.fn.extend( {
 				map = {},
 				i = 0;
 
+				
 			if ( jQuery.isArray( name ) ) {
 				styles = getStyles( elem );
 				len = name.length;

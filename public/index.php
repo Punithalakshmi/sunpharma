@@ -1,7 +1,11 @@
 <?php
-
+//echo "dddssdsd"; die;
+ini_set('upload_max_filesize', '1000M');  
+ini_set('post_max_size', '1000M'); 
+//ini_set("display_errors",TRUE);
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
+
 
 // Ensure the current directory is pointing to the front controller's directory
 chdir(FCPATH);

@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://local.sunpharma.md/';
+    public $baseURL = 'https://sunpharmasciencefoundation.net/';
 
     /**
      * --------------------------------------------------------------------------
@@ -154,6 +154,8 @@ class App extends BaseConfig
      */
     public $sessionDriver = FileHandler::class;
 
+    // public $sessionDriver = 'CodeIgniter\Session\Handlers\DatabaseHandler';
+
     /**
      * --------------------------------------------------------------------------
      * Session Cookie Name
@@ -175,7 +177,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $sessionExpiration = 7200;
+    public $sessionExpiration = 0;
 
     /**
      * --------------------------------------------------------------------------
@@ -194,7 +196,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $sessionSavePath = WRITEPATH . 'session';
+      public $sessionSavePath = WRITEPATH . 'session';
+    //  public $sessionSavePath = 'ci_sessions';
 
     /**
      * --------------------------------------------------------------------------
@@ -219,7 +222,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $sessionTimeToUpdate = 300;
+    public $sessionTimeToUpdate = 1500;
 
     /**
      * --------------------------------------------------------------------------
@@ -356,7 +359,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $CSRFTokenName = 'csrf_test_name';
+    public $CSRFTokenName = 'app_csrf';
 
     /**
      * --------------------------------------------------------------------------
@@ -382,7 +385,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $CSRFCookieName = 'csrf_cookie_name';
+    public $CSRFCookieName = 'app_csrf_cookie';
 
     /**
      * --------------------------------------------------------------------------

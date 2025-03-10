@@ -294,10 +294,12 @@ if (typeof NProgress != 'undefined') {
         NProgress.start();
     });
 
-    $(window).load(function () {
+    $(window).on('load',function () {
         NProgress.done();
     });
 }
+
+
 
 	
 	  //hover and retain popover when on popover content
