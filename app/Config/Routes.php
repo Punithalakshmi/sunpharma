@@ -48,6 +48,7 @@ $routes->get('contact', 'Home::contact');
 $routes->post('contact', 'Home::contact');
 $routes->get('research_awards','ResearchAwards::index');
 $routes->get('directory_research_awardees','DirectoryResearchAwardees::index');
+$routes->get('directory_clinical_research_fellows','DirectoryClinicalResearchAwardees::index');
 $routes->get('special_awards','SpecialAwards::index');
 $routes->get('latest_winners_of_science_scholars_awards','LatestWinnersOfScienceScholarsAwards::index');
 $routes->get('directory_of_science_scholars','DirectoryScienceScholars::index');
@@ -58,6 +59,7 @@ $routes->post('ssan','Nomination::ssan',['filter' => 'redirect_home']);
 $routes->get('nomination_preview', 'Home::nominationPreview');
 $routes->get('latest_winners_of_research_awards','LatestWinnersOfResearchAwards::index');
 $routes->get('latest_winners_of_science_scholar_awards','LatestWinnersOfScienceScholarsAwards::index');
+$routes->get('latest_winners_of_clinical_research_fellows','LatestWinnersOfClinicalResearchFellowships::index');
 //$routes->get('research_awards','Home::research_awards');
 $routes->get('science_scholar_awards','Home::science_scholar_awards');
 
