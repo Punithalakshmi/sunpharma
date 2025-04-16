@@ -472,8 +472,8 @@ public function generatePassword($n) {
                
                 $validation_rules['status']  = array("label" => "Status",'rules' => 'required');
                 if($id=='' && ($_POST['user_role'] != 1)){
-                    $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
-                    $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
+                  //  $validation_rules['password']  = array("label" => "Password",'rules' => 'required');
+                  //  $validation_rules['confirm_password']  = array("label" => "Confirm Password",'rules' => 'required|matches[password]');
                 }
             }      
         }

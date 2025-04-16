@@ -343,6 +343,56 @@
         </div>
     </section>
     <?php endif;?>
+<section></section>
+
+   <?php if(is_array($latestWinnersOfClinicalResearchFellowship) && count($latestWinnersOfClinicalResearchFellowship) > 0 ): ?>
+
+    <section style="padding-top: 60px;">
+        <div class="container-fluid">
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold heading" style="color: #F7941E;">Latest Winners Of Clinical Research Fellowships</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="simple-slider">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                    <?php foreach($latestWinnersOfClinicalResearchFellowship as $wkey => $wvalue):  ?>
+                        <div class="swiper-slide">
+                            <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: #5c5c5c!important;">
+                                <div class="row g-0">
+                                    <div class="col-sm-auto col-md-6 col-lg-8 winnercolleft">
+                                        <div class="text-white winnerinfo">
+                                            <h2 class="fw-bold text-white mb-3"><?=$wvalue['name'];?></h2>
+                                            <p class="mb-4 smtxt" style="color: var(--bs-gray-300);"><?=$wvalue['category'];?><br></p>
+                                            <p class="mb-4" style="color: var(--bs-btn-border-color);"><?=$wvalue['designation'];?><br>
+                                                <?=$wvalue['address'];?><br>
+                                            </p>
+
+                                            <div class="my-3"><a class="btn btn-primary me-2" role="button" href="<?=base_url();?>/latest_winners_of_clinical_research_fellows">Know More</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 order-first order-md-last winnercolright"><img class="w-100 h-100 fit-cover winnerimg" src="<?=base_url();?>/uploads/winners/<?=$wvalue['photo'];?>"></div>
+                                </div>
+                            </div>
+                        </div>
+						
+						<?php endforeach;?>
+						
+                       
+                      
+                    </div>
+                    <div class="swiper-pagination bottom-0"></div>
+                    <div class="text-light swiper-button-prev" style="margin: -24px 0px 0px;"></div>
+                    <div class="text-light swiper-button-next" style="margin: -24px 0px 0px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif;?>
+
 
     <section style="margin:60px 0;">
         <div class="row mx-0">

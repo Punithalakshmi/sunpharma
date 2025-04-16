@@ -28,9 +28,14 @@ class Home extends BaseController
         //get latest winners of science scholars awards
         $scienceScholarAwards = $this->winnersModel->getLatestWinnersByCategory(2,true)->getResultArray();
 
+          //get latest winners of crf
+        $clinicalResearchFellowships = $this->winnersModel->getLatestWinnersByCategory(3,true)->getResultArray();
+
+
         $this->data['nominations'] = $nominationArr;
         $this->data['latestWinnersOfResearchAwards'] = $researchAwards;
         $this->data['latestWinnersOfScholarAwards']  = $scienceScholarAwards;
+        $this->data['latestWinnersOfClinicalResearchFellowship']  = $clinicalResearchFellowships;
         return  render('frontend/dashboard',$this->data);
               
     }
