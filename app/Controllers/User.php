@@ -340,7 +340,7 @@ class User extends BaseController
         endif;
     }
 
-    public function attendMode($mode='',$id)
+    public function attendMode($mode='',$id='')
     {
 
         if(!empty($mode)){
