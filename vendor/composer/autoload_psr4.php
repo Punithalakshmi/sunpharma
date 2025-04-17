@@ -57,6 +57,8 @@ return array(
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
     'Composer\\Pcre\\' => array($vendorDir . '/composer/pcre/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
+    'CodeIgniter\\Shield\\' => array($vendorDir . '/codeigniter4/shield/src'),
+    'CodeIgniter\\Settings\\' => array($vendorDir . '/codeigniter4/settings/src'),
     'CodeIgniter\\CodingStandard\\' => array($vendorDir . '/codeigniter/coding-standard/src'),
     'CodeIgniter\\AutoReview\\' => array($baseDir . '/tests/AutoReview'),
     'CodeIgniter\\' => array($baseDir . '/system', $baseDir . '/tests/system'),
