@@ -97,3 +97,5 @@ writable/debugbar/debugbar_1664527746.927095.json
 writable/debugbar/debugbar_1664527748.307540.json
 writable/session/ci_session3ab2fof0taq10njt2ijqiv9tn11phbtd
 writable/session/ci_session6d8ms7raemnuagdodnsj72j8g6h4jl3t
+/app/Config
+app/Config/Database.php

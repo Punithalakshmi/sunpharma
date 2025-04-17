@@ -33,9 +33,9 @@ class Database extends Config
     public $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
-        'username' => 'sciencefoundationuser',
-        'password' => 's&jd9SscieDSx7pfoun5f',
-        'database' => 'sciencefoundation',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'sunpharma',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
