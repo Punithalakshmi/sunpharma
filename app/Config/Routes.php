@@ -62,6 +62,7 @@ $routes->get('latest_winners_of_science_scholar_awards','LatestWinnersOfScienceS
 $routes->get('latest_winners_of_clinical_research_fellows','LatestWinnersOfClinicalResearchFellowships::index');
 //$routes->get('research_awards','Home::research_awards');
 $routes->get('science_scholar_awards','Home::science_scholar_awards');
+$routes->get('welcome','Home::welcome');
 
 
 $routes->get('ssan/(:any)','Nomination::ssan/$1',['filter' =>'check_date']);
@@ -152,6 +153,8 @@ $routes->post('testform','User::testForm');
 $routes->get('getPdf/(:any)','Nomination::pdfGeneration/$1');
 
 $routes->get('getAuth/(:any)','User::approve/$1');
+
+service('auth')->routes($routes);
 
 
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"] , function($routes){

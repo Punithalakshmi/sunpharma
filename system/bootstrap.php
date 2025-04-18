@@ -61,6 +61,14 @@ if (! defined('TESTPATH')) {
     define('TESTPATH', realpath(rtrim($paths->testsDirectory, '\\/ ')) . DIRECTORY_SEPARATOR);
 }
 
+
+if (! defined('SUPPORTPATH')) {
+    /**
+     * @var Paths $paths
+     */
+    define('SUPPORTPATH', realpath(rtrim($paths->testsDirectory.'/_support/', '\\/ ')) . DIRECTORY_SEPARATOR);
+}
+
 /*
  * ---------------------------------------------------------------
  * GRAB OUR CONSTANTS & COMMON
