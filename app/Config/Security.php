@@ -15,7 +15,7 @@ class Security extends BaseConfig
      *
      * @var string 'cookie' or 'session'
      */
-    public $csrfProtection = 'cookie';
+    public string $csrfProtection = 'session';
 
     /**
      * --------------------------------------------------------------------------
@@ -26,7 +26,7 @@ class Security extends BaseConfig
      *
      * @var bool
      */
-    public $tokenRandomize = true;
+    public bool $tokenRandomize = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -37,7 +37,7 @@ class Security extends BaseConfig
      *
      * @var string
      */
-    public $tokenName = 'app_csrf';
+    public string $tokenName = 'app_csrf';
 
     /**
      * --------------------------------------------------------------------------
@@ -48,7 +48,7 @@ class Security extends BaseConfig
      *
      * @var string
      */
-    public $headerName = 'X-CSRF-TOKEN';
+    public string $headerName = 'X-CSRF-TOKEN';
 
     /**
      * --------------------------------------------------------------------------
@@ -59,7 +59,7 @@ class Security extends BaseConfig
      *
      * @var string
      */
-    public $cookieName = 'app_csrf_cookie';
+    public string $cookieName = 'app_csrf_cookie';
 
     /**
      * --------------------------------------------------------------------------
@@ -72,7 +72,7 @@ class Security extends BaseConfig
      *
      * @var int
      */
-    public $expires = 7200;
+    public int $expires = 7200;
 
     /**
      * --------------------------------------------------------------------------
@@ -83,35 +83,16 @@ class Security extends BaseConfig
      *
      * @var bool
      */
-    public $regenerate = true;
+    public bool $regenerate = true;
 
-    /**
+     /**
      * --------------------------------------------------------------------------
      * CSRF Redirect
      * --------------------------------------------------------------------------
      *
      * Redirect to previous page with error on failure.
      *
-     * @var bool
+     * @see https://codeigniter4.github.io/userguide/libraries/security.html#redirection-on-failure
      */
-    public $redirect = true;
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF SameSite
-     * --------------------------------------------------------------------------
-     *
-     * Setting for CSRF SameSite cookie token.
-     *
-     * Allowed values are: None - Lax - Strict - ''.
-     *
-     * Defaults to `Lax` as recommended in this link:
-     *
-     * @see https://portswigger.net/web-security/csrf/samesite-cookies
-     *
-     * @var string
-     *
-     * @deprecated `Config\Cookie` $samesite property is used.
-     */
-    public $samesite = 'Lax';
+    public bool $redirect = (ENVIRONMENT === 'production');
 }

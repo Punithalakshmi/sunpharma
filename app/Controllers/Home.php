@@ -297,4 +297,9 @@ class Home extends BaseController
       sendMail("punitha@izaaptech.in",$subject,$message);
 
   }
+
+  public function welcome()
+  {
+    return view('welcome_message');
+  }
 }
